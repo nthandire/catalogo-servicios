@@ -14,6 +14,15 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
+
+		<link rel="stylesheet" href="${resource(dir: 'startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css', file: 'bootstrap.min.css')}" type="text/css">
+		<link rel="stylesheet" href="${resource(dir: 'startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist', file: 'metisMenu.min.css')}" type="text/css">
+		<link rel="stylesheet" href="${resource(dir: 'startbootstrap-sb-admin-2-1.0.7/dist/css', file: 'timeline.css')}" type="text/css">
+		<link rel="stylesheet" href="${resource(dir: 'startbootstrap-sb-admin-2-1.0.7/dist/css', file: 'sb-admin-2.css')}" type="text/css">
+		<link rel="stylesheet" href="${resource(dir: 'startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs', file: 'morris.css')}" type="text/css">
+		<link rel="stylesheet" href="${resource(dir: 'startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs', file: 'morris.css')}" type="text/css">
+
+
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>

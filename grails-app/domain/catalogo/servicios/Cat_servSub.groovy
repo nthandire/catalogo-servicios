@@ -2,9 +2,9 @@ package catalogo.servicios
 
 class Cat_servSub {
 
-  Cat_servCat servCat
   String descripcion
 
+  static belongsTo = [servCat:Cat_servCat]
   static hasMany = [servs: Cat_serv]
 
   static constraints = {

@@ -14,10 +14,10 @@ class Cat_serv {
   Integer tiempo1
   Integer tiempo2
   Integer tiempo3
-  Cat_tiempo unidades1
+  Cat_tiempo unidades1 // = Cat_tiempo.findByTitleDescripcion("Hora")
   Cat_tiempo unidades2
   Cat_tiempo unidades3
-  Integer impacto
+  Integer impacto = 1
   String authoriza // TODO: ¿se necesita?
   Cat_servResp servResp
   String plantilla
@@ -39,7 +39,7 @@ class Cat_serv {
     unidades1()
     unidades2 nullable:true
     unidades3 nullable:true
-    impacto min: 0
+    impacto min: 0, max:3
     authoriza(nullable:true)
     servResp()
     plantilla(maxSize:500, nullable:true)
@@ -55,6 +55,7 @@ class Cat_serv {
     unidades1 column:'id_tiempo1'
     unidades2 column:'id_tiempo2'
     unidades3 column:'id_tiempo3'
+    impacto defaultValue: "1"
     servResp column:'id_servresp'
     version false
   }

@@ -15,9 +15,9 @@ class Cat_servCat {
   String categoria
   String descripcion
   Cat_servResp servResp
-  Integer valoracion
-  Integer disponibilidad
-  char estado
+  Integer valoracion = 1
+  Integer disponibilidad = 0
+  char estado = 'A'
   Cat_servCob servCob
 
   static hasMany = [servSubs: Cat_servSub]
@@ -26,9 +26,9 @@ class Cat_servCat {
     categoria(maxSize:255, blank:false)
     descripcion(maxSize:1000, blank:false)
     servResp()
-    valoracion blank:false, min: 1, max: 3, defaultValue: "1"
-    disponibilidad min: 0, defaultValue: "0"
-    estado blank:false, defaultValue: "'A'", inList: ["A","I"] // (blank:false, inList: ['a','i']) // inList: ['d','s', 'p']
+    valoracion blank:false, min: 1, max: 3
+    disponibilidad min: 0
+    estado blank:false, inList: ["A","I"]
     servCob()
   }
 
@@ -36,7 +36,9 @@ class Cat_servCat {
     table 'cat_servcat'
     id column:'id_servcat'
     servResp column:'id_servresp'
-    estado length: 1, columnDefinition: 'char(1)'
+    valoracion defaultValue: "1"
+    disponibilidad defaultValue: "0"
+    estado length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     servCob column:'id_servcob'
     version false
   }
