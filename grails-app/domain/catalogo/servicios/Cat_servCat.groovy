@@ -17,7 +17,7 @@ class Cat_servCat {
   Cat_servResp servResp
   Integer valoracion = 1
   Integer disponibilidad = 0
-  char estado = 'A'
+  char estado = (char)'A'
   Cat_servCob servCob
 
   static hasMany = [servSubs: Cat_servSub]
@@ -28,7 +28,7 @@ class Cat_servCat {
     servResp()
     valoracion blank:false, min: 1, max: 3
     disponibilidad min: 0
-    estado blank:false, inList: ["A","I"]
+    estado blank:false, inList: [(char)'A',(char)'I']
     servCob()
   }
 
