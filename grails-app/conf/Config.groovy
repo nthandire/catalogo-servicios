@@ -69,6 +69,10 @@ environments {
     }
 }
 
+grails.assets.less.compile = 'less4j'
+grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
+grails.assets.plugin."twitter-bootstrap".includes = ["bootstrap.less"]
+
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console appender:
@@ -89,3 +93,8 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'catalogo.servicios.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'catalogo.servicios.UserRole'
+grails.plugins.springsecurity.authority.className = 'catalogo.servicios.Role'
