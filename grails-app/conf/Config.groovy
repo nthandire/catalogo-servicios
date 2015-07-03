@@ -94,3 +94,5 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'catalogo.servicios.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'catalogo.servicios.UserRole'
 grails.plugins.springsecurity.authority.className = 'catalogo.servicios.Role'
+grails.plugins.springsecurity.requestMap.className = 'catalogo.servicios.Requestmap'
+grails.plugins.springsecurity.securityConfigType = 'Requestmap'

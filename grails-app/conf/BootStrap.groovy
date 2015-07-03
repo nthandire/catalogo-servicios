@@ -1,6 +1,7 @@
 import catalogo.servicios.Role
 import catalogo.servicios.User
 import catalogo.servicios.UserRole
+import catalogo.servicios.Requestmap
 
 class BootStrap {
 
@@ -12,6 +13,9 @@ class BootStrap {
     testUser.save(flush: true)
 
     UserRole.create testUser, adminRole, true
+
+    new Requestmap(url: '/cat_servCob/**', configAttribute: 'IS_AUTHENTICATED_FULLY').save()
+    new Requestmap(url: '/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
 
     assert User.count() == 1
     assert Role.count() == 2
