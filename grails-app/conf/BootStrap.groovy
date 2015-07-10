@@ -14,8 +14,12 @@ class BootStrap {
 
     UserRole.create testUser, adminRole, true
 
-    new Requestmap(url: '/cat_servCob/**', configAttribute: 'IS_AUTHENTICATED_FULLY').save()
-    new Requestmap(url: '/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
+    new Requestmap(url: '/login/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
+    new Requestmap(url: '/logout/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
+    // TODO: quitar el acceso a la BD
+    new Requestmap(url: '/dbconsole/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
+    new Requestmap(url: '/', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
+    new Requestmap(url: '/**', configAttribute: 'IS_AUTHENTICATED_FULLY').save()
 
     assert User.count() == 1
     assert Role.count() == 2

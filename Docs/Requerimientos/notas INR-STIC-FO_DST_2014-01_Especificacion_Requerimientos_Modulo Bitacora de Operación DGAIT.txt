@@ -1,0 +1,88 @@
+10 paginas
+
+
+Proyecto: “Sistema de Administración de Servicios de
+TIC”
+
+- Bitácora de Operación (F10)
+- Administración de Checklist (F11)
+- Consulta de notas de bitácora (F12)
+
+
+
+**************** F10 ****************
+{
+  No. de nota
+  Tipo de nota
+  Nombre del Sistema
+  Estado
+  Semáforo
+  No. de Nota de seguimiento        // TODO: ¿?
+  Nota de bitácora
+  Referencia documental
+  No. de solicitud de servicio
+  No. de solicitud de cambio
+  Fecha
+  hora
+  área
+  creador(es) de la nota
+  firma
+}
+
+
+
+
+
+checklist
+envío por correo electrónico
+subir los documentos de referencia en PDF, fotos y reportes
+candados para que solo el creador de la nota pueda modificarla
+delegar nota para monitoreo en cambio de turno
+levantamiento de incidentes y problemas
+
+formato F01-MT-STIC-01-Bitácora-de-operación_V1.0.doc
+
+repositorio para las bitácoras
+
+
+**************** F11 ****************
+
+pantalla que permita la modificación, alta y baja de campos que conforman los distintos checklist del monitoreo de las siguientes equipos y sistemas
+
+1) Servidores (DNS, Correo electrónico, Antivirus, Intranet, Filtrado de Contenidos, SAIH, SIA, Desarrollo y Blade
+Center)
+2) Switches (comunicación)
+3) Firewall (navegación en web) y pruebas de correo electrónico (internas y externas)
+4) Sistema de la red de voz (Conmutador MX-ONE, Operadora automática, Correo de voz ONE-BOX, Directorio
+telefónico CMG, Grabación de llamadas y Tarificador)
+5) Sistema de Sonido y Voceo General
+6) Sistema de Control de Acceso
+7) Sistema de Enfermo-Enfermera
+8) Sistema de CCTV-Seguridad
+9) Sistema de Alerta Sísmica
+10) Sistema de detección de Humos
+11) Sistema de TV entretenimiento
+12) Sistema de CCTV-Enseñanza
+13) Sistema de traducción simultánea
+14) Sistema de Videoconferencia
+
+
+Modificación de la información: usuarios autorizados
+
+
+**************** F12 ****************
+consulta rápida de los registros bajo diversos criterios, alarmas por
+criticidad, tiempo y correlación entre notas
+
+tipo tabla de Excel
+
+generar reportes de los checklist de los monitoreos programados
+visualizar PDF, fotos y reportes
+
+delegar nota para monitoreo en cambio de turno
+formato Bitácora de operación
+
+Visualización de la información: usuarios autorizados
+Compatible con los principales navegadores
+
+
