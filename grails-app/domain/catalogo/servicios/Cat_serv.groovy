@@ -26,19 +26,19 @@ class Cat_serv {
   static constraints = {
     servSub()
     descripcion(maxSize:255, blank:false)
-    portal()
-    incidente()
-    solicitud()
-    problema()
+    portal widget: 'checkbox'
+    incidente widget: 'checkbox'
+    solicitud widget: 'checkbox'
+    problema widget: 'checkbox'
     servResp1()
-    servResp2 nullable:true
-    servResp3 nullable:true
     tiempo1 min: 0
-    tiempo2 min: 0, nullable:true
-    tiempo3 min: 0, nullable:true
     unidades1()
-    unidades2 nullable:true
-    unidades3 nullable:true
+    servResp2 nullable:true
+    tiempo2 min: 0, nullable:true
+    unidades2()
+    servResp3 nullable:true
+    tiempo3 min: 0, nullable:true
+    unidades3()
     impacto min: 0, max:3
     authoriza(nullable:true)
     servResp()

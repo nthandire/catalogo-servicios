@@ -46,13 +46,13 @@
 					
 						<td>${fieldValue(bean: cat_servInstance, field: "descripcion")}</td>
 					
-						<td><g:formatBoolean boolean="${cat_servInstance.portal}" /></td>
+						<td><g:checkBox name="portal" value="${cat_servInstance?.portal}" /></td>
 					
-						<td><g:formatBoolean boolean="${cat_servInstance.incidente}" /></td>
+						<td><g:checkBox name="incidente" value="${cat_servInstance.incidente}" /></td>
 					
-						<td><g:formatBoolean boolean="${cat_servInstance.solicitud}" /></td>
+						<td><g:checkBox name="solicitud" value="${cat_servInstance.solicitud}" /></td>
 					
-						<td><g:formatBoolean boolean="${cat_servInstance.problema}" /></td>
+						<td><g:checkBox name="problema" value="${cat_servInstance.problema}" /></td>
 					
 					</tr>
 				</g:each>

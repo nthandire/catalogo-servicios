@@ -45,7 +45,7 @@
 				<li class="fieldcontain">
 					<span id="portal-label" class="property-label"><g:message code="cat_serv.portal.label" default="Portal" /></span>
 					
-						<span class="property-value" aria-labelledby="portal-label"><g:formatBoolean boolean="${cat_servInstance?.portal}" /></span>
+						<span class="property-value" aria-labelledby="portal-label"><g:checkBox name="portal" value="${cat_servInstance?.portal}" /></span>
 					
 				</li>
 				</g:if>
@@ -54,7 +54,7 @@
 				<li class="fieldcontain">
 					<span id="incidente-label" class="property-label"><g:message code="cat_serv.incidente.label" default="Incidente" /></span>
 					
-						<span class="property-value" aria-labelledby="incidente-label"><g:formatBoolean boolean="${cat_servInstance?.incidente}" /></span>
+						<span class="property-value" aria-labelledby="incidente-label"><g:checkBox name="incidente" value="${cat_servInstance?.incidente}" /></span>
 					
 				</li>
 				</g:if>
@@ -63,7 +63,7 @@
 				<li class="fieldcontain">
 					<span id="solicitud-label" class="property-label"><g:message code="cat_serv.solicitud.label" default="Solicitud" /></span>
 					
-						<span class="property-value" aria-labelledby="solicitud-label"><g:formatBoolean boolean="${cat_servInstance?.solicitud}" /></span>
+						<span class="property-value" aria-labelledby="solicitud-label"><g:checkBox name="solicitud" value="${cat_servInstance?.solicitud}" /></span>
 					
 				</li>
 				</g:if>
@@ -72,7 +72,7 @@
 				<li class="fieldcontain">
 					<span id="problema-label" class="property-label"><g:message code="cat_serv.problema.label" default="Problema" /></span>
 					
-						<span class="property-value" aria-labelledby="problema-label"><g:formatBoolean boolean="${cat_servInstance?.problema}" /></span>
+						<span class="property-value" aria-labelledby="problema-label"><g:checkBox name="problema" value="${cat_servInstance?.problema}" /></span>
 					
 				</li>
 				</g:if>
@@ -86,47 +86,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${cat_servInstance?.servResp2}">
-				<li class="fieldcontain">
-					<span id="servResp2-label" class="property-label"><g:message code="cat_serv.servResp2.label" default="Serv Resp2" /></span>
-					
-						<span class="property-value" aria-labelledby="servResp2-label"><g:link controller="cat_servResp" action="show" id="${cat_servInstance?.servResp2?.id}">${cat_servInstance?.servResp2?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.servResp3}">
-				<li class="fieldcontain">
-					<span id="servResp3-label" class="property-label"><g:message code="cat_serv.servResp3.label" default="Serv Resp3" /></span>
-					
-						<span class="property-value" aria-labelledby="servResp3-label"><g:link controller="cat_servResp" action="show" id="${cat_servInstance?.servResp3?.id}">${cat_servInstance?.servResp3?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${cat_servInstance?.tiempo1}">
 				<li class="fieldcontain">
 					<span id="tiempo1-label" class="property-label"><g:message code="cat_serv.tiempo1.label" default="Tiempo1" /></span>
 					
 						<span class="property-value" aria-labelledby="tiempo1-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo1"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.tiempo2}">
-				<li class="fieldcontain">
-					<span id="tiempo2-label" class="property-label"><g:message code="cat_serv.tiempo2.label" default="Tiempo2" /></span>
-					
-						<span class="property-value" aria-labelledby="tiempo2-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo2"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.tiempo3}">
-				<li class="fieldcontain">
-					<span id="tiempo3-label" class="property-label"><g:message code="cat_serv.tiempo3.label" default="Tiempo3" /></span>
-					
-						<span class="property-value" aria-labelledby="tiempo3-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo3"/></span>
 					
 				</li>
 				</g:if>
@@ -140,11 +104,47 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${cat_servInstance?.servResp2}">
+				<li class="fieldcontain">
+					<span id="servResp2-label" class="property-label"><g:message code="cat_serv.servResp2.label" default="Serv Resp2" /></span>
+					
+						<span class="property-value" aria-labelledby="servResp2-label"><g:link controller="cat_servResp" action="show" id="${cat_servInstance?.servResp2?.id}">${cat_servInstance?.servResp2?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${cat_servInstance?.tiempo2}">
+				<li class="fieldcontain">
+					<span id="tiempo2-label" class="property-label"><g:message code="cat_serv.tiempo2.label" default="Tiempo2" /></span>
+					
+						<span class="property-value" aria-labelledby="tiempo2-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo2"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${cat_servInstance?.unidades2}">
 				<li class="fieldcontain">
 					<span id="unidades2-label" class="property-label"><g:message code="cat_serv.unidades2.label" default="Unidades2" /></span>
 					
 						<span class="property-value" aria-labelledby="unidades2-label"><g:link controller="cat_tiempo" action="show" id="${cat_servInstance?.unidades2?.id}">${cat_servInstance?.unidades2?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${cat_servInstance?.servResp3}">
+				<li class="fieldcontain">
+					<span id="servResp3-label" class="property-label"><g:message code="cat_serv.servResp3.label" default="Serv Resp3" /></span>
+					
+						<span class="property-value" aria-labelledby="servResp3-label"><g:link controller="cat_servResp" action="show" id="${cat_servInstance?.servResp3?.id}">${cat_servInstance?.servResp3?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${cat_servInstance?.tiempo3}">
+				<li class="fieldcontain">
+					<span id="tiempo3-label" class="property-label"><g:message code="cat_serv.tiempo3.label" default="Tiempo3" /></span>
+					
+						<span class="property-value" aria-labelledby="tiempo3-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo3"/></span>
 					
 				</li>
 				</g:if>
