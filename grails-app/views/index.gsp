@@ -106,14 +106,32 @@
 			<h1>Catálogo de Servicios</h1>
 
 			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
+				<h2>Opciones disponibles:</h2>
 				<ul>
 					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<g:if test="${c.fullName.indexOf("Dbdoc") <= 0}" >
-							<li><g:link controller="${c.logicalPropertyName}">
-								${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
-							</g:link></li>
+						<g:if test="${c.fullName.indexOf("Dbdoc") == -1 && c.fullName.indexOf("Log") == -1}" >
+							<sec:ifLoggedIn>
+								<li><g:link controller="${c.logicalPropertyName}">
+									${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
+								</g:link></li>
+							</sec:ifLoggedIn>
 						</g:if>
+						<g:else>
+							<g:if test="${c.fullName.indexOf("Logout") == 0}" >
+								<sec:ifLoggedIn>
+									<li><g:link controller="${c.logicalPropertyName}">
+										${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
+									</g:link></li>
+								</sec:ifLoggedIn>
+							</g:if>
+							<g:if test="${c.fullName.indexOf("Login") == 0}" >
+								<sec:ifNotLoggedIn>
+									<li><g:link controller="${c.logicalPropertyName}">
+										${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
+									</g:link></li>
+								</sec:ifNotLoggedIn>
+							</g:if>
+						</g:else>
 					</g:each>
 				</ul>
 			</div>
