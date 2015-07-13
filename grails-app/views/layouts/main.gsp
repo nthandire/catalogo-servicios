@@ -15,10 +15,37 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 		<g:layoutHead/>
+		<r:require modules="jquery,bootstrap"/>
 		<r:layoutResources />
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
+		<div id="Logo" role="banner" >
+			<table>
+				<tr>
+					<td width="10%">
+						<img src="${resource(dir: 'images', file: 'logo_INR.gif')}" alt="" height="51px" width="68px"/>
+					</td>
+					<td>
+						<div align="center">
+						    <h5>INSTITUTO NACIONAL DE REHABILITACION</h5>
+						    <h5>Subdirección de Tecnologías de la Información y Comunicaciones</h5>
+						    <h5></h5>
+						</div>
+					</td>
+					<td width="10%">
+						<img src="${resource(dir: 'images', file: 'logo_salud.png')}" alt="" height="180px" width="280px" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset8">
+				<sec:ifLoggedIn>
+					¡Bienvenido: <span style="color:blue"><sec:username/></span> !
+						<!-- <g:link controller="logout"><span style="color:red">Cerrar Sesion</span></g:link> -->
+				</sec:ifLoggedIn>
+			</div>
+		</div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

@@ -106,7 +106,7 @@
 			<h1>Catálogo de Servicios</h1>
 
 			<div id="controller-list" role="navigation">
-				<h2>Opciones disponibles:</h2>
+				<h3>Opciones disponibles:</h3>
 				<ul>
 					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
 						<g:if test="${c.fullName.indexOf("Dbdoc") == -1 &&
