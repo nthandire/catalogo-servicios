@@ -109,7 +109,10 @@
 				<h2>Opciones disponibles:</h2>
 				<ul>
 					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<g:if test="${c.fullName.indexOf("Dbdoc") == -1 && c.fullName.indexOf("Log") == -1}" >
+						<g:if test="${c.fullName.indexOf("Dbdoc") == -1 &&
+													c.fullName.indexOf("Log") == -1 &&
+													c.fullName.indexOf("Rol") == -1 &&
+													c.fullName.indexOf("Us") == -1}" >
 							<sec:ifLoggedIn>
 								<li><g:link controller="${c.logicalPropertyName}">
 									${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
@@ -130,6 +133,14 @@
 										${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
 									</g:link></li>
 								</sec:ifNotLoggedIn>
+							</g:if>
+							<g:if test="${c.fullName.indexOf("Rol") != -1 ||
+														c.fullName.indexOf("Us") != -1}" >
+								<sec:ifAllGranted roles="ROLE_ADMIN">
+									<li><g:link controller="${c.logicalPropertyName}">
+										${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
+									</g:link></li>
+								</sec:ifAllGranted>
 							</g:if>
 						</g:else>
 					</g:each>
