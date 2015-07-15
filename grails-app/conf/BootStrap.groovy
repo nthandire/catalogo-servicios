@@ -1,7 +1,7 @@
-import catalogo.servicios.Role
-import catalogo.servicios.User
-import catalogo.servicios.UserRole
-import catalogo.servicios.Requestmap
+import mx.gob.inr.catservicios.Role
+import mx.gob.inr.catservicios.User
+import mx.gob.inr.catservicios.UserRole
+import mx.gob.inr.catservicios.Requestmap
 
 class BootStrap {
 

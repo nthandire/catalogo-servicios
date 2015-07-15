@@ -1,4 +1,4 @@
-<%@ page import="catalogo.servicios.Cat_serv" %>
+<%@ page import="mx.gob.inr.catservicios.Cat_serv" %>
 <!DOCTYPE html>
 <html>
 	<head>

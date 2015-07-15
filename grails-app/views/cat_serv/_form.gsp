@@ -1,4 +1,4 @@
-<%@ page import="catalogo.servicios.Cat_serv" %>
+<%@ page import="mx.gob.inr.catservicios.Cat_serv" %>
 
 <g:javascript library='jquery' />
 
@@ -7,7 +7,7 @@
 		<g:message code="servCat.label" default="Cat" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servCat" name="servCat.id" from="${catalogo.servicios.Cat_servCat.list()}" optionKey="id" required="" value="${cat_servInstance?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['null':'Seleccione una...']}"/>
+	<g:select id="servCat" name="servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" required="" value="${cat_servInstance?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['null':'Seleccione una...']}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servSub', 'error')} required">
@@ -16,7 +16,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<span id="subContainer">
-          <g:select id="servSub" name="servSub.id" from="${catalogo.servicios.Cat_servSub.list()}" optionKey="id" required="" value="${cat_servInstance?.servSub?.id}" class="many-to-one"/>
+          <g:select id="servSub" name="servSub.id" from="${mx.gob.inr.catservicios.Cat_servSub.list()}" optionKey="id" required="" value="${cat_servInstance?.servSub?.id}" class="many-to-one"/>
         </span>
 </div>
 
@@ -73,7 +73,7 @@
 		<g:message code="cat_serv.servResp1.label" default="Serv Resp1" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servResp1" name="servResp1.id" from="${catalogo.servicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.servResp1?.id}" class="many-to-one"/>
+	<g:select id="servResp1" name="servResp1.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.servResp1?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'tiempo1', 'error')} required">
@@ -89,7 +89,7 @@
 		<g:message code="cat_serv.unidades1.label" default="Unidades1" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="unidades1" name="unidades1.id" from="${catalogo.servicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades1?.id}" class="many-to-one"/>
+	<g:select id="unidades1" name="unidades1.id" from="${mx.gob.inr.catservicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades1?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servResp2', 'error')} ">
@@ -97,7 +97,7 @@
 		<g:message code="cat_serv.servResp2.label" default="Serv Resp2" />
 		
 	</label>
-	<g:select id="servResp2" name="servResp2.id" from="${catalogo.servicios.Cat_servResp.list()}" optionKey="id" value="${cat_servInstance?.servResp2?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="servResp2" name="servResp2.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" value="${cat_servInstance?.servResp2?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'tiempo2', 'error')} ">
@@ -113,7 +113,7 @@
 		<g:message code="cat_serv.unidades2.label" default="Unidades2" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="unidades2" name="unidades2.id" from="${catalogo.servicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades2?.id}" class="many-to-one"/>
+	<g:select id="unidades2" name="unidades2.id" from="${mx.gob.inr.catservicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades2?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servResp3', 'error')} ">
@@ -121,7 +121,7 @@
 		<g:message code="cat_serv.servResp3.label" default="Serv Resp3" />
 		
 	</label>
-	<g:select id="servResp3" name="servResp3.id" from="${catalogo.servicios.Cat_servResp.list()}" optionKey="id" value="${cat_servInstance?.servResp3?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="servResp3" name="servResp3.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" value="${cat_servInstance?.servResp3?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'tiempo3', 'error')} ">
@@ -137,7 +137,7 @@
 		<g:message code="cat_serv.unidades3.label" default="Unidades3" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="unidades3" name="unidades3.id" from="${catalogo.servicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades3?.id}" class="many-to-one"/>
+	<g:select id="unidades3" name="unidades3.id" from="${mx.gob.inr.catservicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades3?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'impacto', 'error')} required">
@@ -161,7 +161,7 @@
 		<g:message code="cat_serv.servResp.label" default="Serv Resp" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servResp" name="servResp.id" from="${catalogo.servicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.servResp?.id}" class="many-to-one"/>
+	<g:select id="servResp" name="servResp.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.servResp?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'plantilla', 'error')} ">
