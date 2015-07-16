@@ -1,6 +1,6 @@
 package mx.gob.inr.catservicios
 
-class User {
+class Usuario {
 
 	transient springSecurityService
 
@@ -20,8 +20,8 @@ class User {
 		password column: '`password`'
 	}
 
-	Set<Role> getAuthorities() {
-		UserRole.findAllByUser(this).collect { it.role } as Set
+	Set<Rol> getAuthorities() {
+		UsuarioRol.findAllByUsuario(this).collect { it.rol } as Set
 	}
 
 	def beforeInsert() {

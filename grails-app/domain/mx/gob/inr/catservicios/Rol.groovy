@@ -1,6 +1,6 @@
 package mx.gob.inr.catservicios
 
-class Role {
+class Rol {
 
 	String authority
 
