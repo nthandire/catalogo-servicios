@@ -1,0 +1,30 @@
+
+crear rol que no vea 
+       catTiempo
+       bitacoras
+       Cat_servResp
+       Cat_servCob
+
+como etiquetas (labels) utilizar las del excel, 
+
+^-------------     Ya    -------------^
+
+v------------- Pendiente -------------v
+
+etiquetas reducirlas
+
+
+mostrar siempre todos los checkbox
+
+cuales puede cambiar en edición
+  estado (que aún no esta)
+  descripción
+  portal (todos los checkbox)
+
+  responsables de los niveles
+    sus tiempos
+
+  plantilla 
+  observación
+
+

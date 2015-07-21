@@ -13,6 +13,8 @@ import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 class LoginController {
+    def nombreMenu = "Entrar"
+    def ordenMenu = 71
 
 	/**
 	 * Dependency injection for the authenticationTrustResolver.

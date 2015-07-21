@@ -41,7 +41,7 @@
 		<div class="row-fluid">
 			<div class="span2 offset8">
 				<sec:ifLoggedIn>
-					¡Bienvenido: <span style="color:blue"><sec:username/></span> !
+					¡ Bienvenido: <span style="color:blue"><sec:username/></span> !
 						<!-- <g:link controller="logout"><span style="color:red">Cerrar Sesion</span></g:link> -->
 				</sec:ifLoggedIn>
 			</div>

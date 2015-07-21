@@ -3,6 +3,8 @@ package mx.gob.inr.catservicios
 import org.springframework.dao.DataIntegrityViolationException
 
 class MonitoreoController {
+    def nombreMenu = "Monitoreos"
+    def ordenMenu = 53
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 

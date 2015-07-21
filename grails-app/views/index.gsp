@@ -82,6 +82,7 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_SUPERVISOR">
 		<div id="status" role="complementary">
 			<h1>Application Status</h1>
 			<ul>
@@ -102,6 +103,7 @@
 				</g:each>
 			</ul>
 		</div>
+		</sec:ifAnyGranted>
 		<div id="page-body" role="main">
 			<h1>Catálogo de Servicios</h1>
 

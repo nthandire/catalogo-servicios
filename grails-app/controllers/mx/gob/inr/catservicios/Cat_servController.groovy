@@ -3,6 +3,12 @@ package mx.gob.inr.catservicios
 import org.springframework.dao.DataIntegrityViolationException
 
 class Cat_servController {
+    static nombreMenu = "Catálogo de Servicios"
+    def ordenMenu = 1
+
+    static String naturalName() {
+        nombreMenu
+    }
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 

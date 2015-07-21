@@ -6,25 +6,29 @@ class BootStrap {
     if (Usuario.count() == 0) {
       def adminRole = new Rol(authority: 'ROLE_ADMIN').save(flush: true)
       def userRole = new Rol(authority: 'ROLE_USER').save(flush: true)
+      def serviciosRol = new Rol(authority: 'ROLE_SERVICES').save(flush: true)
   /*
       def adminRole = Rol.findByAuthority('ROLE_ADMIN')
       def userRole = Rol.findByAuthority('ROLE_USER')
   */
       def yo = new Usuario(username: 'yo', enabled: true, password: 'password')
-      yo.save(flush: true)
+        .save(flush: true)
       def testAdmin = new Usuario(username: 'admin', enabled: true, password: 'password')
-      testAdmin.save(flush: true)
+        .save(flush: true)
       def testUser = new Usuario(username: 'usuario', enabled: true, password: 'password')
-      testUser.save(flush: true)
+        .save(flush: true)
+      def serviciosUser = new Usuario(username: 'servicios', enabled: true, password: 'servicios')
+        .save(flush: true)
   /*
-      def yo = User.findByUsername('yo')
-      def testAdmin = User.findByUsername('admin')
-      def testUser = User.findByUsername('usuario')
+      def yo = Usuario.findByUsername('yo')
+      def testAdmin = Usuario.findByUsername('admin')
+      def testUser = Usuario.findByUsername('usuario')
   */
       UsuarioRol.create yo, adminRole, true
       UsuarioRol.create yo, userRole, true
       UsuarioRol.create testAdmin, adminRole, true
       UsuarioRol.create testUser, userRole, true
+      UsuarioRol.create serviciosUser, serviciosRol, true
 
       new Requestmap(url: '/login/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
       new Requestmap(url: '/logout/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
@@ -33,11 +37,18 @@ class BootStrap {
       // TODO: quitar el acceso a la BD
       new Requestmap(url: '/dbconsole/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
       new Requestmap(url: '/', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
+      new Requestmap(url: '/cat_tiempo/**', configAttribute: 'ROLE_ADMIN').save()
       new Requestmap(url: '/**', configAttribute: 'IS_AUTHENTICATED_FULLY').save()
+      new Requestmap(url: '/bitacora/**', configAttribute: 'ROLE_USER').save()
+      new Requestmap(url: '/bitacoraDetalle/**', configAttribute: 'ROLE_USER').save()
+      new Requestmap(url: '/monitoreo/**', configAttribute: 'ROLE_USER').save()
+      new Requestmap(url: '/monitoreoDetalle/**', configAttribute: 'ROLE_USER').save()
+      new Requestmap(url: '/cat_servCob/**', configAttribute: 'ROLE_USER').save()
+      new Requestmap(url: '/cat_servResp/**', configAttribute: 'ROLE_USER').save()
 
-      assert Usuario.count() == 3
-      assert Rol.count() == 2
-      assert UsuarioRol.count() == 4
+      assert Usuario.count() == 4
+      assert Rol.count() == 3
+      assert UsuarioRol.count() == 5
 
       def laBitacora = new Bitacora(tipoBitacora: "Monitoreo",
         desBitacora: "IBM BladeCenter H Advanced Management Module").save(flush: true)
