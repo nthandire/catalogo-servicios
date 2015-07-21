@@ -1,8 +1,8 @@
 package mx.gob.inr.catservicios
 
 class BitacoraController {
-    def nombreMenu = "Bitacoras"
-    def ordenMenu = 51
+    static nombreMenu = "Bitacoras"
+    static ordenMenu = 51
 
     static scaffold = Bitacora
 }

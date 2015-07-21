@@ -4,7 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class Cat_servController {
     static nombreMenu = "Catálogo de Servicios"
-    def ordenMenu = 1
+    static ordenMenu = 1
 
     static String naturalName() {
         nombreMenu

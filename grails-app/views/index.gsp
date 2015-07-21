@@ -110,12 +110,12 @@
 			<div id="controller-list" role="navigation">
 				<h3>Opciones disponibles:</h3>
 				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.getStaticPropertyValue('ordenMenu', int) } }">
 						<g:if test="${c.fullName.indexOf("Dbdoc") == -1 &&
 													c.fullName.indexOf("Log") == -1}" >
 						  <sec:access url="/${c.logicalPropertyName}">
 								<li><g:link controller="${c.logicalPropertyName}">
-									${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
+									${c.getStaticPropertyValue('nombreMenu', String)}
 								</g:link></li>
 						  </sec:access>
 						</g:if>
@@ -123,14 +123,14 @@
 							<g:if test="${c.fullName.indexOf("Logout") == 0}" >
 								<sec:ifLoggedIn>
 									<li><g:link controller="${c.logicalPropertyName}">
-										${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
+										${c.getStaticPropertyValue('nombreMenu', String)}
 									</g:link></li>
 								</sec:ifLoggedIn>
 							</g:if>
 							<g:if test="${c.fullName.indexOf("Login") == 0}" >
 								<sec:ifNotLoggedIn>
 									<li><g:link controller="${c.logicalPropertyName}">
-										${((c.naturalName =~ /([\w ]*) Controller/)[0][1])}
+										${c.getStaticPropertyValue('nombreMenu', String)}
 									</g:link></li>
 								</sec:ifNotLoggedIn>
 							</g:if>
