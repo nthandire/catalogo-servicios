@@ -24,7 +24,7 @@ class Cat_serv {
   String observaciones
 
   static constraints = {
-    servSub()
+    servSub editable:false
     descripcion(maxSize:255, blank:false)
     portal widget: 'checkbox'
     incidente widget: 'checkbox'
@@ -39,9 +39,9 @@ class Cat_serv {
     servResp3 nullable:true
     tiempo3 min: 0, nullable:true
     unidades3()
-    impacto min: 0, max:3
-    authoriza(nullable:true)
-    servResp()
+    impacto min: 0, max:3, editable:false
+    authoriza nullable:true, editable:false
+    servResp editable:false
     plantilla(maxSize:500, nullable:true)
     observaciones(maxSize:1000, nullable:true)
   }
