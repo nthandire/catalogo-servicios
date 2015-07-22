@@ -24,6 +24,8 @@
 				<thead>
 					<tr>
 					
+						<th><g:message code="cat_serv.servCat.label" default="Serv Sub" /></th>
+
 						<th><g:message code="cat_serv.servSub.label" default="Serv Sub" /></th>
 					
 						<g:sortableColumn property="descripcion" title="${message(code: 'cat_serv.descripcion.label', default: 'Descripcion')}" />
@@ -42,6 +44,8 @@
 				<g:each in="${cat_servInstanceList}" status="i" var="cat_servInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
+						<td><g:link action="show" id="${cat_servInstance.id}">${fieldValue(bean: cat_servInstance, field: "servSub.servCat")}</g:link></td>
+
 						<td><g:link action="show" id="${cat_servInstance.id}">${fieldValue(bean: cat_servInstance, field: "servSub")}</g:link></td>
 					
 						<td>${fieldValue(bean: cat_servInstance, field: "descripcion")}</td>

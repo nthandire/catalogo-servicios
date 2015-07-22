@@ -35,7 +35,7 @@ class Cat_serv {
     solicitud widget: 'checkbox'
     problema widget: 'checkbox'
     servResp1()
-    tiempo1 min: 0
+    tiempo1 min: 1
     unidades1()
     servResp2 nullable:true
     tiempo2 min: 0, nullable:true
@@ -44,7 +44,7 @@ class Cat_serv {
     tiempo3 min: 0, nullable:true
     unidades3()
     impacto min: 0, max:3, editable:false
-    authoriza nullable:true, editable:false
+    authoriza nullable:true
     servResp editable:false
     plantilla(maxSize:3000, nullable:true)
     observaciones(maxSize:3000, nullable:true)

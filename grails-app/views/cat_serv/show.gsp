@@ -90,7 +90,7 @@
 				<li class="fieldcontain">
 					<span id="servResp1-label" class="property-label"><g:message code="cat_serv.servResp1.label" default="Serv Resp1" /></span>
 					
-						<span class="property-value" aria-labelledby="servResp1-label"><g:link controller="cat_servResp" action="show" id="${cat_servInstance?.servResp1?.id}">${cat_servInstance?.servResp1?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="servResp1-label">${cat_servInstance?.servResp1?.encodeAsHTML()}</span>
 					
 				</li>
 				</g:if>
@@ -108,7 +108,7 @@
 				<li class="fieldcontain">
 					<span id="unidades1-label" class="property-label"><g:message code="cat_serv.unidades1.label" default="Unidades1" /></span>
 					
-						<span class="property-value" aria-labelledby="unidades1-label"><g:link controller="cat_tiempo" action="show" id="${cat_servInstance?.unidades1?.id}">${cat_servInstance?.unidades1?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="unidades1-label">${cat_servInstance?.unidades1?.encodeAsHTML()}</span>
 					
 				</li>
 				</g:if>
@@ -117,7 +117,7 @@
 				<li class="fieldcontain">
 					<span id="servResp2-label" class="property-label"><g:message code="cat_serv.servResp2.label" default="Serv Resp2" /></span>
 					
-						<span class="property-value" aria-labelledby="servResp2-label"><g:link controller="cat_servResp" action="show" id="${cat_servInstance?.servResp2?.id}">${cat_servInstance?.servResp2?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="servResp2-label">${cat_servInstance?.servResp2?.encodeAsHTML()}</span>
 					
 				</li>
 				</g:if>
@@ -135,7 +135,7 @@
 				<li class="fieldcontain">
 					<span id="unidades2-label" class="property-label"><g:message code="cat_serv.unidades2.label" default="Unidades2" /></span>
 					
-						<span class="property-value" aria-labelledby="unidades2-label"><g:link controller="cat_tiempo" action="show" id="${cat_servInstance?.unidades2?.id}">${cat_servInstance?.unidades2?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="unidades2-label">${cat_servInstance?.unidades2?.encodeAsHTML()}</span>
 					
 				</li>
 				</g:if>
@@ -144,7 +144,7 @@
 				<li class="fieldcontain">
 					<span id="servResp3-label" class="property-label"><g:message code="cat_serv.servResp3.label" default="Serv Resp3" /></span>
 					
-						<span class="property-value" aria-labelledby="servResp3-label"><g:link controller="cat_servResp" action="show" id="${cat_servInstance?.servResp3?.id}">${cat_servInstance?.servResp3?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="servResp3-label">${cat_servInstance?.servResp3?.encodeAsHTML()}</span>
 					
 				</li>
 				</g:if>
@@ -162,7 +162,7 @@
 				<li class="fieldcontain">
 					<span id="unidades3-label" class="property-label"><g:message code="cat_serv.unidades3.label" default="Unidades3" /></span>
 					
-						<span class="property-value" aria-labelledby="unidades3-label"><g:link controller="cat_tiempo" action="show" id="${cat_servInstance?.unidades3?.id}">${cat_servInstance?.unidades3?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="unidades3-label">${cat_servInstance?.unidades3?.encodeAsHTML()}</span>
 					
 				</li>
 				</g:if>
@@ -193,7 +193,7 @@
 				<li class="fieldcontain">
 					<span id="servResp-label" class="property-label"><g:message code="cat_serv.servResp.label" default="Serv Resp" /></span>
 					
-						<span class="property-value" aria-labelledby="servResp-label"><g:link controller="cat_servResp" action="show" id="${cat_servInstance?.servResp?.id}">${cat_servInstance?.servResp?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="servResp-label">${cat_servInstance?.servResp?.encodeAsHTML()}</span>
 					
 				</li>
 				</g:if>

@@ -120,13 +120,12 @@
 		<g:message code="cat_serv.tiempo1.label" default="Tiempo1" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="tiempo1" type="number" min="0" value="${cat_servInstance.tiempo1}" required=""/>
+	<g:field name="tiempo1" type="number" min="1" value="${cat_servInstance.tiempo1}" required=""/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'unidades1', 'error')} required">
 	<label for="unidades1">
 		<g:message code="cat_serv.unidades1.label" default="Unidades1" />
-		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="unidades1" name="unidades1.id" from="${mx.gob.inr.catservicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades1?.id}" class="many-to-one"/>
 </div>
@@ -153,7 +152,6 @@
 <div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'unidades2', 'error')} required">
 	<label for="unidades2">
 		<g:message code="cat_serv.unidades2.label" default="Unidades2" />
-		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="unidades2" name="unidades2.id" from="${mx.gob.inr.catservicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades2?.id}" class="many-to-one"/>
 </div>
@@ -180,7 +178,6 @@
 <div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'unidades3', 'error')} required">
 	<label for="unidades3">
 		<g:message code="cat_serv.unidades3.label" default="Unidades3" />
-		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="unidades3" name="unidades3.id" from="${mx.gob.inr.catservicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades3?.id}" class="many-to-one"/>
 </div>
@@ -198,7 +195,9 @@
 		<g:message code="cat_serv.impacto.label" default="Impacto" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="impacto" type="number" min="0" max="3" value="${cat_servInstance.impacto}" required=""/>
+	<g:select name="impacto" disabled="false" from="${[1,2,3]}"
+		valueMessagePrefix="intensidad.valor" value="${cat_servInstance.impacto}"
+		required="" />
 </div>
 
 		</td>
@@ -209,7 +208,7 @@
 		<g:message code="cat_serv.authoriza.label" default="Authoriza" />
 		
 	</label>
-	<g:textField name="authoriza" readonly="readonly" value="${cat_servInstance?.authoriza}"/>
+	<g:select id="authoriza" name="authoriza.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.authoriza?.id}" class="many-to-one"/>
 </div>
 
 		</td>
