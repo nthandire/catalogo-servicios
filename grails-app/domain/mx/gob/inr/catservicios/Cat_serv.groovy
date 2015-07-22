@@ -26,8 +26,6 @@ class Cat_serv {
   char estadoServ = (char)'A'
   String ipTerminal
   Date lastUpdated
-  Date dateCreated
-
 
   static constraints = {
     servSub editable:false
@@ -54,8 +52,6 @@ class Cat_serv {
     idUsuario display:false, editable:false
     ipTerminal display:false, editable:false
     lastUpdated display:false, editable:false
-    dateCreated display:false, editable:false
-
   }
 
   static mapping = {
@@ -71,7 +67,6 @@ class Cat_serv {
     servResp column:'id_servresp'
     estadoServ length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     lastUpdated column:'fecha_modificacion'
-    dateCreated column:'fecha_creacion'
     version column:'modificacion'
   }
 
