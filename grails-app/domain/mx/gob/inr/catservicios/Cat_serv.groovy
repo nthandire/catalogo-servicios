@@ -18,10 +18,16 @@ class Cat_serv {
   Cat_tiempo unidades2
   Cat_tiempo unidades3
   Integer impacto = 1
-  String authoriza // TODO: ¿se necesita?
+  Cat_servResp authoriza
   Cat_servResp servResp
   String plantilla
   String observaciones
+  char estadoServ = (char)'A'
+  String ipTerminal
+  Date lastUpdated
+  Date dateCreated
+
+  static belongsTo = [idUsuario:Usuario]
 
   static constraints = {
     servSub editable:false
@@ -42,8 +48,14 @@ class Cat_serv {
     impacto min: 0, max:3, editable:false
     authoriza nullable:true, editable:false
     servResp editable:false
-    plantilla(maxSize:500, nullable:true)
-    observaciones(maxSize:1000, nullable:true)
+    plantilla(maxSize:3000, nullable:true)
+    observaciones(maxSize:3000, nullable:true)
+    estadoServ blank:false, inList: [(char)'A',(char)'I']
+    idUsuario display:false, editable:false
+    ipTerminal display:false, editable:false
+    lastUpdated display:false, editable:false
+    dateCreated display:false, editable:false
+
   }
 
   static mapping = {
@@ -57,7 +69,10 @@ class Cat_serv {
     unidades3 column:'id_tiempo3'
     impacto defaultValue: "1"
     servResp column:'id_servresp'
-    version false
+    estadoServ length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
+    lastUpdated column:'fecha_modificacion'
+    dateCreated column:'fecha_creacion'
+    version column:'modificacion'
   }
 
   String toString() {

@@ -27,6 +27,8 @@
 			</ul>
 			</g:hasErrors>
 			<g:form action="save" >
+				<g:hiddenField name="idUsuario" />
+				<g:hiddenField name="ipTerminal" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

@@ -3,8 +3,10 @@ package mx.gob.inr.catservicios
 import org.springframework.dao.DataIntegrityViolationException
 
 class Cat_servController {
+    def springSecurityService
     static nombreMenu = "Catálogo de Servicios"
     static ordenMenu = 1
+
 
     static String naturalName() {
         nombreMenu
@@ -22,7 +24,11 @@ class Cat_servController {
     }
 
     def create() {
-        [cat_servInstance: new Cat_serv(params)]
+        def instance = new Cat_serv(params)
+        def usuarioFirmado = Usuario.get(springSecurityService.principal.id)
+        instance.idUsuario = usuarioFirmado
+        instance.ipTerminal = request.getRemoteAddr()
+        [cat_servInstance: instance]
     }
 
     def save() {
@@ -107,7 +113,6 @@ class Cat_servController {
     }
 
   def categoryChanged(long categoryId) {
-    println "Entre categoryChanged, categoryId <$categoryId>"
       Cat_servCat category = Cat_servCat.get(categoryId)
       def subCategories = []
       if ( category != null ) {

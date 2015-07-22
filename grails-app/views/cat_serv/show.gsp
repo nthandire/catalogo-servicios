@@ -25,6 +25,15 @@
 			
 				<g:if test="${cat_servInstance?.servSub}">
 				<li class="fieldcontain">
+					<span id="servSub-label" class="property-label"><g:message code="cat_serv.servCat.label" default="Cat" /></span>
+					
+						<span class="property-value" aria-labelledby="servSub-label"><g:link controller="cat_servSub" action="show" id="${cat_servInstance?.servSub?.servCat?.id}">${cat_servInstance?.servSub?.servCat?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${cat_servInstance?.servSub}">
+				<li class="fieldcontain">
 					<span id="servSub-label" class="property-label"><g:message code="cat_serv.servSub.label" default="Serv Sub" /></span>
 					
 						<span class="property-value" aria-labelledby="servSub-label"><g:link controller="cat_servSub" action="show" id="${cat_servInstance?.servSub?.id}">${cat_servInstance?.servSub?.encodeAsHTML()}</g:link></span>
@@ -162,7 +171,11 @@
 				<li class="fieldcontain">
 					<span id="impacto-label" class="property-label"><g:message code="cat_serv.impacto.label" default="Impacto" /></span>
 					
-						<span class="property-value" aria-labelledby="impacto-label"><g:fieldValue bean="${cat_servInstance}" field="impacto"/></span>
+						<span class="property-value" aria-labelledby="impacto-label">
+							<g:select name="impacto" disabled="false" from="${[1,2,3]}"
+								valueMessagePrefix="intensidad.valor" value="${cat_servInstance.impacto}"
+								required="" />
+						</span>
 					
 				</li>
 				</g:if>

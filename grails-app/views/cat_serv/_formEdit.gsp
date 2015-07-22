@@ -11,19 +11,13 @@
 		<td colspan="2">
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servSub', 'error')} required">
-		<li class="fieldcontain">
-			<span id="servCat-label" class="property-label"><g:message code="cat_serv.servCat.label" default="Cat" /></span>
-			
-				<span class="property-value" aria-labelledby="servCat-label">${cat_servInstance?.servSub?.servCat?.encodeAsHTML()}</span>
-		</li>
+	<span id="servCat-label" class="property-label"><g:message code="cat_serv.servCat.label" default="Cat" /></span>
+	<span class="property-value" aria-labelledby="servCat-label">${cat_servInstance?.servSub?.servCat?.encodeAsHTML()}</span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servSub', 'error')} required">
-		<li class="fieldcontain">
-			<span id="servSub-label" class="property-label"><g:message code="cat_serv.servSub.label" default="Serv Sub" /></span>
-			
-				<span class="property-value" aria-labelledby="servSub-label">${cat_servInstance?.servSub?.encodeAsHTML()}</span>
-		</li>
+	<span id="servSub-label" class="property-label"><g:message code="cat_serv.servSub.label" default="Serv Sub" /></span>
+	<span class="property-value" aria-labelledby="servSub-label">${cat_servInstance?.servSub?.encodeAsHTML()}</span>
 </div>
 
         <script>
@@ -33,10 +27,11 @@
                     params="'categoryId='+categoryId"/>
             }
         </script>
-		</td>
 
 		</td>
+
 		<td colspan="2">
+		</td>
 
 	</tr>
 	<tr>
@@ -195,7 +190,9 @@
 		<g:message code="cat_serv.impacto.label" default="Impacto" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="impacto" readonly="readonly" type="number" min="0" max="3" value="${cat_servInstance.impacto}" required=""/>
+	<g:select name="impacto" disabled="false" from="${[1,2,3]}"
+		valueMessagePrefix="intensidad.valor" value="${cat_servInstance.impacto}"
+		required="" />
 </div>
 
 		</td>
