@@ -22,12 +22,12 @@ class Cat_serv {
   Cat_servResp servResp
   String plantilla
   String observaciones
+  Integer idUsuario
   char estadoServ = (char)'A'
   String ipTerminal
   Date lastUpdated
   Date dateCreated
 
-  static belongsTo = [idUsuario:Usuario]
 
   static constraints = {
     servSub editable:false

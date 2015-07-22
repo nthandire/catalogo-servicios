@@ -2,16 +2,6 @@ package mx.gob.inr.catservicios
 
 class Cat_servCat {
 
-/*
-  enum Estado {
-    Activo, Inactivo
-  }
-
-  enum Valoracion {
-    Alto, Medio, Bajo
-  }
-*/
-
   String categoria
   String descripcion
   Cat_servResp servResp

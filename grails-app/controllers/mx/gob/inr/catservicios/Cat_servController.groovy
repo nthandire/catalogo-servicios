@@ -25,8 +25,7 @@ class Cat_servController {
 
     def create() {
         def instance = new Cat_serv(params)
-        def usuarioFirmado = Usuario.get(springSecurityService.principal.id)
-        instance.idUsuario = usuarioFirmado
+        instance.idUsuario = springSecurityService.principal.id
         instance.ipTerminal = request.getRemoteAddr()
         [cat_servInstance: instance]
     }
