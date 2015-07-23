@@ -37,7 +37,7 @@ class Cat_servController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'cat_serv.label', default: 'Cat_serv'), cat_servInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'cat_serv.label', default: 'Cat_serv'), cat_servInstance.toString()])
         redirect(action: "show", id: cat_servInstance.id)
     }
 
