@@ -22,7 +22,11 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list cat_serv">
-			
+
+<table class="table table-condensed">
+	<tr>
+		<td colspan="2">
+
 				<g:if test="${cat_servInstance?.servSub}">
 				<li class="fieldcontain">
 					<span id="servSub-label" class="property-label"><g:message code="cat_serv.servCat.label" default="Cat" /></span>
@@ -40,52 +44,78 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${cat_servInstance?.descripcion}">
-				<li class="fieldcontain">
-					<span id="descripcion-label" class="property-label"><g:message code="cat_serv.descripcion.label" default="Descripcion" /></span>
-					
-						<span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${cat_servInstance}" field="descripcion"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.portal}">
-				<li class="fieldcontain">
-					<span id="portal-label" class="property-label"><g:message code="cat_serv.portal.label" default="Portal" /></span>
-					
-						<span class="property-value" aria-labelledby="portal-label"><g:checkBox name="portal" value="${cat_servInstance?.portal}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.incidente}">
-				<li class="fieldcontain">
-					<span id="incidente-label" class="property-label"><g:message code="cat_serv.incidente.label" default="Incidente" /></span>
-					
-						<span class="property-value" aria-labelledby="incidente-label"><g:checkBox name="incidente" value="${cat_servInstance?.incidente}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.solicitud}">
-				<li class="fieldcontain">
-					<span id="solicitud-label" class="property-label"><g:message code="cat_serv.solicitud.label" default="Solicitud" /></span>
-					
-						<span class="property-value" aria-labelledby="solicitud-label"><g:checkBox name="solicitud" value="${cat_servInstance?.solicitud}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.problema}">
-				<li class="fieldcontain">
-					<span id="problema-label" class="property-label"><g:message code="cat_serv.problema.label" default="Problema" /></span>
-					
-						<span class="property-value" aria-labelledby="problema-label"><g:checkBox name="problema" value="${cat_servInstance?.problema}" /></span>
-					
-				</li>
-				</g:if>
-			
+
+		</td>
+
+		<td colspan="2">
+		</td>
+
+	</tr>
+	<tr>
+		<td colspan="2">
+
+<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'descripcion', 'error')} required">
+	<label for="descripcion">
+		<g:message code="cat_serv.descripcion.label" default="Descripcion" />
+		<span class="required-indicator">*</span>
+	</label>
+	<span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${cat_servInstance}" field="descripcion"/></span>
+</div>
+
+		</td>
+		<td colspan="2">
+
+		</td>
+	</tr>
+	<tr>
+		<td>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'portal', 'error')} ">
+	<label for="portal">
+		<g:message code="cat_serv.portal.label" default="Portal" />
+		
+	</label>
+	<span class="property-value" aria-labelledby="portal-label"><g:checkBox name="portal" value="${cat_servInstance?.portal}" /></span>
+</div>
+
+		</td>
+		<td>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'incidente', 'error')} ">
+	<label for="incidente">
+		<g:message code="cat_serv.incidente.label" default="Incidente" />
+		
+	</label>
+	<span class="property-value" aria-labelledby="incidente-label"><g:checkBox name="incidente" value="${cat_servInstance?.incidente}" /></span>
+</div>
+
+		</td>
+		<td>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'solicitud', 'error')} ">
+	<label for="solicitud">
+		<g:message code="cat_serv.solicitud.label" default="Solicitud" />
+		
+	</label>
+	<span class="property-value" aria-labelledby="solicitud-label"><g:checkBox name="solicitud" value="${cat_servInstance?.solicitud}" /></span>
+</div>
+
+		</td>
+		<td>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'problema', 'error')} ">
+	<label for="problema">
+		<g:message code="cat_serv.problema.label" default="Problema" />
+		
+	</label>
+	<span class="property-value" aria-labelledby="problema-label"><g:checkBox name="problema" value="${cat_servInstance?.problema}" /></span>
+</div>
+
+		</td>
+	</tr>
+	<tr>
+		<td>
+
 				<g:if test="${cat_servInstance?.servResp1}">
 				<li class="fieldcontain">
 					<span id="servResp1-label" class="property-label"><g:message code="cat_serv.servResp1.label" default="Serv Resp1" /></span>
@@ -112,7 +142,10 @@
 					
 				</li>
 				</g:if>
-			
+
+		</td>
+		<td>
+
 				<g:if test="${cat_servInstance?.servResp2}">
 				<li class="fieldcontain">
 					<span id="servResp2-label" class="property-label"><g:message code="cat_serv.servResp2.label" default="Serv Resp2" /></span>
@@ -133,7 +166,10 @@
 					<span class="property-value" aria-labelledby="unidades2-label">${cat_servInstance?.unidades2?.encodeAsHTML()}</span>
 				</li>
 				</g:if>
-			
+
+		</td>
+		<td>
+
 				<g:if test="${cat_servInstance?.servResp3}">
 				<li class="fieldcontain">
 					<span id="servResp3-label" class="property-label"><g:message code="cat_serv.servResp3.label" default="Serv Resp3" /></span>
@@ -154,7 +190,15 @@
 					<span class="property-value" aria-labelledby="unidades3-label">${cat_servInstance?.unidades3?.encodeAsHTML()}</span>
 				</li>
 				</g:if>
-			
+
+		</td>
+		<td>
+
+		</td>
+	</tr>
+	<tr>
+		<td>
+
 				<g:if test="${cat_servInstance?.impacto}">
 				<li class="fieldcontain">
 					<span id="impacto-label" class="property-label"><g:message code="cat_serv.impacto.label" default="Impacto" /></span>
@@ -164,7 +208,10 @@
 					
 				</li>
 				</g:if>
-			
+
+		</td>
+		<td>
+
 				<g:if test="${cat_servInstance?.authoriza}">
 				<li class="fieldcontain">
 					<span id="authoriza-label" class="property-label"><g:message code="cat_serv.authoriza.label" default="Authoriza" /></span>
@@ -173,7 +220,10 @@
 					
 				</li>
 				</g:if>
-			
+
+		</td>
+		<td>
+
 				<g:if test="${cat_servInstance?.servResp}">
 				<li class="fieldcontain">
 					<span id="servResp-label" class="property-label"><g:message code="cat_serv.servResp.label" default="Serv Resp" /></span>
@@ -182,7 +232,10 @@
 					
 				</li>
 				</g:if>
-			
+
+		</td>
+		<td>
+
 				<g:if test="${cat_servInstance?.estadoServ}">
 				<li class="fieldcontain">
 					<span id="estadoServ-label" class="property-label"><g:message code="cat_serv.estado.label" default="estadoServ" /></span>
@@ -193,7 +246,12 @@
 					
 				</li>
 				</g:if>
-			
+
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+
 				<g:if test="${cat_servInstance?.plantilla}">
 				<li class="fieldcontain">
 					<span id="plantilla-label" class="property-label"><g:message code="cat_serv.plantilla.label" default="Plantilla" /></span>
@@ -202,7 +260,10 @@
 					
 				</li>
 				</g:if>
-			
+
+		</td>
+		<td colspan="2">
+
 				<g:if test="${cat_servInstance?.observaciones}">
 				<li class="fieldcontain">
 					<span id="observaciones-label" class="property-label"><g:message code="cat_serv.observaciones.label" default="Observaciones" /></span>
@@ -211,7 +272,11 @@
 					
 				</li>
 				</g:if>
-			
+
+		</td>
+	</tr>
+</table>
+
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

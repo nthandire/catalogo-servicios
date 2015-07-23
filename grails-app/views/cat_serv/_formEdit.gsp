@@ -20,14 +20,6 @@
 	<span class="property-value" aria-labelledby="servSub-label">${cat_servInstance?.servSub?.encodeAsHTML()}</span>
 </div>
 
-        <script>
-            function categoryChanged(categoryId) {
-                <g:remoteFunction controller="cat_serv" action="categoryChanged"
-                    update="subContainer"
-                    params="'categoryId='+categoryId"/>
-            }
-        </script>
-
 		</td>
 
 		<td colspan="2">
