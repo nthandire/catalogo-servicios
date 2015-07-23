@@ -24,14 +24,13 @@ class Cat_servController {
     }
 
     def create() {
-        def instance = new Cat_serv(params)
-        instance.idUsuario = springSecurityService.principal.id
-        instance.ipTerminal = request.getRemoteAddr()
-        [cat_servInstance: instance]
+        [cat_servInstance: new Cat_serv(params)]
     }
 
     def save() {
         def cat_servInstance = new Cat_serv(params)
+        cat_servInstance.idUsuario = springSecurityService.principal.id
+        cat_servInstance.ipTerminal = request.getRemoteAddr()
         if (!cat_servInstance.save(flush: true)) {
             render(view: "create", model: [cat_servInstance: cat_servInstance])
             return
@@ -65,6 +64,8 @@ class Cat_servController {
 
     def update(Long id, Long version) {
         def cat_servInstance = Cat_serv.get(id)
+        cat_servInstance.idUsuario = springSecurityService.principal.id
+        cat_servInstance.ipTerminal = request.getRemoteAddr()
         if (!cat_servInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'cat_serv.label', default: 'Cat_serv'), id])
             redirect(action: "list")
