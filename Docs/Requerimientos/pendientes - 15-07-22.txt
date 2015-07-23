@@ -7,15 +7,6 @@ crear rol que no vea
 
 como etiquetas (labels) utilizar las del excel, 
 
-^-------------     Ya    -------------^
-
-v------------- Pendiente -------------v
-
-etiquetas reducirlas
-
-
-mostrar siempre todos los checkbox
-
 cuales puede cambiar en edición
   estado (que aún no esta)
   descripción
@@ -26,5 +17,16 @@ cuales puede cambiar en edición
 
   plantilla 
   observación
+
+
+^-------------     Ya    -------------^
+
+v------------- Pendiente -------------v
+
+etiquetas reducirlas
+
+
+mostrar siempre todos los checkbox
+
 
 

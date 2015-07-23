@@ -49,7 +49,8 @@
 		<g:message code="cat_servCat.valoracion.label" default="Valoracion" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="valoracion" type="number" min="1" max="3" value="${cat_servCatInstance.valoracion}" required=""/>
+	<g:select name="valoracion" from="${[1,2,3]}" valueMessagePrefix="intensidad.valor"
+		value="${cat_servCatInstance.valoracion}" required="" />
 </div>
 
 		</td>
