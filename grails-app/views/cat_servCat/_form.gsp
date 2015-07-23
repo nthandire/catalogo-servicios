@@ -72,7 +72,9 @@
 		<g:message code="cat_servCat.estado.label" default="Estado" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="estado" from="${cat_servCatInstance.constraints.estado.inList}" required="" value="${fieldValue(bean: cat_servCatInstance, field: 'estado')}" valueMessagePrefix="cat_servCat.estado"/>
+	<g:select name="estado" from="${cat_servCatInstance.constraints.estado.inList}"
+		valueMessagePrefix="cat_servCat.estado" value="${cat_servCatInstance.estado}"
+		required="" />
 </div>
 
 		</td>

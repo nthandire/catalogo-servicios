@@ -52,7 +52,7 @@
 					
 						<td>${fieldValue(bean: cat_servCatInstance, field: "disponibilidad")}</td>
 					
-						<td>${fieldValue(bean: cat_servCatInstance, field: "estado")}</td>
+						<td><g:message code="cat_servCat.estado.${cat_servCatInstance.estado}" default="Valora..." /></td>
 					
 					</tr>
 				</g:each>

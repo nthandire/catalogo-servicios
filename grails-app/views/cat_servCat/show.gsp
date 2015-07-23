@@ -74,7 +74,9 @@
 				<li class="fieldcontain">
 					<span id="estado-label" class="property-label"><g:message code="cat_servCat.estado.label" default="Estado" /></span>
 					
-						<span class="property-value" aria-labelledby="estado-label"><g:fieldValue bean="${cat_servCatInstance}" field="estado"/></span>
+						<span class="property-value" aria-labelledby="estado-label">
+							<g:message code="cat_servCat.estado.${cat_servCatInstance.estado}" default="Valora..." />
+						</span>
 					
 				</li>
 				</g:if>
