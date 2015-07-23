@@ -26,9 +26,7 @@
 		<g:message code="cat_serv.servSub.label" default="Serv Sub" />
 		<span class="required-indicator">*</span>
 	</label>
-	<span id="subContainer">
-          <g:select id="servSub" name="servSub.id" from="${mx.gob.inr.catservicios.Cat_servSub.list()}" optionKey="id" required="" value="${cat_servInstance?.servSub?.id}" class="many-to-one"/>
-        </span>
+	<span id="subContainer"></span>
 </div>
 
         <script>
