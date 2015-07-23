@@ -116,66 +116,51 @@
 				<g:if test="${cat_servInstance?.servResp2}">
 				<li class="fieldcontain">
 					<span id="servResp2-label" class="property-label"><g:message code="cat_serv.servResp2.label" default="Serv Resp2" /></span>
-					
-						<span class="property-value" aria-labelledby="servResp2-label">${cat_servInstance?.servResp2?.encodeAsHTML()}</span>
-					
+					<span class="property-value" aria-labelledby="servResp2-label">${cat_servInstance?.servResp2?.encodeAsHTML()}</span>
 				</li>
 				</g:if>
 			
 				<g:if test="${cat_servInstance?.tiempo2}">
 				<li class="fieldcontain">
 					<span id="tiempo2-label" class="property-label"><g:message code="cat_serv.tiempo2.label" default="Tiempo2" /></span>
-					
-						<span class="property-value" aria-labelledby="tiempo2-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo2"/></span>
-					
+					<span class="property-value" aria-labelledby="tiempo2-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo2"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${cat_servInstance?.unidades2}">
 				<li class="fieldcontain">
 					<span id="unidades2-label" class="property-label"><g:message code="cat_serv.unidades2.label" default="Unidades2" /></span>
-					
-						<span class="property-value" aria-labelledby="unidades2-label">${cat_servInstance?.unidades2?.encodeAsHTML()}</span>
-					
+					<span class="property-value" aria-labelledby="unidades2-label">${cat_servInstance?.unidades2?.encodeAsHTML()}</span>
 				</li>
 				</g:if>
 			
 				<g:if test="${cat_servInstance?.servResp3}">
 				<li class="fieldcontain">
 					<span id="servResp3-label" class="property-label"><g:message code="cat_serv.servResp3.label" default="Serv Resp3" /></span>
-					
-						<span class="property-value" aria-labelledby="servResp3-label">${cat_servInstance?.servResp3?.encodeAsHTML()}</span>
-					
+					<span class="property-value" aria-labelledby="servResp3-label">${cat_servInstance?.servResp3?.encodeAsHTML()}</span>
 				</li>
 				</g:if>
 			
 				<g:if test="${cat_servInstance?.tiempo3}">
 				<li class="fieldcontain">
 					<span id="tiempo3-label" class="property-label"><g:message code="cat_serv.tiempo3.label" default="Tiempo3" /></span>
-					
-						<span class="property-value" aria-labelledby="tiempo3-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo3"/></span>
-					
+					<span class="property-value" aria-labelledby="tiempo3-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo3"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${cat_servInstance?.unidades3}">
 				<li class="fieldcontain">
 					<span id="unidades3-label" class="property-label"><g:message code="cat_serv.unidades3.label" default="Unidades3" /></span>
-					
-						<span class="property-value" aria-labelledby="unidades3-label">${cat_servInstance?.unidades3?.encodeAsHTML()}</span>
-					
+					<span class="property-value" aria-labelledby="unidades3-label">${cat_servInstance?.unidades3?.encodeAsHTML()}</span>
 				</li>
 				</g:if>
 			
 				<g:if test="${cat_servInstance?.impacto}">
 				<li class="fieldcontain">
 					<span id="impacto-label" class="property-label"><g:message code="cat_serv.impacto.label" default="Impacto" /></span>
-					
-						<span class="property-value" aria-labelledby="impacto-label">
-							<g:select name="impacto" disabled="false" from="${[1,2,3]}"
-								valueMessagePrefix="intensidad.valor" value="${cat_servInstance.impacto}"
-								required="" />
-						</span>
+					<span class="property-value" aria-labelledby="impacto-label">
+						<g:message code="intensidad.valor.${cat_servInstance.impacto}" default="Impacto..." />
+					</span>
 					
 				</li>
 				</g:if>

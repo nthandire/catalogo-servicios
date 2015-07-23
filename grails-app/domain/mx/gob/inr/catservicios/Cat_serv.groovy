@@ -43,7 +43,7 @@ class Cat_serv {
     servResp3 nullable:true
     tiempo3 min: 0, nullable:true
     unidades3()
-    impacto min: 0, max:3, editable:false
+    impacto min: 1, max:3
     authoriza nullable:true
     servResp editable:false
     plantilla(maxSize:3000, nullable:true)
