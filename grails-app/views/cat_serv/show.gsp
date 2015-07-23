@@ -198,6 +198,17 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${cat_servInstance?.estadoServ}">
+				<li class="fieldcontain">
+					<span id="estadoServ-label" class="property-label"><g:message code="cat_serv.estado.label" default="estadoServ" /></span>
+					
+					<span class="property-value" aria-labelledby="estadoServ-label">
+						<g:message code="cat_servCat.estado.${cat_servInstance.estadoServ}" default="Estado..." />
+					</span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${cat_servInstance?.plantilla}">
 				<li class="fieldcontain">
 					<span id="plantilla-label" class="property-label"><g:message code="cat_serv.plantilla.label" default="Plantilla" /></span>

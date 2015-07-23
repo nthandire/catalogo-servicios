@@ -223,6 +223,16 @@
 		</td>
 		<td>
 
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'estadoServ', 'error')} required">
+	<label for="estadoServ">
+		<g:message code="cat_serv.estado.label" default="estadoServ" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select name="estadoServ" from="${cat_servInstance.constraints.estadoServ.inList}"
+		valueMessagePrefix="cat_servCat.estado" value="${cat_servInstance.estadoServ}"
+		required="" />
+</div>
+
 		</td>
 	</tr>
 	<tr>
