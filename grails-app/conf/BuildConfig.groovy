@@ -38,6 +38,7 @@ grails.project.dependency.resolution = {
     //mavenRepo "http://download.java.net/maven/2/"
     //mavenRepo "http://repository.jboss.com/maven2/"
     mavenRepo "http://repo.grails.org/grails/repo/"
+    mavenRepo "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/"
   }
 
   dependencies {
@@ -63,7 +64,7 @@ grails.project.dependency.resolution = {
 
       compile ':cache:1.0.1'
       compile ':spring-security-core:1.2.7.3'
-      // compile ":jasper:1.11.0"
+      compile ":jasper:1.11.0"
   }
 
   environments {
