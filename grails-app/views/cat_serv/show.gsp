@@ -23,27 +23,23 @@
 			</g:if>
 			<ol class="property-list cat_serv">
 
+<style type="text/css">
+  textArea { width: 412px; }
+</style>
+
 <table class="table table-condensed">
 	<tr>
 		<td colspan="2">
 
-				<g:if test="${cat_servInstance?.servSub}">
-				<li class="fieldcontain">
-					<span id="servSub-label" class="property-label"><g:message code="cat_serv.servCat.label" default="Cat" /></span>
-					
-						<span class="property-value" aria-labelledby="servSub-label"><g:link controller="cat_servSub" action="show" id="${cat_servInstance?.servSub?.servCat?.id}">${cat_servInstance?.servSub?.servCat?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.servSub}">
-				<li class="fieldcontain">
-					<span id="servSub-label" class="property-label"><g:message code="cat_serv.servSub.label" default="Serv Sub" /></span>
-					
-						<span class="property-value" aria-labelledby="servSub-label"><g:link controller="cat_servSub" action="show" id="${cat_servInstance?.servSub?.id}">${cat_servInstance?.servSub?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
+<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servSub', 'error')} required">
+	<span id="servCat-label" class="property-label"><g:message code="cat_serv.servCat.label" default="Cat" /></span>
+	<span class="property-value" aria-labelledby="servCat-label">${cat_servInstance?.servSub?.servCat?.encodeAsHTML()}</span>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servSub', 'error')} required">
+	<span id="servSub-label" class="property-label"><g:message code="cat_serv.servSub.label" default="Serv Sub" /></span>
+	<span class="property-value" aria-labelledby="servSub-label">${cat_servInstance?.servSub?.encodeAsHTML()}</span>
+</div>
 
 		</td>
 
@@ -59,7 +55,8 @@
 		<g:message code="cat_serv.descripcion.label" default="Descripcion" />
 		<span class="required-indicator">*</span>
 	</label>
-	<span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${cat_servInstance}" field="descripcion"/></span>
+	<g:textArea name="descripcion" cols="40" rows="5" maxlength="255" required=""
+		value="${cat_servInstance?.descripcion}" disabled="true"/>
 </div>
 
 		</td>
@@ -75,7 +72,7 @@
 		<g:message code="cat_serv.portal.label" default="Portal" />
 		
 	</label>
-	<span class="property-value" aria-labelledby="portal-label"><g:checkBox name="portal" value="${cat_servInstance?.portal}" /></span>
+	<g:checkBox name="portal" widget="checkbox" value="${cat_servInstance?.portal}" disabled="true" />
 </div>
 
 		</td>
@@ -86,7 +83,7 @@
 		<g:message code="cat_serv.incidente.label" default="Incidente" />
 		
 	</label>
-	<span class="property-value" aria-labelledby="incidente-label"><g:checkBox name="incidente" value="${cat_servInstance?.incidente}" /></span>
+	<g:checkBox name="incidente" widget="checkbox" value="${cat_servInstance?.incidente}" disabled="true" />
 </div>
 
 		</td>
@@ -94,10 +91,10 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'solicitud', 'error')} ">
 	<label for="solicitud">
-		<g:message code="cat_serv.solicitud.label" default="Solicitud" />
+		<g:message code="cat_serv.solicitud.label" default="Solicitud" disabled="true" />
 		
 	</label>
-	<span class="property-value" aria-labelledby="solicitud-label"><g:checkBox name="solicitud" value="${cat_servInstance?.solicitud}" /></span>
+	<g:checkBox name="solicitud" widget="checkbox" value="${cat_servInstance?.solicitud}" disabled="true" />
 </div>
 
 		</td>
@@ -108,7 +105,7 @@
 		<g:message code="cat_serv.problema.label" default="Problema" />
 		
 	</label>
-	<span class="property-value" aria-labelledby="problema-label"><g:checkBox name="problema" value="${cat_servInstance?.problema}" /></span>
+	<g:checkBox name="problema" widget="checkbox" value="${cat_servInstance?.problema}" disabled="true" />
 </div>
 
 		</td>
@@ -116,80 +113,80 @@
 	<tr>
 		<td>
 
-				<g:if test="${cat_servInstance?.servResp1}">
-				<li class="fieldcontain">
-					<span id="servResp1-label" class="property-label"><g:message code="cat_serv.servResp1.label" default="Serv Resp1" /></span>
-					
-						<span class="property-value" aria-labelledby="servResp1-label">${cat_servInstance?.servResp1?.encodeAsHTML()}</span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.tiempo1}">
-				<li class="fieldcontain">
-					<span id="tiempo1-label" class="property-label"><g:message code="cat_serv.tiempo1.label" default="Tiempo1" /></span>
-					
-						<span class="property-value" aria-labelledby="tiempo1-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo1"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.unidades1}">
-				<li class="fieldcontain">
-					<span id="unidades1-label" class="property-label"><g:message code="cat_serv.unidades1.label" default="Unidades1" /></span>
-					
-						<span class="property-value" aria-labelledby="unidades1-label">${cat_servInstance?.unidades1?.encodeAsHTML()}</span>
-					
-				</li>
-				</g:if>
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'servResp1', 'error')} required">
+	<label for="servResp1">
+		<g:message code="cat_serv.servResp1.label" default="Serv Resp1" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="servResp1" name="servResp1.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.servResp1?.id}" class="many-to-one" disabled="true"/>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'tiempo1', 'error')} required">
+	<label for="tiempo1">
+		<g:message code="cat_serv.tiempo1.label" default="Tiempo1" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="tiempo1" type="number" min="1" value="${cat_servInstance.tiempo1}" required="" disabled="true"/>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'unidades1', 'error')} required">
+	<label for="unidades1">
+		<g:message code="cat_serv.unidades1.label" default="Unidades1" />
+	</label>
+	<g:select id="unidades1" name="unidades1.id" from="${mx.gob.inr.catservicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades1?.id}" class="many-to-one" disabled="true"/>
+</div>
 
 		</td>
 		<td>
 
-				<g:if test="${cat_servInstance?.servResp2}">
-				<li class="fieldcontain">
-					<span id="servResp2-label" class="property-label"><g:message code="cat_serv.servResp2.label" default="Serv Resp2" /></span>
-					<span class="property-value" aria-labelledby="servResp2-label">${cat_servInstance?.servResp2?.encodeAsHTML()}</span>
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.tiempo2}">
-				<li class="fieldcontain">
-					<span id="tiempo2-label" class="property-label"><g:message code="cat_serv.tiempo2.label" default="Tiempo2" /></span>
-					<span class="property-value" aria-labelledby="tiempo2-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo2"/></span>
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.unidades2}">
-				<li class="fieldcontain">
-					<span id="unidades2-label" class="property-label"><g:message code="cat_serv.unidades2.label" default="Unidades2" /></span>
-					<span class="property-value" aria-labelledby="unidades2-label">${cat_servInstance?.unidades2?.encodeAsHTML()}</span>
-				</li>
-				</g:if>
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'servResp2', 'error')} ">
+	<label for="servResp2">
+		<g:message code="cat_serv.servResp2.label" default="Serv Resp2" />
+		
+	</label>
+	<g:select id="servResp2" name="servResp2.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" value="${cat_servInstance?.servResp2?.id}" class="many-to-one" noSelection="['null': '']" disabled="true"/>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'tiempo2', 'error')} ">
+	<label for="tiempo2">
+		<g:message code="cat_serv.tiempo2.label" default="Tiempo2" />
+		
+	</label>
+	<g:field name="tiempo2" type="number" min="0" value="${cat_servInstance.tiempo2}" disabled="true"/>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'unidades2', 'error')} required">
+	<label for="unidades2">
+		<g:message code="cat_serv.unidades2.label" default="Unidades2" />
+	</label>
+	<g:select id="unidades2" name="unidades2.id" from="${mx.gob.inr.catservicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades2?.id}" class="many-to-one" disabled="true"/>
+</div>
 
 		</td>
 		<td>
 
-				<g:if test="${cat_servInstance?.servResp3}">
-				<li class="fieldcontain">
-					<span id="servResp3-label" class="property-label"><g:message code="cat_serv.servResp3.label" default="Serv Resp3" /></span>
-					<span class="property-value" aria-labelledby="servResp3-label">${cat_servInstance?.servResp3?.encodeAsHTML()}</span>
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.tiempo3}">
-				<li class="fieldcontain">
-					<span id="tiempo3-label" class="property-label"><g:message code="cat_serv.tiempo3.label" default="Tiempo3" /></span>
-					<span class="property-value" aria-labelledby="tiempo3-label"><g:fieldValue bean="${cat_servInstance}" field="tiempo3"/></span>
-				</li>
-				</g:if>
-			
-				<g:if test="${cat_servInstance?.unidades3}">
-				<li class="fieldcontain">
-					<span id="unidades3-label" class="property-label"><g:message code="cat_serv.unidades3.label" default="Unidades3" /></span>
-					<span class="property-value" aria-labelledby="unidades3-label">${cat_servInstance?.unidades3?.encodeAsHTML()}</span>
-				</li>
-				</g:if>
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'servResp3', 'error')} ">
+	<label for="servResp3">
+		<g:message code="cat_serv.servResp3.label" default="Serv Resp3" />
+		
+	</label>
+	<g:select id="servResp3" name="servResp3.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" value="${cat_servInstance?.servResp3?.id}" class="many-to-one" noSelection="['null': '']" disabled="true"/>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'tiempo3', 'error')} ">
+	<label for="tiempo3">
+		<g:message code="cat_serv.tiempo3.label" default="Tiempo3" />
+		
+	</label>
+	<g:field name="tiempo3" type="number" min="0" value="${cat_servInstance.tiempo3}" disabled="true"/>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'unidades3', 'error')} required">
+	<label for="unidades3">
+		<g:message code="cat_serv.unidades3.label" default="Unidades3" />
+	</label>
+	<g:select id="unidades3" name="unidades3.id" from="${mx.gob.inr.catservicios.Cat_tiempo.list()}" optionKey="id" required="" value="${cat_servInstance?.unidades3?.id}" class="many-to-one" disabled="true"/>
+</div>
 
 		</td>
 		<td>
@@ -199,27 +196,26 @@
 	<tr>
 		<td>
 
-				<g:if test="${cat_servInstance?.impacto}">
-				<li class="fieldcontain">
-					<span id="impacto-label" class="property-label"><g:message code="cat_serv.impacto.label" default="Impacto" /></span>
-					<span class="property-value" aria-labelledby="impacto-label">
-						<g:message code="intensidad.valor.${cat_servInstance.impacto}" default="Impacto..." />
-					</span>
-					
-				</li>
-				</g:if>
+<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'impacto', 'error')} required">
+	<label for="impacto">
+		<g:message code="cat_serv.impacto.label" default="Impacto" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select name="impacto" disabled="true" from="${[1,2,3]}"
+		valueMessagePrefix="intensidad.valor" value="${cat_servInstance.impacto}"
+		required="" />
+</div>
 
 		</td>
 		<td>
 
-				<g:if test="${cat_servInstance?.authoriza}">
-				<li class="fieldcontain">
-					<span id="authoriza-label" class="property-label"><g:message code="cat_serv.authoriza.label" default="Authoriza" /></span>
-					
-						<span class="property-value" aria-labelledby="authoriza-label"><g:fieldValue bean="${cat_servInstance}" field="authoriza"/></span>
-					
-				</li>
-				</g:if>
+<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'authoriza', 'error')} ">
+	<label for="authoriza">
+		<g:message code="cat_serv.authoriza.label" default="Authoriza" />
+		
+	</label>
+	<g:select id="authoriza" name="authoriza.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.authoriza?.id}" class="many-to-one" disabled="true"/>
+</div>
 
 		</td>
 		<td>
@@ -236,55 +232,40 @@
 		</td>
 		<td>
 
-				<g:if test="${cat_servInstance?.estadoServ}">
-				<li class="fieldcontain">
-					<span id="estadoServ-label" class="property-label"><g:message code="cat_serv.estado.label" default="estadoServ" /></span>
-					
-					<span class="property-value" aria-labelledby="estadoServ-label">
-						<g:message code="cat_servCat.estado.${cat_servInstance.estadoServ}" default="Estado..." />
-					</span>
-					
-				</li>
-				</g:if>
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'estadoServ', 'error')} required">
+	<label for="estadoServ">
+		<g:message code="cat_serv.estado.label" default="estadoServ" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select name="estadoServ" from="${cat_servInstance.constraints.estadoServ.inList}"
+		valueMessagePrefix="cat_servCat.estado" value="${cat_servInstance.estadoServ}"
+		required="" disabled="true" />
+</div>
 
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
 
-				<g:if test="${cat_servInstance?.plantilla}">
-				<li class="fieldcontain">
-					<span id="plantilla-label" class="property-label"><g:message code="cat_serv.plantilla.label" default="Plantilla" /></span>
-					
-						<span class="property-value" aria-labelledby="plantilla-label"><g:fieldValue bean="${cat_servInstance}" field="plantilla"/></span>
-					
-				</li>
-				</g:if>
+<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'plantilla', 'error')} ">
+	<label for="plantilla">
+		<g:message code="cat_serv.plantilla.label" default="Plantilla" />
+		
+	</label>
+	<g:textArea name="plantilla" cols="80" rows="5" maxlength="500" value="${cat_servInstance?.plantilla}" disabled="true"/>
+</div>
 
 		</td>
 		<td colspan="2">
 
-				<g:if test="${cat_servInstance?.observaciones}">
-				<li class="fieldcontain">
-					<span id="observaciones-label" class="property-label"><g:message code="cat_serv.observaciones.label" default="Observaciones" /></span>
-					
-						<span class="property-value" aria-labelledby="observaciones-label"><g:fieldValue bean="${cat_servInstance}" field="observaciones"/></span>
-					
-				</li>
-				</g:if>
+<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'observaciones', 'error')} ">
+	<label for="observaciones">
+		<g:message code="cat_serv.observaciones.label" default="Observaciones" />
+		
+	</label>
+	<g:textArea name="observaciones" cols="80" rows="5" maxlength="1000" value="${cat_servInstance?.observaciones}" disabled="true"/>
+</div>
 
 		</td>
 	</tr>
 </table>
-
-			</ol>
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${cat_servInstance?.id}" />
-					<g:link class="edit" action="edit" id="${cat_servInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<!--g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /-->
-				</fieldset>
-			</g:form>
-		</div>
-	</body>
-</html>
