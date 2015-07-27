@@ -112,6 +112,7 @@
 				<ul>
 					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.getStaticPropertyValue('ordenMenu', int) } }">
 						<g:if test="${c.fullName.indexOf("Dbdoc") == -1 &&
+													c.fullName.indexOf("Jasper") == -1 &&
 													c.fullName.indexOf("Log") == -1}" >
 						  <sec:access url="/${c.logicalPropertyName}">
 								<li><g:link controller="${c.logicalPropertyName}">
