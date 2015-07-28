@@ -1,8 +1,15 @@
 import mx.gob.inr.catservicios.*
-
+import net.sf.jasperreports.engine.util.JRProperties
+ 
 class BootStrap {
 
   def init = { servletContext ->
+    JRProperties.setProperty("net.sf.jasperreports.awt.ignore.missing.font", "true")
+    JRProperties.setProperty("net.sf.jasperreports.default.font.name", "Helvetica")
+    JRProperties.setProperty("net.sf.jasperreports.default.pdf.font.name", "Helvetica")
+    JRProperties.setProperty("net.sf.jasperreports.default.pdf.encoding", "UTF-8")
+    JRProperties.setProperty("net.sf.jasperreports.default.pdf.embedded", "false")
+
     if (Usuario.count() == 0) {
       def adminRole = new Rol(authority: 'ROLE_ADMIN').save(flush: true)
       def userRole = new Rol(authority: 'ROLE_USER').save(flush: true)
