@@ -21,7 +21,6 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list cat_serv">
 
 <style type="text/css">
   textArea { width: 412px; }
@@ -220,14 +219,13 @@
 		</td>
 		<td>
 
-				<g:if test="${cat_servInstance?.servResp}">
-				<li class="fieldcontain">
-					<span id="servResp-label" class="property-label"><g:message code="cat_serv.servResp.label" default="Serv Resp" /></span>
-					
-						<span class="property-value" aria-labelledby="servResp-label">${cat_servInstance?.servResp?.encodeAsHTML()}</span>
-					
-				</li>
-				</g:if>
+<div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'servResp', 'error')} required">
+	<label for="servResp">
+		<g:message code="cat_serv.servResp.label" default="Serv Resp" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="servResp" name="servResp.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.servResp?.id}" class="many-to-one" disabled="true"/>
+</div>
 
 		</td>
 		<td>
@@ -269,3 +267,14 @@
 		</td>
 	</tr>
 </table>
+
+			<g:form>
+				<fieldset class="buttons">
+					<g:hiddenField name="id" value="${cat_servInstance?.id}" />
+					<g:link class="edit" action="edit" id="${cat_servInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<!--g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /-->
+				</fieldset>
+			</g:form>
+		</div>
+	</body>
+</html>
