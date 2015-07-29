@@ -75,4 +75,3 @@ class Cat_serv {
   }
 
 }
-// TODO: quitar el boton de "Eliminar" en todas las pantallas 

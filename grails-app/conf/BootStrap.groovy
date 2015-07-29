@@ -41,6 +41,7 @@ class BootStrap {
       new Requestmap(url: '/logout/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
       new Requestmap(url: '/usuario/**', configAttribute: 'ROLE_ADMIN').save()
       new Requestmap(url: '/rol/**', configAttribute: 'ROLE_ADMIN').save()
+      new Requestmap(url: '/usuarioRol/**', configAttribute: 'ROLE_ADMIN').save()
       // TODO: quitar el acceso a la BD
       new Requestmap(url: '/dbconsole/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
       new Requestmap(url: '/', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
