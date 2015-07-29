@@ -1,0 +1,66 @@
+
+<%@ page import="mx.gob.inr.catservicios.Cat_bitacora" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="layout" content="main">
+		<g:set var="entityName" value="${message(code: 'cat_bitacora.label', default: 'Cat_bitacora')}" />
+		<title><g:message code="default.list.label" args="[entityName]" /></title>
+	</head>
+	<body>
+		<a href="#list-cat_bitacora" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<div class="nav" role="navigation">
+			<ul>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+			</ul>
+		</div>
+		<div id="list-cat_bitacora" class="content scaffold-list" role="main">
+			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
+			</g:if>
+			<table>
+				<thead>
+					<tr>
+					
+						<g:sortableColumn property="no_solicitud" title="${message(code: 'cat_bitacora.no_solicitud.label', default: 'Nosolicitud')}" />
+					
+						<th><g:message code="cat_bitacora.servicio.label" default="Servicio" /></th>
+					
+						<g:sortableColumn property="descripcion" title="${message(code: 'cat_bitacora.descripcion.label', default: 'Descripcion')}" />
+					
+						<g:sortableColumn property="responsable" title="${message(code: 'cat_bitacora.responsable.label', default: 'Responsable')}" />
+					
+						<g:sortableColumn property="observaciones" title="${message(code: 'cat_bitacora.observaciones.label', default: 'Observaciones')}" />
+					
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'cat_bitacora.lastUpdated.label', default: 'Last Updated')}" />
+					
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${cat_bitacoraInstanceList}" status="i" var="cat_bitacoraInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					
+						<td><g:link action="show" id="${cat_bitacoraInstance.id}">${fieldValue(bean: cat_bitacoraInstance, field: "no_solicitud")}</g:link></td>
+					
+						<td>${fieldValue(bean: cat_bitacoraInstance, field: "servicio")}</td>
+					
+						<td>${fieldValue(bean: cat_bitacoraInstance, field: "descripcion")}</td>
+					
+						<td>${fieldValue(bean: cat_bitacoraInstance, field: "responsable")}</td>
+					
+						<td>${fieldValue(bean: cat_bitacoraInstance, field: "observaciones")}</td>
+					
+						<td><g:formatDate date="${cat_bitacoraInstance.lastUpdated}" /></td>
+					
+					</tr>
+				</g:each>
+				</tbody>
+			</table>
+			<div class="pagination">
+				<g:paginate total="${cat_bitacoraInstanceTotal}" />
+			</div>
+		</div>
+	</body>
+</html>

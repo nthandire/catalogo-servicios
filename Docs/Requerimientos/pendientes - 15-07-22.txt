@@ -30,3 +30,25 @@ mostrar siempre todos los checkbox
 
 
 
+Crear Tabla Bitácora de Cambios al Portafolio de Servicios del TIC
+  No. de solicitud
+  Categoría del servicio
+  Subcategoría del servicio
+  Servicio
+  Descripción del cambio solicitado
+  Responsable del cambio
+  Fecha del cambio
+  observaciones
+
+
+Crear Tabla Bitácora de Cambios al Portafolio de Servicios del TIC today !2 #Trabajo #inr
+controlador bitacora TIC today !2 #Trabajo #inr
+limitar acceso a controlador bitacora TIC today !2 #Trabajo #inr
+pasar reporte a controlador bitacora TIC today !2 #Trabajo #inr
+modificar reporte tomorrow !2 #Trabajo #inr
+limitar reporte por fechas tomorrow !2 #Trabajo #inr
+
+
+bitacoraPortafolio
+
+
