@@ -31,7 +31,7 @@
 				<g:hiddenField name="id" value="${cat_bitacoraInstance?.id}" />
 				<g:hiddenField name="version" value="${cat_bitacoraInstance?.version}" />
 				<fieldset class="form">
-					<g:render template="form"/>
+					<g:render template="formEdit"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />

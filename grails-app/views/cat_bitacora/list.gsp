@@ -30,11 +30,9 @@
 					
 						<g:sortableColumn property="descripcion" title="${message(code: 'cat_bitacora.descripcion.label', default: 'Descripcion')}" />
 					
-						<g:sortableColumn property="responsable" title="${message(code: 'cat_bitacora.responsable.label', default: 'Responsable')}" />
+						<th><g:message code="cat_bitacora.responsable.label" default="Responsable" /></th>
 					
 						<g:sortableColumn property="observaciones" title="${message(code: 'cat_bitacora.observaciones.label', default: 'Observaciones')}" />
-					
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'cat_bitacora.lastUpdated.label', default: 'Last Updated')}" />
 					
 					</tr>
 				</thead>
@@ -42,7 +40,9 @@
 				<g:each in="${cat_bitacoraInstanceList}" status="i" var="cat_bitacoraInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${cat_bitacoraInstance.id}">${fieldValue(bean: cat_bitacoraInstance, field: "no_solicitud")}</g:link></td>
+						<td><g:link action="show" id="${cat_bitacoraInstance.id}">
+									${cat_bitacoraInstance.no_solicitud}
+						</g:link></td>
 					
 						<td>${fieldValue(bean: cat_bitacoraInstance, field: "servicio")}</td>
 					
@@ -51,8 +51,6 @@
 						<td>${fieldValue(bean: cat_bitacoraInstance, field: "responsable")}</td>
 					
 						<td>${fieldValue(bean: cat_bitacoraInstance, field: "observaciones")}</td>
-					
-						<td><g:formatDate date="${cat_bitacoraInstance.lastUpdated}" /></td>
 					
 					</tr>
 				</g:each>

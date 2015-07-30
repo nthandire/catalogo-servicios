@@ -38,26 +38,25 @@
 		<td>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servicio', 'error')} required">
-	<label>
+	<label for="servicio">
 		<g:message code="cat_serv.servCat.label" default="Cat" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servCat" name="servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" required="" value="${cat_bitacoraInstance?.servicio?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['null':'Seleccione una...']}"/>
+	<g:select id="servCat" name="servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" required="" value="${cat_bitacoraInstance?.servicio?.servSub?.servCat?.id}" class="many-to-one" disabled="true"/><!-- TODO: efientizar el from -->
 </div>
 
 		</td>
-
 		<td>
+
 <div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'servicio', 'error')} required">
 	<label for="servicio">
 		<g:message code="cat_serv.servSub.label" default="Serv Sub" />
 		<span class="required-indicator">*</span>
 	</label>
-	<span id="subContainer"></span>
+	<g:select id="servSub" name="servSub.id" from="${mx.gob.inr.catservicios.Cat_servSub.list()}" optionKey="id" required="" value="${cat_bitacoraInstance?.servicio?.servSub?.id}" class="many-to-one" disabled="true"/><!-- TODO: efientizar el from -->
 </div>
 
 		</td>
-
 		<td>
 
 <div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'servicio', 'error')} required">
@@ -65,21 +64,8 @@
 		<g:message code="cat_bitacora.servicio.label" default="Servicio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<span id="serviciosContainer"></span>
+	<g:select id="servicio" name="servicio.id" from="${mx.gob.inr.catservicios.Cat_serv.list()}" optionKey="id" required="" value="${cat_bitacoraInstance?.servicio?.id}" class="many-to-one" disabled="true"/><!-- TODO: efientizar el from -->
 </div>
-
-        <script>
-            function categoryChanged(categoryId) {
-                <g:remoteFunction controller="Cat_bitacora" action="categoryChanged"
-                    update="subContainer"
-                    params="'categoryId='+categoryId"/>
-            }
-            function subcategoryChanged(subcategoryId) {
-                <g:remoteFunction controller="Cat_bitacora" action="subcategoryChanged"
-                    update="serviciosContainer"
-                    params="'subcategoryId='+subcategoryId"/>
-            }
-        </script>
 
 		</td>
 
