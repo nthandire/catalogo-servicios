@@ -59,6 +59,20 @@
 			<div class="pagination">
 				<g:paginate total="${cat_bitacoraInstanceTotal}" />
 			</div>
+<!-- TODO: el formateo de las pantallas con bootstrap, en lugar de table -->
+			<div class="row-fluid">
+				<div class="span8 offset2">
+				  <g:jasperReport
+				          controller="Cat_bitacora"
+				          action="reporteHojaIncidente"
+				          jasper="HojaIncidente"
+				          format="pdf"
+				          name="Reporte">
+				    de la fecha <input type="text" name="startDate"/> a la fecha <input type="text" name="endDate"/>
+				  </g:jasperReport>
+				</div>
+			</div>
+
 		</div>
 	</body>
 </html>

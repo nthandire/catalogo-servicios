@@ -65,18 +65,6 @@
 			<div class="pagination">
 				<g:paginate total="${cat_servInstanceTotal}" />
 			</div>
-
-		  <g:jasperReport
-		          controller="Cat_serv"
-		          action="reporteHojaIncidente"
-		          jasper="HojaIncidente"
-		          format="pdf"
-		          name="Incidente 746384">
-
-		    De la fecha <input type="text" name="startDate"/> a la fecha <input type="text" name="endDate"/>
-
-		  </g:jasperReport>
-
 		</div>
 	</body>
 </html>
