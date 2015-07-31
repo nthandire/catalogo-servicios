@@ -34,52 +34,26 @@ class Cat_bitacoraController {
     params.image_dir = "${servletContext.getRealPath('/images')}/"
     params.titulo = "REPORTE DE LA BITÁCORA DE CAMBIOS AL PORTAFOLIO DE SERVICIOS"
     
-    def rpthojaIncidente  = new RptHojaIncidente()
-        
-    rpthojaIncidente.noIncidente = 54877
-    rpthojaIncidente.num_solicitud = 333
-    rpthojaIncidente.fecha = new Date()
-    rpthojaIncidente.atendidoPor = "Ingeniero 04"
-    rpthojaIncidente.equipo = "Una laptop"
-    rpthojaIncidente.marca = "Dell"
-    rpthojaIncidente.modelo = "Inspire 3400"
-    rpthojaIncidente.serie = "7845485834"
-    rpthojaIncidente.reporto = "Secretaria 38"
-    rpthojaIncidente.area = "Qirofano 03"
-    rpthojaIncidente.cuerpo = "Urgencias"
-    rpthojaIncidente.extension = "10248"
-    rpthojaIncidente.garantia = 'SI'
-    rpthojaIncidente.categoria = "Mi Categoría"
-    rpthojaIncidente.subcategoria = "Mi Subcategoría"
-    rpthojaIncidente.servicio = "Mi Servicio"
-    rpthojaIncidente.economico = "84756384"
-    rpthojaIncidente.falla = 'teclado' + ', ' +
-                              'no funciona la barra espaciadora'
-    
+    def rpthojaIncidente  = new RptHojaIncidente(
+      num_solicitud: 333,
+      fecha: new Date(),
+      categoria: "Servicios de TIC para personal de nuevo ingreso",
+      subcategoria: "Equipo informático  ",
+      servicio: "Servicio de CCTV",
+      descripcion: "una nueva Descripción: This document is taken from Luke Hoban's excellent es6features repo. Go give it a star on ",
+      observaciones: 'Life hacks are pretty handy. People have managed to figure out all kinds of ways of making everyday tasks just that little bit easier. Many of the life hacks are so clever, you’ll wish that you had thought of them first. On the whole, most of them tend to work. But what happens if life hacks are put into the wrong hands, like the hands of someone a little bit dumb? Or what happens if the inventor had good intentions, but the result is just totally ridiculous? Well buckle up, as we’re about to find out with 15 examples of total life hack fails…',
+    )
     data.add(rpthojaIncidente)
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 }
 
 class RptHojaIncidente {
-    
-    Integer noIncidente
     Integer num_solicitud
     Date fecha
-    String atendidoPor
-    String equipo
-    String marca
-    String modelo
-    String serie
-    String reporto
-    String area
-    String cuerpo
-    String extension
-    String garantia
-    String economico
-    String falla
     String servicio
     String categoria
     String subcategoria
-    String atendio
+    String descripcion
+    String observaciones
 }
