@@ -12,12 +12,21 @@ class RptBitacora {
 }
 
 
-lista = Cat_bitacora.list()
+def inicio = Date.parse('d/M/yy HH:mm', '  1/7/15  '.trim() + ' 00:00' )
+println "inicio ${inicio}"
+def fin = Date.parse('d/M/yy HH:mm', '31/7/15 23:59' )
+println "fin ${fin}"
+
+def lista = Cat_bitacora.findByDateCreatedGreaterThanEqualsAndDateCreatedLessThanEquals(inicio, fin)
+
+
+
+
 
 lista.each{it ->
 def bitacora = new RptBitacora(
     num_solicitud: it.no_solicitud,
-    fecha: it.lastUpdated,
+    fecha: it.dateCreated,
     servicio:it.servicio?.descripcion,
     subcategoria:it.servicio?.servSub?.descripcion,
     categoria:it.servicio?.servSub?.servCat?.categoria,

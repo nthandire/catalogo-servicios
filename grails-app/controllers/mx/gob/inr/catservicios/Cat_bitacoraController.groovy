@@ -34,7 +34,14 @@ class Cat_bitacoraController {
     params.image_dir = "${servletContext.getRealPath('/images')}/"
     params.titulo = "REPORTE DE LA BITÁCORA DE CAMBIOS AL PORTAFOLIO DE SERVICIOS"
     
-    def lista = Cat_bitacora.list()
+    println "startDate ${params.startDate}"
+    println "endDate ${params.endDate}"
+    def startDate = Date.parse( 'd/M/yy HH:mm', params.startDate.trim() + ' 00:00' )
+    def endDate = Date.parse( 'd/M/yy HH:mm', params.endDate.trim() + ' 23:59' )
+    println "startDate ${startDate}"
+    println "endDate ${endDate}"
+
+    def lista = Cat_bitacora.findByDateCreatedGreaterThanEqualsAndDateCreatedLessThanEquals(startDate, endDate)
 
     lista.each { it ->
       def rowBitacora = new RptBitacora (

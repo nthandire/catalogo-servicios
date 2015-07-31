@@ -61,13 +61,16 @@
 			</div>
 <!-- TODO: el formateo de las pantallas con bootstrap, en lugar de table -->
 			<div class="row-fluid">
-				<div class="span8 offset2">
+				<div class="span10 offset1">
 				  <g:jasperReport
 				          controller="Cat_bitacora"
 				          action="reporteHojaIncidente"
 				          jasper="BitacoraSolicitudesDeCambio"
 				          format="pdf"
-				          name="Bitacora-de-Solicitudes-de-Cambios">
+				          name="Bitacora-de-Solicitudes-de-Cambios"
+				          description="Bitácora">
+				          de la fecha <input type="text" name="startDate" value="${(new Date() - 30).format( 'd/M/yy' )}"/>
+				          a la fecha <input type="text" name="endDate" value="${(new Date()).format( 'd/M/yy' )}"/>
 				  </g:jasperReport>
 				</div>
 			</div>
