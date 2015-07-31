@@ -68,7 +68,6 @@
 				          jasper="HojaIncidente"
 				          format="pdf"
 				          name="Reporte">
-				    de la fecha <input type="text" name="startDate"/> a la fecha <input type="text" name="endDate"/>
 				  </g:jasperReport>
 				</div>
 			</div>
