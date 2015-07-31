@@ -39,7 +39,7 @@ class Cat_bitacoraController {
     lista.each { it ->
       def rowBitacora = new RptBitacora (
         num_solicitud: it.no_solicitud,
-        fecha: it.lastUpdated,
+        fecha: it.dateCreated,
         servicio:it.servicio?.descripcion,
         subcategoria:it.servicio?.servSub?.descripcion,
         categoria:it.servicio?.servSub?.servCat?.categoria,

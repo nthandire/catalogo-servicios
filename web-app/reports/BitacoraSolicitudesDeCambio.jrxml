@@ -105,7 +105,7 @@
 				<reportElement x="15" y="96" width="530" height="80" uuid="9f6bd04c-ed84-4265-9789-af639f215e6b"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="20" y="78" width="209" height="15" uuid="5fe81630-fb4d-439a-8f1e-7e773ea6b73f"/>
+				<reportElement x="20" y="78" width="132" height="15" uuid="5fe81630-fb4d-439a-8f1e-7e773ea6b73f"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
@@ -136,6 +136,20 @@
 			<line>
 				<reportElement x="5" y="280" width="545" height="1" uuid="0c785a59-e9b2-4747-9e1b-e303879a492c"/>
 			</line>
+			<staticText>
+				<reportElement x="332" y="78" width="60" height="15" uuid="9995c098-3fc2-40f1-ab9b-e382814e1ffe"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="400" y="78" width="132" height="15" uuid="87a60b42-d169-4a49-bdd3-16d8da66db36"/>
+				<textElement markup="none">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
