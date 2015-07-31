@@ -32,11 +32,12 @@ class Cat_bitacoraController {
   def reporteHojaIncidente() {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
-    params.titulo = "SOLICITUD DE SERVICIO - INCIDENTE"
+    params.titulo = "REPORTE DE LA BITÁCORA DE CAMBIOS AL PORTAFOLIO DE SERVICIOS"
     
     def rpthojaIncidente  = new RptHojaIncidente()
         
     rpthojaIncidente.noIncidente = 54877
+    rpthojaIncidente.num_solicitud = 333
     rpthojaIncidente.fecha = new Date()
     rpthojaIncidente.atendidoPor = "Ingeniero 04"
     rpthojaIncidente.equipo = "Una laptop"
@@ -48,6 +49,9 @@ class Cat_bitacoraController {
     rpthojaIncidente.cuerpo = "Urgencias"
     rpthojaIncidente.extension = "10248"
     rpthojaIncidente.garantia = 'SI'
+    rpthojaIncidente.categoria = "Mi Categoría"
+    rpthojaIncidente.subcategoria = "Mi Subcategoría"
+    rpthojaIncidente.servicio = "Mi Servicio"
     rpthojaIncidente.economico = "84756384"
     rpthojaIncidente.falla = 'teclado' + ', ' +
                               'no funciona la barra espaciadora'
@@ -60,6 +64,7 @@ class Cat_bitacoraController {
 class RptHojaIncidente {
     
     Integer noIncidente
+    Integer num_solicitud
     Date fecha
     String atendidoPor
     String equipo
@@ -74,5 +79,7 @@ class RptHojaIncidente {
     String economico
     String falla
     String servicio
+    String categoria
+    String subcategoria
     String atendio
 }
