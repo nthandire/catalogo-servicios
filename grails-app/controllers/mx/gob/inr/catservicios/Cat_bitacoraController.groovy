@@ -34,21 +34,26 @@ class Cat_bitacoraController {
     params.image_dir = "${servletContext.getRealPath('/images')}/"
     params.titulo = "REPORTE DE LA BITÁCORA DE CAMBIOS AL PORTAFOLIO DE SERVICIOS"
     
-    def rpthojaIncidente  = new RptHojaIncidente(
-      num_solicitud: 333,
-      fecha: new Date(),
-      categoria: "Servicios de TIC para personal de nuevo ingreso",
-      subcategoria: "Equipo informático  ",
-      servicio: "Servicio de CCTV",
-      descripcion: "una nueva Descripción: This document is taken from Luke Hoban's excellent es6features repo. Go give it a star on ",
-      observaciones: 'Life hacks are pretty handy. People have managed to figure out all kinds of ways of making everyday tasks just that little bit easier. Many of the life hacks are so clever, you’ll wish that you had thought of them first. On the whole, most of them tend to work. But what happens if life hacks are put into the wrong hands, like the hands of someone a little bit dumb? Or what happens if the inventor had good intentions, but the result is just totally ridiculous? Well buckle up, as we’re about to find out with 15 examples of total life hack fails…',
-    )
-    data.add(rpthojaIncidente)
+    def lista = Cat_bitacora.list()
+
+    lista.each { it ->
+      def rowBitacora = new RptBitacora (
+        num_solicitud: it.no_solicitud,
+        fecha: it.lastUpdated,
+        servicio:it.servicio?.descripcion,
+        subcategoria:it.servicio?.servSub?.descripcion,
+        categoria:it.servicio?.servSub?.servCat?.categoria,
+        descripcion:it.descripcion,
+        observaciones:it.observaciones,
+      )
+      data.add(rowBitacora)
+    }
+
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 }
 
-class RptHojaIncidente {
+class RptBitacora {
     Integer num_solicitud
     Date fecha
     String servicio

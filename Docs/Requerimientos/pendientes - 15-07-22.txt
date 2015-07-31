@@ -30,18 +30,28 @@ Crear Tabla Bitácora de Cambios al Portafolio de Servicios del TIC
   Fecha del cambio
   observaciones
 
+etiquetas reducirlas
+
+Reporte
+  checar que se ve el titulo
+
+pasar reporte a controlador bitacora TIC today !2 #Trabajo #inr
+
+limpiar el reporte today !3 #inr
+ajustar tamaños today !3 #inr
+mandar lista de solicitudes today !3 #inr
+
+
 ^-------------     Ya    -------------^
 
 v------------- Pendiente -------------v
 
-etiquetas reducirlas
 
 
 mostrar siempre todos los checkbox
 
 
 
-pasar reporte a controlador bitacora TIC today !2 #Trabajo #inr
 modificar reporte tomorrow !2 #Trabajo #inr
 limitar reporte por fechas tomorrow !2 #Trabajo #inr
 
