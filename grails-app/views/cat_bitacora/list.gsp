@@ -68,9 +68,26 @@
 				          jasper="BitacoraSolicitudesDeCambio"
 				          format="pdf"
 				          name="Bitacora-de-Solicitudes-de-Cambios"
-				          description="Bitácora">
-				          de la fecha <input type="text" name="startDate" value="${(new Date() - 30).format( 'd/M/yy' )}"/>
-				          a la fecha <input type="text" name="endDate" value="${(new Date()).format( 'd/M/yy' )}"/>
+				          description="Bitácora: Llene los campos a continuación:">
+				          <table>
+				          	<tr>
+				          		<td>
+							          de la fecha
+				          		</td>
+				          		<td>
+							          <% def ini = new Date(); ini[Calendar.DATE] = 1; %>
+							          <g:datePicker name="startDate" value="${ini}" precision="day" years="${2015..2020}"/>
+				          		</td>
+				          	</tr>
+				          	<tr>
+				          		<td>
+							          a la fecha
+				          		</td>
+				          		<td>
+							          <g:datePicker name="endDate" value="${new Date()}" precision="day" years="${2015..2020}"/>
+				          		</td>
+				          	</tr>
+				          </table>
 				  </g:jasperReport>
 				</div>
 			</div>
