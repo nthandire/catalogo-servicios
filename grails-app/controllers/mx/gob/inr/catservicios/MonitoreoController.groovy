@@ -80,7 +80,7 @@ class MonitoreoController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), monitoreoInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), monitoreoInstance.toString()])
         redirect(action: "show", id: monitoreoInstance.id)
     }
 
