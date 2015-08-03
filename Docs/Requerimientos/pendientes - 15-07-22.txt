@@ -41,10 +41,24 @@ limpiar el reporte today !3 #inr
 ajustar tamaños today !3 #inr
 mandar lista de solicitudes today !3 #inr
 
+Recorrido antes de entregar a pruebas con el usuario
+Borra BD
+crear 3 categorias
+crear 3 subcategorias
+crear 3 servicios
+crear 3 bitacoras
+imprimir reporte
+
+editar categoria
+editar subcategoria
+editar servicio
+editar bitacora
+imprimir reporte
 
 ^-------------     Ya    -------------^
 
 v------------- Pendiente -------------v
+
 
 
 

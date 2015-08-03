@@ -35,7 +35,7 @@
 		<g:message code="cat_servSub.servCat.label" default="Serv Cat" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servCat" name="servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" required="" value="${cat_servSubInstance?.servCat?.id}" class="many-to-one"/>
+	<g:select id="servCat" name="servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" required="" value="${cat_servSubInstance?.servCat?.id}" class="many-to-one" disabled="true"/>
 </div>
 
 		</td>
@@ -46,7 +46,8 @@
 		<g:message code="cat_servSub.descripcion.label" default="Descripcion" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textArea name="descripcion" cols="40" rows="5" maxlength="255" required="" value="${cat_servSubInstance?.descripcion}"/>
+	<g:textArea name="descripcion" cols="40" rows="5" maxlength="255" required=""
+			value="${cat_servSubInstance?.descripcion}" disabled="true"/>
 </div>
 
 		</td>
