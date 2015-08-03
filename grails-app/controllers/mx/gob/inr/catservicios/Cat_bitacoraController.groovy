@@ -29,7 +29,7 @@ class Cat_bitacoraController {
       )
   }
 
-  def reporteHojaIncidente() {
+  def reporteBitacoraSolicitudesDeCambio() {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
     params.titulo = "REPORTE DE LA BITÁCORA DE CAMBIOS AL PORTAFOLIO DE SERVICIOS"
@@ -41,7 +41,7 @@ class Cat_bitacoraController {
     endDate[Calendar.HOUR_OF_DAY] = 23
     endDate[Calendar.MINUTE] = 59
 
-    def lista = Cat_bitacora.findByDateCreatedGreaterThanEqualsAndDateCreatedLessThanEquals(startDate, endDate)
+    def lista = Cat_bitacora.findAllByDateCreatedGreaterThanEqualsAndDateCreatedLessThanEquals(startDate, endDate)
 
     lista.each { it ->
       def rowBitacora = new RptBitacora (

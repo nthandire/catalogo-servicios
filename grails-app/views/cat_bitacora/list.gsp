@@ -64,7 +64,7 @@
 				<div class="span10 offset1">
 				  <g:jasperReport
 				          controller="Cat_bitacora"
-				          action="reporteHojaIncidente"
+				          action="reporteBitacoraSolicitudesDeCambio"
 				          jasper="BitacoraSolicitudesDeCambio"
 				          format="pdf"
 				          name="Bitacora-de-Solicitudes-de-Cambios"
