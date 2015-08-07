@@ -13,7 +13,7 @@ class Cat_servCat {
   static hasMany = [servSubs: Cat_servSub]
 
   static constraints = {
-    categoria(maxSize:255, blank:false)
+    categoria maxSize:255, blank:false, unique:true
     descripcion(maxSize:1000, blank:false)
     servResp()
     valoracion blank:false, min: 1, max: 3

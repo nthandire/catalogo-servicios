@@ -208,12 +208,12 @@
 		</td>
 		<td>
 
-<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'authoriza', 'error')} ">
-	<label for="authoriza">
-		<g:message code="cat_serv.authoriza.label" default="Authoriza" />
+<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'autoriza', 'error')} ">
+	<label for="autoriza">
+		<g:message code="cat_serv.autoriza.label" default="Autoriza" />
 		
 	</label>
-	<g:select id="authoriza" name="authoriza.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.authoriza?.id}" class="many-to-one" disabled="true"/>
+	<g:select id="autoriza" name="autoriza.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.autoriza?.id}" class="many-to-one" disabled="true"/>
 </div>
 
 		</td>

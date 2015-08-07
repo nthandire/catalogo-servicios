@@ -29,7 +29,7 @@
 						<div align="center">
 						    <h5>INSTITUTO NACIONAL DE REHABILITACION</h5>
 						    <h5>Subdirección de Tecnologías de la Información y Comunicaciones</h5>
-						    <h5></h5>
+						    <h5>Sistema de Administación de Servicios de TIC's</h5>
 						</div>
 					</td>
 					<td width="10%">

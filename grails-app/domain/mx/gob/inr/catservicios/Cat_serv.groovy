@@ -18,7 +18,7 @@ class Cat_serv {
   Cat_tiempo unidades2
   Cat_tiempo unidades3
   Integer impacto = 1
-  Cat_servResp authoriza
+  Cat_servResp autoriza
   Cat_servResp servResp
   String plantilla
   String observaciones
@@ -44,7 +44,7 @@ class Cat_serv {
     tiempo3 min: 0, nullable:true
     unidades3()
     impacto min: 1, max:3
-    authoriza nullable:true
+    autoriza nullable:true
     servResp editable:false
     plantilla(maxSize:3000, nullable:true)
     observaciones(maxSize:3000, nullable:true)
@@ -64,6 +64,7 @@ class Cat_serv {
     unidades2 column:'id_tiempo2'
     unidades3 column:'id_tiempo3'
     impacto defaultValue: "1"
+    autoriza column:'id_servrespautoriza'
     servResp column:'id_servresp'
     estadoServ length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     lastUpdated column:'fecha_modificacion'

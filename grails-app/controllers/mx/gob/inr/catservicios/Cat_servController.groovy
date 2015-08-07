@@ -4,7 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class Cat_servController {
     def springSecurityService
-    static nombreMenu = "Catálogo de Servicios"
+    static nombreMenu = "Catálogo de Categorías de Tercer Nivel"
     static ordenMenu = 1
 
 
