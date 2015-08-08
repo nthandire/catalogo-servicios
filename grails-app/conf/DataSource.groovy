@@ -1,8 +1,18 @@
-dataSource {
+dataSource_catServ {
     pooled = true
     driverClassName = "org.h2.Driver"
     username = "sa"
     password = ""
+    dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+    url = "jdbc:h2:catServDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+}
+dataSource_seguridad {
+    pooled = true
+    driverClassName = "org.h2.Driver"
+    username = "sa"
+    password = ""
+    dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+    url = "jdbc:h2:seguridadDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -12,10 +22,8 @@ hibernate {
 // environment specific settings
 environments {
     development {
-        dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-        }
+      dataSource_catServ {}
+      dataSource_seguridad {}
     }
     test {
         dataSource {

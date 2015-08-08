@@ -11,6 +11,7 @@ class Cat_tiempo {
   static mapping = {
     id column:'id_tiempo'
     version false
+    datasource "catServ"
   } 
 
   String toString() {

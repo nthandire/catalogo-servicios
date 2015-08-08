@@ -31,6 +31,7 @@ class Cat_servCat {
     estado length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     servCob column:'id_servcob'
     version false
+    datasource "catServ"
   }
 
   String toString() {

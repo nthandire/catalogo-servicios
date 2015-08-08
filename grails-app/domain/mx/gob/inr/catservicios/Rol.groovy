@@ -6,6 +6,7 @@ class Rol {
 
 	static mapping = {
 		cache true
+		datasource "seguridad"
 	}
 
 	static constraints = {

@@ -12,6 +12,7 @@ class Cat_servResp {
     table 'cat_servresp'
     id column:'id_servresp'
     version false
+    datasource "catServ"
   }
 
   String toString() {

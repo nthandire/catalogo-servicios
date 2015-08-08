@@ -24,6 +24,7 @@ class Cat_bitacora {
     lastUpdated column:'fecha_modificacion'
     dateCreated column:'fecha_creacion'
     version false
+    datasource "catServ"
   }
 
   String toString() {

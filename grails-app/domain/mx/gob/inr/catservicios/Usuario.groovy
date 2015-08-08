@@ -18,6 +18,7 @@ class Usuario {
 
 	static mapping = {
 		password column: '`password`'
+		datasource "seguridad"
 	}
 
 	Set<Rol> getAuthorities() {

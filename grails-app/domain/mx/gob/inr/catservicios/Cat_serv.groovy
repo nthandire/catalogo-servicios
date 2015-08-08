@@ -69,6 +69,7 @@ class Cat_serv {
     estadoServ length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     lastUpdated column:'fecha_modificacion'
     version column:'modificacion'
+    datasource "catServ"
   }
 
   String toString() {

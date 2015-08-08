@@ -33,6 +33,7 @@ class Monitoreo {
     semaforo defaultValue: "1"
     lastUpdated column:'fecha_modificacion'
     version false
+    datasource "catServ"
   }
 
   String toString() {

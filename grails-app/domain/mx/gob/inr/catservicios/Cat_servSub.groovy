@@ -17,6 +17,7 @@ class Cat_servSub {
     id column:'id_servsub'
     servCat column:'id_servcat'
     version false
+    datasource "catServ"
   }
 
   String toString() {
