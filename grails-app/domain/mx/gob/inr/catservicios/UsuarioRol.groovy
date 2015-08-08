@@ -7,6 +7,16 @@ class UsuarioRol implements Serializable {
 	Usuario usuario
 	Rol rol
 
+   Long usuarioId
+
+   Usuario getUsuario() {
+      usuarioId ? Usuario.get(usuarioId) : null
+   }
+   void setUsuario(Usuario usuario) {
+      usuarioId = usuario.id
+   }
+   static transients = ['usuarioId']
+
 	boolean equals(other) {
 		if (!(other instanceof UsuarioRol)) {
 			return false
