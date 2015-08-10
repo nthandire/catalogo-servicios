@@ -14,14 +14,6 @@ dataSource_seguridad {
     dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
     url = "jdbc:h2:seguridadDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 }
-dataSource_usuario {
-    pooled = true
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
-    dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-    url = "jdbc:h2:usuarioDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-}
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
@@ -32,7 +24,6 @@ environments {
     development {
       dataSource_catServ {}
       dataSource_seguridad {}
-      dataSource_usuario {}
     }
     test {
         dataSource {
