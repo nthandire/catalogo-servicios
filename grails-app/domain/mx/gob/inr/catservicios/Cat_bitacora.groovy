@@ -20,11 +20,12 @@ class Cat_bitacora {
   }
 
   static mapping = {
+    table 'borrar_cat_bitacora'
     servicio column:'id_serv'
+    id generator: 'increment'
     lastUpdated column:'fecha_modificacion'
     dateCreated column:'fecha_creacion'
     version false
-    datasource "catServ"
   }
 
   String toString() {

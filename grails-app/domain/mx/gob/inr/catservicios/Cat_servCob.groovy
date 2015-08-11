@@ -9,10 +9,10 @@ class Cat_servCob {
   }
 
   static mapping = {
-    table 'cat_servcob'
+    table 'borrar_cat_servcob'
     id column:'id_servcob'
+    id generator: 'increment'
     version false
-    datasource "catServ"
   } 
 
   String toString() {

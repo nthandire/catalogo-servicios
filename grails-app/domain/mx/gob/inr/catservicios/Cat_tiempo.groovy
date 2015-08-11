@@ -10,8 +10,8 @@ class Cat_tiempo {
 
   static mapping = {
     id column:'id_tiempo'
+    id generator: 'increment'
     version false
-    datasource "catServ"
   } 
 
   String toString() {

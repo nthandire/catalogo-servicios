@@ -1,3 +1,12 @@
+dataSource {
+    dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+    url = "jdbc:informix-sqli://192.168.10.1:1526/sast_dev:informixserver=ol_inrserver"
+    driverClassName = "com.informix.jdbc.IfxDriver"
+    dialect = "org.hibernate.dialect.InformixDialect"
+    username = "informix"
+    password = "informix"
+    pooled = true
+}
 dataSource_catServ {
     pooled = true
     driverClassName = "org.h2.Driver"
@@ -22,6 +31,7 @@ hibernate {
 // environment specific settings
 environments {
     development {
+      dataSource {}
       dataSource_catServ {}
       dataSource_seguridad {}
     }

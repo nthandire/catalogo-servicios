@@ -23,15 +23,15 @@ class Cat_servCat {
   }
 
   static mapping = {
-    table 'cat_servcat'
+    table 'borrar_cat_servcat'
     id column:'id_servcat'
+    id generator: 'increment'
     servResp column:'id_servresp'
     valoracion defaultValue: "1"
     disponibilidad defaultValue: "0"
     estado length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     servCob column:'id_servcob'
     version false
-    datasource "catServ"
   }
 
   String toString() {

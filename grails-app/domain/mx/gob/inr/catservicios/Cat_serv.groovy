@@ -55,7 +55,9 @@ class Cat_serv {
   }
 
   static mapping = {
+    table 'borrar_cat_serv'
     id column:'id_serv'
+    id generator: 'increment'
     servSub column:'id_servSub'
     servResp1 column:'id_servresp1'
     servResp2 column:'id_servresp2'
@@ -69,7 +71,6 @@ class Cat_serv {
     estadoServ length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     lastUpdated column:'fecha_modificacion'
     version column:'modificacion'
-    datasource "catServ"
   }
 
   String toString() {
