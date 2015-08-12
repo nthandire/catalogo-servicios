@@ -1,11 +1,11 @@
 package mx.gob.inr.catservicios
 
 class Cat_bitacora {
-  Integer no_solicitud // TODO: ¿es numerica?
+  Integer no_solicitud // TODO: El sistema la debe generar, reinicio por año. Se debe mostrar con relación al año ##/2015
   String descripcion
   Date lastUpdated
   Date dateCreated
-  String observaciones
+  String observaciones  // TODO: Eliminar
 
   static belongsTo = [servicio:Cat_serv, responsable:Cat_servResp]
 

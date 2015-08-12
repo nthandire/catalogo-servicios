@@ -44,13 +44,13 @@ class Cat_serv {
     tiempo3 min: 0, nullable:true
     unidades3()
     impacto min: 1, max:3
-    autoriza nullable:true
-    servResp editable:false
+    autoriza nullable:true // TODO: hay servicios que no requieren autorización ni aprovación, estos campos deben ser nullables
+    servResp editable:false, nullable:true
     plantilla(maxSize:3000, nullable:true)
     observaciones(maxSize:3000, nullable:true)
     estadoServ blank:false, inList: [(char)'A',(char)'I']
     idUsuario display:false, editable:false
-    ipTerminal display:false, editable:false
+    ipTerminal display:false, editable:false, maxSize:15
     lastUpdated display:false, editable:false
   }
 
@@ -67,7 +67,7 @@ class Cat_serv {
     unidades3 column:'id_tiempo3'
     impacto defaultValue: "1"
     autoriza column:'id_servrespautoriza'
-    servResp column:'id_servresp'
+    servResp column:'id_servrespaprueba'
     estadoServ length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     lastUpdated column:'fecha_modificacion'
     version column:'modificacion'
