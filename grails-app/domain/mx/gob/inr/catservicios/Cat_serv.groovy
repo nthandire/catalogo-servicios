@@ -14,7 +14,7 @@ class Cat_serv {
   Integer tiempo1
   Integer tiempo2
   Integer tiempo3
-  Cat_tiempo unidades1 // = Cat_tiempo.findByTitleDescripcion("Hora")
+  Cat_tiempo unidades1
   Cat_tiempo unidades2
   Cat_tiempo unidades3
   Integer impacto = 1
@@ -44,7 +44,7 @@ class Cat_serv {
     tiempo3 min: 0, nullable:true
     unidades3()
     impacto min: 1, max:3
-    autoriza nullable:true // TODO: hay servicios que no requieren autorización ni aprovación, estos campos deben ser nullables
+    autoriza nullable:true
     servResp editable:false, nullable:true
     plantilla(maxSize:3000, nullable:true)
     observaciones(maxSize:3000, nullable:true)
@@ -65,10 +65,9 @@ class Cat_serv {
     unidades1 column:'id_tiempo1'
     unidades2 column:'id_tiempo2'
     unidades3 column:'id_tiempo3'
-    impacto defaultValue: "1"
     autoriza column:'id_servrespautoriza'
     servResp column:'id_servrespaprueba'
-    estadoServ length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
+    estadoServ length: 1, columnDefinition: 'char(1)'
     lastUpdated column:'fecha_modificacion'
     version column:'modificacion'
   }

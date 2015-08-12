@@ -213,7 +213,7 @@
 		<g:message code="cat_serv.autoriza.label" default="Autoriza" />
 		
 	</label>
-	<g:select id="autoriza" name="autoriza.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.autoriza?.id}" class="many-to-one" disabled="true"/>
+	<g:select id="autoriza" name="autoriza.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" value="${cat_servInstance?.autoriza?.id}" class="many-to-one" noSelection="${['null':'N/A']}" disabled="true"/>
 </div>
 
 		</td>
@@ -222,9 +222,8 @@
 <div class="fieldtablecontain ${hasErrors(bean: cat_servInstance, field: 'servResp', 'error')} required">
 	<label for="servResp">
 		<g:message code="cat_serv.servResp.label" default="Serv Resp" />
-		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servResp" name="servResp.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servInstance?.servResp?.id}" class="many-to-one" disabled="true"/>
+	<g:select id="servResp" name="servResp.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" value="${cat_servInstance?.servResp?.id}" class="many-to-one" noSelection="${['null':'N/A']}" disabled="true"/>
 </div>
 
 		</td>
