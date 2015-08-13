@@ -28,31 +28,18 @@
 <table class="table table-condensed">
 	<tr>
 		<td>
-
-<div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'no_solicitud', 'error')} required">
-	<label for="no_solicitud">
-		<g:message code="cat_bitacora.no_solicitud.label" default="Nosolicitud" />
+<div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'folio', 'error')} required">
+	<label for="folio">
+		<g:message code="cat_bitacora.folio.label" default="Folio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="no_solicitud" type="number" value="${cat_bitacoraInstance.no_solicitud}" disabled="true"/>
+	<g:field name="folio" type="number" value="${cat_bitacoraInstance.folio}" disabled="true"/>
 </div>
-
 		</td>
-		<td>
 
-<div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'responsable', 'error')} required">
-	<label for="responsable">
-		<g:message code="cat_bitacora.responsable.label" default="Responsable" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="responsable" name="responsable.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id"
-		value="${cat_bitacoraInstance?.responsable?.id}" class="many-to-one" disabled="true"/>
-</div>
-
+		<td colspan="2">
 		</td>
-		<td>
 
-		</td>
 	</tr>
 	<tr>
 		<td>
@@ -103,20 +90,6 @@
 	</label>
 	<g:textArea name="descripcion" cols="40" rows="5" maxlength="1000" required=""
 		value="${cat_bitacoraInstance?.descripcion}" disabled="true"/>
-</div>
-
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3">
-
-<div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'observaciones', 'error')} ">
-	<label for="observaciones">
-		<g:message code="cat_bitacora.observaciones.label" default="Observaciones" />
-		
-	</label>
-	<g:textArea name="observaciones" cols="40" rows="5" maxlength="3000"
-		value="${cat_bitacoraInstance?.observaciones}" disabled="true"/>
 </div>
 
 		</td>

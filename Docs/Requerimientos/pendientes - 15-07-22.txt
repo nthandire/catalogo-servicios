@@ -60,6 +60,19 @@ imprimir reporte
 v------------- Pendiente -------------v
 
 
+Para tabla de USUARIOS
+    // url = "jdbc:informix-sqli://192.168.10.12:1527/saihweb:informixserver=ol_adminserver"
+    // usuario
+    // perfil
+    // usuario_perfil
+    // rol_sast_admin
+    // rol_sast_coordinador
+    // rol_sast_tecnico
+    // rol_sast_usuario
+
+
+
+
 
 
 mostrar siempre todos los checkbox

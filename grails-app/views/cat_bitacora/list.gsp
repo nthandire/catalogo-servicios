@@ -24,15 +24,11 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="no_solicitud" title="${message(code: 'cat_bitacora.no_solicitud.label', default: 'Nosolicitud')}" />
+						<g:sortableColumn property="folio" title="${message(code: 'cat_bitacora.folio.label', default: 'Folio')}" />
 					
 						<th><g:message code="cat_bitacora.servicio.label" default="Servicio" /></th>
 					
 						<g:sortableColumn property="descripcion" title="${message(code: 'cat_bitacora.descripcion.label', default: 'Descripcion')}" />
-					
-						<th><g:message code="cat_bitacora.responsable.label" default="Responsable" /></th>
-					
-						<g:sortableColumn property="observaciones" title="${message(code: 'cat_bitacora.observaciones.label', default: 'Observaciones')}" />
 					
 					</tr>
 				</thead>
@@ -41,16 +37,12 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${cat_bitacoraInstance.id}">
-									${cat_bitacoraInstance.no_solicitud}
+									${cat_bitacoraInstance.folio}
 						</g:link></td>
 					
 						<td>${fieldValue(bean: cat_bitacoraInstance, field: "servicio")}</td>
 					
 						<td>${fieldValue(bean: cat_bitacoraInstance, field: "descripcion")}</td>
-					
-						<td>${fieldValue(bean: cat_bitacoraInstance, field: "responsable")}</td>
-					
-						<td>${fieldValue(bean: cat_bitacoraInstance, field: "observaciones")}</td>
 					
 					</tr>
 				</g:each>
