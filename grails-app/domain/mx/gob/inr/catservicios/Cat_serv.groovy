@@ -55,7 +55,6 @@ class Cat_serv {
   }
 
   static mapping = {
-    table 'borrar_cat_serv'
     id column:'id_serv'
     id generator: 'increment'
     servSub column:'id_servSub'

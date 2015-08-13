@@ -9,7 +9,6 @@ class Cat_tiempo {
   }
 
   static mapping = {
-    table 'borrar_cat_tiempo'
     id column:'id_tiempo'
     id generator: 'increment'
     version false

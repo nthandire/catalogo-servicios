@@ -23,7 +23,7 @@ class Cat_servCat {
   }
 
   static mapping = {
-    table 'borrar_cat_servcat'
+    table 'cat_servcat'
     id column:'id_servcat'
     id generator: 'increment'
     servResp column:'id_servresp'
