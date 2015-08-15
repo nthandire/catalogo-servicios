@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 class LoginController {
     static nombreMenu = "Entrar"
-    static ordenMenu = 71
+    static ordenMenu = 271
 
 	/**
 	 * Dependency injection for the authenticationTrustResolver.

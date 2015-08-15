@@ -4,7 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class MonitoreoController {
     static nombreMenu = "Monitoreos"
-    static ordenMenu = 53
+    static ordenMenu = 33
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 

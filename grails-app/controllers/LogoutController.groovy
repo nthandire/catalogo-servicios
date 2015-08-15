@@ -2,7 +2,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class LogoutController {
     static nombreMenu = "Salir"
-    static ordenMenu = 72
+    static ordenMenu = 272
 
 	/**
 	 * Index action. Redirects to the Spring security logout uri.

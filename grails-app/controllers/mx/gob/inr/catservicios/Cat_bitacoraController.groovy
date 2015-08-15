@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class Cat_bitacoraController {
     def springSecurityService
     static nombreMenu = "Bitácora de cambios del Portafolio de Servicios"
-    static ordenMenu = 4
+    static ordenMenu = 7
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
