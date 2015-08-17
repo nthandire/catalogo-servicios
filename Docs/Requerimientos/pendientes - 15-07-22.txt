@@ -60,6 +60,11 @@ imprimir reporte
 v------------- Pendiente -------------v
 
 
+
+
+// TODO: Cambiar el nombre de delete en todos los controladores (por los hackers)
+
+
 Para tabla de USUARIOS
     // url = "jdbc:informix-sqli://192.168.10.12:1527/saihweb:informixserver=ol_adminserver"
     // usuario

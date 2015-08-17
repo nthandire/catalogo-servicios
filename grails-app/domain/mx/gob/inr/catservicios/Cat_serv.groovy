@@ -30,10 +30,10 @@ class Cat_serv {
   static constraints = {
     servSub editable:false
     descripcion(maxSize:255, blank:false)
-    portal widget: 'checkbox'
-    incidente widget: 'checkbox'
-    solicitud widget: 'checkbox'
-    problema widget: 'checkbox'
+    portal widget: 'checkbox', nullable: true
+    incidente widget: 'checkbox', nullable: true
+    solicitud widget: 'checkbox', nullable: true
+    problema widget: 'checkbox', nullable: true
     servResp1()
     tiempo1 min: 1
     unidades1()
