@@ -61,6 +61,23 @@ v------------- Pendiente -------------v
 
 
 
+cambiar las cosas en domine solicitud 
+cambiar las cosas en domine solicitudDetalle
+Volver a generar
+Comparar cambios - git-cola
+
+preparar presentación
+usuario mesa, usuariomesa
+
+pasar a Informix
+
+
+
+
+
+
+
+
 
 // TODO: Cambiar el nombre de delete en todos los controladores (por los hackers)
 

@@ -40,4 +40,9 @@ class Solicitud {
 		fechaModificacion nullable: true
 		ipTerminal nullable: true, maxSize: 15
 	}
+
+  String toString() {
+    numeroSolicitud
+  }
+
 }

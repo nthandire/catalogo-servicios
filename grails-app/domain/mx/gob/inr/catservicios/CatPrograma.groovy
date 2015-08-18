@@ -14,4 +14,9 @@ class CatPrograma {
 		desPrograma nullable: true
 		estadoPrograma nullable: true, maxSize: 1
 	}
+
+  String toString() {
+    desPrograma
+  }
+
 }
