@@ -1,12 +1,14 @@
 package mx.gob.inr.catservicios
 
 import org.springframework.dao.DataIntegrityViolationException
+import groovy.time.TimeCategory
 
 class SolicitudController {
+    def springSecurityService
     static nombreMenu = "Solicitud"
     static ordenMenu = 80
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -23,6 +25,31 @@ class SolicitudController {
 
     def save() {
         def solicitudInstance = new Solicitud(params)
+        solicitudInstance.fechaSolicitud = new Date()
+        solicitudInstance.idSolicitante = springSecurityService.principal.id
+        solicitudInstance.ipTerminal = request.getRemoteAddr()
+
+        def startDate = new Date().clearTime()
+        startDate[Calendar.MONTH] = 0
+        startDate[Calendar.DATE] = 1
+        log.debug("startDate = $startDate")
+        def endDate = startDate.clone()
+        use(TimeCategory) {
+          endDate = endDate + 1.years - 1.seconds
+        }
+        log.debug("endDate = $endDate")
+
+        def criterio = Solicitud.createCriteria()
+        def maxID = criterio.get {
+          between("fechaSolicitud", startDate, endDate)
+          projections {
+            max "id"
+          }
+        } ?: 0
+        log.debug("maxID = $maxID")
+
+        solicitudInstance.numeroSolicitud = ++maxID
+
         if (!solicitudInstance.save(flush: true)) {
             render(view: "create", model: [solicitudInstance: solicitudInstance])
             return
@@ -83,7 +110,7 @@ class SolicitudController {
         redirect(action: "show", id: solicitudInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])

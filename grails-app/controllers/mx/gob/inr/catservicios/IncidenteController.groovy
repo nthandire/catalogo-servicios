@@ -6,7 +6,7 @@ class IncidenteController {
     static nombreMenu = "Incidentes"
     static ordenMenu = 70
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -83,7 +83,7 @@ class IncidenteController {
         redirect(action: "show", id: incidenteInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def incidenteInstance = Incidente.get(id)
         if (!incidenteInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])

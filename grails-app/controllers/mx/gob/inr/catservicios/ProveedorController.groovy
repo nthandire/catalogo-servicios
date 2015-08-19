@@ -6,7 +6,7 @@ class ProveedorController {
     static nombreMenu = "Proveedores"
     static ordenMenu = 91
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -83,7 +83,7 @@ class ProveedorController {
         redirect(action: "show", id: proveedorInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def proveedorInstance = Proveedor.get(id)
         if (!proveedorInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'proveedor.label', default: 'Proveedor'), id])

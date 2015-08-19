@@ -6,7 +6,7 @@ class MonitoreoController {
     static nombreMenu = "Monitoreos"
     static ordenMenu = 33
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -84,7 +84,7 @@ class MonitoreoController {
         redirect(action: "show", id: monitoreoInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def monitoreoInstance = Monitoreo.get(id)
         if (!monitoreoInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), id])

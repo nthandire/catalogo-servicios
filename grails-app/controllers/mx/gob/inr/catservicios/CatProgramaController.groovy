@@ -6,7 +6,7 @@ class CatProgramaController {
     static nombreMenu = "Programas"
     static ordenMenu = 101
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -83,7 +83,7 @@ class CatProgramaController {
         redirect(action: "show", id: catProgramaInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def catProgramaInstance = CatPrograma.get(id)
         if (!catProgramaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'catPrograma.label', default: 'CatPrograma'), id])

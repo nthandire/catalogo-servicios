@@ -6,7 +6,7 @@ class IncidenteArchivoadjuntoController {
     static nombreMenu = "Incidentes Archivos adjuntos"
     static ordenMenu = 72
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -83,7 +83,7 @@ class IncidenteArchivoadjuntoController {
         redirect(action: "show", id: incidenteArchivoadjuntoInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def incidenteArchivoadjuntoInstance = IncidenteArchivoadjunto.get(id)
         if (!incidenteArchivoadjuntoInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidenteArchivoadjunto.label', default: 'IncidenteArchivoadjunto'), id])

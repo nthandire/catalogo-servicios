@@ -6,7 +6,7 @@ class SolicitudDetalleController {
     static nombreMenu = "Solicitud Detalle"
     static ordenMenu = 81
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -14,7 +14,6 @@ class SolicitudDetalleController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        println params
         [solicitudDetalleInstanceList: SolicitudDetalle.list(params), solicitudDetalleInstanceTotal: SolicitudDetalle.count()]
     }
 
@@ -84,7 +83,7 @@ class SolicitudDetalleController {
         redirect(action: "show", id: solicitudDetalleInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def solicitudDetalleInstance = SolicitudDetalle.get(id)
         if (!solicitudDetalleInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])

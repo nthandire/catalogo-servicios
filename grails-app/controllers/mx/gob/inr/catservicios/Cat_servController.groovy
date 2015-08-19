@@ -12,7 +12,7 @@ class Cat_servController {
         nombreMenu
     }
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -93,7 +93,7 @@ class Cat_servController {
         redirect(action: "show", id: cat_servInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def cat_servInstance = Cat_serv.get(id)
         if (!cat_servInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'cat_serv.label', default: 'Cat_serv'), id])

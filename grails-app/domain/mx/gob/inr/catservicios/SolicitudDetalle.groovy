@@ -21,14 +21,14 @@ class SolicitudDetalle {
 	}
 
 	static constraints = {
-		idSolicitud nullable: true
+		idSolicitud nullable: true, editable:false
 		idServ nullable: true
 		idResguardoentregadetalle nullable: true
-		estadoSolictuddetalle nullable: true, maxSize: 1
+		estadoSolictuddetalle nullable: true, maxSize: 1, inList: [(char)'A',(char)'I']
 		descripcion nullable: true, maxSize: 3000
 		solucion nullable: true, maxSize: 3000
-		idTecnico nullable: true
-		fechaSolucion nullable: true
+		idTecnico nullable: true, editable:false
+		fechaSolucion nullable: true, editable:false
 		idPrograma nullable: true
 		idServcat nullable: true
 		descripcionTecnica nullable: true, maxSize: 2500

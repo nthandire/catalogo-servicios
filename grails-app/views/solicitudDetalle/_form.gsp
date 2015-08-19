@@ -67,7 +67,7 @@
 		<g:message code="solicitudDetalle.fechaSolucion.label" default="Fecha Solucion" />
 		
 	</label>
-	<g:datePicker name="fechaSolucion" precision="day"  value="${solicitudDetalleInstance?.fechaSolucion}" default="none" noSelection="['': '']" />
+	${solicitudDetalleInstance?.fechaSolucion?.toString()}
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idPrograma', 'error')} ">

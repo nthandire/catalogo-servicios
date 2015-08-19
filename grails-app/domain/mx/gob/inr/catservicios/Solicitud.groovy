@@ -24,25 +24,26 @@ class Solicitud {
 	}
 
 	static constraints = {
-		fechaSolicitud nullable: true
-		numeroSolicitud nullable: true
-		estadoSolicitud nullable: true, maxSize: 1
+		numeroSolicitud nullable: true, editable:false
+		fechaSolicitud nullable: true, editable:false
+		estadoSolicitud nullable: true, maxSize: 1, editable:false,
+			inList: [(char)'A',(char)'I']
 		justificacion nullable: true, maxSize: 1500
-		idSolicitante nullable: true
+		idSolicitante nullable: true, editable:false
 		idAutoriza nullable: true
-		fechaAutoriza nullable: true
+		fechaAutoriza nullable: true, editable:false
 		idVb nullable: true
-		fechaVb nullable: true
+		fechaVb nullable: true, editable:false
 		p01 nullable: true
 		p02 nullable: true
 		p03 nullable: true
 		p04 nullable: true
-		fechaModificacion nullable: true
-		ipTerminal nullable: true, maxSize: 15
+		fechaModificacion nullable: true, editable:false
+		ipTerminal nullable: true, maxSize: 15, display:false, editable:false
 	}
 
   String toString() {
-    numeroSolicitud
+    "${numeroSolicitud}/${fechaSolicitud[Calendar.YEAR]}"
   }
 
 }

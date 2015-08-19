@@ -6,7 +6,7 @@ class SolicitudArchivoadjuntoController {
     static nombreMenu = "Solicitud Archivos adjuntos"
     static ordenMenu = 82
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -83,7 +83,7 @@ class SolicitudArchivoadjuntoController {
         redirect(action: "show", id: solicitudArchivoadjuntoInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def solicitudArchivoadjuntoInstance = SolicitudArchivoadjunto.get(id)
         if (!solicitudArchivoadjuntoInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto'), id])

@@ -7,7 +7,7 @@ class Cat_bitacoraController {
     static nombreMenu = "Bitácora de cambios del Portafolio de Servicios"
     static ordenMenu = 7
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -88,7 +88,7 @@ class Cat_bitacoraController {
         redirect(action: "show", id: cat_bitacoraInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def cat_bitacoraInstance = Cat_bitacora.get(id)
         if (!cat_bitacoraInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'cat_bitacora.label', default: 'Cat_bitacora'), id])

@@ -23,20 +23,20 @@
 			</g:if>
 			<ol class="property-list solicitud">
 			
-				<g:if test="${solicitudInstance?.fechaSolicitud}">
-				<li class="fieldcontain">
-					<span id="fechaSolicitud-label" class="property-label"><g:message code="solicitud.fechaSolicitud.label" default="Fecha Solicitud" /></span>
-					
-						<span class="property-value" aria-labelledby="fechaSolicitud-label"><g:formatDate date="${solicitudInstance?.fechaSolicitud}" /></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${solicitudInstance?.numeroSolicitud}">
 				<li class="fieldcontain">
 					<span id="numeroSolicitud-label" class="property-label"><g:message code="solicitud.numeroSolicitud.label" default="Numero Solicitud" /></span>
 					
 						<span class="property-value" aria-labelledby="numeroSolicitud-label"><g:fieldValue bean="${solicitudInstance}" field="numeroSolicitud"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${solicitudInstance?.fechaSolicitud}">
+				<li class="fieldcontain">
+					<span id="fechaSolicitud-label" class="property-label"><g:message code="solicitud.fechaSolicitud.label" default="Fecha Solicitud" /></span>
+					
+						<span class="property-value" aria-labelledby="fechaSolicitud-label"><g:formatDate date="${solicitudInstance?.fechaSolicitud}" /></span>
 					
 				</li>
 				</g:if>

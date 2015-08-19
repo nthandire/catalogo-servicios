@@ -6,7 +6,7 @@ class IncidenteLaboratorioController {
     static nombreMenu = "Incidentes Laboratorio"
     static ordenMenu = 71
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -83,7 +83,7 @@ class IncidenteLaboratorioController {
         redirect(action: "show", id: incidenteLaboratorioInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def incidenteLaboratorioInstance = IncidenteLaboratorio.get(id)
         if (!incidenteLaboratorioInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidenteLaboratorio.label', default: 'IncidenteLaboratorio'), id])

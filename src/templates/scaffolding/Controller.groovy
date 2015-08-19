@@ -2,7 +2,7 @@
 
 class ${className}Controller {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -79,7 +79,7 @@ class ${className}Controller {
         redirect(action: "show", id: ${propertyName}.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def ${propertyName} = ${className}.get(id)
         if (!${propertyName}) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), id])

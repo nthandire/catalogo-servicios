@@ -6,7 +6,7 @@ class CatSistemaController {
     static nombreMenu = "Sistemas"
     static ordenMenu = 102
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -83,7 +83,7 @@ class CatSistemaController {
         redirect(action: "show", id: catSistemaInstance.id)
     }
 
-    def delete(Long id) {
+    def x_delete(Long id) {
         def catSistemaInstance = CatSistema.get(id)
         if (!catSistemaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'catSistema.label', default: 'CatSistema'), id])

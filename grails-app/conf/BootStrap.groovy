@@ -1,6 +1,6 @@
 import mx.gob.inr.catservicios.*
 import net.sf.jasperreports.engine.util.JRProperties
- 
+
 class BootStrap {
 
   def init = { servletContext ->
@@ -98,6 +98,7 @@ class BootStrap {
       new Cat_servCob(descripcion: 'HOSPITALIZACION').save()
       new Cat_servCob(descripcion: 'ADMINISTRATIVAS').save()
       new Cat_servCob(descripcion: 'SUSTANTIVAS').save(flush: true)
+
       def servCatVoceoGeneral = new Cat_servCat(categoria: 'Voceo General',
         descripcion: 'Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general',
         servResp:respDGAIT, valoracion: 2, disponibilidad: 90, estado: 'A',
@@ -115,6 +116,10 @@ class BootStrap {
         ipTerminal:'192.168.16.59', lastUpdated: new Date())
       serv.save(flush: true, failOnError: true)
       log.info(serv)
+
+      new CatPrograma(desPrograma: 'Mantenimiento', estadoPrograma:'A').save()
+      new CatPrograma(desPrograma: 'Aprovisionamiento', estadoPrograma:'A').save()
+
     }
   }
 

@@ -12,7 +12,7 @@ class CatPrograma {
 
 	static constraints = {
 		desPrograma nullable: true
-		estadoPrograma nullable: true, maxSize: 1
+		estadoPrograma nullable: true, maxSize: 1, inList: [(char)'A',(char)'I']
 	}
 
   String toString() {
