@@ -120,6 +120,69 @@ class BootStrap {
       new CatPrograma(desPrograma: 'Mantenimiento', estadoPrograma:'A').save()
       new CatPrograma(desPrograma: 'Aprovisionamiento', estadoPrograma:'A').save()
 
+/*
+      // deben quedar en el definitivo
+      // def usuarioRol
+      def mesaRol
+      def coordRol
+      Rol.withNewSession { session ->
+        new Rol(authority: 'ROLE_USUARIO').save(flush: true)
+        mesaRol = new Rol(authority: 'ROLE_MESA')
+        mesaRol.save(flush: true)
+        coordRol = new Rol(authority: 'ROLE_COORDINADOR')
+        coordRol.save(flush: true)
+      }
+      // def normalUser
+      def normal2User
+      def msUser
+      def ms2User
+      def coordUser
+      Usuario.withNewSession { session ->
+        new Usuario(username: 'usuario1', enabled: true, password: 'usuario1').save(flush: true)
+        normal2User = new Usuario(username: 'usuario2', enabled: true, password: 'usuario2')
+        normal2User.save(flush: true)
+        msUser = new Usuario(username: 'mesaservicio', enabled: true, password: 'mesaservicio')
+        msUser.save(flush: true)
+        ms2User = new Usuario(username: 'mesaservicio2', enabled: true, password: 'mesaservicio2')
+        ms2User.save(flush: true)
+        coordUser = new Usuario(username: 'coordinador', enabled: true, password: 'coordinador')
+        coordUser.save(flush: true)
+      }
+*/
+/*
+      def usuarioRol = Rol.findByAuthority('ROLE_USUARIO')
+      def normalUser = Usuario.findByUsername('usuario1')
+      UsuarioRol.withNewSession { session ->
+        // UsuarioRol.create normalUser, usuarioRol, true
+        // UsuarioRol.create Usuario.findByUsername('usuario2'), Rol.findByAuthority('ROLE_USUARIO'), true
+        UsuarioRol.create Usuario.findByUsername('mesaservicio'), Rol.findByAuthority('ROLE_MESA'), true
+        UsuarioRol.create Usuario.findByUsername('mesaservicio2'), Rol.findByAuthority('ROLE_MESA'), true
+        UsuarioRol.create Usuario.findByUsername('coordinador'), Rol.findByAuthority('ROLE_COORDINADOR'), true
+      }
+*/
+      Requestmap.withNewSession { session ->
+
+        // new Requestmap(url: '/solicitud/**', configAttribute: 'ROLE_USUARIO').save()
+        // new Requestmap(url: '/solicituddetalle/**', configAttribute: 'ROLE_USUARIO').save()
+        new Requestmap(url: '/solicitudArchivoadjunto/**', configAttribute: 'ROLE_USUARIO').save()
+        new Requestmap(url: '/incidente/**', configAttribute: 'ROLE_MESA').save()
+        new Requestmap(url: '/incidenteLaboratorio/**', configAttribute: 'ROLE_MESA').save()
+        new Requestmap(url: '/incidenteArchivoadjunto/**', configAttribute: 'ROLE_MESA').save()
+        new Requestmap(url: '/problema/**', configAttribute: 'ROLE_MESA').save()
+        new Requestmap(url: '/proveedor/**', configAttribute: 'ROLE_MESA').save()
+        new Requestmap(url: '/catEstado/**', configAttribute: 'ROLE_MESA').save()
+        new Requestmap(url: '/catSistema/**', configAttribute: 'ROLE_MESA').save()
+        new Requestmap(url: '/catPrograma/**', configAttribute: 'ROLE_MESA').save()
+        new Requestmap(url: '/catTiposervcio/**', configAttribute: 'ROLE_MESA').save()
+
+
+        //  error new Requestmap(url: '/**', configAttribute: 'IS_AUTHENTICATED_FULLY').save()
+        //  error new Requestmap(url: '/', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
+        // new Requestmap(url: '/cat_serv/**', configAttribute: 'ROLE_ADMIN').save()
+        // new Requestmap(url: '/cat_servCat/**', configAttribute: 'ROLE_ADMIN').save()
+        // new Requestmap(url: '/cat_servSub/**', configAttribute: 'ROLE_ADMIN').save()
+        // new Requestmap(url: '/cat_bitacora/**', configAttribute: 'ROLE_ADMIN').save()
+      }
     }
   }
 
