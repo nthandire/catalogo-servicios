@@ -164,6 +164,8 @@ class BootStrap {
 
         // new Requestmap(url: '/solicitud/**', configAttribute: 'ROLE_USUARIO').save()
         // new Requestmap(url: '/solicituddetalle/**', configAttribute: 'ROLE_USUARIO').save()
+
+/*
         new Requestmap(url: '/solicitudArchivoadjunto/**', configAttribute: 'ROLE_USUARIO').save()
         new Requestmap(url: '/incidente/**', configAttribute: 'ROLE_MESA').save()
         new Requestmap(url: '/incidenteLaboratorio/**', configAttribute: 'ROLE_MESA').save()
@@ -174,7 +176,7 @@ class BootStrap {
         new Requestmap(url: '/catSistema/**', configAttribute: 'ROLE_MESA').save()
         new Requestmap(url: '/catPrograma/**', configAttribute: 'ROLE_MESA').save()
         new Requestmap(url: '/catTiposervcio/**', configAttribute: 'ROLE_MESA').save()
-
+*/
 
         //  error new Requestmap(url: '/**', configAttribute: 'IS_AUTHENTICATED_FULLY').save()
         //  error new Requestmap(url: '/', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()

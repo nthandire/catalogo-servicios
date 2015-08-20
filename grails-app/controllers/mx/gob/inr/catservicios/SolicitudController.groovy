@@ -55,6 +55,16 @@ class SolicitudController {
             return
         }
 
+        def idUsuario = springSecurityService.principal.id
+        def personasInstance = Usuario.get(idUsuario)
+        sendMail {
+          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
+          subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
+          body "Hola ${personasInstance.username}\n\nSu solicitud folio " + 
+            "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
+            "pronto seras contactado con relación a el\n"
+        }
+
         flash.message = message(code: 'default.created.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
     }
