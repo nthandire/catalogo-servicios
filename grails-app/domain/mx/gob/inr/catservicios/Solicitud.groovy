@@ -15,11 +15,12 @@ class Solicitud {
 	Integer p02
 	Integer p03
 	Integer p04
-	Date fechaModificacion
+	Date lastUpdated
 	String ipTerminal
 
 	static mapping = {
 		id column: "id_solicitud", generator: "increment"
+		lastUpdated column: "fechaModificacion"
 		version "modificacion"
 	}
 
@@ -38,12 +39,12 @@ class Solicitud {
 		p02 nullable: true
 		p03 nullable: true
 		p04 nullable: true
-		fechaModificacion nullable: true, editable:false
+		lastUpdated nullable: true, editable:false
 		ipTerminal nullable: true, maxSize: 15, display:false, editable:false
 	}
 
   String toString() {
-    "${numeroSolicitud}/${fechaSolicitud[Calendar.YEAR]}"
+    "${numeroSolicitud}/${lastUpdated[Calendar.YEAR]}"
   }
 
 }
