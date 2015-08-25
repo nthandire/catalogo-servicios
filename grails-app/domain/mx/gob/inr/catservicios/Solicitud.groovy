@@ -18,6 +18,8 @@ class Solicitud {
 	Date lastUpdated
 	String ipTerminal
 
+  static hasMany = [detalles: SolicitudDetalle]
+
 	static mapping = {
 		id column: "id_solicitud", generator: "increment"
 		lastUpdated column: "fechaModificacion"

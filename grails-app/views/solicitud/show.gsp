@@ -50,6 +50,17 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${solicitudInstance?.detalles}">
+				<li class="fieldcontain">
+					<span id="detalles-label" class="property-label"><g:message code="solicitud.detalles.label" default="Detalles" /></span>
+					
+						<g:each in="${solicitudInstance.detalles}" var="d">
+						<span class="property-value" aria-labelledby="detalles-label"><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
