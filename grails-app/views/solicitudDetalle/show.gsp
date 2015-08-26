@@ -59,33 +59,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${solicitudDetalleInstance?.solucion}">
-				<li class="fieldcontain">
-					<span id="solucion-label" class="property-label"><g:message code="solicitudDetalle.solucion.label" default="Solucion" /></span>
-					
-						<span class="property-value" aria-labelledby="solucion-label"><g:fieldValue bean="${solicitudDetalleInstance}" field="solucion"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudDetalleInstance?.idTecnico}">
-				<li class="fieldcontain">
-					<span id="idTecnico-label" class="property-label"><g:message code="solicitudDetalle.idTecnico.label" default="Id Tecnico" /></span>
-					
-						<span class="property-value" aria-labelledby="idTecnico-label"><g:fieldValue bean="${solicitudDetalleInstance}" field="idTecnico"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudDetalleInstance?.fechaSolucion}">
-				<li class="fieldcontain">
-					<span id="fechaSolucion-label" class="property-label"><g:message code="solicitudDetalle.fechaSolucion.label" default="Fecha Solucion" /></span>
-					
-						<span class="property-value" aria-labelledby="fechaSolucion-label"><g:formatDate date="${solicitudDetalleInstance?.fechaSolucion}" /></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${solicitudDetalleInstance?.idPrograma}">
 				<li class="fieldcontain">
 					<span id="idPrograma-label" class="property-label"><g:message code="solicitudDetalle.idPrograma.label" default="Id Programa" /></span>
@@ -100,15 +73,6 @@
 					<span id="idServcat-label" class="property-label"><g:message code="solicitudDetalle.idServcat.label" default="Id Servcat" /></span>
 					
 						<span class="property-value" aria-labelledby="idServcat-label"><g:link controller="cat_servCat" action="show" id="${solicitudDetalleInstance?.idServcat?.id}">${solicitudDetalleInstance?.idServcat?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudDetalleInstance?.descripcionTecnica}">
-				<li class="fieldcontain">
-					<span id="descripcionTecnica-label" class="property-label"><g:message code="solicitudDetalle.descripcionTecnica.label" default="Descripcion Tecnica" /></span>
-					
-						<span class="property-value" aria-labelledby="descripcionTecnica-label"><g:fieldValue bean="${solicitudDetalleInstance}" field="descripcionTecnica"/></span>
 					
 				</li>
 				</g:if>

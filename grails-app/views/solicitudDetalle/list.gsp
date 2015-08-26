@@ -28,11 +28,7 @@
 					
 						<th><g:message code="solicitudDetalle.idServ.label" default="Id Serv" /></th>
 					
-						<g:sortableColumn property="idResguardoentregadetalle" title="${message(code: 'solicitudDetalle.idResguardoentregadetalle.label', default: 'Id Resguardoentregadetalle')}" />
-					
 						<g:sortableColumn property="descripcion" title="${message(code: 'solicitudDetalle.descripcion.label', default: 'Descripcion')}" />
-					
-						<g:sortableColumn property="solucion" title="${message(code: 'solicitudDetalle.solucion.label', default: 'Solucion')}" />
 					
 					</tr>
 				</thead>
@@ -44,11 +40,7 @@
 					
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idServ")}</td>
 					
-						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idResguardoentregadetalle")}</td>
-					
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "descripcion")}</td>
-					
-						<td>${fieldValue(bean: solicitudDetalleInstance, field: "solucion")}</td>
 					
 					</tr>
 				</g:each>
