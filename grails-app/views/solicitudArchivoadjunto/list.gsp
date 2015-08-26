@@ -24,17 +24,13 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="idSolicitud" title="${message(code: 'solicitudArchivoadjunto.idSolicitud.label', default: 'Id Solicitud')}" />
-					
-						<g:sortableColumn property="datos" title="${message(code: 'solicitudArchivoadjunto.datos.label', default: 'Datos')}" />
+						<th><g:message code="solicitudArchivoadjunto.idSolicitud.label" default="Id Solicitud" /></th>
 					
 						<g:sortableColumn property="nombre" title="${message(code: 'solicitudArchivoadjunto.nombre.label', default: 'Nombre')}" />
 					
-						<g:sortableColumn property="tamanio" title="${message(code: 'solicitudArchivoadjunto.tamanio.label', default: 'Tamanio')}" />
+						<g:sortableColumn property="tamaño" title="${message(code: 'solicitudArchivoadjunto.tamaño.label', default: 'Tamaño')}" />
 					
 						<g:sortableColumn property="tipo" title="${message(code: 'solicitudArchivoadjunto.tipo.label', default: 'Tipo')}" />
-					
-						<g:sortableColumn property="idUsuario" title="${message(code: 'solicitudArchivoadjunto.idUsuario.label', default: 'Id Usuario')}" />
 					
 					</tr>
 				</thead>
@@ -44,15 +40,11 @@
 					
 						<td><g:link action="show" id="${solicitudArchivoadjuntoInstance.id}">${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "idSolicitud")}</g:link></td>
 					
-						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "datos")}</td>
-					
 						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "nombre")}</td>
 					
-						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "tamanio")}</td>
+						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "tamaño")}</td>
 					
 						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "tipo")}</td>
-					
-						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "idUsuario")}</td>
 					
 					</tr>
 				</g:each>

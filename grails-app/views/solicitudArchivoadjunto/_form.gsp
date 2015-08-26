@@ -11,31 +11,7 @@
 		<g:message code="solicitudArchivoadjunto.idSolicitud.label" default="Id Solicitud" />
 		
 	</label>
-	<g:field name="idSolicitud" type="number" value="${solicitudArchivoadjuntoInstance.idSolicitud}"/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: solicitudArchivoadjuntoInstance, field: 'datos', 'error')} ">
-	<label for="datos">
-		<g:message code="solicitudArchivoadjunto.datos.label" default="Datos" />
-		
-	</label>
-	<input type="file" id="datos" name="datos" />
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: solicitudArchivoadjuntoInstance, field: 'nombre', 'error')} ">
-	<label for="nombre">
-		<g:message code="solicitudArchivoadjunto.nombre.label" default="Nombre" />
-		
-	</label>
-	<g:textField name="nombre" value="${solicitudArchivoadjuntoInstance?.nombre}"/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: solicitudArchivoadjuntoInstance, field: 'tamanio', 'error')} ">
-	<label for="tamanio">
-		<g:message code="solicitudArchivoadjunto.tamanio.label" default="Tamanio" />
-		
-	</label>
-	<g:field name="tamanio" type="number" value="${solicitudArchivoadjuntoInstance.tamanio}"/>
+	<g:select id="idSolicitud" name="idSolicitud.id" from="${mx.gob.inr.catservicios.Solicitud.list()}" optionKey="id" value="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudArchivoadjuntoInstance, field: 'tipo', 'error')} ">
@@ -52,21 +28,5 @@
 		
 	</label>
 	<g:field name="idUsuario" type="number" value="${solicitudArchivoadjuntoInstance.idUsuario}"/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: solicitudArchivoadjuntoInstance, field: 'fechaModificacion', 'error')} ">
-	<label for="fechaModificacion">
-		<g:message code="solicitudArchivoadjunto.fechaModificacion.label" default="Fecha Modificacion" />
-		
-	</label>
-	<g:datePicker name="fechaModificacion" precision="day"  value="${solicitudArchivoadjuntoInstance?.fechaModificacion}" default="none" noSelection="['': '']" />
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: solicitudArchivoadjuntoInstance, field: 'ipTerminal', 'error')} ">
-	<label for="ipTerminal">
-		<g:message code="solicitudArchivoadjunto.ipTerminal.label" default="Ip Terminal" />
-		
-	</label>
-	<g:textField name="ipTerminal" maxlength="15" value="${solicitudArchivoadjuntoInstance?.ipTerminal}"/>
 </div>
 

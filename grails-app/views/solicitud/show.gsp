@@ -61,6 +61,17 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${solicitudInstance?.archivos}">
+				<li class="fieldcontain">
+					<span id="archivos-label" class="property-label"><g:message code="solicitud.archivos.label" default="Archivos" /></span>
+					
+						<g:each in="${solicitudInstance.archivos}" var="d">
+						<span class="property-value" aria-labelledby="archivos-label"><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

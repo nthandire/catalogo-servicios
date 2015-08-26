@@ -2,28 +2,31 @@ package mx.gob.inr.catservicios
 
 class SolicitudArchivoadjunto {
 
-	Long idSolicitud
 	byte[] datos
 	String nombre
-	Integer tamanio
+	Integer tamaño
 	String tipo
 	Integer idUsuario
-	Date fechaModificacion
+	Date lastUpdated
 	String ipTerminal
+
+	static belongsTo = [idSolicitud:Solicitud]
 
 	static mapping = {
 		id generator: "increment"
+		tamaño column: "tamanio"
+		lastUpdated column: "fechaModificacion"
 		version "modificacion"
 	}
 
 	static constraints = {
 		idSolicitud nullable: true
-		datos nullable: true
-		nombre nullable: true
-		tamanio nullable: true
+		datos nullable: true, display:false, editable:false
+		nombre nullable: true, display:false, editable:false
+		tamaño nullable: true, display:false, editable:false
 		tipo nullable: true, maxSize: 20
 		idUsuario nullable: true
-		fechaModificacion nullable: true
-		ipTerminal nullable: true, maxSize: 15
+		lastUpdated nullable: true, display:false, editable:false
+		ipTerminal nullable: true, maxSize: 15, display:false, editable:false
 	}
 }

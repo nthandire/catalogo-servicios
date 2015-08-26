@@ -27,14 +27,7 @@
 				<li class="fieldcontain">
 					<span id="idSolicitud-label" class="property-label"><g:message code="solicitudArchivoadjunto.idSolicitud.label" default="Id Solicitud" /></span>
 					
-						<span class="property-value" aria-labelledby="idSolicitud-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="idSolicitud"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudArchivoadjuntoInstance?.datos}">
-				<li class="fieldcontain">
-					<span id="datos-label" class="property-label"><g:message code="solicitudArchivoadjunto.datos.label" default="Datos" /></span>
+						<span class="property-value" aria-labelledby="idSolicitud-label"><g:link controller="solicitud" action="show" id="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}">${solicitudArchivoadjuntoInstance?.idSolicitud?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -48,11 +41,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${solicitudArchivoadjuntoInstance?.tamanio}">
+				<g:if test="${solicitudArchivoadjuntoInstance?.tamaño}">
 				<li class="fieldcontain">
-					<span id="tamanio-label" class="property-label"><g:message code="solicitudArchivoadjunto.tamanio.label" default="Tamanio" /></span>
+					<span id="tamaño-label" class="property-label"><g:message code="solicitudArchivoadjunto.tamaño.label" default="Tamaño" /></span>
 					
-						<span class="property-value" aria-labelledby="tamanio-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="tamanio"/></span>
+						<span class="property-value" aria-labelledby="tamaño-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="tamaño"/></span>
 					
 				</li>
 				</g:if>
@@ -66,29 +59,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${solicitudArchivoadjuntoInstance?.idUsuario}">
+				<g:if test="${solicitudArchivoadjuntoInstance?.lastUpdated}">
 				<li class="fieldcontain">
-					<span id="idUsuario-label" class="property-label"><g:message code="solicitudArchivoadjunto.idUsuario.label" default="Id Usuario" /></span>
+					<span id="lastUpdated-label" class="property-label"><g:message code="solicitudArchivoadjunto.lastUpdated.label" default="Last Updated" /></span>
 					
-						<span class="property-value" aria-labelledby="idUsuario-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="idUsuario"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudArchivoadjuntoInstance?.fechaModificacion}">
-				<li class="fieldcontain">
-					<span id="fechaModificacion-label" class="property-label"><g:message code="solicitudArchivoadjunto.fechaModificacion.label" default="Fecha Modificacion" /></span>
-					
-						<span class="property-value" aria-labelledby="fechaModificacion-label"><g:formatDate date="${solicitudArchivoadjuntoInstance?.fechaModificacion}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudArchivoadjuntoInstance?.ipTerminal}">
-				<li class="fieldcontain">
-					<span id="ipTerminal-label" class="property-label"><g:message code="solicitudArchivoadjunto.ipTerminal.label" default="Ip Terminal" /></span>
-					
-						<span class="property-value" aria-labelledby="ipTerminal-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="ipTerminal"/></span>
+						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudArchivoadjuntoInstance?.lastUpdated}" /></span>
 					
 				</li>
 				</g:if>
