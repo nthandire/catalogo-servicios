@@ -16,7 +16,17 @@ class SolicitudController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [solicitudInstanceList: Solicitud.list(params), solicitudInstanceTotal: Solicitud.count()]
+        log.debug("params = $params")
+        def userID = springSecurityService.principal.id
+        log.debug("userID = $userID")
+        def criteria = Solicitud.createCriteria()
+        def solicitudes = criteria.list {
+            projections {count()}
+            eq ('idSolicitante', (Integer)userID)
+        }
+        log.debug("numero de solicitudes = $solicitudes")
+        [solicitudInstanceList: Solicitud.findAllByIdSolicitante((Integer)userID, params),
+            solicitudInstanceTotal: solicitudes]
     }
 
     def create() {
@@ -25,9 +35,11 @@ class SolicitudController {
 
     def save() {
         def solicitudInstance = new Solicitud(params)
+        solicitudInstance.idSolicitante = springSecurityService.principal.id
         solicitudInstance.ipTerminal = request.getRemoteAddr()
         solicitudInstance.estadoSolicitud = 'A'
 
+/* TODO: pasar a donde se autorice
         def startDate = new Date().clearTime()
         startDate[Calendar.MONTH] = 0
         startDate[Calendar.DATE] = 1
@@ -39,15 +51,16 @@ class SolicitudController {
         log.debug("endDate = $endDate")
 
         def criterio = Solicitud.createCriteria()
-        def maxID = criterio.get {
-          between("fechaSolicitud", startDate, endDate)
+        def maxID = criterio.get { // TODO: un test para ver si este algoritmo sique funcionando
+          between("fechaAutoriza", startDate, endDate)
           projections {
-            max "id"
+            max "numeroSolicitud"
           }
         } ?: 0
         log.debug("maxID = $maxID")
 
         solicitudInstance.numeroSolicitud = ++maxID
+*/
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "create", model: [solicitudInstance: solicitudInstance])
@@ -100,7 +113,6 @@ class SolicitudController {
 
         solicitudInstance.properties = params
         solicitudInstance.fechaSolicitud = new Date()
-        solicitudInstance.idSolicitante = springSecurityService.principal.id
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "show", model: [solicitudInstance: solicitudInstance])

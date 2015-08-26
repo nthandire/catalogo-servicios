@@ -74,6 +74,7 @@
 			
 			</ol>
 
+<h1></h1>
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudInstance, field: 'detalles', 'error')} ">
 	<label for="detalles">
