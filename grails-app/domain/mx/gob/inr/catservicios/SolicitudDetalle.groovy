@@ -6,7 +6,7 @@ class SolicitudDetalle {
 	Cat_servCat idServcat
 	CatPrograma idPrograma
 	Long idResguardoentregadetalle
-	Character estadoSolictuddetalle
+	Character estado
 	String descripcion
 	String solucion
 	Integer idTecnico
@@ -17,6 +17,7 @@ class SolicitudDetalle {
 
 	static mapping = {
 		id column: "id_solicituddetalle", generator: "increment"
+		estado column: "estado_solictuddetalle"
 		version false
 	}
 
@@ -24,7 +25,7 @@ class SolicitudDetalle {
 		idSolicitud nullable: true, editable:false
 		idServ nullable: true
 		idResguardoentregadetalle nullable: true
-		estadoSolictuddetalle nullable: true, maxSize: 1, inList: [(char)'A',(char)'I']
+		estado nullable: true, maxSize: 1, inList: [(char)'A',(char)'I']
 		descripcion nullable: true, maxSize: 3000
 		solucion nullable: true, maxSize: 3000
 		idTecnico nullable: true, editable:false

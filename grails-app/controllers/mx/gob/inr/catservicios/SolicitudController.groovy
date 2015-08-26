@@ -25,9 +25,8 @@ class SolicitudController {
 
     def save() {
         def solicitudInstance = new Solicitud(params)
-        solicitudInstance.fechaSolicitud = new Date()
-        solicitudInstance.idSolicitante = springSecurityService.principal.id
         solicitudInstance.ipTerminal = request.getRemoteAddr()
+        solicitudInstance.estadoSolicitud = 'A'
 
         def startDate = new Date().clearTime()
         startDate[Calendar.MONTH] = 0
@@ -54,7 +53,7 @@ class SolicitudController {
             render(view: "create", model: [solicitudInstance: solicitudInstance])
             return
         }
-
+/* TODO: habilitar cuando no este en desarrollo
         def idUsuario = springSecurityService.principal.id
         def personasInstance = Usuario.get(idUsuario)
         sendMail {
@@ -64,7 +63,7 @@ class SolicitudController {
             "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
             "pronto seras contactado con relación a el\n"
         }
-
+*/
         flash.message = message(code: 'default.created.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
     }
@@ -89,6 +88,27 @@ class SolicitudController {
         }
 
         [solicitudInstance: solicitudInstance]
+    }
+
+    def firmar(Long id) {
+        def solicitudInstance = Solicitud.get(id)
+        if (!solicitudInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
+            redirect(action: "list")
+            return
+        }
+
+        solicitudInstance.properties = params
+        solicitudInstance.fechaSolicitud = new Date()
+        solicitudInstance.idSolicitante = springSecurityService.principal.id
+
+        if (!solicitudInstance.save(flush: true)) {
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
+        redirect(action: "show", id: solicitudInstance.id)
     }
 
     def update(Long id, Long version) {

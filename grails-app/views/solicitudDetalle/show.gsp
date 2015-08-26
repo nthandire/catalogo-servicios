@@ -50,15 +50,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${solicitudDetalleInstance?.estadoSolictuddetalle}">
-				<li class="fieldcontain">
-					<span id="estadoSolictuddetalle-label" class="property-label"><g:message code="solicitudDetalle.estadoSolictuddetalle.label" default="Estado Solictuddetalle" /></span>
-					
-						<span class="property-value" aria-labelledby="estadoSolictuddetalle-label"><g:fieldValue bean="${solicitudDetalleInstance}" field="estadoSolictuddetalle"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${solicitudDetalleInstance?.descripcion}">
 				<li class="fieldcontain">
 					<span id="descripcion-label" class="property-label"><g:message code="solicitudDetalle.descripcion.label" default="Descripcion" /></span>

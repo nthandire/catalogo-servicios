@@ -30,8 +30,6 @@
 					
 						<g:sortableColumn property="idResguardoentregadetalle" title="${message(code: 'solicitudDetalle.idResguardoentregadetalle.label', default: 'Id Resguardoentregadetalle')}" />
 					
-						<g:sortableColumn property="estadoSolictuddetalle" title="${message(code: 'solicitudDetalle.estadoSolictuddetalle.label', default: 'Estado Solictuddetalle')}" />
-					
 						<g:sortableColumn property="descripcion" title="${message(code: 'solicitudDetalle.descripcion.label', default: 'Descripcion')}" />
 					
 						<g:sortableColumn property="solucion" title="${message(code: 'solicitudDetalle.solucion.label', default: 'Solucion')}" />
@@ -47,8 +45,6 @@
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idServ")}</td>
 					
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idResguardoentregadetalle")}</td>
-					
-						<td>${fieldValue(bean: solicitudDetalleInstance, field: "estadoSolictuddetalle")}</td>
 					
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "descripcion")}</td>
 					

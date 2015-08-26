@@ -27,25 +27,7 @@
 				<li class="fieldcontain">
 					<span id="numeroSolicitud-label" class="property-label"><g:message code="solicitud.numeroSolicitud.label" default="Numero Solicitud" /></span>
 					
-						<span class="property-value" aria-labelledby="numeroSolicitud-label"><g:fieldValue bean="${solicitudInstance}" field="numeroSolicitud"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.fechaSolicitud}">
-				<li class="fieldcontain">
-					<span id="fechaSolicitud-label" class="property-label"><g:message code="solicitud.fechaSolicitud.label" default="Fecha Solicitud" /></span>
-					
-						<span class="property-value" aria-labelledby="fechaSolicitud-label"><g:formatDate date="${solicitudInstance?.fechaSolicitud}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.estadoSolicitud}">
-				<li class="fieldcontain">
-					<span id="estadoSolicitud-label" class="property-label"><g:message code="solicitud.estadoSolicitud.label" default="Estado Solicitud" /></span>
-					
-						<span class="property-value" aria-labelledby="estadoSolicitud-label"><g:fieldValue bean="${solicitudInstance}" field="estadoSolicitud"/></span>
+						<span class="property-value" aria-labelledby="numeroSolicitud-label">${solicitudInstance.toString()}</span>
 					
 				</li>
 				</g:if>
@@ -59,101 +41,22 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${solicitudInstance?.idSolicitante}">
+				<g:if test="${solicitudInstance?.lastUpdated}">
 				<li class="fieldcontain">
-					<span id="idSolicitante-label" class="property-label"><g:message code="solicitud.idSolicitante.label" default="Id Solicitante" /></span>
+					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha Modificacion" /></span>
 					
-						<span class="property-value" aria-labelledby="idSolicitante-label"><g:fieldValue bean="${solicitudInstance}" field="idSolicitante"/></span>
+						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudInstance?.lastUpdated}" /></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${solicitudInstance?.idAutoriza}">
+				<g:if test="${solicitudInstance?.detalles}">
 				<li class="fieldcontain">
-					<span id="idAutoriza-label" class="property-label"><g:message code="solicitud.idAutoriza.label" default="Id Autoriza" /></span>
+					<span id="detalles-label" class="property-label"><g:message code="solicitud.detalles.label" default="Detalles" /></span>
 					
-						<span class="property-value" aria-labelledby="idAutoriza-label"><g:fieldValue bean="${solicitudInstance}" field="idAutoriza"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.fechaAutoriza}">
-				<li class="fieldcontain">
-					<span id="fechaAutoriza-label" class="property-label"><g:message code="solicitud.fechaAutoriza.label" default="Fecha Autoriza" /></span>
-					
-						<span class="property-value" aria-labelledby="fechaAutoriza-label"><g:formatDate date="${solicitudInstance?.fechaAutoriza}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.idVb}">
-				<li class="fieldcontain">
-					<span id="idVb-label" class="property-label"><g:message code="solicitud.idVb.label" default="Id Vb" /></span>
-					
-						<span class="property-value" aria-labelledby="idVb-label"><g:fieldValue bean="${solicitudInstance}" field="idVb"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.fechaVb}">
-				<li class="fieldcontain">
-					<span id="fechaVb-label" class="property-label"><g:message code="solicitud.fechaVb.label" default="Fecha Vb" /></span>
-					
-						<span class="property-value" aria-labelledby="fechaVb-label"><g:formatDate date="${solicitudInstance?.fechaVb}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.p01}">
-				<li class="fieldcontain">
-					<span id="p01-label" class="property-label"><g:message code="solicitud.p01.label" default="P01" /></span>
-					
-						<span class="property-value" aria-labelledby="p01-label"><g:fieldValue bean="${solicitudInstance}" field="p01"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.p02}">
-				<li class="fieldcontain">
-					<span id="p02-label" class="property-label"><g:message code="solicitud.p02.label" default="P02" /></span>
-					
-						<span class="property-value" aria-labelledby="p02-label"><g:fieldValue bean="${solicitudInstance}" field="p02"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.p03}">
-				<li class="fieldcontain">
-					<span id="p03-label" class="property-label"><g:message code="solicitud.p03.label" default="P03" /></span>
-					
-						<span class="property-value" aria-labelledby="p03-label"><g:fieldValue bean="${solicitudInstance}" field="p03"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.p04}">
-				<li class="fieldcontain">
-					<span id="p04-label" class="property-label"><g:message code="solicitud.p04.label" default="P04" /></span>
-					
-						<span class="property-value" aria-labelledby="p04-label"><g:fieldValue bean="${solicitudInstance}" field="p04"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.fechaModificacion}">
-				<li class="fieldcontain">
-					<span id="fechaModificacion-label" class="property-label"><g:message code="solicitud.fechaModificacion.label" default="Fecha Modificacion" /></span>
-					
-						<span class="property-value" aria-labelledby="fechaModificacion-label"><g:formatDate date="${solicitudInstance?.fechaModificacion}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${solicitudInstance?.ipTerminal}">
-				<li class="fieldcontain">
-					<span id="ipTerminal-label" class="property-label"><g:message code="solicitud.ipTerminal.label" default="Ip Terminal" /></span>
-					
-						<span class="property-value" aria-labelledby="ipTerminal-label"><g:fieldValue bean="${solicitudInstance}" field="ipTerminal"/></span>
+						<g:each in="${solicitudInstance.detalles}" var="d">
+						<span class="property-value" aria-labelledby="detalles-label"><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
+						</g:each>
 					
 				</li>
 				</g:if>
@@ -161,9 +64,11 @@
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${solicitudInstance?.id}" />
-					<g:link class="edit" action="edit" id="${solicitudInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<!--g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /-->
+					<g:if test="${!solicitudInstance?.fechaSolicitud}">
+						<g:hiddenField name="id" value="${solicitudInstance?.id}" />
+						<g:link class="edit" action="edit" id="${solicitudInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+						<g:link class="edit" action="firmar" id="${solicitudInstance?.id}"><g:message code="default.button.firmar.label" default="Firmar" /></g:link>
+					</g:if>
 				</fieldset>
 			</g:form>
 		</div>

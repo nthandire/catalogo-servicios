@@ -30,9 +30,9 @@
 	<g:field name="idResguardoentregadetalle" type="number" value="${solicitudDetalleInstance.idResguardoentregadetalle}"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'estadoSolictuddetalle', 'error')} ">
-	<label for="estadoSolictuddetalle">
-		<g:message code="solicitudDetalle.estadoSolictuddetalle.label" default="Estado Solictuddetalle" />
+<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'estado', 'error')} ">
+	<label for="estado">
+		<g:message code="solicitudDetalle.estado.label" default="Estado" />
 		
 	</label>
 	
