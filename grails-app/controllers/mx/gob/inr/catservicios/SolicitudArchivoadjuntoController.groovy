@@ -18,18 +18,31 @@ class SolicitudArchivoadjuntoController {
     }
 
     def create() {
-        [solicitudArchivoadjuntoInstance: new SolicitudArchivoadjunto(params)]
+      def solicitudArchivoadjuntoInstance = new SolicitudArchivoadjunto()
+      def solicitud = Solicitud.get(params.solicitud["id"])
+      solicitudArchivoadjuntoInstance.idSolicitud = solicitud
+      [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance]
     }
 
     def save() {
-        def solicitudArchivoadjuntoInstance = new SolicitudArchivoadjunto(params)
-        if (!solicitudArchivoadjuntoInstance.save(flush: true)) {
-            render(view: "create", model: [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance])
-            return
-        }
-
-        flash.message = message(code: 'default.created.message', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto'), solicitudArchivoadjuntoInstance.toString()])
-        redirect(action: "show", id: solicitudArchivoadjuntoInstance.id)
+      def file = request.getFile('file')
+      if(file.empty) {
+        flash.message = "No puede ser vacío"
+      } else {
+        def solicitudArchivoadjuntoInstance = new SolicitudArchivoadjunto()
+        def solicitud = Solicitud.get(params.idSolicitud)
+        solicitudArchivoadjuntoInstance.idSolicitud = solicitud
+        def nombre = file.originalFilename
+        solicitudArchivoadjuntoInstance.nombre = nombre
+        solicitudArchivoadjuntoInstance.datos = file.getBytes()
+        solicitudArchivoadjuntoInstance.tamaño = 
+          solicitudArchivoadjuntoInstance.datos.size()
+        def dot = nombre.lastIndexOf('.');
+        solicitudArchivoadjuntoInstance.tipo = nombre.substring(dot + 1).
+          toUpperCase();
+        solicitudArchivoadjuntoInstance.save()
+      }
+      redirect (controller: "solicitud", action:'show', id: 1)
     }
 
     def show(Long id) {
@@ -43,44 +56,22 @@ class SolicitudArchivoadjuntoController {
         [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance]
     }
 
-    def edit(Long id) {
-        def solicitudArchivoadjuntoInstance = SolicitudArchivoadjunto.get(id)
-        if (!solicitudArchivoadjuntoInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto'), id])
-            redirect(action: "list")
-            return
+    def download(long id) {
+        SolicitudArchivoadjunto solicitudArchivoadjuntoInstance = 
+          SolicitudArchivoadjunto.get(id)
+        if ( SolicitudArchivoadjunto == null) {
+            flash.message = "Documento no encontrado."
+            redirect (controller: "solicitud", action:'show', id: 1) // TODO: apuntar al id correcto
+        } else {
+            response.setContentType("APPLICATION/OCTET-STREAM")
+            response.setHeader("Content-Disposition",
+              "Attachment;Filename=\"${solicitudArchivoadjuntoInstance.nombre}\"")
+
+            def outputStream = response.getOutputStream()
+            outputStream << solicitudArchivoadjuntoInstance.datos
+            outputStream.flush()
+            outputStream.close()
         }
-
-        [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance]
-    }
-
-    def update(Long id, Long version) {
-        def solicitudArchivoadjuntoInstance = SolicitudArchivoadjunto.get(id)
-        if (!solicitudArchivoadjuntoInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto'), id])
-            redirect(action: "list")
-            return
-        }
-
-        if (version != null) {
-            if (solicitudArchivoadjuntoInstance.version > version) {
-                solicitudArchivoadjuntoInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')] as Object[],
-                          "Another user has updated this SolicitudArchivoadjunto while you were editing")
-                render(view: "edit", model: [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance])
-                return
-            }
-        }
-
-        solicitudArchivoadjuntoInstance.properties = params
-
-        if (!solicitudArchivoadjuntoInstance.save(flush: true)) {
-            render(view: "edit", model: [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance])
-            return
-        }
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto'), solicitudArchivoadjuntoInstance.toString()])
-        redirect(action: "show", id: solicitudArchivoadjuntoInstance.id)
     }
 
     def x_delete(Long id) {

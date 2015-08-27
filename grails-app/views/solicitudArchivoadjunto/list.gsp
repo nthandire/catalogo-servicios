@@ -24,8 +24,6 @@
 				<thead>
 					<tr>
 					
-						<th><g:message code="solicitudArchivoadjunto.idSolicitud.label" default="Id Solicitud" /></th>
-					
 						<g:sortableColumn property="nombre" title="${message(code: 'solicitudArchivoadjunto.nombre.label', default: 'Nombre')}" />
 					
 						<g:sortableColumn property="tamaño" title="${message(code: 'solicitudArchivoadjunto.tamaño.label', default: 'Tamaño')}" />
@@ -38,9 +36,7 @@
 				<g:each in="${solicitudArchivoadjuntoInstanceList}" status="i" var="solicitudArchivoadjuntoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${solicitudArchivoadjuntoInstance.id}">${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "idSolicitud")}</g:link></td>
-					
-						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "nombre")}</td>
+						<td><g:link action="download" id="${solicitudArchivoadjuntoInstance.id}">${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "nombre")}</g:link></td>
 					
 						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "tamaño")}</td>
 					

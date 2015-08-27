@@ -15,13 +15,14 @@ class SolicitudArchivoadjunto {
 	static mapping = {
 		id generator: "increment"
 		tamaño column: "tamanio"
+		idSolicitud column: "id_solicitud"
 		lastUpdated column: "fechaModificacion"
 		version "modificacion"
 	}
 
 	static constraints = {
 		idSolicitud nullable: true
-		datos nullable: true, display:false, editable:false
+		datos nullable: true, display:false, editable:false, maxSize:1073741824
 		nombre nullable: true, display:false, editable:false
 		tamaño nullable: true, display:false, editable:false
 		tipo nullable: true, maxSize: 20
@@ -29,4 +30,9 @@ class SolicitudArchivoadjunto {
 		lastUpdated nullable: true, display:false, editable:false
 		ipTerminal nullable: true, maxSize: 15, display:false, editable:false
 	}
+
+  String toString() {
+    nombre
+  }
+
 }
