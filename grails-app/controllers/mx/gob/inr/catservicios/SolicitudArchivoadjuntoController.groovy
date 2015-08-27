@@ -3,6 +3,7 @@ package mx.gob.inr.catservicios
 import org.springframework.dao.DataIntegrityViolationException
 
 class SolicitudArchivoadjuntoController {
+    def springSecurityService
     static nombreMenu = "Solicitud Archivos adjuntos"
     static ordenMenu = 82
 
@@ -37,6 +38,8 @@ class SolicitudArchivoadjuntoController {
         solicitudArchivoadjuntoInstance.datos = file.getBytes()
         solicitudArchivoadjuntoInstance.tamaño = 
           solicitudArchivoadjuntoInstance.datos.size()
+        solicitudArchivoadjuntoInstance.idUsuario = springSecurityService.principal.id
+        solicitudArchivoadjuntoInstance.ipTerminal = request.getRemoteAddr()
         def dot = nombre.lastIndexOf('.');
         solicitudArchivoadjuntoInstance.tipo = nombre.substring(dot + 1).
           toUpperCase();
