@@ -1,7 +1,9 @@
 package mx.gob.inr.catservicios
 
+import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
+@Secured(['ROLE_ADMIN'])
 class CatEstadoController {
     static nombreMenu = "Estados"
     static ordenMenu = 100

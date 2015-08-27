@@ -1,8 +1,10 @@
 package mx.gob.inr.catservicios
 
+import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
+@Secured(['ROLE_USUARIO'])
 class SolicitudController {
     def springSecurityService
     static nombreMenu = "Solicitud"

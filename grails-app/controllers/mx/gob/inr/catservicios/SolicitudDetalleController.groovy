@@ -1,7 +1,9 @@
 package mx.gob.inr.catservicios
 
+import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
+@Secured(['ROLE_USUARIO'])
 class SolicitudDetalleController {
     static nombreMenu = "Solicitud Detalle"
     static ordenMenu = 81
