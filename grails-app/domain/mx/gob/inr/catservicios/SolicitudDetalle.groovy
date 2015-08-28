@@ -17,6 +17,10 @@ class SolicitudDetalle {
 
 	static mapping = {
 		id column: "id_solicituddetalle", generator: "increment"
+		idServ column: "id_serv"
+		idServcat column: "id_servcat"
+		idPrograma column: "id_programa"
+		idSolicitud column: "id_solicitud"
 		estado column: "estado_solictuddetalle"
 		version false
 	}

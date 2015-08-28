@@ -20,18 +20,24 @@ class SolicitudDetalleController {
     }
 
     def create() {
-        [solicitudDetalleInstance: new SolicitudDetalle(params)]
+      def solicitudDetalleInstance = new SolicitudDetalle(params)
+      def solicitud = Solicitud.get(params.solicitud["id"])
+      solicitudDetalleInstance.idSolicitud = solicitud
+      [solicitudDetalleInstance: solicitudDetalleInstance]
     }
 
     def save() {
-        def solicitudDetalleInstance = new SolicitudDetalle(params)
+        def paramsFiltrado = params.findAll {it.key != 'idSolicitud'}
+        def solicitudDetalleInstance = new SolicitudDetalle(paramsFiltrado)
+        def solicitud = Solicitud.get(params.idSolicitud)
+        solicitudDetalleInstance.idSolicitud = solicitud
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "create", model: [solicitudDetalleInstance: solicitudDetalleInstance])
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
-        redirect(action: "show", id: solicitudDetalleInstance.id)
+        redirect (controller: "solicitud", action:'show', id: solicitud.id)
     }
 
     def show(Long id) {
@@ -82,7 +88,7 @@ class SolicitudDetalleController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
-        redirect(action: "show", id: solicitudDetalleInstance.id)
+        redirect(controller: "solicitud", action: "show", id: solicitudDetalleInstance.idSolicitud.id)
     }
 
     def x_delete(Long id) {

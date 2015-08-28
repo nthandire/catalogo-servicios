@@ -30,7 +30,9 @@ class SolicitudArchivoadjuntoController {
     def save() {
       def file = request.getFile('file')
       if(file.empty) {
-        flash.message = "No puede ser vacío"
+        flash.message = "Debe enviar algún archivo"
+        render(view: "create")
+        return
       } else {
         def solicitudArchivoadjuntoInstance = new SolicitudArchivoadjunto()
         def solicitud = Solicitud.get(params.idSolicitud)
@@ -43,11 +45,17 @@ class SolicitudArchivoadjuntoController {
         solicitudArchivoadjuntoInstance.idUsuario = springSecurityService.principal.id
         solicitudArchivoadjuntoInstance.ipTerminal = request.getRemoteAddr()
         def dot = nombre.lastIndexOf('.');
-        solicitudArchivoadjuntoInstance.tipo = nombre.substring(dot + 1).
-          toUpperCase();
-        solicitudArchivoadjuntoInstance.save()
+        if (dot > 0)
+          solicitudArchivoadjuntoInstance.tipo = nombre.substring(dot + 1).
+            toUpperCase()
+        else
+          solicitudArchivoadjuntoInstance.tipo = ""
+        if (!solicitudArchivoadjuntoInstance.save(flush: true)) {
+            render(view: "create", model: [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance])
+            return
+        }
+        redirect (controller: "solicitud", action:'show', id: solicitud.id)
       }
-      redirect (controller: "solicitud", action:'show', id: 1)
     }
 
     def show(Long id) {
@@ -66,7 +74,7 @@ class SolicitudArchivoadjuntoController {
           SolicitudArchivoadjunto.get(id)
         if ( SolicitudArchivoadjunto == null) {
             flash.message = "Documento no encontrado."
-            redirect (controller: "solicitud", action:'show', id: 1) // TODO: apuntar al id correcto
+            redirect (controller: "solicitud", action:'list')
         } else {
             response.setContentType("APPLICATION/OCTET-STREAM")
             response.setHeader("Content-Disposition",

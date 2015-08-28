@@ -6,14 +6,6 @@
 </style>
 
 
-<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idSolicitud', 'error')} ">
-	<label for="idSolicitud">
-		<g:message code="solicitudDetalle.idSolicitud.label" default="Id Solicitud" />
-		
-	</label>
-	<g:select id="idSolicitud" name="idSolicitud.id" from="${mx.gob.inr.catservicios.Solicitud.list()}" optionKey="id" value="${solicitudDetalleInstance?.idSolicitud?.id}" class="many-to-one" noSelection="['null': '']"/>
-</div>
-
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
 	<label for="idServcat">
 		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
