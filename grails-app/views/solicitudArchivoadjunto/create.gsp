@@ -29,7 +29,11 @@
 			<g:form action="save"  enctype="multipart/form-data">
 			<g:hiddenField name="idSolicitud" value="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}" />
 				<fieldset class="form">
-          <input type="file" name="file" />
+					<div class="fieldtablecontain ">
+						<br /><br /><br />
+	          <input type="file" name="file" />
+						<br /><br /><br />
+					</div>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.upload.label', default: 'Subir')}" />

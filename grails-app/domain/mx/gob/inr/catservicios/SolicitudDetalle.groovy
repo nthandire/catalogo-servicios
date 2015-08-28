@@ -34,4 +34,9 @@ class SolicitudDetalle {
 		idServcat nullable: true
 		descripcionTecnica nullable: true, maxSize: 2500
 	}
+
+  String toString() {
+    idServcat
+  }
+
 }

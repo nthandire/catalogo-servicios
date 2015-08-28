@@ -14,12 +14,12 @@
 	<g:select id="idSolicitud" name="idSolicitud.id" from="${mx.gob.inr.catservicios.Solicitud.list()}" optionKey="id" value="${solicitudDetalleInstance?.idSolicitud?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServ', 'error')} ">
-	<label for="idServ">
-		<g:message code="solicitudDetalle.idServ.label" default="Id Serv" />
+<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
+	<label for="idServcat">
+		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
 		
 	</label>
-	<g:select id="idServ" name="idServ.id" from="${mx.gob.inr.catservicios.Cat_serv.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServ?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="idServcat" name="idServcat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <!--

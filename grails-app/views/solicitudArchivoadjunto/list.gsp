@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<!--<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>-->
 			</ul>
 		</div>
 		<div id="list-solicitudArchivoadjunto" class="content scaffold-list" role="main">
@@ -38,7 +38,10 @@
 					
 						<td><g:link action="download" id="${solicitudArchivoadjuntoInstance.id}">${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "nombre")}</g:link></td>
 					
-						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "tamaño")}</td>
+						<td>
+							<g:formatNumber number="${solicitudArchivoadjuntoInstance.tamaño}"
+								format="###,##0" locale="es_MX" />
+						</td>
 					
 						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "tipo")}</td>
 					
