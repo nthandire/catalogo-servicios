@@ -7,7 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class SolicitudArchivoadjuntoController {
     def springSecurityService
     static nombreMenu = "Solicitud Archivos adjuntos"
-    static ordenMenu = 82
+    static ordenMenu = -82
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 

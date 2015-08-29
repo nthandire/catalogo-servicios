@@ -110,7 +110,7 @@
 			<div id="controller-list" role="navigation">
 				<h3>Opciones disponibles:</h3>
 				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.getStaticPropertyValue('ordenMenu', int) } }">
+					<g:each var="c" in="${grailsApplication.controllerClasses.findAll{ it.getStaticPropertyValue('ordenMenu', int) >= 0 }.sort{ it.getStaticPropertyValue('ordenMenu', int) } }">
 						<g:if test="${c.fullName.indexOf("Dbdoc") == -1 &&
 													c.fullName.indexOf("Jasper") == -1 &&
 													c.fullName.indexOf("Log") == -1}" >
