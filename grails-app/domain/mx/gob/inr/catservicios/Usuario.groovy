@@ -11,14 +11,8 @@ class Usuario {
 	boolean accountLocked
 	boolean passwordExpired
 
-	// // Long version
-	// Long getVersion() {
-	// 	0
-	// }
-	
 	// boolean enabled
 	boolean getEnabled() {
-		log.debug("estatus = $estatus")
 		estatus == 'A'
 	}
 	
