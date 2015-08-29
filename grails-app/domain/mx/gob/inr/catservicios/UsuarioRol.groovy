@@ -51,7 +51,10 @@ class UsuarioRol implements Serializable {
 	}
 
 	static mapping = {
+		table 'usuario_perfil'
 		id composite: ['rol', 'usuario']
+		usuario column:'idusuario'
+		rol column:'idperfil'
 		version false
 		datasource "seguridad"
 	}

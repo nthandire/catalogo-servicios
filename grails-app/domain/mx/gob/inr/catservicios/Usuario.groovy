@@ -6,18 +6,45 @@ class Usuario {
 
 	String username
 	String password
-	boolean enabled
+	char estatus
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
 
+	// // Long version
+	// Long getVersion() {
+	// 	0
+	// }
+	
+	// boolean enabled
+	boolean getEnabled() {
+		log.debug("estatus = $estatus")
+		estatus == 'A'
+	}
+	
+	private void setEnabled(boolean val) {
+		if (val)
+			estatus = 'A'
+		else
+			estatus = 'B'
+	}
+
+
 	static constraints = {
-		username blank: false, unique: true
-		password blank: false
+		username blank: false, unique: true, nullable: true
+		password blank: false, nullable: true
+		estatus nullable: true
+		accountExpired nullable: true
+		accountLocked nullable: true
+		passwordExpired nullable: true
 	}
 
 	static mapping = {
-		password column: '`password`'
+		id column:'idusuario'    //, type:'integer'
+		username column:'rfc'
+		//password column: '`password`'
+		estatus length: 1, columnDefinition: 'char(1)'
+		version false
 		datasource "seguridad"
 	}
 

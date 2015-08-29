@@ -10,13 +10,13 @@ class BootStrap {
     JRProperties.setProperty("net.sf.jasperreports.default.pdf.encoding", "UTF-8")
     JRProperties.setProperty("net.sf.jasperreports.default.pdf.embedded", "false")
 
-    if (Usuario.count() == 0) {
-      def adminRole = new Rol(authority: 'ROLE_ADMIN').save(flush: true)
-      def userRole = new Rol(authority: 'ROLE_USER').save(flush: true)
-      def serviciosRol = new Rol(authority: 'ROLE_SERVICES').save(flush: true)
+    if (false) { // if (Usuario.count() == 0) {
+      def adminRole = new Rol(authority: 'ServTICs_ADMIN').save(flush: true)
+      def userRole = new Rol(authority: 'ServTICs_USER').save(flush: true)
+      def serviciosRol = new Rol(authority: 'ServTICs_SERVICES').save(flush: true)
   /*
-      def adminRole = Rol.findByAuthority('ROLE_ADMIN')
-      def userRole = Rol.findByAuthority('ROLE_USER')
+      def adminRole = Rol.findByAuthority('ServTICs_ADMIN')
+      def userRole = Rol.findByAuthority('ServTICs_USER')
   */
       def yo = new Usuario(username: 'yo', enabled: true, password: 'password')
         .save(flush: true)
@@ -36,24 +36,24 @@ class BootStrap {
       UsuarioRol.create testAdmin, adminRole, true
       UsuarioRol.create testUser, userRole, true
       UsuarioRol.create serviciosUser, serviciosRol, true
-
+/*
       new Requestmap(url: '/login/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
       new Requestmap(url: '/logout/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
-      new Requestmap(url: '/usuario/**', configAttribute: 'ROLE_ADMIN').save()
-      new Requestmap(url: '/rol/**', configAttribute: 'ROLE_ADMIN').save()
-      new Requestmap(url: '/usuarioRol/**', configAttribute: 'ROLE_ADMIN').save()
+      new Requestmap(url: '/usuario/**', configAttribute: 'ServTICs_ADMIN').save()
+      new Requestmap(url: '/rol/**', configAttribute: 'ServTICs_ADMIN').save()
+      new Requestmap(url: '/usuarioRol/**', configAttribute: 'ServTICs_ADMIN').save()
       // TODO: quitar el acceso a la BD
       new Requestmap(url: '/dbconsole/**', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
       new Requestmap(url: '/', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
-      new Requestmap(url: '/cat_tiempo/**', configAttribute: 'ROLE_ADMIN').save()
+      new Requestmap(url: '/cat_tiempo/**', configAttribute: 'ServTICs_ADMIN').save()
       new Requestmap(url: '/**', configAttribute: 'IS_AUTHENTICATED_FULLY').save()
-      new Requestmap(url: '/bitacora/**', configAttribute: 'ROLE_USER').save()
-      new Requestmap(url: '/bitacoraDetalle/**', configAttribute: 'ROLE_USER').save()
-      new Requestmap(url: '/monitoreo/**', configAttribute: 'ROLE_USER').save()
-      new Requestmap(url: '/monitoreoDetalle/**', configAttribute: 'ROLE_USER').save()
-      new Requestmap(url: '/cat_servCob/**', configAttribute: 'ROLE_USER').save()
-      new Requestmap(url: '/cat_servResp/**', configAttribute: 'ROLE_USER').save()
-
+      new Requestmap(url: '/bitacora/**', configAttribute: 'ServTICs_USER').save()
+      new Requestmap(url: '/bitacoraDetalle/**', configAttribute: 'ServTICs_USER').save()
+      new Requestmap(url: '/monitoreo/**', configAttribute: 'ServTICs_USER').save()
+      new Requestmap(url: '/monitoreoDetalle/**', configAttribute: 'ServTICs_USER').save()
+      new Requestmap(url: '/cat_servCob/**', configAttribute: 'ServTICs_USER').save()
+      new Requestmap(url: '/cat_servResp/**', configAttribute: 'ServTICs_USER').save()
+*/
       assert Usuario.count() == 4
       assert Rol.count() == 3
       assert UsuarioRol.count() == 5
@@ -128,9 +128,9 @@ class BootStrap {
       /*
       // deben quedar en el definitivo
       Rol.withNewSession { session ->
-        new Rol(authority: 'ROLE_USUARIO').save(flush: true)
-        new Rol(authority: 'ROLE_MESA').save(flush: true)
-        new Rol(authority: 'ROLE_COORDINADOR').save(flush: true)
+        new Rol(authority: 'ServTICs_USUARIO').save(flush: true)
+        new Rol(authority: 'ServTICs_MESA').save(flush: true)
+        new Rol(authority: 'ServTICs_COORDINADOR').save(flush: true)
       }
       // def normalUser
       Usuario.withNewSession { session ->
@@ -143,35 +143,35 @@ class BootStrap {
 
 
       UsuarioRol.withNewSession { session ->
-        UsuarioRol.create Usuario.findByUsername('usuario1'), Rol.findByAuthority('ROLE_USUARIO'), true
-        UsuarioRol.create Usuario.findByUsername('usuario2'), Rol.findByAuthority('ROLE_USUARIO'), true
-        UsuarioRol.create Usuario.findByUsername('mesaservicio'), Rol.findByAuthority('ROLE_MESA'), true
-        UsuarioRol.create Usuario.findByUsername('mesaservicio2'), Rol.findByAuthority('ROLE_MESA'), true
-        UsuarioRol.create Usuario.findByUsername('coordinador'), Rol.findByAuthority('ROLE_COORDINADOR'), true
+        UsuarioRol.create Usuario.findByUsername('usuario1'), Rol.findByAuthority('ServTICs_USUARIO'), true
+        UsuarioRol.create Usuario.findByUsername('usuario2'), Rol.findByAuthority('ServTICs_USUARIO'), true
+        UsuarioRol.create Usuario.findByUsername('mesaservicio'), Rol.findByAuthority('ServTICs_MESA'), true
+        UsuarioRol.create Usuario.findByUsername('mesaservicio2'), Rol.findByAuthority('ServTICs_MESA'), true
+        UsuarioRol.create Usuario.findByUsername('coordinador'), Rol.findByAuthority('ServTICs_COORDINADOR'), true
       }
 
       Requestmap.withNewSession { session ->
 
-        new Requestmap(url: '/solicitud/**', configAttribute: 'ROLE_USUARIO').save()
-        new Requestmap(url: '/solicituddetalle/**', configAttribute: 'ROLE_USUARIO').save()
-        new Requestmap(url: '/solicitudArchivoadjunto/**', configAttribute: 'ROLE_USUARIO').save()
-        new Requestmap(url: '/incidente/**', configAttribute: 'ROLE_MESA').save()
-        new Requestmap(url: '/incidenteLaboratorio/**', configAttribute: 'ROLE_MESA').save()
-        new Requestmap(url: '/incidenteArchivoadjunto/**', configAttribute: 'ROLE_MESA').save()
-        new Requestmap(url: '/problema/**', configAttribute: 'ROLE_MESA').save()
-        new Requestmap(url: '/proveedor/**', configAttribute: 'ROLE_MESA').save()
-        new Requestmap(url: '/catEstado/**', configAttribute: 'ROLE_MESA').save()
-        new Requestmap(url: '/catSistema/**', configAttribute: 'ROLE_MESA').save()
-        new Requestmap(url: '/catPrograma/**', configAttribute: 'ROLE_MESA').save()
-        new Requestmap(url: '/catTiposervcio/**', configAttribute: 'ROLE_MESA').save()
+        new Requestmap(url: '/solicitud/**', configAttribute: 'ServTICs_USUARIO').save()
+        new Requestmap(url: '/solicituddetalle/**', configAttribute: 'ServTICs_USUARIO').save()
+        new Requestmap(url: '/solicitudArchivoadjunto/**', configAttribute: 'ServTICs_USUARIO').save()
+        new Requestmap(url: '/incidente/**', configAttribute: 'ServTICs_MESA').save()
+        new Requestmap(url: '/incidenteLaboratorio/**', configAttribute: 'ServTICs_MESA').save()
+        new Requestmap(url: '/incidenteArchivoadjunto/**', configAttribute: 'ServTICs_MESA').save()
+        new Requestmap(url: '/problema/**', configAttribute: 'ServTICs_MESA').save()
+        new Requestmap(url: '/proveedor/**', configAttribute: 'ServTICs_MESA').save()
+        new Requestmap(url: '/catEstado/**', configAttribute: 'ServTICs_MESA').save()
+        new Requestmap(url: '/catSistema/**', configAttribute: 'ServTICs_MESA').save()
+        new Requestmap(url: '/catPrograma/**', configAttribute: 'ServTICs_MESA').save()
+        new Requestmap(url: '/catTiposervcio/**', configAttribute: 'ServTICs_MESA').save()
 
 
         //  error new Requestmap(url: '/**', configAttribute: 'IS_AUTHENTICATED_FULLY').save()
         //  error new Requestmap(url: '/', configAttribute: 'IS_AUTHENTICATED_ANONYMOUSLY').save()
-        new Requestmap(url: '/cat_serv/**', configAttribute: 'ROLE_ADMIN').save()
-        new Requestmap(url: '/cat_servCat/**', configAttribute: 'ROLE_ADMIN').save()
-        new Requestmap(url: '/cat_servSub/**', configAttribute: 'ROLE_ADMIN').save()
-        new Requestmap(url: '/cat_bitacora/**', configAttribute: 'ROLE_ADMIN').save()
+        new Requestmap(url: '/cat_serv/**', configAttribute: 'ServTICs_ADMIN').save()
+        new Requestmap(url: '/cat_servCat/**', configAttribute: 'ServTICs_ADMIN').save()
+        new Requestmap(url: '/cat_servSub/**', configAttribute: 'ServTICs_ADMIN').save()
+        new Requestmap(url: '/cat_bitacora/**', configAttribute: 'ServTICs_ADMIN').save()
       }
       */
     }

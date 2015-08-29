@@ -25,13 +25,22 @@ dataSource_catServ {
     url = "jdbc:h2:catServDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 }
 dataSource_seguridad {
-    pooled = true
+    pooled = false
     driverClassName = "org.h2.Driver"
     username = "sa"
     password = ""
     dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
     url = "jdbc:h2:seguridadDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 }
+// dataSource_seguridad {
+//     dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
+//     url = "jdbc:informix-sqli://192.168.10.12:1527/saihweb:informixserver=ol_adminserver"
+//     driverClassName = "com.informix.jdbc.IfxDriver"
+//     dialect = "org.hibernate.dialect.InformixDialect"
+//     username = "informix"
+//     password = "informix"
+//     pooled = true
+// }
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false

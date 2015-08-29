@@ -7,7 +7,7 @@ class Requestmap {
 
 	static mapping = {
 		cache true
-		datasource "seguridad"
+//		datasource "seguridad"
 	}
 
 	static constraints = {

@@ -91,7 +91,8 @@ log4j = {
 
     debug  'grails.app.conf.BootStrap',
            'grails.app.controllers',
-           'grails.app.domain'
+           'grails.app.domain',
+           'grails.plugin.springsecurity'
 }
 
 // Added by the Spring Security Core plugin:
