@@ -42,16 +42,14 @@ class SolicitudAutorizaController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def criteria = Solicitud.createCriteria()
-        def autorizables = criteria.list {
+        def autorizables = Solicitud.withCriteria {
             projections {count()}
             eq ('idAutoriza', (Integer)userID)
             isNotNull('fechaSolicitud')
             isNull('fechaAutoriza')
         }
         log.debug("numero de autorizables = $autorizables")
-        def criteria2 = Solicitud.createCriteria()
-        def autorizados = criteria2.list {
+        def autorizados = Solicitud.withCriteria {
             projections {count()}
             eq ('idAutoriza', (Integer)userID)
             isNotNull('fechaSolicitud')
@@ -63,41 +61,6 @@ class SolicitudAutorizaController {
             autorizadosInstanceList: Solicitud.findAllByIdAutorizaAndFechaSolicitudIsNotNullAndFechaAutorizaIsNotNull((Integer)userID, params),
             autorizadosInstanceTotal: autorizados]
     }
-
-/* TODO: pasar a donde se autorice
-        def startDate = new Date().clearTime()
-        startDate[Calendar.MONTH] = 0
-        startDate[Calendar.DATE] = 1
-        log.debug("startDate = $startDate")
-        def endDate = startDate.clone()
-        use(TimeCategory) {
-          endDate = endDate + 1.years - 1.seconds
-        }
-        log.debug("endDate = $endDate")
-
-        def criterio = Solicitud.createCriteria()
-        def maxID = criterio.get { // TODO: un test para ver si este algoritmo sique funcionando
-          between("fechaAutoriza", startDate, endDate)
-          projections {
-            max "numeroSolicitud"
-          }
-        } ?: 0
-        log.debug("maxID = $maxID")
-
-        solicitudInstance.numeroSolicitud = ++maxID
-*/
-
-/* TODO: habilitar cuando no este en desarrollo
-        def idUsuario = springSecurityService.principal.id
-        def personasInstance = Usuario.get(idUsuario)
-        sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
-          subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " + 
-            "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
-            "pronto seras contactado con relación a el\n"
-        }
-*/
 
     def show(Long id) {
         def solicitudInstance = Solicitud.get(id)
@@ -142,13 +105,12 @@ class SolicitudAutorizaController {
         }
         log.debug("endDate = $endDate")
 
-        def criterio = Solicitud.createCriteria()
-        def maxID = criterio.get { // TODO: un test para ver si este algoritmo sique funcionando
+        def maxID = Solicitud.withCriteria { // TODO: un test para ver si este algoritmo sique funcionando
           between("fechaAutoriza", startDate, endDate)
           projections {
             max "numeroSolicitud"
           }
-        } ?: 0
+        }[0] ?: 0
         log.debug("maxID = $maxID")
 
         solicitudInstance.numeroSolicitud = ++maxID
@@ -157,6 +119,7 @@ class SolicitudAutorizaController {
             render(view: "create", model: [solicitudInstance: solicitudInstance])
             return
         }
+
 /* TODO: habilitar cuando no este en desarrollo
         def idUsuario = springSecurityService.principal.id
         def personasInstance = Usuario.get(idUsuario)
@@ -168,14 +131,6 @@ class SolicitudAutorizaController {
             "pronto seras contactado con relación a el\n"
         }
 */
-
-
-
-
-
-
-
-
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "show", model: [solicitudInstance: solicitudInstance])
