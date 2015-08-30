@@ -131,12 +131,7 @@ class SolicitudAutorizaController {
 
         solicitudInstance.fechaAutoriza = new Date()
 
-
-
-
-
-
-/* TODO: pasar a donde se autorice
+        // Asignarle el siguiente folio dentro del año
         def startDate = new Date().clearTime()
         startDate[Calendar.MONTH] = 0
         startDate[Calendar.DATE] = 1
@@ -157,7 +152,6 @@ class SolicitudAutorizaController {
         log.debug("maxID = $maxID")
 
         solicitudInstance.numeroSolicitud = ++maxID
-*/
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "create", model: [solicitudInstance: solicitudInstance])
