@@ -116,8 +116,7 @@ class SolicitudAutorizaController {
             return
         }
 
-        solicitudInstance.properties = params
-        solicitudInstance.fechaSolicitud = new Date()
+        solicitudInstance.fechaAutoriza = new Date()
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "show", model: [solicitudInstance: solicitudInstance])

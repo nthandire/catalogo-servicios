@@ -83,6 +83,7 @@
 
 			<g:form>
 				<fieldset class="buttons">
+					<g:link class="edit" action="firmar" id="${solicitudInstance?.id}"><g:message code="default.button.firmar.label" default="Firmar" /></g:link>
 				</fieldset>
 			</g:form>
 		</div>
