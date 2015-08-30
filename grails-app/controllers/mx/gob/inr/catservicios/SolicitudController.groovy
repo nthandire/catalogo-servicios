@@ -42,29 +42,6 @@ class SolicitudController {
         solicitudInstance.estadoSolicitud = 'A'
         solicitudInstance.idAutoriza = 2 // TODO: debe ser el id del jefe
 
-/* TODO: pasar a donde se autorice
-        def startDate = new Date().clearTime()
-        startDate[Calendar.MONTH] = 0
-        startDate[Calendar.DATE] = 1
-        log.debug("startDate = $startDate")
-        def endDate = startDate.clone()
-        use(TimeCategory) {
-          endDate = endDate + 1.years - 1.seconds
-        }
-        log.debug("endDate = $endDate")
-
-        def criterio = Solicitud.createCriteria()
-        def maxID = criterio.get { // TODO: un test para ver si este algoritmo sique funcionando
-          between("fechaAutoriza", startDate, endDate)
-          projections {
-            max "numeroSolicitud"
-          }
-        } ?: 0
-        log.debug("maxID = $maxID")
-
-        solicitudInstance.numeroSolicitud = ++maxID
-*/
-
         if (!solicitudInstance.save(flush: true)) {
             render(view: "create", model: [solicitudInstance: solicitudInstance])
             return
@@ -114,7 +91,6 @@ class SolicitudController {
             return
         }
 
-        solicitudInstance.properties = params
         solicitudInstance.fechaSolicitud = new Date()
 
         if (!solicitudInstance.save(flush: true)) {
