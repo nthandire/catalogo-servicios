@@ -40,6 +40,7 @@ class SolicitudController {
         solicitudInstance.idSolicitante = springSecurityService.principal.id
         solicitudInstance.ipTerminal = request.getRemoteAddr()
         solicitudInstance.estadoSolicitud = 'A'
+        solicitudInstance.idAutoriza = 2 // TODO: debe ser el id del jefe
 
 /* TODO: pasar a donde se autorice
         def startDate = new Date().clearTime()
