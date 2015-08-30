@@ -77,7 +77,7 @@
 				<g:each in="${autorizadosInstanceList}" status="i" var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
+						<td><g:link action="showNoFirma" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
 					
 						<td>${Usuario.get(solicitudInstance.idSolicitante).username}</td>
 					
