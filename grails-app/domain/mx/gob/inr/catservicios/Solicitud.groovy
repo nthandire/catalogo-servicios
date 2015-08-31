@@ -31,7 +31,7 @@ class Solicitud {
 		numeroSolicitud nullable: true, editable:false
 		fechaSolicitud nullable: true, editable:false
 		estado nullable: true, maxSize: 1, editable:false,
-			inList: [(char)'A',(char)'C',(char)'I']
+			inList: [(char)'F', (char)'A', (char)'R', (char)'V', (char)'E', (char)'T', (char)'C']
 		justificacion nullable: true, maxSize: 1500
 		idSolicitante nullable: true, editable:false
 		idAutoriza nullable: true

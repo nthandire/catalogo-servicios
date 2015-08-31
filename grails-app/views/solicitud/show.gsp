@@ -44,11 +44,22 @@
 				<g:if test="${solicitudInstance?.lastUpdated}">
 				<li class="fieldcontain">
 					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha Modificacion" /></span>
-					
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudInstance?.lastUpdated}" /></span>
-					
 				</li>
 				</g:if>
+
+				<g:if test="${solicitudInstance?.estado}">
+				<li class="fieldcontain">
+					<span id="estado-label" class="property-label">Estado</span>
+					
+					<span class="property-value" aria-labelledby="estado-label">
+						<g:select name="estado" disabled="true"
+							from="${['F' as char, 'A' as char, 'R' as char, 'V' as char, 'E' as char, 'T' as char, 'C' as char]}"
+							valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
+					</span>
+				</li>
+				</g:if>
+
 			</ol>
 
 

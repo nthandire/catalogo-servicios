@@ -59,12 +59,11 @@
 				</g:if>
 			
 				<g:if test="${solicitudArchivoadjuntoInstance?.lastUpdated}">
-				<li class="fieldcontain">
-					<span id="lastUpdated-label" class="property-label"><g:message code="solicitudArchivoadjunto.lastUpdated.label" default="Last Updated" /></span>
-					
+					<li class="fieldcontain">
+						<span id="lastUpdated-label" class="property-label"><g:message code="solicitudArchivoadjunto.lastUpdated.label" default="Last Updated" /></span>
+						
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudArchivoadjuntoInstance?.lastUpdated}" /></span>
-					
-				</li>
+					</li>
 				</g:if>
 			
 			</ol>
