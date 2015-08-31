@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="back" action="list">Regresar a la lista</g:link></li>
+				<li><g:link class="back" action="${params.back}">Regresar a la lista</g:link></li>
 			</ul>
 		</div>
 		<div id="show-solicitud" class="content scaffold-show" role="main">
@@ -83,7 +83,9 @@
 
 			<g:form>
 				<fieldset class="buttons">
-					<g:link class="edit" action="firmar" id="${solicitudInstance?.id}"><g:message code="default.button.firmar.label" default="Firmar" /></g:link>
+					<g:if test="${solicitudInstance?.estado == 'F' as char}">
+						<g:link class="edit" action="firmar" id="${solicitudInstance?.id}"><g:message code="default.button.firmar.label" default="Firmar" /></g:link>
+					</g:if>
 				</fieldset>
 			</g:form>
 		</div>

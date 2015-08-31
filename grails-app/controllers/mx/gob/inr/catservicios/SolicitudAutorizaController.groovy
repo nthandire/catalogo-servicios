@@ -45,11 +45,10 @@ class SolicitudAutorizaController {
         def autorizables = Solicitud.withCriteria {
             projections {count()}
             eq ('idAutoriza', (Integer)userID)
-            isNotNull('fechaSolicitud')
-            isNull('fechaAutoriza')
+            eq ('estado', 'F' as char)
         }
         log.debug("numero de autorizables = $autorizables")
-        [autorizablesInstanceList: Solicitud.findAllByIdAutorizaAndFechaSolicitudIsNotNullAndFechaAutorizaIsNull((Integer)userID, params),
+        [autorizablesInstanceList: Solicitud.findAllByIdAutorizaAndEstado((Integer)userID, 'F' as char, params),
           autorizablesInstanceTotal: autorizables]
     }
 
@@ -61,11 +60,10 @@ class SolicitudAutorizaController {
         def autorizados = Solicitud.withCriteria {
             projections {count()}
             eq ('idAutoriza', (Integer)userID)
-            isNotNull('fechaSolicitud')
-            isNotNull('fechaAutoriza')
+            eq ('estado', 'A' as char)
         }
         log.debug("numero de autorizados = $autorizados")
-        [autorizadosInstanceList: Solicitud.findAllByIdAutorizaAndFechaSolicitudIsNotNullAndFechaAutorizaIsNotNull((Integer)userID, params),
+        [autorizadosInstanceList: Solicitud.findAllByIdAutorizaAndEstado((Integer)userID, 'A' as char, params),
           autorizadosInstanceTotal: autorizados]
     }
 
@@ -77,31 +75,16 @@ class SolicitudAutorizaController {
         def terminadas = Solicitud.withCriteria {
             projections {count()}
             eq ('idAutoriza', (Integer)userID)
-            eq('estado', 'C' as char)
-            isNotNull('fechaSolicitud')
-            isNotNull('fechaAutoriza')
+            eq ('estado', 'T' as char)
 
         }
         log.debug("numero de terminadas = $terminadas")
-        [terminadasInstanceList: 
-          Solicitud.
-            findAllByIdAutorizaAndEstadoAndFechaSolicitudIsNotNullAndFechaAutorizaIsNotNull(
-              (Integer)userID, 'C' as char, params),
+        [terminadasInstanceList: Solicitud.
+            findAllByIdAutorizaAndEstado((Integer)userID, 'T' as char, params),
           terminadasInstanceTotal: terminadas]
     }
 
     def show(Long id) {
-        def solicitudInstance = Solicitud.get(id)
-        if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [solicitudInstance: solicitudInstance]
-    }
-
-    def showNoFirma(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
@@ -121,6 +104,7 @@ class SolicitudAutorizaController {
         }
 
         solicitudInstance.fechaAutoriza = new Date()
+        solicitudInstance.estado = 'A' as char
 
         // Asignarle el siguiente folio dentro del año
         def startDate = new Date().clearTime()
@@ -144,7 +128,7 @@ class SolicitudAutorizaController {
         solicitudInstance.numeroSolicitud = ++maxID
 
         if (!solicitudInstance.save(flush: true)) {
-            render(view: "create", model: [solicitudInstance: solicitudInstance])
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
             return
         }
 
@@ -159,11 +143,6 @@ class SolicitudAutorizaController {
             "pronto seras contactado con relación a el\n"
         }
 */
-
-        if (!solicitudInstance.save(flush: true)) {
-            render(view: "show", model: [solicitudInstance: solicitudInstance])
-            return
-        }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
