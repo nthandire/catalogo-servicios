@@ -21,6 +21,9 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			<g:if test="${flash.error}">
+			<div class="alert alert-error" style="display: block" role="status">${flash.error}</div>
+			</g:if>
 			<ol class="property-list solicitud">
 			
 				<g:if test="${solicitudInstance?.numeroSolicitud}">

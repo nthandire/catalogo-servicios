@@ -90,6 +90,13 @@ class SolicitudController {
             return
         }
 
+        if (solicitudInstance?.detalles?.size()) {
+        } else {
+            flash.error = "Debe tener al menos un detalle para poderla firmar"
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            return
+        }
+
         solicitudInstance.fechaSolicitud = new Date()
         solicitudInstance.estado = 'F' as char
 
