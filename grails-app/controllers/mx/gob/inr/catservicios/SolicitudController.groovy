@@ -39,7 +39,7 @@ class SolicitudController {
         def solicitudInstance = new Solicitud(params)
         solicitudInstance.idSolicitante = springSecurityService.principal.id
         solicitudInstance.ipTerminal = request.getRemoteAddr()
-        solicitudInstance.estadoSolicitud = 'A'
+        solicitudInstance.estado = 'A'
         solicitudInstance.idAutoriza = 2 // TODO: debe ser el id del jefe
 
         if (!solicitudInstance.save(flush: true)) {

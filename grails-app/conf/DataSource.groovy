@@ -4,8 +4,8 @@ dataSource {
     username = "sa"
     password = ""
     dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-    url = "jdbc:h2:mem:informixMemDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-    // url = "jdbc:h2:informixDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+    // url = "jdbc:h2:mem:informixMemDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+    url = "jdbc:h2:informixDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 }
 // dataSource_informix {
 //     dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''

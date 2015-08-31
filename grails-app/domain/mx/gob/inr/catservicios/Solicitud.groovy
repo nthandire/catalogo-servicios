@@ -4,7 +4,7 @@ class Solicitud {
 
 	Date fechaSolicitud
 	Integer numeroSolicitud
-	Character estadoSolicitud
+	Character estado
 	String justificacion
 	Integer idSolicitante
 	Integer idAutoriza
@@ -22,6 +22,7 @@ class Solicitud {
 
 	static mapping = {
 		id column: "id_solicitud", generator: "increment"
+		estado column: "estado_solicitud"
 		lastUpdated column: "fechaModificacion"
 		version "modificacion"
 	}
@@ -29,8 +30,8 @@ class Solicitud {
 	static constraints = {
 		numeroSolicitud nullable: true, editable:false
 		fechaSolicitud nullable: true, editable:false
-		estadoSolicitud nullable: true, maxSize: 1, editable:false,
-			inList: [(char)'A',(char)'I']
+		estado nullable: true, maxSize: 1, editable:false,
+			inList: [(char)'A',(char)'C',(char)'I']
 		justificacion nullable: true, maxSize: 1500
 		idSolicitante nullable: true, editable:false
 		idAutoriza nullable: true

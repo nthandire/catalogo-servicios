@@ -19,7 +19,7 @@ class BootStrap {
       Rol.withNewSession { session ->
         new Rol(authority: 'ROLE_ADMIN').save(flush: true)
         new Rol(authority: 'ROLE_USUARIO').save(flush: true)
-        new Rol(authority: 'ROLE_MESA').save(flush: true)
+        new Rol(authority: 'ROLE_TECNICO').save(flush: true)
         new Rol(authority: 'ROLE_COORDINADOR').save(flush: true)
       }
 
@@ -42,8 +42,8 @@ class BootStrap {
         UsuarioRol.create Usuario.findByUsername('admin'), Rol.findByAuthority('ROLE_ADMIN'), true
         UsuarioRol.create Usuario.findByUsername('usuario1'), Rol.findByAuthority('ROLE_USUARIO'), true
         UsuarioRol.create Usuario.findByUsername('usuario2'), Rol.findByAuthority('ROLE_USUARIO'), true
-        UsuarioRol.create Usuario.findByUsername('mesaservicio'), Rol.findByAuthority('ROLE_MESA'), true
-        UsuarioRol.create Usuario.findByUsername('mesaservicio2'), Rol.findByAuthority('ROLE_MESA'), true
+        UsuarioRol.create Usuario.findByUsername('mesaservicio'), Rol.findByAuthority('ROLE_TECNICO'), true
+        UsuarioRol.create Usuario.findByUsername('mesaservicio2'), Rol.findByAuthority('ROLE_TECNICO'), true
         UsuarioRol.create Usuario.findByUsername('coordinador'), Rol.findByAuthority('ROLE_COORDINADOR'), true
       }
 
@@ -67,7 +67,7 @@ class BootStrap {
       tiempoDias.save(flush: true)
       new Cat_tiempo(descripcion: 'Semanas').save()
     } else { // TODO: borrar el else cuando no se use BD en memoria
-
+/*
       
       def tiempoMinutos = new Cat_tiempo(descripcion: 'Minutos')
       tiempoMinutos.save(flush: true)
@@ -115,7 +115,7 @@ class BootStrap {
       
       new CatPrograma(desPrograma: 'Mantenimiento', estadoPrograma:'A').save()
       new CatPrograma(desPrograma: 'Aprovisionamiento', estadoPrograma:'A').save()
-
+*/
     }
   }
 
