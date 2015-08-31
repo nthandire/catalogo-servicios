@@ -49,6 +49,15 @@ class SolicitudAutorizaController {
             isNull('fechaAutoriza')
         }
         log.debug("numero de autorizables = $autorizables")
+        [autorizablesInstanceList: Solicitud.findAllByIdAutorizaAndFechaSolicitudIsNotNullAndFechaAutorizaIsNull((Integer)userID, params),
+          autorizablesInstanceTotal: autorizables]
+    }
+
+    def listAutorizados(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        log.debug("params = $params")
+        def userID = springSecurityService.principal.id
+        log.debug("userID = $userID")
         def autorizados = Solicitud.withCriteria {
             projections {count()}
             eq ('idAutoriza', (Integer)userID)
@@ -56,10 +65,29 @@ class SolicitudAutorizaController {
             isNotNull('fechaAutoriza')
         }
         log.debug("numero de autorizados = $autorizados")
-        [autorizablesInstanceList: Solicitud.findAllByIdAutorizaAndFechaSolicitudIsNotNullAndFechaAutorizaIsNull((Integer)userID, params),
-            autorizablesInstanceTotal: autorizables, 
-            autorizadosInstanceList: Solicitud.findAllByIdAutorizaAndFechaSolicitudIsNotNullAndFechaAutorizaIsNotNull((Integer)userID, params),
-            autorizadosInstanceTotal: autorizados]
+        [autorizadosInstanceList: Solicitud.findAllByIdAutorizaAndFechaSolicitudIsNotNullAndFechaAutorizaIsNotNull((Integer)userID, params),
+          autorizadosInstanceTotal: autorizados]
+    }
+
+    def listTerminadas(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        log.debug("params = $params")
+        def userID = springSecurityService.principal.id
+        log.debug("userID = $userID")
+        def terminadas = Solicitud.withCriteria {
+            projections {count()}
+            eq ('idAutoriza', (Integer)userID)
+            eq('estado', 'C' as char)
+            isNotNull('fechaSolicitud')
+            isNotNull('fechaAutoriza')
+
+        }
+        log.debug("numero de terminadas = $terminadas")
+        [terminadasInstanceList: 
+          Solicitud.
+            findAllByIdAutorizaAndEstadoAndFechaSolicitudIsNotNullAndFechaAutorizaIsNotNull(
+              (Integer)userID, 'C' as char, params),
+          terminadasInstanceTotal: terminadas]
     }
 
     def show(Long id) {
