@@ -21,21 +21,12 @@ class SolicitudCoordinadorController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-
-        def query =
-          "from Solicitud s                                     " +
-          " where s.fechaSolicitud is Not Null                  " +
-          "   and fechaAutoriza is Not Null                     " +
-          "   and exists(select id from SolicitudDetalle d      " +
-          "               where s.id = d.idSolicitud            " +
-          "                 and idTecnico is null)              "
-
-        def autorizados = Solicitud.executeQuery(
-            "select count(*) " + query
-        )
-
+        def autorizados = Solicitud.withCriteria {
+            projections {count()}
+            eq ('estado', 'A' as char)
+        }
         log.debug("numero de autorizados = ${autorizados}")
-        [autorizadosInstanceList: Solicitud.executeQuery(query, [:], params),
+        [autorizadosInstanceList: Solicitud.findAllByEstado('A' as char, params),
             autorizadosInstanceTotal: autorizados]
     }
 
@@ -103,7 +94,7 @@ class SolicitudCoordinadorController {
         [solicitudInstance: solicitudInstance]
     }
 
-    def firmar(Long id) {
+    def revisar(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
@@ -111,31 +102,10 @@ class SolicitudCoordinadorController {
             return
         }
 
-        solicitudInstance.fechaAutoriza = new Date()
-
-        // Asignarle el siguiente folio dentro del año
-        def startDate = new Date().clearTime()
-        startDate[Calendar.MONTH] = 0
-        startDate[Calendar.DATE] = 1
-        log.debug("startDate = $startDate")
-        def endDate = startDate.clone()
-        use(TimeCategory) {
-          endDate = endDate + 1.years - 1.seconds
-        }
-        log.debug("endDate = $endDate")
-
-        def maxID = Solicitud.withCriteria { // TODO: un test para ver si este algoritmo sique funcionando
-          between("fechaAutoriza", startDate, endDate)
-          projections {
-            max "numeroSolicitud"
-          }
-        }[0] ?: 0
-        log.debug("maxID = $maxID")
-
-        solicitudInstance.numeroSolicitud = ++maxID
+        solicitudInstance.estado = 'R' as char
 
         if (!solicitudInstance.save(flush: true)) {
-            render(view: "create", model: [solicitudInstance: solicitudInstance])
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
             return
         }
 
@@ -150,11 +120,6 @@ class SolicitudCoordinadorController {
             "pronto seras contactado con relación a el\n"
         }
 */
-
-        if (!solicitudInstance.save(flush: true)) {
-            render(view: "show", model: [solicitudInstance: solicitudInstance])
-            return
-        }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)

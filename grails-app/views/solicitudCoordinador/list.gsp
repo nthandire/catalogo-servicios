@@ -33,6 +33,8 @@
 					
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
 					
+						<g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -46,6 +48,16 @@
 						<td><g:formatDate date="${solicitudInstance.lastUpdated}" /></td>
 					
 						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
+					
+						<td>
+							<g:if test="${solicitudInstance?.estado}">
+								<span class="property-value" aria-labelledby="estado-label">
+									<g:select name="estado" disabled="true"
+										from="${['F' as char, 'A' as char, 'R' as char, 'V' as char, 'E' as char, 'T' as char, 'C' as char]}"
+										valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
+								</span>
+							</g:if>
+						</td>
 					
 					</tr>
 				</g:each>
