@@ -41,6 +41,15 @@ dataSource_seguridad {
 //     password = "informix"
 //     pooled = true
 // }
+dataSource_almacen {
+    dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
+    url = "jdbc:informix-sqli://192.168.10.1:1526/almacenes:informixserver=ol_inrserver" // TODO: _dev es la BD
+    driverClassName = "com.informix.jdbc.IfxDriver"
+    dialect = "org.hibernate.dialect.InformixDialect"
+    username = "informix"
+    password = "informix"
+    pooled = true
+}
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
@@ -52,6 +61,7 @@ environments {
       dataSource {}
       dataSource_catServ {}
       dataSource_seguridad {}
+      dataSource_almacen {}
     }
     test {
         dataSource {
