@@ -19,8 +19,6 @@ class SolicitudCoordinadorController {
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
-        def userID = springSecurityService.principal.id
-        log.debug("userID = $userID")
         def autorizados = Solicitud.withCriteria {
             projections {count()}
             eq ('estado', 'A' as char)
@@ -30,11 +28,22 @@ class SolicitudCoordinadorController {
             autorizadosInstanceTotal: autorizados]
     }
 
+    def listDetalle(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        log.debug("params = $params")
+        def query = "from SolicitudDetalle d where idTecnico is null and exists( from Solicitud s where s.id = d.idSolicitud and s.estado =  ?)"
+        def detalles = SolicitudDetalle.executeQuery (
+              "select count (*) " + query, 'A' as char
+            )
+        log.debug("numero de detalles = ${detalles}")
+        [solicitudDetalleInstanceList: SolicitudDetalle.
+            executeQuery(query, 'A' as char, params),
+            solicitudDetalleInstanceTotal: detalles]
+    }
+
     def listAsignados(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
-        def userID = springSecurityService.principal.id
-        log.debug("userID = $userID")
 
         def query =
           "from Solicitud s                                     " +
@@ -56,8 +65,6 @@ class SolicitudCoordinadorController {
     def listTerminadas(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
-        def userID = springSecurityService.principal.id
-        log.debug("userID = $userID")
 
         def query =
           "from Solicitud s          " +
