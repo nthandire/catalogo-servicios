@@ -14,16 +14,6 @@
 	<g:select id="idServcat" name="idServcat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['null': '']" disabled="true"/>
 </div>
 
-<!--
-<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idResguardoentregadetalle', 'error')} ">
-	<label for="idResguardoentregadetalle">
-		<g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Id Resguardoentregadetalle" />
-		
-	</label>
-	<g:field name="idResguardoentregadetalle" type="number" value="${solicitudDetalleInstance.idResguardoentregadetalle}"/>
-</div>
--->
-
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcion', 'error')} ">
 	<label for="descripcion">
 		<g:message code="solicitudDetalle.descripcion.label" default="Descripcion" />

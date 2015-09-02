@@ -117,6 +117,17 @@ class SolicitudCoordinadorController {
         [solicitudDetalleInstance: solicitudDetalleInstance]
     }
 
+    def vistoBueno(Long id) {
+        def solicitudInstance = Solicitud.get(id)
+        if (!solicitudInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
+            redirect(action: "show", id: solicitudInstance.id)
+            return
+        }
+
+        [solicitudInstance: solicitudInstance]
+    }
+
     def revisar(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
@@ -146,6 +157,35 @@ class SolicitudCoordinadorController {
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
+    }
+
+    def updateVB(Long id, Long version) {
+        def solicitudInstance = Solicitud.get(id)
+        if (!solicitudInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
+            redirect(action: "list")
+            return
+        }
+
+        if (version != null) {
+            if (solicitudInstance.version > version) {
+                solicitudInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                          [message(code: 'solicitud.label', default: 'Solicitud')] as Object[],
+                          "Another user has updated this Solicitud while you were editing")
+                render(view: "vistoBueno", model: [solicitudInstance: solicitudInstance])
+                return
+            }
+        }
+
+        solicitudInstance.properties = params
+
+        if (!solicitudInstance.save(flush: true)) {
+            render(view: "vistoBueno", model: [solicitudInstance: solicitudInstance])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
+        redirect(action: "list")
     }
 
     def update(Long id, Long version) {

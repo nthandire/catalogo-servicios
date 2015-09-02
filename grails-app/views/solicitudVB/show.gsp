@@ -20,6 +20,9 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			<g:if test="${flash.error}">
+			<div class="errors" role="status">${flash.error}</div>
+			</g:if>
 			<ol class="property-list solicitud">
 			
 				<g:if test="${solicitudInstance?.numeroSolicitud}">
@@ -97,8 +100,7 @@
 			<g:form>
 				<fieldset class="buttons">
 					<g:if test="${solicitudInstance?.estado == 'A' as char}">
-						<g:link class="edit" action="revisar" id="${solicitudInstance?.id}"><g:message code="default.button.revisar.label" default="Revisado" /></g:link>
-						<g:link class="edit" action="vistoBueno" id="${solicitudInstance?.id}"><g:message code="default.button.revisar.label" default="Pedir un visto bueno" /></g:link>
+						<g:link class="edit" action="firmar" id="${solicitudInstance?.id}"><g:message code="default.button.firmar.label" default="Visto Bueno" /></g:link>
 					</g:if>
 				</fieldset>
 			</g:form>

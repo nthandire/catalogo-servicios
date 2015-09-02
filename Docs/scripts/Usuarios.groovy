@@ -14,3 +14,11 @@ def queryR = "  from Rol r                          " +
              " where r.authority = 'ROLE_TECNICO'   " 
 
 println Rol.executeQuery(queryR)
+
+def autorizables = Solicitud.withCriteria {
+            projections {count()}
+            eq ('idVb', (Integer)9)
+            eq ('estado', 'A' as char)
+        }
+
+println "autorizables = $autorizables"
