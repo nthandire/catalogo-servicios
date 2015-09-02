@@ -19,12 +19,16 @@ class SolicitudCoordinadorController {
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
-        def autorizados = Solicitud.withCriteria {
-            projections {count()}
-            eq ('estado', 'A' as char)
-        }
+        def query = 
+            "  from Solicitud              " +
+            " where (estado = 'A'          " +
+            "        and idVb is null)     " +
+            "    or  estado = 'V'          "
+        def autorizados = Solicitud.executeQuery (
+          "select count (*) " + query
+        )
         log.debug("numero de autorizados = ${autorizados}")
-        [autorizadosInstanceList: Solicitud.findAllByEstado('A' as char, params),
+        [autorizadosInstanceList: Solicitud.executeQuery(query, [:], params),
             autorizadosInstanceTotal: autorizados]
     }
 

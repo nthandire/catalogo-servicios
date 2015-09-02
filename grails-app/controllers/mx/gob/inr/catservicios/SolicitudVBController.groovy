@@ -8,7 +8,7 @@ import groovy.time.TimeCategory
 class SolicitudVBController {
     def springSecurityService
     static nombreMenu = "Visto Bueno"
-    static ordenMenu = 84
+    static ordenMenu = 85
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 

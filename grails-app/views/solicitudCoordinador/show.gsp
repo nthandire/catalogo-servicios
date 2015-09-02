@@ -96,9 +96,11 @@
 
 			<g:form>
 				<fieldset class="buttons">
-					<g:if test="${solicitudInstance?.estado == 'A' as char}">
+					<g:if test="${(solicitudInstance?.estado == 'A' as char || solicitudInstance?.estado == 'V' as char)}">
 						<g:link class="edit" action="revisar" id="${solicitudInstance?.id}"><g:message code="default.button.revisar.label" default="Revisado" /></g:link>
-						<g:link class="edit" action="vistoBueno" id="${solicitudInstance?.id}"><g:message code="default.button.revisar.label" default="Pedir un visto bueno" /></g:link>
+						<g:if test="${(solicitudInstance?.estado != 'V' as char)}">
+							<g:link class="edit" action="vistoBueno" id="${solicitudInstance?.id}"><g:message code="default.button.revisar.label" default="Pedir un visto bueno" /></g:link>
+						</g:if>
 					</g:if>
 				</fieldset>
 			</g:form>
