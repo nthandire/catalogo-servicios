@@ -27,7 +27,9 @@ class SolicitudDetalleController {
     }
 
     def save() {
-        def paramsFiltrado = params.findAll {it.key != 'idSolicitud'}
+        log.debug("params = $params")
+        def paramsFiltrado = params.findAll {it.key != 'idSolicitud' && (it.key != 'idResguardoentregadetalle' || !it.value )}
+        log.debug("paramsFiltrado = $paramsFiltrado")
         def solicitudDetalleInstance = new SolicitudDetalle(paramsFiltrado)
         def solicitud = Solicitud.get(params.idSolicitud)
         solicitudDetalleInstance.idSolicitud = solicitud
