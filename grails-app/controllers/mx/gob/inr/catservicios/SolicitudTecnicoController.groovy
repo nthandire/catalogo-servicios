@@ -117,7 +117,7 @@ class SolicitudTecnicoController {
         def detalles = SolicitudDetalle.countByIdSolicitudAndFechaSolucionIsNull(solicitud)
         log.debug("detalles = $detalles")
         if (!detalles) {
-            solicitud.estado = 'T' as char
+            solicitud.estado = 'E' as char
             if (!solicitud.save(flush: true)) {
                 log.debug("Fallo salvado de solicitud, ${solicitud.errors}")
                 redirect(action: "list")

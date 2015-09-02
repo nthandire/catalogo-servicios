@@ -59,7 +59,7 @@
 -				<div class="span10 offset1">
 					<ul class="one-to-many">
 						<g:each in="${solicitudInstance?.detalles?}" var="d">
-						    <li><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
+						    <li><g:link action="showDetalle" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
 						</g:each>
 					</ul>
 				</div>
@@ -84,7 +84,7 @@
 			<g:form>
 				<fieldset class="buttons">
 					<g:if test="${solicitudInstance?.estado == 'F' as char}">
-						<g:link class="edit" action="firmar" id="${solicitudInstance?.id}"><g:message code="default.button.firmar.label" default="Firmar" /></g:link>
+						<g:link class="edit" action="firmar" id="${solicitudInstance?.id}"><g:message code="default.button.firmar.label" default="Autorizar" /></g:link>
 					</g:if>
 				</fieldset>
 			</g:form>

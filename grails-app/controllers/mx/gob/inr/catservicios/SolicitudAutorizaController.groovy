@@ -95,6 +95,17 @@ class SolicitudAutorizaController {
         [solicitudInstance: solicitudInstance]
     }
 
+    def showDetalle(Long id) {
+        def solicitudDetalleInstance = SolicitudDetalle.get(id)
+        if (!solicitudDetalleInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [solicitudDetalleInstance: solicitudDetalleInstance]
+    }
+
     def firmar(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
