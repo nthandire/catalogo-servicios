@@ -13,11 +13,13 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list">Solicitudes a revisar</g:link></li>
+				<li><g:link class="list" action="listDetalle">Detalles a asignar</g:link></li>
 				<li><g:link class="list" action="listAsignados">Solicitudes asignadas</g:link></li>
+				<li><g:link class="list" action="listTerminadas">Solicitudes termindadas</g:link></li>
 			</ul>
 		</div>
 		<div id="list-solicitudDetalle" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1>Lista de Detalles a asignar</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -37,7 +39,7 @@
 				<g:each in="${solicitudDetalleInstanceList}" status="i" var="solicitudDetalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>
+						<td><g:link action="edit" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>
 					
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idServcat")}</td>
 					

@@ -31,13 +31,19 @@ class SolicitudCoordinadorController {
     def listDetalle(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
-        def query = "from SolicitudDetalle d where idTecnico is null and exists( from Solicitud s where s.id = d.idSolicitud and s.estado =  ?)"
+        def query = 
+            "  from SolicitudDetalle d             " +
+            " where idTecnico is null              " +
+            "   and exists                         " +
+            "      ( from Solicitud s              " +
+            "       where s.id = d.idSolicitud     " +
+            "         and s.estado = 'R')          "
         def detalles = SolicitudDetalle.executeQuery (
-              "select count (*) " + query, 'A' as char
+              "select count (*) " + query
             )
         log.debug("numero de detalles = ${detalles}")
         [solicitudDetalleInstanceList: SolicitudDetalle.
-            executeQuery(query, 'A' as char, params),
+            executeQuery(query, [:], params),
             solicitudDetalleInstanceTotal: detalles]
     }
 
@@ -47,9 +53,8 @@ class SolicitudCoordinadorController {
 
         def query =
           "from Solicitud s                                     " +
-          " where s.fechaSolicitud is Not Null                  " +
-          "   and fechaAutoriza is Not Null                     " +
-          "   and not exists(select id from SolicitudDetalle d      " +
+          " where s.estado = 'R'                                " +
+          "   and not exists(select id from SolicitudDetalle d  " +
           "               where s.id = d.idSolicitud            " +
           "                 and idTecnico is null)              "
 
@@ -68,7 +73,7 @@ class SolicitudCoordinadorController {
 
         def query =
           "from Solicitud s          " +
-          " where s.estado = 'C'     "
+          " where s.estado = 'T'     "
 
         def terminadas = Solicitud.executeQuery(
             "select count(*) " + query
@@ -101,6 +106,17 @@ class SolicitudCoordinadorController {
         [solicitudInstance: solicitudInstance]
     }
 
+    def edit(Long id) {
+        def solicitudDetalleInstance = SolicitudDetalle.get(id)
+        if (!solicitudDetalleInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+            redirect(action: "listDetalle")
+            return
+        }
+
+        [solicitudDetalleInstance: solicitudDetalleInstance]
+    }
+
     def revisar(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
@@ -130,6 +146,35 @@ class SolicitudCoordinadorController {
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
+    }
+
+    def update(Long id, Long version) {
+        def solicitudDetalleInstance = SolicitudDetalle.get(id)
+        if (!solicitudDetalleInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+            redirect(action: "list")
+            return
+        }
+
+        if (version != null) {
+            if (solicitudDetalleInstance.version > version) {
+                solicitudDetalleInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                          [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle')] as Object[],
+                          "Another user has updated this SolicitudDetalle while you were editing")
+                render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+                return
+            }
+        }
+
+        solicitudDetalleInstance.properties = params
+
+        if (!solicitudDetalleInstance.save(flush: true)) {
+            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
+        redirect(action: "listDetalle")
     }
 
 }
