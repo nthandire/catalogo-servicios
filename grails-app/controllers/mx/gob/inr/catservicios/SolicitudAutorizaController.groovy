@@ -114,6 +114,39 @@ class SolicitudAutorizaController {
             return
         }
 
+        if (solicitudInstance?.detalles?.size()) {
+        } else {
+            flash.error = "La solicitud debe tener al menos un detalle para poderla firmar"
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            return
+        }
+
+        [solicitudInstance: solicitudInstance]
+    }
+
+    def firmarUpdate(Long id) {
+        log.debug("params = $params")
+        def solicitudInstance = Solicitud.get(id)
+        if (!solicitudInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
+            redirect(action: "list")
+            return
+        }
+
+        def userID = springSecurityService.principal.id
+        log.debug("userID = $userID")
+
+        def firmaTeclada = params['passwordfirma']
+        log.debug("firmaTeclada = $firmaTeclada")
+        def firma = Firmadigital.findById(userID)?.passwordfirma
+        log.debug("firma = $firma")
+
+        if (firmaTeclada != firma) {
+            flash.error = "Error en contaseña"
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            return
+        }
+
         solicitudInstance.fechaAutoriza = new Date()
         solicitudInstance.estado = 'A' as char
 
