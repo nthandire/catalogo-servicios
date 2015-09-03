@@ -22,8 +22,8 @@
 		<div id="Logo" role="banner" >
 			<table>
 				<tr>
-					<td width="10%">
-						<img src="${resource(dir: 'images', file: 'logo_INR.gif')}" alt="" height="51px" width="68px"/>
+					<td width="25%">
+						<img src="${resource(dir: 'images', file: 'logo_salud.png')}" alt="" height="180px" width="280px" />
 					</td>
 					<td>
 						<div align="center">
@@ -33,7 +33,7 @@
 						</div>
 					</td>
 					<td width="10%">
-						<img src="${resource(dir: 'images', file: 'logo_salud.png')}" alt="" height="180px" width="280px" />
+						<img src="${resource(dir: 'images', file: 'logo_INR.gif')}" alt="" height="51px" width="68px"/>
 					</td>
 				</tr>
 			</table>
@@ -47,7 +47,12 @@
 			</div>
 		</div>
 		<g:layoutBody/>
-		<div class="footer" role="contentinfo"></div>
+		<div class="footer" role="contentinfo">
+			<div class="row-fluid">
+				<div class="span2 offset1" style="color:#969696">Versión ${grailsApplication.metadata['app.version']}</div>
+				<div class="span4 offset5"><a href="mailto:rpena@inr.gob.mx?Subject=Comentarios,%20quejas%20y/o%20sugerencias" target="_top">Comentarios, quejas y/o sugerencias a: Richard, rpena@inr.gob.mx</a></div>
+			</div>
+		</div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>
 		<r:layoutResources />
