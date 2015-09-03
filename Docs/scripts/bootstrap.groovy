@@ -1,14 +1,15 @@
 import mx.gob.inr.catservicios.*
 
-def nombre = "usuario10"
+
+def nombre = "tecnico2"
 Usuario.withNewSession { session ->
   new Usuario(username: nombre, enabled: true, password: nombre, estatus: 'A',
               ACCOUNT_EXPIRED: false, ACCOUNT_LOCKED: false, PASSWORD_EXPIRED: false).save(flush: true)
 }
 
-      UsuarioRol.withNewSession { session ->
-        new UsuarioRol(usuario:Usuario.findByUsername('usuario3'), rol: Rol.findByAuthority('ROLE_USUARIO')).save(flush:true)
-      }
+UsuarioRol.withNewSession { session ->
+    new UsuarioRol(usuario:Usuario.findByUsername(nombre), rol: Rol.findByAuthority('ROLE_TECNICO')).save(flush:true)
+}
 
 /*
       UsuarioRol.withNewSession { session ->
@@ -28,7 +29,7 @@ Usuario.withNewSession { session ->
       }
 */
 
-
+/*
 println Usuario.list()
 Usuario.withNewSession { session ->
 Usuario.list().each {
@@ -41,3 +42,4 @@ UsuarioRol.list().each {
   println "$it.usuario, $it.rol"
 }
 }
+*/

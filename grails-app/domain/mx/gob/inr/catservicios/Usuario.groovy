@@ -34,7 +34,7 @@ class Usuario {
 	}
 
 	static mapping = {
-		id column:'idusuario'    //, type:'integer'
+		id column:'idusuario', generator: "increment"    //, type:'integer'
 		username column:'rfc'
 		//password column: '`password`'
 		estatus length: 1, columnDefinition: 'char(1)'
