@@ -11,6 +11,7 @@
 		<g:message code="solicitud.justificacion.label" default="Justificacion" />
 		
 	</label>
-	<g:textArea name="justificacion" cols="40" rows="5" maxlength="1500" value="${solicitudInstance?.justificacion}"/>
+	<g:textArea name="justificacion" cols="40" rows="5" maxlength="1500"
+    value="${solicitudInstance?.justificacion}" required=""/>
 </div>
 
