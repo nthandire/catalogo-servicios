@@ -82,7 +82,10 @@ class SolicitudDetalleController {
             }
         }
 
-        solicitudDetalleInstance.properties = params
+        log.debug("params = $params")
+        def paramsFiltrado = params.findAll {it.key != 'idResguardoentregadetalle' || !it.value}
+        log.debug("paramsFiltrado = $paramsFiltrado")
+        solicitudDetalleInstance.properties = paramsFiltrado
 
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
