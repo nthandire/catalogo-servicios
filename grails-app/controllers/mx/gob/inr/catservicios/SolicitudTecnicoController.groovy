@@ -20,7 +20,7 @@ class SolicitudTecnicoController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        [solicitudDetalleInstanceList: SolicitudDetalle.findAllByIdTecnicoAndFechaSolucionIsNull((Integer)userID, [:],params),
+        [solicitudDetalleInstanceList: SolicitudDetalle.findAllByIdTecnicoAndFechaSolucionIsNull((Integer)userID, params),
             solicitudDetalleInstanceTotal: SolicitudDetalle.countByIdTecnicoAndFechaSolucionIsNull((Integer)userID)]
     }
 

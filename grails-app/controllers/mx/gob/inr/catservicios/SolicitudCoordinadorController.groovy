@@ -26,9 +26,9 @@ class SolicitudCoordinadorController {
             "    or  estado = 'V'          "
         def autorizados = Solicitud.executeQuery (
           "select count (*) " + query
-        )
+        )[0]
         log.debug("numero de autorizados = ${autorizados}")
-        [autorizadosInstanceList: Solicitud.executeQuery(query, [:], params),
+        [autorizadosInstanceList: Solicitud.executeQuery(query, [], params),
             autorizadosInstanceTotal: autorizados]
     }
 
@@ -44,10 +44,10 @@ class SolicitudCoordinadorController {
             "         and s.estado = 'R')          "
         def detalles = SolicitudDetalle.executeQuery (
               "select count (*) " + query
-            )
+            )[0]
         log.debug("numero de detalles = ${detalles}")
         [solicitudDetalleInstanceList: SolicitudDetalle.
-            executeQuery(query, [:], params),
+            executeQuery(query, [], params),
             solicitudDetalleInstanceTotal: detalles]
     }
 
@@ -61,14 +61,27 @@ class SolicitudCoordinadorController {
           "   and not exists(select id from SolicitudDetalle d  " +
           "               where s.id = d.idSolicitud            " +
           "                 and idTecnico is null)              "
-
         def asignados = Solicitud.executeQuery(
             "select count(*) " + query
-        )
-
+        )[0]
         log.debug("numero de asignados = ${asignados}")
-        [asignadosInstanceList: Solicitud.executeQuery(query, [:], params),
+        [asignadosInstanceList: Solicitud.executeQuery(query, [], params),
             asignadosInstanceTotal: asignados]
+    }
+
+    def listEncuestas(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        log.debug("params = $params")
+
+        def query =
+          "from Solicitud s          " +
+          " where s.estado = 'E'     "
+        def enEncuestas = Solicitud.executeQuery(
+            "select count(*) " + query
+        )[0]
+        log.debug("numero de enEncuestas = ${enEncuestas}")
+        [enEncuestasInstanceList: Solicitud.executeQuery(query, [], params),
+            enEncuestasInstanceTotal: enEncuestas]
     }
 
     def listTerminadas(Integer max) {
@@ -78,13 +91,11 @@ class SolicitudCoordinadorController {
         def query =
           "from Solicitud s          " +
           " where s.estado = 'T'     "
-
         def terminadas = Solicitud.executeQuery(
             "select count(*) " + query
-        )
-
+        )[0]
         log.debug("numero de terminadas = ${terminadas}")
-        [terminadasInstanceList: Solicitud.executeQuery(query, [:], params),
+        [terminadasInstanceList: Solicitud.executeQuery(query, [], params),
             terminadasInstanceTotal: terminadas]
     }
 

@@ -21,11 +21,7 @@ class SolicitudVBController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def autorizables = Solicitud.withCriteria {
-            projections {count()}
-            eq ('idVb', (Integer)userID)
-            eq ('estado', 'A' as char)
-        }
+        def autorizables = Solicitud.countByIdVbAndEstado((Integer)userID, 'A' as char)
         log.debug("numero de autorizables = $autorizables")
         [autorizablesInstanceList: Solicitud.findAllByIdVbAndEstado((Integer)userID, 'A' as char, params),
           autorizablesInstanceTotal: autorizables]
@@ -36,11 +32,7 @@ class SolicitudVBController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def autorizados = Solicitud.withCriteria {
-            projections {count()}
-            eq ('idVb', (Integer)userID)
-            eq ('estado', 'V' as char)
-        }
+        def autorizados = Solicitud.countByIdVbAndEstado((Integer)userID, 'V' as char)
         log.debug("numero de autorizados = $autorizados")
         [autorizadosInstanceList: Solicitud.findAllByIdVbAndEstado((Integer)userID, 'V' as char, params),
           autorizadosInstanceTotal: autorizados]
@@ -51,15 +43,10 @@ class SolicitudVBController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def terminadas = Solicitud.withCriteria {
-            projections {count()}
-            eq ('idVb', (Integer)userID)
-            eq ('estado', 'T' as char)
-
-        }
+        def terminadas = Solicitud.countByIdVbAndEstado((Integer)userID, 'T' as char)
         log.debug("numero de terminadas = $terminadas")
         [terminadasInstanceList: Solicitud.
-            findAllByIdAutorizaAndEstado((Integer)userID, 'T' as char, params),
+            findAllByIdVbAndEstado((Integer)userID, 'T' as char, params),
           terminadasInstanceTotal: terminadas]
     }
 

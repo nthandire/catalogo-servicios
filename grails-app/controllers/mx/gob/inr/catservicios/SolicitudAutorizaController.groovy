@@ -42,11 +42,7 @@ class SolicitudAutorizaController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def autorizables = Solicitud.withCriteria {
-            projections {count()}
-            eq ('idAutoriza', (Integer)userID)
-            eq ('estado', 'F' as char)
-        }
+        def autorizables = Solicitud.countByIdAutorizaAndEstado((Integer)userID, 'F' as char)
         log.debug("numero de autorizables = $autorizables")
         [autorizablesInstanceList: Solicitud.findAllByIdAutorizaAndEstado((Integer)userID, 'F' as char, params),
           autorizablesInstanceTotal: autorizables]
@@ -57,11 +53,7 @@ class SolicitudAutorizaController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def autorizados = Solicitud.withCriteria {
-            projections {count()}
-            eq ('idAutoriza', (Integer)userID)
-            eq ('estado', 'A' as char)
-        }
+        def autorizados = Solicitud.countByIdAutorizaAndEstado((Integer)userID, 'A' as char)
         log.debug("numero de autorizados = $autorizados")
         [autorizadosInstanceList: Solicitud.findAllByIdAutorizaAndEstado((Integer)userID, 'A' as char, params),
           autorizadosInstanceTotal: autorizados]
@@ -72,12 +64,7 @@ class SolicitudAutorizaController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def terminadas = Solicitud.withCriteria {
-            projections {count()}
-            eq ('idAutoriza', (Integer)userID)
-            eq ('estado', 'T' as char)
-
-        }
+        def terminadas = Solicitud.countByIdAutorizaAndEstado((Integer)userID, 'T' as char)
         log.debug("numero de terminadas = $terminadas")
         [terminadasInstanceList: Solicitud.
             findAllByIdAutorizaAndEstado((Integer)userID, 'T' as char, params),

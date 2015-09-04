@@ -99,3 +99,12 @@ insert into firmadigital (idusuario,passwordfirma,nombre,tipo,          tamanio,
 
 SELECT idusuario,passwordfirma,nombre,tipo,tamanio,datos,bloqueada,intentosfallidos FROM "informix"."firmadigital";
 
+SELECT * FROM usuario where idusuario >= 9580;
+
+
+
+SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo FROM usuario;
+
+
+
+SELECT * FROM firmadigital where idusuario >= 9574
