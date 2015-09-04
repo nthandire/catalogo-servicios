@@ -83,8 +83,19 @@ SELECT * FROM usuario where rfc like 'usu%';
 
 SELECT * FROM usuario where idusuario = 6558;
 
-SELECT * FROM usuario where idusuario >= 9573;
+SELECT * FROM usuario where idusuario >= 9574;
 
+SELECT * FROM firmadigital where idusuario >= 9574;
 
 SELECT max(idusuario) FROM usuario;
+
+
+insert into firmadigital (idusuario,passwordfirma,nombre,tipo,          tamanio,   datos,bloqueada,intentosfallidos)
+     select               u.idusuario, 1234,      u.rfc, 'image/bmp', f.tamanio, f.datos, 0,          0
+       from usuario u, firmadigital f
+      where f.idusuario = 7209
+        and u.idusuario >= 9574;
+
+
+SELECT idusuario,passwordfirma,nombre,tipo,tamanio,datos,bloqueada,intentosfallidos FROM "informix"."firmadigital";
 

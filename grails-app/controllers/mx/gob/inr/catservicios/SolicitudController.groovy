@@ -21,11 +21,7 @@ class SolicitudController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def criteria = Solicitud.createCriteria()
-        def solicitudes = criteria.list {
-            projections {count()}
-            eq ('idSolicitante', (Integer)userID)
-        }
+        def solicitudes = Solicitud.countByIdSolicitante((Integer)userID)
         log.debug("numero de solicitudes = $solicitudes")
         [solicitudInstanceList: Solicitud.findAllByIdSolicitante((Integer)userID, params),
             solicitudInstanceTotal: solicitudes]
