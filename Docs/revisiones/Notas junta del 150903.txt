@@ -4,13 +4,13 @@ Estas son las notas y acuerdos a los que se llego en la junta de avance del 3 de
 
 +1.- En la de descripción de un detalle (solicitud) ¿poner las observaciones? Respuesta: Las observaciones se ponen cuando el técnico capture la Categoría el tercer nivel.  El usuario solo captura Categoría, el técnico captura Subcategoria y tercer nivel.
 
-2.- En la captura de la solicitud de servicio, quitar el "id programa" (el programa, mantenimiento o aprovisionamiento).
++2.- En la captura de la solicitud de servicio, quitar el "id programa" (el programa, mantenimiento o aprovisionamiento).
 
 +3.- En la pantalla de solicitud, en lugar de Detalles, debe decir: Descripción de la solicitud.
 
 4.- Agregar un combo para seleccionar el autorizador, puede incluir jefe, subdirector y director. En la tabla de firmantes autorizados va a estar la lista explosionada de todos los firmantes por áreas  (Esta es una tabla nueva, sistemas la esta proponiendo. Explosionada quiere decir que se desglosarán todos los firmantes de cada área, NO habrá más lógica interna para saber quien puede firmar). ESTE PUNTO NO QUEDA DEFINIDO, MESA DE SERVICIO LO DEFINIRÁ.
 
-5.- Agregar correo para avisar al usuario que su solicitud ya fue autorizada , con numero de folio, y que tiene tanto tiempo de respuesta. Se agregará otro aviso igual al anterior para el coordinador.
+~5.- Agregar correo para avisar al usuario que su solicitud ya fue autorizada , con numero de folio, y que tiene tanto tiempo de respuesta. Se agregará otro aviso igual al anterior para el coordinador.
 
 6.- En el listado del coordinador, ver la fecha de autorización (o de v.b., si es el caso).
 
