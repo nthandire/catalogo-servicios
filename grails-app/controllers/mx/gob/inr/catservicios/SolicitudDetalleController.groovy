@@ -33,12 +33,19 @@ class SolicitudDetalleController {
         def solicitudDetalleInstance = new SolicitudDetalle(paramsFiltrado)
         def solicitud = Solicitud.get(params.idSolicitud)
         solicitudDetalleInstance.idSolicitud = solicitud
+        if (!solicitudDetalleInstance?.idServcat?.id) {
+            flash.error = "Debe capturar la categoría de su solicitud"
+            render(view: "create", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+            return
+        }
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "create", model: [solicitudDetalleInstance: solicitudDetalleInstance])
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
+        flash.message = message(code: 'default.created.message',
+            args: [message(code: 'solicitudDetalle.label',
+                default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
         redirect (controller: "solicitud", action:'show', id: solicitud.id)
     }
 

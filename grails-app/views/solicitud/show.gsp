@@ -107,16 +107,41 @@
 				</div>
 			</div>
 
+			<!-- Modal para firmar -->
+			<div id="myModal" class="modal hide fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="myModalLabel">Firma digital</h3>
+			  </div>
+				<g:form method="post" >
+				  <div class="modal-body">
+			  
+						<g:hiddenField name="id" value="${solicitudInstance?.id}" />
+						<g:hiddenField name="version" value="${solicitudInstance?.version}" />
+						<fieldset class="form">
+							<g:render template="formFirmar"/>
+						</fieldset>
+
+				  </div>
+						<fieldset class="buttons">
+							<g:actionSubmit class="save" action="firmarUpdate" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+						</fieldset>
+				</g:form>
+			</div>
 
 			<g:form>
 				<fieldset class="buttons">
 					<g:if test="${!solicitudInstance?.fechaSolicitud}">
 						<g:hiddenField name="id" value="${solicitudInstance?.id}" />
 						<g:link class="edit" action="edit" id="${solicitudInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-						<g:link class="edit" action="firmar" id="${solicitudInstance?.id}"><g:message code="default.button.firmar.label" default="Firmar" /></g:link>
+						<!-- Button to trigger modal -->
+						<a href="#myModal" class="edit" data-toggle="modal">Firmar</a>
 					</g:if>
 				</fieldset>
 			</g:form>
 		</div>
 	</body>
 </html>
+
+
+ 

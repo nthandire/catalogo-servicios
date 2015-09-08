@@ -97,25 +97,7 @@ class SolicitudController {
         [solicitudInstance: solicitudInstance]
     }
 
-    def firmar(Long id) {
-        def solicitudInstance = Solicitud.get(id)
-        if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
-            redirect(action: "list")
-            return
-        }
-
-        if (solicitudInstance?.detalles?.size()) {
-        } else {
-            flash.error = "La solicitud debe tener al menos un detalle para poderla firmar"
-            render(view: "show", model: [solicitudInstance: solicitudInstance])
-            return
-        }
-
-        [solicitudInstance: solicitudInstance]
-    }
-
-    def firmarUpdate(Long id) {
+    def firmarUpdate(Long id, Long version) {
         log.debug("params = $params")
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
@@ -129,6 +111,16 @@ class SolicitudController {
             flash.error = "Debe tener al menos un detalle para poderla firmar"
             render(view: "show", model: [solicitudInstance: solicitudInstance])
             return
+        }
+
+        if (version != null) {
+            if (solicitudInstance.version > version) {
+                solicitudInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                          [message(code: 'solicitud.label', default: 'Solicitud')] as Object[],
+                          "Alguien más ha modificado esta Solicitud mientras usted la estaba firmando")
+                render(view: "show", model: [solicitudInstance: solicitudInstance])
+                return
+            }
         }
 
         def userID = springSecurityService.principal.id
@@ -169,7 +161,7 @@ class SolicitudController {
             if (solicitudInstance.version > version) {
                 solicitudInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'solicitud.label', default: 'Solicitud')] as Object[],
-                          "Another user has updated this Solicitud while you were editing")
+                          "Alguien más ha modificado esta Solicitud mientras usted la estaba editando")
                 render(view: "edit", model: [solicitudInstance: solicitudInstance])
                 return
             }
