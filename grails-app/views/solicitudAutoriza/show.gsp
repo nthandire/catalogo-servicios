@@ -55,7 +55,7 @@
 
 
 			<H1>
-				<g:message code="solicitud.detalles.label" default="Detalles" />
+				<g:message code="solicitud.detalles.label" default="Descripción de la solicitud" />
 			</H1>
 			
 			<div class="row-fluid">

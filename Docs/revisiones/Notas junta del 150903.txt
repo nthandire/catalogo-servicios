@@ -1,0 +1,47 @@
+Estas son las notas y acuerdos a los que se llego en la junta de avance del 3 de septiembre.
+-----------------------------------
+
+
+1.- En la de descripción de un detalle (solicitud) ¿poner las observaciones? Respuesta: Las observaciones se ponen cuando el técnico capture la Categoría el tercer nivel.  El usuario solo captura Categoría, el técnico captura Subcategoria y tercer nivel.
+
+2.- En la captura de la solicitud de servicio, quitar el "id programa" (el programa, mantenimiento o aprovisionamiento).
+
++3.- En la pantalla de solicitud, en lugar de Detalles, debe decir: Descripción de la solicitud.
+
+4.- Agregar un combo para seleccionar el autorizador, puede incluir jefe, subdirector y director. En la tabla de firmantes autorizados va a estar la lista explosionada de todos los firmantes por áreas  (Esta es una tabla nueva, sistemas la esta proponiendo. Explosionada quiere decir que se desglosarán todos los firmantes de cada área, NO habrá más lógica interna para saber quien puede firmar). ESTE PUNTO NO QUEDA DEFINIDO, MESA DE SERVICIO LO DEFINIRÁ.
+
+5.- Agregar correo para avisar al usuario que su solicitud ya fue autorizada , con numero de folio, y que tiene tanto tiempo de respuesta. Se agregará otro aviso igual al anterior para el coordinador.
+
+6.- En el listado del coordinador, ver la fecha de autorización (o de v.b., si es el caso).
+
+7.- Una vez autorizada, el usuario ya no puede modificar la solicitud.
+
+8.- Cancelar por el autorizador. No manejamos en el sistema el motivo por el cual no lo autoriza. Una vez cancelada, la solicitud queda muerta. (ESTADO NUEVO, C = CANCELADA).
+
+9.- ¿La Mesa puede rechazar? Respuesta: No, Debe solucionarla (aunque la solución sea que no la pudo solucionar, y porque). También podrá asignara el programa, mantenimiento o aprovisionamiento.
+
+10.- El coordinador puede indicar la prioridad de un Detalle de una Solicitud. SE NECESITA UN CAMPO NUEVO EN LA BD. No se cambian los tiempos de respuesta, esto solo es un aviso interno al técnico para su atención
+
+11.- El coordinador es el que asigna la subcategoria y el tercer nivel.
+
+12.- Si el coordinador detecta que falta detalle en la descripción, usará el campo descripcion_tecnica para informar al técnico.
+
+13.- Coordinación, en lugar de "Detalles a asignar" el menú debe decir "Asignación de servicio".
+
+14.- Los coordinadores son por área, los técnicos también.
+
+15.- x - Escalar un requerimiento, Respuesta. NO APLICA EN ESTE PUNTO DEL SISTEMA (el Escalamiento se verá en Incidentes).
+
+16.- Mandar un aviso al usuario si se requirió un v.b. El texto de este aviso nos los proporcionará Mesa de Servicio.
+
+17.- Lista de personas que dan v.b. Mesa de Servicio nos explicará como se llevará esta relación de firmantes de v.b.
+
+18.- X - Campo nuevo en Categoría: Observaciones para el usuario. (similar a la plantilla). ESTO NO VA, VER EL PUNTO SIGUIENTE.
+
+19.- Mesa de servicios creará un manual en PDF de requisitos para capturar "Solicitudes de servicios". Se agregará una liga apuntando a esté manual en las pantallas que lo requieran.
+
+20.- En la pantalla de Encuesta, agregar las descripciones de lo solicitado, y las soluciones dadas.
+
+21.- En Encuesta poner mensaje de a quien se puede mandar correos con quejas y sugerencias. (Este es un requerimiento nuevo, pero no es nada costoso). Lo pondremos en el pie de todos las páginas del sistema.
+
+Es todo, solo 21 notas.

@@ -21,9 +21,28 @@ class SolicitudController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def solicitudes = Solicitud.countByIdSolicitante((Integer)userID)
+        def solicitudes = Solicitud.withCriteria {
+            projections {count()}
+            eq('idSolicitante',(Integer)userID)
+            or {
+                and {
+                    ne('estado','T' as char)
+                    ne('estado','C' as char) }
+                isNull('estado') }
+        }[0]
         log.debug("numero de solicitudes = $solicitudes")
-        [solicitudInstanceList: Solicitud.findAllByIdSolicitante((Integer)userID, params),
+        def criterio = Solicitud.createCriteria()
+        def solicitudesList = criterio.list(max:params.max, offset:params.offset) {
+            eq('idSolicitante',(Integer)userID)
+            or {
+                and {
+                    ne('estado','T' as char)
+                    ne('estado','C' as char)
+                    }
+                isNull('estado')
+                }
+        }
+        [solicitudInstanceList: solicitudesList,
             solicitudInstanceTotal: solicitudes]
     }
 

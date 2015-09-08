@@ -69,7 +69,7 @@
 
 
 			<H1>
-				<g:message code="solicitud.detalles.label" default="Detalles" />
+				<g:message code="solicitud.detalles.label" default="Descripción de la solicitud" />
 			</H1>
 			
 			<div class="row-fluid">
@@ -78,9 +78,11 @@
 						<g:each in="${solicitudInstance?.detalles?}" var="d">
 						    <li><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
 						</g:each>
-						<li class="add">
-							<g:link controller="solicitudDetalle" action="create" params="['solicitud.id': solicitudInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle')])}</g:link>
-						</li>
+						<g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'A' as char}">
+							<li class="add">
+								<g:link controller="solicitudDetalle" action="create" params="['solicitud.id': solicitudInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle')])}</g:link>
+							</li>
+						</g:if>
 					</ul>
 				</div>
 			</div>
@@ -96,9 +98,11 @@
 						<g:each in="${solicitudInstance?.archivos?}" var="a">
 						    <li><g:link controller="solicitudArchivoadjunto" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
 						</g:each>
-						<li class="add">
-							<g:link controller="solicitudArchivoadjunto" action="create" params="['solicitud.id': solicitudInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
-						</li>
+						<g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'A' as char}">
+							<li class="add">
+								<g:link controller="solicitudArchivoadjunto" action="create" params="['solicitud.id': solicitudInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
+							</li>
+						</g:if>
 					</ul>
 				</div>
 			</div>
