@@ -2,7 +2,7 @@ Estas son las notas y acuerdos a los que se llego en la junta de avance del 3 de
 -----------------------------------
 
 
-1.- En la de descripción de un detalle (solicitud) ¿poner las observaciones? Respuesta: Las observaciones se ponen cuando el técnico capture la Categoría el tercer nivel.  El usuario solo captura Categoría, el técnico captura Subcategoria y tercer nivel.
++1.- En la de descripción de un detalle (solicitud) ¿poner las observaciones? Respuesta: Las observaciones se ponen cuando el técnico capture la Categoría el tercer nivel.  El usuario solo captura Categoría, el técnico captura Subcategoria y tercer nivel.
 
 2.- En la captura de la solicitud de servicio, quitar el "id programa" (el programa, mantenimiento o aprovisionamiento).
 

@@ -46,3 +46,12 @@
 	<g:select id="idTecnico" name="idTecnico" 
 		from="${Usuario.executeQuery("from Usuario u where exists( from UsuarioRol ur where ur.usuario.id = u.id and exists ( from Rol r where r.id = ur.rol.id and r.authority = 'ROLE_TECNICO'))")}" optionKey="id" value="${solicitudDetalleInstance?.idTecnico}" class="many-to-one" noSelection="['null': '']"/>
 </div>
+
+<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcionTecnica', 'error')} ">
+  <label for="descripcionTecnica">
+    <g:message code="solicitudDetalle.descripcionTecnica.label" default="Solución" />
+    
+  </label>
+  <g:textArea name="descripcionTecnica" cols="40" rows="5" maxlength="3000"
+    value="${solicitudDetalleInstance?.descripcionTecnica}"/>
+</div>

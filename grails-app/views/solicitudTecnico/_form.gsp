@@ -41,11 +41,11 @@
 </div>
 -->
 
-<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcionTecnica', 'error')} ">
-  <label for="descripcionTecnica">
-    <g:message code="solicitudDetalle.descripcionTecnica.label" default="Solución" />
+<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'solucion', 'error')} ">
+  <label for="solucion">
+    <g:message code="solicitudDetalle.solucion.label" default="Solución" />
     
   </label>
-  <g:textArea name="descripcionTecnica" cols="40" rows="5" maxlength="3000"
-    value="${solicitudDetalleInstance?.descripcionTecnica}"/>
+  <g:textArea name="solucion" cols="40" rows="5" maxlength="3000"
+    value="${solicitudDetalleInstance?.solucion}"/>
 </div>
