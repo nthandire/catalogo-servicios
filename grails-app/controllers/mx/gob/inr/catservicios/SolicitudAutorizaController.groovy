@@ -163,17 +163,22 @@ class SolicitudAutorizaController {
             return
         }
 
-/* TODO: habilitar cuando no este en desarrollo
-        def idUsuario = springSecurityService.principal.id
-        def personasInstance = Usuario.get(idUsuario)
-        sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
-          subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " + 
-            "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
-            "pronto seras contactado con relación a el\n"
+        def idUsuario = solicitudInstance.idSolicitante
+        def persona = Usuario.get(idUsuario)
+        /*
+        def tiempo = 0
+        def unidad = 0
+        SolicitudDetalle.findAllByIdSolicitud(solicitudInstance).each{
+          if (it.) // TODO: mesa de servicio nos dira si ponemos el tiempo y como
         }
-*/
+        */
+        sendMail {
+          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       persona.email
+          subject "Solicitud ${solicitudInstance.toString()} ya fue autorizada"
+          body "Hola ${persona.username}\n\nSu solicitud folio " + 
+            "${solicitudInstance.toString()} (${solicitudInstance.justificacion}) "+ 
+            "ya fue autorizada, pronto tendras respuestas a tu solicitud."
+        }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
