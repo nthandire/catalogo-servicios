@@ -14,7 +14,7 @@ Estas son las notas y acuerdos a los que se llego en la junta de avance del 3 de
 
 + 6.- En el listado del coordinador, ver la fecha de autorización (o de v.b., si es el caso).
 
-7.- Una vez autorizada, el usuario ya no puede modificar la solicitud.
++ 7.- Una vez autorizada, el usuario ya no puede modificar la solicitud.
 
 8.- Cancelar por el autorizador. No manejamos en el sistema el motivo por el cual no lo autoriza. Una vez cancelada, la solicitud queda muerta. (ESTADO NUEVO, C = CANCELADA).
 

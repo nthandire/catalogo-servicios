@@ -78,7 +78,7 @@
 						<g:each in="${solicitudInstance?.detalles?}" var="d">
 						    <li><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
 						</g:each>
-						<g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'A' as char}">
+						<g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
 							<li class="add">
 								<g:link controller="solicitudDetalle" action="create" params="['solicitud.id': solicitudInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle')])}</g:link>
 							</li>
