@@ -72,7 +72,7 @@
 -				<div class="span10 offset1">
 					<ul class="one-to-many">
 						<g:each in="${solicitudInstance?.detalles?}" var="d">
-						    <li><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
+							<li><g:link action="showDetalle" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
 						</g:each>
 					</ul>
 				</div>
@@ -87,7 +87,7 @@
 -				<div class="span10 offset1">
 					<ul class="one-to-many">
 						<g:each in="${solicitudInstance?.archivos?}" var="a">
-						    <li><g:link controller="solicitudArchivoadjunto" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+							<li><g:link action="showArchivo" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
 						</g:each>
 					</ul>
 				</div>

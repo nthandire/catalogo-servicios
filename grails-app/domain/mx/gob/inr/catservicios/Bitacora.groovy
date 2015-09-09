@@ -17,7 +17,6 @@ class Bitacora {
     id column:'id_bitacora'
     estadoBitacora length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     version false
-    datasource "catServ"
   } 
 
   String toString() {

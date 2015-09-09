@@ -16,14 +16,14 @@ dataSource {
     password = "informix"
     pooled = true
 }
-dataSource_catServ {
-    pooled = true
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
-    dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-    url = "jdbc:h2:catServDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-}
+// dataSource_catServ {
+//     pooled = true
+//     driverClassName = "org.h2.Driver"
+//     username = "sa"
+//     password = ""
+//     dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+//     url = "jdbc:h2:catServDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+// }
 // dataSource_seguridad {
 //     pooled = false
 //     driverClassName = "org.h2.Driver"
@@ -59,7 +59,7 @@ hibernate {
 environments {
     development {
       dataSource {}
-      dataSource_catServ {}
+      // dataSource_catServ {}
       dataSource_seguridad {}
       dataSource_almacen {}
     }

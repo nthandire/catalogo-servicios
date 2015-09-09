@@ -18,7 +18,6 @@ class MonitoreoDetalle {
     estado length: 1, columnDefinition: 'char(1)',
       defaultValue: "'A'"
     version false
-   datasource "catServ"
   } 
 
   String toString() {

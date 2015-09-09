@@ -110,6 +110,28 @@ class SolicitudCoordinadorController {
         [solicitudInstance: solicitudInstance]
     }
 
+    def showDetalle(Long id) {
+        def solicitudDetalleInstance = SolicitudDetalle.get(id)
+        if (!solicitudDetalleInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [solicitudDetalleInstance: solicitudDetalleInstance]
+    }
+
+    def showArchivo(Long id) {
+        def solicitudArchivoadjuntoInstance = SolicitudArchivoadjunto.get(id)
+        if (!solicitudArchivoadjuntoInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance]
+    }
+
     def showNoFirma(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
