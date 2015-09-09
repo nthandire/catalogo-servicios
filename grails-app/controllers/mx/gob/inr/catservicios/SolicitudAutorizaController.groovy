@@ -94,6 +94,14 @@ class SolicitudAutorizaController {
     }
 
     def firmarUpdate(Long id, Long version) {
+      comandoUpdate(id, version, 'A' as char)
+    }
+
+    def cancelaUpdate(Long id, Long version) {
+      comandoUpdate(id, version, 'C' as char)
+    }
+
+    def comandoUpdate(Long id, Long version, char estado) {
         log.debug("params = $params")
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
@@ -127,28 +135,30 @@ class SolicitudAutorizaController {
         }
 
         solicitudInstance.fechaAutoriza = new Date()
-        solicitudInstance.estado = 'A' as char
+        solicitudInstance.estado = estado
 
         // Asignarle el siguiente folio dentro del año
-        def startDate = new Date().clearTime()
-        startDate[Calendar.MONTH] = 0
-        startDate[Calendar.DATE] = 1
-        log.debug("startDate = $startDate")
-        def endDate = startDate.clone()
-        use(TimeCategory) {
-          endDate = endDate + 1.years - 1.seconds
-        }
-        log.debug("endDate = $endDate")
-
-        def maxID = Solicitud.withCriteria { // TODO: un test para ver si este algoritmo sique funcionando
-          between("fechaAutoriza", startDate, endDate)
-          projections {
-            max "numeroSolicitud"
+        if (estado == 'A' as char) {
+          def startDate = new Date().clearTime()
+          startDate[Calendar.MONTH] = 0
+          startDate[Calendar.DATE] = 1
+          log.debug("startDate = $startDate")
+          def endDate = startDate.clone()
+          use(TimeCategory) {
+            endDate = endDate + 1.years - 1.seconds
           }
-        }[0] ?: 0
-        log.debug("maxID = $maxID")
+          log.debug("endDate = $endDate")
 
-        solicitudInstance.numeroSolicitud = ++maxID
+          def maxID = Solicitud.withCriteria { // TODO: un test para ver si este algoritmo sique funcionando
+            between("fechaAutoriza", startDate, endDate)
+            projections {
+              max "numeroSolicitud"
+            }
+          }[0] ?: 0
+          log.debug("maxID = $maxID")
+
+          solicitudInstance.numeroSolicitud = ++maxID
+        }
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "show", model: [solicitudInstance: solicitudInstance])
@@ -164,12 +174,23 @@ class SolicitudAutorizaController {
           if (it.) // TODO: mesa de servicio nos dira si ponemos el tiempo y como
         }
         */
-        sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       persona.email
-          subject "Solicitud ${solicitudInstance.toString()} ya fue autorizada"
-          body "Hola ${persona.username}\n\nSu solicitud folio " + 
+        def asunto = (estado == 'A' as char) ?
+          "La solicitud ${solicitudInstance.toString()} ya fue autorizada"
+          :
+          "La solicitud ${solicitudInstance.toString()} fue cancelada"
+        def msg = (estado == 'A' as char) ?
+          "Hola ${persona.username}\n\nSu solicitud folio " + 
             "${solicitudInstance.toString()} (${solicitudInstance.justificacion}) "+ 
             "ya fue autorizada, pronto tendras respuestas a tu solicitud."
+          :
+          "Hola ${persona.username}\n\nSu solicitud " + 
+            "(${solicitudInstance.justificacion}) "+ 
+            "fue cancelada, investigue con su autorizador el motivo."
+
+        sendMail {
+          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       persona.email
+          subject asunto
+          body msg
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])

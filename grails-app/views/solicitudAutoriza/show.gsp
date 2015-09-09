@@ -105,11 +105,34 @@
 				</g:form>
 			</div>
 
+			<!-- Modal para Cancelar -->
+			<div id="myModalCancelar" class="modal hide fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="myModalLabel">Firma digital</h3>
+			  </div>
+				<g:form method="post" >
+				  <div class="modal-body">
+			  
+						<g:hiddenField name="id" value="${solicitudInstance?.id}" />
+						<g:hiddenField name="version" value="${solicitudInstance?.version}" />
+						<fieldset class="form">
+							<g:render template="formFirmar"/>
+						</fieldset>
+
+				  </div>
+						<fieldset class="buttons">
+							<g:actionSubmit class="save" action="cancelaUpdate" value="Cancelar solicitud" />
+						</fieldset>
+				</g:form>
+			</div>
+
 			<g:form>
 				<fieldset class="buttons">
 					<g:if test="${solicitudInstance?.estado == 'F' as char}">
 						<!-- Button to trigger modal -->
 						<a href="#myModal" class="edit" data-toggle="modal">Autorizar</a>
+						<a href="#myModalCancelar" class="edit" data-toggle="modal">Cancelar</a>
 					</g:if>
 				</fieldset>
 			</g:form>
