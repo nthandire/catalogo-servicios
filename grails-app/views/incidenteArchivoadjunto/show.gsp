@@ -75,11 +75,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${incidenteArchivoadjuntoInstance?.fechaModificacion}">
+				<g:if test="${incidenteArchivoadjuntoInstance?.lastUpdated}">
 				<li class="fieldcontain">
-					<span id="fechaModificacion-label" class="property-label"><g:message code="incidenteArchivoadjunto.fechaModificacion.label" default="Fecha Modificacion" /></span>
+					<span id="lastUpdated-label" class="property-label"><g:message code="incidenteArchivoadjunto.lastUpdated.label" default="Fecha Modificacion" /></span>
 					
-						<span class="property-value" aria-labelledby="fechaModificacion-label"><g:formatDate date="${incidenteArchivoadjuntoInstance?.fechaModificacion}" /></span>
+						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${incidenteArchivoadjuntoInstance?.lastUpdated}" /></span>
 					
 				</li>
 				</g:if>

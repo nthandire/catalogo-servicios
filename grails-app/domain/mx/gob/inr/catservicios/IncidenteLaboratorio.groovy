@@ -19,11 +19,12 @@ class IncidenteLaboratorio {
 	Date fechaReparacion
 	String tecnico
 	String observaciones
-	Date fechaModificacion
+	Date lastUpdated
 	String ipTerminal
 
 	static mapping = {
 		id column: "id_laboratorio", generator: "increment"
+		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 	}
 
@@ -45,7 +46,7 @@ class IncidenteLaboratorio {
 		fechaReparacion nullable: true
 		tecnico nullable: true
 		observaciones nullable: true, maxSize: 2000
-		fechaModificacion nullable: true
+		lastUpdated nullable: true
 		ipTerminal nullable: true, maxSize: 15
 	}
 }

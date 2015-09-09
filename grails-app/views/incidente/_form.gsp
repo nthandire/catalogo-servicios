@@ -278,12 +278,12 @@
 	<g:field name="idPrograma" type="number" value="${incidenteInstance.idPrograma}"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'fechaModificacion', 'error')} ">
-	<label for="fechaModificacion">
-		<g:message code="incidente.fechaModificacion.label" default="Fecha Modificacion" />
+<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'lastUpdated', 'error')} ">
+	<label for="lastUpdated">
+		<g:message code="incidente.lastUpdated.label" default="Fecha Modificacion" />
 		
 	</label>
-	<g:datePicker name="fechaModificacion" precision="day"  value="${incidenteInstance?.fechaModificacion}" default="none" noSelection="['': '']" />
+	<g:datePicker name="lastUpdated" precision="day"  value="${incidenteInstance?.lastUpdated}" default="none" noSelection="['': '']" />
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'ipTerminal', 'error')} ">

@@ -16,7 +16,7 @@ class ResguardoEntregaDetalle {
 	Date fechaBaja
 	Integer idEmpleado
 	Integer idUsuario
-	Date fechaModificacion
+	Date lastUpdated
 	String ipTerminal
 	Long idMarca
 	String desModelo
@@ -26,6 +26,7 @@ class ResguardoEntregaDetalle {
 	static mapping = {
 		id column: "id_resguardoentregadetalle", generator: "increment"
 		idResguardo column: "id_resguardo"
+		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 		datasource "almacen"
 	}
@@ -43,7 +44,7 @@ class ResguardoEntregaDetalle {
 		fechaBaja nullable: true
 		idEmpleado nullable: true
 		idUsuario nullable: true
-		fechaModificacion nullable: true
+		lastUpdated nullable: true
 		ipTerminal nullable: true, maxSize: 15
 		idMarca nullable: true
 		desModelo nullable: true, maxSize: 50

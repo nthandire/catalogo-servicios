@@ -329,11 +329,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${incidenteInstance?.fechaModificacion}">
+				<g:if test="${incidenteInstance?.lastUpdated}">
 				<li class="fieldcontain">
-					<span id="fechaModificacion-label" class="property-label"><g:message code="incidente.fechaModificacion.label" default="Fecha Modificacion" /></span>
+					<span id="lastUpdated-label" class="property-label"><g:message code="incidente.lastUpdated.label" default="Fecha Modificacion" /></span>
 					
-						<span class="property-value" aria-labelledby="fechaModificacion-label"><g:formatDate date="${incidenteInstance?.fechaModificacion}" /></span>
+						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${incidenteInstance?.lastUpdated}" /></span>
 					
 				</li>
 				</g:if>

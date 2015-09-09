@@ -1,3 +1,44 @@
+idusuario rfc
+6558  SAIH940101
+9574  usuario1
+9575  usuario2
+9576  usuario3
+9577  usuario4
+9578  usuario5
+9579  usuario6
+9580  usuario7
+9581  usuario8
+9582  usuario9
+9583  coordinador
+9584  tecnico1
+9585  tecnico2
+9586  admin
+
+idusuario idperfil
+6558  57
+9586  57
+9574  58
+9575  58
+9576  58
+9577  58
+9578  58
+9579  58
+9580  58
+9581  58
+9582  58
+9584  59
+9585  59
+9583  60
+
+idperfil  desc_perfil perfil_bi
+56  ROLE_SAST_COORDINADOR false
+57  ROLE_SAST_ADMIN false
+58  ROLE_SAST_USUARIO false
+59  ROLE_SAST_TECNICO false
+60  ROLE_SAST_COORDINADOR_DE_GESTION  false
+
+
+
 Logos
 - original 102 x 137
 - nuevo     83 x 104

@@ -4,7 +4,7 @@ import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
-@Secured(['ROLE_USUARIO'])
+@Secured(['ROLE_SAST_USUARIO'])
 class SolicitudAutorizaController {
     def springSecurityService
     static nombreMenu = "Autoriza"
@@ -91,6 +91,17 @@ class SolicitudAutorizaController {
         }
 
         [solicitudDetalleInstance: solicitudDetalleInstance]
+    }
+
+    def showArchivo(Long id) {
+        def solicitudArchivoadjuntoInstance = SolicitudArchivoadjunto.get(id)
+        if (!solicitudArchivoadjuntoInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance]
     }
 
     def firmarUpdate(Long id, Long version) {

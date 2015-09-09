@@ -12,11 +12,12 @@ class Problema {
 	Date fechaSolucion
 	String resolvio
 	Integer idUsuario
-	Date fechaModificacion
+	Date lastUpdated
 	String ipTerminal
 
 	static mapping = {
 		id name: "idProblema", generator: "increment"
+		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 	}
 
@@ -31,7 +32,7 @@ class Problema {
 		fechaSolucion nullable: true
 		resolvio nullable: true
 		idUsuario nullable: true
-		fechaModificacion nullable: true
+		lastUpdated nullable: true
 		ipTerminal nullable: true, maxSize: 15
 	}
 }

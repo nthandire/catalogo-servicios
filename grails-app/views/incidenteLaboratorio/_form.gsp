@@ -142,12 +142,12 @@
 	<g:textArea name="observaciones" cols="40" rows="5" maxlength="2000" value="${incidenteLaboratorioInstance?.observaciones}"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteLaboratorioInstance, field: 'fechaModificacion', 'error')} ">
-	<label for="fechaModificacion">
-		<g:message code="incidenteLaboratorio.fechaModificacion.label" default="Fecha Modificacion" />
+<div class="fieldtablecontain ${hasErrors(bean: incidenteLaboratorioInstance, field: 'lastUpdated', 'error')} ">
+	<label for="lastUpdated">
+		<g:message code="incidenteLaboratorio.lastUpdated.label" default="Fecha Modificacion" />
 		
 	</label>
-	<g:datePicker name="fechaModificacion" precision="day"  value="${incidenteLaboratorioInstance?.fechaModificacion}" default="none" noSelection="['': '']" />
+	<g:datePicker name="lastUpdated" precision="day"  value="${incidenteLaboratorioInstance?.lastUpdated}" default="none" noSelection="['': '']" />
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteLaboratorioInstance, field: 'ipTerminal', 'error')} ">

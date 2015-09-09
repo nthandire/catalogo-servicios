@@ -16,7 +16,7 @@ class SolicitudArchivoadjunto {
 		id generator: "increment"
 		tamaño column: "tamanio"
 		idSolicitud column: "id_solicitud"
-		lastUpdated column: "fechaModificacion"
+		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 	}
 

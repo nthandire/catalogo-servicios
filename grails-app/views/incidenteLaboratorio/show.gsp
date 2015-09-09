@@ -176,11 +176,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${incidenteLaboratorioInstance?.fechaModificacion}">
+				<g:if test="${incidenteLaboratorioInstance?.lastUpdated}">
 				<li class="fieldcontain">
-					<span id="fechaModificacion-label" class="property-label"><g:message code="incidenteLaboratorio.fechaModificacion.label" default="Fecha Modificacion" /></span>
+					<span id="lastUpdated-label" class="property-label"><g:message code="incidenteLaboratorio.lastUpdated.label" default="Fecha Modificacion" /></span>
 					
-						<span class="property-value" aria-labelledby="fechaModificacion-label"><g:formatDate date="${incidenteLaboratorioInstance?.fechaModificacion}" /></span>
+						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${incidenteLaboratorioInstance?.lastUpdated}" /></span>
 					
 				</li>
 				</g:if>

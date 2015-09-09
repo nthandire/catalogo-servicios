@@ -8,11 +8,12 @@ class IncidenteArchivoadjunto {
 	Integer tamanio
 	String tipo
 	Integer idUsuario
-	Date fechaModificacion
+	Date lastUpdated
 	String ipTerminal
 
 	static mapping = {
 		id generator: "increment"
+		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 	}
 
@@ -23,7 +24,7 @@ class IncidenteArchivoadjunto {
 		tamanio nullable: true
 		tipo nullable: true, maxSize: 20
 		idUsuario nullable: true
-		fechaModificacion nullable: true
+		lastUpdated nullable: true
 		ipTerminal nullable: true, maxSize: 15
 	}
 }

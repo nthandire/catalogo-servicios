@@ -113,11 +113,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${problemaInstance?.fechaModificacion}">
+				<g:if test="${problemaInstance?.lastUpdated}">
 				<li class="fieldcontain">
-					<span id="fechaModificacion-label" class="property-label"><g:message code="problema.fechaModificacion.label" default="Fecha Modificacion" /></span>
+					<span id="lastUpdated-label" class="property-label"><g:message code="problema.lastUpdated.label" default="Fecha Modificacion" /></span>
 					
-						<span class="property-value" aria-labelledby="fechaModificacion-label"><g:formatDate date="${problemaInstance?.fechaModificacion}" /></span>
+						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${problemaInstance?.lastUpdated}" /></span>
 					
 				</li>
 				</g:if>

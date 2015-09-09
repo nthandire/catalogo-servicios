@@ -36,11 +36,12 @@ class Incidente {
 	Integer p03
 	Integer p04
 	Integer idPrograma
-	Date fechaModificacion
+	Date lastUpdated
 	String ipTerminal
 
 	static mapping = {
 		id column: "id_incidente", generator: "increment"
+		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 	}
 
@@ -79,7 +80,7 @@ class Incidente {
 		p03 nullable: true
 		p04 nullable: true
 		idPrograma nullable: true
-		fechaModificacion nullable: true
+		lastUpdated nullable: true
 		ipTerminal nullable: true, maxSize: 15
 	}
 }

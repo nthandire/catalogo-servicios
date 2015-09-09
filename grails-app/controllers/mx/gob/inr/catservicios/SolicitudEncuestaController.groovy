@@ -4,7 +4,7 @@ import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
-@Secured(['ROLE_USUARIO'])
+@Secured(['ROLE_SAST_USUARIO'])
 class SolicitudEncuestaController {
     def springSecurityService
     static nombreMenu = "Encuesta"

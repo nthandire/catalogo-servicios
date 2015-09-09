@@ -54,12 +54,12 @@
 	<g:field name="idUsuario" type="number" value="${incidenteArchivoadjuntoInstance.idUsuario}"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteArchivoadjuntoInstance, field: 'fechaModificacion', 'error')} ">
-	<label for="fechaModificacion">
-		<g:message code="incidenteArchivoadjunto.fechaModificacion.label" default="Fecha Modificacion" />
+<div class="fieldtablecontain ${hasErrors(bean: incidenteArchivoadjuntoInstance, field: 'lastUpdated', 'error')} ">
+	<label for="lastUpdated">
+		<g:message code="incidenteArchivoadjunto.lastUpdated.label" default="Fecha Modificacion" />
 		
 	</label>
-	<g:datePicker name="fechaModificacion" precision="day"  value="${incidenteArchivoadjuntoInstance?.fechaModificacion}" default="none" noSelection="['': '']" />
+	<g:datePicker name="lastUpdated" precision="day"  value="${incidenteArchivoadjuntoInstance?.lastUpdated}" default="none" noSelection="['': '']" />
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteArchivoadjuntoInstance, field: 'ipTerminal', 'error')} ">

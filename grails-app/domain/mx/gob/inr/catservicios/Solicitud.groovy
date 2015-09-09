@@ -23,7 +23,7 @@ class Solicitud {
 	static mapping = {
 		id column: "id_solicitud", generator: "increment"
 		estado column: "estado_solicitud"
-		lastUpdated column: "fechaModificacion"
+		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 	}
 

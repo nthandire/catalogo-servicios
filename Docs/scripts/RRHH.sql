@@ -75,6 +75,9 @@ select * from perfil where idperfil = 57;
 update perfil set desc_perfil = 'ROLE_COORDINADOR' where idperfil = 56;
 select * from perfil where idperfil = 56;
 
+select * from perfil where desc_perfil like 'ROLE_%';
+
+select * from perfil where idperfil = 56;
 
 
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo FROM "informix"."usuario";
@@ -108,3 +111,48 @@ SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,c
 
 
 SELECT * FROM firmadigital where idusuario >= 9574
+
+
+
+
+
+---------------------------------
+
+
+SELECT * FROM usuario where idusuario >= 9574
+
+select * from perfil where idperfil >= 56
+
+
+update perfil set desc_perfil = 'ROLE_SAST_COORDINADOR' where idperfil = 56;
+
+update perfil set desc_perfil = 'ROLE_SAST_ADMIN' where idperfil = 57;
+update perfil set desc_perfil = 'ROLE_SAST_USUARIO' where idperfil = 58;
+update perfil set desc_perfil = 'ROLE_SAST_TECNICO' where idperfil = 59;
+
+insert into perfil (idperfil,desc_perfil,perfil_bi)
+            values (60, 'ROLE_SAST_COORDINADOR_DE_GESTION', 'f')
+
+
+SELECT idperfil,desc_perfil,perfil_bi FROM "informix"."perfil";
+
+
+select * from usuario_perfil where idperfil >= 56
+
+select idusuario, rfc from usuario u
+ where exists (
+   select * from usuario_perfil up
+    where up.idusuario = u.idusuario
+      and exists (
+        select * from perfil p
+         where p.idperfil = up.idperfil
+           and p.idperfil >= 56))
+         
+
+
+
+
+
+
+
+

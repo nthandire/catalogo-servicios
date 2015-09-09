@@ -14,7 +14,7 @@ class ResguardoEntrega {
 	String recibe
 	Long idEntradadetalle
 	Integer numeroResguardoentrega
-	Date fechaModificacion
+	Date lastUpdated
 	Integer umis
 	Integer idPais
 	Long idBienes
@@ -27,6 +27,7 @@ class ResguardoEntrega {
 
 	static mapping = {
 		id column: "id_resguardo", generator: "increment"
+		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 		datasource "almacen"
 	}
@@ -42,7 +43,7 @@ class ResguardoEntrega {
 		idEvatecno nullable: true
 		nombreEntrega nullable: true, maxSize: 150
 		recibe nullable: true, maxSize: 250
-		fechaModificacion nullable: true
+		lastUpdated nullable: true
 		umis nullable: true
 		idPais nullable: true
 		idBienes nullable: true
