@@ -4,35 +4,32 @@ import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
-@Secured(['ROLE_SAST_COORDINADOR'])
-class SolicitudCoordinadorController {
+@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION'])
+class SolicitudGestionController {
     def springSecurityService
-    static nombreMenu = "Coordinación"
-    static ordenMenu = 20
+    static nombreMenu = "Mesa de servicio"
+    static ordenMenu = 88
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
-        redirect(action: "listDetalle", params: params)
+        redirect(action: "list", params: params)
     }
 
-    def listDetalle(Integer max) {
+    def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
         def query = 
-            "  from SolicitudDetalle d             " +
-            " where idTecnico is null              " +
-            "   and exists                         " +
-            "      ( from Solicitud s              " +
-            "       where s.id = d.idSolicitud     " +
-            "         and s.estado = 'R')          "
-        def detalles = SolicitudDetalle.executeQuery (
-              "select count (*) " + query
-            )[0]
-        log.debug("numero de detalles = ${detalles}")
-        [solicitudDetalleInstanceList: SolicitudDetalle.
-            executeQuery(query, [], params),
-            solicitudDetalleInstanceTotal: detalles]
+            "  from Solicitud              " +
+            " where (estado = 'A'          " +
+            "        and idVb is null)     " +
+            "    or  estado = 'V'          "
+        def autorizados = Solicitud.executeQuery (
+          "select count (*) " + query
+        )[0]
+        log.debug("numero de autorizados = ${autorizados}")
+        [autorizadosInstanceList: Solicitud.executeQuery(query, [], params),
+            autorizadosInstanceTotal: autorizados]
     }
 
     def listAsignados(Integer max) {

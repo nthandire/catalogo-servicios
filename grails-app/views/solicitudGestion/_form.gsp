@@ -47,11 +47,11 @@
 		from="${Usuario.executeQuery("from Usuario u where exists( from UsuarioRol ur where ur.usuario.id = u.id and exists ( from Rol r where r.id = ur.rol.id and r.authority = 'ROLE_TECNICO'))")}" optionKey="id" value="${solicitudDetalleInstance?.idTecnico}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'solucion', 'error')} ">
-  <label for="solucion">
-    <g:message code="solicitudDetalle.solucion.label" default="Solución" />
+<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcionTecnica', 'error')} ">
+  <label for="descripcionTecnica">
+    <g:message code="solicitudDetalle.descripcionTecnica.label" default="Descripción Técnica" />
     
   </label>
-  <g:textArea name="solucion" cols="40" rows="5" maxlength="3000"
-    value="${solicitudDetalleInstance?.solucion}"/>
+  <g:textArea name="descripcionTecnica" cols="40" rows="5" maxlength="3000"
+    value="${solicitudDetalleInstance?.descripcionTecnica}"/>
 </div>

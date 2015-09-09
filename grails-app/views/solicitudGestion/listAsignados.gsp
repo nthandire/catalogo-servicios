@@ -12,13 +12,13 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="listDetalle">Detalles a asignar</g:link></li>
+				<li><g:link class="list" action="list">Solicitudes a revisar</g:link></li>
 				<li><g:link class="list" action="listAsignados">Solicitudes asignadas</g:link></li>
 				<li><g:link class="list" action="listTerminadas">Solicitudes termindadas</g:link></li>
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Solicitudes terminadas</h1>
+			<h1>Solicitudes asignadas</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -37,7 +37,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${terminadasInstanceList}" status="i" var="solicitudInstance">
+				<g:each in="${asignadosInstanceList}" status="i" var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
@@ -53,7 +53,7 @@
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${terminadasInstanceTotal}" />
+				<g:paginate total="${asignadosInstanceTotal}" />
 			</div>
 		</div>
 	</body>
