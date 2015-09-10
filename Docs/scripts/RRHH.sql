@@ -133,6 +133,9 @@ update perfil set desc_perfil = 'ROLE_SAST_TECNICO' where idperfil = 59;
 insert into perfil (idperfil,desc_perfil,perfil_bi)
             values (60, 'ROLE_SAST_COORDINADOR_DE_GESTION', 'f')
 
+insert into perfil (idperfil,desc_perfil,perfil_bi)
+            values (61, 'ROLE_SAST_TECNICO_MESA_SERVICIO', 'f')
+
 
 SELECT idperfil,desc_perfil,perfil_bi FROM "informix"."perfil";
 
@@ -151,8 +154,56 @@ select idusuario, rfc from usuario u
 
 
 
+select * from usuario_perfil where idusuario = 9583
+
+update usuario_perfil set idperfil = 60 where idusuario = 9583
+
+
+INSERT INTO usuario_perfil 
+        (idusuario, idperfil)
+ VALUES (9580, 56);
+INSERT INTO usuario_perfil 
+        (idusuario, idperfil)
+ VALUES (9581, 56);
 
 
 
 
+select u.idusuario, u.rfc, p.desc_perfil, p.idperfil 
+  from usuario u,
+       usuario_perfil up,
+       perfil p
+ where p.idperfil >= 56
+   --and u.idusuario in (9584,9585,6558,9586,9583)
+   and p.idperfil = up.idperfil
+   and up.idusuario = u.idusuario
 
+
+select *
+  from usuario u
+ where u.idusuario in (9584,9585,6558,9586,9583)
+
+
+select * from usuario_perfil where idusuario = 9584;
+
+INSERT INTO usuario_perfil 
+        (idusuario, idperfil)
+ VALUES (6558, 58);
+ 
+INSERT INTO usuario_perfil 
+        (idusuario, idperfil)
+ VALUES (9584, 58);
+ 
+INSERT INTO usuario_perfil 
+        (idusuario, idperfil)
+ VALUES (9585, 58);
+INSERT INTO usuario_perfil 
+        (idusuario, idperfil)
+ VALUES (9586, 58);
+INSERT INTO usuario_perfil 
+        (idusuario, idperfil)
+ VALUES (9583, 58);
+
+INSERT INTO usuario_perfil 
+        (idusuario, idperfil)
+ VALUES (9582, 61);
