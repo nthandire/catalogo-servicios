@@ -24,7 +24,7 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="idSistema" title="${message(code: 'incidente.idSistema.label', default: 'Id Sistema')}" />
+						<th><g:message code="incidente.idSistema.label" default="Id Sistema" /></th>
 					
 						<g:sortableColumn property="idResguardoentregadetalle" title="${message(code: 'incidente.idResguardoentregadetalle.label', default: 'Id Resguardoentregadetalle')}" />
 					
@@ -32,7 +32,7 @@
 					
 						<g:sortableColumn property="numeroIncidente" title="${message(code: 'incidente.numeroIncidente.label', default: 'Numero Incidente')}" />
 					
-						<g:sortableColumn property="estadoIncidente" title="${message(code: 'incidente.estadoIncidente.label', default: 'Estado Incidente')}" />
+						<g:sortableColumn property="estado" title="${message(code: 'incidente.estado.label', default: 'Estado')}" />
 					
 						<g:sortableColumn property="idReporta" title="${message(code: 'incidente.idReporta.label', default: 'Id Reporta')}" />
 					
@@ -50,7 +50,7 @@
 					
 						<td>${fieldValue(bean: incidenteInstance, field: "numeroIncidente")}</td>
 					
-						<td>${fieldValue(bean: incidenteInstance, field: "estadoIncidente")}</td>
+						<td>${fieldValue(bean: incidenteInstance, field: "estado")}</td>
 					
 						<td>${fieldValue(bean: incidenteInstance, field: "idReporta")}</td>
 					

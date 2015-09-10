@@ -27,7 +27,7 @@
 				<li class="fieldcontain">
 					<span id="idSistema-label" class="property-label"><g:message code="incidente.idSistema.label" default="Id Sistema" /></span>
 					
-						<span class="property-value" aria-labelledby="idSistema-label"><g:fieldValue bean="${incidenteInstance}" field="idSistema"/></span>
+						<span class="property-value" aria-labelledby="idSistema-label"><g:link controller="catSistema" action="show" id="${incidenteInstance?.idSistema?.id}">${incidenteInstance?.idSistema?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -59,11 +59,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${incidenteInstance?.estadoIncidente}">
+				<g:if test="${incidenteInstance?.estado}">
 				<li class="fieldcontain">
-					<span id="estadoIncidente-label" class="property-label"><g:message code="incidente.estadoIncidente.label" default="Estado Incidente" /></span>
+					<span id="estado-label" class="property-label"><g:message code="incidente.estado.label" default="Estado" /></span>
 					
-						<span class="property-value" aria-labelledby="estadoIncidente-label"><g:fieldValue bean="${incidenteInstance}" field="estadoIncidente"/></span>
+						<span class="property-value" aria-labelledby="estado-label"><g:fieldValue bean="${incidenteInstance}" field="estado"/></span>
 					
 				</li>
 				</g:if>
@@ -81,7 +81,7 @@
 				<li class="fieldcontain">
 					<span id="idServ-label" class="property-label"><g:message code="incidente.idServ.label" default="Id Serv" /></span>
 					
-						<span class="property-value" aria-labelledby="idServ-label"><g:fieldValue bean="${incidenteInstance}" field="idServ"/></span>
+						<span class="property-value" aria-labelledby="idServ-label"><g:link controller="cat_serv" action="show" id="${incidenteInstance?.idServ?.id}">${incidenteInstance?.idServ?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -90,7 +90,7 @@
 				<li class="fieldcontain">
 					<span id="idServfinal-label" class="property-label"><g:message code="incidente.idServfinal.label" default="Id Servfinal" /></span>
 					
-						<span class="property-value" aria-labelledby="idServfinal-label"><g:fieldValue bean="${incidenteInstance}" field="idServfinal"/></span>
+						<span class="property-value" aria-labelledby="idServfinal-label"><g:link controller="cat_serv" action="show" id="${incidenteInstance?.idServfinal?.id}">${incidenteInstance?.idServfinal?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -117,7 +117,7 @@
 				<li class="fieldcontain">
 					<span id="idServresp-label" class="property-label"><g:message code="incidente.idServresp.label" default="Id Servresp" /></span>
 					
-						<span class="property-value" aria-labelledby="idServresp-label"><g:fieldValue bean="${incidenteInstance}" field="idServresp"/></span>
+						<span class="property-value" aria-labelledby="idServresp-label"><g:link controller="cat_servResp" action="show" id="${incidenteInstance?.idServresp?.id}">${incidenteInstance?.idServresp?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -324,14 +324,14 @@
 				<li class="fieldcontain">
 					<span id="idPrograma-label" class="property-label"><g:message code="incidente.idPrograma.label" default="Id Programa" /></span>
 					
-						<span class="property-value" aria-labelledby="idPrograma-label"><g:fieldValue bean="${incidenteInstance}" field="idPrograma"/></span>
+						<span class="property-value" aria-labelledby="idPrograma-label"><g:link controller="catPrograma" action="show" id="${incidenteInstance?.idPrograma?.id}">${incidenteInstance?.idPrograma?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
 			
 				<g:if test="${incidenteInstance?.lastUpdated}">
 				<li class="fieldcontain">
-					<span id="lastUpdated-label" class="property-label"><g:message code="incidente.lastUpdated.label" default="Fecha Modificacion" /></span>
+					<span id="lastUpdated-label" class="property-label"><g:message code="incidente.lastUpdated.label" default="Last Updated" /></span>
 					
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${incidenteInstance?.lastUpdated}" /></span>
 					

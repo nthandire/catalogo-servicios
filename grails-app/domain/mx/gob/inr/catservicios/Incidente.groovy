@@ -2,17 +2,17 @@ package mx.gob.inr.catservicios
 
 class Incidente {
 
-	Integer idSistema
+	CatSistema idSistema
 	Long idResguardoentregadetalle
 	Date fechaIncidente
 	Integer numeroIncidente
-	Character estadoIncidente
+	Character estado
 	Integer idReporta
-	Integer idServ
-	Integer idServfinal
+	Cat_serv idServ
+	Cat_serv idServfinal
 	String descripcion
 	Integer nivel
-	Integer idServresp
+	Cat_servResp idServresp
 	Integer idCaptura
 	Integer idNivel1
 	Date fechaNivel1
@@ -35,12 +35,18 @@ class Incidente {
 	Integer p02
 	Integer p03
 	Integer p04
-	Integer idPrograma
+	CatPrograma idPrograma
 	Date lastUpdated
 	String ipTerminal
 
 	static mapping = {
 		id column: "id_incidente", generator: "increment"
+		idSistema column: "id_sistema"
+		estado column: "estado_incidente"
+		idServ column:'id_serv'
+		idServfinal column:'id_servfinal'
+		idServresp column:'id_servresp'
+		idPrograma column: "id_programa"
 		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 	}
@@ -50,12 +56,12 @@ class Incidente {
 		idResguardoentregadetalle nullable: true
 		fechaIncidente nullable: true
 		numeroIncidente nullable: true
-		estadoIncidente nullable: true, maxSize: 1
+		estado nullable: true, maxSize: 1
 		idReporta nullable: true
 		idServ nullable: true
 		idServfinal nullable: true
 		descripcion nullable: true, maxSize: 3000
-		nivel nullable: true
+		nivel nullable: true, min: 1, max:3
 		idServresp nullable: true
 		idCaptura nullable: true
 		idNivel1 nullable: true

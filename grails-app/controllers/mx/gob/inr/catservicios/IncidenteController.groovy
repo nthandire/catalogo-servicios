@@ -3,7 +3,7 @@ package mx.gob.inr.catservicios
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
-@Secured(['ROLE_SAST_ADMIN'])
+@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO_MESA_SERVICIO'])
 class IncidenteController {
     static nombreMenu = "Incidentes"
     static ordenMenu = 70

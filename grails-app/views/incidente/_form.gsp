@@ -11,7 +11,7 @@
 		<g:message code="incidente.idSistema.label" default="Id Sistema" />
 		
 	</label>
-	<g:field name="idSistema" type="number" value="${incidenteInstance.idSistema}"/>
+	<g:select id="idSistema" name="idSistema.id" from="${mx.gob.inr.catservicios.CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
@@ -38,9 +38,9 @@
 	<g:field name="numeroIncidente" type="number" value="${incidenteInstance.numeroIncidente}"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'estadoIncidente', 'error')} ">
-	<label for="estadoIncidente">
-		<g:message code="incidente.estadoIncidente.label" default="Estado Incidente" />
+<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'estado', 'error')} ">
+	<label for="estado">
+		<g:message code="incidente.estado.label" default="Estado" />
 		
 	</label>
 	
@@ -59,7 +59,7 @@
 		<g:message code="incidente.idServ.label" default="Id Serv" />
 		
 	</label>
-	<g:field name="idServ" type="number" value="${incidenteInstance.idServ}"/>
+	<g:select id="idServ" name="idServ.id" from="${mx.gob.inr.catservicios.Cat_serv.list()}" optionKey="id" value="${incidenteInstance?.idServ?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')} ">
@@ -67,7 +67,7 @@
 		<g:message code="incidente.idServfinal.label" default="Id Servfinal" />
 		
 	</label>
-	<g:field name="idServfinal" type="number" value="${incidenteInstance.idServfinal}"/>
+	<g:select id="idServfinal" name="idServfinal.id" from="${mx.gob.inr.catservicios.Cat_serv.list()}" optionKey="id" value="${incidenteInstance?.idServfinal?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'descripcion', 'error')} ">
@@ -83,7 +83,7 @@
 		<g:message code="incidente.nivel.label" default="Nivel" />
 		
 	</label>
-	<g:field name="nivel" type="number" value="${incidenteInstance.nivel}"/>
+	<g:field name="nivel" type="number" min="1" max="3" value="${incidenteInstance.nivel}"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServresp', 'error')} ">
@@ -91,7 +91,7 @@
 		<g:message code="incidente.idServresp.label" default="Id Servresp" />
 		
 	</label>
-	<g:field name="idServresp" type="number" value="${incidenteInstance.idServresp}"/>
+	<g:select id="idServresp" name="idServresp.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" value="${incidenteInstance?.idServresp?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idCaptura', 'error')} ">
@@ -275,15 +275,7 @@
 		<g:message code="incidente.idPrograma.label" default="Id Programa" />
 		
 	</label>
-	<g:field name="idPrograma" type="number" value="${incidenteInstance.idPrograma}"/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'lastUpdated', 'error')} ">
-	<label for="lastUpdated">
-		<g:message code="incidente.lastUpdated.label" default="Fecha Modificacion" />
-		
-	</label>
-	<g:datePicker name="lastUpdated" precision="day"  value="${incidenteInstance?.lastUpdated}" default="none" noSelection="['': '']" />
+	<g:select id="idPrograma" name="idPrograma.id" from="${mx.gob.inr.catservicios.CatPrograma.list()}" optionKey="id" value="${incidenteInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'ipTerminal', 'error')} ">

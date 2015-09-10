@@ -4,6 +4,8 @@ class CatSistema {
 
 	String desSistema
 
+  static hasMany = [incidentes: Incidente]
+
 	static mapping = {
 		id column: "id_sistema", generator: "increment"
 		version false
