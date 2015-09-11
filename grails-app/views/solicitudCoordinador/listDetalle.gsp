@@ -12,13 +12,13 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="listDetalle">Detalles a asignar</g:link></li>
+				<li><g:link class="list" action="listDetalle">Asignación de servicio</g:link></li>
 				<li><g:link class="list" action="listAsignados">Solicitudes asignadas</g:link></li>
 				<li><g:link class="list" action="listTerminadas">Solicitudes termindadas</g:link></li>
 			</ul>
 		</div>
 		<div id="list-solicitudDetalle" class="content scaffold-list" role="main">
-			<h1>Lista de Detalles a asignar</h1>
+			<h1>Asignación de servicio</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
