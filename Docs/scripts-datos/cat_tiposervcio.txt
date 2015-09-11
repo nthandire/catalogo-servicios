@@ -1,0 +1,17 @@
+id_tiposervicio des_tiposervicio  estado
+1 CONTRATO  A
+2 CORRECTIVO  A
+3 GARANTIA  A
+4 RE-CONFIGURACION  A
+5 PREVENTIVO  A
+6 SEGURO  A
+
+
+
+(id_tiposervicio, des_tiposervicio, estado)
+(1, 'CONTRATO', 'A'),
+(2, 'CORRECTIVO', 'A'),
+(3, 'GARANTIA', 'A'),
+(4, 'RE-CONFIGURACION', 'A'),
+(5, 'PREVENTIVO', 'A'),
+(6, 'SEGURO', 'A')
