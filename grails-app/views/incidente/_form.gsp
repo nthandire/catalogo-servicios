@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.Incidente" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 
 
 <style type="text/css">
@@ -16,52 +16,56 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
 	<label for="idResguardoentregadetalle">
-		<g:message code="incidente.idResguardoentregadetalle.label" default="Id Resguardoentregadetalle" />
-		
+		<g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
 	</label>
-	<g:field name="idResguardoentregadetalle" type="number" value="${incidenteInstance.idResguardoentregadetalle}"/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'fechaIncidente', 'error')} ">
-	<label for="fechaIncidente">
-		<g:message code="incidente.fechaIncidente.label" default="Fecha Incidente" />
-		
-	</label>
-	<g:datePicker name="fechaIncidente" precision="day"  value="${incidenteInstance?.fechaIncidente}" default="none" noSelection="['': '']" />
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'numeroIncidente', 'error')} ">
-	<label for="numeroIncidente">
-		<g:message code="incidente.numeroIncidente.label" default="Numero Incidente" />
-		
-	</label>
-	<g:field name="numeroIncidente" type="number" value="${incidenteInstance.numeroIncidente}"/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'estado', 'error')} ">
-	<label for="estado">
-		<g:message code="incidente.estado.label" default="Estado" />
-		
-	</label>
-	
+  <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle" 
+		from="${ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}" optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}" class="many-to-one"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
 	<label for="idReporta">
 		<g:message code="incidente.idReporta.label" default="Id Reporta" />
-		
 	</label>
-	<g:field name="idReporta" type="number" value="${incidenteInstance.idReporta}"/>
+	<g:field name="idReporta" type="number" value="${incidenteInstance.idReporta}" required=""/> <!-- // TODO: poner un select -->
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} ">
+<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
 	<label for="idServ">
-		<g:message code="incidente.idServ.label" default="Id Serv" />
-		
+		<g:message code="cat_serv.servCat.label" default="Cat" />
+		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="idServ" name="idServ.id" from="${mx.gob.inr.catservicios.Cat_serv.list()}" optionKey="id" value="${incidenteInstance?.idServ?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="servCat" name="idServ.servSub.servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" required="" value="${incidenteInstance?.idServ?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['':'Seleccione una...']}"/>
 </div>
 
+<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+	<label for="idServ">
+		<g:message code="cat_serv.servSub.label" default="Serv Sub" />
+		<span class="required-indicator">*</span>
+	</label>
+	<span id="subContainer"></span>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+	<label for="idServ">
+		<g:message code="cat_bitacora.servicio.label" default="Servicio" />
+		<span class="required-indicator">*</span>
+	</label>
+	<span id="serviciosContainer"></span>
+</div>
+
+<script>
+    function categoryChanged(categoryId) {
+        <g:remoteFunction controller="incidente" action="categoryChanged"
+            update="subContainer"
+            params="'categoryId='+categoryId"/>
+    }
+    function subcategoryChanged(subcategoryId) {
+        <g:remoteFunction controller="incidente" action="subcategoryChanged"
+            update="serviciosContainer"
+            params="'subcategoryId='+subcategoryId"/>
+    }
+</script>
+<!--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')} ">
 	<label for="idServfinal">
 		<g:message code="incidente.idServfinal.label" default="Id Servfinal" />
@@ -286,3 +290,4 @@
 	<g:textField name="ipTerminal" maxlength="15" value="${incidenteInstance?.ipTerminal}"/>
 </div>
 
+-->

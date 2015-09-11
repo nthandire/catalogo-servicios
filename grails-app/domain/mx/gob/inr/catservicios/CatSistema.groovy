@@ -14,4 +14,9 @@ class CatSistema {
 	static constraints = {
 		desSistema nullable: true, maxSize: 50
 	}
+
+  String toString() {
+    desSistema
+  }
+
 }

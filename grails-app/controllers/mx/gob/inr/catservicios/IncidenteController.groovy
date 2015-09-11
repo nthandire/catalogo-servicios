@@ -2,6 +2,7 @@ package mx.gob.inr.catservicios
 
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
+import groovy.time.TimeCategory
 
 @Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO_MESA_SERVICIO'])
 class IncidenteController {
@@ -25,6 +26,28 @@ class IncidenteController {
 
     def save() {
         def incidenteInstance = new Incidente(params)
+        incidenteInstance.fechaIncidente = new Date()
+
+        // Asignarle el siguiente folio dentro del año
+        // TODO: Pasarlo a un servicio
+      def startDate = new Date().clearTime()
+      startDate[Calendar.MONTH] = 0
+      startDate[Calendar.DATE] = 1
+      def endDate = startDate.clone()
+      use(TimeCategory) {
+        endDate = endDate + 1.years - 1.seconds
+      }
+      log.debug("startDate = $startDate, endDate = $endDate")
+
+      def maxID = Incidente.withCriteria { // TODO: un test para ver si este algoritmo sique funcionando
+        between("fechaIncidente", startDate, endDate)
+        projections {
+          max "numeroIncidente"
+        }
+      }[0] ?: 0
+      log.debug("maxID = $maxID")
+      incidenteInstance.numeroIncidente = ++maxID
+
         if (!incidenteInstance.save(flush: true)) {
             render(view: "create", model: [incidenteInstance: incidenteInstance])
             return
@@ -103,4 +126,30 @@ class IncidenteController {
             redirect(action: "show", id: id)
         }
     }
+
+  def categoryChanged(long categoryId) {
+    log.debug("categoryId = $categoryId")
+      Cat_servCat category = Cat_servCat.get(categoryId)
+      def subCategories = []
+      if ( category != null ) {
+          subCategories = Cat_servSub.findAllByServCat(category, [order:'id'])
+      }
+      render g.select(id:'servSub', name:'servSub.id', required:'',
+        onchange:'subcategoryChanged(this.value)',
+        from:subCategories, optionKey:'id', noSelection:['':' ']
+      )
+  }
+
+  def subcategoryChanged(long subcategoryId) {
+    log.debug("subcategoryId = $subcategoryId")
+      Cat_servSub subcategory = Cat_servSub.get(subcategoryId)
+      def servicios = []
+      if ( subcategory != null ) {
+          servicios = Cat_serv.findAllByServSub(subcategory, [order:'id'])
+      }
+      render g.select(id:'idServ', name:'idServ.id', required:'',
+          from:servicios, optionKey:'id', noSelection:['':'Seleccione una...']
+      )
+  }
+
 }
