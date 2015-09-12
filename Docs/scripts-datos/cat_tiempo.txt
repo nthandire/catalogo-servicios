@@ -1,0 +1,5 @@
+id_tiempo descripcion
+1 Minutos
+2 Horas
+3 Días
+4 Semanas 3

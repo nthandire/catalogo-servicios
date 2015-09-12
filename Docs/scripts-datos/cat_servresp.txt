@@ -1,0 +1,14 @@
+id_servresp descripcion
+1 DGAIT
+2 MS
+3 WM
+4 PROV
+5 Subdireccion
+6 Dirección/ Subdireccion
+7 DGAIT/PROV
+8 MS/DGDST/DGAIT
+9 STIC
+10  Jefe de Servicio o Superior
+11  Subdireccion
+12  Dirección/ Subdireccion
+13  MS/PROV
