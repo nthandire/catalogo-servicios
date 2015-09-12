@@ -48,6 +48,8 @@ class IncidenteController {
       log.debug("maxID = $maxID")
       incidenteInstance.numeroIncidente = ++maxID
 
+      incidenteInstance.estado = 'A' as char
+
         if (!incidenteInstance.save(flush: true)) {
             render(view: "create", model: [incidenteInstance: incidenteInstance])
             return
@@ -128,6 +130,14 @@ class IncidenteController {
     }
 
   def categoryChanged(long categoryId) {
+    categoryChangedProceso(categoryId, 'subcategoryChanged')
+  }
+
+  def categoryChangedFinal(long categoryId) {
+    categoryChangedProceso(categoryId, 'subcategoryChangedFinal')
+  }
+
+  def categoryChangedProceso(long categoryId, String rutinaALlamar) {
     log.debug("categoryId = $categoryId")
       Cat_servCat category = Cat_servCat.get(categoryId)
       def subCategories = []
@@ -135,19 +145,27 @@ class IncidenteController {
           subCategories = Cat_servSub.findAllByServCat(category, [order:'id'])
       }
       render g.select(id:'servSub', name:'servSub.id', required:'',
-        onchange:'subcategoryChanged(this.value)',
+        onchange:rutinaALlamar + '(this.value)',
         from:subCategories, optionKey:'id', noSelection:['':' ']
       )
   }
 
   def subcategoryChanged(long subcategoryId) {
+    subcategoryChangedProceso(subcategoryId, 'idServ')
+  }
+
+  def subcategoryChangedFinal(long subcategoryId) {
+    subcategoryChangedProceso(subcategoryId, 'idServfinal')
+  }
+
+  def subcategoryChangedProceso(long subcategoryId, String campoAActualizar) {
     log.debug("subcategoryId = $subcategoryId")
       Cat_servSub subcategory = Cat_servSub.get(subcategoryId)
       def servicios = []
       if ( subcategory != null ) {
           servicios = Cat_serv.findAllByServSub(subcategory, [order:'id'])
       }
-      render g.select(id:'idServ', name:'idServ.id', required:'',
+      render g.select(id:campoAActualizar, name:campoAActualizar + '.id', required:'',
           from:servicios, optionKey:'id', noSelection:['':'Seleccione una...']
       )
   }

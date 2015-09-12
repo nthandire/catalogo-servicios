@@ -180,3 +180,6 @@ update CAT_SERV set FECHA_MODIFICACION = to_date('2015-09-07 17:23',"%Y-%m-%d %H
 
 
 SELECT id_serv, id_ FROM CAT_SERV   ;
+
+
+SELECT * FROM incidente;

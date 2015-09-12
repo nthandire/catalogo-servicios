@@ -121,6 +121,8 @@ SELECT * FROM firmadigital where idusuario >= 9574
 
 SELECT * FROM usuario where idusuario >= 9574
 
+SELECT * FROM usuario where idusuario = 6558
+
 select * from perfil where idperfil >= 56
 
 
