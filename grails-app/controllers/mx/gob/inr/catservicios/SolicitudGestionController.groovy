@@ -19,7 +19,7 @@ class SolicitudGestionController {
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
-        def query = 
+        def query =
             "  from Solicitud              " +
             " where (estado = 'A'          " +
             "        and idVb is null)     " +
@@ -167,7 +167,7 @@ class SolicitudGestionController {
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
           subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " + 
+          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
             "pronto seras contactado con relación a el\n"
         }
@@ -232,7 +232,7 @@ class SolicitudGestionController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
-        redirect(action: "listDetalle")
+        redirect(action: "show", id: solicitudDetalleInstance.id)
     }
 
 }
