@@ -26,20 +26,20 @@
 	</label>
 	<g:select id="idPrograma" name="idPrograma.id" from="${mx.gob.inr.catservicios.CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']" disabled="true"/>
 </div>
-<!--
+
 <div class="fieldtablecontain">
   <label for="resguardo">
     <g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Equipo" />
   </label>
-  <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle" 
-		from="pesos{ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}" optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}" class="many-to-one"/>
+  <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
+		from="${ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}" optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}" class="many-to-one"/>
 </div>
--->
+
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idTecnico', 'error')} ">
 	<label for="idTecnico">
 		<g:message code="solicitudDetalle.idTecnico.label" default="Tecnico" />
 	</label>
-	<g:select id="idTecnico" name="idTecnico" 
+	<g:select id="idTecnico" name="idTecnico"
 		from="${Usuario.executeQuery("from Usuario u where exists( from UsuarioRol ur where ur.usuario.id = u.id and exists ( from Rol r where r.id = ur.rol.id and r.authority = 'ROLE_SAST_TECNICO'))")}" optionKey="id" value="${solicitudDetalleInstance?.idTecnico}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
@@ -51,10 +51,10 @@
     value="${solicitudDetalleInstance?.descripcionTecnica}"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'impacto', 'error')}">
-  <label for="impacto">
-    <g:message code="solicitudDetalle.impacto.label" default="Impacto" />
+<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'prioridad', 'error')}">
+  <label for="prioridad">
+    <g:message code="solicitudDetalle.prioridad.label" default="Prioridad" />
   </label>
-  <g:select name="impacto" disabled="false" from="${[1,2,3]}"
-    valueMessagePrefix="intensidad.valor" value="${solicitudDetalleInstance.impacto}" />
+  <g:select name="prioridad" disabled="false" from="${[1,2,3]}"
+    valueMessagePrefix="intensidad.valor" value="${solicitudDetalleInstance.prioridad}" />
 </div>

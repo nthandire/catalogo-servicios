@@ -66,7 +66,7 @@ class SolicitudController {
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
           subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " + 
+          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
             "pronto seras contactado con relación a el\n"
         }
@@ -83,7 +83,16 @@ class SolicitudController {
             return
         }
 
-        [solicitudInstance: solicitudInstance]
+      def autorizador = null
+      if (solicitudInstance?.idAutoriza) {
+        Usuario.withNewSession { sessionU ->
+          def usuarioAutorizador = Usuario.get(solicitudInstance?.idAutoriza)
+          autorizador = usuarioAutorizador.username
+        }
+      }
+
+        [solicitudInstance: solicitudInstance,
+          autorizador: autorizador]
     }
 
     def listaDeAutorizadores() {
@@ -104,7 +113,7 @@ class SolicitudController {
       }
 
       /* TODO: este es el query original, borrar
-      def query = 
+      def query =
         "  from Usuario u                                      " +
         " where exists                                         " +
         "   ( from UsuarioRol up                               " +

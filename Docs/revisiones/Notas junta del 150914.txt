@@ -1,0 +1,17 @@
+Junta del 14 de septiembre.
+---------------------------
+
+
+Nota: El "Gestor" es el "Coordinador de la mesa de servicio".
+
+
+(En relación a los puntos de la junta del 3 de septiembre).
+
++ Punto 7, si solo esta firmada la solicitud, el usuario debe poder editarla.
+
+Punto 8, al cancelar la solicitud (por el autorizador) no pasa por encuesta.
+
++ Punto 10, solo el gestor puede cambiar la prioridad.
+
+Punto 12: es el gestor el que usará el campo descripcion_tecnica para informar al técnico (no los coordinadores de área).
+

@@ -27,25 +27,23 @@
 			<div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<ol class="property-list solicitud">
-			
+
 				<g:if test="${solicitudInstance?.numeroSolicitud}">
 				<li class="fieldcontain">
 					<span id="numeroSolicitud-label" class="property-label"><g:message code="solicitud.numeroSolicitud.label" default="Numero Solicitud" /></span>
-					
 						<span class="property-value" aria-labelledby="numeroSolicitud-label">${solicitudInstance.toString()}</span>
-					
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudInstance?.justificacion}">
 				<li class="fieldcontain">
 					<span id="justificacion-label" class="property-label"><g:message code="solicitud.justificacion.label" default="Justificacion" /></span>
-					
-						<span class="property-value" aria-labelledby="justificacion-label"><g:fieldValue bean="${solicitudInstance}" field="justificacion"/></span>
-					
+						<span class="property-value" aria-labelledby="justificacion-label">
+              <g:fieldValue bean="${solicitudInstance}" field="justificacion"/>
+            </span>
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudInstance?.lastUpdated}">
 				<li class="fieldcontain">
 					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha Modificacion" /></span>
@@ -53,25 +51,32 @@
 				</li>
 				</g:if>
 
-				<g:if test="${solicitudInstance?.estado}">
-				<li class="fieldcontain">
-					<span id="estado-label" class="property-label">Estado</span>
-					
-					<span class="property-value" aria-labelledby="estado-label">
-						<g:select name="estado" disabled="true"
-							from="${['F' as char, 'A' as char, 'R' as char, 'V' as char, 'E' as char, 'T' as char, 'C' as char]}"
-							valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
-					</span>
-				</li>
-				</g:if>
+        <g:if test="${solicitudInstance?.estado}">
+        <li class="fieldcontain">
+          <span id="estado-label" class="property-label">Estado</span>
+          <span class="property-value" aria-labelledby="estado-label">
+            <g:select name="estado" disabled="true"
+              from="${['F' as char, 'A' as char, 'R' as char, 'V' as char, 'E' as char, 'T' as char, 'C' as char]}"
+              valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
+          </span>
+        </li>
+        </g:if>
+
+        <g:if test="${autorizador}">
+        <li class="fieldcontain">
+          <span id="idAutoriza-label" class="property-label">idAutoriza</span>
+          <span class="property-value" aria-labelledby="idAutoriza-label">
+            ${autorizador}
+          </span>
+        </li>
+        </g:if>
 
 			</ol>
-
 
 			<H1>
 				<g:message code="solicitud.detalles.label" default="Descripción de la solicitud" />
 			</H1>
-			
+
 			<div class="row-fluid">
 -				<div class="span10 offset1">
 					<ul class="one-to-many">
@@ -91,7 +96,7 @@
 			<H1>
 				<g:message code="solicitud.archivos.label" default="Archivos" />
 			</H1>
-					
+
 			<div class="row-fluid">
 -				<div class="span10 offset1">
 					<ul class="one-to-many">
@@ -115,7 +120,7 @@
 			  </div>
 				<g:form method="post" >
 				  <div class="modal-body">
-			  
+
 						<g:hiddenField name="id" value="${solicitudInstance?.id}" />
 						<g:hiddenField name="version" value="${solicitudInstance?.version}" />
 						<fieldset class="form">
@@ -130,18 +135,17 @@
 			</div>
 
 			<g:form>
-				<fieldset class="buttons">
-					<g:if test="${!solicitudInstance?.fechaSolicitud}">
-						<g:hiddenField name="id" value="${solicitudInstance?.id}" />
-						<g:link class="edit" action="edit" id="${solicitudInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-						<!-- Button to trigger modal -->
-						<a href="#myModal" class="edit" data-toggle="modal">Firmar</a>
-					</g:if>
-				</fieldset>
+        <fieldset class="buttons">
+          <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
+            <g:hiddenField name="id" value="${solicitudInstance?.id}" />
+            <g:link class="edit" action="edit" id="${solicitudInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+            <!-- Button to trigger modal -->
+            <a href="#myModal" class="edit" data-toggle="modal">Firmar</a>
+          </g:if>
+        </fieldset>
 			</g:form>
 		</div>
 	</body>
 </html>
 
 
- 
