@@ -47,14 +47,14 @@ class SolicitudController {
     }
 
     def create() {
-        [solicitudInstance: new Solicitud(params)]
+        [solicitudInstance: new Solicitud(params),
+          autorizadores:listaDeAutorizadores()]
     }
 
     def save() {
         def solicitudInstance = new Solicitud(params)
         solicitudInstance.idSolicitante = springSecurityService.principal.id
         solicitudInstance.ipTerminal = request.getRemoteAddr()
-        solicitudInstance.idAutoriza = 9575 // TODO: debe ser el id del jefe
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "create", model: [solicitudInstance: solicitudInstance])
@@ -86,6 +86,39 @@ class SolicitudController {
         [solicitudInstance: solicitudInstance]
     }
 
+    def listaDeAutorizadores() {
+      def rolUsuarios = null
+      Rol.withNewSession { session ->
+        rolUsuarios = Rol.findByAuthority('ROLE_SAST_USUARIO')
+      }
+      log.debug("rolUsuarios = $rolUsuarios")
+      def usuariosRolesIds = []
+      UsuarioRol.withNewSession { sessionUR ->
+        def usuariosRoles = UsuarioRol.findAllByRol(rolUsuarios)
+        usuariosRolesIds = usuariosRoles.collectMany{[it.usuario.id]}
+      }
+      log.debug("usuariosRolesIds = $usuariosRolesIds")
+      def autorizadores = []
+      Usuario.withNewSession { sessionU ->
+        autorizadores = Usuario.findAllByIdInList(usuariosRolesIds)
+      }
+
+      /* TODO: este es el query original, borrar
+      def query = 
+        "  from Usuario u                                      " +
+        " where exists                                         " +
+        "   ( from UsuarioRol up                               " +
+        "    where up.idusuario = u.idusuario                  " +
+        "      and exists (                                    " +
+        "        from Rol p                                    " +
+        "       where p.idperfil = up.idperfil                 " +
+        "         and p.desc_perfil = 'ROLE_SAST_USUARIO'))    "
+      */
+
+      log.debug("numero de autorizadores = ${autorizadores.size()}")
+      return autorizadores
+    }
+
     def edit(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
@@ -94,7 +127,8 @@ class SolicitudController {
             return
         }
 
-        [solicitudInstance: solicitudInstance]
+        [solicitudInstance: solicitudInstance,
+          autorizadores:listaDeAutorizadores()]
     }
 
     def firmarUpdate(Long id, Long version) {
