@@ -82,7 +82,7 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_SUPERVISOR">
+		<sec:ifAnyGranted roles="ROLE_SAST_ADMIN">
 		<div id="status" role="complementary">
 			<h1>Application Status</h1>
 			<ul>

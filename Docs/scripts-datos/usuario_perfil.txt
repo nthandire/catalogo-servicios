@@ -24,6 +24,7 @@ idusuario idperfil
 9583  60
 9582  61
 
+delete FROM USUARIO_PERFIL where  IDUSUARIO in (9584,9585)  and idperfil = 57 ;
 
 insert into usuario_perfil
 (idusuario, idperfil)

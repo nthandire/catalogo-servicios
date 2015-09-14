@@ -16,7 +16,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudInstance, field: 'idAutoriza', 'error')} ">
   <label for="idAutoriza">
-    <g:message code="solicitud.idAutoriza.label" default="Categoría" />
+    <g:message code="solicitud.idAutoriza.label" default="Autoriza" />
   </label>
   <g:select id="idAutoriza" name="idAutoriza" from="${autorizadores}"
     optionKey="id" optionValue="username" value="${solicitudInstance?.idAutoriza}" class="many-to-one"

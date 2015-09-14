@@ -27,14 +27,14 @@ class Usuario {
 	static constraints = {
 		username blank: false, unique: true, nullable: true
 		password blank: false, nullable: true
-		estatus nullable: true
+		estatus nullable: true, inList: [(char)'A',(char)'B']
 		accountExpired nullable: true
 		accountLocked nullable: true
 		passwordExpired nullable: true
 	}
 
 	static mapping = {
-		id column:'idusuario', generator: "increment"    //, type:'integer'
+		id column:'idusuario', generator: "increment"
 		username column:'rfc'
 		//password column: '`password`'
 		estatus length: 1, columnDefinition: 'char(1)'

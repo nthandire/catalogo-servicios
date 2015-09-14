@@ -2,7 +2,7 @@ package mx.gob.inr.catservicios
 
 import grails.plugins.springsecurity.Secured
 
-@Secured(['ROLE_COORDINADOR'])
+@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION'])
 class Cat_servSubController {
     static nombreMenu = "Catálogo de Subcategorías de Servicios"
     static ordenMenu = 2

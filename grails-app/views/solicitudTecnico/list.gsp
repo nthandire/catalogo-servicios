@@ -15,7 +15,7 @@
 			</ul>
 		</div>
 		<div id="list-solicitudDetalle" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1>Listado de Servicios</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -30,19 +30,23 @@
 					
 						<th><g:message code="solicitudDetalle.idServcat.label" default="Categoría" /></th>
 					
-						<g:sortableColumn property="descripcion" title="${message(code: 'solicitudDetalle.descripcion.label', default: 'Descripcion')}" />
+            <g:sortableColumn property="descripcion" title="${message(code: 'solicitudDetalle.descripcion.label', default: 'Descripcion')}" />
+          
+						<g:sortableColumn property="impacto" title="${message(code: 'solicitudDetalle.impacto.label', default: 'Impacto')}" />
 					
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${solicitudDetalleInstanceList}" status="i" var="solicitudDetalleInstance">
+				<g:each in="${solicitudDetalleInstanceList.sort{ it.impacto?:(it?.idServ?.impacto?:3) }}" status="i" var="solicitudDetalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>
 					
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idServcat")}</td>
 					
-						<td>${fieldValue(bean: solicitudDetalleInstance, field: "descripcion")}</td>
+            <td>${fieldValue(bean: solicitudDetalleInstance, field: "descripcion")}</td>
+          
+						<td><g:message code="intensidad.valor.${solicitudDetalleInstance.impacto?:(solicitudDetalleInstance?.idServ?.impacto?:3)}" default="" /></td>
 					
 					</tr>
 				</g:each>

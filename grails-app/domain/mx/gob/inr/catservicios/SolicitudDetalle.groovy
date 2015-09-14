@@ -10,6 +10,7 @@ class SolicitudDetalle {
 	String descripcion
 	String solucion
 	Integer idTecnico
+  Integer impacto = 0
 	Date fechaSolucion
 	String descripcionTecnica
 
@@ -33,6 +34,7 @@ class SolicitudDetalle {
 		descripcion nullable: true, maxSize: 3000
 		solucion nullable: true, maxSize: 3000
 		idTecnico nullable: true, editable:false
+    impacto nullable: true, inList: [0, 1, 2, 3]
 		fechaSolucion nullable: true, editable:false
 		idPrograma nullable: true
 		idServcat nullable: true

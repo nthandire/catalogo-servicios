@@ -20,7 +20,7 @@ Estas son las notas y acuerdos a los que se llego en la junta de avance del 3 de
 
 + 9.- ¿La Mesa puede rechazar? Respuesta: No, Debe solucionarla (aunque la solución sea que no la pudo solucionar, y porque). También podrá asignara el programa, mantenimiento o aprovisionamiento.
 
-10.- El coordinador puede indicar la prioridad de un Detalle de una Solicitud. SE NECESITA UN CAMPO NUEVO EN LA BD. No se cambian los tiempos de respuesta, esto solo es un aviso interno al técnico para su atención
++10.- El coordinador puede indicar la prioridad de un Detalle de una Solicitud. SE NECESITA UN CAMPO NUEVO EN LA BD. No se cambian los tiempos de respuesta, esto solo es un aviso interno al técnico para su atención
 
 11.- El coordinador es el que asigna la subcategoria y el tercer nivel.
 

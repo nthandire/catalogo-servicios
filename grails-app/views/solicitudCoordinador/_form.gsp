@@ -36,20 +36,27 @@
   <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle" 
 		from="${ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}" optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}" class="many-to-one"/>
 </div>
+
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idTecnico', 'error')} ">
 	<label for="idTecnico">
 		<g:message code="solicitudDetalle.idTecnico.label" default="Tecnico" />
-		
 	</label>
 	<g:select id="idTecnico" name="idTecnico" 
-		from="${Usuario.executeQuery("from Usuario u where exists( from UsuarioRol ur where ur.usuario.id = u.id and exists ( from Rol r where r.id = ur.rol.id and r.authority = 'ROLE_TECNICO'))")}" optionKey="id" value="${solicitudDetalleInstance?.idTecnico}" class="many-to-one" noSelection="['null': '']"/>
+		from="${Usuario.executeQuery("from Usuario u where exists( from UsuarioRol ur where ur.usuario.id = u.id and exists ( from Rol r where r.id = ur.rol.id and r.authority = 'ROLE_SAST_TECNICO'))")}" optionKey="id" value="${solicitudDetalleInstance?.idTecnico}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'solucion', 'error')} ">
-  <label for="solucion">
-    <g:message code="solicitudDetalle.solucion.label" default="Solución" />
-    
+<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcionTecnica', 'error')} ">
+  <label for="descripcionTecnica">
+    <g:message code="solicitudDetalle.descripcionTecnica.label" default="Descripción Técnica" />
   </label>
-  <g:textArea name="solucion" cols="40" rows="5" maxlength="3000"
-    value="${solicitudDetalleInstance?.solucion}"/>
+  <g:textArea name="descripcionTecnica" cols="40" rows="5" maxlength="3000"
+    value="${solicitudDetalleInstance?.descripcionTecnica}"/>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'impacto', 'error')}">
+  <label for="impacto">
+    <g:message code="solicitudDetalle.impacto.label" default="Impacto" />
+  </label>
+  <g:select id="impacto" name="impacto" disabled="false" from="${[0, 1, 2, 3]}"
+    valueMessagePrefix="intensidad.valor" value="${solicitudDetalleInstance.impacto}"/>
 </div>
