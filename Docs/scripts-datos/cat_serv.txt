@@ -7,3 +7,32 @@ id_serv id_servsub  descripcion portal  incidente solicitud problema  id_servres
 5 13  Configuración false true  false false 2 1 7 15  120 240 1 1 1 1 <null>  <null>  IP:
 /nDirección MAC:
 /nVersión de la aplicación:   <null>  A 9583  2015-09-09 12:51:00.0 1 127.0.0.1
+
+
+
+
+
+
+
+
+insert into CAT_SERV
+(id_serv, id_servsub, descripcion, portal, incidente, solicitud, problema, id_servresp1, id_servresp2, id_servresp3, tiempo1, tiempo2, tiempo3, id_tiempo1, id_tiempo2, id_tiempo3, impacto, id_servrespautoriza, id_servrespaprueba, plantilla, observaciones, estado_serv, id_usuario, fecha_modificacion, modificacion, ip_terminal)
+values
+(1, 1, 'El sonido tiene el volumen muy alto', true , true , null , null, 2, 1, 1, 30, 60, 1, 1, 1, 3, 3, null , null, 'plantilla general', null , 'A', 3, '2015-08-30 21:01:00.0', 0, '192.168.16.59');
+insert into CAT_SERV
+(id_serv, id_servsub, descripcion, portal, incidente, solicitud, problema, id_servresp1, id_servresp2, id_servresp3, tiempo1, tiempo2, tiempo3, id_tiempo1, id_tiempo2, id_tiempo3, impacto, id_servrespautoriza, id_servrespaprueba, plantilla, observaciones, estado_serv, id_usuario, fecha_modificacion, modificacion, ip_terminal)
+values
+(2, 2, 'Compartir archivos y carpetas', true , true , false, false, 2, 13, null, 15, 60, null, 1, 1, 1, 3, null , null, 'No.de Inventario  del equipo a compartir: (validar con base de datos de activo fijo)/nNo. de Inventario del(los ) equipo(s) a donde se desea compartir los archivos: (validar con base de datos de activo fijo)', null, 'A', 9583, '2015-09-09 12:50:00.0', 2, '127.0.0.1');
+insert into CAT_SERV
+(id_serv, id_servsub, descripcion, portal, incidente, solicitud, problema, id_servresp1, id_servresp2, id_servresp3, tiempo1, tiempo2, tiempo3, id_tiempo1, id_tiempo2, id_tiempo3, impacto, id_servrespautoriza, id_servrespaprueba, plantilla, observaciones, estado_serv, id_usuario, fecha_modificacion, modificacion, ip_terminal)
+values
+(3, 2, 'Conectar/Desconectar por mantenimiento del área', true , true , false, false, 2, 13, null, 15, 60, null, 1, 1, 1, 2, null, null, null, 'Este servicio se cerrara una vez que sea conectado el equipo.', 'A', 9583, '2015-09-07 17:26:00.0', 0, '192.168.13.1');
+insert into CAT_SERV
+(id_serv, id_servsub, descripcion, portal, incidente, solicitud, problema, id_servresp1, id_servresp2, id_servresp3, tiempo1, tiempo2, tiempo3, id_tiempo1, id_tiempo2, id_tiempo3, impacto, id_servrespautoriza, id_servrespaprueba, plantilla, observaciones, estado_serv, id_usuario, fecha_modificacion, modificacion, ip_terminal)
+values
+(4, 2, 'No enciende', true, true, false, false, 2, 13, 7, 15, 60, 21600, 1, 1, 1, 1, null, null, null, 'Los equipos de apoyo se proporcionaran de lunes a viernes en un horario de 9:00 a 18:00 hrs. de acuerdo a condiciones contractuales vigentes.', 'A', 9583, '2015-09-07 17:33:00.0', 3, '192.168.13.1');
+insert into CAT_SERV
+(id_serv, id_servsub, descripcion, portal, incidente, solicitud, problema, id_servresp1, id_servresp2, id_servresp3, tiempo1, tiempo2, tiempo3, id_tiempo1, id_tiempo2, id_tiempo3, impacto, id_servrespautoriza, id_servrespaprueba, plantilla, observaciones, estado_serv, id_usuario, fecha_modificacion, modificacion, ip_terminal)
+values
+(5, 13, 'Configuración', false, true, false, false, 2, 1, 7, 15, 120, 240, 1, 1, 1, 1, null, null, 'IP:/nDirección MAC:/nVersión de la aplicación: ', null, 'A', 9583, '2015-09-09 12:51:00.0', 1, '127.0.0.1');
+

@@ -5,3 +5,29 @@ idperfil  desc_perfil perfil_bi
 59  ROLE_SAST_TECNICO false
 60  ROLE_SAST_COORDINADOR_DE_GESTION  false
 61  ROLE_SAST_TECNICO_MESA_SERVICIO false
+
+
+insert into perfil
+(idperfil, desc_perfil, perfil_bi)
+values
+(56, 'ROLE_SAST_COORDINADOR', false);
+insert into perfil
+(idperfil, desc_perfil, perfil_bi)
+values
+(57, 'ROLE_SAST_ADMIN', false);
+insert into perfil
+(idperfil, desc_perfil, perfil_bi)
+values
+(58, 'ROLE_SAST_USUARIO', false);
+insert into perfil
+(idperfil, desc_perfil, perfil_bi)
+values
+(59, 'ROLE_SAST_TECNICO', false);
+insert into perfil
+(idperfil, desc_perfil, perfil_bi)
+values
+(60, 'ROLE_SAST_COORDINADOR_DE_GESTION',  false);
+insert into perfil
+(idperfil, desc_perfil, perfil_bi)
+values
+(61, 'ROLE_SAST_TECNICO_MESA_SERVICIO', false);

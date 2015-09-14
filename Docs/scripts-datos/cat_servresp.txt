@@ -12,3 +12,63 @@ id_servresp descripcion
 11  Subdireccion
 12  Dirección/ Subdireccion
 13  MS/PROV
+
+
+
+
+
+
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(1, 'DGAIT');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(2, 'MS');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(3, 'WM');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(4, 'PROV');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(5, 'Subdireccion');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(6, 'Dirección/ Subdireccion');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(7, 'DGAIT/PROV');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(8, 'MS/DGDST/DGAIT');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(9, 'STIC');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(10,  'Jefe de Servicio o Superior');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(11,  'Subdireccion');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(12,  'Dirección/ Subdireccion');
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(13,  'MS/PROV');
+
+

@@ -17,3 +17,80 @@ id_servsub  id_servcat  descripcion estado
 16  3 Tarificador A
 17  3  Conmutador A
 18  3 Conmutador  A
+
+
+
+
+
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(1, 1, 'Bocinas');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(2, 2, 'CPU');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(3, 2, 'Monitor');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(4, 2, 'Mouse');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(5, 2, 'Teclado');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(6, 2, 'Impresora');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(7, 2, 'Laptop');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(8, 2, 'Scanner');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(9, 2, 'Videoproyector');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(10,  2, 'Periféricos (lectores de barras'  );
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(11,  2, 'Regulador');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(12,  2, 'UPS/No-break');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(13,  3, 'Informix');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(14,  3, 'CONTINUUM');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(15,  3, 'Antivirus');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(16,  3, 'Tarificador');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(17,  3, ' Conmutador');
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion)
+values
+(18,  3, 'Conmutador');

@@ -8,10 +8,28 @@ id_tiposervicio des_tiposervicio  estado
 
 
 
+
+insert into cat_tiposervcio
 (id_tiposervicio, des_tiposervicio, estado)
-(1, 'CONTRATO', 'A'),
-(2, 'CORRECTIVO', 'A'),
-(3, 'GARANTIA', 'A'),
-(4, 'RE-CONFIGURACION', 'A'),
-(5, 'PREVENTIVO', 'A'),
-(6, 'SEGURO', 'A')
+values
+(1, 'CONTRATO', 'A');
+insert into cat_tiposervcio
+(id_tiposervicio, des_tiposervicio, estado)
+values
+(2, 'CORRECTIVO', 'A');
+insert into cat_tiposervcio
+(id_tiposervicio, des_tiposervicio, estado)
+values
+(3, 'GARANTIA', 'A');
+insert into cat_tiposervcio
+(id_tiposervicio, des_tiposervicio, estado)
+values
+(4, 'RE-CONFIGURACION', 'A');
+insert into cat_tiposervcio
+(id_tiposervicio, des_tiposervicio, estado)
+values
+(5, 'PREVENTIVO', 'A');
+insert into cat_tiposervcio
+(id_tiposervicio, des_tiposervicio, estado)
+values
+(6, 'SEGURO', 'A');

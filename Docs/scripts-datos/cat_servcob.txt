@@ -7,3 +7,40 @@ id_servcob  descripcion
 6 STIC
 7 SUBDIRECCIÓN DE RH
 8 SUSTANTIVAS
+
+
+
+
+
+insert into cat_servcob
+(id_servcob, descripcion)
+values
+(1, 'TODAS LAS AREAS');
+insert into cat_servcob
+(id_servcob, descripcion)
+values
+(2, 'HOSPITALIZACION');
+insert into cat_servcob
+(id_servcob, descripcion)
+values
+(3, 'ADMINISTRATIVAS');
+insert into cat_servcob
+(id_servcob, descripcion)
+values
+(4, 'SUSTANTIVAS');
+insert into cat_servcob
+(id_servcob, descripcion)
+values
+(5, 'TODAS LAS AREAS QUE CUENTEN CON IMPRESORA ARRENDADA');
+insert into cat_servcob
+(id_servcob, descripcion)
+values
+(6, 'STIC');
+insert into cat_servcob
+(id_servcob, descripcion)
+values
+(7, 'SUBDIRECCIÓN DE RH');
+insert into cat_servcob
+(id_servcob, descripcion)
+values
+(8, 'SUSTANTIVAS');

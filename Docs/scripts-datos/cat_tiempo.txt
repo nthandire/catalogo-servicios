@@ -2,4 +2,24 @@ id_tiempo descripcion
 1 Minutos
 2 Horas
 3 Días
-4 Semanas 3
+4 Semanas
+
+
+
+
+insert into cat_tiempo
+(id_tiempo, descripcion)
+values
+(1, 'Minutos');
+insert into cat_tiempo
+(id_tiempo, descripcion)
+values
+(2, 'Horas');
+insert into cat_tiempo
+(id_tiempo, descripcion)
+values
+(3, 'Días');
+insert into cat_tiempo
+(id_tiempo, descripcion)
+values
+(4, 'Semanas');

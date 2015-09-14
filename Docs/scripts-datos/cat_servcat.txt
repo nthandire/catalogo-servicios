@@ -4,3 +4,33 @@ id_servcat  categoria descripcion id_servresp valoracion  disponibilidad  estado
 3 Equipo de comunicaciones y Seguridad  Atención de fallas en la operación en los equipos de comunicaciones y seguridad, así como Asignación de antena para red inalámbrica 1 1 90  A 1
 4 Voceo general Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general 1 2 90  A 1
 5 voceo general Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general 1 2 90  A 1
+
+
+
+
+
+
+
+insert into cat_servcat
+(id_servcat, categoria, descripcion, id_servresp, valoracion, disponibilidad, estado, id_servcob)
+values
+(1, 'Voceo General', 'Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general', 1, 2, 90, 'A', 1);
+
+insert into cat_servcat
+(id_servcat, categoria, descripcion, id_servresp, valoracion, disponibilidad, estado, id_servcob)
+values
+(2, 'Computo de usuario final', 'Asesoría en el uso y operación de computadoras, impresoras, video proyectores, UPS''s y periféricos, así como la reparación de fallas físicas o lógicas, además de Asignación, Reubicación,  Reasignación o baja de equipos', 1, 1, 90, 'A', 1);
+
+
+insert into cat_servcat
+(id_servcat, categoria, descripcion, id_servresp, valoracion, disponibilidad, estado, id_servcob)
+values
+(3, 'Equipo de comunicaciones y Seguridad', 'Atención de fallas en la operación en los equipos de comunicaciones y seguridad, así como Asignación de antena para red inalámbrica', 1, 1, 90, 'A', 1);
+insert into cat_servcat
+(id_servcat, categoria, descripcion, id_servresp, valoracion, disponibilidad, estado, id_servcob)
+values
+(4, 'Voceo general', 'Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general', 1, 2, 90, 'A', 1);
+insert into cat_servcat
+(id_servcat, categoria, descripcion, id_servresp, valoracion, disponibilidad, estado, id_servcob)
+values
+(5, 'voceo general', 'Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general', 1, 2, 90, 'A', 1);

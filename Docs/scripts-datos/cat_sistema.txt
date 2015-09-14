@@ -5,9 +5,30 @@ id_sistema  des_sistema
 4 SISTEMA DE ACCESO
 
 
-
+insert into CAT_SISTEMA
 (id_sistema, des_sistema)
-(1, 'SISTEMA DE VIGILANCIA'),
-(2, 'SISTEMA CONTRA INCENDIOS'),
-(3, 'SISTEMA SISMICO'),
-(4, 'SISTEMA DE ACCESO')
+values
+
+insert into CAT_SISTEMA
+(id_sistema, des_sistema)
+values
+
+
+
+
+insert into CAT_SISTEMA
+(id_sistema, des_sistema)
+values
+(1, 'SISTEMA DE VIGILANCIA');
+insert into CAT_SISTEMA
+(id_sistema, des_sistema)
+values
+(2, 'SISTEMA CONTRA INCENDIOS');
+insert into CAT_SISTEMA
+(id_sistema, des_sistema)
+values
+(3, 'SISTEMA SISMICO');
+insert into CAT_SISTEMA
+(id_sistema, des_sistema)
+values
+(4, 'SISTEMA DE ACCESO');

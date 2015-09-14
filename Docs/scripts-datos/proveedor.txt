@@ -23,28 +23,91 @@ id_proveedor  des_proveedor representante telefono
 22  DISTRIBUIDORA COMPUTACIONAL JERB S.A. DE C.V. HÉCTOR MANUEL GRANADOS BOLAÑOS  36879040
 
 
-
-
+insert into proveedor
 (id_proveedor, des_proveedor, representante, telefono)
-(1, 'SINTEG',  'ING. RICARDO MORALES AGUILAR',  '5260-4778'),
-(2, 'SSI', 'ING. MARGARITA LARA', '55451622'),
-(3, 'DATAPOINT', 'ING. JORGE JAM',  '52729258'),
-(4, 'MICROINGENIERIA EN HARDWARE', 'ING. JUNA MANUEL RIZO', '53341000'),
-(5, 'COMPULINEAS', 'CP. MARTA PEÑA',  '55436077'),
-(6, 'LABORATORIO', ',INR', '59991000'),
-(7, 'ALTERNATIVAS EN COMPUTACIÓN', 'RENE RODRIGUEZ ROMERO', ','),
-(8, 'DEPENDENCIA DE SALUD',  'INR', ','),
-(9, 'EXPERTOS EN COMPUTO Y COMUNICACIONES S.A. DE C.V.', 'JAIME PEREZ', '85031450'),
-(10, 'MANTENIMIENTO Y ASESORIA EN EQUIPO DE COMPUTO S.A. DE C.V.',  'ING. MIGUEL ANGEL PINEDA PEDRAZA',  '27355630'),
-(11, 'GEOANALITICA, S.A. DE C.V.',  'MANUEL OLEA', '10546141'),
-(12, 'SOLUCIONES INTEGRALES AMR', 'ING. JUAN CARLOS AGUIÑAGA', '91711169'),
-(13, 'EVOLUTION SOFTWARE, S.A. DE C.V.',  'OSCAR MARIN ZEA', '56870696'),
-(14, 'INFORMATION TECHNOLOGY BUREAU', 'C. DAVID SOLORZANO FRIAS',  '52438959'),
-(15, 'LA SFIDA S.A. DE C.V.', 'ERICKA NUÑEZ',  '10542946'),
-(16, 'SICTEL',  'ING. EDUARDO SALVADOR GONZALEZ',  '56824654'),
-(17, 'PTI DE MEXICO, S.A. DE C.V.', 'PENDIENTE', '-'),
-(18, 'PROFESIONALES EN COMPUTACION S.A. DE C.V.', 'CELIA AVALOS',  '56662016'),
-(19, 'HERRAMIENTAS INFORMATICAS Y DE PRODUCTIVIDAD',  'CARLOS ALBERTO GARCIA HERRERA', '19944540'),
-(20, 'INDUSTRIAL SOLUTIONS TECHNOLOGY', 'LIC. ELIZABETH  MÁRQUEZ  ALONSO', '52206722 y 23'),
-(21, 'SEGURIDAD ELECTRÓNICA Y COMUNICACIONES, S.A. DE C.V.',  'ING. SERGIO VELAZQUEZ',  '55302028'),
-(22, 'DISTRIBUIDORA COMPUTACIONAL JERB S.A. DE C.V.', 'HÉCTOR MANUEL GRANADOS BOLAÑOS',  '36879040')
+values
+(1, 'SINTEG',  'ING. RICARDO MORALES AGUILAR',  '5260-4778');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(2, 'SSI', 'ING. MARGARITA LARA', '55451622');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(3, 'DATAPOINT', 'ING. JORGE JAM',  '52729258');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(4, 'MICROINGENIERIA EN HARDWARE', 'ING. JUNA MANUEL RIZO', '53341000');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(5, 'COMPULINEAS', 'CP. MARTA PEÑA',  '55436077');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(6, 'LABORATORIO', 'INR', '59991000');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(7, 'ALTERNATIVAS EN COMPUTACIÓN', 'RENE RODRIGUEZ ROMERO', ',');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(8, 'DEPENDENCIA DE SALUD',  'INR', ',');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(9, 'EXPERTOS EN COMPUTO Y COMUNICACIONES S.A. DE C.V.', 'JAIME PEREZ', '85031450');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(10, 'MANTENIMIENTO Y ASESORIA EN EQUIPO DE COMPUTO S.A. DE C.V.',  'ING. MIGUEL ANGEL PINEDA PEDRAZA',  '27355630');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(11, 'GEOANALITICA, S.A. DE C.V.',  'MANUEL OLEA', '10546141');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(12, 'SOLUCIONES INTEGRALES AMR', 'ING. JUAN CARLOS AGUIÑAGA', '91711169');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(13, 'EVOLUTION SOFTWARE, S.A. DE C.V.',  'OSCAR MARIN ZEA', '56870696');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(14, 'INFORMATION TECHNOLOGY BUREAU', 'C. DAVID SOLORZANO FRIAS',  '52438959');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(15, 'LA SFIDA S.A. DE C.V.', 'ERICKA NUÑEZ',  '10542946');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(16, 'SICTEL',  'ING. EDUARDO SALVADOR GONZALEZ',  '56824654');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(17, 'PTI DE MEXICO, S.A. DE C.V.', 'PENDIENTE', '-');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(18, 'PROFESIONALES EN COMPUTACION S.A. DE C.V.', 'CELIA AVALOS',  '56662016');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(19, 'HERRAMIENTAS INFORMATICAS Y DE PRODUCTIVIDAD',  'CARLOS ALBERTO GARCIA HERRERA', '19944540');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(20, 'INDUSTRIAL SOLUTIONS TECHNOLOGY', 'LIC. ELIZABETH  MÁRQUEZ  ALONSO', '52206722 y 23');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(21, 'SEGURIDAD ELECTRÓNICA Y COMUNICACIONES, S.A. DE C.V.',  'ING. SERGIO VELAZQUEZ',  '55302028');
+insert into proveedor
+(id_proveedor, des_proveedor, representante, telefono)
+values
+(22, 'DISTRIBUIDORA COMPUTACIONAL JERB S.A. DE C.V.', 'HÉCTOR MANUEL GRANADOS BOLAÑOS',  '36879040');
