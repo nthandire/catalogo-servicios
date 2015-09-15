@@ -40,7 +40,7 @@
 				<g:each in="${solicitudDetalleInstanceList.sort{ it.prioridad?:(it?.idServ?.prioridad?:3) }}" status="i" var="solicitudDetalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="show" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>
+						<td><g:link action="edit" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>
 
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idServcat")}</td>
 

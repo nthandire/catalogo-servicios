@@ -46,7 +46,7 @@ class SolicitudTecnicoController {
         def nombre = file.originalFilename
         solicitudArchivoadjuntoInstance.nombre = nombre
         solicitudArchivoadjuntoInstance.datos = file.getBytes()
-        solicitudArchivoadjuntoInstance.tamaño = 
+        solicitudArchivoadjuntoInstance.tamaño =
           solicitudArchivoadjuntoInstance.datos.size()
         solicitudArchivoadjuntoInstance.idUsuario = springSecurityService.principal.id
         solicitudArchivoadjuntoInstance.ipTerminal = request.getRemoteAddr()
@@ -105,6 +105,34 @@ class SolicitudTecnicoController {
         }
 
         solicitudDetalleInstance.properties = params
+
+        if (!solicitudDetalleInstance.save(flush: true)) {
+            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+            return
+        }
+
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
+        redirect(action: "edit", id: id)
+    }
+
+    def solucionar(Long id) {
+        def solicitudDetalleInstance = SolicitudDetalle.get(id)
+        if (!solicitudDetalleInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+            redirect(action: "list")
+            return
+        }
+
+        solicitudDetalleInstance.properties = params
+
+        if (!solicitudDetalleInstance?.solucion) {
+          solicitudDetalleInstance.errors.rejectValue("solucion", "no.error.estandar",
+                    "Debe capturar la solución")
+          render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+          return
+        }
+
         solicitudDetalleInstance.fechaSolucion = new Date()
 
         if (!solicitudDetalleInstance.save(flush: true)) {
@@ -125,8 +153,22 @@ class SolicitudTecnicoController {
             }
         }
 
-        log.debug("Termino bien el salvado")
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
+/* TODO: habilitar cuando no este en desarrollo {copiado de otro lado}
+        def idUsuario = springSecurityService.principal.id
+        def personasInstance = Usuario.get(idUsuario)
+        sendMail {
+          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
+          subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
+          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
+            "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
+            "pronto seras contactado con relación a el\n"
+        }
+*/
+
+        flash.message = message(code: 'default.updated.message',
+                                args: [message(code: 'solicitudDetalle.label',
+                                               default: 'SolicitudDetalle'),
+                                solicitudDetalleInstance.toString()])
         redirect(action: "list")
     }
 

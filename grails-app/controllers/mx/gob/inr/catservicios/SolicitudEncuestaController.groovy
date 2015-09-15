@@ -79,22 +79,4 @@ class SolicitudEncuestaController {
         redirect(action: "show", id: solicitudInstance.id)
     }
 
-    def x_delete(Long id) {
-        def solicitudInstance = Solicitud.get(id)
-        if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            solicitudInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
-            redirect(action: "show", id: id)
-        }
-    }
 }
