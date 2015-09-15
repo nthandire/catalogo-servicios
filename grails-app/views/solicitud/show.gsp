@@ -78,7 +78,7 @@
 			</H1>
 
 			<div class="row-fluid">
--				<div class="span10 offset1">
+				<div class="span10 offset1">
 					<ul class="one-to-many">
 						<g:each in="${solicitudInstance?.detalles?}" var="d">
 						    <li><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>

@@ -40,7 +40,7 @@ Estas son las notas y acuerdos a los que se llego en la junta de avance del 3 de
 
 + 19.- Mesa de servicios creará un manual en PDF de requisitos para capturar "Solicitudes de servicios". Se agregará una liga apuntando a esté manual en las pantallas que lo requieran.
 
-20.- En la pantalla de Encuesta, agregar las descripciones de lo solicitado, y las soluciones dadas.
++ 20.- En la pantalla de Encuesta, agregar las descripciones de lo solicitado, y las soluciones dadas.
 
 + 21.- En Encuesta poner mensaje de a quien se puede mandar correos con quejas y sugerencias. (Este es un requerimiento nuevo, pero no es nada costoso). Lo pondremos en el pie de todos las páginas del sistema.
 
