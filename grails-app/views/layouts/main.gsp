@@ -50,7 +50,6 @@
 		<div class="footer" role="contentinfo">
 			<div class="row-fluid">
 				<div class="span2 offset1" style="color:#969696">Versión ${grailsApplication.metadata['app.version']}</div>
-				<div class="span4 offset5"><a href="mailto:sast@inr.gob.mx?Subject=Comentarios,%20quejas%20y/o%20sugerencias" target="_top">Comentarios, quejas y/o sugerencias a: SAST, sast@inr.gob.mx</a></div>
 			</div>
 		</div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
