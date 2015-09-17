@@ -28,18 +28,17 @@
 		<g:message code="solicitudDetalle.idPrograma.label" default="Id Programa" />
 		
 	</label>
-	<g:select id="idPrograma" name="idPrograma.id" from="${mx.gob.inr.catservicios.CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
-<!--
+<g:if test="${equipo}">
 <div class="fieldtablecontain">
   <label for="resguardo">
     <g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Equipo" />
   </label>
-  <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle" 
-		from="pesos{ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}" optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}" class="many-to-one"/>
+  ${equipo}
 </div>
--->
+</g:if>
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'solucion', 'error')} ">
   <label for="solucion">

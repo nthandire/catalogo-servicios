@@ -28,7 +28,7 @@ class SolicitudDetalleController {
 
     def save() {
         log.debug("params = $params")
-        def paramsFiltrado = params.findAll {it.key != 'idSolicitud' && (it.key != 'idResguardoentregadetalle' || !it.value )}
+        def paramsFiltrado = params.findAll {it.key != 'idSolicitud' && (it.key != 'idResguardoentregadetalle' || it.value )}
         log.debug("paramsFiltrado = $paramsFiltrado")
         def solicitudDetalleInstance = new SolicitudDetalle(paramsFiltrado)
         def solicitud = Solicitud.get(params.idSolicitud)
@@ -90,7 +90,7 @@ class SolicitudDetalleController {
         }
 
         log.debug("params = $params")
-        def paramsFiltrado = params.findAll {it.key != 'idResguardoentregadetalle' || !it.value}
+        def paramsFiltrado = params.findAll {it.key != 'idResguardoentregadetalle' || it.value}
         log.debug("paramsFiltrado = $paramsFiltrado")
         solicitudDetalleInstance.properties = paramsFiltrado
 

@@ -83,7 +83,15 @@ class SolicitudTecnicoController {
             return
         }
 
-        [solicitudDetalleInstance: solicitudDetalleInstance]
+        def resg = ""
+        if (solicitudDetalleInstance?.idResguardoentregadetalle) {
+          log.debug("idResguardoentregadetalle = $solicitudDetalleInstance?.idResguardoentregadetalle")
+          resg = ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle where id = ?', solicitudDetalleInstance?.idResguardoentregadetalle)[0]
+        }
+
+        log.debug{"Resg = $resg"}
+        [solicitudDetalleInstance: solicitudDetalleInstance,
+          equipo: resg?resg.toString():'']
     }
 
     def update(Long id, Long version) {
