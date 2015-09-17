@@ -100,3 +100,431 @@ id_resguardo  inventario  consecutivo descripcion observaciones serie estatus_bi
 10  30  4 MOUSE CARGA IRI MXD80A5412_M  N D <null>  A 4 99  <null>  <null>  <null>  <null>  <null>  <null>  0 6 7000 D80A_M
 10  31  1 COMPUTADORA (SEGÚN ANEXO TÉCNICO) CARGA IRI MXD80A5415  N D <null>  A 1 100 <null>  <null>  <null>  <null>  <null>  <null>  0 6 7000 D80A
 
+
+
+
+
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(1, 0, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'NXM0RAL016217045FF7600', 'N', 'A', null, 'A', 1, 1, null,null,359, 370, '2015-03-11 11:14:00.0', '192.168.9.27', 1, 2, 'E1-431-4639');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(2, 2, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'C02G815GDRJG', 'N', 'D', null, 'A', 1, 2, null,null,null,null, null, null, 0, 3, 'A1297');
+
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 3, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'C02K3CLCDNCR', 'N', 'D', null, 'A', 1, 3, null,null,null,null, null, null, 0, 3, 'A1418');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 3, 2, 'MONITOR', 'CARGA IRI', 'C02K3CLCDNCR-M', 'N', 'D', null,'A', 2, 4, null,null,null,null, null, null, 0, 3, 'A1418');
+
+
+
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 3, 3, 'TECLADO', 'CARGA IRI', 'DG725141FA3DR05A2', 'N', 'D', null, 'A', 3, 5, null,null,null,null, null, null, 0, 3, 'A1314');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 3, 4, 'MOUSE', 'CARGA IRI', 'C02K3CLCDNCR_M', 'N', 'D', null, 'A', 4, 6, null,null,null,null, null, null, 0, 3, 'A1418_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 4, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'D25K81DMDNML', 'N', 'D', null, 'A', 1, 7, null,null,null,null, null, null, 0, 3, 'A1418');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 4, 2, 'MONITOR', 'CARGA IRI', 'D25K81DMDNML-M', 'N', 'D', null,'A', 2, 8, null,null,null,null, null, null, 0, 3, 'A1418');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 4, 3, 'TECLADO', 'CARGA IRI', 'DG722154NC0CDR05A9', 'N', 'D', null, 'A', 3, 9, null,null,null,null, null, null, 0, 3, 'A1314');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 4, 4, 'MOUSE', 'CARGA IRI', 'D25K81DMDNML_M', 'N', 'D', null, 'A', 4, 10, null,null,null,null, null, null, 0, 3, 'A1418_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 5, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'D25K81DQDN', 'N', 'D', null, 'A', 1, 11, null,null,null,null, null, null, 0, 3, 'A1418');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 5, 2, 'MONITOR', 'CARGA IRI', 'D25K81DQDN-M', 'N', 'D', null,'A', 2, 12, null,null,null,null, null, null, 0, 3, 'A1418');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 5, 3, 'TECLADO', 'CARGA IRI', 'DG722154MWQDR05AA', 'N', 'D', null, 'A', 3, 13, null,null,null,null, null, null, 0, 3, 'A1314');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(3, 5, 4, 'MOUSE', 'CARGA IRI', 'D25K81DQDN_M', 'N', 'D', null, 'A', 4, 14, null,null,null,null, null, null, 0, 3, 'A1418_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(4, 6, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'C02HX34JDRV7', 'N', 'D', null, 'A', 1, 15, null,null,null,null, null, null, 0, 3, 'A1465');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(5, 7, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'C02HM05RDHJF', 'N', 'D', null, 'A', 1, 16, null,null,null,null,null, null, 0, 3, 'IMAC A1311');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(5, 7, 2, 'MONITOR', 'CARGA IRI', 'C02HM05RDHJF-M', 'N', 'D', null,'A', 2, 17, null,null,null,null, null, null, 0, 3, 'A1465');
+
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(5, 7, 3, 'TECLADO', 'CARGA IRI', 'DG721652P2CDR05AU-T', 'N', 'D', null,'A', 3, 18, null,null,null,null, null, null, 0, 3, 'A1314');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(5, 7, 4, 'MOUSE', 'CARGA IRI', 'C02HM05RDHJF_M', 'N', 'D', null, 'A', 4, 19, null,null,null,null,null, null, 0, 3, 'IMAC A1311_M');
+
+
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(6, 8, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'H013701YEUE', 'N', 'D', null, 'A', 1, 20, null,null,null,null,null, null, 0, 3, 'MAC PRO');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(6, 8, 2, 'MONITOR', 'CARGA IRI', 'I11C030363', 'N', 'D', null, 'A', 2, 21, null,null,null,null,null, null, 0, 3, 'ELO TOUCHSYSTEM');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(6, 8, 3, 'TECLADO', 'CARGA IRI', 'H013701YEUE-M', 'N', 'D', null,'A', 3, 22, null,null,null,null,null, null, 0, 3, 'MACBOOK PRO');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(6, 8, 4, 'MOUSE', 'CARGA IRI', 'H013701YEUE_M', 'N', 'D', null, 'A', 4, 23, null,null,null,null,null, null, 0, 3, 'MAC PRO_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(7, 9, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'C2VHQMD4DTY3', 'N', 'D', null, 'A', 1, 24, null,null,null,null,null, null, 0, 3, 'MACBOOK A1278');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(8, 10, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'W89270Q766E', 'N', 'D', null, 'A', 1, 25, null,null,null,null,null, null, 0, 3, 'MACBOOK PRO');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(8, 11, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'W89270WW66E', 'N', 'D', null, 'A', 1, 26, null,null,null,null,null, null, 0, 3, 'MACBOOK PRO');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(9, 12, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'C4N0BC25694017E', 'N', 'D', null, 'A', 1, 27, null,null,null,null, null, null, 0, 5, 'X44H');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 13, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5253', 'N', 'D', null, 'A', 1, 28, null,null,null,null,null, null, 0, 6, '7000 D80A');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 13, 2, 'MONITOR', 'CARGA IRI', 'MX-0J0947-47605-3BH-CM9R', 'N', 'D', null,'A', 2, 29, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 13, 3, 'TECLADO', 'CARGA IRI', 'ZM4939020912', 'N', 'D', null, 'A', 3, 30, null,null,null,null,null, null, 0, 25, 'KB-06XE');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 13, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5253_M', 'N', 'D', null, 'A', 4, 31, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 14, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5272', 'N', 'D', null, 'A', 1, 32, null,null,null,null,null, null, 0, 6, '7000 D80A');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 14, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-2CR-D3LU', 'N', 'D', null,'A', 2, 33, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 14, 3, 'TECLADO', 'CARGA IRI', 'ZM6907062047', 'N', 'D', null, 'A', 3, 34, null,null,null,null, null, null, 0, 25, 'K645');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 14, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5272_M', 'N', 'D', null, 'A', 4, 35, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 15, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5301', 'N', 'D', null, 'A', 1, 36, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 15, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-2CQ-D2K8', 'N', 'D', null,'A', 2, 37, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 15, 3, 'TECLADO', 'CARGA IRI', '0200701892795', 'N', 'D', null, 'A', 3, 38, null,null,null,null, null, null, 0, 26, '1406');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 15, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5301_M', 'N', 'D', null, 'A', 4, 39, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 16, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5303', 'N', 'D', null, 'A', 1, 40, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 16, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-2CR-D520', 'N', 'D', null,'A', 2, 41, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 16, 3, 'TECLADO', 'CARGA IRI', '0200703042799', 'N', 'D', null, 'A', 3, 42, null,null,null,null, null, null, 0, 26, '200');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 16, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5303_M', 'N', 'D', null, 'A', 4, 43, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 17, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5306', 'N', 'D', null, 'A', 1, 44, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 17, 2, 'MONITOR', 'CARGA IRI', 'MX-05R108-47605-31D-DCFW', 'N', 'D', null,'A', 2, 45, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 17, 3, 'TECLADO', 'CARGA IRI', '00063162', 'N', 'D', null, 'A', 3, 46, null,null,null,null,null,null, 0, 24, 'AT-9900-1');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 17, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5306_M', 'N', 'D', null, 'A', 4, 47, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 18, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5315', 'N', 'D', null, 'A', 1, 48, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 18, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-2CQ-D2PS', 'N', 'D', null,'A', 2, 49, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 18, 3, 'TECLADO', 'CARGA IRI', 'ZCE7C5700967', 'N', 'D', null, 'A', 3, 50, null,null,null,null,null, null, 0, 25, 'KB-0138');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 18, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5315_M', 'N', 'D', null, 'A', 4, 51, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 19, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5325', 'N', 'D', null, 'A', 1, 52, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 19, 2, 'MONITOR', 'CARGA IRI', 'YC60H9LB604302', 'N', 'D', null, 'A', 2, 53, null,null,null,null, null, null, 0, 22, 'B1930');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 19, 3, 'TECLADO', 'CARGA IRI', 'N09C02239', 'N', 'D', null, 'A', 3, 54, null,null,null,null,null,null, 0, 28, 'MEDIA CLICK 411');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 19, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5325_M', 'N', 'D', null, 'A', 4, 55, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 20, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5330', 'N', 'D', null, 'A', 1, 56, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 20, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-317-D29K', 'N', 'D', null,'A', 2, 57, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 20, 3, 'TECLADO', 'CARGA IRI', 'ZM7402129437', 'N', 'D', null, 'A', 3, 58, null,null,null,null, null, null, 0, 25, 'K369');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 20, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5330_M', 'N', 'D', null, 'A', 4, 59, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 21, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5333', 'N', 'D', null, 'A', 1, 60, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 21, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-2CR-D4ZH', 'N', 'D', null,'A', 2, 61, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 21, 3, 'TECLADO', 'CARGA IRI', 'ZCE142600302', 'N', 'D', null, 'A', 3, 62, null,null,null,null,null, null, 0, 25, 'KU-0138');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 21, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5333_M', 'N', 'D', null, 'A', 4, 63, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 22, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5334', 'N', 'D', null, 'A', 1, 64, null,null,null,null,null, null, 0, 6, '7000 D80A');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 22, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-317-D299', 'N', 'D', null,'A', 2, 65, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 22, 3, 'TECLADO', 'CARGA IRI', 'ZM5239049803', 'N', 'D', null, 'A', 3, 66, null,null,null,null, null, null, 0, 25, 'K659');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 22, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5334_M', 'N', 'D', null, 'A', 4, 67, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 23, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5338', 'N', 'D', null, 'A', 1, 68, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 23, 2, 'MONITOR', 'CARGA IRI', 'CNC104R4FD', 'N', 'D', null, 'A', 2, 69, null,null,null,null, null, null, 0, 11, 'TFT185W80PS');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 23, 3, 'TECLADO', 'CARGA IRI', 'ZM5639006680', 'N', 'D', null, 'A', 3, 70, null,null,null,null, null, null, 0, 25, 'K639');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 23, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5338_M', 'N', 'D', null, 'A', 4, 71, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 24, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5343', 'N', 'D', null, 'A', 1, 72, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 24, 2, 'MONITOR', 'CARGA IRI', '201MX00484', 'N', 'D', null, 'A', 2, 73, null,null,null,null, null, null, 0, 6, '55AV');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 24, 3, 'TECLADO', 'CARGA IRI', 'ZM2800233895', 'N', 'D', null, 'A', 3, 74, null,null,null,null,null, null, 0, 25, 'KB-12M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 24, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5343_M', 'N', 'D', null, 'A', 4, 75, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 25, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5344', 'N', 'D', null, 'A', 1, 76, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 25, 2, 'MONITOR', 'CARGA IRI', 'ETLHV0D16005111C268508', 'N', 'D', null, 'A', 2, 77, null,null,null,null, null, null, 0, 2, 'V193W');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 25, 3, 'TECLADO', 'CARGA IRI', 'ZM2800233902', 'N', 'D', null, 'A', 3, 78, null,null,null,null,null, null, 0, 1, 'K 632');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 25, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5344_M', 'N', 'D', null, 'A', 4, 79, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 26, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5346', 'N', 'D', null, 'A', 1, 80, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 26, 2, 'MONITOR', 'CARGA IRI', '22794F8J3869', 'N', 'D', null, 'A', 2, 81, null,null,null,null, null, null, 0, 8, '800F');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 26, 3, 'TECLADO', 'CARGA IRI', '102040415615', 'N', 'D', null, 'A', 3, 82, null,null,null,null,null, null, 0, 1, 'KB-9902E');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 26, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5346_M', 'N', 'D', null, 'A', 4, 83, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 27, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5365', 'N', 'D', null, 'A', 1, 84, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 27, 2, 'MONITOR', 'CARGA IRI', 'MX-0J0947-47605-3BH-CMAR', 'N', 'D', null,'A', 2, 85, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 27, 3, 'TECLADO', 'CARGA IRI', 'ZM1402004183', 'N', 'D', null, 'A', 3, 86, null,null,null,null, null, null, 0, 25, 'K639');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 27, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5365_M', 'N', 'D', null, 'A', 4, 87, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 28, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5403', 'N', 'D', null, 'A', 1, 88, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 28, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-2CR-D4XN', 'N', 'D', null,'A', 2, 89, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 28, 3, 'TECLADO', 'CARGA IRI', '00010072', 'N', 'D', null, 'A', 3, 90, null,null,null,null,null,null, 0, 24, 'AT-9900-1');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 28, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5403_M', 'N', 'D', null, 'A', 4, 91, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 29, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5408', 'N', 'D', null, 'A', 1, 92, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 29, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-2CR-D51C', 'N', 'D', null,'A', 2, 93, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 29, 3, 'TECLADO', 'CARGA IRI', 'ZM5845037752', 'N', 'D', null, 'A', 3, 94, null,null,null,null, null, null, 0, 25, 'K645');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 29, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5408_M', 'N', 'D', null, 'A', 4, 95, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 30, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5412', 'N', 'D', null, 'A', 1, 96, null,null,null,null,null, null, 0, 6, '7000 D80A');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 30, 2, 'MONITOR', 'CARGA IRI', 'MY-05R108-47603-317-D2D2', 'N', 'D', null,'A', 2, 97, null,null,null,null,null, null, 0, 8, 'ULTRASHARP 1504FP');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 30, 3, 'TECLADO', 'CARGA IRI', 'ZM5845036870', 'N', 'D', null, 'A', 3, 98, null,null,null,null, null, null, 0, 25, 'K645');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 30, 4, 'MOUSE', 'CARGA IRI', 'MXD80A5412_M', 'N', 'D', null, 'A', 4, 99, null,null,null,null,null, null, 0, 6, '7000 D80A_M');
+insert into resguardo_entrega_detalle
+(id_resguardo, inventario, consecutivo, descripcion, observaciones, serie, estatus_bien, estatus_asignacion, id_baja, status_soptec, id_tipoanexotecnico, id_resguardoentregadetalle, obs_baja, fecha_baja, id_empleado, id_usuario, fecha_modificacion, ip_terminal, modificacion, id_marca, des_modelo)
+values
+(10, 31, 1, 'COMPUTADORA (SEGÚN ANEXO TÉCNICO)', 'CARGA IRI', 'MXD80A5415', 'N', 'D', null, 'A', 1, 100, null,null,null,null,null, null, 0, 6, '7000 D80A');
