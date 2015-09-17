@@ -65,7 +65,7 @@
             params="'subcategoryId='+subcategoryId"/>
     }
 </script>
-
+<%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')}">
 	<label for="idServfinal">
 		<g:message code="cat_serv.servCat.final.label" default="Categoría final" />
@@ -101,7 +101,7 @@
             params="'subcategoryId='+subcategoryId"/>
     }
 </script>
-
+--%>
 
 
 <!--

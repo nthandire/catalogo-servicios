@@ -30,6 +30,9 @@
   <div class="fieldtablecontain">
     ${"Solución: " + d?.solucion.encodeAsHTML()}
   </div>
+  <div class="fieldtablecontain">
+    -------------------------------------------
+  </div>
 </g:each>
 <br/>
 <h1>Encuestas</h1>
