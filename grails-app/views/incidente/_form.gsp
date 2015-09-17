@@ -11,7 +11,7 @@
 		<g:message code="incidente.idSistema.label" default="Id Sistema" />
 
 	</label>
-	<g:select id="idSistema" name="idSistema.id" from="${mx.gob.inr.catservicios.CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
@@ -34,7 +34,7 @@
 		<g:message code="cat_serv.servCat.label" default="Cat" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servCat" name="idServ.servSub.servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" required="" value="${incidenteInstance?.idServ?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['':'Seleccione una...']}"/>
+	<g:select id="servCat" name="idServ.servSub.servCat.id" from="${Cat_servCat.list()}" optionKey="id" required="" value="${incidenteInstance?.idServ?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['':'Seleccione una...']}"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
@@ -70,7 +70,7 @@
 	<label for="idServfinal">
 		<g:message code="cat_serv.servCat.final.label" default="Categoría final" />
 	</label>
-	<g:select id="servCat" name="idServfinal.servSub.servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${incidenteInstance?.idServfinal?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChangedFinal(this.value)" noSelection="${['':'Seleccione una...']}"/>
+	<g:select id="servCat" name="idServfinal.servSub.servCat.id" from="${Cat_servCat.list()}" optionKey="id" value="${incidenteInstance?.idServfinal?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChangedFinal(this.value)" noSelection="${['':'Seleccione una...']}"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')} required">
@@ -123,7 +123,7 @@
 	<label for="idServresp">
 		<g:message code="incidente.idServresp.label" default="Id Servresp" />
 	</label>
-	<g:select id="idServresp" name="idServresp.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" value="${incidenteInstance?.idServresp?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="idServresp" name="idServresp.id" from="${Cat_servResp.list()}" optionKey="id" value="${incidenteInstance?.idServresp?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idCaptura', 'error')} ">
@@ -284,7 +284,7 @@
 	<label for="idPrograma">
 		<g:message code="incidente.idPrograma.label" default="Id Programa" />
 	</label>
-	<g:select id="idPrograma" name="idPrograma.id" from="${mx.gob.inr.catservicios.CatPrograma.list()}" optionKey="id" value="${incidenteInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}" optionKey="id" value="${incidenteInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'ipTerminal', 'error')} ">

@@ -20,10 +20,6 @@ class IncidenteController {
         [incidenteInstanceList: Incidente.list(params), incidenteInstanceTotal: Incidente.count()]
     }
 
-    def create() {
-        [incidenteInstance: new Incidente(params)]
-    }
-
     def save() {
         def incidenteInstance = new Incidente(params)
         incidenteInstance.fechaIncidente = new Date()
