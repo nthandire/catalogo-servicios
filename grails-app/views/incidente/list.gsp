@@ -47,58 +47,47 @@
 				</thead>
 				<tbody>
 				<g:each in="${incidenteInstanceList}" status="i" var="incidenteInstance">
+          <% def liga = createLink(action: "edit", id: incidenteInstance.id) %>
           <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
             <td>
-              <g:link action="edit" id="${incidenteInstance.id}">
-                ${fieldValue(bean: incidenteInstance, field: "idSistema")}
-              </g:link>
+                <a href="${liga}">
+                  ${fieldValue(bean: incidenteInstance, field: "idSistema")}
+                </a>
             </td>
-            <%--
-            <td>
-              <button type="button" class="btn btn-link" data-target="myEditModal"
-                data-toggle="#modal"
-                onClick="$('#myEditModal .modal-body').load('<g:createLink action="edit" id="${incidenteInstance.id}" />');">
-                ${fieldValue(bean: incidenteInstance, field: "idSistema") }
-              </button>
-              <a href=<g:createLink action="edit" id="${incidenteInstance.id}" /> onClick="$(\"#myModal .modal-body\").load(<g:createLink action=\"edit\" id=\"${incidenteInstance.id}\" />);">
-                ${fieldValue(bean: incidenteInstance, field: "idSistema")}
 
+            <td>
+              <a href="${liga}">
+                ${fieldValue(bean: incidenteInstance, field: "idResguardoentregadetalle")}
               </a>
             </td>
-            --%>
 
             <td>
-              <g:link action="edit" id="${incidenteInstance.id}">
-                ${fieldValue(bean: incidenteInstance, field: "idResguardoentregadetalle")}
-              </g:link>
-            </td>
-
-            <td>
-              <g:link action="edit" id="${incidenteInstance.id}">
+              <a href="${liga}">
                 <g:formatDate date="${incidenteInstance.fechaIncidente}" />
-              </g:link>
+              </a>
             </td>
 
             <td>
-              <g:link action="edit" id="${incidenteInstance.id}">
+              <a href="${liga}">
                 ${fieldValue(bean: incidenteInstance, field: "numeroIncidente")}
-              </g:link>
+              </a>
             </td>
 
             <td>
-              <g:link action="edit" id="${incidenteInstance.id}">
+              <a href="${liga}">
                 ${fieldValue(bean: incidenteInstance, field: "estado")}
-              </g:link>
+              </a>
             </td>
 
             <td>
-              <g:link action="edit" id="${incidenteInstance.id}">
+              <a href="${liga}">
                 ${fieldValue(bean: incidenteInstance, field: "idReporta")}
-              </g:link>
+              </a>
             </td>
 
           </tr>
+          </a>
         </g:each>
         </tbody>
 			</table>
