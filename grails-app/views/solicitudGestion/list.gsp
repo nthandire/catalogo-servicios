@@ -28,31 +28,31 @@
 			<table>
 				<thead>
 					<tr>
-					
+
 						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Numero Solicitud')}" />
-					
+
 						<g:sortableColumn property="nombre" title="Solicitante" />
-					
+
 						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha de autorización')}" />
-					
+
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
-					
+
 						<g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
-					
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${autorizadosInstanceList}" status="i" var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
-					
+
 						<td>${Usuario.get(solicitudInstance.idSolicitante).username}</td>
-					
+
 						<td><g:formatDate date="${solicitudInstance.fechaVb?:solicitudInstance.fechaAutoriza}" /></td>
-					
+
 						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
-					
+
 						<td>
 							<g:if test="${solicitudInstance?.estado}">
 								<span class="property-value" aria-labelledby="estado-label">
@@ -62,7 +62,7 @@
 								</span>
 							</g:if>
 						</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>

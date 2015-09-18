@@ -19,7 +19,7 @@ class SolicitudCoordinadorController {
     def listDetalle(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
-        def query = 
+        def query =
             "  from SolicitudDetalle d             " +
             " where idTecnico is null              " +
             "   and exists                         " +
@@ -128,6 +128,7 @@ class SolicitudCoordinadorController {
     }
 
     def edit(Long id) {
+      log.debug("params = $params")
         def solicitudDetalleInstance = SolicitudDetalle.get(id)
         if (!solicitudDetalleInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
@@ -170,7 +171,7 @@ class SolicitudCoordinadorController {
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
           subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " + 
+          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
             "pronto seras contactado con relación a el\n"
         }
@@ -210,10 +211,11 @@ class SolicitudCoordinadorController {
     }
 
     def update(Long id, Long version) {
+      log.debug("params = $params")
         def solicitudDetalleInstance = SolicitudDetalle.get(id)
         if (!solicitudDetalleInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
-            redirect(action: "list")
+            redirect(action: "listDetalle")
             return
         }
 
@@ -227,7 +229,22 @@ class SolicitudCoordinadorController {
             }
         }
 
+        def userID = springSecurityService.principal.id
+        log.debug("userID = $userID")
+
+        def firmaTeclada = params['passwordfirma']
+        log.debug("firmaTeclada = $firmaTeclada")
+        def firma = Firmadigital.findById(userID)?.passwordfirma
+        log.debug("firma = $firma")
+
         solicitudDetalleInstance.properties = params
+
+        if (firmaTeclada != firma) {
+          log.debug("Error en contraseña")
+            flash.error = "Error en contaseña"
+            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+            return
+        }
 
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])

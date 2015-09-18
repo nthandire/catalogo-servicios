@@ -43,10 +43,10 @@
   <label for="idTecnico">
     <g:message code="solicitudDetalle.idTecnico.label" default="Tecnico" />
   </label>
-  <g:select id="idTecnico" name="idTecnico"
+  <g:select id="idTecnico" name="idTecnico" required="true"
     from="${Usuario.executeQuery("from Usuario u where exists( from UsuarioRol ur where ur.usuario.id = u.id and exists ( from Rol r where r.id = ur.rol.id and r.authority = 'ROLE_SAST_TECNICO'))")}"
       optionKey="id" value="${solicitudDetalleInstance?.idTecnico}" class="many-to-one"
-      noSelection="['null': '']"/>
+      noSelection="['': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcionTecnica', 'error')} ">

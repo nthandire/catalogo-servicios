@@ -11,8 +11,8 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list">Lista de servicios</g:link></li>
-        <li><g:link class="back" action="showDetalle" id="${solicitudDetalleInstance?.idSolicitud?.id}">Regresar al servicio</g:link></li>
+        <li><g:link class="list" action="list">Lista de servicios</g:link></li>
+        <li><g:link class="back" action="show" id="${solicitudDetalleInstance?.idSolicitud?.id}">Regresar al servicio</g:link></li>
 			</ul>
 		</div>
 		<div id="edit-solicitudDetalle" class="content scaffold-edit" role="main">
@@ -33,9 +33,32 @@
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
+
+
+      <H1>
+        <g:message code="solicitud.archivos.label" default="Archivos" />
+      </H1>
+
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <ul class="one-to-many">
+            <g:each in="${solicitudDetalleInstance.idSolicitud?.archivos}" var="a">
+              <li><g:link action="showArchivo" id="${a.id}">${a?.encodeAsHTML()}</g:link>
+              &nbsp; : &nbsp;
+              <g:link action="download" id="${a.id}">descargarlo</g:link></li>
+            </g:each>
+            <li class="add">
+              <g:link class="create" action="create"
+                params="['solicitud.id': solicitudDetalleInstance?.idSolicitud?.id, 'detalle.id': solicitudDetalleInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-					<!--g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /-->
+
 				</fieldset>
 			</g:form>
 		</div>

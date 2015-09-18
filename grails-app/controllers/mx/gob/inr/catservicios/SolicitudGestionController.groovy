@@ -80,6 +80,46 @@ class SolicitudGestionController {
             terminadasInstanceTotal: terminadas]
     }
 
+    def create() {
+      log.debug("params = $params")
+      def solicitudArchivoadjuntoInstance = new SolicitudArchivoadjunto()
+      def solicitud = Solicitud.get(params.solicitud["id"])
+      solicitudArchivoadjuntoInstance.idSolicitud = solicitud
+      [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance, back:params.detalle["id"]]
+    }
+
+    def save() {
+      log.debug("params = $params")
+      def file = request.getFile('file')
+      if(file.empty) {
+        flash.message = "Debe enviar algún archivo"
+        render(view: "create")
+        return
+      } else {
+        def solicitudArchivoadjuntoInstance = new SolicitudArchivoadjunto()
+        def solicitud = Solicitud.get(params.idSolicitud)
+        solicitudArchivoadjuntoInstance.idSolicitud = solicitud
+        def nombre = file.originalFilename
+        solicitudArchivoadjuntoInstance.nombre = nombre
+        solicitudArchivoadjuntoInstance.datos = file.getBytes()
+        solicitudArchivoadjuntoInstance.tamaño =
+          solicitudArchivoadjuntoInstance.datos.size()
+        solicitudArchivoadjuntoInstance.idUsuario = springSecurityService.principal.id
+        solicitudArchivoadjuntoInstance.ipTerminal = request.getRemoteAddr()
+        def dot = nombre.lastIndexOf('.');
+        if (dot > 0)
+          solicitudArchivoadjuntoInstance.tipo = nombre.substring(dot + 1).
+            toUpperCase()
+        else
+          solicitudArchivoadjuntoInstance.tipo = ""
+        if (!solicitudArchivoadjuntoInstance.save(flush: true)) {
+            render(view: "create", model: [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance])
+            return
+        }
+        redirect (action:'edit', id: solicitud.id)
+      }
+    }
+
     def show(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
@@ -244,7 +284,25 @@ class SolicitudGestionController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
-        redirect(action: "show", id: solicitudDetalleInstance.id)
+        redirect(action: "edit", id: solicitudDetalleInstance.id)
+    }
+
+    def download(long id) {
+        SolicitudArchivoadjunto solicitudArchivoadjuntoInstance =
+          SolicitudArchivoadjunto.get(id)
+        if ( SolicitudArchivoadjunto == null) {
+            flash.message = "Documento no encontrado."
+            redirect (controller: "solicitud", action:'list')
+        } else {
+            response.setContentType("APPLICATION/OCTET-STREAM")
+            response.setHeader("Content-Disposition",
+              "Attachment;Filename=\"${solicitudArchivoadjuntoInstance.nombre}\"")
+
+            def outputStream = response.getOutputStream()
+            outputStream << solicitudArchivoadjuntoInstance.datos
+            outputStream.flush()
+            outputStream.close()
+        }
     }
 
 }
