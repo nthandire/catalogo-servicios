@@ -20,7 +20,10 @@
 		<div id="list-autoriza" class="content scaffold-list" role="main">
 			<h1>Solicitudes autorizadas</h1>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			  <div class="message" role="status">${flash.message}</div>
+			</g:if>
+			<g:if test="${flash.error}">
+			  <div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<table>
 				<thead>
