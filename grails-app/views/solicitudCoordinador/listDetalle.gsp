@@ -25,25 +25,33 @@
 			<table>
 				<thead>
 					<tr>
-					
+
 						<th><g:message code="solicitudDetalle.idSolicitud.label" default="Id Solicitud" /></th>
-					
+
+            <g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha de autorización')}" />
+
+						<g:sortableColumn property="tiempo" title="Tiempo de atención" />
+
 						<th><g:message code="solicitudDetalle.idServcat.label" default="Categoría" /></th>
-					
+
 						<g:sortableColumn property="descripcion" title="${message(code: 'solicitudDetalle.descripcion.label', default: 'Descripcion')}" />
-					
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${solicitudDetalleInstanceList}" status="i" var="solicitudDetalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="edit" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>
-					
+
+						<td><g:formatDate date="${solicitudDetalleInstance.idSolicitud.fechaVb?:solicitudDetalleInstance.idSolicitud.fechaAutoriza}" /></td>
+
+            <td>¿ que tiempo ?</td>
+
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idServcat")}</td>
-					
+
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "descripcion")}</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>

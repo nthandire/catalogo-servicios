@@ -202,6 +202,18 @@ class SolicitudGestionController {
             return
         }
 
+        def idUsuario = springSecurityService.principal.id
+        def personasInstance = Usuario.get(solicitudInstance.idVb)
+        sendMail {
+          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
+          subject "Solicitud ${solicitudInstance.toString()} requiere un visto bueno"
+          body "Hola ${personasInstance.username}\n\nLa solicitud folio " +
+            "${solicitudInstance.toString()} requiere que le de su visto bueno, " +
+            "utilice la liga siguiente para revisarla y autorizarla. \n\n" +
+            "<a href='${createLink(controller:"solicitudVB", action: "show", id: solicitudInstance.id)}'>" +
+            "${solicitudInstance.toString()}</a>".encodeAsHTML()
+        }
+
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "list")
     }
