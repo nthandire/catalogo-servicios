@@ -19,8 +19,6 @@
     <g:message code="solicitud.idAutoriza.label" default="Autoriza" />
   </label>
   <g:select id="idAutoriza" name="idAutoriza" from="${autorizadores}"
-    optionKey="id" optionValue="username" value="${solicitudInstance?.idAutoriza}" class="many-to-one"
+    optionKey="id" optionValue="nombreMostrar" value="${solicitudInstance?.idAutoriza}" class="many-to-one"
     noSelection="['': '']" required=""/>
 </div>
-
-

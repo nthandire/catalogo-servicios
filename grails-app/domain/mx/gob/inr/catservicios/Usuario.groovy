@@ -4,18 +4,25 @@ class Usuario {
 
 	transient springSecurityService
 
-	String username
-	String password
-	char estatus
-	boolean accountExpired
-	boolean accountLocked
-	boolean passwordExpired
+  String username
+  String password
+  char estatus
+  boolean accountExpired
+  boolean accountLocked
+  boolean passwordExpired
+  String nombre
+  String paterno
+	String materno
 
 	// boolean enabled
 	boolean getEnabled() {
 		estatus == 'A'
 	}
-	
+
+  String getNombreMostrar() {
+    toString()
+  }
+
 	private void setEnabled(boolean val) {
 		if (val)
 			estatus = 'A'
@@ -30,7 +37,10 @@ class Usuario {
 		estatus nullable: true, inList: [(char)'A',(char)'B']
 		accountExpired nullable: true
 		accountLocked nullable: true
-		passwordExpired nullable: true
+    passwordExpired nullable: true
+    nombre nullable: true
+    paterno nullable: true
+		materno nullable: true
 	}
 
 	static mapping = {
@@ -61,7 +71,7 @@ class Usuario {
 	}
 
   String toString() {
-    username
+    nombre? nombre + (paterno ? " " + paterno : "") + (materno ? " " + materno : "") : username
   }
 
 }
