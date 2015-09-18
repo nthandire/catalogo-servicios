@@ -25,7 +25,7 @@
 				<g:if test="${solicitudDetalleInstance?.idSolicitud}">
 				<li class="fieldcontain">
 					<span id="idSolicitud-label" class="property-label"><g:message code="solicitudDetalle.idSolicitud.label" default="Id Solicitud" /></span>
-						<span class="property-value" aria-labelledby="idSolicitud-label">${solicitudDetalleInstance?.idSolicitud?.encodeAsHTML()}</span>
+					<span class="property-value" aria-labelledby="idSolicitud-label">${solicitudDetalleInstance?.idSolicitud?.encodeAsHTML()}</span>
 				</li>
 				</g:if>
 

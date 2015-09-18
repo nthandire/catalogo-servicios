@@ -61,6 +61,28 @@ class SolicitudVBController {
         [solicitudInstance: solicitudInstance]
     }
 
+    def showDetalle(Long id) {
+        def solicitudDetalleInstance = SolicitudDetalle.get(id)
+        if (!solicitudDetalleInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [solicitudDetalleInstance: solicitudDetalleInstance]
+    }
+
+    def showArchivo(Long id) {
+        def solicitudArchivoadjuntoInstance = SolicitudArchivoadjunto.get(id)
+        if (!solicitudArchivoadjuntoInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance]
+    }
+
     def firmar(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
@@ -109,17 +131,67 @@ class SolicitudVBController {
             return
         }
 
-/* TODO: habilitar cuando no este en desarrollo
         def idUsuario = springSecurityService.principal.id
         def personasInstance = Usuario.get(idUsuario)
         sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
-          subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " + 
-            "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
-            "pronto seras contactado con relación a el\n"
+          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.email
+          subject "Solicitud ${solicitudInstance.toString()} ya ha recibido el visto bueno"
+          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
+            "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
+            "ya ha recibido el visto bueno, pronto seras contactado con relación " +
+            "a esta solicitud.\n"
         }
-*/
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
+        redirect(action: "show", id: solicitudInstance.id)
+    }
+
+    def cancelaUpdate(Long id) {
+        def solicitudInstance = Solicitud.get(id)
+        if (!solicitudInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
+            redirect(action: "list")
+            return
+        }
+
+        def userID = springSecurityService.principal.id
+        log.debug("userID = $userID")
+
+        if (userID != solicitudInstance.idVb) {
+            flash.error = "Usted no puede dar el visto bueno."
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            return
+        }
+
+        def firmaTeclada = params['passwordfirma']
+        log.debug("firmaTeclada = $firmaTeclada")
+        def firma = Firmadigital.findById(userID)?.passwordfirma
+        log.debug("firma = $firma")
+
+        if (firmaTeclada != firma) {
+            flash.error = "Error en contaseña"
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            return
+        }
+
+        solicitudInstance.fechaVb = new Date()
+        solicitudInstance.estado = 'C' as char
+
+        if (!solicitudInstance.save(flush: true)) {
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            return
+        }
+
+        def idUsuario = springSecurityService.principal.id
+        def personasInstance = Usuario.get(idUsuario)
+        sendMail {
+          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.email
+          subject "Solicitud ${solicitudInstance.toString()} no recibio el visto bueno"
+          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
+            "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
+            "no recibio visto bueno, contacte a la mesa de servicio si requiere " +
+            "más información.\n"
+        }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
