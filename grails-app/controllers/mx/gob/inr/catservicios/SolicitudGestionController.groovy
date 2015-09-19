@@ -305,4 +305,16 @@ class SolicitudGestionController {
         }
     }
 
+  def subcategoryChanged(long subcategoryId) {
+    log.debug("subcategoryId = $subcategoryId")
+      Cat_servSub subcategory = Cat_servSub.get(subcategoryId)
+      def servicios = []
+      if ( subcategory != null ) {
+          servicios = Cat_serv.findAllByServSub(subcategory, [order:'id'])
+      }
+      render g.select(id: 'idServ', name:'idServ.id', required:'',
+          from:servicios, optionKey:'id', noSelection:['':'Seleccione una...']
+      )
+  }
+
 }

@@ -13,6 +13,41 @@
 	<g:select id="idServcat" name="idServcat.id" from="${Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['null': '']" disabled="true"/>
 </div>
 
+<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+  <label for="idServ">
+    <g:message code="cat_serv.servCat.label" default="Cat" />
+    <span class="required-indicator">*</span>
+  </label>
+  <g:select id="servCat" name="idServ.servSub.servCat.id" from="${Cat_servCat.list()}" optionKey="id" required="" value="${incidenteInstance?.idServ?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['':'Seleccione una...']}"/>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+  <label for="idServ">
+    <g:message code="cat_serv.servSub.label" default="Serv Sub" />
+    <span class="required-indicator">*</span>
+  </label>
+  <g:select id="servSub" name="idServ.servSub.id" from="${Cat_servSub.list()}" optionKey="id" required="" value="${incidenteInstance?.idServ?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['':'Seleccione una...']}"/>
+  <g:select id='servSub' name='servSub.id' required='',
+        onchange="subcategoryChanged(this.value)"
+        from=subCategories, optionKey:'id', noSelection:['':' ']/>
+</div>
+
+<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+  <label for="idServ">
+    <g:message code="cat_bitacora.servicio.label" default="Servicio" />
+    <span class="required-indicator">*</span>
+  </label>
+  <span id="serviciosContainer"></span>
+</div>
+
+<script>
+    function subcategoryChanged(subcategoryId) {
+        <g:remoteFunction controller="incidente" action="subcategoryChanged"
+            update="serviciosContainer"
+            params="'subcategoryId='+subcategoryId"/>
+    }
+</script>
+
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcion', 'error')} ">
 	<label for="descripcion">
 		<g:message code="solicitudDetalle.descripcion.label" default="Descripción" />
