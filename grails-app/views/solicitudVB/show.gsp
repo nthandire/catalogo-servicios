@@ -79,7 +79,11 @@
 -				<div class="span10 offset1">
 					<ul class="one-to-many">
 						<g:each in="${solicitudInstance?.detalles}" var="d">
-						    <li><g:link action="showDetalle" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
+              <li>
+                <g:link action="showDetalle" id="${d.id}">${d?.encodeAsHTML()}</g:link>
+                ${d?.idServ?.servSub?.descripcion}
+                ${d?.idServ?.descripcion}
+              </li>
 						</g:each>
 					</ul>
 				</div>
