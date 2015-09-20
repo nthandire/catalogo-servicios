@@ -37,7 +37,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${solicitudDetalleInstanceList.sort{ it.prioridad?:(it?.idServ?.prioridad?:3) }}" status="i" var="solicitudDetalleInstance">
+				<g:each in="${solicitudDetalleInstanceList.sort{ it.prioridad?:(it?.idServ?.impacto?:3) }}" status="i" var="solicitudDetalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
 						<td><g:link action="edit" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>
@@ -46,7 +46,7 @@
 
             <td>${fieldValue(bean: solicitudDetalleInstance, field: "descripcion")}</td>
 
-						<td><g:message code="intensidad.valor.${solicitudDetalleInstance.prioridad?:(solicitudDetalleInstance?.idServ?.prioridad?:3)}" default="" /></td>
+						<td><g:message code="intensidad.valor.${solicitudDetalleInstance.prioridad?:(solicitudDetalleInstance?.idServ?.impacto?:3)}" default="" /></td>
 
 					</tr>
 				</g:each>

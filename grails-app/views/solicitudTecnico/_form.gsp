@@ -36,9 +36,18 @@
   <label for="resguardo">
     <g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Equipo" />
   </label>
-  ${equipo}
+  <g:textArea name="equipo" cols="40" rows="1" maxlength="3000"
+    value="${equipo}" disabled="true"/>
 </div>
 </g:if>
+
+<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcionTecnica', 'error')} ">
+  <label for="descripcionTecnica">
+    <g:message code="solicitudDetalle.descripcionTecnica.label" default="Descripción Técnica" />
+  </label>
+  <g:textArea name="descripcionTecnica" cols="40" rows="5" maxlength="3000"
+    value="${solicitudDetalleInstance?.descripcionTecnica}" disabled="true"/>
+</div>
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'solucion', 'error')} ">
   <label for="solucion">
