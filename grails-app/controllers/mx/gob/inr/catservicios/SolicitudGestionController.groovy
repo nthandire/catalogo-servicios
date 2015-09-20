@@ -183,7 +183,20 @@ class SolicitudGestionController {
             return
         }
 
-        [solicitudInstance: solicitudInstance]
+        [solicitudInstance: solicitudInstance,
+          autorizadores:listaDeVobos()]
+    }
+
+    def listaDeVobos() {
+      def miembros = UsuarioAutorizado.findAllVoboByEstado('A' as char).collect{it.id}
+
+      def autorizadores = []
+      Usuario.withNewSession { sessionU ->
+        autorizadores = Usuario.findAllByIdInList(miembros)
+      }
+
+      log.debug("numero de autorizadores = ${autorizadores.size()}")
+      return autorizadores
     }
 
     def revisar(Long id) {

@@ -20,6 +20,6 @@
     <g:message code="solicitudDetalle.idVb.label" default="Responsable" />
     
   </label>
-  <g:select id="idVb" name="idVb" 
-    from="${Usuario.executeQuery("from Usuario u where exists( from UsuarioRol ur where ur.usuario.id = u.id and exists ( from Rol r where r.id = ur.rol.id and r.authority = 'ROLE_SAST_USUARIO'))")}" optionKey="id" value="${solicitudInstance?.idVb}" class="many-to-one" noSelection="['null': '']"/>
+  <g:select id="idVb" name="idVb"  from="${autorizadores}" optionKey="id"
+    value="${solicitudInstance?.idVb}" class="many-to-one" noSelection="['null': '']"/>
 </div>
