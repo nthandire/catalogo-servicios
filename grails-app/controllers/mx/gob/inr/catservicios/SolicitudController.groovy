@@ -87,7 +87,7 @@ class SolicitudController {
       if (solicitudInstance?.idAutoriza) {
         Usuario.withNewSession { sessionU ->
           def usuarioAutorizador = Usuario.get(solicitudInstance?.idAutoriza)
-          autorizador = usuarioAutorizador.username
+          autorizador = usuarioAutorizador.toString()
         }
       }
 
@@ -96,33 +96,14 @@ class SolicitudController {
     }
 
     def listaDeAutorizadores() {
-      def rolUsuarios = null
-      Rol.withNewSession { session ->
-        rolUsuarios = Rol.findByAuthority('ROLE_SAST_USUARIO')
-      }
-      log.debug("rolUsuarios = $rolUsuarios")
-      def usuariosRolesIds = []
-      UsuarioRol.withNewSession { sessionUR ->
-        def usuariosRoles = UsuarioRol.findAllByRol(rolUsuarios)
-        usuariosRolesIds = usuariosRoles.collectMany{[it.usuario.id]}
-      }
-      log.debug("usuariosRolesIds = $usuariosRolesIds")
+      def userID = springSecurityService.principal.id
+      def area = UsuarioAutorizado.get(userID)?.area
+      def miembros = UsuarioAutorizado.findAllAutorizaByAreaAndEstado(area,'A' as char).collect{it.id}
+
       def autorizadores = []
       Usuario.withNewSession { sessionU ->
-        autorizadores = Usuario.findAllByIdInList(usuariosRolesIds)
+        autorizadores = Usuario.findAllByIdInList(miembros)
       }
-
-      /* TODO: este es el query original, borrar
-      def query =
-        "  from Usuario u                                      " +
-        " where exists                                         " +
-        "   ( from UsuarioRol up                               " +
-        "    where up.idusuario = u.idusuario                  " +
-        "      and exists (                                    " +
-        "        from Rol p                                    " +
-        "       where p.idperfil = up.idperfil                 " +
-        "         and p.desc_perfil = 'ROLE_SAST_USUARIO'))    "
-      */
 
       log.debug("numero de autorizadores = ${autorizadores.size()}")
       return autorizadores

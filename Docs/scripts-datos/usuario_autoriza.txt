@@ -1,0 +1,137 @@
+SELECT * FROM USUARIO;
+IDUSUARIO   ACCOUNT_EXPIRED   ACCOUNT_LOCKED    ESTATUS   PASSWORD    PASSWORD_EXPIRED    RFC   MATERNO   NOMBRE    PATERNO  
+6558  FALSE FALSE A 3f79bb7b435b05321651daefd374cdc681dc06faa65e374e38337b88ca046dea  FALSE SAIH940101  null  null  null
+9574  FALSE FALSE A a0ccddd9e5ddd2617e88f6515a2998f0119b6e99fd2bfef049550ad983af9fa0  FALSE usuario1  null  null  null
+9575  FALSE FALSE A 534063df44e5903915d9ae79265073e51d5f21950b3af1102029378cce270f8a  FALSE usuario2  null  null  null
+9576  FALSE FALSE A 15676680ffc67a48761517e72a60827e471fb3ce472862592ed25ce6a7e63a74  FALSE usuario3  null  null  null
+9577  FALSE FALSE A 47b85ca8f181024f909d10f416bc436563109f4cc9106fc6c4e28398118c9f8e  FALSE usuario4  null  null  null
+9578  FALSE FALSE A 1a87d3b9b8ec79a0444cb5aa4988fa64966c469579888dc5eb385eeb2071bc81  FALSE usuario5  null  null  null
+9579  FALSE FALSE A 5c9b3723b4112067d763f485f00b0ba1a50d5d6333a53ab0693377bb50833ebd  FALSE usuario6  null  null  null
+9580  FALSE FALSE A 40492b43829c8c460ca813b518de536d75f985c5e9f586227135cb8beb8b97b0  FALSE usuario7  null  null  null
+9581  FALSE FALSE A 4ce26c492172468182a828d063d6a2178b37e3e68269f0cd31b65ca490837a13  FALSE usuario8  null  null  null
+9582  FALSE FALSE A 5634120b9a559dabb406487aaa55752303cb4267864c06138a564337fe5ceecd  FALSE usuario9  null  null  null
+9584  FALSE FALSE A 23ed6f4aeed0a4935a666d6ed1db9183c40c07237a9cb48bc35744144f00de96  FALSE tecnico1  null  null  null
+9585  FALSE FALSE A 89ef19c2b29638b132cafb7023c3935424efbab01e664c80743ebff6e995bab3  FALSE tecnico2  null  null  null
+9586  FALSE FALSE A 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918  FALSE admin null  null  null
+9587  FALSE FALSE A 1ec0c087bb9340326247f9536ac7932e98b593cc23315de8643f1bd082a83db4  FALSE coordinador1  null  null  null
+9588  FALSE FALSE A 1e57b56ccbe3e9361f3cac36c09b7de1b5e336baf1b364d1e02528cd42786d4c  FALSE coordinador2  null  null  null
+9583  FALSE FALSE A 0bd66e5612153f99a1a193e638fa154694de99912c0911c8e6a28dc120719e6b  FALSE gestor  null  null  null
+(16 rows, 2 ms)
+
+(id_usuario,area,autoriza,vobo,estado)
+
+
+
+insert into usuario_autorizado
+(id_usuario)
+values
+(9574);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9575);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9576);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9577);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9578);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9579);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9580);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9581);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9582);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9583);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9584);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9585);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9586);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9587);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9588);
+insert into usuario_autorizado
+(id_usuario)
+values
+(6558);
+
+
+update usuario_autorizado set area = 'DGAIT' where id_usuario = 9574; -- usuario1
+update usuario_autorizado set area = 'DGAIT' where id_usuario = 9575; -- usuario2
+update usuario_autorizado set autoriza = true where id_usuario = 9575; -- usuario2
+update usuario_autorizado set area = 'DGAIT' where id_usuario = 9579; -- usuario6
+update usuario_autorizado set vobo = true where id_usuario = 9578; -- usuario5
+update usuario_autorizado set vobo = true where id_usuario = 9579; -- usuario6
+
+
+update usuario_autorizado set area = 'DGAIT' where id_usuario = 9584; -- tecnico1
+update usuario_autorizado set area = 'MS' where id_usuario = 9585; -- tecnico2
+
+update usuario_autorizado set area = 'DGAIT' where id_usuario = 9580; -- usuario7 coordinador
+update usuario_autorizado set area = 'MS' where id_usuario = 9581; -- usuario8 coordinador
+update usuario_autorizado set area = 'DGAIT' where id_usuario = 9587; -- coordinador1
+update usuario_autorizado set area = 'MS' where id_usuario = 9588; -- coordinador2
+
+
+
+
+IDUSUARIO   RFC   DESC_PERFIL   IDPERFIL  
+9580  usuario7  ROLE_SAST_COORDINADOR 56
+9581  usuario8  ROLE_SAST_COORDINADOR 56
+9587  coordinador1  ROLE_SAST_COORDINADOR 56
+9588  coordinador2  ROLE_SAST_COORDINADOR 56
+6558  SAIH940101  ROLE_SAST_ADMIN 57
+9586  admin ROLE_SAST_ADMIN 57
+6558  SAIH940101  ROLE_SAST_USUARIO 58
+9574  usuario1  ROLE_SAST_USUARIO 58
+9575  usuario2  ROLE_SAST_USUARIO 58
+9576  usuario3  ROLE_SAST_USUARIO 58
+9577  usuario4  ROLE_SAST_USUARIO 58
+9578  usuario5  ROLE_SAST_USUARIO 58
+9579  usuario6  ROLE_SAST_USUARIO 58
+9580  usuario7  ROLE_SAST_USUARIO 58
+9581  usuario8  ROLE_SAST_USUARIO 58
+9582  usuario9  ROLE_SAST_USUARIO 58
+9583  gestor  ROLE_SAST_USUARIO 58
+9584  tecnico1  ROLE_SAST_USUARIO 58
+9585  tecnico2  ROLE_SAST_USUARIO 58
+9586  admin ROLE_SAST_USUARIO 58
+9587  coordinador1  ROLE_SAST_USUARIO 58
+9588  coordinador2  ROLE_SAST_USUARIO 58
+9584  tecnico1  ROLE_SAST_TECNICO 59
+9585  tecnico2  ROLE_SAST_TECNICO 59
+9583  gestor  ROLE_SAST_COORDINADOR_DE_GESTION  60
+9582  usuario9  ROLE_SAST_TECNICO_MESA_SERVICIO 61
+(26 rows, 0 ms)
