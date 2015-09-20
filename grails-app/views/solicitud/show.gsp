@@ -101,7 +101,7 @@
 -				<div class="span10 offset1">
 					<ul class="one-to-many">
 						<g:each in="${solicitudInstance?.archivos}" var="a">
-						    <li><g:link controller="solicitudArchivoadjunto" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+						    <li><g:link controller="solicitudArchivoadjunto" action="download" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
 						</g:each>
 						<g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'A' as char}">
 							<li class="add">
@@ -139,8 +139,10 @@
           <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
             <g:hiddenField name="id" value="${solicitudInstance?.id}" />
             <g:link class="edit" action="edit" id="${solicitudInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-            <!-- Button to trigger modal -->
-            <a href="#myModal" class="edit" data-toggle="modal">Firmar</a>
+            <g:if test="${!solicitudInstance?.estado}">
+              <!-- Button to trigger modal -->
+              <a href="#myModal" class="edit" data-toggle="modal">Firmar</a>
+            </g:if>
           </g:if>
         </fieldset>
 			</g:form>
