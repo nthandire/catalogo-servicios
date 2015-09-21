@@ -207,6 +207,14 @@ class SolicitudGestionController {
             return
         }
 
+        def detalles = SolicitudDetalle.countByIdSolicitudAndIdServIsNull(solicitudInstance)
+        log.debug("detalles = $detalles")
+        if (detalles) {
+            flash.error = "Debe capturar antes todos los servicios de tercer nivel."
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            return
+        }
+
         solicitudInstance.estado = 'R' as char
 
         if (!solicitudInstance.save(flush: true)) {
