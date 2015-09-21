@@ -1,5 +1,8 @@
 import mx.gob.inr.catservicios.*
 
+println Usuario.count()
+println Usuario.countByEnabled(true)
+
 def query2 = "  from Usuario u            " +
             " where exists( from UsuarioRol ur      " +
             "              where ur.usuario.id = u.id    " +

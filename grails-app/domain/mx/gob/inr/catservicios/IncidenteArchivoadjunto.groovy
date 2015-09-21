@@ -2,15 +2,14 @@ package mx.gob.inr.catservicios
 
 class IncidenteArchivoadjunto {
 
-	byte[] datos
-	String nombre
-	Integer tamaño
+	Integer idIncidente
+  byte[] datos
+  String nombre
+  Integer tamaño
 	String tipo
 	Integer idUsuario
 	Date lastUpdated
 	String ipTerminal
-
-  static belongsTo = [idIncidente:Incidente]
 
 	static mapping = {
 		id generator: "increment"

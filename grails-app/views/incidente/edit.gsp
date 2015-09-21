@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.Incidente" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -40,7 +40,7 @@
       <div class="row-fluid">
         <div class="span10 offset1">
           <ul class="one-to-many">
-            <g:each in="${incidenteInstance?.archivos}" var="a">
+            <g:each in="${IncidenteArchivoadjunto.findAllByIdIncidente(incidenteInstance?.id)}" var="a">
               <li>
                 <g:link action="download" id="${a.id}">${a?.encodeAsHTML()}</g:link>
               </li>

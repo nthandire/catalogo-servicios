@@ -11,7 +11,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="back" action="edit" id="${incidenteArchivoadjuntoInstance?.idIncidente?.id}">Regresar al incidente</g:link></li>
+				<li><g:link class="back" action="edit" id="${incidenteArchivoadjuntoInstance?.idIncidente}">Regresar al incidente</g:link></li>
 			</ul>
 		</div>
 		<div id="create-incidenteArchivoadjunto" class="content scaffold-create" role="main">
@@ -30,7 +30,7 @@
 			</ul>
 			</g:hasErrors>
 			<g:form action="saveArchivo"  enctype="multipart/form-data">
-				<g:hiddenField name="idIncidente" value="${incidenteArchivoadjuntoInstance?.idIncidente?.id}" />
+				<g:hiddenField name="idIncidente" value="${incidenteArchivoadjuntoInstance?.idIncidente}" />
 				<fieldset class="form">
 					<div class="fieldtablecontain ">
 						<br /><br /><br />

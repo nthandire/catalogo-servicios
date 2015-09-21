@@ -27,7 +27,8 @@
 		<g:message code="incidente.idReporta.label" default="Quien Reporta" />
 	</label>
   <%-- TODO: mejorar el select, solo los usuarios SAST --%>
-  <g:select id="idReporta" name="idReporta" from="${Usuario.list()}"
+  <g:select id="idReporta" name="idReporta"
+    from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
     required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
     noSelection="${['':'Seleccione una...']}" optionKey="id"
     optionValue="nombreMostrar"/>
@@ -38,7 +39,11 @@
 		<g:message code="cat_serv.servCat.label" default="Cat" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servCat" name="idServ.servSub.servCat.id" from="${Cat_servCat.list()}" optionKey="id" required="" value="${incidenteInstance?.idServ?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['':'Seleccione una...']}"/>
+	<g:select id="servCat" name="idServ.servSub.servCat.id"
+    from="${Cat_servCat.list()}" optionKey="id" required=""
+    value="${incidenteInstance?.idServ?.servSub?.servCat?.id}"
+    class="many-to-one" onchange="categoryChanged(this.value)"
+    noSelection="${['':'Seleccione una...']}"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
@@ -46,7 +51,14 @@
 		<g:message code="cat_serv.servSub.label" default="Serv Sub" />
 		<span class="required-indicator">*</span>
 	</label>
-	<span id="subContainer"></span>
+	<span id="subContainer">
+    <g:if test="${incidenteInstance?.idServ}">
+      <g:select id='servSub' name='servSub.id' required=''
+        onchange='subcategoryChanged(this.value)' optionKey='id'
+        from="${Cat_servSub.findAllByServCat(incidenteInstance?.idServ?.servSub?.servCat, [order:'id'])}"
+        value="${incidenteInstance?.idServ?.servSub?.id}" noSelection="['':' ']"/>
+    </g:if>
+  </span>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
@@ -54,7 +66,14 @@
 		<g:message code="cat_bitacora.servicio.label" default="Servicio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<span id="serviciosContainer"></span>
+	<span id="serviciosContainer">
+    <g:if test="${incidenteInstance?.idServ}">
+      <g:select id='idServ' name='idServ.id' required=''
+        optionKey='id' value="${incidenteInstance?.idServ?.id}"
+        from="${Cat_serv.findAllByServSub(incidenteInstance?.idServ?.servSub, [order:'id'])}"
+        noSelection="['':' ']"/>
+    </g:if>
+  </span>
 </div>
 
 <script>

@@ -53,6 +53,11 @@ class IncidenteController {
       incidenteInstance.idCaptura = springSecurityService.principal.id
       incidenteInstance.ipTerminal = request.getRemoteAddr()
 
+      def userID = springSecurityService.principal.id
+
+      if (!isGestor(userID)) {
+        incidenteInstance.idNivel1 = userID
+      }
 
         if (!incidenteInstance.save(flush: true)) {
             render(view: "create", model: [incidenteInstance: incidenteInstance])
@@ -60,14 +65,32 @@ class IncidenteController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
-        redirect(action: "show", id: incidenteInstance.id)
+        redirect(action: "edit", id: incidenteInstance.id)
+    }
+
+    Boolean isGestor(Long userID) {
+      log.debug("userID = ${userID}")
+      // Saber si es gestor o no
+      def gestor = false
+      UsuarioRol.withNewSession { session ->
+        def rolUsuarios = UsuarioRol.findAllByUsuario(Usuario.get(userID)).each{
+          log.debug("UsuarioRol = $it")
+          if(it.rol.authority == 'ROLE_SAST_COORDINADOR_DE_GESTION') {
+            gestor = true
+          }
+        }
+      }
+      log.debug("gestor = $gestor")
+
+      return gestor
     }
 
     def createArchivo() {
       log.debug("params = $params")
       def incidenteArchivoadjuntoInstance = new IncidenteArchivoadjunto()
-      def incidente = Incidente.get(params.incidente['id'])
-      incidenteArchivoadjuntoInstance.idIncidente = incidente
+      incidenteArchivoadjuntoInstance.idIncidente =
+        (params.incidente['id']).toInteger()
+      log.debug("idIncidente = ${incidenteArchivoadjuntoInstance.idIncidente}")
       [incidenteArchivoadjuntoInstance: incidenteArchivoadjuntoInstance]
     }
 
@@ -80,8 +103,8 @@ class IncidenteController {
         return
       } else {
         def incidenteArchivoadjuntoInstance = new IncidenteArchivoadjunto()
-        def incidente = Incidente.get(params.idIncidente)
-        incidenteArchivoadjuntoInstance.idIncidente = incidente
+        incidenteArchivoadjuntoInstance.idIncidente =
+          (params.idIncidente).toInteger()
         def nombre = file.originalFilename
         incidenteArchivoadjuntoInstance.nombre = nombre
         incidenteArchivoadjuntoInstance.datos = file.getBytes()
@@ -99,7 +122,7 @@ class IncidenteController {
             render(view: "create", model: [incidenteArchivoadjuntoInstance: incidenteArchivoadjuntoInstance])
             return
         }
-        redirect (action:'edit', id: incidente.id)
+        redirect (action:'edit', id: params.idIncidente)
       }
     }
 
@@ -121,17 +144,6 @@ class IncidenteController {
         }
     }
 
-    def show(Long id) {
-        def incidenteInstance = Incidente.get(id)
-        if (!incidenteInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [incidenteInstance: incidenteInstance]
-    }
-
     def edit(Long id) {
         def incidenteInstance = Incidente.get(id)
         if (!incidenteInstance) {
@@ -147,20 +159,9 @@ class IncidenteController {
     def listaDeTecnicos() {
       def userID = springSecurityService.principal.id
       log.debug("userID = ${userID}")
-      // Saber si es gestor o no
-      def gestor = false
-      UsuarioRol.withNewSession { session ->
-        def rolUsuarios = UsuarioRol.findAllByUsuario(Usuario.get(userID)).each{
-          log.debug("UsuarioRol = $it")
-          if(it.rol.authority == 'ROLE_SAST_COORDINADOR_DE_GESTION') {
-            gestor = true
-          }
-        }
-      }
-      log.debug("gestor = $gestor")
 
       def tecnicos = null
-      if (gestor) {
+      if (isGestor(userID)) {
         def rolUsuarios = null
         Rol.withNewSession { session ->
           rolUsuarios = Rol.findByAuthority('ROLE_SAST_TECNICO_MESA_SERVICIO')
@@ -210,26 +211,7 @@ class IncidenteController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
-        redirect(action: "show", id: incidenteInstance.id)
-    }
-
-    def x_delete(Long id) {
-        def incidenteInstance = Incidente.get(id)
-        if (!incidenteInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            incidenteInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
-            redirect(action: "show", id: id)
-        }
+        redirect(action: "edit", id: incidenteInstance.id)
     }
 
   def categoryChanged(long categoryId) {

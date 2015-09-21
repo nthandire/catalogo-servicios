@@ -1,5 +1,5 @@
 
-<%@ page import="mx.gob.inr.catservicios.Incidente" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -95,37 +95,6 @@
 				<g:paginate total="${incidenteInstanceTotal}" />
 			</div>
 		</div>
-
-    <!-- Modal para captura -->
-    <div id="myModal" class="modal hide fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Incidente</h3>
-      </div>
-      <g:form method="post" >
-        <div class="modal-body">
-          <g:hiddenField name="id" value="-1" />
-          <g:hiddenField name="version" value="0" />
-          <fieldset class="form">
-            <g:render template="form" model="${[incidenteInstance: new Incidente()]}"/>
-          </fieldset>
-        </div>
-          <fieldset class="buttons">
-            <g:actionSubmit class="save" action="save" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-          </fieldset>
-      </g:form>
-    </div>
-
-    <!-- Modal para edición -->
-    <div id="myEditModal" class="modal fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Incidente</h3>
-      </div>
-      <div class="modal-body">
-      --- rellenar ---
-      </div>
-    </div>
 
 	</body>
 </html>

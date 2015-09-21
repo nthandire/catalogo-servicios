@@ -7,6 +7,7 @@ class Usuario {
   String username
   String password
   char estatus
+  boolean enabled
   boolean accountExpired
   boolean accountLocked
   boolean passwordExpired
@@ -14,22 +15,9 @@ class Usuario {
   String paterno
 	String materno
 
-	// boolean enabled
-	boolean getEnabled() {
-		estatus == 'A'
-	}
-
   String getNombreMostrar() {
     toString()
   }
-
-	private void setEnabled(boolean val) {
-		if (val)
-			estatus = 'A'
-		else
-			estatus = 'B'
-	}
-
 
 	static constraints = {
 		username blank: false, unique: true, nullable: true
