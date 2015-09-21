@@ -131,6 +131,19 @@
     optionKey="id" value="${incidenteInstance?.idServresp?.id}" class="many-to-one"
     noSelection="['': '']" disabled="true"/>
 </div>
+
+<g:if test="${tecnicos}">
+  <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel1', 'error')} ">
+    <label for="idNivel1">
+      <g:message code="incidente.idNivel1.label" default="Tecnico" />
+    </label>
+    <g:select id="idNivel1" name="idNivel1" required="true"
+      from="${tecnicos}"
+        optionKey="id" value="${incidenteInstance?.idNivel1}" class="many-to-one"
+        noSelection="['': '']"/>
+  </div>
+</g:if>
+
 <%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel1', 'error')} ">
 	<label for="idNivel1">

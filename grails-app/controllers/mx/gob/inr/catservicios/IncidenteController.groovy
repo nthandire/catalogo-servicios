@@ -140,7 +140,46 @@ class IncidenteController {
             return
         }
 
-        [incidenteInstance: incidenteInstance]
+        [incidenteInstance: incidenteInstance,
+          tecnicos:listaDeTecnicos()]
+    }
+
+    def listaDeTecnicos() {
+      def userID = springSecurityService.principal.id
+      log.debug("userID = ${userID}")
+      // Saber si es gestor o no
+      def gestor = false
+      UsuarioRol.withNewSession { session ->
+        def rolUsuarios = UsuarioRol.findAllByUsuario(Usuario.get(userID)).each{
+          log.debug("UsuarioRol = $it")
+          if(it.rol.authority == 'ROLE_SAST_COORDINADOR_DE_GESTION') {
+            gestor = true
+          }
+        }
+      }
+      log.debug("gestor = $gestor")
+
+      def tecnicos = null
+      if (gestor) {
+        def rolUsuarios = null
+        Rol.withNewSession { session ->
+          rolUsuarios = Rol.findByAuthority('ROLE_SAST_TECNICO_MESA_SERVICIO')
+        }
+        log.debug("rolUsuarios = $rolUsuarios")
+        def usuariosRolesIds = []
+        UsuarioRol.withNewSession { sessionUR ->
+          def lista = UsuarioRol.findAllByRol(rolUsuarios).
+            collect {it.usuario.id}
+          usuariosRolesIds = (userID in lista) ? lista : lista + [userID]
+        }
+        log.debug("usuariosRolesIds = $usuariosRolesIds")
+
+         Usuario.withNewSession { sessionU ->
+          tecnicos = Usuario.findAllByIdInList(usuariosRolesIds)
+         }
+        log.debug("numero de tecnicos = ${tecnicos.size()}")
+      }
+      return tecnicos
     }
 
     def update(Long id, Long version) {
