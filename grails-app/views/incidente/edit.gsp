@@ -33,9 +33,33 @@
         <fieldset class="form">
           <g:render template="form"/>
         </fieldset>
+      <H1>
+        <g:message code="solicitud.archivos.label" default="Archivos" />
+      </H1>
+
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <ul class="one-to-many">
+            <g:each in="${incidenteInstance?.archivos}" var="a">
+              <li>
+                <g:link action="download" id="${a.id}">${a?.encodeAsHTML()}</g:link>
+              </li>
+            </g:each>
+            <li class="add">
+              <g:link class="create" action="createArchivo"
+                params="['incidente.id': incidenteInstance?.id]">
+                ${message(code: 'default.add.label',
+                  args: [message(code: 'solicitudArchivoadjunto.label',
+                                  default: 'SolicitudArchivoadjunto')])}
+              </g:link>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
         <fieldset class="buttons">
           <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-          <!--g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /-->
         </fieldset>
       </g:form>
     </div>

@@ -63,6 +63,64 @@ class IncidenteController {
         redirect(action: "show", id: incidenteInstance.id)
     }
 
+    def createArchivo() {
+      log.debug("params = $params")
+      def incidenteArchivoadjuntoInstance = new IncidenteArchivoadjunto()
+      def incidente = Incidente.get(params.incidente['id'])
+      incidenteArchivoadjuntoInstance.idIncidente = incidente
+      [incidenteArchivoadjuntoInstance: incidenteArchivoadjuntoInstance]
+    }
+
+    def saveArchivo() {
+      log.debug("params = $params")
+      def file = request.getFile('file')
+      if(file.empty) {
+        flash.message = "Debe enviar algún archivo"
+        render(view: "createArchivo")
+        return
+      } else {
+        def incidenteArchivoadjuntoInstance = new IncidenteArchivoadjunto()
+        def incidente = Incidente.get(params.idIncidente)
+        incidenteArchivoadjuntoInstance.idIncidente = incidente
+        def nombre = file.originalFilename
+        incidenteArchivoadjuntoInstance.nombre = nombre
+        incidenteArchivoadjuntoInstance.datos = file.getBytes()
+        incidenteArchivoadjuntoInstance.tamaño =
+          incidenteArchivoadjuntoInstance.datos.size()
+        incidenteArchivoadjuntoInstance.idUsuario = springSecurityService.principal.id
+        incidenteArchivoadjuntoInstance.ipTerminal = request.getRemoteAddr()
+        def dot = nombre.lastIndexOf('.');
+        if (dot > 0)
+          incidenteArchivoadjuntoInstance.tipo = nombre.substring(dot + 1).
+            toUpperCase()
+        else
+          incidenteArchivoadjuntoInstance.tipo = ""
+        if (!incidenteArchivoadjuntoInstance.save(flush: true)) {
+            render(view: "create", model: [incidenteArchivoadjuntoInstance: incidenteArchivoadjuntoInstance])
+            return
+        }
+        redirect (action:'edit', id: incidente.id)
+      }
+    }
+
+    def download(long id) {
+        IncidenteArchivoadjunto incidenteArchivoadjuntoInstance =
+          IncidenteArchivoadjunto.get(id)
+        if ( IncidenteArchivoadjunto == null) {
+            flash.message = "Documento no encontrado."
+            redirect (controller: "incidente", action:'list')
+        } else {
+            response.setContentType("APPLICATION/OCTET-STREAM")
+            response.setHeader("Content-Disposition",
+              "Attachment;Filename=\"${incidenteArchivoadjuntoInstance.nombre}\"")
+
+            def outputStream = response.getOutputStream()
+            outputStream << incidenteArchivoadjuntoInstance.datos
+            outputStream.flush()
+            outputStream.close()
+        }
+    }
+
     def show(Long id) {
         def incidenteInstance = Incidente.get(id)
         if (!incidenteInstance) {

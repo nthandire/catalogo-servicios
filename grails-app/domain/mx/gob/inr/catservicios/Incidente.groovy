@@ -39,6 +39,8 @@ class Incidente {
 	Date lastUpdated
 	String ipTerminal
 
+  static hasMany = [archivos: IncidenteArchivoadjunto]
+
 	static mapping = {
 		id column: "id_incidente", generator: "increment"
 		idSistema column: "id_sistema"
