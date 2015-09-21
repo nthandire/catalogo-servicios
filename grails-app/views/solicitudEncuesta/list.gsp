@@ -32,8 +32,6 @@
 					
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
 					
-						<g:sortableColumn property="idAutoriza" title="${message(code: 'solicitud.idAutoriza.label', default: 'Autorizó')}" />
-					
 					</tr>
 				</thead>
 				<tbody>
@@ -45,8 +43,6 @@
 						<td><g:formatDate date="${solicitudInstance.fechaSolicitud}" /></td>
 					
 						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
-					
-						<td>${fieldValue(bean: solicitudInstance, field: "idAutoriza")}</td>
 					
 					</tr>
 				</g:each>
