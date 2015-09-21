@@ -19,13 +19,26 @@ class SolicitudCoordinadorController {
     def listDetalle(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
+        def userID = springSecurityService.principal.id
+        def area = UsuarioAutorizado.get(userID)?.area
+        log.debug("area = ${area}")
+
+        def areaServicio = Cat_servCat.get()
+
         def query =
-            "  from SolicitudDetalle d             " +
-            " where idTecnico is null              " +
-            "   and exists                         " +
-            "      ( from Solicitud s              " +
-            "       where s.id = d.idSolicitud     " +
-            "         and s.estado = 'R')          "
+            "  from SolicitudDetalle d                    \n" +
+            " where idTecnico is null                     \n" +
+            "   and exists                                \n" +
+            "      ( from Cat_servCat c,                  \n" +
+            "             Cat_servResp r                  \n" +
+            "       where d.idServcat = c.id            \n" +
+            "         and c.servResp = r.id               \n" +
+            "         and r.descripcion like '%${area}%') \n" +
+            "   and exists                                \n" +
+            "      ( from Solicitud s                     \n" +
+            "       where s.id = d.idSolicitud            \n" +
+            "         and s.estado = 'R')                 \n"
+        log.debug("query = \n${query}")
         def detalles = SolicitudDetalle.executeQuery (
               "select count (*) " + query
             )[0]
