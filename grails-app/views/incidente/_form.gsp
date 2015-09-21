@@ -282,7 +282,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idPrograma', 'error')} ">
 	<label for="idPrograma">
-		<g:message code="incidente.idPrograma.label" default="Id Programa" />
+		<g:message code="incidente.idPrograma.label" default="Estado de cierre" />
 	</label>
 	<g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}" optionKey="id" value="${incidenteInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>

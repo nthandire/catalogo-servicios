@@ -25,7 +25,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idPrograma', 'error')} ">
 	<label for="idPrograma">
-		<g:message code="solicitudDetalle.idPrograma.label" default="Programa o tipo de solución" />
+		<g:message code="solicitudDetalle.idPrograma.label" default="Estado de cierre" />
 		
 	</label>
 	<g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['': '']"/>
