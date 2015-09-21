@@ -10,7 +10,7 @@
 	<label for="idServcat">
 		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
 	</label>
-	<g:select id="idServcat" name="idServcat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['null': '']" disabled="true"/>
+	<g:select id="idServcat" name="idServcat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['': '']" disabled="true"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcion', 'error')} ">
@@ -22,9 +22,9 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idPrograma', 'error')} ">
   <label for="idPrograma">
-    <g:message code="solicitudDetalle.idPrograma.label" default="Id Programa" />
+    <g:message code="solicitudDetalle.idPrograma.label" default="Programa" />
   </label>
-  <g:select id="idPrograma" name="idPrograma.id" from="${mx.gob.inr.catservicios.CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']" disabled="true"/>
+  <g:select id="idPrograma" name="idPrograma.id" from="${mx.gob.inr.catservicios.CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['': '']" disabled="true"/>
 </div>
 
 <g:if test="${solicitudDetalleInstance?.idResguardoentregadetalle}">
@@ -44,7 +44,7 @@
     <g:message code="solicitudDetalle.idTecnico.label" default="Tecnico" />
   </label>
   <g:select id="idTecnico" name="idTecnico" required="true"
-    from="${Usuario.executeQuery("from Usuario u where exists( from UsuarioRol ur where ur.usuario.id = u.id and exists ( from Rol r where r.id = ur.rol.id and r.authority = 'ROLE_SAST_TECNICO'))")}"
+    from="${tecnicos}"
       optionKey="id" value="${solicitudDetalleInstance?.idTecnico}" class="many-to-one"
       noSelection="['': '']"/>
 </div>

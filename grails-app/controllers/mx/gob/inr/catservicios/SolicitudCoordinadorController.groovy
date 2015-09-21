@@ -23,8 +23,6 @@ class SolicitudCoordinadorController {
         def area = UsuarioAutorizado.get(userID)?.area
         log.debug("area = ${area}")
 
-        def areaServicio = Cat_servCat.get()
-
         def query =
             "  from SolicitudDetalle d                    \n" +
             " where idTecnico is null                     \n" +
@@ -149,7 +147,38 @@ class SolicitudCoordinadorController {
             return
         }
 
-        [solicitudDetalleInstance: solicitudDetalleInstance]
+        [solicitudDetalleInstance: solicitudDetalleInstance,
+          tecnicos:listaDeTecnicos()]
+    }
+
+    def listaDeTecnicos() {
+      def userID = springSecurityService.principal.id
+      log.debug("userID = ${userID}")
+      def area = UsuarioAutorizado.get(userID)?.area
+      log.debug("area = ${area}")
+      def miembros = UsuarioAutorizado.findAllByAreaAndEstado(area,'A' as char).
+        collect{it.id}
+      log.debug("miembros = ${miembros}")
+
+      def rolUsuarios = null
+      Rol.withNewSession { session ->
+        rolUsuarios = Rol.findByAuthority('ROLE_SAST_TECNICO')
+      }
+      log.debug("rolUsuarios = $rolUsuarios")
+      def usuariosRolesIds = []
+      UsuarioRol.withNewSession { sessionUR ->
+        usuariosRolesIds = UsuarioRol.findAllByRol(rolUsuarios).
+          findAll {it.usuario.id in miembros}.collect {it.usuario.id}
+      }
+      log.debug("usuariosRolesIds = $usuariosRolesIds")
+
+       def tecnicos = []
+       Usuario.withNewSession { sessionU ->
+        tecnicos = Usuario.findAllByIdInList(usuariosRolesIds)
+       }
+
+      log.debug("numero de tecnicos = ${tecnicos.size()}")
+      return tecnicos
     }
 
     def vistoBueno(Long id) {

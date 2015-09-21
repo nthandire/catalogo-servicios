@@ -58,4 +58,9 @@ class UsuarioRol implements Serializable {
 		version false
 		datasource "seguridad"
 	}
+
+  String toString() {
+    "$usuario : $rol"
+  }
+
 }
