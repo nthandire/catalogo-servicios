@@ -2,7 +2,7 @@
 
 
 <style type="text/css">
-  textArea { width: 412px; }
+  textArea { width: 712px; }
 </style>
 
 
@@ -24,9 +24,13 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
 	<label for="idReporta">
-		<g:message code="incidente.idReporta.label" default="Id Reporta" />
+		<g:message code="incidente.idReporta.label" default="Quien Reporta" />
 	</label>
-	<g:field name="idReporta" type="number" value="${incidenteInstance.idReporta}" required=""/> <!-- // TODO: poner un select -->
+  <%-- TODO: mejorar el select, solo los usuarios SAST --%>
+  <g:select id="idReporta" name="idReporta" from="${Usuario.list()}"
+    required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
+    noSelection="${['':'Seleccione una...']}" optionKey="id"
+    optionValue="nombreMostrar"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
@@ -104,7 +108,6 @@
 --%>
 
 
-<!--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'descripcion', 'error')} ">
 	<label for="descripcion">
 		<g:message code="incidente.descripcion.label" default="Descripcion" />
@@ -116,23 +119,19 @@
 	<label for="nivel">
 		<g:message code="incidente.nivel.label" default="Nivel" />
 	</label>
-	<g:field name="nivel" type="number" min="1" max="3" value="${incidenteInstance.nivel}"/>
+	<g:field name="nivel" type="number" min="1" max="3"
+    value="${incidenteInstance.nivel}" disabled="true"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServresp', 'error')} ">
 	<label for="idServresp">
-		<g:message code="incidente.idServresp.label" default="Id Servresp" />
+		<g:message code="incidente.idServresp.label" default="Responsable" />
 	</label>
-	<g:select id="idServresp" name="idServresp.id" from="${Cat_servResp.list()}" optionKey="id" value="${incidenteInstance?.idServresp?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="idServresp" name="idServresp.id" from="${Cat_servResp.list()}"
+    optionKey="id" value="${incidenteInstance?.idServresp?.id}" class="many-to-one"
+    noSelection="['': '']" disabled="true"/>
 </div>
-
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idCaptura', 'error')} ">
-	<label for="idCaptura">
-		<g:message code="incidente.idCaptura.label" default="Id Captura" />
-	</label>
-	<g:field name="idCaptura" type="number" value="${incidenteInstance.idCaptura}"/>
-</div>
-
+<%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel1', 'error')} ">
 	<label for="idNivel1">
 		<g:message code="incidente.idNivel1.label" default="Id Nivel1" />
@@ -167,14 +166,16 @@
 	</label>
 	<g:datePicker name="fechaSolnivel1" precision="day"  value="${incidenteInstance?.fechaSolnivel1}" default="none" noSelection="['': '']" />
 </div>
-
+--%>
+<%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idAsignanivel2', 'error')} ">
 	<label for="idAsignanivel2">
 		<g:message code="incidente.idAsignanivel2.label" default="Id Asignanivel2" />
 	</label>
 	<g:field name="idAsignanivel2" type="number" value="${incidenteInstance.idAsignanivel2}"/>
 </div>
-
+--%>
+<%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel2', 'error')} ">
 	<label for="idNivel2">
 		<g:message code="incidente.idNivel2.label" default="Id Nivel2" />
@@ -195,14 +196,16 @@
 	</label>
 	<g:checkBox name="firmaNivel2" value="${incidenteInstance?.firmaNivel2}" />
 </div>
-
+--%>
+<%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'solucionNivel2', 'error')} ">
 	<label for="solucionNivel2">
 		<g:message code="incidente.solucionNivel2.label" default="Solucion Nivel2" />
 	</label>
 	<g:textArea name="solucionNivel2" cols="40" rows="5" maxlength="3000" value="${incidenteInstance?.solucionNivel2}"/>
 </div>
-
+--%>
+<%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'fechaSolnivel2', 'error')} ">
 	<label for="fechaSolnivel2">
 		<g:message code="incidente.fechaSolnivel2.label" default="Fecha Solnivel2" />
@@ -237,14 +240,16 @@
 	</label>
 	<g:checkBox name="firmaNivel3" value="${incidenteInstance?.firmaNivel3}" />
 </div>
-
+--%>
+<%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'solucionNivel3', 'error')} ">
 	<label for="solucionNivel3">
 		<g:message code="incidente.solucionNivel3.label" default="Solucion Nivel3" />
 	</label>
 	<g:textArea name="solucionNivel3" cols="40" rows="5" maxlength="3000" value="${incidenteInstance?.solucionNivel3}"/>
 </div>
-
+--%>
+<%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'fechaSolnivel3', 'error')} ">
 	<label for="fechaSolnivel3">
 		<g:message code="incidente.fechaSolnivel3.label" default="Fecha Solnivel3" />
@@ -279,19 +284,13 @@
 	</label>
 	<g:field name="p04" type="number" value="${incidenteInstance.p04}"/>
 </div>
-
+--%>
+<%--
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idPrograma', 'error')} ">
 	<label for="idPrograma">
 		<g:message code="incidente.idPrograma.label" default="Estado de cierre" />
 	</label>
 	<g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}" optionKey="id" value="${incidenteInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
+--%>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'ipTerminal', 'error')} ">
-	<label for="ipTerminal">
-		<g:message code="incidente.ipTerminal.label" default="Ip Terminal" />
-	</label>
-	<g:textField name="ipTerminal" maxlength="15" value="${incidenteInstance?.ipTerminal}"/>
-</div>
-
--->

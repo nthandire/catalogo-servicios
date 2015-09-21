@@ -11,7 +11,7 @@ class Incidente {
 	Cat_serv idServ
 	Cat_serv idServfinal
 	String descripcion
-	Integer nivel
+	Integer nivel = 1
 	Cat_servResp idServresp
 	Integer idCaptura
 	Integer idNivel1

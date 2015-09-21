@@ -6,6 +6,7 @@ import groovy.time.TimeCategory
 
 @Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO_MESA_SERVICIO'])
 class IncidenteController {
+    def springSecurityService
     static nombreMenu = "Incidentes"
     static ordenMenu = 70
 
@@ -18,6 +19,10 @@ class IncidenteController {
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [incidenteInstanceList: Incidente.list(params), incidenteInstanceTotal: Incidente.count()]
+    }
+
+    def create() {
+        [incidenteInstance: new Incidente(params)]
     }
 
     def save() {
@@ -45,6 +50,9 @@ class IncidenteController {
       incidenteInstance.numeroIncidente = ++maxID
 
       incidenteInstance.estado = 'A' as char
+      incidenteInstance.idCaptura = springSecurityService.principal.id
+      incidenteInstance.ipTerminal = request.getRemoteAddr()
+
 
         if (!incidenteInstance.save(flush: true)) {
             render(view: "create", model: [incidenteInstance: incidenteInstance])
@@ -96,6 +104,8 @@ class IncidenteController {
         }
 
         incidenteInstance.properties = params
+        incidenteInstance.idCaptura = springSecurityService.principal.id
+        incidenteInstance.ipTerminal = request.getRemoteAddr()
 
         if (!incidenteInstance.save(flush: true)) {
             render(view: "edit", model: [incidenteInstance: incidenteInstance])
