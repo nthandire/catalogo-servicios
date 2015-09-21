@@ -134,6 +134,13 @@ class SolicitudTecnicoController {
 
         solicitudDetalleInstance.properties = params
 
+        if (!solicitudDetalleInstance?.idPrograma) {
+          solicitudDetalleInstance.errors.rejectValue("idPrograma", "no.error.estandar",
+                    "Debe capturar el programa o tipo de solución")
+          render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+          return
+        }
+
         if (!solicitudDetalleInstance?.solucion) {
           solicitudDetalleInstance.errors.rejectValue("solucion", "no.error.estandar",
                     "Debe capturar la solución")

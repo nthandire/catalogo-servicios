@@ -11,7 +11,7 @@
 		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
 		
 	</label>
-	<g:select id="idServcat" name="idServcat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['null': '']" disabled="true"/>
+	<g:select id="idServcat" name="idServcat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['': '']" disabled="true"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcion', 'error')} ">
@@ -25,10 +25,10 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idPrograma', 'error')} ">
 	<label for="idPrograma">
-		<g:message code="solicitudDetalle.idPrograma.label" default="Id Programa" />
+		<g:message code="solicitudDetalle.idPrograma.label" default="Programa o tipo de solución" />
 		
 	</label>
-	<g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['': '']"/>
 </div>
 
 <g:if test="${equipo}">

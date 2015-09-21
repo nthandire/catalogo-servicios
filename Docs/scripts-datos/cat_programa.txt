@@ -1,0 +1,15 @@
+insert into cat_programa
+(id_programa, des_Programa, estado_Programa)
+values
+(3, 'Solucionado', 'A');
+
+insert into cat_programa
+(id_programa, des_Programa, estado_Programa)
+values
+(4, 'No solucionado', 'A');
+
+insert into cat_programa
+(id_programa, des_Programa, estado_Programa)
+values
+(5, 'Solucionado parcialmente', 'A');
+

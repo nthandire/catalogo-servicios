@@ -34,7 +34,9 @@
 				</fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+          <g:if test="${solicitudDetalleInstance?.idPrograma && solicitudDetalleInstance?.solucion}">
             <g:link class="edit" action="solucionar" id="${solicitudDetalleInstance?.id}"><g:message code="default.button.revisar.label" default="Marcar como solucionado" /></g:link>
+          </g:if>
           <g:link class="create" action="create"
             params="['solicitud.id': solicitudDetalleInstance?.idSolicitud?.id, 'detalle.id': solicitudDetalleInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
 				</fieldset>
