@@ -147,6 +147,7 @@ class SolicitudVBController {
     }
 
     def cancelaUpdate(Long id) {
+        log.debug("params = $params")
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
@@ -174,6 +175,7 @@ class SolicitudVBController {
             return
         }
 
+        solicitudInstance.properties = params
         solicitudInstance.fechaVb = new Date()
         solicitudInstance.estado = 'C' as char
 

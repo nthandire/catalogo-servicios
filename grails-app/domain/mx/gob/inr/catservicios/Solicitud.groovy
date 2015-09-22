@@ -5,18 +5,19 @@ class Solicitud {
 	Date fechaSolicitud
 	Integer numeroSolicitud
 	Character estado
-	String justificacion
-	Integer idSolicitante
-	Integer idAutoriza
-	Date fechaAutoriza
-	Integer idVb
-	Date fechaVb
-	Integer p01
-	Integer p02
-	Integer p03
-	Integer p04
-	Date lastUpdated
-	String ipTerminal
+  String justificacion
+  Integer idSolicitante
+  Integer idAutoriza
+  Date fechaAutoriza
+  Integer idVb
+  Date fechaVb
+  Integer p01
+  Integer p02
+  Integer p03
+  Integer p04
+  Date lastUpdated
+  String ipTerminal
+  String comentarioVb
 
   static hasMany = [detalles: SolicitudDetalle, archivos: SolicitudArchivoadjunto]
 
@@ -32,7 +33,8 @@ class Solicitud {
 		fechaSolicitud nullable: true, editable:false
 		estado nullable: true, maxSize: 1, editable:false,
 			inList: [(char)'F', (char)'A', (char)'R', (char)'V', (char)'E', (char)'T', (char)'C']
-		justificacion nullable: true, maxSize: 1500
+    justificacion nullable: true, maxSize: 1500
+		comentarioVb nullable: true, maxSize: 1500
 		idSolicitante nullable: true, editable:false
 		idAutoriza nullable: true
 		fechaAutoriza nullable: true, editable:false
@@ -48,7 +50,7 @@ class Solicitud {
 
   String toString() {
     numeroSolicitud ? "${numeroSolicitud}/${lastUpdated[Calendar.YEAR]}" :
-    	"${justificacion?justificacion.substring(0, Math.min(20, justificacion.length())):""}"
+    	"${justificacion?justificacion.substring(0, Math.min(30, justificacion.length())):""}"
   }
 
 }

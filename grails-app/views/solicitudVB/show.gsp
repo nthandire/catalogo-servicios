@@ -144,7 +144,7 @@
                 <label for="razon_de_cancelar">
                   Motivo de la cancelación
                 </label>
-                <g:textArea name="motivo" cols="40" rows="5" maxlength="1000" required="" value=""/>
+                <g:textArea name="comentarioVb" cols="40" rows="5" maxlength="1000" required="" value=""/>
               </div>
 						</fieldset>
 
