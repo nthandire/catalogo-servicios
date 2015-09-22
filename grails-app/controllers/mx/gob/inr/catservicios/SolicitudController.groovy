@@ -170,14 +170,16 @@ class SolicitudController {
         }
 
         def personasInstance = Usuario.get(solicitudInstance.idAutoriza)
+        def liga = createLink(controller:"solicitudAutoriza", action: "show",
+                              id: solicitudInstance.id, absolute: "true")
+        log.debug("liga = $liga")
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
           subject "La solicitud ${solicitudInstance.toString()} requiere autorización"
-          body "Hola ${personasInstance.username}\n\nLa solicitud folio " +
+          html "Hola ${personasInstance.username}<br/><br/>La solicitud folio " +
             "${solicitudInstance.toString()} requiere que la autorices, " +
-            "utilice la liga siguiente para revisarla y autorizarla. \n\n" +
-            "<a href='${createLink(controller:"solicitudAutoriza", action: "show", id: solicitudInstance.id)}'>" +
-            "${solicitudInstance.toString()}</a>"
+            "utilice la liga siguiente para revisarla y autorizarla. <br/><br/>" +
+            "<a href='${liga}'>Solicitud: ${solicitudInstance.toString()}</a>"
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
