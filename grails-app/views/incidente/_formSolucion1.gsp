@@ -42,7 +42,8 @@
   <label for="solucionNivel1">
     <g:message code="incidente.solucionNivel1.label" default="Solución" />
   </label>
-  <g:textArea style="width:412px;" name="solucionNivel1" cols="30" rows="5" maxlength="3000" value="${incidenteInstance?.solucionNivel1}"/>
+  <g:textArea style="width:412px;" name="solucionNivel1" cols="30" rows="5"
+    maxlength="3000" value="${incidenteInstance?.solucionNivel1}" required="true"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idPrograma', 'error')} ">
