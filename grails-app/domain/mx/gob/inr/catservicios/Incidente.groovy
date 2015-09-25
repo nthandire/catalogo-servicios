@@ -89,4 +89,9 @@ class Incidente {
 		lastUpdated nullable: true
 		ipTerminal nullable: true, maxSize: 15
 	}
+
+  String toString() {
+    "${numeroIncidente}/${fechaIncidente[Calendar.YEAR]}"
+  }
+
 }

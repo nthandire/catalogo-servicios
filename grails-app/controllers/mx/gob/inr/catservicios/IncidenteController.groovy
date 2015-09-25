@@ -59,9 +59,17 @@ class IncidenteController {
       log.debug("maxID = $maxID")
       incidenteInstance.numeroIncidente = ++maxID
 
+      if (!incidenteInstance.idServ) {
+          flash.error = "Debe capturar la categoría de tercer nivel."
+          render(view: "create", model: [incidenteInstance: incidenteInstance])
+          return
+      }
+
       incidenteInstance.estado = 'A' as char
       incidenteInstance.idCaptura = springSecurityService.principal.id
       incidenteInstance.ipTerminal = request.getRemoteAddr()
+
+
 
       def userID = springSecurityService.principal.id
 
@@ -69,13 +77,13 @@ class IncidenteController {
         incidenteInstance.idNivel1 = userID
       }
 
-        if (!incidenteInstance.save(flush: true)) {
-            render(view: "create", model: [incidenteInstance: incidenteInstance])
-            return
-        }
+      if (!incidenteInstance.save(flush: true)) {
+          render(view: "create", model: [incidenteInstance: incidenteInstance])
+          return
+      }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
-        redirect(action: "edit", id: incidenteInstance.id)
+      flash.message = message(code: 'default.created.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
+      redirect(action: "edit", id: incidenteInstance.id)
     }
 
     Boolean isGestor(Long userID) {

@@ -49,7 +49,7 @@ class Solicitud {
 	}
 
   String toString() {
-    numeroSolicitud ? "${numeroSolicitud}/${lastUpdated[Calendar.YEAR]}" :
+    numeroSolicitud ? "${numeroSolicitud}/${(fechaSolicitud?:lastUpdated)[Calendar.YEAR]}" :
     	"${justificacion?justificacion.substring(0, Math.min(30, justificacion.length())):""}"
   }
 

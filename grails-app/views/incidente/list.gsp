@@ -31,13 +31,13 @@
 				<thead>
 					<tr>
 
-						<th><g:message code="incidente.idSistema.label" default="Sistema" /></th>
+						<g:sortableColumn property="numeroIncidente" title="${message(code: 'incidente.numeroIncidente.label', default: 'Incidente')}" />
 
-						<g:sortableColumn property="idResguardoentregadetalle" title="${message(code: 'incidente.idResguardoentregadetalle.label', default: 'Id Resguardoentregadetalle')}" />
+            <th><g:message code="incidente.idSistema.label" default="Sistema" /></th>
 
-						<g:sortableColumn property="fechaIncidente" title="${message(code: 'incidente.fechaIncidente.label', default: 'Fecha Incidente')}" />
+            <g:sortableColumn property="idResguardoentregadetalle" title="${message(code: 'incidente.idResguardoentregadetalle.label', default: 'Id Resguardoentregadetalle')}" />
 
-						<g:sortableColumn property="numeroIncidente" title="${message(code: 'incidente.numeroIncidente.label', default: 'Numero Incidente')}" />
+            <g:sortableColumn property="fechaIncidente" title="${message(code: 'incidente.fechaIncidente.label', default: 'Fecha Incidente')}" />
 
 						<g:sortableColumn property="estado" title="${message(code: 'incidente.estado.label', default: 'Estado')}" />
 
@@ -49,6 +49,12 @@
 				<g:each in="${incidenteInstanceList}" status="i" var="incidenteInstance">
           <% def liga = createLink(action: "edit", id: incidenteInstance.id) %>
           <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
+            <td>
+              <a href="${liga}">
+                ${incidenteInstance.toString()}
+              </a>
+            </td>
 
             <td>
                 <a href="${liga}">
@@ -65,12 +71,6 @@
             <td>
               <a href="${liga}">
                 <g:formatDate date="${incidenteInstance.fechaIncidente}" />
-              </a>
-            </td>
-
-            <td>
-              <a href="${liga}">
-                ${fieldValue(bean: incidenteInstance, field: "numeroIncidente")}
               </a>
             </td>
 
