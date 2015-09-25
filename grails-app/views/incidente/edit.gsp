@@ -20,6 +20,9 @@
       <g:if test="${flash.message}">
       <div class="message" role="status">${flash.message}</div>
       </g:if>
+      <g:if test="${flash.error}">
+        <div class="errors" role="status">${flash.error}</div>
+      </g:if>
       <g:hasErrors bean="${incidenteInstance}">
       <ul class="errors" role="alert">
         <g:eachError bean="${incidenteInstance}" var="error">
@@ -50,14 +53,14 @@
                   params="['incidente.id': incidenteInstance?.id]">
                   ${message(code: 'default.add.label',
                     args: [message(code: 'solicitudArchivoadjunto.label',
-                                    default: 'SolicitudArchivoadjunto')])}
+                                    default: 'Archivo')])}
                 </g:link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div id="responsive" class="modal hide fade" tabindex="-1" data-width="460">
+        <div id="responsive" class="modal hide fade" tabindex="-1" data-width="512">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3>Responsive</h3>
@@ -65,25 +68,23 @@
           <div class="modal-body">
             <div class="row-fluid">
               <div class="span12">
-                <h4>Some Input</h4>
-                <p><input type="text" class="span12"></p>
-                <p><input type="text" class="span12"></p>
-                <p><input type="text" class="span12"></p>
-                <p><input type="text" class="span12"></p>
-                <p><input type="text" class="span12"></p>
-                <p><input type="text" class="span12"></p>
-                <p><input type="text" class="span12"></p>
+                <h4>Solución del Incidente</h4>
+                <fieldset class="form">
+                  <g:render template="formSolucion1"/>
+                </fieldset>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <fieldset class="buttons">
+              <a data-dismiss="modal" class="cancel">Close</a>
+              <g:actionSubmit class="save" action="soluciónUpdate" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+            </fieldset>
           </div>
         </div>
 
         <fieldset class="buttons">
-          <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+          <g:actionSubmit class="edit" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
           <a class="save" data-toggle="modal" href="#responsive">Solucionar Incidente</a>
         </fieldset>
       </g:form>
