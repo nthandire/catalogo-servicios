@@ -63,7 +63,7 @@
         <div id="responsive" class="modal hide fade" tabindex="-1" data-width="512">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3>Responsive</h3>
+            <h3 id="titulo">error Escalar incidente error</h3>
           </div>
           <div class="modal-body">
             <div class="row-fluid">
@@ -77,15 +77,47 @@
           </div>
           <div class="modal-footer">
             <fieldset class="buttons">
-              <a data-dismiss="modal" class="cancel">Close</a>
-              <g:actionSubmit class="save" action="soluciónUpdate" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+              <a data-dismiss="modal" class="cancel">Cancelar</a>
+              <input type="submit" name="_action_resp" id="respButton"
+                value="${message(code: 'default.button.update.label',
+                  default: 'Update')}"
+                class="save">
             </fieldset>
           </div>
         </div>
 
+        <script>
+          function escala() {
+            $("#titulo").text('Escalar incidente');
+            $("#idPrograma").prop("required", false);
+            $("#solucionNivel1").prop("required", true);
+            $("#respButton").attr('name','_action_escalaUpdate');
+            $("#passwordfirma").prop("required", true);
+          }
+          function soluciona() {
+            $("#titulo").text('Soluciona incidente');
+            $("#idPrograma").prop("required", true);
+            $("#solucionNivel1").prop("required", true);
+            $("#respButton").attr('name','_action_soluciónUpdate');
+            $("#passwordfirma").prop("required", true);
+          }
+          function update() {
+            $("#idPrograma").prop("required", false);
+            $("#solucionNivel1").prop("required", false);
+            $("#passwordfirma").prop("required", false);
+          }
+        </script>
+
+
         <fieldset class="buttons">
-          <g:actionSubmit class="edit" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-          <a class="save" data-toggle="modal" href="#responsive">Solucionar Incidente</a>
+          <g:actionSubmit class="edit" action="update"
+            value="${message(code: 'default.button.update.label',
+                             default: 'Update')}"
+            onclick="update()"/>
+          <a class="save" data-toggle="modal" href="#responsive"
+            onclick="soluciona()">Solucionar Incidente</a>
+          <a class="escala" data-toggle="modal" href="#responsive"
+            onclick="escala()">Escalar Incidente</a>
         </fieldset>
       </g:form>
     </div>
