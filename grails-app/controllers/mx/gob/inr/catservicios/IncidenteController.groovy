@@ -274,6 +274,7 @@ class IncidenteController {
     }
 
     def soluciónUpdate(Long id, Long version) {
+      log.debug("params = $params")
       def incidenteInstance = Incidente.get(id)
       if (!incidenteInstance) {
           flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
@@ -301,7 +302,7 @@ class IncidenteController {
         return
       }
 
-      if (!incidenteInstance?.idNivel1) { // TODO: preguntar si es gestor
+      if (!incidenteInstance?.idNivel1) {
         incidenteInstance.fechaNivel1 = new Date()
         incidenteInstance.idNivel1 = springSecurityService.principal.id
       } else if (incidenteInstance?.idNivel1 != userID) {
@@ -315,6 +316,61 @@ class IncidenteController {
       incidenteInstance.ipTerminal = request.getRemoteAddr()
       incidenteInstance.fechaSolnivel1 = new Date()
       incidenteInstance.estado = 'E' as char
+
+      if (!incidenteInstance.save(flush: true)) {
+          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          return
+      }
+
+      flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
+      redirect(action: "edit", id: incidenteInstance.id)
+    }
+
+    def escalaUpdate(Long id, Long version) {
+      log.debug("params = $params")
+      def incidenteInstance = Incidente.get(id)
+      if (!incidenteInstance) {
+          flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
+          redirect(action: "list")
+          return
+      }
+
+      if (version != null) {
+        if (incidenteInstance.version > version) {
+          incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                    [message(code: 'incidente.label', default: 'Incidente')] as Object[],
+                    "Another user has updated this Incidente while you were editing")
+          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          return
+        }
+      }
+
+      def userID = springSecurityService.principal.id
+      def firmaTeclada = params['passwordfirma']
+      def firma = Firmadigital.findById(userID)?.passwordfirma
+
+      if (firmaTeclada != firma) {
+        flash.error = "Error en contaseña"
+        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        return
+      }
+
+      if (!incidenteInstance?.idNivel1) {
+        incidenteInstance.fechaNivel1 = new Date()
+        incidenteInstance.idNivel1 = springSecurityService.principal.id
+      } else if (incidenteInstance?.idNivel1 != userID) {
+        flash.error = "Esta incidencia no esta asignada a Usted"
+        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        return
+      }
+
+      incidenteInstance.properties = params
+      incidenteInstance.idCaptura = springSecurityService.principal.id
+      incidenteInstance.ipTerminal = request.getRemoteAddr()
+      incidenteInstance.fechaSolnivel1 = new Date()
+      incidenteInstance.firmaNivel1 = true
+
+      ++incidenteInstance.nivel
 
       if (!incidenteInstance.save(flush: true)) {
           render(view: "edit", model: [incidenteInstance: incidenteInstance])
