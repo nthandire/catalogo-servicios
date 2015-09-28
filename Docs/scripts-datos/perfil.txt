@@ -31,3 +31,5 @@ insert into perfil
 (idperfil, desc_perfil, perfil_bi)
 values
 (61, 'ROLE_SAST_TECNICO_MESA_SERVICIO', false);
+
+delete from perfil where idperfil = 61;

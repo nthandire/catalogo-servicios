@@ -122,3 +122,5 @@ insert into usuario_perfil
 (idusuario, idperfil)
 values
 (9582, 61);
+
+update usuario_perfil set idperfil = 59  where idusuario = 9582 and idperfil = 61;
