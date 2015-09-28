@@ -4,7 +4,7 @@ import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
-@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO_MESA_SERVICIO'])
+@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO'])
 class IncidenteController {
     def springSecurityService
     static nombreMenu = "Incidentes"
@@ -184,7 +184,8 @@ class IncidenteController {
       if (isGestor(userID)) {
         def rolUsuarios = null
         Rol.withNewSession { session ->
-          rolUsuarios = Rol.findByAuthority('ROLE_SAST_TECNICO_MESA_SERVICIO')
+          // TODO: cambiar el filtro, por rol: tecnico, y por área
+          rolUsuarios = Rol.findByAuthority('ROLE_SAST_TECNICO')
         }
         log.debug("rolUsuarios = $rolUsuarios")
         def usuariosRolesIds = []

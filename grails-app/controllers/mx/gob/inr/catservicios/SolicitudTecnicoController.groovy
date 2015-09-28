@@ -3,7 +3,7 @@ package mx.gob.inr.catservicios
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
-@Secured(['ROLE_SAST_TECNICO','ROLE_SAST_TECNICO_MESA_SERVICIO'])
+@Secured(['ROLE_SAST_TECNICO'])
 class SolicitudTecnicoController {
     def springSecurityService
     static nombreMenu = "Solucionar Solicitudes"
