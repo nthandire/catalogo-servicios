@@ -92,6 +92,7 @@ log4j = {
     debug  'grails.app.conf.BootStrap',
            'grails.app.controllers',
            'grails.app.domain',
+           'grails.app.services',
            'grails.plugin.springsecurity'
 }
 

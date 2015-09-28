@@ -7,6 +7,7 @@ import groovy.time.TimeCategory
 @Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO'])
 class IncidenteController {
     def springSecurityService
+    def firmadoService
     static nombreMenu = "Incidentes"
     static ordenMenu = 70
 
@@ -21,7 +22,7 @@ class IncidenteController {
         def userID = springSecurityService.principal.id
         def incidenteInstanceList = []
 
-        incidenteInstanceList = isGestor(userID) ?
+        incidenteInstanceList = firmadoService.isGestor(session, userID) ?
             Incidente.executeQuery("from Incidente where estado = 'A'" +
                                    " and (idNivel1 is null or idNivel1 = ?)",
                                    [(Integer) userID], params)
@@ -73,7 +74,7 @@ class IncidenteController {
 
       def userID = springSecurityService.principal.id
 
-      if (!isGestor(userID)) {
+      if (!firmadoService.isGestor(session, userID)) {
         incidenteInstance.idNivel1 = userID
       }
 
@@ -84,25 +85,6 @@ class IncidenteController {
 
       flash.message = message(code: 'default.created.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
       redirect(action: "edit", id: incidenteInstance.id)
-    }
-
-    Boolean isGestor(Long userID) {
-      if (session["gestor"] == null) {
-        log.debug("no lo tengo, busco el gestor")
-        def gestor = false
-        UsuarioRol.withNewSession { session ->
-          def rolUsuarios = UsuarioRol.findAllByUsuario(Usuario.get(userID)).each{
-            log.debug("UsuarioRol = $it")
-            if(it.rol.authority == 'ROLE_SAST_COORDINADOR_DE_GESTION') {
-              gestor = true
-            }
-          }
-        }
-        session["gestor"] = gestor
-      }
-      log.debug("en IncidenteController isGestor: gestor = ${session["gestor"]}")
-
-      return session["gestor"]
     }
 
     def createArchivo() {
@@ -181,7 +163,7 @@ class IncidenteController {
       log.debug("userID = ${userID}")
 
       def tecnicos = null
-      if (isGestor(userID)) {
+      if (firmadoService.isGestor(session, userID)) {
         def rolUsuarios = null
         Rol.withNewSession { session ->
           // TODO: cambiar el filtro, por rol: tecnico, y por área
