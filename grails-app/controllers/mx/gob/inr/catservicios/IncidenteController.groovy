@@ -87,20 +87,22 @@ class IncidenteController {
     }
 
     Boolean isGestor(Long userID) {
-      log.debug("userID = ${userID}")
-      // Saber si es gestor o no
-      def gestor = false
-      UsuarioRol.withNewSession { session ->
-        def rolUsuarios = UsuarioRol.findAllByUsuario(Usuario.get(userID)).each{
-          log.debug("UsuarioRol = $it")
-          if(it.rol.authority == 'ROLE_SAST_COORDINADOR_DE_GESTION') {
-            gestor = true
+      if (session["gestor"] == null) {
+        log.debug("no lo tengo, busco el gestor")
+        def gestor = false
+        UsuarioRol.withNewSession { session ->
+          def rolUsuarios = UsuarioRol.findAllByUsuario(Usuario.get(userID)).each{
+            log.debug("UsuarioRol = $it")
+            if(it.rol.authority == 'ROLE_SAST_COORDINADOR_DE_GESTION') {
+              gestor = true
+            }
           }
         }
+        session["gestor"] = gestor
       }
-      log.debug("gestor = $gestor")
+      log.debug("en IncidenteController isGestor: gestor = ${session["gestor"]}")
 
-      return gestor
+      return session["gestor"]
     }
 
     def createArchivo() {
