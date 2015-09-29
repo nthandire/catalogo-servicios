@@ -11,7 +11,7 @@
 		<g:message code="incidente.idSistema.label" default="Id Sistema" />
 
 	</label>
-	<g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
@@ -19,7 +19,10 @@
 		<g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
 	</label>
   <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
-		from="${ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}" optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}" class="many-to-one"/>
+		from="${ResguardoEntregaDetalle.executeQuery(
+      'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
+      optionKey="id" class="many-to-one" noSelection="['': '']"
+      value="${solicitudDetalleInstance?.idResguardoentregadetalle}"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">

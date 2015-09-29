@@ -4,7 +4,8 @@ import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
-@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO'])
+@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO',
+          'ROLE_SAST_COORDINADOR'])
 class IncidenteController {
     def springSecurityService
     def firmadoService
@@ -20,16 +21,38 @@ class IncidenteController {
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def userID = springSecurityService.principal.id
-        def incidenteInstanceList = []
+        def area = area()
+        log.debug("area = ${area}, area.id = ${area?.id}")
 
-        incidenteInstanceList = firmadoService.isGestor(session, userID) ?
-            Incidente.executeQuery("from Incidente where estado = 'A'" +
-                                   " and (idNivel1 is null or idNivel1 = ?)",
-                                   [(Integer) userID], params)
+        def incidentes = Incidente.findAllByEstado('A' as char)
+        log.debug("IncidenteController list incidentes = ${incidentes}")
+
+        def incidentesFiltrados =
+          incidentes.findAll {it.idServresp?.id == area?.id}
+        log.debug("incidentesFiltrados = ${incidentesFiltrados}")
+
+        def incidenteInstanceList = isTecnico() ?
+            incidentesFiltrados.findAll {it."idNivel${it.nivel}" == userID}
           :
-            Incidente.findAllByIdNivel1AndEstado(userID, 'A' as char, params)
+            incidentesFiltrados
+        log.debug("incidenteInstanceList = ${incidenteInstanceList}")
         [incidenteInstanceList: incidenteInstanceList,
           incidenteInstanceTotal: incidenteInstanceList.size()]
+    }
+
+    Boolean isTecnico() {
+      firmadoService.isTecnico(session, springSecurityService.principal.id)
+    }
+
+    Boolean isCoordinador() {
+      firmadoService.isCoordinador(session, springSecurityService.principal.id)
+    }
+
+    Cat_servResp area() {
+      def area = firmadoService.area(session, springSecurityService.principal.id)
+      if (!area)
+        flash.error ="Error de configuración de usuario, reporte a sistemas(SAST 1023)"
+      area
     }
 
     def create() {
@@ -66,6 +89,7 @@ class IncidenteController {
           return
       }
 
+      incidenteInstance.idServresp = incidenteInstance.idServ.servResp1
       incidenteInstance.estado = 'A' as char
       incidenteInstance.idCaptura = springSecurityService.principal.id
       incidenteInstance.ipTerminal = request.getRemoteAddr()
@@ -171,14 +195,14 @@ class IncidenteController {
         }
         log.debug("rolUsuarios = $rolUsuarios")
         def usuariosRolesIds = []
-        UsuarioRol.withNewSession { sessionUR ->
+        UsuarioRol.withNewSession { session ->
           def lista = UsuarioRol.findAllByRol(rolUsuarios).
             collect {it.usuario.id}
           usuariosRolesIds = (userID in lista) ? lista : lista + [userID]
         }
         log.debug("usuariosRolesIds = $usuariosRolesIds")
 
-         Usuario.withNewSession { sessionU ->
+         Usuario.withNewSession { session ->
           tecnicos = Usuario.findAllByIdInList(usuariosRolesIds)
          }
         log.debug("numero de tecnicos = ${tecnicos.size()}")
