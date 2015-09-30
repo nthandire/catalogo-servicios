@@ -254,6 +254,9 @@ class IncidenteController {
       if (params["idNivel"] != incidenteInstance."idNivel${nivel}") {
         incidenteInstance."idNivel${nivel}" = params["idNivel"].toLong()
         incidenteInstance."fechaNivel${nivel}" = new Date()
+        if (nivel > 1) {
+          incidenteInstance."idAsignanivel${nivel}" = userID
+        }
       }
 
       incidenteInstance.properties = params
@@ -348,6 +351,10 @@ class IncidenteController {
       if (!incidenteInstance?."idNivel${nivel}") {
         if(isGestor()) {
           incidenteInstance."fechaNivel${nivel}" = new Date()
+          incidenteInstance."idNivel${nivel}" = userID
+          if (nivel > 1) {
+            incidenteInstance."idAsignanivel${nivel}" = userID
+          }
         } else {
           flash.error = "Usted no puede modificar este incidente"
           render(view: "edit", model: [incidenteInstance: incidenteInstance])
@@ -360,7 +367,6 @@ class IncidenteController {
       }
 
       incidenteInstance.properties = params
-      incidenteInstance."idNivel${nivel}" = userID
       incidenteInstance."solucionNivel${nivel}" =
         params["solucionNivel"]
       incidenteInstance.idCaptura = userID
@@ -413,6 +419,10 @@ class IncidenteController {
       if (!incidenteInstance?."idNivel${nivel}") {
         if(isGestor()) {
           incidenteInstance."fechaNivel${nivel}" = new Date()
+          incidenteInstance."idNivel${nivel}" = userID
+          if (nivel > 1) {
+            incidenteInstance."idAsignanivel${nivel}" = userID
+          }
         } else {
           flash.error = "Usted no puede modificar este incidente"
           render(view: "edit", model: [incidenteInstance: incidenteInstance])
@@ -425,7 +435,6 @@ class IncidenteController {
       }
 
       incidenteInstance.properties = params
-      incidenteInstance."idNivel${nivel}" = userID
       incidenteInstance."solucionNivel${nivel}" =
         params["solucionNivel"]
       incidenteInstance.idCaptura = userID
