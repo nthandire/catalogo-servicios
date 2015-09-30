@@ -47,9 +47,16 @@
 	<label for="idPrograma">
 		<g:message code="incidente.idPrograma.label" default="Estado de cierre" />
 	</label>
-	<g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}"
-    optionKey="id" value="${incidenteInstance?.idPrograma?.id}"
-    class="many-to-one" noSelection="['': '']"/>
+  <g:if test="${incidenteInstance?.idPrograma}">
+    <g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}"
+      optionKey="id" value="${incidenteInstance?.idPrograma?.id}"
+      class="many-to-one"/>
+  </g:if>
+  <g:else>
+    <g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}"
+      optionKey="id" value="${incidenteInstance?.idPrograma?.id}"
+      class="many-to-one" noSelection="['': '']"/>
+  </g:else>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: firmadigitalInstance, field: 'passwordfirma', 'error')} ">

@@ -101,6 +101,13 @@
             $("#respButton").attr('name','_action_soluciónUpdate');
             $("#passwordfirma").prop("required", true);
           }
+          function problema() {
+            $("#titulo").text('Soluciona incidente');
+            $("#idPrograma").prop("required", false);
+            $("#solucionNivel").prop("required", true);
+            $("#respButton").attr('name','_action_problemaUpdate');
+            $("#passwordfirma").prop("required", true);
+          }
           function update() {
             $("#idPrograma").prop("required", false);
             $("#solucionNivel").prop("required", false);
@@ -114,10 +121,18 @@
             value="${message(code: 'default.button.update.label',
                              default: 'Update')}"
             onclick="update()"/>
-          <a class="save" data-toggle="modal" href="#responsive"
-            onclick="soluciona()">Solucionar Incidente</a>
-          <a class="escala" data-toggle="modal" href="#responsive"
-            onclick="escala()">Escalar Incidente</a>
+          <g:if test="${idNivel == yo}">
+            <a class="save" data-toggle="modal" href="#responsive"
+              onclick="soluciona()">Solucionar Incidente</a>
+            <g:if test="${incidenteInstance.nivel < 3}">
+              <a class="escala" data-toggle="modal" href="#responsive"
+                onclick="escala()">Escalar Incidente</a>
+            </g:if>
+          </g:if>
+          <g:if test="${incidenteInstance.nivel == 3 && idNivel == yo}">
+            <a class="cancel" data-toggle="modal" href="#responsive"
+              onclick="problema()">Marcarlo como problema</a>
+          </g:if>
         </fieldset>
       </g:form>
     </div>

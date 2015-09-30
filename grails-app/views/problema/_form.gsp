@@ -6,14 +6,6 @@
 </style>
 
 
-<div class="fieldtablecontain ${hasErrors(bean: problemaInstance, field: 'idProblema', 'error')} ">
-	<label for="idProblema">
-		<g:message code="problema.idProblema.label" default="Id Problema" />
-		
-	</label>
-	<g:textField name="idProblema" maxlength="18" value="${problemaInstance?.idProblema}"/>
-</div>
-
 <div class="fieldtablecontain ${hasErrors(bean: problemaInstance, field: 'fuente', 'error')} ">
 	<label for="fuente">
 		<g:message code="problema.fuente.label" default="Fuente" />
@@ -84,14 +76,6 @@
 		
 	</label>
 	<g:field name="idUsuario" type="number" value="${problemaInstance.idUsuario}"/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: problemaInstance, field: 'lastUpdated', 'error')} ">
-	<label for="lastUpdated">
-		<g:message code="problema.lastUpdated.label" default="Fecha Modificacion" />
-		
-	</label>
-	<g:datePicker name="lastUpdated" precision="day"  value="${problemaInstance?.lastUpdated}" default="none" noSelection="['': '']" />
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: problemaInstance, field: 'ipTerminal', 'error')} ">

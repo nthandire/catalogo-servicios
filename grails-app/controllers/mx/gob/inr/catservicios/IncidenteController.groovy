@@ -184,11 +184,14 @@ class IncidenteController {
         def tecnicos =
           isCoordinador() ? listaDeTecnicos(incidenteInstance.idServresp) : []
         log.debug("tecnicos = ${tecnicos}")
-        def idNivel = incidenteInstance."idNivel${incidenteInstance.nivel}"
+        def nivel = incidenteInstance.nivel
+        def idNivel = incidenteInstance."idNivel${nivel}"
         log.debug("idNivel = ${idNivel}")
+        def userID = springSecurityService.principal.id
+        log.debug("userID = ${userID}")
         [incidenteInstance: incidenteInstance,
-          tecnicos:tecnicos, idNivel: idNivel,
-          solucionNivel: incidenteInstance."solucionNivel${incidenteInstance.nivel}"]
+          tecnicos:tecnicos, idNivel: idNivel, yo: userID,
+          solucionNivel: incidenteInstance."solucionNivel${nivel}"]
     }
 
   def listaDeTecnicos(Cat_servResp servresp) {
@@ -209,13 +212,9 @@ class IncidenteController {
       findAllByIdInListAndEstado(usuariosRolesIds, 'A' as char).
         findAll{areaDesc.contains(it.area)}.collect {it.id}
 
-    def areaMS = g.message(code: "mesa.de.ayuda")
-    log.debug("areaMS = $areaMS")
-
     def userID = springSecurityService.principal.id
     Boolean agregarCoordinador = (isCoordinador() &&
-                                  !tecnicosDelAreaIds.contains(userID) &&
-                                  areaDesc.contains(areaMS))
+                                  !tecnicosDelAreaIds.contains(userID))
     log.debug("agregarCoordinador = $agregarCoordinador")
     def delAreaIds = tecnicosDelAreaIds + (agregarCoordinador
                                            ? [userID] : [])
@@ -348,20 +347,8 @@ class IncidenteController {
 
       def nivel = incidenteInstance.nivel
 
-      if (!incidenteInstance?."idNivel${nivel}") {
-        if(isGestor()) {
-          incidenteInstance."fechaNivel${nivel}" = new Date()
-          incidenteInstance."idNivel${nivel}" = userID
-          if (nivel > 1) {
-            incidenteInstance."idAsignanivel${nivel}" = userID
-          }
-        } else {
-          flash.error = "Usted no puede modificar este incidente"
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
-          return
-        }
-      } else if (incidenteInstance?."idNivel${nivel}" != userID) {
-        flash.error = "Esta incidencia no esta asignada a Usted"
+      if (incidenteInstance?."idNivel${nivel}" != userID) {
+        flash.error = "Este incidente no esta asignado a Usted"
         render(view: "edit", model: [incidenteInstance: incidenteInstance])
         return
       }
@@ -377,6 +364,96 @@ class IncidenteController {
       incidenteInstance.estado = 'E' as char
 
       if (!incidenteInstance.save(flush: true)) {
+          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          return
+      }
+
+      flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
+      redirect(action: "list")
+    }
+
+    def problemaUpdate(Long id, Long version) {
+      log.debug("params = $params")
+      def incidenteInstance = Incidente.get(id)
+      if (!incidenteInstance) {
+          flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
+          redirect(action: "list")
+          return
+      }
+
+      if (version != null) {
+        if (incidenteInstance.version > version) {
+          incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                    [message(code: 'incidente.label', default: 'Incidente')] as Object[],
+                    "Another user has updated this Incidente while you were editing")
+          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          return
+        }
+      }
+
+      def userID = springSecurityService.principal.id
+      def firmaTeclada = params['passwordfirma']
+      def firma = Firmadigital.findById(userID)?.passwordfirma
+      if (firmaTeclada != firma) {
+        flash.error = "Error en contaseña"
+        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        return
+      }
+
+      def nivel = incidenteInstance.nivel
+
+      if (incidenteInstance?."idNivel${nivel}" != userID) {
+        flash.error = "Este incidente no esta asignado a Usted"
+        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        return
+      }
+
+      incidenteInstance.properties = params
+      incidenteInstance."solucionNivel${nivel}" =
+        params["solucionNivel"]
+      incidenteInstance.idCaptura = userID
+      incidenteInstance.ipTerminal = request.getRemoteAddr()
+      incidenteInstance."fechaSolnivel${nivel}" = new Date()
+      incidenteInstance."firmaNivel${nivel}" = true
+
+      incidenteInstance.estado = 'P' as char
+
+      if (!incidenteInstance.save(flush: true)) {
+          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          return
+      }
+
+      def problema = new Problema()
+
+      problema.fuente = "Incidente"
+      problema.idFuente = incidenteInstance.id
+      problema.idFuente = incidenteInstance.id
+      problema.folio = incidenteInstance.id
+
+        // Asignarle el siguiente folio dentro del año
+        // TODO: Pasarlo a un servicio
+      def startDate = new Date().clearTime()
+      startDate[Calendar.MONTH] = 0
+      startDate[Calendar.DATE] = 1
+      def endDate = startDate.clone()
+      use(TimeCategory) {
+        endDate = endDate + 1.years - 1.seconds
+      }
+      log.debug("startDate = $startDate, endDate = $endDate")
+
+      def maxID = Problema.withCriteria { // TODO: un test para ver si este algoritmo sique funcionando
+        between("fechaProblema", startDate, endDate)
+        projections {
+          max "folio"
+        }
+      }[0] ?: 0
+      log.debug("maxID = $maxID")
+      problema.folio = ++maxID
+      problema.observaciones = params["solucionNivel"]
+      problema.idUsuario = incidenteInstance.idReporta
+      problema.ipTerminal = request.getRemoteAddr()
+
+      if (!problema.save(flush: true)) {
           render(view: "edit", model: [incidenteInstance: incidenteInstance])
           return
       }
@@ -416,20 +493,8 @@ class IncidenteController {
 
       def nivel = incidenteInstance.nivel
 
-      if (!incidenteInstance?."idNivel${nivel}") {
-        if(isGestor()) {
-          incidenteInstance."fechaNivel${nivel}" = new Date()
-          incidenteInstance."idNivel${nivel}" = userID
-          if (nivel > 1) {
-            incidenteInstance."idAsignanivel${nivel}" = userID
-          }
-        } else {
-          flash.error = "Usted no puede modificar este incidente"
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
-          return
-        }
-      } else if (incidenteInstance?."idNivel${nivel}" != userID) {
-        flash.error = "Esta incidencia no esta asignada a Usted"
+      if (incidenteInstance?."idNivel${nivel}" != userID) {
+        flash.error = "Este incidente no esta asignado a Usted"
         render(view: "edit", model: [incidenteInstance: incidenteInstance])
         return
       }

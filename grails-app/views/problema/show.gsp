@@ -18,122 +18,113 @@
 		</div>
 		<div id="show-problema" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			  <div class="message" role="status">${flash.message}</div>
-			</g:if>
+      <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+      </g:if>
 			<g:if test="${flash.error}">
-			  <div class="errors" role="status">${flash.error}</div>
+			 <div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<ol class="property-list problema">
-			
-				<g:if test="${problemaInstance?.idProblema}">
-				<li class="fieldcontain">
-					<span id="idProblema-label" class="property-label"><g:message code="problema.idProblema.label" default="Id Problema" /></span>
-					
-						<span class="property-value" aria-labelledby="idProblema-label"><g:fieldValue bean="${problemaInstance}" field="idProblema"/></span>
-					
-				</li>
-				</g:if>
-			
+
 				<g:if test="${problemaInstance?.fuente}">
 				<li class="fieldcontain">
 					<span id="fuente-label" class="property-label"><g:message code="problema.fuente.label" default="Fuente" /></span>
-					
+
 						<span class="property-value" aria-labelledby="fuente-label"><g:fieldValue bean="${problemaInstance}" field="fuente"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.idFuente}">
 				<li class="fieldcontain">
 					<span id="idFuente-label" class="property-label"><g:message code="problema.idFuente.label" default="Id Fuente" /></span>
-					
+
 						<span class="property-value" aria-labelledby="idFuente-label"><g:fieldValue bean="${problemaInstance}" field="idFuente"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.fechaProblema}">
 				<li class="fieldcontain">
 					<span id="fechaProblema-label" class="property-label"><g:message code="problema.fechaProblema.label" default="Fecha Problema" /></span>
-					
+
 						<span class="property-value" aria-labelledby="fechaProblema-label"><g:formatDate date="${problemaInstance?.fechaProblema}" /></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.folio}">
 				<li class="fieldcontain">
 					<span id="folio-label" class="property-label"><g:message code="problema.folio.label" default="Folio" /></span>
-					
+
 						<span class="property-value" aria-labelledby="folio-label"><g:fieldValue bean="${problemaInstance}" field="folio"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.observaciones}">
 				<li class="fieldcontain">
 					<span id="observaciones-label" class="property-label"><g:message code="problema.observaciones.label" default="Observaciones" /></span>
-					
+
 						<span class="property-value" aria-labelledby="observaciones-label"><g:fieldValue bean="${problemaInstance}" field="observaciones"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.solucion}">
 				<li class="fieldcontain">
 					<span id="solucion-label" class="property-label"><g:message code="problema.solucion.label" default="Solucion" /></span>
-					
+
 						<span class="property-value" aria-labelledby="solucion-label"><g:fieldValue bean="${problemaInstance}" field="solucion"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.fechaSolucion}">
 				<li class="fieldcontain">
 					<span id="fechaSolucion-label" class="property-label"><g:message code="problema.fechaSolucion.label" default="Fecha Solucion" /></span>
-					
+
 						<span class="property-value" aria-labelledby="fechaSolucion-label"><g:formatDate date="${problemaInstance?.fechaSolucion}" /></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.resolvio}">
 				<li class="fieldcontain">
 					<span id="resolvio-label" class="property-label"><g:message code="problema.resolvio.label" default="Resolvio" /></span>
-					
+
 						<span class="property-value" aria-labelledby="resolvio-label"><g:fieldValue bean="${problemaInstance}" field="resolvio"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.idUsuario}">
 				<li class="fieldcontain">
 					<span id="idUsuario-label" class="property-label"><g:message code="problema.idUsuario.label" default="Id Usuario" /></span>
-					
+
 						<span class="property-value" aria-labelledby="idUsuario-label"><g:fieldValue bean="${problemaInstance}" field="idUsuario"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.lastUpdated}">
 				<li class="fieldcontain">
 					<span id="lastUpdated-label" class="property-label"><g:message code="problema.lastUpdated.label" default="Fecha Modificacion" /></span>
-					
+
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${problemaInstance?.lastUpdated}" /></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${problemaInstance?.ipTerminal}">
 				<li class="fieldcontain">
 					<span id="ipTerminal-label" class="property-label"><g:message code="problema.ipTerminal.label" default="Ip Terminal" /></span>
-					
+
 						<span class="property-value" aria-labelledby="ipTerminal-label"><g:fieldValue bean="${problemaInstance}" field="ipTerminal"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
