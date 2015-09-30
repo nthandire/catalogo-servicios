@@ -9,6 +9,7 @@ import groovy.time.TimeCategory
 class IncidenteController {
     def springSecurityService
     def firmadoService
+    def messageSource
     static nombreMenu = "Incidentes"
     static ordenMenu = 70
 
@@ -22,14 +23,16 @@ class IncidenteController {
         params.max = Math.min(max ?: 10, 100)
         def userID = springSecurityService.principal.id
         def area = area()
+        def areaDesc = area.descripcion
         log.debug("area = ${area}, area.id = ${area?.id}")
 
         def incidentes = Incidente.findAllByEstado('A' as char)
-        log.debug("IncidenteController list incidentes = ${incidentes}")
+        log.debug("list incidentes = ${incidentes}")
 
         def incidentesFiltrados =
-          incidentes.findAll {it.idServresp?.id == area?.id}
+          incidentes.findAll {it?.idServresp?.descripcion?.contains areaDesc}
         log.debug("incidentesFiltrados = ${incidentesFiltrados}")
+
 
         def incidenteInstanceList = isTecnico() ?
             incidentesFiltrados.findAll {it."idNivel${it.nivel}" == userID}
@@ -44,8 +47,14 @@ class IncidenteController {
       firmadoService.isTecnico(session, springSecurityService.principal.id)
     }
 
+    Boolean isGestor() {
+      firmadoService.isGestor(session, springSecurityService.principal.id)
+    }
+
     Boolean isCoordinador() {
-      firmadoService.isCoordinador(session, springSecurityService.principal.id)
+      Boolean coordinador =
+        firmadoService.isCoordinador(session, springSecurityService.principal.id)
+      coordinador ?: isGestor()
     }
 
     Cat_servResp area() {
@@ -93,14 +102,8 @@ class IncidenteController {
       incidenteInstance.estado = 'A' as char
       incidenteInstance.idCaptura = springSecurityService.principal.id
       incidenteInstance.ipTerminal = request.getRemoteAddr()
-
-
-
-      def userID = springSecurityService.principal.id
-
-      if (!firmadoService.isGestor(session, userID)) {
-        incidenteInstance.idNivel1 = userID
-      }
+      incidenteInstance.idNivel1 = springSecurityService.principal.id
+      incidenteInstance.fechaNivel1 = new Date()
 
       if (!incidenteInstance.save(flush: true)) {
           render(view: "create", model: [incidenteInstance: incidenteInstance])
@@ -178,37 +181,53 @@ class IncidenteController {
             return
         }
 
+        def tecnicos =
+          isCoordinador() ? listaDeTecnicos(incidenteInstance.idServresp) : []
+        log.debug("tecnicos = ${tecnicos}")
+        def idNivel = incidenteInstance."idNivel${incidenteInstance.nivel}"
+        log.debug("idNivel = ${idNivel}")
         [incidenteInstance: incidenteInstance,
-          tecnicos:listaDeTecnicos()]
+          tecnicos:tecnicos, idNivel: idNivel,
+          solucionNivel: incidenteInstance."solucionNivel${incidenteInstance.nivel}"]
     }
 
-    def listaDeTecnicos() {
-      def userID = springSecurityService.principal.id
-      log.debug("userID = ${userID}")
-
-      def tecnicos = null
-      if (firmadoService.isGestor(session, userID)) {
-        def rolUsuarios = null
-        Rol.withNewSession { session ->
-          // TODO: cambiar el filtro, por rol: tecnico, y por área
-          rolUsuarios = Rol.findByAuthority('ROLE_SAST_TECNICO')
-        }
-        log.debug("rolUsuarios = $rolUsuarios")
-        def usuariosRolesIds = []
-        UsuarioRol.withNewSession { session ->
-          def lista = UsuarioRol.findAllByRol(rolUsuarios).
-            collect {it.usuario.id}
-          usuariosRolesIds = (userID in lista) ? lista : lista + [userID]
-        }
-        log.debug("usuariosRolesIds = $usuariosRolesIds")
-
-         Usuario.withNewSession { session ->
-          tecnicos = Usuario.findAllByIdInList(usuariosRolesIds)
-         }
-        log.debug("numero de tecnicos = ${tecnicos.size()}")
-      }
-      return tecnicos
+  def listaDeTecnicos(Cat_servResp servresp) {
+    def rolUsuarios = Rol.withNewSession { session ->
+      Rol.findByAuthority('ROLE_SAST_TECNICO')
     }
+    log.debug("rolUsuarios = $rolUsuarios")
+
+    def usuariosRolesIds = UsuarioRol.withNewSession { session ->
+      UsuarioRol.findAllByRol(rolUsuarios).collect {it.usuario.id}
+    }
+    log.debug("usuariosRolesIds = $usuariosRolesIds")
+
+    def areaDesc = servresp.descripcion
+    log.debug("areaDesc = $areaDesc")
+
+    def tecnicosDelAreaIds = UsuarioAutorizado.
+      findAllByIdInListAndEstado(usuariosRolesIds, 'A' as char).
+        findAll{areaDesc.contains(it.area)}.collect {it.id}
+
+    def areaMS = g.message(code: "mesa.de.ayuda")
+    log.debug("areaMS = $areaMS")
+
+    def userID = springSecurityService.principal.id
+    Boolean agregarCoordinador = (isCoordinador() &&
+                                  !tecnicosDelAreaIds.contains(userID) &&
+                                  areaDesc.contains(areaMS))
+    log.debug("agregarCoordinador = $agregarCoordinador")
+    def delAreaIds = tecnicosDelAreaIds + (agregarCoordinador
+                                           ? [userID] : [])
+    log.debug("delAreaIds = $delAreaIds")
+
+    def tecnicos = Usuario.withNewSession { session ->
+      Usuario.findAllByIdInList(delAreaIds)
+    }
+    log.debug("numero de tecnicos = ${tecnicos.size()}")
+
+    tecnicos
+  }
 
     def update(Long id, Long version) {
         def incidenteInstance = Incidente.get(id)
@@ -228,7 +247,20 @@ class IncidenteController {
             }
         }
 
-        incidenteInstance.properties = params
+      incidenteInstance.properties = params
+
+      def nivel = incidenteInstance.nivel
+      def userID = springSecurityService.principal.id
+      if (params["idNivel"] != incidenteInstance."idNivel${nivel}") {
+        incidenteInstance."idNivel${nivel}" = params["idNivel"].toLong()
+        incidenteInstance."fechaNivel${nivel}" = new Date()
+      }
+
+      incidenteInstance.properties = params
+      incidenteInstance."solucionNivel${nivel}" =
+        params["solucionNivel"]
+
+
         incidenteInstance.idCaptura = springSecurityService.principal.id
         incidenteInstance.ipTerminal = request.getRemoteAddr()
 
@@ -332,7 +364,7 @@ class IncidenteController {
       }
 
       flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
-      redirect(action: "edit", id: incidenteInstance.id)
+      redirect(action: "list")
     }
 
     def escalaUpdate(Long id, Long version) {
@@ -364,22 +396,28 @@ class IncidenteController {
         return
       }
 
-      if (!incidenteInstance?.idNivel1) {
-        incidenteInstance.fechaNivel1 = new Date()
-        incidenteInstance.idNivel1 = springSecurityService.principal.id
-      } else if (incidenteInstance?.idNivel1 != userID) {
+      def nivel = incidenteInstance.nivel
+
+      if (!incidenteInstance?."idNivel${nivel}") {
+        incidenteInstance."fechaNivel${nivel}" = new Date()
+      } else if (incidenteInstance?."idNivel${nivel}" != userID) {
         flash.error = "Esta incidencia no esta asignada a Usted"
         render(view: "edit", model: [incidenteInstance: incidenteInstance])
         return
       }
 
+      incidenteInstance."idNivel${nivel}" = userID
       incidenteInstance.properties = params
+      incidenteInstance."solucionNivel${nivel}" =
+        params["solucionNivel"]
       incidenteInstance.idCaptura = springSecurityService.principal.id
       incidenteInstance.ipTerminal = request.getRemoteAddr()
-      incidenteInstance.fechaSolnivel1 = new Date()
-      incidenteInstance.firmaNivel1 = true
+      incidenteInstance."fechaSolnivel${nivel}" = new Date()
+      incidenteInstance."firmaNivel${nivel}" = true
 
       ++incidenteInstance.nivel
+      incidenteInstance.idServresp =
+        incidenteInstance.idServ."servResp${incidenteInstance.nivel}"
 
       if (!incidenteInstance.save(flush: true)) {
           render(view: "edit", model: [incidenteInstance: incidenteInstance])
@@ -387,7 +425,7 @@ class IncidenteController {
       }
 
       flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
-      redirect(action: "edit", id: incidenteInstance.id)
+      redirect(action: "list")
     }
 
 }

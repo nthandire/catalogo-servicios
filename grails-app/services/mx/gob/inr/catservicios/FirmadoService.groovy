@@ -14,30 +14,26 @@ class FirmadoService {
   }
 
   Boolean isCoordinador(HttpSession sessionFirmado, Long userID) {
-    isRol("coordonador", "ROLE_SAST_COORDINADOR", sessionFirmado, userID)
+    isRol("coordinador", "ROLE_SAST_COORDINADOR", sessionFirmado, userID)
   }
 
   Boolean isRol(String rol, String rolCadena, HttpSession sessionFirmado, Long userID) {
     if (sessionFirmado[rol] == null) {
       log.debug("no lo tengo, busco el $rol")
-      def rolAsignado = false
-      UsuarioRol.withNewSession { session ->
-        def rolUsuarios = UsuarioRol.findAllByUsuario(Usuario.get(userID)).each{
-          log.debug("UsuarioRol = $it")
-          if(it.rol.authority == rolCadena) {
-            rolAsignado = true
-          }
+      def rolAsignado = UsuarioRol.withNewSession { session ->
+        UsuarioRol.findAllByUsuario(Usuario.get(userID)).any {
+          it.rol.authority == rolCadena
         }
       }
       sessionFirmado[rol] = rolAsignado
     }
-    log.debug("en FirmadoService isrol: is${rol} = ${sessionFirmado[rol]}")
+    log.debug("isrol: is${rol} = ${sessionFirmado[rol]}")
 
     sessionFirmado[rol]
   }
 
   Cat_servResp area(HttpSession sessionFirmado, Long userID) {
-    log.debug("en FirmadoService area: userID = ${userID}")
+    log.debug("area: userID = ${userID}")
     if (sessionFirmado["area"] == null) {
       log.debug("no lo tengo, busco el área")
       def area = _area(userID)

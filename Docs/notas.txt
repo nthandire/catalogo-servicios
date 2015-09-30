@@ -31,6 +31,23 @@ idusuario rfc desc_perfil idperfil
 9583  gestor  ROLE_SAST_COORDINADOR_DE_GESTION  60
 (26 rows, 5 ms)
 
+id_usuario  area  autoriza  vobo  estado
+9574  DGAIT <null>  <null>  A
+9575  DGAIT true  <null>  A
+9576  <null>  <null>  <null>  A
+9577  <null>  <null>  <null>  A
+9578  <null>  <null>  true  A
+9579  DGAIT <null>  true  A
+9580  DGAIT <null>  <null>  A
+9581  MS  <null>  <null>  A
+9582  MS  <null>  <null>  A
+9583  MS  <null>  <null>  A
+9584  DGAIT <null>  <null>  A
+9585  MS  <null>  <null>  A
+9586  <null>  <null>  <null>  A
+9587  DGAIT <null>  <null>  A
+9588  MS  <null>  <null>  A
+6558  <null>  <null>  <null>  A
 
 idusuario rfc
 6558  SAIH940101

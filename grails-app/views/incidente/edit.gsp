@@ -70,7 +70,7 @@
               <div class="span12">
                 <h4>Solución del Incidente</h4>
                 <fieldset class="form">
-                  <g:render template="formSolucion1"/>
+                  <g:render template="formSolucion"/>
                 </fieldset>
               </div>
             </div>
@@ -90,20 +90,20 @@
           function escala() {
             $("#titulo").text('Escalar incidente');
             $("#idPrograma").prop("required", false);
-            $("#solucionNivel1").prop("required", true);
+            $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_escalaUpdate');
             $("#passwordfirma").prop("required", true);
           }
           function soluciona() {
             $("#titulo").text('Soluciona incidente');
             $("#idPrograma").prop("required", true);
-            $("#solucionNivel1").prop("required", true);
+            $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_soluciónUpdate');
             $("#passwordfirma").prop("required", true);
           }
           function update() {
             $("#idPrograma").prop("required", false);
-            $("#solucionNivel1").prop("required", false);
+            $("#solucionNivel").prop("required", false);
             $("#passwordfirma").prop("required", false);
           }
         </script>

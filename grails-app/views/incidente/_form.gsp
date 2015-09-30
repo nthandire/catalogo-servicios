@@ -156,13 +156,13 @@
 </div>
 
 <g:if test="${tecnicos}">
-  <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel1', 'error')} ">
-    <label for="idNivel1">
-      <g:message code="incidente.idNivel1.label" default="Tecnico" />
+  <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel', 'error')} ">
+    <label for="idNivel">
+      <g:message code="incidente.idNivel.label" default="Técnico" />
     </label>
-    <g:select id="idNivel1" name="idNivel1" required="true"
+    <g:select id="idNivel" name="idNivel" required="true"
       from="${tecnicos}"
-        optionKey="id" value="${incidenteInstance?.idNivel1}" class="many-to-one"
+        optionKey="id" value="${idNivel}" class="many-to-one"
         noSelection="['': '']"/>
   </div>
 </g:if>
