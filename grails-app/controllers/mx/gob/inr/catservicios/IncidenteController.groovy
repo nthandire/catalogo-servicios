@@ -343,19 +343,31 @@ class IncidenteController {
         return
       }
 
-      if (!incidenteInstance?.idNivel1) {
-        incidenteInstance.fechaNivel1 = new Date()
-        incidenteInstance.idNivel1 = springSecurityService.principal.id
-      } else if (incidenteInstance?.idNivel1 != userID) {
+      def nivel = incidenteInstance.nivel
+
+      if (!incidenteInstance?."idNivel${nivel}") {
+        if(isGestor()) {
+          incidenteInstance."fechaNivel${nivel}" = new Date()
+        } else {
+          flash.error = "Usted no puede modificar este incidente"
+          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          return
+        }
+      } else if (incidenteInstance?."idNivel${nivel}" != userID) {
         flash.error = "Esta incidencia no esta asignada a Usted"
         render(view: "edit", model: [incidenteInstance: incidenteInstance])
         return
       }
 
       incidenteInstance.properties = params
-      incidenteInstance.idCaptura = springSecurityService.principal.id
+      incidenteInstance."idNivel${nivel}" = userID
+      incidenteInstance."solucionNivel${nivel}" =
+        params["solucionNivel"]
+      incidenteInstance.idCaptura = userID
       incidenteInstance.ipTerminal = request.getRemoteAddr()
-      incidenteInstance.fechaSolnivel1 = new Date()
+      incidenteInstance."fechaSolnivel${nivel}" = new Date()
+      incidenteInstance."firmaNivel${nivel}" = true
+
       incidenteInstance.estado = 'E' as char
 
       if (!incidenteInstance.save(flush: true)) {
@@ -399,18 +411,24 @@ class IncidenteController {
       def nivel = incidenteInstance.nivel
 
       if (!incidenteInstance?."idNivel${nivel}") {
-        incidenteInstance."fechaNivel${nivel}" = new Date()
+        if(isGestor()) {
+          incidenteInstance."fechaNivel${nivel}" = new Date()
+        } else {
+          flash.error = "Usted no puede modificar este incidente"
+          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          return
+        }
       } else if (incidenteInstance?."idNivel${nivel}" != userID) {
         flash.error = "Esta incidencia no esta asignada a Usted"
         render(view: "edit", model: [incidenteInstance: incidenteInstance])
         return
       }
 
-      incidenteInstance."idNivel${nivel}" = userID
       incidenteInstance.properties = params
+      incidenteInstance."idNivel${nivel}" = userID
       incidenteInstance."solucionNivel${nivel}" =
         params["solucionNivel"]
-      incidenteInstance.idCaptura = springSecurityService.principal.id
+      incidenteInstance.idCaptura = userID
       incidenteInstance.ipTerminal = request.getRemoteAddr()
       incidenteInstance."fechaSolnivel${nivel}" = new Date()
       incidenteInstance."firmaNivel${nivel}" = true
@@ -426,60 +444,6 @@ class IncidenteController {
 
       flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
       redirect(action: "list")
-    }
-
-    def escalaUpdate(Long id, Long version) {
-      log.debug("params = $params")
-      def incidenteInstance = Incidente.get(id)
-      if (!incidenteInstance) {
-          flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
-          redirect(action: "list")
-          return
-      }
-
-      if (version != null) {
-        if (incidenteInstance.version > version) {
-          incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                    [message(code: 'incidente.label', default: 'Incidente')] as Object[],
-                    "Another user has updated this Incidente while you were editing")
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
-          return
-        }
-      }
-
-      def userID = springSecurityService.principal.id
-      def firmaTeclada = params['passwordfirma']
-      def firma = Firmadigital.findById(userID)?.passwordfirma
-
-      if (firmaTeclada != firma) {
-        flash.error = "Error en contaseña"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
-        return
-      }
-
-      if (!incidenteInstance?.idNivel1) { // TODO: preguntar si es gestor
-        incidenteInstance.fechaNivel1 = new Date()
-        incidenteInstance.idNivel1 = springSecurityService.principal.id
-      } else if (incidenteInstance?.idNivel1 != userID) {
-        flash.error = "Esta incidencia no esta asignada a Usted"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
-        return
-      }
-
-      incidenteInstance.properties = params
-      incidenteInstance.idCaptura = springSecurityService.principal.id
-      incidenteInstance.ipTerminal = request.getRemoteAddr()
-      incidenteInstance.fechaSolnivel1 = new Date()
-
-      ++incidenteInstance.nivel
-
-      if (!incidenteInstance.save(flush: true)) {
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
-          return
-      }
-
-      flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
-      redirect(action: "edit", id: incidenteInstance.id)
     }
 
 }
