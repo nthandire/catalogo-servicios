@@ -43,7 +43,8 @@ dataSource_seguridad {
 // }
 dataSource_almacen {
     dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
-    url = "jdbc:informix-sqli://192.168.10.1:1526/almacenes:informixserver=ol_inrserver" // TODO: _dev es la BD
+    // url = "jdbc:informix-sqli://192.168.10.1:1526/almacenes:informixserver=ol_inrserver" // _dev es la BD original
+    url = "jdbc:informix-sqli://192.168.10.12:1527/almacenes_dev:informixserver=ol_adminserver"
     driverClassName = "com.informix.jdbc.IfxDriver"
     dialect = "org.hibernate.dialect.InformixDialect"
     username = "informix"
