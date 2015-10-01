@@ -23,8 +23,12 @@ class SolicitudEncuestaController {
         log.debug("userID = $userID")
         def solicitudes = Solicitud.countByIdSolicitanteAndEstado((Integer)userID, 'E' as char)
         log.debug("numero de solicitudes = ${solicitudes}")
-        [solicitudInstanceList: Solicitud.findAllByIdSolicitanteAndEstado((Integer)userID, 'E' as char, params),
-            solicitudInstanceTotal: solicitudes]
+        def solicitudLista = Solicitud.findAllByIdSolicitanteAndEstado((Integer)userID, 'E' as char, params)
+        def incidentes = Incidente.countByIdReportaAndEstado((Integer)userID, 'E' as char)
+        log.debug("numero de solicitudes = ${solicitudes}")
+        def incidenteLista = Incidente.findAllByIdReportaAndEstado((Integer)userID, 'E' as char, params)
+        [solicitudInstanceList: solicitudLista + incidenteLista,
+          solicitudInstanceTotal: solicitudes + incidentes]
     }
 
     def show(Long id) {
@@ -38,6 +42,41 @@ class SolicitudEncuestaController {
         [solicitudInstance: solicitudInstance]
     }
 
+    def showIncidente(Long id) {
+        def incidenteInstance = Incidente.get(id)
+        if (!incidenteInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Incidente'), id])
+            redirect(action: "list")
+            return
+        }
+
+        def archivos =
+          IncidenteArchivoadjunto.findAllByIdIncidente(incidenteInstance.id)
+        def nivel = incidenteInstance.nivel
+        def tecnico = Usuario.get(incidenteInstance."idNivel${nivel}")
+
+        [incidenteInstance: incidenteInstance,
+          archivos: archivos, tecnico: tecnico]
+    }
+
+    def downloadIncidente(long id) {
+        IncidenteArchivoadjunto incidenteArchivoadjuntoInstance =
+          IncidenteArchivoadjunto.get(id)
+        if ( IncidenteArchivoadjunto == null) {
+            flash.message = "Documento no encontrado."
+            redirect (controller: "incidente", action:'list')
+        } else {
+            response.setContentType("APPLICATION/OCTET-STREAM")
+            response.setHeader("Content-Disposition",
+              "Attachment;Filename=\"${incidenteArchivoadjuntoInstance.nombre}\"")
+
+            def outputStream = response.getOutputStream()
+            outputStream << incidenteArchivoadjuntoInstance.datos
+            outputStream.flush()
+            outputStream.close()
+        }
+    }
+
     def edit(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
@@ -47,6 +86,17 @@ class SolicitudEncuestaController {
         }
 
         [solicitudInstance: solicitudInstance]
+    }
+
+    def editIncidente(Long id) {
+        def incidenteInstance = Incidente.get(id)
+        if (!incidenteInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Incidente'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [incidenteInstance: incidenteInstance]
     }
 
     def update(Long id, Long version) {
@@ -77,6 +127,36 @@ class SolicitudEncuestaController {
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
+    }
+
+    def UpdateIncidente(Long id, Long version) {
+        def incidenteInstance = Incidente.get(id)
+        if (!incidenteInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
+            redirect(action: "list")
+            return
+        }
+
+        if (version != null) {
+            if (incidenteInstance.version > version) {
+                incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                          [message(code: 'incidente.label', default: 'Incidente')] as Object[],
+                          "Another user has updated this Incidente while you were editing")
+                render(view: "editIncedente", model: [incidenteInstance: incidenteInstance])
+                return
+            }
+        }
+
+        incidenteInstance.properties = params
+        incidenteInstance.estado = 'T' as char
+
+        if (!incidenteInstance.save(flush: true)) {
+            render(view: "editIncidente", model: [incidenteInstance: incidenteInstance])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
+        redirect(action: "showIncidente", id: incidenteInstance.id)
     }
 
 }

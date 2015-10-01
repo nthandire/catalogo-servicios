@@ -91,7 +91,6 @@
 				<g:if test="${solicitudInstance?.idVb}">
 				<li class="fieldcontain">
 					<span id="idVb-label" class="property-label"><g:message code="solicitud.idVb.label" default="Id Vb" /></span>
-
 						<span class="property-value" aria-labelledby="idVb-label"><g:fieldValue bean="${solicitudInstance}" field="idVb"/></span>
 
 				</li>
@@ -100,7 +99,6 @@
 				<g:if test="${solicitudInstance?.fechaVb}">
 				<li class="fieldcontain">
 					<span id="fechaVb-label" class="property-label"><g:message code="solicitud.fechaVb.label" default="Fecha Vb" /></span>
-
 						<span class="property-value" aria-labelledby="fechaVb-label"><g:formatDate date="${solicitudInstance?.fechaVb}" /></span>
 
 				</li>
@@ -109,36 +107,44 @@
 				<g:if test="${solicitudInstance?.p01}">
 				<li class="fieldcontain">
 					<span id="p01-label" class="property-label"><g:message code="solicitud.p01.label" default="P01" /></span>
-
-						<span class="property-value" aria-labelledby="p01-label"><g:fieldValue bean="${solicitudInstance}" field="p01"/></span>
-
+          <span class="property-value" aria-labelledby="p01-label">
+            <g:select name="p01" disabled="true"
+              from="${[1,2]}" style="width: 60px"
+              valueMessagePrefix="encuesta.valor" value="${solicitudInstance.p01}" />
+          </span>
 				</li>
 				</g:if>
 
 				<g:if test="${solicitudInstance?.p02}">
 				<li class="fieldcontain">
 					<span id="p02-label" class="property-label"><g:message code="solicitud.p02.label" default="P02" /></span>
-
-						<span class="property-value" aria-labelledby="p02-label"><g:fieldValue bean="${solicitudInstance}" field="p02"/></span>
-
+          <span class="property-value" aria-labelledby="p02-label">
+            <g:select name="p02" disabled="true"
+              from="${[1,2]}" style="width: 60px"
+              valueMessagePrefix="encuesta.valor" value="${solicitudInstance.p02}" />
+          </span>
 				</li>
 				</g:if>
 
 				<g:if test="${solicitudInstance?.p03}">
 				<li class="fieldcontain">
 					<span id="p03-label" class="property-label"><g:message code="solicitud.p03.label" default="P03" /></span>
-
-						<span class="property-value" aria-labelledby="p03-label"><g:fieldValue bean="${solicitudInstance}" field="p03"/></span>
-
+          <span class="property-value" aria-labelledby="p03-label">
+            <g:select name="p03" disabled="true"
+              from="${[1,2]}" style="width: 60px"
+              valueMessagePrefix="encuesta.valor" value="${solicitudInstance.p03}" />
+          </span>
 				</li>
 				</g:if>
 
 				<g:if test="${solicitudInstance?.p04}">
 				<li class="fieldcontain">
 					<span id="p04-label" class="property-label"><g:message code="solicitud.p04.label" default="P04" /></span>
-
-						<span class="property-value" aria-labelledby="p04-label"><g:fieldValue bean="${solicitudInstance}" field="p04"/></span>
-
+          <span class="property-value" aria-labelledby="p04-label">
+            <g:select name="p04" disabled="true"
+              from="${[1,2]}" style="width: 60px"
+              valueMessagePrefix="encuesta.valor" value="${solicitudInstance.p04}" />
+          </span>
 				</li>
 				</g:if>
 
@@ -174,11 +180,12 @@
 				<g:if test="${solicitudInstance?.detalles}">
 				<li class="fieldcontain">
 					<span id="detalles-label" class="property-label"><g:message code="solicitud.detalles.label" default="Detalles" /></span>
-
 						<g:each in="${solicitudInstance.detalles}" var="d">
-						<span class="property-value" aria-labelledby="detalles-label"><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
+            <%--
+            <span class="property-value" aria-labelledby="detalles-label"><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
+            --%>
+						<span class="property-value" aria-labelledby="detalles-label">${d?.encodeAsHTML()}</span>
 						</g:each>
-
 				</li>
 				</g:if>
 

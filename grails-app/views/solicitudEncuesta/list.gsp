@@ -1,5 +1,5 @@
 
-<%@ page import="mx.gob.inr.catservicios.Solicitud" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,25 +25,44 @@
 			<table>
 				<thead>
 					<tr>
-					
-						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Numero Solicitud')}" />
-					
+
+            <g:sortableColumn property="tipo" title="Tipo" />
+
+						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Folio')}" />
+
 						<g:sortableColumn property="fechaSolicitud" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha Solicitud')}" />
-					
+
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
-					
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${solicitudInstanceList}" status="i" var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="edit" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
-					
-						<td><g:formatDate date="${solicitudInstance.fechaSolicitud}" /></td>
-					
-						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
-					
+
+            <g:if test="${solicitudInstance.instanceOf(Solicitud)}">
+
+              <td><g:link action="edit" id="${solicitudInstance.id}">Solicitud</g:link></td>
+
+              <td><g:link action="edit" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
+
+  						<td><g:formatDate date="${solicitudInstance.fechaSolicitud}" /></td>
+
+  						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
+
+            </g:if>
+            <g:else>
+
+              <td><g:link action="editIncidente" id="${solicitudInstance.id}">Incidente</g:link></td>
+
+              <td><g:link action="editIncidente" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
+
+              <td><g:formatDate date="${solicitudInstance.fechaIncidente}" /></td>
+
+              <td>${fieldValue(bean: solicitudInstance, field: "descripcion")}</td>
+
+            </g:else>
+
 					</tr>
 				</g:each>
 				</tbody>
