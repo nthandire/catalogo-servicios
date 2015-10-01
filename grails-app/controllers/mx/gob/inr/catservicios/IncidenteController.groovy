@@ -189,8 +189,10 @@ class IncidenteController {
         log.debug("idNivel = ${idNivel}")
         def userID = springSecurityService.principal.id
         log.debug("userID = ${userID}")
+        def lab = (area().descripcion == message(code: "area.de.laboratorio"))
+    		log.debug("lab = ${lab}")
         [incidenteInstance: incidenteInstance,
-          tecnicos:tecnicos, idNivel: idNivel, yo: userID,
+          tecnicos:tecnicos, idNivel: idNivel, yo: userID, laboratorio: lab,
           solucionNivel: incidenteInstance."solucionNivel${nivel}"]
     }
 

@@ -39,7 +39,7 @@ class FirmadoService {
       def area = _area(userID)
       sessionFirmado["area"] = area
     }
-    log.debug("en FirmadoService area = ${sessionFirmado["area"]}")
+    log.debug("area = ${sessionFirmado["area"]}")
 
     sessionFirmado["area"]
   }

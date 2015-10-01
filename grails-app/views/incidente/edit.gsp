@@ -108,6 +108,13 @@
             $("#respButton").attr('name','_action_problemaUpdate');
             $("#passwordfirma").prop("required", true);
           }
+          function laboratorio() {
+            $("#titulo").text('Soluciona incidente');
+            $("#idPrograma").prop("required", false);
+            $("#solucionNivel").prop("required", true);
+            $("#respButton").attr('name','_action_laboratorioUpdate');
+            $("#passwordfirma").prop("required", true);
+          }
           function update() {
             $("#idPrograma").prop("required", false);
             $("#solucionNivel").prop("required", false);
@@ -127,6 +134,10 @@
             <g:if test="${incidenteInstance.nivel < 3}">
               <a class="escala" data-toggle="modal" href="#responsive"
                 onclick="escala()">Escalar Incidente</a>
+            </g:if>
+            <g:if test="${laboratorio}">
+              <a class="save" data-toggle="modal" href="#responsive"
+                onclick="laboratorio()">Capturar laboratorio</a>
             </g:if>
           </g:if>
           <g:if test="${incidenteInstance.nivel == 3 && idNivel == yo}">
