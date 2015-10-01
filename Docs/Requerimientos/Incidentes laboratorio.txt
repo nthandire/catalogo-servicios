@@ -1,0 +1,101 @@
+id_estado des_estado
+1 PENDIENTE
+2 REPORTADO
+3 CANCELADO
+4 SALIDA
+5 REPARADO
+
+
+Al capturar el laboratorio (solo técnicos de DEGAIT pueden hacerlo), se capturan los siguientes campos:
+
+id_laboratorio
+id_incidente
+fecha_laboratorio
+numero_laboratorio
+id_estado ( = 1, PENDIENTE)
+
+id_usuario (es el usuario logueado)
+fecha_modificacion
+modificacion
+ip_terminal
+
+
+
+Al cancelar el laboratorio, se capturan los siguientes campos:
+
+falla_tecnica
+id_estado ( = 3, CANCELADO)
+
+id_usuario (es el usuario logueado)
+fecha_modificacion
+modificacion
+ip_terminal
+
+
+
+Cuando se reporte al proveedor, se deberan llenar los siguientes campos:
+
+fecha_reporte
+id_proveedor
+numero_reporte
+tecnico
+id_tiposervicio
+id_estado ( = 2, REPORTADO)
+
+id_usuario (es el usuario logueado)
+fecha_modificacion
+modificacion
+ip_terminal
+
+
+
+Cuando sale el equipo, se deberan llenar los siguientes campos:
+
+fecha_salida
+id_estado ( = 4, SALIDA)
+
+id_usuario (es el usuario logueado)
+fecha_modificacion
+modificacion
+ip_terminal
+
+
+
+Cuando entregan el equipo, se deberan llenar los siguientes campos:
+
+fecha_entrega
+(no hay estado para este caso)
+
+id_usuario (es el usuario logueado)
+fecha_modificacion
+modificacion
+ip_terminal
+
+
+
+Cuando se reporte como reparado, se deberan llenar los siguientes campos:
+
+solucion
+refacciones
+falla_tecnica
+fecha_reparacion
+observaciones
+id_estado ( = 5, REPARADO)
+
+id_usuario (es el usuario logueado)
+fecha_modificacion
+modificacion
+ip_terminal
+
+
+
+
+Los caminos posibles son:
+
+PENDIENTE -> REPORTADO
+PENDIENTE -> CANCELADO
+REPORTADO -> CANCELADO
+REPORTADO -> SALIDA
+REPORTADO -> REPARADO
+SALIDA -> REPARADO
+
