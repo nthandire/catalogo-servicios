@@ -49,7 +49,7 @@ grails.project.dependency.resolution = {
 
   plugins {
       runtime ":hibernate:$grailsVersion"
-      runtime ":jquery:1.8.3"
+      runtime ":jquery:1.10.2"
       runtime ":resources:1.2"
       runtime ":twitter-bootstrap:2.3.2"
 
@@ -62,6 +62,8 @@ grails.project.dependency.resolution = {
 
       runtime ":database-migration:1.3.2"
 
+      compile ":jquery-ui:1.10.4"
+      compile ":growler:0.2"
       compile ':cache:1.0.1'
       compile ':spring-security-core:1.2.7.3'
       compile ":jasper:1.11.0"
