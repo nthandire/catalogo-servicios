@@ -15,8 +15,10 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 		<g:layoutHead/>
-		<r:require modules="jquery,bootstrap"/>
-		<r:layoutResources />
+    <r:require modules="jquery,jquery-ui,bootstrap"/>
+    <r:layoutResources />
+    <g:javascript library="jquery" plugin="jquery"/>
+    <growler:resources />
 	</head>
 	<body>
 		<div id="Logo" role="banner" >

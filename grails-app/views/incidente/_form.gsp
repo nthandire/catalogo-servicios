@@ -1,9 +1,93 @@
 <%@ page import="mx.gob.inr.catservicios.*" %>
 
+<g:javascript src="servicios.js" />
 
 <style type="text/css">
   textArea { width: 712px; }
 </style>
+
+
+
+<table class="table table-condensed">
+  <tr>
+    <td width="290px">
+      &nbsp;
+    </td>
+    <td>
+      <label for="cpuauto">Inventario o Número de Serie</label>
+      <g:textField id="cpuauto" name="cpuauto" style="width: 250px;" />
+    </td>
+    <td>
+      <div id="area" style="visibility: hidden">
+        <label for="nombreArea">Area</label>
+        <g:textField name="nombreArea" style="width: 250px;text-transform: uppercase;" />
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <label for="equipo"><g:message code="servicios.equipo.label" default="Equipo" /></label>
+        <g:textField name="equipo" value="${serviciosInstance?.equipo}" required="" readonly="true" style="width: 250px;text-transform: uppercase;"/>
+    </td>
+    <td>
+        <label for="marca">
+          <g:message code="servicios.marca.label" default="Marca" />
+        </label>
+        <g:textField name="marca" value="${serviciosInstance?.marca}" required="" readonly="true" style="width: 250px;text-transform: uppercase;"/>
+    </td>
+    <td>
+        <label for="modelo">
+          <g:message code="servicios.modelo.label" default="Modelo" />
+        </label>
+        <g:textField name="modelo" value="${serviciosInstance?.modelo}" required="" readonly="true" style="width: 250px;text-transform: uppercase;"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <label for="serie">
+          <g:message code="servicios.serie.label" default="Serie" />
+          <span class="required-indicator">*</span>
+        </label>
+        <g:textField name="serie" value="${serviciosInstance?.serie}" required="" readonly="true" style="width: 250px;text-transform: uppercase;" />
+    </td>
+    <td>
+        <label for="economico">
+          <g:message code="servicios.economico.label" default="Economico" />
+        </label>
+        <g:textField name="economico" value="${serviciosInstance?.economico}" readonly="true" style="width: 250px;"/>
+    </td>
+    <td>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <label for="reporto">
+          <g:message code="servicios.reporto.label" default="Reporto" />
+        </label>
+        <g:textField name="reporto" value="${serviciosInstance?.reporto}" required="" style="width: 250px;text-transform: uppercase;"/>
+
+    </td>
+    <td>
+        <label for="extension">
+          <g:message code="servicios.extension.label" default="Extension" />
+        </label>
+        <g:field type="number" name="extension" value="${serviciosInstance?.extension}" min="10000" max="99999" size="5" required="" style="width: 250px;"/>
+    </td>
+    <td>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idSistema', 'error')} ">

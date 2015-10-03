@@ -3,12 +3,15 @@ package mx.gob.inr.catservicios
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
+import grails.converters.JSON
+
 
 @Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO',
           'ROLE_SAST_COORDINADOR'])
 class IncidenteController {
     def springSecurityService
     def firmadoService
+    def serviciosService
     def messageSource
     static nombreMenu = "Incidentes"
     static ordenMenu = 70
@@ -155,6 +158,10 @@ class IncidenteController {
       }
     }
 
+    def equipoLista = {
+        render autoCompleteService.equipoLista(params) as JSON
+    }
+
     def download(long id) {
         IncidenteArchivoadjunto incidenteArchivoadjuntoInstance =
           IncidenteArchivoadjunto.get(id)
@@ -190,9 +197,9 @@ class IncidenteController {
         def userID = springSecurityService.principal.id
         log.debug("userID = ${userID}")
         def lab = (area().descripcion == message(code: "area.de.laboratorio"))
-    		log.debug("lab = ${lab}")
-        [incidenteInstance: incidenteInstance,
-          tecnicos:tecnicos, idNivel: idNivel, yo: userID, laboratorio: lab,
+        log.debug("lab = ${lab}")
+        [incidenteInstance: incidenteInstance, tecnicos:tecnicos,
+          idNivel: idNivel, yo: userID, laboratorio: lab,
           solucionNivel: incidenteInstance."solucionNivel${nivel}"]
     }
 
@@ -521,5 +528,10 @@ class IncidenteController {
       flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
       redirect(action: "list")
     }
+
+  def listarEquipo = {
+    log.debug("en listarEquipo")
+    render serviciosService.listarEquipo(params) as JSON
+  }
 
 }

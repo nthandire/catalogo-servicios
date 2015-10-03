@@ -20,8 +20,6 @@ class ResguardoEntrega {
 	Long idBienes
 	String codigo
 	String idAlmacen
-	String desModelo
-	Long idMarca
 
 	static hasMany = [detalles: ResguardoEntregaDetalle]
 
@@ -49,7 +47,5 @@ class ResguardoEntrega {
 		idBienes nullable: true
 		codigo nullable: true, maxSize: 30
 		idAlmacen nullable: true, maxSize: 2
-		desModelo nullable: true, maxSize: 50
-		idMarca nullable: true
 	}
 }
