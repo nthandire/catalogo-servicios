@@ -210,14 +210,20 @@ class SolicitudAutorizaController {
           def gestores = UsuarioRol.withNewSession {UsuarioRol.findAllByRol(rolGestor)["usuario"]}
           log.debug("gestores = ${gestores}")
 
+        def liga = createLink(controller:"solicitudGestion", action: "show",
+                              id: solicitudInstance.id, absolute: "true")
+        log.debug("liga = $liga")
+
           gestores.each {
             msg = "Hola ${it}\n\nLa solicitud folio " +
               "${solicitudInstance} (${solicitudInstance.justificacion}) " +
-              "ya fue autorizada, debe atenderla a la brevedad."
+              "ya fue autorizada, debe atenderla a la brevedad.<br/><br/>" +
+              "Utilice la liga siguiente para revisarla. <br/><br/>" +
+              "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
             sendMail {
               to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       gestores.email
               subject asunto
-              body msg
+              html msg
             }
           }
         }
