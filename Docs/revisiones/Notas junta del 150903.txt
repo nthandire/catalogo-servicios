@@ -22,13 +22,13 @@ Estas son las notas y acuerdos a los que se llego en la junta de avance del 3 de
 
 +10.- El coordinador puede indicar la prioridad de un Detalle de una Solicitud. SE NECESITA UN CAMPO NUEVO EN LA BD. No se cambian los tiempos de respuesta, esto solo es un aviso interno al técnico para su atención
 
-11.- El coordinador es el que asigna la subcategoria y el tercer nivel.
++ 11.- El coordinador es el que asigna la subcategoria y el tercer nivel.
 
-12.- Si el coordinador detecta que falta detalle en la descripción, usará el campo descripcion_tecnica para informar al técnico.
++ 12.- Si el coordinador detecta que falta detalle en la descripción, usará el campo descripcion_tecnica para informar al técnico.
 
 + 13.- Coordinación, en lugar de "Detalles a asignar" el menú debe decir "Asignación de servicio".
 
-14.- Los coordinadores son por área, los técnicos también.
++ 14.- Los coordinadores son por área, los técnicos también.
 
 + 15.- x - Escalar un requerimiento, Respuesta. NO APLICA EN ESTE PUNTO DEL SISTEMA (el Escalamiento se verá en Incidentes).
 

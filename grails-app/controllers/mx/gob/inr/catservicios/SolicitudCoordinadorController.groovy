@@ -4,7 +4,7 @@ import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
-@Secured(['ROLE_SAST_COORDINADOR'])
+@Secured(['ROLE_SAST_COORDINADOR','ROLE_SAST_COORDINADOR_DE_GESTION'])
 class SolicitudCoordinadorController {
     def springSecurityService
     static nombreMenu = "Coordinación"
