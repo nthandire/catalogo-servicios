@@ -1,0 +1,21 @@
+Junta del 1 de octubre.
+---------------------------
+
+
+- 1.-  MS no puede mandar a Mantenimiento ni Aprovisionamiento, solo DEGAIT puede (esto aplica a Incidente y a Solicitud). Este es un requerimiento nuevo para Solicitud.
+- 2.- Se requiere ver la extensión y ubicación del solicitante (Desarrollo explicará como obtengo la ubicación, parece que desarrollo aún no tiene este valor totalmente, porque parece que se necesita "cuerpo" y "nivel").
+- 3.- Incidente, solo se puede capturar categoría de tercer nivel FINAL cuando se soluciona o se marca como problema, NO cuando se escala.
+- 4.- Al escalar, no se ve la ventana completa en terminales muy pequeñas.
+- 5.- Incidente, solo se puede capturar Estado de cierre cuando se soluciona, NO cuando se escala.
+- 6.- El GESTOR podrá ver quién escalo un incidente. Debe ver TODOS los incidentes activos, ponerle una marca a los que requieren tu atención.
+- 7.- Ningún otro (excepto el Gestor) podrá ver quien escaló un incidente.
+- 8.- TODOS los Servicios tienen tercer nivel.
+- 9.- La sintaxis para áreas en el portafolio es: {área1}/{área2} ... . El nombre del área es EXACTAMENTE  como se capturé, mayusculas y minusculas (MS es diferente a ms y a Ms y a mS y a M S). No se debe poner espacios entre las áreas.
+- 10.- Cuando se comparta la responsabilidad de un nivel, se podrá seleccionar para asignar entre todos los técnicos de todas las áreas.
+- 11.- Se deben mostrar los datos del equipo al seleccionarlo. Usar código de Richard para búsqueda y selección. Seleccionar por inventario y/o usuario y/o Número de Serie. Esto se aclaro con esta fecha, ya existe un combo que funciona, aunque no da todas las facilidades y velocidad.
++ 12.- Problema ¿lleva a encuesta?. Respuesta, NO.
+- 13.- Cancelar Incidentes (NUEVA OPCIÓN, se captura la razón como la solución) (sin Encuesta)(CONSIDERAR ESTO EN ESTADÍSTICAS, no cuenta como incidente).
+- 14.- Estado de cierre (NUEVO): "Atención de Servicio" (sin Encuesta)(CONSIDERAR ESTO EN ESTADÍSTICAS, si cuenta como incidente).
+- 16.- ¿En primer nivel no hay encuesta?. Respuesta, NO (ESTO ES NUEVO).
+- 17.- En la etiqueta al marcar como problema, en lugar de decir solución debe decir "Justificación".
+- 18.- Las únicas opciones de Estado de cierre al marcar como problema son: No solucionado y Solucionado parcial.

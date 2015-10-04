@@ -32,6 +32,25 @@ class FirmadoService {
     sessionFirmado[rol]
   }
 
+  Boolean thisIsGestor(Long userID) {
+    thisIsRol("gestor", "ROLE_SAST_COORDINADOR_DE_GESTION", userID)
+  }
+
+  Boolean thisIsCoordinador(Long userID) {
+    thisIsRol("coordinador", "ROLE_SAST_COORDINADOR", userID)
+  }
+
+  Boolean thisIsRol(String rol, String rolCadena, Long userID) {
+    def rolAsignado = UsuarioRol.withNewSession { session ->
+      UsuarioRol.findAllByUsuario(Usuario.get(userID)).any {
+        it.rol.authority == rolCadena
+      }
+    }
+    log.debug("thisIsRol: is${rol} = ${rolAsignado}")
+
+    rolAsignado
+  }
+
   Cat_servResp area(HttpSession sessionFirmado, Long userID) {
     log.debug("area: userID = ${userID}")
     if (sessionFirmado["area"] == null) {

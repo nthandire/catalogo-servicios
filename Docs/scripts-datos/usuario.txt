@@ -78,3 +78,5 @@ update usuario set nombre = 'Anabel' where idusuario = 9586;
 update usuario set nombre = 'Martín' where idusuario = 9583;
 
 update usuario set nombre = 'Dorian' where idusuario = 9580;
+
+update USUARIO  set enabled = true;

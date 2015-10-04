@@ -7,6 +7,7 @@ import groovy.time.TimeCategory
 @Secured(['ROLE_SAST_USUARIO'])
 class SolicitudAutorizaController {
     def springSecurityService
+    def firmadoService
     static nombreMenu = "Autoriza"
     static ordenMenu = 83
 
@@ -204,8 +205,45 @@ class SolicitudAutorizaController {
           body msg
         }
 
+        if (estado == 'A' as char) {
+          def areas = []
+          solicitudInstance.detalles.each {
+            if (!areas.contains(it.idServcat.servResp))
+              areas << it.idServcat.servResp
+          }
+          log.debug("areas = ${areas}")
+          def areasExpandidas = []
+          areas.each {areasExpandidas += it.descripcion.split("/")}
+          areasExpandidas = areasExpandidas.flatten()
+          log.debug("areasExpandidas = ${areasExpandidas}")
+          def usuariosDelArea = []
+          areasExpandidas.each{
+            usuariosDelArea += UsuarioAutorizado.findAllByArea(it)["id"]
+          }
+          log.debug("usuariosDelArea = ${usuariosDelArea}")
+            
+          def usuarios = Usuario.withNewSession { session ->
+            Usuario.findAllEnabledByIdInList(usuariosDelArea)
+          }
+          log.debug("usuarios = ${usuarios}")
+
+          def coordinadores = usuarios.findAll{firmadoService.thisIsCoordinador(it.id)}
+          log.debug("coordinadores = ${coordinadores}")
+
+          coordinadores.each {
+            msg = "Hola ${it}\n\nSu solicitud folio " +
+              "${solicitudInstance} (${solicitudInstance.justificacion}) " +
+              "ya fue autorizada, debe atenderla a la brevedad."
+            sendMail {
+              to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       coordinadores.email
+              subject asunto
+              body msg
+            }
+          }
+        }
+
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
-        redirect(action: "show", id: solicitudInstance.id)
+        redirect(action: "list")
     }
 
 }

@@ -1,0 +1,15 @@
+Junta del 17 de septiembre.
+---------------------------
+
+
++ 1 Se elimina el correo de quejas.
+- 2 Mesa realiza lista de autorizadores/vistos buenos, también quien puede autorizar / dar visto bueno en las subdirecciones.
++ 3 En visto bueno, se ponen TODOS los que puedan dar v.b., son pocos.
++ 4 En el v.b., el responsable puede cancelar. Se necesita un campo nuevo de observaciones.
+~ 5 Para el listado del coordinador, en la lista, agregar fecha de autorización/v.b. y tiempo de atención
++ 6 El gestor debe capturar el tercer nivel.
++ 7 Técnico debe ver las descripción técnica
+- 8 El técnico debe dar su firma digital al marcar como solucionado.
++ 9 El técnico puede rechazar, es un programa, "No solucionado". También agregar "Solucionado" y "Solucionado parcialmente", este campo se vuelve obligatorio.
++ 10 La etiqueta de programa debe decir " Estado de cierre".
+- 11 x - ¿Notas?, es algo entre mesa y desarrollo. No hay cambios al sistema.
