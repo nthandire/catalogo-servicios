@@ -206,36 +206,16 @@ class SolicitudAutorizaController {
         }
 
         if (estado == 'A' as char) {
-          def areas = []
-          solicitudInstance.detalles.each {
-            if (!areas.contains(it.idServcat.servResp))
-              areas << it.idServcat.servResp
-          }
-          log.debug("areas = ${areas}")
-          def areasExpandidas = []
-          areas.each {areasExpandidas += it.descripcion.split("/")}
-          areasExpandidas = areasExpandidas.flatten()
-          log.debug("areasExpandidas = ${areasExpandidas}")
-          def usuariosDelArea = []
-          areasExpandidas.each{
-            usuariosDelArea += UsuarioAutorizado.findAllByArea(it)["id"]
-          }
-          log.debug("usuariosDelArea = ${usuariosDelArea}")
-            
-          def usuarios = Usuario.withNewSession { session ->
-            Usuario.findAllEnabledByIdInList(usuariosDelArea)
-          }
-          log.debug("usuarios = ${usuarios}")
+          def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_COORDINADOR_DE_GESTION")}
+          def gestores = UsuarioRol.withNewSession {UsuarioRol.findAllByRol(rolGestor)["usuario"]}
+          log.debug("gestores = ${gestores}")
 
-          def coordinadores = usuarios.findAll{firmadoService.thisIsCoordinador(it.id)}
-          log.debug("coordinadores = ${coordinadores}")
-
-          coordinadores.each {
-            msg = "Hola ${it}\n\nSu solicitud folio " +
+          gestores.each {
+            msg = "Hola ${it}\n\nLa solicitud folio " +
               "${solicitudInstance} (${solicitudInstance.justificacion}) " +
               "ya fue autorizada, debe atenderla a la brevedad."
             sendMail {
-              to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       coordinadores.email
+              to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       gestores.email
               subject asunto
               body msg
             }
