@@ -128,7 +128,8 @@ class SolicitudGestionController {
             return
         }
 
-        [solicitudInstance: solicitudInstance]
+        [solicitudInstance: solicitudInstance,
+          autorizadores:listaDeVobos()]
     }
 
     def showDetalle(Long id) {
@@ -173,18 +174,6 @@ class SolicitudGestionController {
         }
 
         [solicitudDetalleInstance: solicitudDetalleInstance]
-    }
-
-    def vistoBueno(Long id) {
-        def solicitudInstance = Solicitud.get(id)
-        if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
-            redirect(action: "show", id: solicitudInstance.id)
-            return
-        }
-
-        [solicitudInstance: solicitudInstance,
-          autorizadores:listaDeVobos()]
     }
 
     def listaDeVobos() {
@@ -251,28 +240,40 @@ class SolicitudGestionController {
                 solicitudInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'solicitud.label', default: 'Solicitud')] as Object[],
                           "Another user has updated this Solicitud while you were editing")
-                render(view: "vistoBueno", model: [solicitudInstance: solicitudInstance])
+                render(view: "show", model: [solicitudInstance: solicitudInstance])
                 return
             }
+        }
+
+        def userID = springSecurityService.principal.id
+        def firmaTeclada = params['passwordfirma']
+        def firma = Firmadigital.findById(userID)?.passwordfirma
+
+        if (firmaTeclada != firma) {
+          flash.error = "Error en contaseña"
+          render(view: "show", model: [solicitudInstance: solicitudInstance])
+          return
         }
 
         solicitudInstance.properties = params
 
         if (!solicitudInstance.save(flush: true)) {
-            render(view: "vistoBueno", model: [solicitudInstance: solicitudInstance])
+            render(view: "show", model: [solicitudInstance: solicitudInstance])
             return
         }
 
         def idUsuario = springSecurityService.principal.id
         def personasInstance = Usuario.get(solicitudInstance.idVb)
+        def liga = createLink(controller:"solicitudVB", action: "show",
+                              id: solicitudInstance.id, absolute: "true")
+        log.debug("liga = $liga")
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
           subject "Solicitud ${solicitudInstance.toString()} requiere un visto bueno"
-          body "Hola ${personasInstance.username}\n\nLa solicitud folio " +
+          html "Hola ${personasInstance.username}<br/><br/>La solicitud folio " +
             "${solicitudInstance.toString()} requiere que le de su visto bueno, " +
-            "utilice la liga siguiente para revisarla y autorizarla. \n\n" +
-            "<a href='${createLink(controller:"solicitudVB", action: "show", id: solicitudInstance.id)}'>" +
-            "${solicitudInstance.toString()}</a>".encodeAsHTML()
+            "utilice la liga siguiente para revisarla y autorizarla. <br/><br/>" +
+            "<a href='${liga}'>${solicitudInstance}</a>"
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])

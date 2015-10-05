@@ -2,7 +2,7 @@
 
 
 <style type="text/css">
-  textArea { width: 812px; }
+  textArea { width: 412px; }
 </style>
 
 
@@ -21,5 +21,15 @@
     
   </label>
   <g:select id="idVb" name="idVb"  from="${autorizadores}" optionKey="id"
-    value="${solicitudInstance?.idVb}" class="many-to-one" noSelection="['null': '']"/>
+     required="" value="${solicitudInstance?.idVb}" class="many-to-one"
+     noSelection="['': 'Debe seleccionar uno ...']"/>
 </div>
+
+<div class="fieldtablecontain ${hasErrors(bean: firmadigitalInstance, field: 'passwordfirma', 'error')} ">
+  <label for="passwordfirma">
+    <g:message code="firmadigital.passwordfirma.label" default="Passwordfirma" />
+
+  </label>
+  <g:field name="passwordfirma" type="password" value="${firmadigitalInstance?.passwordfirma}" required="true"/>
+</div>
+

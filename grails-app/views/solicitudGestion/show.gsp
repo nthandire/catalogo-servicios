@@ -99,13 +99,44 @@
        </div>
      </div>
 
+      <div id="responsive" class="modal hide fade" tabindex="-1" data-width="512">
+        <g:form method="post" >
+          <g:hiddenField name="id" value="${solicitudInstance?.id}" />
+          <g:hiddenField name="version" value="${solicitudInstance?.version}" />
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="titulo">Solicitar un visto bueno</h3>
+          </div>
+          <div class="modal-body">
+            <div class="row-fluid">
+              <div class="span12">
+                <h4>Firma digital</h4>
+                <fieldset class="form">
+                  <g:render template="formVistoBueno"/>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <fieldset class="buttons">
+              <a data-dismiss="modal" class="cancel">Cancelar</a>
+              <input type="submit" name="_action_updateVB" id="respButton"
+                value="${message(code: 'default.button.update.label',
+                  default: 'Update')}"
+                class="save">
+            </fieldset>
+          </div>
+        </g:form>
+      </div>
 
      <g:form>
        <fieldset class="buttons">
          <g:if test="${(solicitudInstance?.estado == 'A' as char || solicitudInstance?.estado == 'V' as char)}">
            <g:link class="edit" action="revisar" id="${solicitudInstance?.id}"><g:message code="default.button.revisar.label" default="Marcar como revisado" /></g:link>
            <g:if test="${(solicitudInstance?.estado != 'V' as char)}">
-             <g:link class="edit" action="vistoBueno" id="${solicitudInstance?.id}"><g:message code="default.button.revisar.label" default="Pedir un visto bueno" /></g:link>
+             <a class="edit" data-toggle="modal" href="#responsive">
+               Pedir un visto bueno
+             </a>
            </g:if>
          </g:if>
        </fieldset>

@@ -32,9 +32,9 @@ Estas son las notas y acuerdos a los que se llego en la junta de avance del 3 de
 
 + 15.- x - Escalar un requerimiento, Respuesta. NO APLICA EN ESTE PUNTO DEL SISTEMA (el Escalamiento se verá en Incidentes).
 
-16.- Mandar un aviso al usuario si se requirió un v.b. El texto de este aviso nos los proporcionará Mesa de Servicio.
++ 16.- Mandar un aviso al usuario si se requirió un v.b. El texto de este aviso nos los proporcionará Mesa de Servicio.
 
-17.- Lista de personas que dan v.b. Mesa de Servicio nos explicará como se llevará esta relación de firmantes de v.b.
++ 17.- Lista de personas que dan v.b. Mesa de Servicio nos explicará como se llevará esta relación de firmantes de v.b.
 
 + 18.- X - Campo nuevo en Categoría: Observaciones para el usuario. (similar a la plantilla). ESTO NO VA, VER EL PUNTO SIGUIENTE.
 

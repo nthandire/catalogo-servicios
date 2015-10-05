@@ -123,6 +123,12 @@ class SolicitudVBController {
             return
         }
 
+        if (solicitudInstance?.idVb != userID) {
+          flash.error = "Este incidente no esta asignado a Usted"
+          render(view: "show", model: [solicitudInstance: solicitudInstance])
+          return
+        }
+
         solicitudInstance.fechaVb = new Date()
         solicitudInstance.estado = 'V' as char
 

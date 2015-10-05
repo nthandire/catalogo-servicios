@@ -2,7 +2,7 @@
 
 
 <style type="text/css">
-  textArea { width: 812px; }
+  textArea { width: 412px; }
 </style>
 
 

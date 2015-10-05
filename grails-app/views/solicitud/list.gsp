@@ -65,6 +65,6 @@
 				<g:paginate total="${solicitudInstanceTotal}" />
 			</div>
 		</div>
-		<dev><a href="${resource(dir: 'docs', file: 'wiegers-testing-the-requirements-EDU.pdf')}" download>Manual de captura de Solicitudes</a></dev>
+		<dev><a href="${resource(dir: 'docs', file: 'Manual-Solicitudes-INR-V-0.1.pdf')}" download>Manual de captura de Solicitudes</a></dev>
 	</body>
 </html>
