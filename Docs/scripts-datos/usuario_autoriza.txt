@@ -146,3 +146,69 @@ update usuario_autorizado set autoriza = false, vobo = false where id_usuario = 
 update usuario_autorizado set autoriza = false, vobo = false where id_usuario = 9580;
 update usuario_autorizado set area = 'MS' where id_usuario = 9583;
 update usuario_autorizado set area = 'MS' where id_usuario = 9582;
+
+
+delete from usuario_autorizado
+ where id_usuario in (9574,9575,9576,9577,9578,9579,9580,9581,9582,9583,9584,9585,9586,7607,9587);
+
+insert into usuario_autorizado
+(id_usuario)
+values
+(9574);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9575);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9576);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9577);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9578);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9579);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9580);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9581);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9582);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9583);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9584);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9585);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9586);
+insert into usuario_autorizado
+(id_usuario)
+values
+(7607);
+insert into usuario_autorizado
+(id_usuario)
+values
+(9587);
+

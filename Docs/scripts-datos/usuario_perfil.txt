@@ -125,3 +125,133 @@ values
 
 update usuario_perfil set idperfil = 59  where idusuario = 9582 and idperfil = 61;
 delete from usuario_perfil where idusuario = 9582 and idperfil = 61;
+
+
+delete
+  from usuario_perfil
+ where idperfil >= 56;
+
+
+
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9574, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9575, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9576, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9577, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9578, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9579, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9580, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9581, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9582, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9583, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9584, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9585, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9586, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(7607, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9587, 58);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9524, 58);
+
+
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9574, 56);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9575, 59);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9576, 59);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9577, 59);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9578, 59);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9579, 56);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9580, 56);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9581, 56);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9582, 59);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9583, 60);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9584, 59);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9585, 56);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9586, 57);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(9583, 56);

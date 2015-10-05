@@ -90,3 +90,27 @@ update usuario set nombre = 'David', paterno = 'Cano' where idusuario = 9581;
 update usuario set nombre = 'Kanek', paterno = 'Mercado' where idusuario = 9582;
 
 update USUARIO  set enabled = true;
+
+
+update usuario set nombre = 'Kanek', paterno = 'Mercado' where idusuario = 9582;
+
+
+
+update usuario set nombre = 'Omar', paterno = 'Mercado', rfc = 'MEPO751211' where idusuario = 9574;
+update usuario set nombre = 'Yazmin', paterno = 'de la Rosa', rfc = 'ROBY751227' where idusuario = 9575;
+update usuario set nombre = 'Margarita', paterno = 'Maldonado', rfc = 'MAIM680222' where idusuario = 9576;
+update usuario set nombre = 'Tatiana', paterno = 'Castro', rfc = 'CAET840823' where idusuario = 9577;
+update usuario set nombre = 'Israel', paterno = 'Marin', rfc = 'MASI760508' where idusuario = 9578;
+update usuario set nombre = 'Javier', paterno = 'Torres', rfc = 'TOGJ660804' where idusuario = 9579;
+update usuario set nombre = 'Alonso', paterno = 'Alanis', rfc = 'AAGA810815' where idusuario = 9580;
+update usuario set nombre = 'David', paterno = 'Cano', rfc = 'CARL740622' where idusuario = 9581;
+update usuario set nombre = 'Kanek', paterno = 'Mercado', rfc = 'MEPK800306' where idusuario = 9582;
+update usuario set nombre = 'Martin', paterno = 'Vergara', rfc = 'VENR690106' where idusuario = 9583;
+update usuario set nombre = 'Juan Carlos', paterno =' Martinez', rfc = 'MAMJ690912' where idusuario = 9584;
+update usuario set nombre = 'Arturo', paterno = 'Demanos', rfc = 'DERA791215' where idusuario = 9585;
+update usuario set nombre = 'Anabel', paterno = 'Espino', rfc = 'EIVA721207' where idusuario = 9586;
+update usuario set nombre = 'Alejandra', paterno = 'Castillo', rfc = 'CAMA571121'  where idusuario = 7607;
+update usuario set idunidadmedica = 'O' where idusuario = 7607;
+update usuario set nombre = 'Angelica', paterno = 'Trejo', rfc = 'TEMA680912'  where idusuario = 9587;
+update usuario set nombre = 'REBOLLO', paterno = 'REBOLLO', rfc = 'RETR760604'  where idusuario = 9524;
+update usuario set idunidadmedica = 'O' where idusuario = 9524;
