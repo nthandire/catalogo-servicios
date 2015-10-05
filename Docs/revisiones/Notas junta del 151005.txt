@@ -3,7 +3,7 @@ Junta del 5 de octubre.
 
 
 
-- 1.- la lista de subcategorías debe estar ordenada por categoría
++ 1.- la lista de subcategorías debe estar ordenada por categoría
 - 2.- MS mandará el área de WM, Autorizador, Visto bueno,  Aprovador, técnico, y un empleado.
 - 3.- Mostrar para gestion y para técnicos también el área (ademas de la persona y su extensió), del solicitante, el autorizador y el visto bueno
 - 4.- Al dar el servicio de tercer nivel, la prioridad debe ser por default la que tiene dicho tercer nivel
