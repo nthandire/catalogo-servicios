@@ -293,6 +293,24 @@ class SolicitudCoordinadorController {
             return
         }
 
+        def tecnico = Usuario.get(solicitudDetalleInstance.idTecnico)
+        def liga = createLink(controller:"SolicitudTecnico", action: "edit",
+                              id: solicitudDetalleInstance.id, absolute: "true")
+        log.debug("liga = $liga")
+        sendMail {
+          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       tecnico.correo
+          subject "Solicitud ${solicitudDetalleInstance.idSolicitud} requiere ser atendida"
+          html "Hola ${tecnico}<br/><br/>La solicitud folio " +
+            "${solicitudDetalleInstance.idSolicitud} requiere ser atendida, se autorizo el " +
+            formatDate(date:solicitudDetalleInstance.idSolicitud.fechaVb?:
+                            solicitudDetalleInstance.idSolicitud.fechaAutoriza) +
+            " y debe ser respondida en ${solicitudDetalleInstance?.idServ?.tiempo1}" +
+            " ${solicitudDetalleInstance?.idServ?.unidades1?.descripcion}." +
+            "<br/><br/>" +
+            "utilice la liga siguiente para atenderla. <br/><br/>" +
+            "<a href='${liga}'>${solicitudDetalleInstance.idSolicitud}</a>"
+        }
+
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
         redirect(action: "listDetalle")
     }
