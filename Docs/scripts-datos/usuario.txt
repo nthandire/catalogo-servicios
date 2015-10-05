@@ -77,6 +77,16 @@ values
 update usuario set nombre = 'Anabel' where idusuario = 9586;
 update usuario set nombre = 'Martín' where idusuario = 9583;
 
-update usuario set nombre = 'Dorian' where idusuario = 9580;
+update usuario set nombre = null, paterno = null where idusuario = 9580;
+update usuario set nombre = 'David', paterno = 'Hernández' where idusuario = 9587;
+update usuario set nombre = 'Javier', paterno = 'Torres' where idusuario = 9579;
+update usuario set nombre = 'Yazmin', paterno = 'de la Rosa' where idusuario = 9575;
+update usuario set nombre = 'Juan Carlos', paterno = 'Martinez' where idusuario = 9584;
+update usuario set nombre = 'Elizabeth', paterno = 'Vargas' where idusuario = 9582;
+update usuario set nombre = 'Martin', paterno = 'Vergara' where idusuario = 9583;
+update usuario set nombre = 'Anabel', paterno = 'Espino' where idusuario = 9586;
+update usuario set nombre = 'David', paterno = 'Cano' where idusuario = 9588;
+update usuario set nombre = 'David', paterno = 'Cano' where idusuario = 9581;
+update usuario set nombre = 'Kanek', paterno = 'Mercado' where idusuario = 9582;
 
 update USUARIO  set enabled = true;

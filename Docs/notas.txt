@@ -1,69 +1,60 @@
-select u.idusuario, u.rfc, p.desc_perfil, p.idperfil
-  from usuario u,
-       usuario_perfil up,
-       perfil p
- where p.idperfil >= 56
-   --and u.idusuario in (9584,9585,6558,9586,9583)
-   and p.idperfil = up.idperfil
-   and up.idusuario = u.idusuario;
-idusuario rfc desc_perfil idperfil
-9580  usuario7  ROLE_SAST_COORDINADOR 56
-9581  usuario8  ROLE_SAST_COORDINADOR 56
-6558  SAIH940101  ROLE_SAST_ADMIN 57
-9586  admin ROLE_SAST_ADMIN 57
-9586  admin ROLE_SAST_USUARIO 58
-9583  gestor  ROLE_SAST_USUARIO 58
-9585  tecnico2  ROLE_SAST_USUARIO 58
-9584  tecnico1  ROLE_SAST_USUARIO 58
-6558  SAIH940101  ROLE_SAST_USUARIO 58
-9582  usuario9  ROLE_SAST_USUARIO 58
-9581  usuario8  ROLE_SAST_USUARIO 58
-9580  usuario7  ROLE_SAST_USUARIO 58
-9579  usuario6  ROLE_SAST_USUARIO 58
-9578  usuario5  ROLE_SAST_USUARIO 58
-9577  usuario4  ROLE_SAST_USUARIO 58
-9576  usuario3  ROLE_SAST_USUARIO 58
-9575  usuario2  ROLE_SAST_USUARIO 58
-9574  usuario1  ROLE_SAST_USUARIO 58
-9582  usuario9  ROLE_SAST_TECNICO 59 -- antes ROLE_SAST_TECNICO_MESA_SERVICIO 61
-9584  tecnico1  ROLE_SAST_TECNICO 59
-9585  tecnico2  ROLE_SAST_TECNICO 59
-9583  gestor  ROLE_SAST_COORDINADOR_DE_GESTION  60
-(26 rows, 5 ms)
+select u.idusuario, u.nombre, u.paterno, u.materno, u.rfc, p.desc_perfil, p.idperfil 
+  from usuario u, 
+       usuario_perfil up, 
+       perfil p 
+ where p.idperfil >= 56 
+   --and u.idusuario in (9584,9585,6558,9586,9583) 
+   and p.idperfil = up.idperfil 
+   and up.idusuario = u.idusuario 
+ order by u.idusuario;
+IDUSUARIO   NOMBRE    PATERNO   MATERNO   RFC   DESC_PERFIL   IDPERFIL  
+6558  null  null  null  SAIH940101  ROLE_SAST_ADMIN 57
+6558  null  null  null  SAIH940101  ROLE_SAST_USUARIO 58
+9574  null  null  null  usuario1  ROLE_SAST_USUARIO 58
+9575  Yazmin  de la Rosa  null  usuario2  ROLE_SAST_USUARIO 58
+9576  null  null  null  usuario3  ROLE_SAST_USUARIO 58
+9577  null  null  null  usuario4  ROLE_SAST_USUARIO 58
+9578  null  null  null  usuario5  ROLE_SAST_USUARIO 58
+9579  Javier  Torres  null  usuario6  ROLE_SAST_USUARIO 58
+9580  null  null  null  usuario7  ROLE_SAST_COORDINADOR 56
+9580  null  null  null  usuario7  ROLE_SAST_USUARIO 58
+9581  David Cano  null  usuario8  ROLE_SAST_COORDINADOR 56
+9581  David Cano  null  usuario8  ROLE_SAST_USUARIO 58
+9582  Elizabeth Vargas  null  usuario9  ROLE_SAST_USUARIO 58
+9583  Martin  Vergara null  gestor  ROLE_SAST_USUARIO 58
+9583  Martin  Vergara null  gestor  ROLE_SAST_COORDINADOR_DE_GESTION  60
+9584  Juan Carlos Martinez  null  tecnico1  ROLE_SAST_USUARIO 58
+9584  Juan Carlos Martinez  null  tecnico1  ROLE_SAST_TECNICO 59
+9585  null  null  null  tecnico2  ROLE_SAST_USUARIO 58
+9585  null  null  null  tecnico2  ROLE_SAST_TECNICO 59
+9586  Anabel  Espino  null  admin ROLE_SAST_ADMIN 57
+9586  Anabel  Espino  null  admin ROLE_SAST_USUARIO 58
+9587  David Hernández null  coordinador1  ROLE_SAST_COORDINADOR 56
+9587  David Hernández null  coordinador1  ROLE_SAST_USUARIO 58
+9588  David Cano  null  coordinador2  ROLE_SAST_COORDINADOR 56
+9588  David Cano  null  coordinador2  ROLE_SAST_USUARIO 58
+(25 rows, 3 ms)
 
-id_usuario  area  autoriza  vobo  estado
-9574  DGAIT <null>  <null>  A
-9575  DGAIT true  <null>  A
-9576  <null>  <null>  <null>  A
-9577  <null>  <null>  <null>  A
-9578  <null>  <null>  true  A
-9579  DGAIT <null>  true  A
-9580  DGAIT <null>  <null>  A
-9581  MS  <null>  <null>  A
-9582  MS  <null>  <null>  A
-9583  MS  <null>  <null>  A
-9584  DGAIT <null>  <null>  A
-9585  MS  <null>  <null>  A
-9586  <null>  <null>  <null>  A
-9587  DGAIT <null>  <null>  A
-9588  MS  <null>  <null>  A
-6558  <null>  <null>  <null>  A
+SELECT * FROM USUARIO_AUTORIZADO ;
+ID_USUARIO    AREA    AUTORIZA    ESTADO    VOBO  
+6558  null  null  A null
+9574  DGAIT null  A null
+9575  DGAIT FALSE A FALSE
+9576  null  null  A null
+9577  null  null  A null
+9578  null  null  A TRUE
+9579  DGAIT TRUE  A TRUE
+9580  DGAIT FALSE A FALSE
+9581  MS  null  A null
+9582  null  null  A null
+9583  MS  null  A null
+9584  DGAIT null  A null
+9585  MS  null  A null
+9586  MS  TRUE  A TRUE
+9587  DGAIT null  A null
+9588  MS  null  A null
+(16 rows, 0 ms)
 
-idusuario rfc
-6558  SAIH940101
-9574  usuario1
-9575  usuario2
-9576  usuario3
-9577  usuario4
-9578  usuario5
-9579  usuario6
-9580  usuario7
-9581  usuario8
-9582  usuario9
-9583  coordinador
-9584  tecnico1
-9585  tecnico2
-9586  admin
 
 idusuario idperfil
 6558  57

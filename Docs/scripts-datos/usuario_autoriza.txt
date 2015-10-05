@@ -139,3 +139,10 @@ IDUSUARIO   RFC   DESC_PERFIL   IDPERFIL
 update usuario_autorizado set area = 'MS' where id_usuario = 9583;
 
 update usuario_autorizado set area = 'MS' where id_usuario = 9582;
+
+update usuario_autorizado set autoriza = true, vobo = true, area = 'MS' where id_usuario = 9586;
+update usuario_autorizado set autoriza = true, vobo = true where id_usuario = 9579;
+update usuario_autorizado set autoriza = false, vobo = false where id_usuario = 9575;
+update usuario_autorizado set autoriza = false, vobo = false where id_usuario = 9580;
+update usuario_autorizado set area = 'MS' where id_usuario = 9583;
+update usuario_autorizado set area = 'MS' where id_usuario = 9582;

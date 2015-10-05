@@ -124,3 +124,4 @@ values
 (9582, 61);
 
 update usuario_perfil set idperfil = 59  where idusuario = 9582 and idperfil = 61;
+delete from usuario_perfil where idusuario = 9582 and idperfil = 61;
