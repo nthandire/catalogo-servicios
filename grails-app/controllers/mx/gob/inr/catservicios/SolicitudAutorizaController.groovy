@@ -187,9 +187,9 @@ class SolicitudAutorizaController {
         }
         */
         def asunto = (estado == 'A' as char) ?
-          "La solicitud ${solicitudInstance.toString()} ya fue autorizada"
+          "La solicitud ${solicitudInstance} ya fue autorizada"
           :
-          "La solicitud ${solicitudInstance.toString()} fue cancelada"
+          "La solicitud ${solicitudInstance} fue cancelada"
         def msg = (estado == 'A' as char) ?
           "Hola ${persona.username}\n\nSu solicitud folio " + 
             "${solicitudInstance.toString()} (${solicitudInstance.justificacion}) "+ 
@@ -210,12 +210,12 @@ class SolicitudAutorizaController {
           def gestores = UsuarioRol.withNewSession {UsuarioRol.findAllByRol(rolGestor)["usuario"]}
           log.debug("gestores = ${gestores}")
 
-        def liga = createLink(controller:"solicitudGestion", action: "show",
-                              id: solicitudInstance.id, absolute: "true")
-        log.debug("liga = $liga")
+          def liga = createLink(controller:"solicitudGestion", action: "show",
+                                id: solicitudInstance.id, absolute: "true")
+          log.debug("liga = $liga")
 
           gestores.each {
-            msg = "Hola ${it}\n\nLa solicitud folio " +
+            msg = "Hola ${it} <br/><br/>La solicitud folio " +
               "${solicitudInstance} (${solicitudInstance.justificacion}) " +
               "ya fue autorizada, debe atenderla a la brevedad.<br/><br/>" +
               "Utilice la liga siguiente para revisarla. <br/><br/>" +

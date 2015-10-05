@@ -138,14 +138,36 @@ class SolicitudVBController {
         }
 
         def idUsuario = springSecurityService.principal.id
+        def asunto = "La solicitud ${solicitudInstance} ya recibió el visto bueno"
         def personasInstance = Usuario.get(idUsuario)
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.email
-          subject "Solicitud ${solicitudInstance.toString()} ya ha recibido el visto bueno"
+          subject asunto
           body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
             "ya ha recibido el visto bueno, pronto seras contactado con relación " +
             "a esta solicitud.\n"
+        }
+
+        def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_COORDINADOR_DE_GESTION")}
+        def gestores = UsuarioRol.withNewSession {UsuarioRol.findAllByRol(rolGestor)["usuario"]}
+        log.debug("gestores = ${gestores}")
+
+        def liga = createLink(controller:"solicitudGestion", action: "show",
+                              id: solicitudInstance.id, absolute: "true")
+        log.debug("liga = $liga")
+
+        gestores.each {
+          def msg = "Hola ${it} <br/><br/>La solicitud folio " +
+            "${solicitudInstance} (${solicitudInstance.justificacion}) " +
+            "ya recibió el visto bueno, debe atenderla a la brevedad.<br/><br/>" +
+            "Utilice la liga siguiente para revisarla. <br/><br/>" +
+            "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
+          sendMail {
+            to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       gestores.email
+            subject asunto
+            html msg
+          }
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
