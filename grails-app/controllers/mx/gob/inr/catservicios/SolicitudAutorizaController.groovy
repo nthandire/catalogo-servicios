@@ -191,11 +191,11 @@ class SolicitudAutorizaController {
           :
           "La solicitud ${solicitudInstance} fue cancelada"
         def msg = (estado == 'A' as char) ?
-          "Hola ${persona.username}\n\nSu solicitud folio " + 
+          "Hola ${persona}\n\nSu solicitud folio " + 
             "${solicitudInstance.toString()} (${solicitudInstance.justificacion}) "+ 
             "ya fue autorizada, pronto tendras respuestas a tu solicitud."
           :
-          "Hola ${persona.username}\n\nSu solicitud " + 
+          "Hola ${persona}\n\nSu solicitud " + 
             "(${solicitudInstance.justificacion}) "+ 
             "fue cancelada, investigue con su autorizador el motivo."
 

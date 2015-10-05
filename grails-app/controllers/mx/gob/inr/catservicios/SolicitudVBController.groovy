@@ -137,13 +137,13 @@ class SolicitudVBController {
             return
         }
 
-        def idUsuario = springSecurityService.principal.id
+        def idSolicitante = solicitudInstance.idSolicitante
         def asunto = "La solicitud ${solicitudInstance} ya recibió el visto bueno"
-        def personasInstance = Usuario.get(idUsuario)
+        def personasInstance = Usuario.get(idSolicitante)
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.email
           subject asunto
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
+          body "Hola ${personasInstance}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
             "ya ha recibido el visto bueno, pronto seras contactado con relación " +
             "a esta solicitud.\n"
@@ -212,12 +212,12 @@ class SolicitudVBController {
             return
         }
 
-        def idUsuario = springSecurityService.principal.id
-        def personasInstance = Usuario.get(idUsuario)
+        def idSolicitante = solicitudInstance.idSolicitante
+        def personasInstance = Usuario.get(idSolicitante)
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.email
-          subject "Solicitud ${solicitudInstance.toString()} no recibio el visto bueno"
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
+          subject "Solicitud ${solicitudInstance} no recibio el visto bueno"
+          body "Hola ${personasInstance}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
             "no recibio visto bueno, contacte a la mesa de servicio si requiere " +
             "más información.\n"

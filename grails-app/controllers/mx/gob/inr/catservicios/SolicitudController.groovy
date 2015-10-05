@@ -151,10 +151,7 @@ class SolicitudController {
         log.debug("userID = $userID")
 
         def firmaTeclada = params['passwordfirma']
-        log.debug("firmaTeclada = $firmaTeclada")
         def firma = Firmadigital.findById(userID)?.passwordfirma
-        log.debug("firma = $firma")
-
         if (firmaTeclada != firma) {
             flash.error = "Error en contaseña"
             render(view: "show", model: [solicitudInstance: solicitudInstance])
@@ -175,11 +172,11 @@ class SolicitudController {
         log.debug("liga = $liga")
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
-          subject "La solicitud ${solicitudInstance.toString()} requiere autorización"
-          html "Hola ${personasInstance.username}<br/><br/>La solicitud folio " +
-            "${solicitudInstance.toString()} requiere que la autorices, " +
+          subject "La solicitud ${solicitudInstance} requiere autorización"
+          html "Hola ${personasInstance}<br/><br/>La solicitud folio " +
+            "${solicitudInstance} requiere que la autorices, " +
             "utilice la liga siguiente para revisarla y autorizarla. <br/><br/>" +
-            "<a href='${liga}'>Solicitud: ${solicitudInstance.toString()}</a>"
+            "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
