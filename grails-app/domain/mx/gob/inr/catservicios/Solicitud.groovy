@@ -8,6 +8,7 @@ class Solicitud {
   String justificacion
   Integer idSolicitante
   Integer idAutoriza
+  Integer idRevisa
   Date fechaAutoriza
   Integer idVb
   Date fechaVb
@@ -36,7 +37,8 @@ class Solicitud {
     justificacion nullable: true, maxSize: 1500
 		comentarioVb nullable: true, maxSize: 1500
 		idSolicitante nullable: true, editable:false
-		idAutoriza nullable: true
+    idAutoriza nullable: true
+		idRevisa nullable: true
 		fechaAutoriza nullable: true, editable:false
 		idVb nullable: true
 		fechaVb nullable: true, editable:false

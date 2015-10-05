@@ -99,6 +99,36 @@
        </div>
      </div>
 
+      <div id="responsiveFirma" class="modal hide fade" tabindex="-1" data-width="512">
+        <g:form method="post" >
+          <g:hiddenField name="id" value="${solicitudInstance?.id}" />
+          <g:hiddenField name="version" value="${solicitudInstance?.version}" />
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="titulo">Marcar como revisado</h3>
+          </div>
+          <div class="modal-body">
+            <div class="row-fluid">
+              <div class="span12">
+                <h4>Firma digital</h4>
+                <fieldset class="form">
+                  <g:render template="formFirmar"/>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <fieldset class="buttons">
+              <a data-dismiss="modal" class="cancel">Cancelar</a>
+              <input type="submit" name="_action_revisar" id="respButton"
+                value="${message(code: 'default.button.update.label',
+                  default: 'Update')}"
+                class="save">
+            </fieldset>
+          </div>
+        </g:form>
+      </div>
+
       <div id="responsive" class="modal hide fade" tabindex="-1" data-width="512">
         <g:form method="post" >
           <g:hiddenField name="id" value="${solicitudInstance?.id}" />
@@ -131,8 +161,11 @@
 
      <g:form>
        <fieldset class="buttons">
-         <g:if test="${(solicitudInstance?.estado == 'A' as char || solicitudInstance?.estado == 'V' as char)}">
-           <g:link class="edit" action="revisar" id="${solicitudInstance?.id}"><g:message code="default.button.revisar.label" default="Marcar como revisado" /></g:link>
+         <g:if test="${(solicitudInstance?.estado == 'A' as char ||
+                        solicitudInstance?.estado == 'V' as char)}">
+           <a class="edit" data-toggle="modal" href="#responsiveFirma">
+             Marcar como revisado
+           </a>
            <g:if test="${(solicitudInstance?.estado != 'V' as char)}">
              <a class="edit" data-toggle="modal" href="#responsive">
                Pedir un visto bueno

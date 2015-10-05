@@ -4,7 +4,7 @@ Junta del 18 de septiembre.
 
 ~ 1 Poner el nombre del autorizador en lugar de su RFC, y también poner su teléfono, en el combo de autorizadores y en los listados y despliegues
 - 2 Restringir el tamaño de los archivos a subir. 5 MB. Maximo 2 por el usuario. Debe permitir borrar archivos.
-- 3 Cuando el gestor lo marca como revisado, le debe pedir firma y se debe guardar el gestor que lo reviso (en un campo nuevo)
++ 3 Cuando el gestor lo marca como revisado, le debe pedir firma y se debe guardar el gestor que lo reviso (en un campo nuevo)
 - 4 Los coordinadores deben poder ver el tercer nivel.
 + 5  Quitar el menú de Asignación de servicio para el gestor.
 + 6 Si poner la lista de Encuestas, quitar de la lista el campo de autorizo

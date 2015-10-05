@@ -7,6 +7,7 @@ import groovy.time.TimeCategory
 @Secured(['ROLE_SAST_COORDINADOR_DE_GESTION'])
 class SolicitudGestionController {
     def springSecurityService
+    def firmadoService
     static nombreMenu = "Mesa de servicio"
     static ordenMenu = 88
 
@@ -204,24 +205,65 @@ class SolicitudGestionController {
             return
         }
 
+        def userID = springSecurityService.principal.id
+        def firmaTeclada = params['passwordfirma']
+        def firma = Firmadigital.findById(userID)?.passwordfirma
+
+        if (firmaTeclada != firma) {
+          flash.error = "Error en contaseña"
+          render(view: "show", model: [solicitudInstance: solicitudInstance])
+          return
+        }
+
         solicitudInstance.estado = 'R' as char
+        solicitudInstance.idRevisa = userID
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "show", model: [solicitudInstance: solicitudInstance])
             return
         }
 
-/* TODO: habilitar cuando no este en desarrollo
-        def idUsuario = springSecurityService.principal.id
-        def personasInstance = Usuario.get(idUsuario)
-        sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
-          subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
-            "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
-            "pronto seras contactado con relación a el\n"
+        def areas = []
+        solicitudInstance.detalles.each {
+          if (!areas.contains(it.idServcat.servResp))
+            areas << it.idServcat.servResp
         }
-*/
+        log.debug("areas = ${areas}")
+        def areasExpandidas = []
+        areas.each {areasExpandidas += it.descripcion.split("/")}
+        areasExpandidas = areasExpandidas.flatten()
+        log.debug("areasExpandidas = ${areasExpandidas}")
+        def usuariosDelArea = []
+        areasExpandidas.each{
+          usuariosDelArea += UsuarioAutorizado.findAllByArea(it)["id"]
+        }
+        log.debug("usuariosDelArea = ${usuariosDelArea}")
+          
+        def usuarios = Usuario.withNewSession { session ->
+          Usuario.findAllEnabledByIdInList(usuariosDelArea)
+        }
+        log.debug("usuarios = ${usuarios}")
+
+        def coordinadores = usuarios.findAll{firmadoService.thisIsCoordinador(it.id)}
+        log.debug("coordinadores = ${coordinadores}")
+
+        def liga = createLink(controller: "SolicitudCoordinador",
+                              action: "edit", id: solicitudInstance.id,
+                              absolute: "true")
+        log.debug("liga = $liga")
+        def asunto = "Solicitud ${solicitudInstance} requiere procesarse"
+
+        coordinadores.each {
+          def msg = "Hola ${it}<br/><br/>La solicitud folio " +
+            "${solicitudInstance} (${solicitudInstance.justificacion}) " +
+            "ya fue revisada, debe atenderla a la brevedad. <br/><br/>" +
+            "<a href='${liga}'>${solicitudInstance}</a>"
+          sendMail {
+            to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       coordinadores.email
+            subject asunto
+            html msg
+          }
+        }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
@@ -270,8 +312,8 @@ class SolicitudGestionController {
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
           subject "Solicitud ${solicitudInstance.toString()} requiere un visto bueno"
-          html "Hola ${personasInstance.username}<br/><br/>La solicitud folio " +
-            "${solicitudInstance.toString()} requiere que le de su visto bueno, " +
+          html "Hola ${personasInstance}<br/><br/>La solicitud folio " +
+            "${solicitudInstance} requiere que le de su visto bueno, " +
             "utilice la liga siguiente para revisarla y autorizarla. <br/><br/>" +
             "<a href='${liga}'>${solicitudInstance}</a>"
         }
