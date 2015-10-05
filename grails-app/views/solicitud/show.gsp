@@ -107,7 +107,8 @@
 						<g:each in="${solicitudInstance?.archivos}" var="a">
 						    <li><g:link controller="solicitudArchivoadjunto" action="download" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
 						</g:each>
-						<g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'A' as char}">
+						<g:if test="${(!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char) &&
+                            (!solicitudInstance?.archivos || solicitudInstance?.archivos?.size() <= 2)}">
 							<li class="add">
 								<g:link controller="solicitudArchivoadjunto" action="create" params="['solicitud.id': solicitudInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
 							</li>
