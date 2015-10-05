@@ -64,34 +64,39 @@ class SolicitudTecnicoController {
       }
     }
 
-    def show(Long id) {
-        def solicitudDetalleInstance = SolicitudDetalle.get(id)
-        if (!solicitudDetalleInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [solicitudDetalleInstance: solicitudDetalleInstance]
-    }
-
     def edit(Long id) {
-        def solicitudDetalleInstance = SolicitudDetalle.get(id)
-        if (!solicitudDetalleInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
-            redirect(action: "list")
-            return
-        }
+      log.debug("params = $params")
+      def solicitudDetalleInstance = SolicitudDetalle.get(id)
+      if (!solicitudDetalleInstance) {
+          flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+          redirect(action: "list")
+          return
+      }
 
-        def resg = ""
-        if (solicitudDetalleInstance?.idResguardoentregadetalle) {
-          log.debug("idResguardoentregadetalle = $solicitudDetalleInstance?.idResguardoentregadetalle")
-          resg = ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle where id = ?', solicitudDetalleInstance?.idResguardoentregadetalle)[0]
-        }
+      def resg = null
+      if (solicitudDetalleInstance?.idResguardoentregadetalle) {
+        log.debug("idResguardoentregadetalle = ${solicitudDetalleInstance?.idResguardoentregadetalle}")
+        resg = ResguardoEntregaDetalle.executeQuery(
+          'from ResguardoEntregaDetalle where id = ?',
+          solicitudDetalleInstance?.idResguardoentregadetalle)[0]
+      }
+      log.debug("resg = ${resg}")
 
-        log.debug{"Resg = $resg"}
-        [solicitudDetalleInstance: solicitudDetalleInstance,
-          equipo: resg?resg.toString():'']
+      def userID = springSecurityService.principal.id
+      def area = UsuarioAutorizado.get(userID)["area"]
+      log.debug("area = ${area}")
+      def areaLab = message(code: "area.de.laboratorio")
+      log.debug("areaLab = ${areaLab}")
+      def minPrograma = 0
+      if (area != areaLab)
+        minPrograma = 2
+      log.debug("minPrograma = ${minPrograma}")
+      def programas = CatPrograma.findAllByIdGreaterThan(minPrograma)
+      log.debug("programas = ${programas}")
+
+      [solicitudDetalleInstance: solicitudDetalleInstance,
+        equipo: resg?resg.toString():'',
+        programas: programas]
     }
 
     def update(Long id, Long version) {

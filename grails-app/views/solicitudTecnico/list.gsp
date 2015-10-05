@@ -26,7 +26,7 @@
 				<thead>
 					<tr>
 
-						<th><g:message code="solicitudDetalle.idSolicitud.label" default="Id Solicitud" /></th>
+						<th><g:message code="solicitudDetalle.idSolicitud.label" default="Solicitud" /></th>
 
 						<th><g:message code="solicitudDetalle.idServcat.label" default="Categoría" /></th>
 

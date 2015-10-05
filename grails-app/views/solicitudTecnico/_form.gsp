@@ -28,7 +28,9 @@
 		<g:message code="solicitudDetalle.idPrograma.label" default="Estado de cierre" />
 		
 	</label>
-	<g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['': '']"/>
+	<g:select id="idPrograma" name="idPrograma.id" from="${programas}"
+    optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}"
+    class="many-to-one" noSelection="['': '']"/>
 </div>
 
 <g:if test="${equipo}">
