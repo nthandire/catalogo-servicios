@@ -34,6 +34,12 @@
 
 						<g:sortableColumn property="prioridad" title="${message(code: 'solicitudDetalle.prioridad.label', default: 'Prioridad')}" />
 
+            <g:sortableColumn property="lastUpdated"
+              title="${message(code: 'solicitud.fechaSolicitud.label',
+                default: 'Fecha de autorización')}" />
+
+            <g:sortableColumn property="tiempo" title="Tiempo de atención" />
+
 					</tr>
 				</thead>
 				<tbody>
@@ -46,7 +52,16 @@
 
             <td>${fieldValue(bean: solicitudDetalleInstance, field: "descripcion")}</td>
 
-						<td><g:message code="intensidad.valor.${solicitudDetalleInstance.prioridad?:(solicitudDetalleInstance?.idServ?.impacto?:3)}" default="" /></td>
+						<td><g:message code="intensidad.valor.${solicitudDetalleInstance.prioridad?:(solicitudDetalleInstance?.idServ?.impacto)}" default="" /></td>
+
+            <td>
+              <g:formatDate date="${solicitudDetalleInstance.idSolicitud.fechaVb?:
+                solicitudDetalleInstance.idSolicitud.fechaAutoriza}" /></td>
+
+            <td>
+              ${solicitudDetalleInstance?.idServ?.tiempo1}
+              ${solicitudDetalleInstance?.idServ?.unidades1?.descripcion}
+            </td>
 
 					</tr>
 				</g:each>
