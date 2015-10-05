@@ -6,6 +6,56 @@
 </style>
 
 
+<div class="fieldtablecontain">
+  <label for="nombre-label">
+    <g:message code="solicitud.nombre.label" default="Solicitante"/>
+  </label>
+  <g:field type="text" name="nombre.no" disabled="true"
+    value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
+</div>
+
+<div class="fieldtablecontain">
+  <label for="telefono-label">
+    <g:message code="solicitud.telefono.label" default="Extensión" />
+  </label>
+  <g:field type="text" name="telefono.no" disabled="true"
+    value="solicitudDetalleInstance?.idSolicitud?.idSolicitante.extensión"/>
+</div>
+
+<div class="fieldtablecontain">
+  <label for="nombre-label">
+    <g:message code="solicitud.nombre.label" default="Autorizante"/>
+  </label>
+  <g:field type="text" name="autoriza.no" disabled="true"
+    value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
+</div>
+
+<div class="fieldtablecontain">
+  <label for="telefono-label">
+    <g:message code="solicitud.telefono.label" default="Extensión" />
+  </label>
+  <g:field type="text" name="telefonoAutoriza.no" disabled="true"
+    value="solicitudDetalleInstance?.idSolicitud?.idAutoriza.extensión"/>
+</div>
+
+<g:if test="${solicitudDetalleInstance?.idSolicitud?.idVb}">
+  <div class="fieldtablecontain">
+    <label for="nombre-label">
+      <g:message code="solicitud.nombre.label" default="Visto Bueno"/>
+    </label>
+    <g:field type="text" name="vobo.no" disabled="true"
+      value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
+  </div>
+
+  <div class="fieldtablecontain">
+    <label for="telefono-label">
+      <g:message code="solicitud.telefono.label" default="Extensión" />
+    </label>
+    <g:field type="text" name="telefonoVobo.no" disabled="true"
+      value="solicitudDetalleInstance?.idSolicitud?.idVb.extensión"/>
+  </div>
+</g:if>
+
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
 	<label for="idServcat">
 		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />

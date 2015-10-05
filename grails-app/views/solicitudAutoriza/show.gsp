@@ -1,5 +1,5 @@
 
-<%@ page import="mx.gob.inr.catservicios.Solicitud" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -28,18 +28,24 @@
 				<g:if test="${solicitudInstance?.numeroSolicitud}">
 				<li class="fieldcontain">
 					<span id="numeroSolicitud-label" class="property-label"><g:message code="solicitud.numeroSolicitud.label" default="Numero Solicitud" /></span>
-					
-						<span class="property-value" aria-labelledby="numeroSolicitud-label">${solicitudInstance.toString()}</span>
-					
-				</li>
-				</g:if>
-			
+					<span class="property-value" aria-labelledby="numeroSolicitud-label">${solicitudInstance}</span>
+        </li>
+        </g:if>
+        
+        <li class="fieldcontain">
+          <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Solicitante" /></span>
+          <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idSolicitante)}</span>
+        </li>
+
+        <li class="fieldcontain">
+          <span id="telefono-label" class="property-label"><g:message code="solicitud.telefono.label" default="Solicitante" /></span>
+            <span class="property-value" aria-labelledby="telefono-label">solicitudInstance.idSolicitante.extensión</span>
+        </li>
+
 				<g:if test="${solicitudInstance?.justificacion}">
 				<li class="fieldcontain">
 					<span id="justificacion-label" class="property-label"><g:message code="solicitud.justificacion.label" default="Justificacion" /></span>
-					
-						<span class="property-value" aria-labelledby="justificacion-label"><g:fieldValue bean="${solicitudInstance}" field="justificacion"/></span>
-					
+					<span class="property-value" aria-labelledby="justificacion-label"><g:fieldValue bean="${solicitudInstance}" field="justificacion"/></span>
 				</li>
 				</g:if>
 			
@@ -47,7 +53,6 @@
 				<li class="fieldcontain">
 					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha Modificacion" /></span>
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudInstance?.lastUpdated}" /></span>
-					
 				</li>
 				</g:if>
 
