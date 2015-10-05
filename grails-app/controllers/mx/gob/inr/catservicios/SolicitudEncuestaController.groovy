@@ -117,6 +117,13 @@ class SolicitudEncuestaController {
             }
         }
 
+        def userID = springSecurityService.principal.id
+        if (userID != solicitudInstance.idSolicitante) {
+            flash.error = "Usted no puede realizar la encuesta."
+            redirect(action: "list")
+            return
+        }
+
         solicitudInstance.properties = params
         solicitudInstance.estado = 'T' as char
 
@@ -145,6 +152,13 @@ class SolicitudEncuestaController {
                 render(view: "editIncedente", model: [incidenteInstance: incidenteInstance])
                 return
             }
+        }
+
+        def userID = springSecurityService.principal.id
+        if (userID != incidenteInstance.idReporta) {
+            flash.error = "Usted no puede realizar la encuesta."
+            redirect(action: "list")
+            return
         }
 
         incidenteInstance.properties = params

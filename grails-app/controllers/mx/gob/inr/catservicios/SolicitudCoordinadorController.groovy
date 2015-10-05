@@ -282,7 +282,6 @@ class SolicitudCoordinadorController {
         solicitudDetalleInstance.properties = params
 
         if (firmaTeclada != firma) {
-          log.debug("Error en contraseña")
             flash.error = "Error en contaseña"
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
             return
@@ -299,7 +298,7 @@ class SolicitudCoordinadorController {
         log.debug("liga = $liga")
         sendMail {
           to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       tecnico.correo
-          subject "Solicitud ${solicitudDetalleInstance.idSolicitud} requiere ser atendida"
+          subject "La solicitud ${solicitudDetalleInstance.idSolicitud} requiere ser atendida"
           html "Hola ${tecnico}<br/><br/>La solicitud folio " +
             "${solicitudDetalleInstance.idSolicitud} requiere ser atendida, se autorizo el " +
             formatDate(date:solicitudDetalleInstance.idSolicitud.fechaVb?:

@@ -117,13 +117,19 @@ class SolicitudTecnicoController {
             }
         }
 
+        def userID = springSecurityService.principal.id
+        if (userID != solicitudDetalleInstance.idSolicitante) {
+            flash.error = "Usted no tiene asignada esta solicitud"
+            redirect(action: "list")
+            return
+        }
+
         solicitudDetalleInstance.properties = params
 
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
             return
         }
-
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
         redirect(action: "edit", id: id)
@@ -137,11 +143,25 @@ class SolicitudTecnicoController {
             return
         }
 
+        def userID = springSecurityService.principal.id
+        log.debug("userID = $userID")
+
+        def firmaTeclada = params['passwordfirma']
+        log.debug("firmaTeclada = $firmaTeclada")
+        def firma = Firmadigital.findById(userID)?.passwordfirma
+        log.debug("firma = $firma")
+
         solicitudDetalleInstance.properties = params
+
+        if (firmaTeclada != firma) {
+            flash.error = "Error en contaseña"
+            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+            return
+        }
 
         if (!solicitudDetalleInstance?.idPrograma) {
           solicitudDetalleInstance.errors.rejectValue("idPrograma", "no.error.estandar",
-                    "Debe capturar el programa o tipo de solución")
+                    "Debe capturar el Estado de cierre")
           render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
           return
         }
@@ -162,28 +182,35 @@ class SolicitudTecnicoController {
 
         def solicitud = solicitudDetalleInstance.idSolicitud
         log.debug("solicitud = $solicitud")
-        def detalles = SolicitudDetalle.countByIdSolicitudAndFechaSolucionIsNull(solicitud)
-        log.debug("detalles = $detalles")
-        if (!detalles) {
+        def detallesPendientes =
+          SolicitudDetalle.countByIdSolicitudAndFechaSolucionIsNull(solicitud)
+        log.debug("detallesPendientes = $detallesPendientes")
+        if (!detallesPendientes) {
             solicitud.estado = 'E' as char
             if (!solicitud.save(flush: true)) {
                 log.debug("Fallo salvado de solicitud, ${solicitud.errors}")
                 redirect(action: "list")
                 return
             }
-        }
 
-/* TODO: habilitar cuando no este en desarrollo {copiado de otro lado}
-        def idUsuario = springSecurityService.principal.id
-        def personasInstance = Usuario.get(idUsuario)
-        sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
-          subject "Solicitud ${solicitudInstance.toString()} registrada en el sistema"
-          body "Hola ${personasInstance.username}\n\nSu solicitud folio " +
-            "${solicitudInstance.toString()} ya esta registrada en el sistema, " +
-            "pronto seras contactado con relación a el\n"
+            def solicitante = Usuario.get(solicitud.idSolicitante)
+            def liga = createLink(controller:"SolicitudEncuesta", action: "edit",
+                                  id: solicitud.id, absolute: "true")
+            log.debug("liga = ${liga}")
+            def asunto = "La solicitud ${solicitud} ya ha sido atendida"
+            log.debug("asunto = ${asunto}")
+            def msg = "Hola ${solicitante}<br/><br/>La solicitud folio " +
+              "${solicitud} ya ha sido atendida, es necesario que llenes " +
+              "la forma de encuesta, usando la siguiente liga: <br/><br/>" +
+              "<a href='${liga}'>${solicitud}</a>"
+            log.debug("msg = ${msg}")
+            sendMail {
+              to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       solicitante.correo
+              subject asunto
+              html msg
+            }
+
         }
-*/
 
         flash.message = message(code: 'default.updated.message',
                                 args: [message(code: 'solicitudDetalle.label',

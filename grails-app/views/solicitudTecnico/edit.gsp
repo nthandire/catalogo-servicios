@@ -35,10 +35,33 @@
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
+
+      <!-- Modal para Autorizar -->
+      <div id="myModal" class="modal hide fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Firma digital</h3>
+        </div>
+        <g:form method="post" >
+          <div class="modal-body">
+
+            <fieldset class="form">
+              <g:render template="formFirmar"/>
+            </fieldset>
+
+          </div>
+            <fieldset class="buttons">
+              <g:actionSubmit class="save" action="solucionar"
+                value="${message(code: 'default.button.update.label',
+                  default: 'Update')}" />
+            </fieldset>
+        </g:form>
+      </div>
+
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
           <g:if test="${solicitudDetalleInstance?.idPrograma && solicitudDetalleInstance?.solucion}">
-            <g:link class="edit" action="solucionar" id="${solicitudDetalleInstance?.id}"><g:message code="default.button.revisar.label" default="Marcar como solucionado" /></g:link>
+          <a href="#myModal" class="edit" data-toggle="modal">Marcar como solucionado</a>
           </g:if>
           <g:link class="create" action="create"
             params="['solicitud.id': solicitudDetalleInstance?.idSolicitud?.id, 'detalle.id': solicitudDetalleInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
