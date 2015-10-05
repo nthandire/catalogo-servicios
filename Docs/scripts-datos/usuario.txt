@@ -114,3 +114,5 @@ update usuario set idunidadmedica = 'O' where idusuario = 7607;
 update usuario set nombre = 'Angelica', paterno = 'Trejo', rfc = 'TEMA680912'  where idusuario = 9587;
 update usuario set nombre = 'REBOLLO', paterno = 'REBOLLO', rfc = 'RETR760604'  where idusuario = 9524;
 update usuario set idunidadmedica = 'O' where idusuario = 9524;
+
+ZAML680508, Aprobador del Portal-WM, Zaldivar, Martínez, María de Lourdes       where idusuario = 9585;

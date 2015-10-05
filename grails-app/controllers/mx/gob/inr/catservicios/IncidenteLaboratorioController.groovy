@@ -7,7 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class IncidenteLaboratorioController {
     def springSecurityService
     static nombreMenu = "Incidentes Laboratorio"
-    static ordenMenu = -71
+    static ordenMenu = -91
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 

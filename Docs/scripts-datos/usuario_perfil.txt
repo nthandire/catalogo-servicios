@@ -255,3 +255,14 @@ insert into usuario_perfil
 (idusuario, idperfil)
 values
 (9583, 56);
+
+
+--ADemanos
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(8456, 56);
+insert into usuario_perfil
+(idusuario, idperfil)
+values
+(8456, 58);

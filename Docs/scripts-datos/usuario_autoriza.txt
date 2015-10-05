@@ -212,3 +212,21 @@ insert into usuario_autorizado
 values
 (9587);
 
+update usuario_autorizado set autoriza = 't', vobo = 't', area = 'WM' where id_usuario = 9574;
+update usuario_autorizado set autoriza = 'f', vobo = 'f', area = 'DGAIT' where id_usuario = 9575;
+update usuario_autorizado set autoriza = null, vobo = null, area = 'WM' where id_usuario = 9576;
+update usuario_autorizado set autoriza = null, vobo = null, area = 'DGDST' where id_usuario = 9577;
+update usuario_autorizado set autoriza = null, vobo = 't', area = 'DGDST' where id_usuario = 9578;
+update usuario_autorizado set autoriza = 't', vobo = 't', area = 'DGAIT' where id_usuario = 9579;
+update usuario_autorizado set autoriza = 'f', vobo = 'f', area = 'DGDST' where id_usuario = 9580;
+update usuario_autorizado set autoriza = null, vobo = null, area = 'MS' where id_usuario = 9581;
+update usuario_autorizado set autoriza = null, vobo = null, area = 'MS' where id_usuario = 9582;
+update usuario_autorizado set autoriza = null, vobo = null, area = 'MS' where id_usuario = 9583;
+update usuario_autorizado set autoriza = null, vobo = null, area = 'DGAIT' where id_usuario = 9584;
+update usuario_autorizado set autoriza = 't', vobo = 't', area = 'DGDST' where id_usuario = 9585;
+update usuario_autorizado set autoriza = 't', vobo = 't', area = 'MS' where id_usuario = 9586;
+update usuario_autorizado set autoriza = 't', vobo = 'f', area = null where id_usuario = 7607;
+update usuario_autorizado set autoriza = 't', vobo = 't', area = null where id_usuario = 9587;
+
+
+update usuario_autorizado set estado = 'A';
