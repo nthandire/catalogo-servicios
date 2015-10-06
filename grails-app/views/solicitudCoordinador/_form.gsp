@@ -13,53 +13,112 @@
 	<g:select id="idServcat" name="idServcat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['': '']" disabled="true"/>
 </div>
 
-<div class="fieldtablecontain">
-  <label for="nombre-label">
-    <g:message code="solicitud.nombre.label" default="Solicitante"/>
-  </label>
-  <g:field type="text" name="nombre.no" disabled="true"
-    value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
-</div>
+<div class="row-fluid">
+  <div class="span4">
 
-<div class="fieldtablecontain">
-  <label for="telefono-label">
-    <g:message code="solicitud.telefono.label" default="Extensión" />
-  </label>
-  <g:field type="text" name="telefono.no" disabled="true"
-    value="solicitudDetalleInstance?.idSolicitud?.idSolicitante.extensión"/>
-</div>
+    <div class="fieldtablecontain">
+      <label for="nombre-label">
+        <g:message code="solicitud.nombre.label" default="Solicitante"/>
+      </label>
+      <g:field type="text" name="nombre.no" disabled="true"
+        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
+    </div>
 
-<div class="fieldtablecontain">
-  <label for="nombre-label">
-    <g:message code="solicitud.nombre.label" default="Autorizante"/>
-  </label>
-  <g:field type="text" name="autoriza.no" disabled="true"
-    value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
-</div>
-
-<div class="fieldtablecontain">
-  <label for="telefono-label">
-    <g:message code="solicitud.telefono.label" default="Extensión" />
-  </label>
-  <g:field type="text" name="telefonoAutoriza.no" disabled="true"
-    value="solicitudDetalleInstance?.idSolicitud?.idAutoriza.extensión"/>
-</div>
-
-<g:if test="${solicitudDetalleInstance?.idSolicitud?.idVb}">
-  <div class="fieldtablecontain">
-    <label for="nombre-label">
-      <g:message code="solicitud.nombre.label" default="Visto Bueno"/>
-    </label>
-    <g:field type="text" name="vobo.no" disabled="true"
-      value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
   </div>
+  <div class="span3">
 
-  <div class="fieldtablecontain">
-    <label for="telefono-label">
-      <g:message code="solicitud.telefono.label" default="Extensión" />
-    </label>
-    <g:field type="text" name="telefonoVobo.no" disabled="true"
-      value="solicitudDetalleInstance?.idSolicitud?.idVb.extensión"/>
+    <div class="fieldtablecontain">
+      <label for="telefono-label">
+        <g:message code="solicitud.telefono.label" default="Extensión" />
+      </label>
+      <g:field type="text" name="telefono.no" disabled="true"
+        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante).extension}"/>
+    </div>
+
+  </div>
+  <div class="span3">
+
+    <div class="fieldtablecontain">
+      <label for="area-label">
+        <g:message code="solicitud.area.label" default="Área" />
+      </label>
+      <g:field type="text" name="area.no" disabled="true"
+        value="${UsuarioAutorizado.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante).area}"/>
+    </div>
+
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span4">
+
+    <div class="fieldtablecontain">
+      <label for="nombre-label">
+        <g:message code="solicitud.nombre.label" default="Autorizador"/>
+      </label>
+      <g:field type="text" name="nombre.no" disabled="true"
+        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
+    </div>
+
+  </div>
+  <div class="span3">
+
+    <div class="fieldtablecontain">
+      <label for="telefono-label">
+        <g:message code="solicitud.telefono.label" default="Extensión" />
+      </label>
+      <g:field type="text" name="telefono.no" disabled="true"
+        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza).extension}"/>
+    </div>
+
+  </div>
+  <div class="span3">
+
+    <div class="fieldtablecontain">
+      <label for="area-label">
+        <g:message code="solicitud.area.label" default="Área" />
+      </label>
+      <g:field type="text" name="area.no" disabled="true"
+        value="${UsuarioAutorizado.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza).area}"/>
+    </div>
+
+  </div>
+</div>
+<g:if test="${solicitudDetalleInstance?.idSolicitud?.idVb}">
+  <div class="row-fluid">
+    <div class="span4">
+
+      <div class="fieldtablecontain">
+        <label for="nombre-label">
+          <g:message code="solicitud.nombre.label" default="Visto Bueno"/>
+        </label>
+        <g:field type="text" name="nombre.no" disabled="true"
+          value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
+      </div>
+
+    </div>
+    <div class="span3">
+
+      <div class="fieldtablecontain">
+        <label for="telefono-label">
+          <g:message code="solicitud.telefono.label" default="Extensión" />
+        </label>
+        <g:field type="text" name="telefono.no" disabled="true"
+          value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb).extension}"/>
+      </div>
+
+    </div>
+    <div class="span3">
+
+      <div class="fieldtablecontain">
+        <label for="area-label">
+          <g:message code="solicitud.area.label" default="Área" />
+        </label>
+        <g:field type="text" name="area.no" disabled="true"
+          value="${UsuarioAutorizado.get(solicitudDetalleInstance?.idSolicitud?.idVb).area}"/>
+      </div>
+
+    </div>
   </div>
 </g:if>
 

@@ -13,7 +13,8 @@ class Usuario {
   boolean passwordExpired
   String nombre
   String paterno
-	String materno
+  String materno
+	String extension
 
   String getNombreMostrar() {
     toString()
@@ -29,6 +30,7 @@ class Usuario {
     nombre nullable: true
     paterno nullable: true
 		materno nullable: true
+    extension nullable: true, maxSize: 6
 	}
 
 	static mapping = {

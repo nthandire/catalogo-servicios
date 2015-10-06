@@ -118,7 +118,7 @@ class SolicitudTecnicoController {
         }
 
         def userID = springSecurityService.principal.id
-        if (userID != solicitudDetalleInstance.idSolicitante) {
+        if (userID != solicitudDetalleInstance.idSolicitud.idSolicitante) {
             flash.error = "Usted no tiene asignada esta solicitud"
             redirect(action: "list")
             return

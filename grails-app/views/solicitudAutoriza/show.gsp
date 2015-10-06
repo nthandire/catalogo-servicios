@@ -24,23 +24,48 @@
 			<div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<ol class="property-list solicitud">
-			
+
 				<g:if test="${solicitudInstance?.numeroSolicitud}">
 				<li class="fieldcontain">
 					<span id="numeroSolicitud-label" class="property-label"><g:message code="solicitud.numeroSolicitud.label" default="Numero Solicitud" /></span>
 					<span class="property-value" aria-labelledby="numeroSolicitud-label">${solicitudInstance}</span>
         </li>
         </g:if>
-        
-        <li class="fieldcontain">
-          <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Solicitante" /></span>
-          <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idSolicitante)}</span>
-        </li>
 
-        <li class="fieldcontain">
-          <span id="telefono-label" class="property-label"><g:message code="solicitud.telefono.label" default="Solicitante" /></span>
-            <span class="property-value" aria-labelledby="telefono-label">solicitudInstance.idSolicitante.extensión</span>
-        </li>
+        <div class="row-fluid">
+          <div class="span4">
+
+            <li class="fieldcontain">
+              <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Solicitante" /></span>
+              <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idSolicitante)}</span>
+            </li>
+
+          </div>
+          <div class="span3">
+
+            <li class="fieldcontain">
+              <span id="telefono-label" class="property-label">
+                <g:message code="solicitud.telefono.label" default="Extensión" />
+              </span>
+                <span class="property-value" aria-labelledby="telefono-label">
+                  ${Usuario.get(solicitudInstance?.idSolicitante).extension}
+                </span>
+            </li>
+
+          </div>
+          <div class="span3">
+
+            <li class="fieldcontain">
+              <span id="area-label" class="property-label">
+                <g:message code="solicitud.area.label" default="Área" />
+              </span>
+                <span class="property-value" aria-labelledby="area-label">
+                  ${UsuarioAutorizado.get(solicitudInstance?.idSolicitante).area}
+                </span>
+            </li>
+
+          </div>
+        </div>
 
 				<g:if test="${solicitudInstance?.justificacion}">
 				<li class="fieldcontain">
@@ -48,7 +73,7 @@
 					<span class="property-value" aria-labelledby="justificacion-label"><g:fieldValue bean="${solicitudInstance}" field="justificacion"/></span>
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudInstance?.lastUpdated}">
 				<li class="fieldcontain">
 					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha Modificacion" /></span>
@@ -62,7 +87,7 @@
 			<H1>
 				<g:message code="solicitud.detalles.label" default="Descripción de la solicitud" />
 			</H1>
-			
+
 			<div class="row-fluid">
 -				<div class="span10 offset1">
 					<ul class="one-to-many">
@@ -81,7 +106,7 @@
 			<H1>
 				<g:message code="solicitud.archivos.label" default="Archivos" />
 			</H1>
-					
+
 			<div class="row-fluid">
 -				<div class="span10 offset1">
 					<ul class="one-to-many">
@@ -100,7 +125,7 @@
 			  </div>
 				<g:form method="post" >
 				  <div class="modal-body">
-			  
+
 						<g:hiddenField name="id" value="${solicitudInstance?.id}" />
 						<g:hiddenField name="version" value="${solicitudInstance?.version}" />
 						<fieldset class="form">
@@ -122,7 +147,7 @@
 			  </div>
 				<g:form method="post" >
 				  <div class="modal-body">
-			  
+
 						<g:hiddenField name="id" value="${solicitudInstance?.id}" />
 						<g:hiddenField name="version" value="${solicitudInstance?.version}" />
 						<fieldset class="form">

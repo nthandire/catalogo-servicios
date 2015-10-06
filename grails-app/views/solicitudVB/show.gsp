@@ -39,25 +39,112 @@
 				</li>
 				</g:if>
 
-        <li class="fieldcontain">
-          <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Solicitante" /></span>
-          <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idSolicitante)}</span>
-        </li>
+        <div class="row-fluid">
+          <div class="span4">
 
-        <li class="fieldcontain">
-          <span id="telefono-label" class="property-label"><g:message code="solicitud.telefono.label" default="Solicitante" /></span>
-            <span class="property-value" aria-labelledby="telefono-label">solicitudInstance.idSolicitante.extensión</span>
-        </li>
+            <li class="fieldcontain">
+              <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Solicitante" /></span>
+              <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idSolicitante)}</span>
+            </li>
 
-        <li class="fieldcontain">
-          <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Autorizante" /></span>
-          <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idAutoriza)}</span>
-        </li>
+          </div>
+          <div class="span3">
 
-        <li class="fieldcontain">
-          <span id="telefono-label" class="property-label"><g:message code="solicitud.telefono.label" default="Solicitante" /></span>
-            <span class="property-value" aria-labelledby="telefono-label">solicitudInstance.idAutoriza.extensión</span>
-        </li>
+            <li class="fieldcontain">
+              <span id="telefono-label" class="property-label">
+                <g:message code="solicitud.telefono.label" default="Extensión" />
+              </span>
+                <span class="property-value" aria-labelledby="telefono-label">
+                  ${Usuario.get(solicitudInstance?.idSolicitante).extension}
+                </span>
+            </li>
+
+          </div>
+          <div class="span3">
+
+            <li class="fieldcontain">
+              <span id="area-label" class="property-label">
+                <g:message code="solicitud.area.label" default="Área" />
+              </span>
+                <span class="property-value" aria-labelledby="area-label">
+                  ${UsuarioAutorizado.get(solicitudInstance?.idSolicitante).area}
+                </span>
+            </li>
+
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span4">
+
+            <li class="fieldcontain">
+              <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Autorizador" /></span>
+              <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idAutoriza)}</span>
+            </li>
+
+          </div>
+          <div class="span3">
+
+            <li class="fieldcontain">
+              <span id="telefono-label" class="property-label">
+                <g:message code="solicitud.telefono.label" default="Extensión" />
+              </span>
+                <span class="property-value" aria-labelledby="telefono-label">
+                  ${Usuario.get(solicitudInstance?.idAutoriza).extension}
+                </span>
+            </li>
+
+          </div>
+          <div class="span3">
+
+            <li class="fieldcontain">
+              <span id="area-label" class="property-label">
+                <g:message code="solicitud.area.label" default="Área" />
+              </span>
+                <span class="property-value" aria-labelledby="area-label">
+                  ${UsuarioAutorizado.get(solicitudInstance?.idAutoriza).area}
+                </span>
+            </li>
+
+          </div>
+        </div>
+
+        <g:if test="${solicitudInstance?.idVb}">
+          <div class="row-fluid">
+            <div class="span4">
+
+              <li class="fieldcontain">
+                <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Visto Bueno" /></span>
+                <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idVb)}</span>
+              </li>
+
+            </div>
+            <div class="span3">
+
+              <li class="fieldcontain">
+                <span id="telefono-label" class="property-label">
+                  <g:message code="solicitud.telefono.label" default="Extensión" />
+                </span>
+                  <span class="property-value" aria-labelledby="telefono-label">
+                    ${Usuario.get(solicitudInstance?.idVb).extension}
+                  </span>
+              </li>
+
+            </div>
+            <div class="span3">
+
+              <li class="fieldcontain">
+                <span id="area-label" class="property-label">
+                  <g:message code="solicitud.area.label" default="Área" />
+                </span>
+                  <span class="property-value" aria-labelledby="area-label">
+                    ${UsuarioAutorizado.get(solicitudInstance?.idVb).area}
+                  </span>
+              </li>
+
+            </div>
+          </div>
+        </g:if>
 
 				<g:if test="${solicitudInstance?.justificacion}">
 				<li class="fieldcontain">

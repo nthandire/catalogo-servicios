@@ -1,6 +1,6 @@
 
 
--- (6558,9574,9575,9576,9577,9578,9579,9580,9581,9582,9583,9584,9585,9586,9587,9588) 
+-- (6558,9574,9575,9576,9577,9578,9579,9580,9581,9582,9583,9584,9585,9586,9587,9588)
 
 insert into firmadigital (IDUSUARIO, BLOQUEADA, DATOS, INTENTOSFALLIDOS, NOMBRE, PASSWORDFIRMA, TAMANIO, TIPO )
 values (6558, 0, 0x123, 0, '', '1234', 2, '');
@@ -34,3 +34,11 @@ insert into firmadigital (IDUSUARIO, BLOQUEADA, DATOS, INTENTOSFALLIDOS, NOMBRE,
 values (9587, 0, 0x123, 0, '', '1234', 2, '');
 insert into firmadigital (IDUSUARIO, BLOQUEADA, DATOS, INTENTOSFALLIDOS, NOMBRE, PASSWORDFIRMA, TAMANIO, TIPO )
 values (9588, 0, 0x123, 0, '', '1234', 2, '');
+
+
+insert into firmadigital
+(idusuario,passwordfirma,nombre,tipo,tamanio,datos,bloqueada,intentosfallidos)
+select 8456,'1234',nombre,tipo,tamanio,datos,bloqueada,intentosfallidos
+ from firmadigital
+ where idusuario = 6558;
+
