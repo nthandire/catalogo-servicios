@@ -29,12 +29,6 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form method="post" >
-				<g:hiddenField name="id" value="${solicitudDetalleInstance?.id}" />
-				<g:hiddenField name="version" value="${solicitudDetalleInstance?.version}" />
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
 
       <!-- Modal para Autorizar -->
       <div id="myModal" class="modal hide fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -43,12 +37,12 @@
           <h3 id="myModalLabel">Firma digital</h3>
         </div>
         <g:form method="post" >
+          <g:hiddenField name="id" value="${solicitudDetalleInstance?.id}" />
+          <g:hiddenField name="version" value="${solicitudDetalleInstance?.version}" />
           <div class="modal-body">
-
             <fieldset class="form">
               <g:render template="formFirmar"/>
             </fieldset>
-
           </div>
             <fieldset class="buttons">
               <g:actionSubmit class="save" action="solucionar"
@@ -58,6 +52,12 @@
         </g:form>
       </div>
 
+      <g:form method="post" >
+        <g:hiddenField name="id" value="${solicitudDetalleInstance?.id}" />
+        <g:hiddenField name="version" value="${solicitudDetalleInstance?.version}" />
+        <fieldset class="form">
+          <g:render template="form"/>
+        </fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
           <g:if test="${solicitudDetalleInstance?.idPrograma && solicitudDetalleInstance?.solucion}">

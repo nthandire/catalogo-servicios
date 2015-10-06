@@ -8,4 +8,4 @@ Junta del 5 de octubre.
 + 3.- Mostrar para gestion y para técnicos también el área (ademas de la persona y su extensió), del solicitante, el autorizador y el visto bueno
 - 4.- Al dar el servicio de tercer nivel, la prioridad debe ser por default la que tiene dicho tercer nivel
 - 5.- Al asignar tercer nivel, se debe tomar en cuenta si es un requerimiento o un incidente (Hay servicios de tercer nivel que son incidentes y otros no). No se deben presentar servicios de tercer nivel que solo sean Incidentes cuando se esta capturando Requerimientos.
-- 6.- ERROR, no funciona el botón de que un técnico capture la solución y el estado de cierre.
++ 6.- ERROR, no funciona el botón de que un técnico capture la solución y el estado de cierre.
