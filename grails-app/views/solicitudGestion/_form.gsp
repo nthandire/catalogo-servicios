@@ -120,9 +120,8 @@
 	<label for="idServcat">
 		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
 	</label>
-	<g:select id="idServcat" name="idServcat.id" from="${Cat_servCat.list()}"
-    optionKey="id" class="many-to-one" noSelection="['null': '']"
-    value="${solicitudDetalleInstance?.idServcat?.id}" disabled="true"/>
+  <g:field type="text" name="idServcat.id" disabled="true"
+    value="${solicitudDetalleInstance.idServcat}"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
@@ -132,7 +131,7 @@
   </label>
   <g:select id='servSub' name='servSub' required=''
     onchange="subcategoryChanged(this.value)"
-    from="${Cat_servSub.findAllByServCat(solicitudDetalleInstance?.idServcat)}"
+    from="${subcategorias}"
     value="${solicitudDetalleInstance?.idServ?.servSub?.id}"
     optionKey='id' noSelection="['':'Seleccione una...']"/>
 </div>
@@ -145,7 +144,8 @@
   <span id="serviciosContainer">
     <g:if test="${solicitudDetalleInstance?.idServ}">
       <g:select id='idServ' name='idServ.id' required=''
-        from="${Cat_serv.findAllByServSub(solicitudDetalleInstance?.idServ?.servSub, [order:'id'])}"
+        from="${Cat_serv.findAllNotIncidenteByServSub(solicitudDetalleInstance?.idServ?.servSub,
+          [order:'id'])}"
         value="${solicitudDetalleInstance?.idServ?.id}"
         optionKey='id' noSelection="['':'Seleccione una...']"/>
     </g:if>
@@ -154,7 +154,7 @@
 
 <script>
     function subcategoryChanged(subcategoryId) {
-        <g:remoteFunction controller="incidente" action="subcategoryChanged"
+        <g:remoteFunction controller="solicitudGestion" action="subcategoryChanged"
             update="serviciosContainer"
             params="'subcategoryId='+subcategoryId"/>
     }

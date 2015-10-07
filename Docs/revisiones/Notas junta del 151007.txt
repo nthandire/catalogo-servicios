@@ -1,0 +1,25 @@
+Junta del 7 de octubre.
+-----------------------
+
+
+
+- 1.- Falta poder ligar usuarios de unidad medica
+- 2.- No se ve bien el nombre del solicitante en Opera ni en IE
+- 3.- Para los reportes, iniciar el tiempo de atención usando la fecha de "Revisión" del Gestor
+- 4.- REQUERIMIENTO NUEVO (o entendimiento nuevo por Daniel), El personal del área ve como tiempos de servicio los tiempos asignados a SU área (el segundo nivel)
+- 5.- REQUERIMIENTO NUEVO, volver a poner al Gestor la lista de solicitudes terminadas y de encuestas.
+- 6.- REQUERIMIENTO NUEVO, El ordenamiento de las listas debe ser por fecha descendente.
+- 7.- REQUERIMIENTO NUEVO, En la encuesta de solicitud, quitar la Justificación
+- 8.- En la encuesta, no se ve el "NO" en las respuestas de la encuesta, en Chrome.
+- 9.- REQUERIMIENTO NUEVO, El personal de área ve como inicio de su tiempo para dar servicio, la fecha (con hora) de Gestión (Cuando el Gestor lo marca como Revisado).
+- 10.- REQUERIMIENTO NUEVO,  En la vista de la encuesta, en lugar de la jsutificación, poner la lista de lo solicitado y solucionado.
+- 11.- Corregir en el sespliegue de la Encuesta (Show), los siguientes problemas:
+Numero Solicitud      11
+(quitar)
+Estado T
+Id Solicitante9.575
+Id Autoriza9.579
+Last Updated2015-10-07 14:39:00 CDT
+Ip Terminal192.168.13.1
+(mover para arriba, despues de la fecha de solicitud)
+Detalles Portal (debe decir : Categoría del servicio)

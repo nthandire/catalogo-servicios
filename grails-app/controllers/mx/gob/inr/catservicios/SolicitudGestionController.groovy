@@ -169,12 +169,28 @@ class SolicitudGestionController {
     def edit(Long id) {
         def solicitudDetalleInstance = SolicitudDetalle.get(id)
         if (!solicitudDetalleInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+            flash.message = message(code: 'default.not.found.message',
+              args: [message(code: 'solicitudDetalle.label',
+                             default: 'SolicitudDetalle'), id])
             redirect(action: "listDetalle")
             return
         }
 
-        [solicitudDetalleInstance: solicitudDetalleInstance]
+        def query =
+          "    from Cat_servSub s            \n" +
+          "   where s.servCat = ?            \n" +
+          "     and exists (                 \n" +
+          "       from Cat_serv t            \n" +
+          "      where s.id = t.servSub      \n" +
+          "        and t.incidente = 'f'     \n" +
+          "     )                            \n"
+
+        def subcategorias = Cat_servSub.executeQuery(query,
+          [solicitudDetalleInstance.idServcat])
+        log.debug("numero de subcategorias = ${subcategorias.size()}")
+
+        [solicitudDetalleInstance: solicitudDetalleInstance,
+            subcategorias: subcategorias]
     }
 
     def listaDeVobos() {
@@ -238,7 +254,7 @@ class SolicitudGestionController {
           usuariosDelArea += UsuarioAutorizado.findAllByArea(it)["id"]
         }
         log.debug("usuariosDelArea = ${usuariosDelArea}")
-          
+
         def usuarios = Usuario.withNewSession { session ->
           Usuario.findAllEnabledByIdInList(usuariosDelArea)
         }
@@ -371,14 +387,14 @@ class SolicitudGestionController {
 
   def subcategoryChanged(long subcategoryId) {
     log.debug("subcategoryId = $subcategoryId")
-      Cat_servSub subcategory = Cat_servSub.get(subcategoryId)
-      def servicios = []
-      if ( subcategory != null ) {
-          servicios = Cat_serv.findAllByServSub(subcategory, [order:'id'])
-      }
-      render g.select(id: 'idServ', name:'idServ.id', required:'',
-          from:servicios, optionKey:'id', noSelection:['':'Seleccione una...']
-      )
+    Cat_servSub subcategory = Cat_servSub.get(subcategoryId)
+    def servicios = []
+    if ( subcategory != null ) {
+      servicios = Cat_serv.findAllNotIncidenteByServSub(subcategory, [order:'id'])
+    }
+    render g.select(id: 'idServ', name:'idServ.id', required:'',
+      from:servicios, optionKey:'id', noSelection:['':'Seleccione una...']
+    )
   }
 
 }
