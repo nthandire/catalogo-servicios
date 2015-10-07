@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.Cat_servCat" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 
 
 <style type="text/css">
@@ -38,7 +38,7 @@
 		<g:message code="cat_servCat.servResp.label" default="Serv Resp" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servResp" name="servResp.id" from="${mx.gob.inr.catservicios.Cat_servResp.list()}" optionKey="id" required="" value="${cat_servCatInstance?.servResp?.id}" class="many-to-one"/>
+	<g:select id="servResp" name="servResp.id" from="${Cat_servResp.list()}" optionKey="id" required="" value="${cat_servCatInstance?.servResp?.id}" class="many-to-one"/>
 </div>
 
 		</td>
@@ -87,7 +87,7 @@
 		<g:message code="cat_servCat.servCob.label" default="Serv Cob" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servCob" name="servCob.id" from="${mx.gob.inr.catservicios.Cat_servCob.list()}" optionKey="id" required="" value="${cat_servCatInstance?.servCob?.id}" class="many-to-one"/>
+	<g:select id="servCob" name="servCob.id" from="${Cat_servCob.list()}" optionKey="id" required="" value="${cat_servCatInstance?.servCob?.id}" class="many-to-one"/>
 </div>
 
 		</td>
@@ -102,9 +102,9 @@
 <div class="fieldtablecontain ${hasErrors(bean: cat_servCatInstance, field: 'servSubs', 'error')} ">
 	<label for="servSubs">
 		<g:message code="cat_servCat.servSubs.label" default="Serv Subs" />
-		
+
 	</label>
-	
+
 <ul class="one-to-many">
 <g:each in="${cat_servCatInstance?.servSubs?}" var="s">
     <li><g:link controller="cat_servSub" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>

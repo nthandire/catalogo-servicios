@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.Cat_servSub" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 
 
 <style type="text/css">
@@ -14,7 +14,7 @@
 		<g:message code="cat_servSub.servCat.label" default="Serv Cat" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servCat" name="servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" required="" value="${cat_servSubInstance?.servCat?.id}" class="many-to-one"/>
+	<g:select id="servCat" name="servCat.id" from="${Cat_servCat.list()}" optionKey="id" required="" value="${cat_servSubInstance?.servCat?.id}" class="many-to-one"/>
 </div>
 
 		</td>
@@ -36,9 +36,9 @@
 <div class="fieldtablecontain ${hasErrors(bean: cat_servSubInstance, field: 'servs', 'error')} ">
 	<label for="servs">
 		<g:message code="cat_servSub.servs.label" default="Servs" />
-		
+
 	</label>
-	
+
 <ul class="one-to-many">
 <g:each in="${cat_servSubInstance?.servs?}" var="s">
     <li><g:link controller="cat_serv" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>

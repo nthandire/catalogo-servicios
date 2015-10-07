@@ -10,7 +10,7 @@
 	<label for="idServcat">
 		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
 	</label>
-	<g:select id="idServcat" name="idServcat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['': '']" disabled="true"/>
+	<g:select id="idServcat" name="idServcat.id" from="${Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['': '']" disabled="true"/>
 </div>
 
 <div class="row-fluid">
@@ -133,7 +133,7 @@
   <label for="idPrograma">
     <g:message code="solicitudDetalle.idPrograma.label" default="Estado de cierre" />
   </label>
-  <g:select id="idPrograma" name="idPrograma.id" from="${mx.gob.inr.catservicios.CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['': '']" disabled="true"/>
+  <g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}" optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}" class="many-to-one" noSelection="['': '']" disabled="true"/>
 </div>
 
 <g:if test="${solicitudDetalleInstance?.idResguardoentregadetalle}">

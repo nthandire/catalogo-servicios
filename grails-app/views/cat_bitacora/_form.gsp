@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.Cat_bitacora" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 
 <g:javascript library='jquery' />
 
@@ -30,7 +30,7 @@
 		<g:message code="cat_serv.servCat.label" default="Cat" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servCat" name="servCat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" required="" value="${cat_bitacoraInstance?.servicio?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['null':'Seleccione una...']}"/>
+	<g:select id="servCat" name="servCat.id" from="${Cat_servCat.list()}" optionKey="id" required="" value="${cat_bitacoraInstance?.servicio?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['null':'Seleccione una...']}"/>
 </div>
 
 		</td>

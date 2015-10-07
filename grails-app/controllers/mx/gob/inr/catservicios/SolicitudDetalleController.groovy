@@ -23,7 +23,22 @@ class SolicitudDetalleController {
       def solicitudDetalleInstance = new SolicitudDetalle(params)
       def solicitud = Solicitud.get(params.solicitud["id"])
       solicitudDetalleInstance.idSolicitud = solicitud
-      [solicitudDetalleInstance: solicitudDetalleInstance]
+
+      def query =
+          "  from Cat_servCat c               \n" +
+          " where exists                      \n" +
+          "      ( from Cat_servSub s,        \n" +
+          "             Cat_serv t            \n" +
+          "       where s.id = t.servSub      \n" +
+          "         and t.incidente = 'f'     \n" +
+          "      )                            \n"
+      log.debug("query = \n${query}")
+
+      def categorias = Cat_servCat.executeQuery(query)
+      log.debug("numero de categorias = ${categorias.size()}")
+
+      [solicitudDetalleInstance: solicitudDetalleInstance,
+          categorias: categorias]
     }
 
     def save() {

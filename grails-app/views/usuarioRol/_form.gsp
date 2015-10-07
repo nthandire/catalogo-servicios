@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.UsuarioRol" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 
 
 <style type="text/css">
@@ -11,7 +11,7 @@
 		<g:message code="usuarioRol.rol.label" default="Rol" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="rol" name="rol.id" from="${mx.gob.inr.catservicios.Rol.list()}" optionKey="id" required="" value="${usuarioRolInstance?.rol?.id}" class="many-to-one"/>
+	<g:select id="rol" name="rol.id" from="${Rol.list()}" optionKey="id" required="" value="${usuarioRolInstance?.rol?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: usuarioRolInstance, field: 'usuario', 'error')} required">
@@ -19,6 +19,6 @@
 		<g:message code="usuarioRol.usuario.label" default="Usuario" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="usuario" name="usuario.id" from="${mx.gob.inr.catservicios.Usuario.list()}" optionKey="id" required="" value="${usuarioRolInstance?.usuario?.id}" class="many-to-one"/>
+	<g:select id="usuario" name="usuario.id" from="${Usuario.list()}" optionKey="id" required="" value="${usuarioRolInstance?.usuario?.id}" class="many-to-one"/>
 </div>
 

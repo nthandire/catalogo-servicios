@@ -9,15 +9,17 @@
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
 	<label for="idServcat">
 		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
-		
+
 	</label>
-	<g:select id="idServcat" name="idServcat.id" from="${mx.gob.inr.catservicios.Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['': '']" required=""/>
+	<g:select id="idServcat" name="idServcat.id" from="${categorias}"
+    optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}"
+    class="many-to-one" noSelection="['': '']" required=""/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcion', 'error')} ">
 	<label for="descripcion">
 		<g:message code="solicitudDetalle.descripcion.label" default="Descripcion" />
-		
+
 	</label>
 	<g:textArea name="descripcion" cols="40" rows="5" maxlength="3000"
     value="${solicitudDetalleInstance?.descripcion}" required=""/>
@@ -27,6 +29,6 @@
   <label for="resguardo">
     <g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Equipo" />
   </label>
-  <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle" 
+  <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
 		from="${ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}" optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}" class="many-to-one" noSelection="${['':'Seleccione una...']}"/>
 </div>

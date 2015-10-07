@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.Monitoreo" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 
 
 
@@ -23,7 +23,7 @@
 		<g:message code="monitoreo.bitacora.label" default="Bitacora" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="bitacora" name="bitacora.id" from="${mx.gob.inr.catservicios.Bitacora.list()}" optionKey="id" required="" value="${monitoreoInstance?.bitacora?.id}" class="many-to-one"/>
+	<g:select id="bitacora" name="bitacora.id" from="${Bitacora.list()}" optionKey="id" required="" value="${monitoreoInstance?.bitacora?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'estadoMonitoreo', 'error')} required">
@@ -45,7 +45,7 @@
 <div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'nota', 'error')} ">
 	<label for="nota">
 		<g:message code="monitoreo.nota.label" default="Nota" />
-		
+
 	</label>
 	<g:textArea name="nota" cols="40" rows="5" maxlength="3000" value="${monitoreoInstance?.nota}"/>
 </div>
@@ -61,7 +61,7 @@
 <div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'ipTerminal', 'error')} ">
 	<label for="ipTerminal">
 		<g:message code="monitoreo.ipTerminal.label" default="Ip Terminal" />
-		
+
 	</label>
 	<g:textField name="ipTerminal" readonly="readonly" value="${monitoreoInstance.ipTerminal = request.getRemoteAddr(); monitoreoInstance?.ipTerminal}"/>
 </div>
@@ -69,9 +69,9 @@
 <div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'monitoreoDetalles', 'error')} ">
 	<label for="monitoreoDetalles">
 		<g:message code="monitoreo.monitoreoDetalles.label" default="Monitoreo Detalles" />
-		
+
 	</label>
-	
+
 <ul class="one-to-many">
 <g:each in="${monitoreoInstance?.monitoreoDetalles?}" var="m">
     <li><g:link controller="monitoreoDetalle" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
