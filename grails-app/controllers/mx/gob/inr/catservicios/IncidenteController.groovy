@@ -188,14 +188,25 @@ class IncidenteController {
             return
         }
 
+        def userID = springSecurityService.principal.id
+        log.debug("userID = ${userID}")
+        def area = UsuarioAutorizado.get(userID)["area"]
+        log.debug("area = ${area}")
+        def areaLab = message(code: "area.de.laboratorio")
+        log.debug("areaLab = ${areaLab}")
+        def minPrograma = message(code: "laboratorio.programa.normal").toInteger()
+        if (area == areaLab)
+          minPrograma = message(code: "laboratorio.programa.DGAIT").toInteger()
+        log.debug("minPrograma = ${minPrograma}")
+        def programas = CatPrograma.findAllByIdGreaterThanEquals(minPrograma)
+        log.debug("programas = ${programas}")
+
         def tecnicos =
           isCoordinador() ? listaDeTecnicos(incidenteInstance.idServresp) : []
         log.debug("tecnicos = ${tecnicos}")
         def nivel = incidenteInstance.nivel
         def idNivel = incidenteInstance."idNivel${nivel}"
         log.debug("idNivel = ${idNivel}")
-        def userID = springSecurityService.principal.id
-        log.debug("userID = ${userID}")
         def lab = (area().descripcion == message(code: "area.de.laboratorio"))
         log.debug("lab = ${lab}")
         [incidenteInstance: incidenteInstance, tecnicos:tecnicos,
