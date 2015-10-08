@@ -87,9 +87,9 @@ class SolicitudTecnicoController {
       log.debug("area = ${area}")
       def areaLab = message(code: "area.de.laboratorio")
       log.debug("areaLab = ${areaLab}")
-      def minPrograma = 0
-      if (area != areaLab)
-        minPrograma = 2
+      def minPrograma = message(code: "laboratorio.programa.minimo").toInteger()
+      if (area == areaLab)
+        minPrograma = message(code: "laboratorio.programa.DGAIT").toInteger()
       log.debug("minPrograma = ${minPrograma}")
       def programas = CatPrograma.findAllByIdGreaterThan(minPrograma)
       log.debug("programas = ${programas}")

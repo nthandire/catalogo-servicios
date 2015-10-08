@@ -26,27 +26,27 @@
 			<table>
 				<thead>
 					<tr>
-					
+
 						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Numero Solicitud')}" />
-					
+
 						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha')}" />
-					
+
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
-					
+
 						<g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
-					
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${solicitudInstanceList}" status="i" var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
-					
+
 						<td><g:formatDate date="${solicitudInstance.fechaSolicitud ?: solicitudInstance.lastUpdated}" /></td>
-					
+
 						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
-					
+
 						<td>
 							<g:if test="${solicitudInstance?.estado}">
 								<span class="property-value" aria-labelledby="estado-label">
@@ -54,9 +54,13 @@
 										from="${['F' as char, 'A' as char, 'R' as char, 'V' as char, 'E' as char, 'T' as char, 'C' as char]}"
 										valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
 								</span>
-							</g:if>
+              </g:if>
+              <g:else>
+                <g:field name="estado-null" type="text"
+                  value="Pendiente de firmar por el solicitante" disabled="true"/>
+							</g:else>
 						</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>
