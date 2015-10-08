@@ -147,6 +147,7 @@
         from="${Cat_serv.findAllNotIncidenteByServSub(solicitudDetalleInstance?.idServ?.servSub,
           [order:'id'])}"
         value="${solicitudDetalleInstance?.idServ?.id}"
+        onchange="servicesChanged(this.value)"
         optionKey='id' noSelection="['':'Seleccione una...']"/>
     </g:if>
   </span>
@@ -154,9 +155,14 @@
 
 <script>
     function subcategoryChanged(subcategoryId) {
-        <g:remoteFunction controller="solicitudGestion" action="subcategoryChanged"
+        <g:remoteFunction action="subcategoryChanged"
             update="serviciosContainer"
             params="'subcategoryId='+subcategoryId"/>
+    }
+    function servicesChanged(servicesId) {
+      <g:remoteFunction action="servicesChanged"
+          update="prioridadContainer"
+          params="'servicesId='+servicesId"/>
     }
 </script>
 
@@ -194,6 +200,9 @@
   <label for="prioridad">
     <g:message code="solicitudDetalle.prioridad.label" default="Prioridad" />
   </label>
-  <g:select id="prioridad" name="prioridad" disabled="false" from="${[0, 1, 2, 3]}"
-    valueMessagePrefix="intensidad.valor" value="${solicitudDetalleInstance.prioridad}" />
+  <span id="prioridadContainer">
+    <g:select id="prioridad" name="prioridad" from="${[0, 1, 2, 3]}"
+      valueMessagePrefix="intensidad.valor"
+      value="${solicitudDetalleInstance.prioridad}"/>
+  </span>
 </div>

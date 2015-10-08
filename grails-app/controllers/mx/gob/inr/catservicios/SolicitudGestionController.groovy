@@ -397,4 +397,11 @@ class SolicitudGestionController {
     )
   }
 
+  def servicesChanged(long servicesId) {
+    log.debug("servicesId = $servicesId")
+    render g.select(id: 'prioridad', name:'prioridad',
+      from:[0, 1, 2, 3], valueMessagePrefix:"intensidad.valor",
+      value:"${Cat_serv.get(servicesId).impacto}")
+  }
+
 }
