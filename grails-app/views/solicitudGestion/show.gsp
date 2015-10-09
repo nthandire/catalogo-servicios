@@ -61,7 +61,7 @@
                 <g:message code="solicitud.area.label" default="Área" />
               </span>
                 <span class="property-value" aria-labelledby="area-label">
-                  ${UsuarioAutorizado.get(solicitudInstance?.idSolicitante).area}
+                  ${area}
                 </span>
             </li>
 
@@ -96,7 +96,7 @@
                 <g:message code="solicitud.area.label" default="Área" />
               </span>
                 <span class="property-value" aria-labelledby="area-label">
-                  ${UsuarioAutorizado.get(solicitudInstance?.idAutoriza).area}
+                  ${areaAutoriza}
                 </span>
             </li>
 
@@ -132,7 +132,7 @@
                   <g:message code="solicitud.area.label" default="Área" />
                 </span>
                   <span class="property-value" aria-labelledby="area-label">
-                    ${UsuarioAutorizado.get(solicitudInstance?.idVb).area}
+                    ${areaVb}
                   </span>
               </li>
 

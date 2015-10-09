@@ -73,21 +73,15 @@ class SolicitudAutorizaController {
     }
 
     def show(Long id) {
+        log.debug("id = ${id}")
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
             redirect(action: "list")
             return
         }
-        def area = UsuarioAutorizado.get(solicitudInstance?.idSolicitante)?.area
-        if (!area) {
-          def idArea = Usuario.get(springSecurityService.principal.id).idUnidadMedica
-          log.debug("idArea = ${idArea}")
-          def unidMed = UnidadMedica.get(idArea)
-          log.debug("unidMed = ${unidMed}")
-          area = unidMed.descripcion
-          log.debug("area = ${area}")
-        }
+
+        def area = firmadoService.areaNombre(solicitudInstance?.idSolicitante)
 
         [solicitudInstance: solicitudInstance, area: area]
     }

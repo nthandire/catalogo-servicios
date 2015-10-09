@@ -70,4 +70,25 @@ class FirmadoService {
       return null
     Cat_servResp.findByDescripcion(areaString.area)
   }
+
+  def areaNombre (Long usuario) {
+    log.debug("usuario = ${usuario}")
+    def area = ""
+    if (usuario) {
+      area = UsuarioAutorizado.get(usuario)?.area
+      if (!area || area.length() == 1) {
+        def idArea = area ?: Usuario.get(usuario).idUnidadMedica
+        log.debug("idArea = ${idArea}")
+        if (idArea) {
+          def unidMed = UnidadMedica.get(idArea as char)
+          log.debug("unidMed = ${unidMed}")
+          area = unidMed.descripcion
+          log.debug("area = ${area}")
+          } else
+            area = "Error, revisar con desarrollo de sistemas"
+      }
+    }
+    area
+  }
+
 }

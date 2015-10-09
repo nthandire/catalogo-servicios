@@ -122,6 +122,7 @@ class SolicitudGestionController {
     }
 
     def show(Long id) {
+        log.debug("id = ${id}")
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
@@ -129,8 +130,12 @@ class SolicitudGestionController {
             return
         }
 
+        def area = firmadoService.areaNombre(solicitudInstance?.idSolicitante)
+        def areaAutoriza = firmadoService.areaNombre(solicitudInstance?.idAutoriza)
+        def areaVb = firmadoService.areaNombre(solicitudInstance?.idVb)
         [solicitudInstance: solicitudInstance,
-          autorizadores:listaDeVobos()]
+          autorizadores:listaDeVobos(), area: area, areaAutoriza: areaAutoriza,
+          areaVb: areaVb]
     }
 
     def showDetalle(Long id) {
