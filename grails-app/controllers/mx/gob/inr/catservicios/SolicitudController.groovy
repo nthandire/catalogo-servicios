@@ -88,7 +88,11 @@ class SolicitudController {
     def listaDeAutorizadores() {
       def userID = springSecurityService.principal.id
       def area = UsuarioAutorizado.get(userID)?.area
-      def miembros = UsuarioAutorizado.findAllAutorizaByAreaAndEstado(area,'A' as char).collect{it.id}
+      // if (!area) {
+      //   area = Usuario.get(userID).idUnidadMedica
+      // }
+      def miembros = UsuarioAutorizado.findAllAutorizaByAreaAndEstado(area,
+                                                'A' as char).collect{it.id}
 
       def autorizadores = []
       Usuario.withNewSession { sessionU ->
@@ -102,7 +106,9 @@ class SolicitudController {
     def edit(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
+            flash.message = message(code: 'default.not.found.message',
+                                    args: [message(code: 'solicitud.label',
+                                                   default: 'Solicitud'), id])
             redirect(action: "list")
             return
         }

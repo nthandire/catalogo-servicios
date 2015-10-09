@@ -27,10 +27,10 @@ class SolicitudCoordinadorController {
             "  from SolicitudDetalle d                    \n" +
             " where idTecnico is null                     \n" +
             "   and exists                                \n" +
-            "      ( from Cat_servCat c,                  \n" +
+            "      ( from Cat_serv t,                     \n" +
             "             Cat_servResp r                  \n" +
-            "       where d.idServcat = c.id            \n" +
-            "         and c.servResp = r.id               \n" +
+            "       where d.idServ = t.id                 \n" +
+            "         and t.servResp2 = r.id              \n" +
             "         and r.descripcion like '%${area}%') \n" +
             "   and exists                                \n" +
             "      ( from Solicitud s                     \n" +

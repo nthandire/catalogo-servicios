@@ -241,8 +241,8 @@ class SolicitudGestionController {
 
         def areas = []
         solicitudInstance.detalles.each {
-          if (!areas.contains(it.idServcat.servResp))
-            areas << it.idServcat.servResp
+          if (!areas.contains(it.idServ.servResp2))
+            areas << it.idServ.servResp2
         }
         log.debug("areas = ${areas}")
         def areasExpandidas = []

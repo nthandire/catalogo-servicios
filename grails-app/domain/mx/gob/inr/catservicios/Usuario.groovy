@@ -36,7 +36,6 @@ class Usuario {
 	static mapping = {
 		id column:'idusuario', generator: "increment"
 		username column:'rfc'
-		//password column: '`password`'
 		estatus length: 1, columnDefinition: 'char(1)'
 		version false
 		datasource "seguridad"
