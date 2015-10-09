@@ -29,19 +29,28 @@ class SolicitudArchivoadjuntoController {
 
     def save() {
       def file = request.getFile('file')
+      def solicitudArchivoadjuntoInstance = new SolicitudArchivoadjunto()
+      def solicitud = Solicitud.get(params.idSolicitud)
+      solicitudArchivoadjuntoInstance.idSolicitud = solicitud
       if(file.empty) {
         flash.message = "Debe enviar algún archivo"
-        render(view: "create")
+        render(view: "create", model: [solicitudArchivoadjuntoInstance:
+                                       solicitudArchivoadjuntoInstance])
         return
       } else {
-        def solicitudArchivoadjuntoInstance = new SolicitudArchivoadjunto()
-        def solicitud = Solicitud.get(params.idSolicitud)
-        solicitudArchivoadjuntoInstance.idSolicitud = solicitud
         def nombre = file.originalFilename
         solicitudArchivoadjuntoInstance.nombre = nombre
         solicitudArchivoadjuntoInstance.datos = file.getBytes()
-        solicitudArchivoadjuntoInstance.tamaño = 
+        solicitudArchivoadjuntoInstance.tamaño =
           solicitudArchivoadjuntoInstance.datos.size()
+
+        if (solicitudArchivoadjuntoInstance.tamaño > 5242880) {
+          flash.error = "No puede subir archivos de más de 5 MB"
+          render(view: "create", model: [solicitudArchivoadjuntoInstance:
+                                         solicitudArchivoadjuntoInstance])
+          return
+        }
+
         solicitudArchivoadjuntoInstance.idUsuario = springSecurityService.principal.id
         solicitudArchivoadjuntoInstance.ipTerminal = request.getRemoteAddr()
         def dot = nombre.lastIndexOf('.');
@@ -51,7 +60,8 @@ class SolicitudArchivoadjuntoController {
         else
           solicitudArchivoadjuntoInstance.tipo = ""
         if (!solicitudArchivoadjuntoInstance.save(flush: true)) {
-            render(view: "create", model: [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance])
+             render(view: "create", model: [solicitudArchivoadjuntoInstance:
+                                            solicitudArchivoadjuntoInstance])
             return
         }
         redirect (controller: "solicitud", action:'show', id: solicitud.id)
@@ -70,7 +80,7 @@ class SolicitudArchivoadjuntoController {
     }
 
     def download(long id) {
-        SolicitudArchivoadjunto solicitudArchivoadjuntoInstance = 
+        SolicitudArchivoadjunto solicitudArchivoadjuntoInstance =
           SolicitudArchivoadjunto.get(id)
         if ( SolicitudArchivoadjunto == null) {
             flash.message = "Documento no encontrado."

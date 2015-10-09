@@ -3,7 +3,7 @@ Junta del 17 de septiembre.
 
 
 + 1 Se elimina el correo de quejas.
-- 2 Mesa realiza lista de autorizadores/vistos buenos, también quien puede autorizar / dar visto bueno en las subdirecciones.
++ 2 Mesa realiza lista de autorizadores/vistos buenos, también quien puede autorizar / dar visto bueno en las subdirecciones.
 + 3 En visto bueno, se ponen TODOS los que puedan dar v.b., son pocos.
 + 4 En el v.b., el responsable puede cancelar. Se necesita un campo nuevo de observaciones.
 + 5 Para el listado del coordinador, en la lista, agregar fecha de autorización/v.b. y tiempo de atención
