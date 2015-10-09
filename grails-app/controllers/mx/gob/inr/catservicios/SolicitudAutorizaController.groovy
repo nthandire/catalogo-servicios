@@ -28,7 +28,7 @@ class SolicitudAutorizaController {
     //       ordenMenuInterna
     //     else
     //       -ordenMenuInterna
-    //     } else 
+    //     } else
     //       -ordenMenuInterna
     // }
 
@@ -79,8 +79,17 @@ class SolicitudAutorizaController {
             redirect(action: "list")
             return
         }
+        def area = UsuarioAutorizado.get(solicitudInstance?.idSolicitante)?.area
+        if (!area) {
+          def idArea = Usuario.get(springSecurityService.principal.id).idUnidadMedica
+          log.debug("idArea = ${idArea}")
+          def unidMed = UnidadMedica.get(idArea)
+          log.debug("unidMed = ${unidMed}")
+          area = unidMed.descripcion
+          log.debug("area = ${area}")
+        }
 
-        [solicitudInstance: solicitudInstance]
+        [solicitudInstance: solicitudInstance, area: area]
     }
 
     def showDetalle(Long id) {
@@ -191,12 +200,12 @@ class SolicitudAutorizaController {
           :
           "La solicitud ${solicitudInstance} fue cancelada"
         def msg = (estado == 'A' as char) ?
-          "Hola ${persona}\n\nSu solicitud folio " + 
-            "${solicitudInstance.toString()} (${solicitudInstance.justificacion}) "+ 
+          "Hola ${persona}\n\nSu solicitud folio " +
+            "${solicitudInstance.toString()} (${solicitudInstance.justificacion}) "+
             "ya fue autorizada, pronto tendras respuestas a tu solicitud."
           :
-          "Hola ${persona}\n\nSu solicitud " + 
-            "(${solicitudInstance.justificacion}) "+ 
+          "Hola ${persona}\n\nSu solicitud " +
+            "(${solicitudInstance.justificacion}) "+
             "fue cancelada, investigue con su autorizador el motivo."
 
         sendMail {

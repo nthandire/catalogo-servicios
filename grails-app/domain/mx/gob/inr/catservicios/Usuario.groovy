@@ -14,7 +14,8 @@ class Usuario {
   String nombre
   String paterno
   String materno
-	String extension
+  String extension
+  Character idUnidadMedica
 
   String getNombreMostrar() {
     toString()
@@ -31,12 +32,14 @@ class Usuario {
     paterno nullable: true
 		materno nullable: true
     extension nullable: true, maxSize: 6
+		idUnidadMedica nullable: true
 	}
 
 	static mapping = {
 		id column:'idusuario', generator: "increment"
 		username column:'rfc'
 		estatus length: 1, columnDefinition: 'char(1)'
+    idUnidadMedica column:'idunidadmedica', length: 1, columnDefinition: 'char(1)'
 		version false
 		datasource "seguridad"
 	}

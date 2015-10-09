@@ -60,7 +60,7 @@
                 <g:message code="solicitud.area.label" default="Área" />
               </span>
                 <span class="property-value" aria-labelledby="area-label">
-                  ${UsuarioAutorizado.get(solicitudInstance?.idSolicitante).area}
+                  ${area}
                 </span>
             </li>
 
