@@ -6,11 +6,25 @@
 </style>
 
 
-<div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
-	<label for="idServcat">
-		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
-	</label>
-	<g:select id="idServcat" name="idServcat.id" from="${Cat_servCat.list()}" optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}" class="many-to-one" noSelection="['': '']" disabled="true"/>
+<div class="row-fluid">
+  <div class="span4 offset1">
+    <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
+      <label for="idServcat">
+        <g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
+      </label>
+      <g:field id="idServcat" name="idServcat.id"
+        value="${solicitudDetalleInstance?.idServcat}" disabled="true"/>
+    </div>
+  </div>
+  <div class="span6">
+    <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServ', 'error')} ">
+      <label for="idServ">
+        <g:message code="solicitudDetalle.idServ.label" default="Tercer nivel" />
+      </label>
+      <g:field id="idServ" name="idServ.id"
+        value="${solicitudDetalleInstance?.idServ}" disabled="true"/>
+    </div>
+  </div>
 </div>
 
 <div class="row-fluid">

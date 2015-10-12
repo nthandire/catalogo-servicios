@@ -1,4 +1,3 @@
-
 <%@ page import="mx.gob.inr.catservicios.SolicitudDetalle" %>
 <!DOCTYPE html>
 <html>
@@ -47,6 +46,11 @@
                 default="Categoría" />
             </th>
 
+            <th>
+              <g:message code="solicitudDetalle.idServ.label"
+                default="Tercer nivel" />
+            </th>
+
 						<g:sortableColumn property="descripcion"
               title="${message(code: 'solicitudDetalle.descripcion.label',
                 default: 'Descripcion')}" />
@@ -72,8 +76,12 @@
               ${solicitudDetalleInstance?.idServ?.unidades1?.descripcion}
             </td>
 
-						<td>
+            <td>
               ${fieldValue(bean: solicitudDetalleInstance, field: "idServcat")}
+            </td>
+
+						<td>
+              ${fieldValue(bean: solicitudDetalleInstance, field: "idServ")}
             </td>
 
 						<td>
