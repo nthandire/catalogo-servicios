@@ -8,4 +8,4 @@ Junta del 18 de septiembre.
 + 4 Los coordinadores deben poder ver el tercer nivel.
 + 5  Quitar el menú de Asignación de servicio para el gestor.
 + 6 Si poner la lista de Encuestas, quitar de la lista el campo de autorizo
-~ 7 El gestor, el coordinador y el técnico verán (en show) quien autorizó, quien solicito (con extensión), el área, y la prioridad (dada o capturada).
++ 7 El gestor, el coordinador y el técnico verán (en show) quien autorizó, quien solicito (con extensión), el área, y la prioridad (dada o capturada).
