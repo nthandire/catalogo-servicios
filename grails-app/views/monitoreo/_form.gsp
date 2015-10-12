@@ -58,14 +58,6 @@
 	<g:field name="modificacion" type="number" value="${monitoreoInstance.modificacion}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'ipTerminal', 'error')} ">
-	<label for="ipTerminal">
-		<g:message code="monitoreo.ipTerminal.label" default="Ip Terminal" />
-
-	</label>
-	<g:textField name="ipTerminal" readonly="readonly" value="${monitoreoInstance.ipTerminal = request.getRemoteAddr(); monitoreoInstance?.ipTerminal}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'monitoreoDetalles', 'error')} ">
 	<label for="monitoreoDetalles">
 		<g:message code="monitoreo.monitoreoDetalles.label" default="Monitoreo Detalles" />

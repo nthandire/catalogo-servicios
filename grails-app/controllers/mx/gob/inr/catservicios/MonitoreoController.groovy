@@ -76,6 +76,7 @@ class MonitoreoController {
         }
 
         monitoreoInstance.properties = params
+        monitoreoInstance.ipTerminal = request.getRemoteAddr()
 
         if (!monitoreoInstance.save(flush: true)) {
             render(view: "edit", model: [monitoreoInstance: monitoreoInstance])
