@@ -108,6 +108,7 @@
             $("#solServSub").css("display", "block");
             $("#solServ").css("display", "block");
             $("#solEstadoCierre").css("display", "block");
+            $("#solSolucion").text('Solución');
           }
           function problema() {
             $("#titulo").text('Soluciona incidente');
@@ -115,6 +116,7 @@
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_problemaUpdate');
             $("#passwordfirma").prop("required", true);
+            $("#solSolucion").text('Justificación');
           }
           function update() {
             $("#idPrograma").prop("required", false);

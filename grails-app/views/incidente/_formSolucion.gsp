@@ -56,8 +56,8 @@
 </script>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'solucionNivel', 'error')} ">
-  <label for="solucionNivel">
-    <g:message code="incidente.solucionNivel.label" default="Solución" />
+  <label id="solSolucion" for="solucionNivel">
+    Solución
   </label>
   <g:textArea style="width:412px;" name="solucionNivel" id="solucionNivel"
     cols="30" rows="5" maxlength="3000"
