@@ -11,7 +11,7 @@ Junta del 1 de octubre.
 - 7.- Ningún otro (excepto el Gestor) podrá ver quien escaló un incidente.
 - 8.- TODOS los Servicios tienen tercer nivel.
 - 9.- La sintaxis para áreas en el portafolio es: {área1}/{área2} ... . El nombre del área es EXACTAMENTE  como se capturé, mayusculas y minusculas (MS es diferente a ms y a Ms y a mS y a M S). No se debe poner espacios entre las áreas.
-- 10.- Cuando se comparta la responsabilidad de un nivel, se podrá seleccionar para asignar entre todos los técnicos de todas las áreas.
++ 10.- Cuando se comparta la responsabilidad de un nivel, se podrá seleccionar para asignar entre todos los técnicos de todas las áreas.
 - 11.- Se deben mostrar los datos del equipo al seleccionarlo. Usar código de Richard para búsqueda y selección. Seleccionar por inventario y/o usuario y/o Número de Serie. Esto se aclaro con esta fecha, ya existe un combo que funciona, aunque no da todas las facilidades y velocidad.
 + 12.- Problema ¿lleva a encuesta?. Respuesta, NO.
 - 13.- Cancelar Incidentes (NUEVA OPCIÓN, se captura la razón como la solución) (sin Encuesta)(CONSIDERAR ESTO EN ESTADÍSTICAS, no cuenta como incidente).

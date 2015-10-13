@@ -213,21 +213,21 @@ class IncidenteController {
     }
 
   def listaDeTecnicos(Cat_servResp servresp) {
-    def rolUsuarios = Rol.withNewSession { session ->
+    def rolTecnicos = Rol.withNewSession { session ->
       Rol.findByAuthority('ROLE_SAST_TECNICO')
     }
-    log.debug("rolUsuarios = $rolUsuarios")
+    log.debug("rolTecnicos = $rolTecnicos")
 
-    def usuariosRolesIds = UsuarioRol.withNewSession { session ->
-      UsuarioRol.findAllByRol(rolUsuarios).collect {it.usuario.id}
+    def usuariosRolesTecnicosIds = UsuarioRol.withNewSession { session ->
+      UsuarioRol.findAllByRol(rolTecnicos).collect {it.usuario.id}
     }
-    log.debug("usuariosRolesIds = $usuariosRolesIds")
+    log.debug("usuariosRolesTecnicosIds = $usuariosRolesTecnicosIds")
 
     def areaDesc = servresp.descripcion
     log.debug("areaDesc = $areaDesc")
 
     def tecnicosDelAreaIds = UsuarioAutorizado.
-      findAllByIdInListAndEstado(usuariosRolesIds, 'A' as char).
+      findAllByIdInListAndEstado(usuariosRolesTecnicosIds, 'A' as char).
         findAll{areaDesc.contains(it.area)}.collect {it.id}
 
     def userID = springSecurityService.principal.id
