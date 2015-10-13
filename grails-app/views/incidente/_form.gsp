@@ -157,44 +157,6 @@
             params="'subcategoryId='+subcategoryId"/>
     }
 </script>
-<%--
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')}">
-	<label for="idServfinal">
-		<g:message code="cat_serv.servCat.final.label" default="Categoría final" />
-	</label>
-	<g:select id="servCat" name="idServfinal.servSub.servCat.id" from="${Cat_servCat.list()}" optionKey="id" value="${incidenteInstance?.idServfinal?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChangedFinal(this.value)" noSelection="${['':'Seleccione una...']}"/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')} required">
-	<label for="idServfinal">
-		<g:message code="cat_serv.servSub.final.label" default="Subcategoría final" />
-		<span class="required-indicator">*</span>
-	</label>
-	<span id="subContainerFinal"></span>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')} required">
-	<label for="idServfinal">
-		<g:message code="cat_bitacora.servicio.final.label" default="Servicio final" />
-		<span class="required-indicator">*</span>
-	</label>
-	<span id="serviciosContainerFinal"></span>
-</div>
-
-<script>
-    function categoryChangedFinal(categoryId) {
-        <g:remoteFunction controller="incidente" action="categoryChangedFinal"
-            update="subContainerFinal"
-            params="'categoryId='+categoryId"/>
-    }
-    function subcategoryChangedFinal(subcategoryId) {
-        <g:remoteFunction controller="incidente" action="subcategoryChangedFinal"
-            update="serviciosContainerFinal"
-            params="'subcategoryId='+subcategoryId"/>
-    }
-</script>
---%>
-
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'descripcion', 'error')} ">
 	<label for="descripcion">

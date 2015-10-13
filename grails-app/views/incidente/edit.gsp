@@ -93,6 +93,10 @@
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_escalaUpdate');
             $("#passwordfirma").prop("required", true);
+            $("#solServCat").css("display", "none");
+            $("#solServSub").css("display", "none");
+            $("#solServ").css("display", "none");
+            $("#solEstadoCierre").css("display", "none");
           }
           function soluciona() {
             $("#titulo").text('Soluciona incidente');
@@ -100,19 +104,16 @@
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_solucionUpdate');
             $("#passwordfirma").prop("required", true);
+            $("#solServCat").css("display", "block");
+            $("#solServSub").css("display", "block");
+            $("#solServ").css("display", "block");
+            $("#solEstadoCierre").css("display", "block");
           }
           function problema() {
             $("#titulo").text('Soluciona incidente');
             $("#idPrograma").prop("required", false);
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_problemaUpdate');
-            $("#passwordfirma").prop("required", true);
-          }
-          function laboratorio() {
-            $("#titulo").text('Soluciona incidente');
-            $("#idPrograma").prop("required", false);
-            $("#solucionNivel").prop("required", true);
-            $("#respButton").attr('name','_action_laboratorioUpdate');
             $("#passwordfirma").prop("required", true);
           }
           function update() {
@@ -134,10 +135,6 @@
             <g:if test="${incidenteInstance.nivel < 3}">
               <a class="escala" data-toggle="modal" href="#responsive"
                 onclick="escala()">Escalar Incidente</a>
-            </g:if>
-            <g:if test="${laboratorio}">
-              <a class="save" data-toggle="modal" href="#responsive"
-                onclick="laboratorio()">Capturar laboratorio</a>
             </g:if>
           </g:if>
           <g:if test="${incidenteInstance.nivel == 3 && idNivel == yo}">

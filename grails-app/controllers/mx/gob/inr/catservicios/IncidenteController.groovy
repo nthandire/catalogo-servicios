@@ -195,8 +195,7 @@ class IncidenteController {
         def areaLab = message(code: "area.de.laboratorio")
         log.debug("areaLab = ${areaLab}")
         def minPrograma = message(code: "laboratorio.programa.normal").toInteger()
-        def lab = (area == areaLab)
-        if (lab)
+        if (area == areaLab)
           minPrograma = message(code: "laboratorio.programa.DGAIT").toInteger()
         log.debug("minPrograma = ${minPrograma}")
         def programas = CatPrograma.findAllByIdGreaterThanEquals(minPrograma)
@@ -209,7 +208,7 @@ class IncidenteController {
         def idNivel = incidenteInstance."idNivel${nivel}"
         log.debug("idNivel = ${idNivel}")
         [incidenteInstance: incidenteInstance, tecnicos:tecnicos,
-          idNivel: idNivel, yo: userID, laboratorio: lab,
+          idNivel: idNivel, yo: userID,
           solucionNivel: incidenteInstance."solucionNivel${nivel}"]
     }
 

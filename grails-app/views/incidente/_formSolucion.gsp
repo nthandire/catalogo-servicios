@@ -1,24 +1,45 @@
 <%@ page import="mx.gob.inr.catservicios.*" %>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')}">
+<div id="solServCat"
+  class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')}">
   <label for="idServfinal">
     <g:message code="cat_serv.servCat.final.label" default="Categoría final" />
   </label>
-  <g:select id="servCat" name="idServfinal.servSub.servCat.id" from="${Cat_servCat.list()}" optionKey="id" value="${incidenteInstance?.idServfinal?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChangedFinal(this.value)" noSelection="${['':'Seleccione una...']}"/>
+  <g:select id="servCat" name="idServfinal.servSub.servCat.id"
+    from="${Cat_servCat.list()}" optionKey="id"
+    value="${incidenteInstance?.idServfinal?.servSub?.servCat?.id}"
+    class="many-to-one" onchange="categoryChangedFinal(this.value)"
+    noSelection="${['':'Seleccione una...']}"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')}">
+<div id="solServSub"
+  class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')}">
   <label for="idServfinal">
     <g:message code="cat_serv.servSub.final.label" default="Subcategoría final" />
   </label>
-  <span id="subContainerFinal"></span>
+  <span id="subContainerFinal">
+    <g:if test="${incidenteInstance?.idServfinal}">
+      <g:select id='servfinal' name='servfinal.id' required=''
+        onchange='subcategoryChangedFinal(this.value)' optionKey='id'
+        from="${Cat_servSub.findAllByServCat(incidenteInstance?.idServfinal?.servSub?.servCat, [order:'id'])}"
+        value="${incidenteInstance?.idServfinal?.servSub?.id}" noSelection="['':' ']"/>
+    </g:if>
+  </span>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')}">
+<div id="solServ"
+  class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')}">
   <label for="idServfinal">
     <g:message code="cat_bitacora.servicio.final.label" default="Servicio final" />
   </label>
-  <span id="serviciosContainerFinal"></span>
+  <span id="serviciosContainerFinal">
+      <g:if test="${incidenteInstance?.idServfinal}">
+        <g:select id='idServfinal' name='idServfinal.id' required=''
+          optionKey='id' value="${incidenteInstance?.idServfinal?.id}"
+          from="${Cat_serv.findAllByServSub(incidenteInstance?.idServfinal?.servSub, [order:'id'])}"
+          noSelection="['':' ']"/>
+      </g:if>
+  </span>
 </div>
 
 <script>
@@ -43,7 +64,8 @@
     value="${solucionNivel}"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idPrograma', 'error')} ">
+<div id="solEstadoCierre"
+  class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idPrograma', 'error')} ">
 	<label for="idPrograma">
 		<g:message code="incidente.idPrograma.label" default="Estado de cierre" />
 	</label>
