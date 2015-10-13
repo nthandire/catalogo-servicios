@@ -5,7 +5,7 @@ class IncidenteArchivoadjunto {
 	Integer idIncidente
   byte[] datos
   String nombre
-  Integer tamaño
+  Integer tamanio
 	String tipo
 	Integer idUsuario
 	Date lastUpdated
@@ -13,7 +13,6 @@ class IncidenteArchivoadjunto {
 
 	static mapping = {
 		id generator: "increment"
-    tamaño column: "tamanio"
 		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
 	}
@@ -22,7 +21,7 @@ class IncidenteArchivoadjunto {
 		idIncidente nullable: true
 		datos nullable: true, display:false, editable:false, maxSize:1073741824
 		nombre nullable: true
-		tamaño nullable: true
+		tamanio nullable: true
 		tipo nullable: true, maxSize: 20
 		idUsuario nullable: true
 		lastUpdated nullable: true

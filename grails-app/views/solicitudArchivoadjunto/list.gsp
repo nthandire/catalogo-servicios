@@ -26,28 +26,28 @@
 			<table>
 				<thead>
 					<tr>
-					
+
 						<g:sortableColumn property="nombre" title="${message(code: 'solicitudArchivoadjunto.nombre.label', default: 'Nombre')}" />
-					
-						<g:sortableColumn property="tamaño" title="${message(code: 'solicitudArchivoadjunto.tamaño.label', default: 'Tamaño')}" />
-					
+
+						<g:sortableColumn property="tamanio" title="${message(code: 'solicitudArchivoadjunto.tamanio.label', default: 'Tamaño')}" />
+
 						<g:sortableColumn property="tipo" title="${message(code: 'solicitudArchivoadjunto.tipo.label', default: 'Tipo')}" />
-					
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${solicitudArchivoadjuntoInstanceList}" status="i" var="solicitudArchivoadjuntoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="download" id="${solicitudArchivoadjuntoInstance.id}">${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "nombre")}</g:link></td>
-					
+
 						<td>
-							<g:formatNumber number="${solicitudArchivoadjuntoInstance.tamaño}"
+							<g:formatNumber number="${solicitudArchivoadjuntoInstance.tamanio}"
 								format="###,##0" locale="es_MX" />
 						</td>
-					
+
 						<td>${fieldValue(bean: solicitudArchivoadjuntoInstance, field: "tipo")}</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>

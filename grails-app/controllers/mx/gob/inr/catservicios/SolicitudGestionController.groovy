@@ -103,7 +103,7 @@ class SolicitudGestionController {
         def nombre = file.originalFilename
         solicitudArchivoadjuntoInstance.nombre = nombre
         solicitudArchivoadjuntoInstance.datos = file.getBytes()
-        solicitudArchivoadjuntoInstance.tamaño =
+        solicitudArchivoadjuntoInstance.tamanio =
           solicitudArchivoadjuntoInstance.datos.size()
         solicitudArchivoadjuntoInstance.idUsuario = springSecurityService.principal.id
         solicitudArchivoadjuntoInstance.ipTerminal = request.getRemoteAddr()

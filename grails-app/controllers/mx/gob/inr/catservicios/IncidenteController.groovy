@@ -140,7 +140,7 @@ class IncidenteController {
         def nombre = file.originalFilename
         incidenteArchivoadjuntoInstance.nombre = nombre
         incidenteArchivoadjuntoInstance.datos = file.getBytes()
-        incidenteArchivoadjuntoInstance.tamaño =
+        incidenteArchivoadjuntoInstance.tamanio =
           incidenteArchivoadjuntoInstance.datos.size()
         incidenteArchivoadjuntoInstance.idUsuario = springSecurityService.principal.id
         incidenteArchivoadjuntoInstance.ipTerminal = request.getRemoteAddr()

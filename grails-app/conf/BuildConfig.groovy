@@ -5,7 +5,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 // grails.server.port.http = 9090
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
+// grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 // uncomment (and adjust settings) to fork the JVM to isolate classpaths
 //grails.project.fork = [
@@ -65,7 +65,6 @@ grails.project.dependency.resolution = {
 
 
       compile ":jquery-ui:1.10.4"
-      compile ":growler:0.2"
       compile ':cache:1.0.1'
       compile ':spring-security-core:1.2.7.3'
       compile ":jasper:1.11.0"

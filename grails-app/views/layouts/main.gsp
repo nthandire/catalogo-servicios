@@ -18,7 +18,6 @@
     <r:require modules="jquery,jquery-ui,bootstrap"/>
     <r:layoutResources />
     <g:javascript library="jquery" plugin="jquery"/>
-    <growler:resources />
 	</head>
 	<body>
 		<div id="Logo" role="banner" >

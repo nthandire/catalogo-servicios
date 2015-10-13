@@ -41,10 +41,10 @@ class SolicitudArchivoadjuntoController {
         def nombre = file.originalFilename
         solicitudArchivoadjuntoInstance.nombre = nombre
         solicitudArchivoadjuntoInstance.datos = file.getBytes()
-        solicitudArchivoadjuntoInstance.tamaño =
+        solicitudArchivoadjuntoInstance.tamanio =
           solicitudArchivoadjuntoInstance.datos.size()
 
-        if (solicitudArchivoadjuntoInstance.tamaño > 5242880) {
+        if (solicitudArchivoadjuntoInstance.tamanio > 5242880) {
           flash.error = "No puede subir archivos de más de 5 MB"
           render(view: "create", model: [solicitudArchivoadjuntoInstance:
                                          solicitudArchivoadjuntoInstance])

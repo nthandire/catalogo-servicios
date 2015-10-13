@@ -43,11 +43,11 @@
 				</li>
 				</g:if>
 
-				<g:if test="${solicitudArchivoadjuntoInstance?.tamaño}">
+				<g:if test="${solicitudArchivoadjuntoInstance?.tamanio}">
 				<li class="fieldcontain">
-					<span id="tamaño-label" class="property-label"><g:message code="solicitudArchivoadjunto.tamaño.label" default="Tamaño" /></span>
+					<span id="tamanio-label" class="property-label"><g:message code="solicitudArchivoadjunto.tamanio.label" default="Tamaño" /></span>
 
-						<span class="property-value" aria-labelledby="tamaño-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="tamaño"/></span>
+						<span class="property-value" aria-labelledby="tamanio-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="tamanio"/></span>
 
 				</li>
 				</g:if>

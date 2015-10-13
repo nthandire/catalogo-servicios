@@ -24,51 +24,51 @@
 			  <div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<ol class="property-list solicitudArchivoadjunto">
-			
+
 				<g:if test="${solicitudArchivoadjuntoInstance?.idSolicitud}">
 				<li class="fieldcontain">
 					<span id="idSolicitud-label" class="property-label"><g:message code="solicitudArchivoadjunto.idSolicitud.label" default="Id Solicitud" /></span>
-					
+
 						<span class="property-value" aria-labelledby="idSolicitud-label"><g:link controller="solicitud" action="show" id="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}">${solicitudArchivoadjuntoInstance?.idSolicitud?.encodeAsHTML()}</g:link></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudArchivoadjuntoInstance?.nombre}">
 				<li class="fieldcontain">
 					<span id="nombre-label" class="property-label"><g:message code="solicitudArchivoadjunto.nombre.label" default="Nombre" /></span>
-					
+
 						<span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="nombre"/></span>
-					
+
 				</li>
 				</g:if>
-			
-				<g:if test="${solicitudArchivoadjuntoInstance?.tamaño}">
+
+				<g:if test="${solicitudArchivoadjuntoInstance?.tamanio}">
 				<li class="fieldcontain">
-					<span id="tamaño-label" class="property-label"><g:message code="solicitudArchivoadjunto.tamaño.label" default="Tamaño" /></span>
-					
-						<span class="property-value" aria-labelledby="tamaño-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="tamaño"/></span>
-					
+					<span id="tamanio-label" class="property-label"><g:message code="solicitudArchivoadjunto.tamanio.label" default="Tamaño" /></span>
+
+						<span class="property-value" aria-labelledby="tamanio-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="tamanio"/></span>
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudArchivoadjuntoInstance?.tipo}">
 				<li class="fieldcontain">
 					<span id="tipo-label" class="property-label"><g:message code="solicitudArchivoadjunto.tipo.label" default="Tipo" /></span>
-					
+
 						<span class="property-value" aria-labelledby="tipo-label"><g:fieldValue bean="${solicitudArchivoadjuntoInstance}" field="tipo"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudArchivoadjuntoInstance?.lastUpdated}">
 					<li class="fieldcontain">
 						<span id="lastUpdated-label" class="property-label"><g:message code="solicitudArchivoadjunto.lastUpdated.label" default="Last Updated" /></span>
-						
+
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudArchivoadjuntoInstance?.lastUpdated}" /></span>
 					</li>
 				</g:if>
-			
+
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
