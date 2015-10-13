@@ -63,10 +63,10 @@ grails.gorm.failOnError=true
 
 environments {
     development {
-        grails.logging.jul.usebridge = true
+      grails.logging.jul.usebridge = true
     }
     production {
-        grails.logging.jul.usebridge = false
+      grails.logging.jul.usebridge = true // false // TODO: apagar por performance
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }

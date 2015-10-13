@@ -59,32 +59,7 @@
     <td>
     </td>
   </tr>
-  <tr>
-    <td>
-        <label for="reporto">
-          <g:message code="servicios.reporto.label" default="Reporto" />
-        </label>
-        <g:textField name="reporto" value="${serviciosInstance?.reporto}" required="" style="width: 250px;text-transform: uppercase;"/>
-
-    </td>
-    <td>
-        <label for="extension">
-          <g:message code="servicios.extension.label" default="Extension" />
-        </label>
-        <g:field type="number" name="extension" value="${serviciosInstance?.extension}" min="10000" max="99999" size="5" required="" style="width: 250px;"/>
-    </td>
-    <td>
-    </td>
-  </tr>
 </table>
-
-
-
-
-
-
-
-
 
 
 
@@ -92,8 +67,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idSistema', 'error')} ">
 	<label for="idSistema">
-		<g:message code="incidente.idSistema.label" default="Id Sistema" />
-
+		<g:message code="incidente.idSistema.label" default="Sistema" />
 	</label>
 	<g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['': '']"/>
 </div>
@@ -121,46 +95,54 @@
     optionValue="nombreMostrar"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
-	<label for="idServ">
-		<g:message code="cat_serv.servCat.label" default="Cat" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="servCat" name="idServ.servSub.servCat.id"
-    from="${Cat_servCat.list()}" optionKey="id" required=""
-    value="${incidenteInstance?.idServ?.servSub?.servCat?.id}"
-    class="many-to-one" onchange="categoryChanged(this.value)"
-    noSelection="${['':'Seleccione una...']}"/>
-</div>
+<div class="row-fluid">
+  <div class="span4">
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+      <label for="idServ">
+        <g:message code="cat_serv.servCat.label" default="Cat" />
+        <span class="required-indicator">*</span>
+      </label>
+      <g:select id="servCat" name="idServ.servSub.servCat.id"
+        from="${Cat_servCat.list()}" optionKey="id" required=""
+        value="${incidenteInstance?.idServ?.servSub?.servCat?.id}"
+        class="many-to-one" onchange="categoryChanged(this.value)"
+        noSelection="${['':'Seleccione una...']}"/>
+    </div>
+  </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
-	<label for="idServ">
-		<g:message code="cat_serv.servSub.label" default="Serv Sub" />
-		<span class="required-indicator">*</span>
-	</label>
-	<span id="subContainer">
-    <g:if test="${incidenteInstance?.idServ}">
-      <g:select id='servSub' name='servSub.id' required=''
-        onchange='subcategoryChanged(this.value)' optionKey='id'
-        from="${Cat_servSub.findAllByServCat(incidenteInstance?.idServ?.servSub?.servCat, [order:'id'])}"
-        value="${incidenteInstance?.idServ?.servSub?.id}" noSelection="['':' ']"/>
-    </g:if>
-  </span>
-</div>
+  <div class="span4">
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+      <label for="idServ">
+        <g:message code="cat_serv.servSub.label" default="Serv Sub" />
+        <span class="required-indicator">*</span>
+      </label>
+      <span id="subContainer">
+        <g:if test="${incidenteInstance?.idServ}">
+          <g:select id='servSub' name='servSub.id' required=''
+            onchange='subcategoryChanged(this.value)' optionKey='id'
+            from="${Cat_servSub.findAllByServCat(incidenteInstance?.idServ?.servSub?.servCat, [order:'id'])}"
+            value="${incidenteInstance?.idServ?.servSub?.id}" noSelection="['':' ']"/>
+        </g:if>
+      </span>
+    </div>
+  </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
-	<label for="idServ">
-		<g:message code="cat_bitacora.servicio.label" default="Servicio" />
-		<span class="required-indicator">*</span>
-	</label>
-	<span id="serviciosContainer">
-    <g:if test="${incidenteInstance?.idServ}">
-      <g:select id='idServ' name='idServ.id' required=''
-        optionKey='id' value="${incidenteInstance?.idServ?.id}"
-        from="${Cat_serv.findAllByServSub(incidenteInstance?.idServ?.servSub, [order:'id'])}"
-        noSelection="['':' ']"/>
-    </g:if>
-  </span>
+  <div class="span4">
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+      <label for="idServ">
+        <g:message code="cat_bitacora.servicio.label" default="Servicio" />
+        <span class="required-indicator">*</span>
+      </label>
+      <span id="serviciosContainer">
+        <g:if test="${incidenteInstance?.idServ}">
+          <g:select id='idServ' name='idServ.id' required=''
+            optionKey='id' value="${incidenteInstance?.idServ?.id}"
+            from="${Cat_serv.findAllByServSub(incidenteInstance?.idServ?.servSub, [order:'id'])}"
+            noSelection="['':' ']"/>
+        </g:if>
+      </span>
+    </div>
+  </div>
 </div>
 
 <script>

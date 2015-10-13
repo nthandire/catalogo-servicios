@@ -2,8 +2,8 @@ Junta del 1 de octubre.
 ---------------------------
 
 
-- 1.-  MS no puede mandar a Mantenimiento ni Aprovisionamiento, solo DEGAIT puede (esto aplica a Incidente y a Solicitud). Este es un requerimiento nuevo para Solicitud.
-- 2.- Se requiere ver la extensión y ubicación del solicitante (Desarrollo explicará como obtengo la ubicación, parece que desarrollo aún no tiene este valor totalmente, porque parece que se necesita "cuerpo" y "nivel").
++ 1.-  MS no puede mandar a Mantenimiento ni Aprovisionamiento, solo DEGAIT puede (esto aplica a Incidente y a Solicitud). Este es un requerimiento nuevo para Solicitud.
+~ 2.- Se requiere ver la extensión y ubicación del solicitante (Desarrollo explicará como obtengo la ubicación, parece que desarrollo aún no tiene este valor totalmente, porque parece que se necesita "cuerpo" y "nivel").
 - 3.- Incidente, solo se puede capturar categoría de tercer nivel FINAL cuando se soluciona o se marca como problema, NO cuando se escala.
 - 4.- Al escalar, no se ve la ventana completa en terminales muy pequeñas.
 - 5.- Incidente, solo se puede capturar Estado de cierre cuando se soluciona, NO cuando se escala.
