@@ -98,7 +98,7 @@
             $("#titulo").text('Soluciona incidente');
             $("#idPrograma").prop("required", true);
             $("#solucionNivel").prop("required", true);
-            $("#respButton").attr('name','_action_soluciónUpdate');
+            $("#respButton").attr('name','_action_solucionUpdate');
             $("#passwordfirma").prop("required", true);
           }
           function problema() {

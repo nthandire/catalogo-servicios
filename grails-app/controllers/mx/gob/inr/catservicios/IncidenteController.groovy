@@ -336,7 +336,7 @@ class IncidenteController {
         )
     }
 
-    def soluciónUpdate(Long id, Long version) {
+    def solucionUpdate(Long id, Long version) {
       log.debug("params = $params")
       def incidenteInstance = Incidente.get(id)
       if (!incidenteInstance) {
