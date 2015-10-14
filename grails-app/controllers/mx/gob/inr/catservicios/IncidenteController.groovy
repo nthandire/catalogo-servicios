@@ -209,8 +209,19 @@ class IncidenteController {
         log.debug("idNivel = ${idNivel}")
         def areaReporta = firmadoService.areaNombre(incidenteInstance.idReporta)
         log.debug("areaReporta = ${areaReporta}")
+        def areaAtendio1 = (incidenteInstance.fechaNivel1) ?
+          firmadoService.areaNombre(incidenteInstance.idNivel1) : ""
+        log.debug("areaAtendio1 = ${areaAtendio1}")
+        def areaAtendio2 = (incidenteInstance.fechaNivel2) ?
+          firmadoService.areaNombre(incidenteInstance.idNivel2) : ""
+        log.debug("areaAtendio2 = ${areaAtendio2}")
+        def areaAtendio3 = (incidenteInstance.fechaNivel3) ?
+          firmadoService.areaNombre(incidenteInstance.idNivel3) : ""
+        log.debug("areaAtendio3 = ${areaAtendio3}")
         [incidenteInstance: incidenteInstance, tecnicos:tecnicos,
           idNivel: idNivel, yo: userID, areaReporta: areaReporta,
+          areaAtendio1: areaAtendio1, areaAtendio2: areaAtendio2,
+          areaAtendio3: areaAtendio3,
           solucionNivel: incidenteInstance."solucionNivel${nivel}"]
     }
 

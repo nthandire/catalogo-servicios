@@ -72,6 +72,17 @@
 	<g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['': '']"/>
 </div>
 
+<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
+  <label for="idResguardoentregadetalle">
+    <g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
+  </label>
+  <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
+    from="${ResguardoEntregaDetalle.executeQuery(
+      'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
+      optionKey="id" class="many-to-one" noSelection="['': '']"
+      value="${solicitudDetalleInstance?.idResguardoentregadetalle}"/>
+</div>
+
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain">
@@ -102,17 +113,101 @@
   </div>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
-	<label for="idReporta">
-		<g:message code="incidente.idReporta.label" default="Quien Reporta" />
-	</label>
-  <%-- TODO: mejorar el select, solo los usuarios SAST --%>
-  <g:select id="idReporta" name="idReporta"
-    from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
-    required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
-    noSelection="${['':'Seleccione una...']}" optionKey="id"
-    optionValue="nombreMostrar"/>
-</div>
+<g:if test="${incidenteInstance.fechaSolnivel1}">
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="fieldtablecontain">
+        <label for="nombre-label">
+          <g:message code="incidente.idReporta.label" default="Quien Atendió nivel 1" />
+        </label>
+        <g:field type="text" name="nombre.no" disabled="true"
+          value="${Usuario.get(incidenteInstance.idNivel1)}"/>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="fieldtablecontain">
+        <label for="telefono-label">
+          <g:message code="solicitud.telefono.label" default="Extensión" />
+        </label>
+        <g:field type="text" name="telefono.no" disabled="true"
+          value="${Usuario.get(incidenteInstance.idNivel1).extension}"/>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="fieldtablecontain">
+        <label for="area-label">
+          <g:message code="solicitud.area.label" default="Área" />
+        </label>
+        <g:field type="text" name="area.no" disabled="true"
+          value="${areaAtendio1}"/>
+      </div>
+    </div>
+  </div>
+</g:if>
+
+<g:if test="${incidenteInstance.fechaSolnivel2}">
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="fieldtablecontain">
+        <label for="nombre-label">
+          <g:message code="incidente.idReporta.label" default="Quien Atendió nivel 2" />
+        </label>
+        <g:field type="text" name="nombre.no" disabled="true"
+          value="${Usuario.get(incidenteInstance.idNivel2)}"/>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="fieldtablecontain">
+        <label for="telefono-label">
+          <g:message code="solicitud.telefono.label" default="Extensión" />
+        </label>
+        <g:field type="text" name="telefono.no" disabled="true"
+          value="${Usuario.get(incidenteInstance.idNivel2).extension}"/>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="fieldtablecontain">
+        <label for="area-label">
+          <g:message code="solicitud.area.label" default="Área" />
+        </label>
+        <g:field type="text" name="area.no" disabled="true"
+          value="${areaAtendio2}"/>
+      </div>
+    </div>
+  </div>
+</g:if>
+
+<g:if test="${incidenteInstance.fechaSolnivel3}">
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="fieldtablecontain">
+        <label for="nombre-label">
+          <g:message code="incidente.idReporta.label" default="Quien Atendió nivel 3" />
+        </label>
+        <g:field type="text" name="nombre.no" disabled="true"
+          value="${Usuario.get(incidenteInstance.idNivel3)}"/>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="fieldtablecontain">
+        <label for="telefono-label">
+          <g:message code="solicitud.telefono.label" default="Extensión" />
+        </label>
+        <g:field type="text" name="telefono.no" disabled="true"
+          value="${Usuario.get(incidenteInstance.idNivel3).extension}"/>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="fieldtablecontain">
+        <label for="area-label">
+          <g:message code="solicitud.area.label" default="Área" />
+        </label>
+        <g:field type="text" name="area.no" disabled="true"
+          value="${areaAtendio3}"/>
+      </div>
+    </div>
+  </div>
+</g:if>
 
 <div class="row-fluid">
   <div class="span4">
