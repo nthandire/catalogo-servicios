@@ -95,7 +95,7 @@
 				<g:paginate total="${incidenteInstanceTotal}" />
 			</div>
 		</div>
-
+<%--
     <!-- Modal para captura -->
     <div id="myModal" class="modal hide fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
@@ -126,6 +126,6 @@
       --- rellenar ---
       </div>
     </div>
-
+--%>
 	</body>
 </html>

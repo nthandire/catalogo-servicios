@@ -1,0 +1,7 @@
+Revisión con Richard 14 de octubre.
+--------------------------------
+
++ 1.- No se puede entrar a incidentes, marca error.
+- 2.- En la lista del Gestor, Solicitudes asignadas, agregar nivel y área
+- 3.- En el listado de incidentes, el que reporta aparece como un número, debe ser un nombre
+- 4.- Incidente, en edición, No debe permitir modificar el servicio.
