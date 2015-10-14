@@ -266,3 +266,14 @@ insert into usuario_perfil
 (idusuario, idperfil)
 values
 (8456, 58);
+
+
+
+insert into usuario_perfil
+  (idusuario, idperfil)
+values
+  (9588, 59);
+insert into usuario_perfil
+  (idusuario,idperfil)
+values
+  (9589, 59);

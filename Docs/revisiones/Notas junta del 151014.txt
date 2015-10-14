@@ -1,0 +1,6 @@
+Junta del 14 de octubre.
+------------------------
+
+
+- 1.- quitar el manejo de usuarios
+- 2.- pedir VPN
