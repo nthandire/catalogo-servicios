@@ -207,7 +207,7 @@ class SolicitudCoordinadorController {
             return
         }
 
-/* TODO: habilitar cuando no este en desarrollo
+/* TODO: correo que quizá falta
         def idUsuario = springSecurityService.principal.id
         def personasInstance = Usuario.get(idUsuario)
         sendMail {
@@ -297,7 +297,7 @@ class SolicitudCoordinadorController {
                               id: solicitudDetalleInstance.id, absolute: "true")
         log.debug("liga = $liga")
         sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       tecnico.correo
+          to message(code: "correo.general") // TODO: mandar el correo al que solicito       tecnico.correo
           subject "La solicitud ${solicitudDetalleInstance.idSolicitud} requiere ser atendida"
           html "Hola ${tecnico}<br/><br/>La solicitud folio " +
             "${solicitudDetalleInstance.idSolicitud} requiere ser atendida, se autorizo el " +

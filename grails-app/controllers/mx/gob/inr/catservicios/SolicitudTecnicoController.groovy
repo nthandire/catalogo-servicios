@@ -205,7 +205,7 @@ class SolicitudTecnicoController {
               "<a href='${liga}'>${solicitud}</a>"
             log.debug("msg = ${msg}")
             sendMail {
-              to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       solicitante.correo
+              to message(code: "correo.general") // TODO: mandar el correo al que solicito       solicitante.correo
               subject asunto
               html msg
             }

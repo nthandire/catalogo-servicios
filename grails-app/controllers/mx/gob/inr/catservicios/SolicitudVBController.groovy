@@ -141,7 +141,7 @@ class SolicitudVBController {
         def asunto = "La solicitud ${solicitudInstance} ya recibió el visto bueno"
         def personasInstance = Usuario.get(idSolicitante)
         sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.email
+          to message(code: "correo.general") // TODO: mandar el correo al que solicito       personasInstance.email
           subject asunto
           body "Hola ${personasInstance}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
@@ -164,7 +164,7 @@ class SolicitudVBController {
             "Utilice la liga siguiente para revisarla. <br/><br/>" +
             "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
           sendMail {
-            to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       gestores.email
+            to message(code: "correo.general") // TODO: mandar el correo al que lo solicito       gestores.email
             subject asunto
             html msg
           }
@@ -215,7 +215,7 @@ class SolicitudVBController {
         def idSolicitante = solicitudInstance.idSolicitante
         def personasInstance = Usuario.get(idSolicitante)
         sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.email
+          to message(code: "correo.general") // TODO: mandar el correo al que solicito       personasInstance.email
           subject "Solicitud ${solicitudInstance} no recibio el visto bueno"
           body "Hola ${personasInstance}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +

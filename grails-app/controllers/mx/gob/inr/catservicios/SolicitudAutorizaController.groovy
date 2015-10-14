@@ -203,7 +203,7 @@ class SolicitudAutorizaController {
             "fue cancelada, investigue con su autorizador el motivo."
 
         sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       persona.email
+          to message(code: "correo.general") // TODO: mandar el correo al que lo solicito       persona.email
           subject asunto
           body msg
         }
@@ -224,7 +224,7 @@ class SolicitudAutorizaController {
               "Utilice la liga siguiente para revisarla. <br/><br/>" +
               "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
             sendMail {
-              to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       gestores.email
+              to message(code: "correo.general") // TODO: mandar el correo al que lo solicito       gestores.email
               subject asunto
               html msg
             }

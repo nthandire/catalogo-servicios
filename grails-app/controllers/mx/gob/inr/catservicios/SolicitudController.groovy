@@ -167,7 +167,7 @@ class SolicitudController {
                               id: solicitudInstance.id, absolute: "true")
         log.debug("liga = $liga")
         sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
+          to message(code: "correo.general") // TODO: mandar el correo al que solicito       personasInstance.correo
           subject "La solicitud ${solicitudInstance} requiere autorización"
           html "Hola ${personasInstance}<br/><br/>La solicitud folio " +
             "${solicitudInstance} requiere que la autorices, " +

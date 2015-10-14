@@ -280,7 +280,7 @@ class SolicitudGestionController {
             "ya fue revisada, debe atenderla a la brevedad. <br/><br/>" +
             "<a href='${liga}'>${solicitudInstance}</a>"
           sendMail {
-            to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que lo solicito       coordinadores.email
+            to message(code: "correo.general") // TODO: mandar el correo al que lo solicito       coordinadores.email
             subject asunto
             html msg
           }
@@ -331,7 +331,7 @@ class SolicitudGestionController {
                               id: solicitudInstance.id, absolute: "true")
         log.debug("liga = $liga")
         sendMail {
-          to 'dzamora@inr.gob.mx' // TODO: mandar el correo al que solicito       personasInstance.correo
+          to message(code: "correo.general") // TODO: mandar el correo al que solicito       personasInstance.correo
           subject "Solicitud ${solicitudInstance.toString()} requiere un visto bueno"
           html "Hola ${personasInstance}<br/><br/>La solicitud folio " +
             "${solicitudInstance} requiere que le de su visto bueno, " +
