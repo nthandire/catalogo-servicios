@@ -83,35 +83,37 @@
       value="${solicitudDetalleInstance?.idResguardoentregadetalle}"/>
 </div>
 
-<div class="row-fluid">
-  <div class="span4">
-    <div class="fieldtablecontain">
-      <label for="nombre-label">
-        <g:message code="incidente.idReporta.label" default="Quien Reporta" />
-      </label>
-      <g:field type="text" name="nombre.no" disabled="true"
-        value="${Usuario.get(incidenteInstance.idReporta)}"/>
+<g:if test="${incidenteInstance.idReporta}">
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="fieldtablecontain">
+        <label for="nombre-label">
+          <g:message code="incidente.idReporta.label" default="Quien Reporta" />
+        </label>
+        <g:field type="text" name="nombre.no" disabled="true"
+          value="${Usuario.get(incidenteInstance.idReporta)}"/>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="fieldtablecontain">
+        <label for="telefono-label">
+          <g:message code="solicitud.telefono.label" default="Extensión" />
+        </label>
+        <g:field type="text" name="telefono.no" disabled="true"
+          value="${Usuario.get(incidenteInstance.idReporta).extension}"/>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="fieldtablecontain">
+        <label for="area-label">
+          <g:message code="solicitud.area.label" default="Área" />
+        </label>
+        <g:field type="text" name="area.no" disabled="true"
+          value="${areaReporta}"/>
+      </div>
     </div>
   </div>
-  <div class="span3">
-    <div class="fieldtablecontain">
-      <label for="telefono-label">
-        <g:message code="solicitud.telefono.label" default="Extensión" />
-      </label>
-      <g:field type="text" name="telefono.no" disabled="true"
-        value="${Usuario.get(incidenteInstance.idReporta).extension}"/>
-    </div>
-  </div>
-  <div class="span3">
-    <div class="fieldtablecontain">
-      <label for="area-label">
-        <g:message code="solicitud.area.label" default="Área" />
-      </label>
-      <g:field type="text" name="area.no" disabled="true"
-        value="${areaReporta}"/>
-    </div>
-  </div>
-</div>
+</g:if>
 
 <g:if test="${incidenteInstance.fechaSolnivel1}">
   <div class="row-fluid">
@@ -124,7 +126,7 @@
           value="${Usuario.get(incidenteInstance.idNivel1)}"/>
       </div>
     </div>
-    <div class="span3">
+    <div class="span4">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -133,7 +135,7 @@
           value="${Usuario.get(incidenteInstance.idNivel1).extension}"/>
       </div>
     </div>
-    <div class="span3">
+    <div class="span4">
       <div class="fieldtablecontain">
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
@@ -156,7 +158,7 @@
           value="${Usuario.get(incidenteInstance.idNivel2)}"/>
       </div>
     </div>
-    <div class="span3">
+    <div class="span4">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -165,7 +167,7 @@
           value="${Usuario.get(incidenteInstance.idNivel2).extension}"/>
       </div>
     </div>
-    <div class="span3">
+    <div class="span4">
       <div class="fieldtablecontain">
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
@@ -188,7 +190,7 @@
           value="${Usuario.get(incidenteInstance.idNivel3)}"/>
       </div>
     </div>
-    <div class="span3">
+    <div class="span4">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -197,7 +199,7 @@
           value="${Usuario.get(incidenteInstance.idNivel3).extension}"/>
       </div>
     </div>
-    <div class="span3">
+    <div class="span4">
       <div class="fieldtablecontain">
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
@@ -216,11 +218,18 @@
         <g:message code="cat_serv.servCat.label" default="Cat" />
         <span class="required-indicator">*</span>
       </label>
-      <g:select id="servCat" name="idServ.servSub.servCat.id"
-        from="${Cat_servCat.list()}" optionKey="id" required=""
-        value="${incidenteInstance?.idServ?.servSub?.servCat?.id}"
-        class="many-to-one" onchange="categoryChanged(this.value)"
-        noSelection="${['':'Seleccione una...']}"/>
+      <g:if test="${incidenteInstance?.idServ}">
+        <g:field id="servCat" name="idServ.servSub.servCat.id"
+          value="${incidenteInstance?.idServ?.servSub?.servCat}"
+          disabled="true"/>
+      </g:if>
+      <g:else>
+        <g:select id="servCat" name="idServ.servSub.servCat.id"
+          from="${Cat_servCat.list()}" optionKey="id" required=""
+          value="${incidenteInstance?.idServ?.servSub?.servCat?.id}"
+          class="many-to-one" onchange="categoryChanged(this.value)"
+          noSelection="${['':'Seleccione una...']}"/>
+      </g:else>
     </div>
   </div>
 
@@ -232,11 +241,16 @@
       </label>
       <span id="subContainer">
         <g:if test="${incidenteInstance?.idServ}">
+          <g:field id="servSub" name="servSub.id"
+            value="${incidenteInstance?.idServ?.servSub}"
+            disabled="true"/>
+        </g:if>
+        <g:else>
           <g:select id='servSub' name='servSub.id' required=''
             onchange='subcategoryChanged(this.value)' optionKey='id'
             from="${Cat_servSub.findAllByServCat(incidenteInstance?.idServ?.servSub?.servCat, [order:'id'])}"
             value="${incidenteInstance?.idServ?.servSub?.id}" noSelection="['':' ']"/>
-        </g:if>
+        </g:else>
       </span>
     </div>
   </div>
@@ -249,11 +263,16 @@
       </label>
       <span id="serviciosContainer">
         <g:if test="${incidenteInstance?.idServ}">
+          <g:field id="idServ" name="idServ.id"
+            value="${incidenteInstance?.idServ}"
+            disabled="true"/>
+        </g:if>
+        <g:else>
           <g:select id='idServ' name='idServ.id' required=''
             optionKey='id' value="${incidenteInstance?.idServ?.id}"
             from="${Cat_serv.findAllByServSub(incidenteInstance?.idServ?.servSub, [order:'id'])}"
             noSelection="['':' ']"/>
-        </g:if>
+        </g:else>
       </span>
     </div>
   </div>
