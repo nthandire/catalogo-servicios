@@ -14,11 +14,12 @@
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list">Solicitudes a revisar</g:link></li>
 				<li><g:link class="list" action="listAsignados">Solicitudes asignadas</g:link></li>
+        <li><g:link class="list" action="listEncuestas">Solicitudes en encuesta</g:link></li>
 				<li><g:link class="list" action="listTerminadas">Solicitudes termindadas</g:link></li>
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Solicitudes terminadas</h1>
+			<h1>Solicitudes en encuesta</h1>
 			<g:if test="${flash.message}">
 			  <div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -28,29 +29,29 @@
 			<table>
 				<thead>
 					<tr>
-					
+
 						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Numero Solicitud')}" />
-					
+
 						<g:sortableColumn property="nombre" title="Solicitante" />
-					
+
 						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha Modificación')}" />
-					
+
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
-					
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${enEncuestasInstanceList}" status="i" var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
-					
+
 						<td>${Usuario.get(solicitudInstance.idSolicitante).username}</td>
-					
+
 						<td><g:formatDate date="${solicitudInstance.lastUpdated}" /></td>
-					
+
 						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>
