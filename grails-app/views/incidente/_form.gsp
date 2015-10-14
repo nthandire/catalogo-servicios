@@ -72,15 +72,34 @@
 	<g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['': '']"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
-	<label for="idResguardoentregadetalle">
-		<g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
-	</label>
-  <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
-		from="${ResguardoEntregaDetalle.executeQuery(
-      'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
-      optionKey="id" class="many-to-one" noSelection="['': '']"
-      value="${solicitudDetalleInstance?.idResguardoentregadetalle}"/>
+<div class="row-fluid">
+  <div class="span4">
+    <div class="fieldtablecontain">
+      <label for="nombre-label">
+        <g:message code="incidente.idReporta.label" default="Quien Reporta" />
+      </label>
+      <g:field type="text" name="nombre.no" disabled="true"
+        value="${Usuario.get(incidenteInstance.idReporta)}"/>
+    </div>
+  </div>
+  <div class="span3">
+    <div class="fieldtablecontain">
+      <label for="telefono-label">
+        <g:message code="solicitud.telefono.label" default="Extensión" />
+      </label>
+      <g:field type="text" name="telefono.no" disabled="true"
+        value="${Usuario.get(incidenteInstance.idReporta).extension}"/>
+    </div>
+  </div>
+  <div class="span3">
+    <div class="fieldtablecontain">
+      <label for="area-label">
+        <g:message code="solicitud.area.label" default="Área" />
+      </label>
+      <g:field type="text" name="area.no" disabled="true"
+        value="${areaReporta}"/>
+    </div>
+  </div>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">

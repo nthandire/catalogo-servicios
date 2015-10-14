@@ -207,8 +207,10 @@ class IncidenteController {
         def nivel = incidenteInstance.nivel
         def idNivel = incidenteInstance."idNivel${nivel}"
         log.debug("idNivel = ${idNivel}")
+        def areaReporta = firmadoService.areaNombre(incidenteInstance.idReporta)
+        log.debug("areaReporta = ${areaReporta}")
         [incidenteInstance: incidenteInstance, tecnicos:tecnicos,
-          idNivel: idNivel, yo: userID,
+          idNivel: idNivel, yo: userID, areaReporta: areaReporta,
           solucionNivel: incidenteInstance."solucionNivel${nivel}"]
     }
 
