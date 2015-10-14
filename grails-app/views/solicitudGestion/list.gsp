@@ -1,4 +1,3 @@
-
 <%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
@@ -13,6 +12,7 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list">Solicitudes a revisar</g:link></li>
+        <li><g:link class="list" action="listTodas">Todas</g:link></li>
 				<li><g:link class="list" action="listAsignados">Solicitudes asignadas</g:link></li>
         <li><g:link class="list" action="listEncuestas">Solicitudes en encuesta</g:link></li>
 				<li><g:link class="list" action="listTerminadas">Solicitudes termindadas</g:link></li>

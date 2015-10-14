@@ -29,6 +29,23 @@ class SolicitudGestionController {
           "select count (*) " + query
         )[0]
         log.debug("numero de autorizados = ${autorizados}")
+        query += " order by fechaSolicitud desc"
+        [autorizadosInstanceList: Solicitud.executeQuery(query, [], params),
+            autorizadosInstanceTotal: autorizados]
+    }
+
+    def listTodas(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        log.debug("params = $params")
+        def query =
+            "  from Solicitud              " +
+            " where estado <> 'F'          " +
+            "   and estado is not null     "
+        def autorizados = Solicitud.executeQuery (
+          "select count (*) " + query
+        )[0]
+        log.debug("numero de autorizados = ${autorizados}")
+        query += " order by fechaSolicitud desc"
         [autorizadosInstanceList: Solicitud.executeQuery(query, [], params),
             autorizadosInstanceTotal: autorizados]
     }
@@ -47,6 +64,7 @@ class SolicitudGestionController {
             "select count(*) " + query
         )[0]
         log.debug("numero de asignados = ${asignados}")
+        query += " order by fechaSolicitud desc"
         [asignadosInstanceList: Solicitud.executeQuery(query, [], params),
             asignadosInstanceTotal: asignados]
     }
@@ -62,6 +80,7 @@ class SolicitudGestionController {
             "select count(*) " + query
         )[0]
         log.debug("numero de enEncuestas = ${enEncuestas}")
+        query += " order by fechaSolicitud desc"
         [enEncuestasInstanceList: Solicitud.executeQuery(query, [], params),
             enEncuestasInstanceTotal: enEncuestas]
     }
@@ -77,6 +96,7 @@ class SolicitudGestionController {
             "select count(*) " + query
         )[0]
         log.debug("numero de terminadas = ${terminadas}")
+        query += " order by fechaSolicitud desc"
         [terminadasInstanceList: Solicitud.executeQuery(query, [], params),
             terminadasInstanceTotal: terminadas]
     }

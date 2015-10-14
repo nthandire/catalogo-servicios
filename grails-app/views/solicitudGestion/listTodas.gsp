@@ -19,7 +19,7 @@
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Solicitudes en encuesta</h1>
+			<h1>Todas las Solicitudes</h1>
 			<g:if test="${flash.message}">
 			  <div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -34,30 +34,42 @@
 
 						<g:sortableColumn property="nombre" title="Solicitante" />
 
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha Modificación')}" />
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha de autorización')}" />
 
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
+
+						<g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
 
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${enEncuestasInstanceList}" status="i" var="solicitudInstance">
+				<g:each in="${autorizadosInstanceList}" status="i" var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
 						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
 
 						<td>${Usuario.get(solicitudInstance.idSolicitante).username}</td>
 
-						<td><g:formatDate date="${solicitudInstance.lastUpdated}" /></td>
+						<td><g:formatDate date="${solicitudInstance.fechaVb?:solicitudInstance.fechaAutoriza}" /></td>
 
 						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
+
+						<td>
+							<g:if test="${solicitudInstance?.estado}">
+								<span class="property-value" aria-labelledby="estado-label">
+									<g:select name="estado" disabled="true"
+										from="${['F' as char, 'A' as char, 'R' as char, 'V' as char, 'E' as char, 'T' as char, 'C' as char]}"
+										valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
+								</span>
+							</g:if>
+						</td>
 
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${enEncuestasInstanceTotal}" />
+				<g:paginate total="${autorizadosInstanceTotal}" />
 			</div>
 		</div>
 	</body>

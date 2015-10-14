@@ -13,6 +13,7 @@
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
         <li><g:link class="list" action="list">Lista de servicios</g:link></li>
         <li><g:link class="back" action="show" id="${solicitudDetalleInstance?.idSolicitud?.id}">Regresar al servicio</g:link></li>
+        <li><g:link class="list" action="listTodas">Todas</g:link></li>
         <li><g:link class="list" action="listAsignados">Solicitudes asignadas</g:link></li>
         <li><g:link class="list" action="listEncuestas">Solicitudes en encuesta</g:link></li>
         <li><g:link class="list" action="listTerminadas">Solicitudes termindadas</g:link></li>
