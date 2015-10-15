@@ -118,6 +118,14 @@
             $("#passwordfirma").prop("required", true);
             $("#solSolucion").text('Justificación');
           }
+          function cancelar() {
+            $("#titulo").text('Cancelar incidente');
+            $("#idPrograma").prop("required", false);
+            $("#solucionNivel").prop("required", true);
+            $("#respButton").attr('name','_action_cancelarUpdate');
+            $("#passwordfirma").prop("required", true);
+            $("#solSolucion").text('Motivo de cancelación');
+          }
           function update() {
             $("#idPrograma").prop("required", false);
             $("#solucionNivel").prop("required", false);
@@ -143,6 +151,8 @@
             <a class="cancel" data-toggle="modal" href="#responsive"
               onclick="problema()">Marcarlo como problema</a>
           </g:if>
+          <a class="cancel" data-toggle="modal" href="#responsive"
+            onclick="cancelar()">Cancelar</a>
         </fieldset>
       </g:form>
     </div>

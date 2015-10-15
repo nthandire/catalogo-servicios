@@ -493,6 +493,61 @@ class IncidenteController {
       redirect(action: "list")
     }
 
+    def cancelarUpdate(Long id, Long version) {
+      log.debug("params = $params")
+      def incidenteInstance = Incidente.get(id)
+      if (!incidenteInstance) {
+          flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
+          redirect(action: "list")
+          return
+      }
+
+      if (version != null) {
+        if (incidenteInstance.version > version) {
+          incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                    [message(code: 'incidente.label', default: 'Incidente')] as Object[],
+                    "Another user has updated this Incidente while you were editing")
+          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          return
+        }
+      }
+
+      def userID = springSecurityService.principal.id
+      def firmaTeclada = params['passwordfirma']
+      def firma = Firmadigital.findById(userID)?.passwordfirma
+      if (firmaTeclada != firma) {
+        flash.error = "Error en contaseña"
+        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        return
+      }
+
+      def nivel = incidenteInstance.nivel
+
+      if (incidenteInstance?."idNivel${nivel}" != userID) {
+        flash.error = "Este incidente no esta asignado a Usted"
+        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        return
+      }
+
+      incidenteInstance.properties = params
+      incidenteInstance."solucionNivel${nivel}" =
+        params["solucionNivel"]
+      incidenteInstance.idCaptura = userID
+      incidenteInstance.ipTerminal = request.getRemoteAddr()
+      incidenteInstance."fechaSolnivel${nivel}" = new Date()
+      incidenteInstance."firmaNivel${nivel}" = true
+
+      incidenteInstance.estado = 'C' as char
+
+      if (!incidenteInstance.save(flush: true)) {
+          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          return
+      }
+
+      flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
+      redirect(action: "list")
+    }
+
     def escalaUpdate(Long id, Long version) {
       log.debug("params = $params")
       def incidenteInstance = Incidente.get(id)
