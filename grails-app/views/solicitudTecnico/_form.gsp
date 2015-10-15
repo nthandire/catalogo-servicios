@@ -133,8 +133,9 @@
       <label for="idPrograma">
         <g:message code="solicitudDetalle.idPrograma.label" default="Estado de cierre" />
       </label>
-      <g:field id="idPrograma" name="idPrograma.id" type="text"
-        value="${solicitudDetalleInstance?.idPrograma}" disabled="true"/>
+      <g:select id="idPrograma" name="idPrograma.id" from="${programas}"
+         optionKey="id" value="${solicitudDetalleInstance?.idPrograma?.id}"
+         class="many-to-one" noSelection="['': '']" required="true" />
     </div>
   </div>
 

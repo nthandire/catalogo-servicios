@@ -223,7 +223,7 @@
       <span id="prioridadContainer">
         <g:select id="prioridad" name="prioridad" from="${[0, 1, 2, 3]}"
           valueMessagePrefix="intensidad.valor"
-          value="${solicitudDetalleInstance.prioridad?:solicitudDetalleInstance.idServ.impacto}"/>
+          value="${solicitudDetalleInstance.prioridad?:solicitudDetalleInstance?.idServ?.impacto?:0}"/>
       </span>
     </div>
   </div>
