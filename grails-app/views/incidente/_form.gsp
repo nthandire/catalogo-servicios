@@ -295,8 +295,14 @@
 	<label for="descripcion">
 		<g:message code="incidente.descripcion.label" default="Descripcion" />
 	</label>
-	<g:textArea name="descripcion" cols="40" rows="5" maxlength="3000"
-    value="${incidenteInstance?.descripcion}" required="true"/>
+  <g:if test="${incidenteInstance?.descripcion}">
+    <g:textArea name="descripcion" cols="40" rows="5" maxlength="3000"
+      value="${incidenteInstance?.descripcion}" disabled="true"/>
+  </g:if>
+  <g:else>
+    <g:textArea name="descripcion" cols="40" rows="5" maxlength="3000"
+      value="${incidenteInstance?.descripcion}" required="true"/>
+  </g:else>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'nivel', 'error')} ">

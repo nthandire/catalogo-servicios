@@ -16,6 +16,6 @@ Junta del 1 de octubre.
 + 12.- Problema ¿lleva a encuesta?. Respuesta, NO.
 + 13.- Cancelar Incidentes (NUEVA OPCIÓN, se captura la razón como la solución) (sin Encuesta)(CONSIDERAR ESTO EN ESTADÍSTICAS, no cuenta como incidente).
 + 14.- Estado de cierre (NUEVO): "Atención de Servicio" (sin Encuesta)(CONSIDERAR ESTO EN ESTADÍSTICAS, si cuenta como incidente).
-- 16.- ¿En primer nivel no hay encuesta?. Respuesta, NO (ESTO ES NUEVO).
++ 16.- ¿En primer nivel no hay encuesta?. Respuesta, NO (ESTO ES NUEVO).
 + 17.- En la etiqueta al marcar como problema, en lugar de decir solución debe decir "Justificación".
 - 18.- Las únicas opciones de Estado de cierre al marcar como problema son: No solucionado y Solucionado parcial.

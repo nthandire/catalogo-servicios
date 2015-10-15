@@ -392,7 +392,7 @@ class IncidenteController {
       incidenteInstance."fechaSolnivel${nivel}" = new Date()
       incidenteInstance."firmaNivel${nivel}" = true
 
-      incidenteInstance.estado = 'E' as char
+      incidenteInstance.estado = nivel == 1 ? 'T' as char : 'E' as char
 
       if (!incidenteInstance.save(flush: true)) {
           render(view: "edit", model: [incidenteInstance: incidenteInstance])
