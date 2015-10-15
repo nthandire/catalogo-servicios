@@ -7,6 +7,7 @@ import groovy.time.TimeCategory
 @Secured(['ROLE_SAST_USUARIO'])
 class SolicitudVBController {
     def springSecurityService
+    def grailsApplication
     static nombreMenu = "Visto Bueno"
     static ordenMenu = 85
 
@@ -140,8 +141,9 @@ class SolicitudVBController {
         def idSolicitante = solicitudInstance.idSolicitante
         def asunto = "La solicitud ${solicitudInstance} ya recibió el visto bueno"
         def personasInstance = Usuario.get(idSolicitante)
+        def correo = grailsApplication.config.correo.general
         sendMail {
-          to message(code: "correo.general") // TODO: mandar el correo al que solicito       personasInstance.email
+          to correo // TODO: mandar el correo al que solicito       personasInstance.email
           subject asunto
           body "Hola ${personasInstance}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
@@ -164,7 +166,7 @@ class SolicitudVBController {
             "Utilice la liga siguiente para revisarla. <br/><br/>" +
             "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
           sendMail {
-            to message(code: "correo.general") // TODO: mandar el correo al que lo solicito       gestores.email
+            to correo // TODO: mandar el correo al que lo solicito       gestores.email
             subject asunto
             html msg
           }
@@ -214,8 +216,9 @@ class SolicitudVBController {
 
         def idSolicitante = solicitudInstance.idSolicitante
         def personasInstance = Usuario.get(idSolicitante)
+        def correo = grailsApplication.config.correo.general
         sendMail {
-          to message(code: "correo.general") // TODO: mandar el correo al que solicito       personasInstance.email
+          to correo // TODO: mandar el correo al que solicito       personasInstance.email
           subject "Solicitud ${solicitudInstance} no recibio el visto bueno"
           body "Hola ${personasInstance}\n\nSu solicitud folio " +
             "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +

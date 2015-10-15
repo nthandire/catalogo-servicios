@@ -7,6 +7,7 @@ import groovy.time.TimeCategory
 @Secured(['ROLE_SAST_COORDINADOR','ROLE_SAST_COORDINADOR_DE_GESTION'])
 class SolicitudCoordinadorController {
     def springSecurityService
+    def grailsApplication
     static nombreMenu = "Coordinación"
     static ordenMenu = 20
 
@@ -296,8 +297,9 @@ class SolicitudCoordinadorController {
         def liga = createLink(controller:"SolicitudTecnico", action: "edit",
                               id: solicitudDetalleInstance.id, absolute: "true")
         log.debug("liga = $liga")
+        def correo = grailsApplication.config.correo.general
         sendMail {
-          to message(code: "correo.general") // TODO: mandar el correo al que solicito       tecnico.correo
+          to correo // TODO: mandar el correo al que solicito       tecnico.correo
           subject "La solicitud ${solicitudDetalleInstance.idSolicitud} requiere ser atendida"
           html "Hola ${tecnico}<br/><br/>La solicitud folio " +
             "${solicitudDetalleInstance.idSolicitud} requiere ser atendida, se autorizo el " +

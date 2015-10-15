@@ -8,6 +8,7 @@ import groovy.time.TimeCategory
 class SolicitudGestionController {
     def springSecurityService
     def firmadoService
+    def grailsApplication
     static nombreMenu = "Mesa de servicio"
     static ordenMenu = 88
 
@@ -299,8 +300,9 @@ class SolicitudGestionController {
             "${solicitudInstance} (${solicitudInstance.justificacion}) " +
             "ya fue revisada, debe atenderla a la brevedad. <br/><br/>" +
             "<a href='${liga}'>${solicitudInstance}</a>"
+          def correo = grailsApplication.config.correo.general
           sendMail {
-            to message(code: "correo.general") // TODO: mandar el correo al que lo solicito       coordinadores.email
+            to correo // TODO: mandar el correo al que lo solicito       coordinadores.email
             subject asunto
             html msg
           }
@@ -350,8 +352,9 @@ class SolicitudGestionController {
         def liga = createLink(controller:"solicitudVB", action: "show",
                               id: solicitudInstance.id, absolute: "true")
         log.debug("liga = $liga")
+        def correo = grailsApplication.config.correo.general
         sendMail {
-          to message(code: "correo.general") // TODO: mandar el correo al que solicito       personasInstance.correo
+          to correo // TODO: mandar el correo al que solicito       personasInstance.correo
           subject "Solicitud ${solicitudInstance.toString()} requiere un visto bueno"
           html "Hola ${personasInstance}<br/><br/>La solicitud folio " +
             "${solicitudInstance} requiere que le de su visto bueno, " +

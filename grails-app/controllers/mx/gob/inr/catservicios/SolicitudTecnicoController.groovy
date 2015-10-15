@@ -6,6 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException
 @Secured(['ROLE_SAST_TECNICO'])
 class SolicitudTecnicoController {
     def springSecurityService
+    def grailsApplication
     static nombreMenu = "Solucionar Solicitudes"
     static ordenMenu = 86
 
@@ -204,8 +205,9 @@ class SolicitudTecnicoController {
               "la forma de encuesta, usando la siguiente liga: <br/><br/>" +
               "<a href='${liga}'>${solicitud}</a>"
             log.debug("msg = ${msg}")
+            def correo = grailsApplication.config.correo.general
             sendMail {
-              to message(code: "correo.general") // TODO: mandar el correo al que solicito       solicitante.correo
+              to correo // TODO: mandar el correo al que solicito       solicitante.correo
               subject asunto
               html msg
             }

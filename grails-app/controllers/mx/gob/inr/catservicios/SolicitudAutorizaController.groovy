@@ -8,6 +8,7 @@ import groovy.time.TimeCategory
 class SolicitudAutorizaController {
     def springSecurityService
     def firmadoService
+    def grailsApplication
     static nombreMenu = "Autoriza"
     static ordenMenu = 83
 
@@ -201,9 +202,10 @@ class SolicitudAutorizaController {
           "Hola ${persona}\n\nSu solicitud " +
             "(${solicitudInstance.justificacion}) "+
             "fue cancelada, investigue con su autorizador el motivo."
+        def correo = grailsApplication.config.correo.general
 
         sendMail {
-          to message(code: "correo.general") // TODO: mandar el correo al que lo solicito       persona.email
+          to correo // TODO: mandar el correo al que lo solicito       persona.email
           subject asunto
           body msg
         }
@@ -224,7 +226,7 @@ class SolicitudAutorizaController {
               "Utilice la liga siguiente para revisarla. <br/><br/>" +
               "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
             sendMail {
-              to message(code: "correo.general") // TODO: mandar el correo al que lo solicito       gestores.email
+              to correo // TODO: mandar el correo al que lo solicito       gestores.email
               subject asunto
               html msg
             }
