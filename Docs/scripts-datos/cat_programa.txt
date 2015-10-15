@@ -13,3 +13,7 @@ insert into cat_programa
 values
 (5, 'Solucionado parcialmente', 'A');
 
+insert into cat_programa
+(id_programa,des_programa,estado_programa)
+values
+(6, 'Atención de Servicio', 'A');
