@@ -198,9 +198,9 @@
       <label for="prioridad">
         <g:message code="solicitudDetalle.prioridad.label" default="Prioridad" />
       </label>
-      <g:field id="prioridad" name="prioridad"
-        valueMessagePrefix="intensidad.valor" disabled="true"
-        value="${solicitudDetalleInstance.prioridad?:solicitudDetalleInstance.idServ.impacto}"/>
+      <g:field id="prioridad" name="prioridad" disabled="true"
+        value="${message(code: "intensidad.valor." +
+          solicitudDetalleInstance.prioridad?:solicitudDetalleInstance.idServ.impacto)}"/>
     </div>
   </div>
 </div>

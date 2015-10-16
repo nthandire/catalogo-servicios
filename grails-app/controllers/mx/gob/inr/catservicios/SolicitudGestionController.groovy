@@ -421,6 +421,7 @@ class SolicitudGestionController {
       servicios = Cat_serv.findAllNotIncidenteByServSub(subcategory, [order:'id'])
     }
     render g.select(id: 'idServ', name:'idServ.id', required:'',
+      onchange:"servicesChanged(this.value)",
       from:servicios, optionKey:'id', noSelection:['':'Seleccione una...']
     )
   }

@@ -121,6 +121,34 @@
 </g:if>
 
 <div class="row-fluid">
+  <div class="span4 offset2">
+    <div class="fieldtablecontain">
+      Fecha inicio Atención
+    </div>
+  </div>
+  <div class="span4">
+    <div class="fieldtablecontain">
+      Tiempo de atención
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span4 offset2">
+    <div class="fieldtablecontain">
+      <g:field name="tiempoInicio" type="date" disabled="true"
+        value="${solicitudDetalleInstance.idSolicitud.fechaVb?:
+        solicitudDetalleInstance.idSolicitud.fechaAutoriza}" />
+    </div>
+  </div>
+  <div class="span4">
+    <div class="fieldtablecontain">
+    <g:field name="tiempo" type="text" disabled="true"
+      value="${solicitudDetalleInstance?.idServ?.tiempo2} ${solicitudDetalleInstance?.idServ?.unidades2?.descripcion}" />
+    </div>
+  </div>
+</div>
+
+<div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcion', 'error')} ">
       <label for="descripcion">

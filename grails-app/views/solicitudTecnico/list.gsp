@@ -38,7 +38,7 @@
 
             <g:sortableColumn property="lastUpdated"
               title="${message(code: 'solicitud.fechaSolicitud.label',
-                default: 'Fecha de autorización')}" />
+                default: 'Fecha inicio Atención')}" />
 
             <g:sortableColumn property="tiempo" title="Tiempo de atención" />
 
@@ -63,8 +63,8 @@
                 solicitudDetalleInstance.idSolicitud.fechaAutoriza}" /></td>
 
             <td>
-              ${solicitudDetalleInstance?.idServ?.tiempo1}
-              ${solicitudDetalleInstance?.idServ?.unidades1?.descripcion}
+              ${solicitudDetalleInstance?.idServ?.tiempo2}
+              ${solicitudDetalleInstance?.idServ?.unidades2?.descripcion}
             </td>
 
 					</tr>

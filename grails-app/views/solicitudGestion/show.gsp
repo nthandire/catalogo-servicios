@@ -141,33 +141,36 @@
         </g:if>
 
        <g:if test="${solicitudInstance?.justificacion}">
-       <li class="fieldcontain">
-         <span id="justificacion-label" class="property-label"><g:message code="solicitud.justificacion.label" default="Justificacion" /></span>
-
-           <span class="property-value" aria-labelledby="justificacion-label"><g:fieldValue bean="${solicitudInstance}" field="justificacion"/></span>
-
-       </li>
+         <li class="fieldcontain">
+           <span id="justificacion-label" class="property-label">
+             <g:message code="solicitud.justificacion.label" default="Justificacion" />
+           </span>
+           <span class="property-value" aria-labelledby="justificacion-label">
+             <g:fieldValue bean="${solicitudInstance}" field="justificacion"/>
+           </span>
+         </li>
        </g:if>
 
-       <g:if test="${solicitudInstance?.lastUpdated}">
-       <li class="fieldcontain">
-         <span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha Modificacion" /></span>
-
-           <span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudInstance?.lastUpdated}" /></span>
-
-       </li>
+       <g:if test="${solicitudInstance?.fechaAutoriza}">
+         <li class="fieldcontain">
+           <span id="fechaAutoriza-label" class="property-label">
+             <g:message code="solicitud.fechaAutoriza.label" default="Fecha Autorización/Vobo" />
+           </span>
+           <span class="property-value" aria-labelledby="fechaAutoriza-label">
+             <g:formatDate date="${solicitudInstance?.fechaVb?:solicitudInstance?.fechaAutoriza}" />
+           </span>
+         </li>
        </g:if>
 
        <g:if test="${solicitudInstance?.estado}">
-       <li class="fieldcontain">
-         <span id="estado-label" class="property-label">Estado</span>
-
-         <span class="property-value" aria-labelledby="estado-label">
-           <g:select name="estado" disabled="true"
-             from="${['F' as char, 'A' as char, 'R' as char, 'V' as char, 'E' as char, 'T' as char, 'C' as char]}"
-             valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
-         </span>
-       </li>
+         <li class="fieldcontain">
+           <span id="estado-label" class="property-label">Estado</span>
+           <span class="property-value" aria-labelledby="estado-label">
+             <g:select name="estado" disabled="true"
+               from="${['F' as char,'A' as char,'R' as char,'V' as char,'E' as char,'T' as char,'C' as char]}"
+               valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
+           </span>
+         </li>
        </g:if>
 
      </ol>
