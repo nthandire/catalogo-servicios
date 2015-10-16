@@ -12,7 +12,6 @@ class IncidenteController {
     def springSecurityService
     def firmadoService
     def serviciosService
-    def messageSource
     static nombreMenu = "Incidentes"
     static ordenMenu = 90
 
@@ -200,6 +199,10 @@ class IncidenteController {
         log.debug("minPrograma = ${minPrograma}")
         def programas = CatPrograma.findAllByIdGreaterThanEquals(minPrograma)
         log.debug("programas = ${programas}")
+        def programasProblema = CatPrograma.findAllByIdBetween(
+          message(code: "programa.problema.menor"),
+          message(code: "programa.problema.mayor"))
+        log.debug("programasProblema = ${programasProblema}")
 
         def tecnicos =
           isCoordinador() ? listaDeTecnicos(incidenteInstance.idServresp) : []
@@ -221,7 +224,8 @@ class IncidenteController {
         [incidenteInstance: incidenteInstance, tecnicos:tecnicos,
           idNivel: idNivel, yo: userID, areaReporta: areaReporta,
           areaAtendio1: areaAtendio1, areaAtendio2: areaAtendio2,
-          areaAtendio3: areaAtendio3,
+          areaAtendio3: areaAtendio3, programas:programas,
+          programasProblema: programasProblema,
           solucionNivel: incidenteInstance."solucionNivel${nivel}"]
     }
 
@@ -439,6 +443,7 @@ class IncidenteController {
         return
       }
 
+      params.idPrograma["id"] = params.idProgramaProblema["id"]
       incidenteInstance.properties = params
       incidenteInstance."solucionNivel${nivel}" =
         params["solucionNivel"]
@@ -529,6 +534,7 @@ class IncidenteController {
         return
       }
 
+      params.idPrograma["id"] = params.idProgramaProblema["id"]
       incidenteInstance.properties = params
       incidenteInstance."solucionNivel${nivel}" =
         params["solucionNivel"]

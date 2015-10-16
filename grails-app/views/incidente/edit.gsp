@@ -97,6 +97,7 @@
             $("#solServSub").css("display", "none");
             $("#solServ").css("display", "none");
             $("#solEstadoCierre").css("display", "none");
+            $("#solEstadoCierreProblema").css("display", "none");
           }
           function soluciona() {
             $("#titulo").text('Soluciona incidente');
@@ -108,6 +109,7 @@
             $("#solServSub").css("display", "block");
             $("#solServ").css("display", "block");
             $("#solEstadoCierre").css("display", "block");
+            $("#solEstadoCierreProblema").css("display", "none");
             $("#solSolucion").text('Solución');
           }
           function problema() {
@@ -116,6 +118,11 @@
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_problemaUpdate');
             $("#passwordfirma").prop("required", true);
+            $("#solServCat").css("display", "none");
+            $("#solServSub").css("display", "none");
+            $("#solServ").css("display", "none");
+            $("#solEstadoCierre").css("display", "none");
+            $("#solEstadoCierreProblema").css("display", "block");
             $("#solSolucion").text('Justificación');
           }
           function cancelar() {
@@ -124,6 +131,11 @@
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_cancelarUpdate');
             $("#passwordfirma").prop("required", true);
+            $("#solServCat").css("display", "none");
+            $("#solServSub").css("display", "none");
+            $("#solServ").css("display", "none");
+            $("#solEstadoCierre").css("display", "none");
+            $("#solEstadoCierreProblema").css("display", "block");
             $("#solSolucion").text('Motivo de cancelación');
           }
           function update() {

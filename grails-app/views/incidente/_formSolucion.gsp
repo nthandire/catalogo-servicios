@@ -66,19 +66,23 @@
 
 <div id="solEstadoCierre"
   class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idPrograma', 'error')} ">
+  <label for="idPrograma">
+    <g:message code="incidente.idPrograma.label" default="Estado de cierre" />
+  </label>
+  <g:select id="idPrograma" name="idPrograma.id" from="${programas}"
+    optionKey="id" value="${incidenteInstance?.idPrograma?.id}"
+    noSelection="['': '']"/>
+  <br />
+</div>
+
+<div id="solEstadoCierreProblema"
+  class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idPrograma', 'error')} ">
 	<label for="idPrograma">
 		<g:message code="incidente.idPrograma.label" default="Estado de cierre" />
 	</label>
-  <g:if test="${incidenteInstance?.idPrograma}">
-    <g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}"
-      optionKey="id" value="${incidenteInstance?.idPrograma?.id}"
-      class="many-to-one"/>
-  </g:if>
-  <g:else>
-    <g:select id="idPrograma" name="idPrograma.id" from="${CatPrograma.list()}"
-      optionKey="id" value="${incidenteInstance?.idPrograma?.id}"
-      class="many-to-one" noSelection="['': '']"/>
-  </g:else>
+  <g:select id="idProgramaProblema" name="idProgramaProblema.id" from="${programasProblema}"
+    optionKey="id" value="${incidenteInstance?.idPrograma?.id}"
+    noSelection="['': '']"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: firmadigitalInstance, field: 'passwordfirma', 'error')} ">
