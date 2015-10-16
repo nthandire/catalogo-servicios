@@ -36,9 +36,10 @@
 
 						<span class="property-value" aria-labelledby="numeroSolicitud-label">${solicitudInstance.toString()}</span>
 
-				</li>
-				</g:if>
+        </li>
+        </g:if>
 
+        <g:set var="firmado" bean="firmadoService"/>
         <div class="row-fluid">
           <div class="span4">
 
@@ -67,7 +68,7 @@
                 <g:message code="solicitud.area.label" default="Área" />
               </span>
                 <span class="property-value" aria-labelledby="area-label">
-                  ${UsuarioAutorizado.get(solicitudInstance?.idSolicitante).area}
+                  ${firmado.areaNombre(solicitudInstance?.idSolicitante)}
                 </span>
             </li>
 
@@ -95,6 +96,7 @@
             </li>
 
           </div>
+
           <div class="span3">
 
             <li class="fieldcontain">
@@ -102,7 +104,7 @@
                 <g:message code="solicitud.area.label" default="Área" />
               </span>
                 <span class="property-value" aria-labelledby="area-label">
-                  ${UsuarioAutorizado.get(solicitudInstance?.idAutoriza).area}
+                  ${firmado.areaNombre(solicitudInstance?.idAutoriza)}
                 </span>
             </li>
 
@@ -138,7 +140,7 @@
                   <g:message code="solicitud.area.label" default="Área" />
                 </span>
                   <span class="property-value" aria-labelledby="area-label">
-                    ${UsuarioAutorizado.get(solicitudInstance?.idVb).area}
+                  ${firmado.areaNombre(solicitudInstance?.idVb)}
                   </span>
               </li>
 
@@ -157,8 +159,8 @@
 
 				<g:if test="${solicitudInstance?.lastUpdated}">
 				<li class="fieldcontain">
-					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha Modificacion" /></span>
-						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudInstance?.lastUpdated}" /></span>
+					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha de solicitud" /></span>
+						<span class="property-value" aria-labelledby="fechaSolicitud-label"><g:formatDate date="${solicitudInstance?.fechaSolicitud}" /></span>
 
 				</li>
 				</g:if>

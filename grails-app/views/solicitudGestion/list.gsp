@@ -34,7 +34,7 @@
 
 						<g:sortableColumn property="nombre" title="Solicitante" />
 
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha de autorización')}" />
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha autorización/Vobo')}" />
 
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
 

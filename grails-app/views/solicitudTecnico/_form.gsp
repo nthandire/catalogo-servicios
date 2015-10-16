@@ -6,6 +6,7 @@
 </style>
 
 
+<g:set var="firmado" bean="firmadoService"/>
 <div class="row-fluid">
   <div class="span4 offset1">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
@@ -52,7 +53,7 @@
         <g:message code="solicitud.area.label" default="Área" />
       </label>
       <g:field type="text" name="area.no" disabled="true"
-        value="${UsuarioAutorizado.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante).area}"/>
+        value="${firmado.areaNombre(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
     </div>
   </div>
 </div>
@@ -82,7 +83,7 @@
         <g:message code="solicitud.area.label" default="Área" />
       </label>
       <g:field type="text" name="area.no" disabled="true"
-        value="${UsuarioAutorizado.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza).area}"/>
+        value="${firmado.areaNombre(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
     </div>
   </div>
 </div>
@@ -113,7 +114,7 @@
           <g:message code="solicitud.area.label" default="Área" />
         </label>
         <g:field type="text" name="area.no" disabled="true"
-          value="${UsuarioAutorizado.get(solicitudDetalleInstance?.idSolicitud?.idVb).area}"/>
+          value="${firmado.areaNombre(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
       </div>
     </div>
   </div>

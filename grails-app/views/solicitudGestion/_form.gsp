@@ -64,6 +64,7 @@
     }
 </script>
 
+<g:set var="firmado" bean="firmadoService"/>
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain">
@@ -89,7 +90,7 @@
         <g:message code="solicitud.area.label" default="Área" />
       </label>
       <g:field type="text" name="area.no" disabled="true"
-        value="${UsuarioAutorizado.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante).area}"/>
+        value="${firmado.areaNombre(solicitudInstance?.idSolicitante)}"/>
     </div>
   </div>
 </div>
@@ -119,7 +120,7 @@
         <g:message code="solicitud.area.label" default="Área" />
       </label>
       <g:field type="text" name="area.no" disabled="true"
-        value="${UsuarioAutorizado.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza).area}"/>
+        value="${firmado.areaNombre(solicitudInstance?.idAutoriza)}"/>
     </div>
   </div>
 </div>
@@ -150,7 +151,7 @@
           <g:message code="solicitud.area.label" default="Área" />
         </label>
         <g:field type="text" name="area.no" disabled="true"
-          value="${UsuarioAutorizado.get(solicitudDetalleInstance?.idSolicitud?.idVb).area}"/>
+          value="${firmado.areaNombre(solicitudInstance?.idVb)}"/>
       </div>
     </div>
   </div>
