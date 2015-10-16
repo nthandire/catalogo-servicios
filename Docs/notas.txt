@@ -1,3 +1,20 @@
+
+
+
+Avances para el 17 de octubre
+
+Avances que no se pueden probar
+-------------------------------
+
+
+
+Incidente
+---------
+
+
+
+
+
 select u.idusuario, u.nombre, u.paterno, u.materno, u.rfc, p.desc_perfil, p.idperfil
   from usuario u,
        usuario_perfil up,

@@ -30,6 +30,8 @@
 
             <th><g:message code="solicitudDetalle.idServcat.label" default="Categoría" /></th>
 
+            <th><g:message code="solicitudDetalle.idTecnico.label" default="Técnico" /></th>
+
 						<th><g:message code="solicitudDetalle.idServ.label" default="Tercer nivel" /></th>
 
             <g:sortableColumn property="descripcion" title="${message(code: 'solicitudDetalle.descripcion.label', default: 'Descripcion')}" />
@@ -51,6 +53,8 @@
 						<td><g:link action="edit" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>
 
             <td>${fieldValue(bean: solicitudDetalleInstance, field: "idServcat")}</td>
+
+            <td>${fieldValue(bean: solicitudDetalleInstance, field: "idTecnico")}</td>
 
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idServ")}</td>
 

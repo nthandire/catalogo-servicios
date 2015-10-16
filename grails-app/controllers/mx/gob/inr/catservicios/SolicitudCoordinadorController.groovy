@@ -43,7 +43,7 @@ class SolicitudCoordinadorController {
             )[0]
         log.debug("numero de detalles = ${detalles}")
         [solicitudDetalleInstanceList: SolicitudDetalle.
-            executeQuery(query, [], params),
+            executeQuery(query + "order by d.id desc", [], params),
             solicitudDetalleInstanceTotal: detalles]
     }
 

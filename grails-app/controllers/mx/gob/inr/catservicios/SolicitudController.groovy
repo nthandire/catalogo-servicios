@@ -33,7 +33,8 @@ class SolicitudController {
         }[0]
         log.debug("numero de solicitudes = $solicitudes")
         def criterio = Solicitud.createCriteria()
-        def solicitudesList = criterio.list(max:params.max, offset:params.offset) {
+        def solicitudesList = criterio.list(max:params.max, offset:params.offset,
+                                            sort:"fechaSolicitud", order:"desc") {
             eq('idSolicitante',(Integer)userID)
             or {
                 and {

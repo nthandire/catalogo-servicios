@@ -41,12 +41,15 @@ class SolicitudAutorizaController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+        params.sort = "fechaSolicitud"
+        params.order = "desc"
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
         def autorizables = Solicitud.countByIdAutorizaAndEstado((Integer)userID, 'F' as char)
         log.debug("numero de autorizables = $autorizables")
-        [autorizablesInstanceList: Solicitud.findAllByIdAutorizaAndEstado((Integer)userID, 'F' as char, params),
+        [autorizablesInstanceList: Solicitud.findAllByIdAutorizaAndEstado(
+          (Integer)userID, 'F' as char, params),
           autorizablesInstanceTotal: autorizables]
     }
 

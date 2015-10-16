@@ -18,11 +18,13 @@ class SolicitudTecnicoController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+        // params.sort = "id"
+        // params.order = "desc"
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        [solicitudDetalleInstanceList: SolicitudDetalle.findAllByIdTecnicoAndFechaSolucionIsNull((Integer)userID, params),
-            solicitudDetalleInstanceTotal: SolicitudDetalle.countByIdTecnicoAndFechaSolucionIsNull((Integer)userID)]
+        [solicitudDetalleInstanceList: SolicitudDetalle.findAllByIdTecnico/*AndFechaSolucionIsNull*/((Integer)userID, params),
+            solicitudDetalleInstanceTotal: SolicitudDetalle.countByIdTecnico/*AndFechaSolucionIsNull*/((Integer)userID)]
     }
 
     def create() {
