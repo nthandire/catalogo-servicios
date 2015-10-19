@@ -2,4 +2,4 @@ Revisión con Coco 14 de octubre.
 --------------------------------
 
 + 1.- Gestor: El menú dice "Termindadas"
-- 2.- Gestor, edit: No se ve el técnico.
++ 2.- Gestor, edit: No se ve el técnico.

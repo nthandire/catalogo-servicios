@@ -209,10 +209,8 @@
         <label for="idTecnico">
           <g:message code="solicitudDetalle.idTecnico.label" default="Tecnico" />
         </label>
-        <g:select id="idTecnico" name="idTecnico" disabled="true"
-          from="${tecnicos}" class="many-to-one"
-            optionKey="id" value="${solicitudDetalleInstance?.idTecnico}"
-            noSelection="['': '']"/>
+        <g:field  id="idTecnico" name="idTecnico" disabled="true"
+          value="${firmado.usuarioNombre(solicitudDetalleInstance?.idTecnico)}"/>
       </div>
     </g:if>
   </div>
