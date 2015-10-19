@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <h1>Solicitudes y soluciones</h1>
+        <h1>Categoría del servicio</h1>
         <g:each in="${solicitudInstance?.detalles}" var="d">
           <div class="fieldtablecontain">
             ${"Solicitud: ${d?.encodeAsHTML()} : ${d?.descripcion.encodeAsHTML()}"}
@@ -61,15 +61,6 @@
           </div>
         </g:each>
         <br/>
-
-				<g:if test="${solicitudInstance?.idAutoriza}">
-				<li class="fieldcontain">
-					<span id="idAutoriza-label" class="property-label"><g:message code="solicitud.idAutoriza.label" default="Autorizador" /></span>
-
-						<span class="property-value" aria-labelledby="idAutoriza-label"><g:fieldValue bean="${solicitudInstance}" field="idAutoriza"/></span>
-
-				</li>
-				</g:if>
 
         <div class="row-fluid">
           <div class="span4">
@@ -167,24 +158,6 @@
               from="${[1,2]}" style="width: 60px"
               valueMessagePrefix="encuesta.valor" value="${solicitudInstance.p04}" />
           </span>
-				</li>
-				</g:if>
-
-				<g:if test="${solicitudInstance?.lastUpdated}">
-				<li class="fieldcontain">
-					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Last Updated" /></span>
-
-						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudInstance?.lastUpdated}" /></span>
-
-				</li>
-				</g:if>
-
-				<g:if test="${solicitudInstance?.ipTerminal}">
-				<li class="fieldcontain">
-					<span id="ipTerminal-label" class="property-label"><g:message code="solicitud.ipTerminal.label" default="Ip Terminal" /></span>
-
-						<span class="property-value" aria-labelledby="ipTerminal-label"><g:fieldValue bean="${solicitudInstance}" field="ipTerminal"/></span>
-
 				</li>
 				</g:if>
 
