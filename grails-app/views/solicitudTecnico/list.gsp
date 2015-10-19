@@ -64,8 +64,7 @@
 						<td><g:message code="intensidad.valor.${solicitudDetalleInstance.prioridad?:(solicitudDetalleInstance?.idServ?.impacto)}" default="" /></td>
 
             <td>
-              <g:formatDate date="${solicitudDetalleInstance.idSolicitud.fechaVb?:
-                solicitudDetalleInstance.idSolicitud.fechaAutoriza}" /></td>
+              <g:formatDate date="${solicitudDetalleInstance.idSolicitud.fechaRevisa}" /></td>
 
             <td>
               ${solicitudDetalleInstance?.idServ?.tiempo2}

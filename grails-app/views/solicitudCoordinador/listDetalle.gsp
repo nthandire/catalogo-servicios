@@ -68,8 +68,7 @@
             </g:link></td>
 
 						<td>
-              <g:formatDate date="${solicitudDetalleInstance.idSolicitud.fechaVb?:
-                solicitudDetalleInstance.idSolicitud.fechaAutoriza}" /></td>
+              <g:formatDate date="${solicitudDetalleInstance.idSolicitud.fechaRevisa}" /></td>
 
             <td>
               ${solicitudDetalleInstance?.idServ?.tiempo2}

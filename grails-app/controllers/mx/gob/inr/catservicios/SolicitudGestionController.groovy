@@ -258,6 +258,7 @@ class SolicitudGestionController {
         }
 
         solicitudInstance.estado = 'R' as char
+        solicitudInstance.fechaRevisa = new Date()
         solicitudInstance.idRevisa = userID
 
         if (!solicitudInstance.save(flush: true)) {

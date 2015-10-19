@@ -8,6 +8,7 @@
 	</head>
 	<body>
 		<a href="#list-autoriza" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+    <g:set var="firmado" bean="firmadoService"/>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -46,7 +47,7 @@
 
 						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
 
-						<td>${Usuario.get(solicitudInstance.idSolicitante).username}</td>
+						<td>${firmado.usuarioNombre(solicitudInstance.idSolicitante)}</td>
 
 						<td><g:formatDate date="${solicitudInstance.lastUpdated}" /></td>
 

@@ -151,13 +151,13 @@
          </li>
        </g:if>
 
-       <g:if test="${solicitudInstance?.fechaAutoriza}">
+       <g:if test="${solicitudInstance?.fechaRevisa}">
          <li class="fieldcontain">
-           <span id="fechaAutoriza-label" class="property-label">
-             <g:message code="solicitud.fechaAutoriza.label" default="Fecha Autorización/Vobo" />
+           <span id="fechaRevisa-label" class="property-label">
+             <g:message code="solicitud.fechaRevisa.label" default="Fecha de Revisión" />
            </span>
-           <span class="property-value" aria-labelledby="fechaAutoriza-label">
-             <g:formatDate date="${solicitudInstance?.fechaVb?:solicitudInstance?.fechaAutoriza}" />
+           <span class="property-value" aria-labelledby="fechaRevisa-label">
+             <g:formatDate date="${solicitudInstance?.fechaVb?:solicitudInstance?.fechaRevisa}" />
            </span>
          </li>
        </g:if>

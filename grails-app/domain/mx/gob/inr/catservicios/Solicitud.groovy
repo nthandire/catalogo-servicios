@@ -2,14 +2,15 @@ package mx.gob.inr.catservicios
 
 class Solicitud {
 
-	Date fechaSolicitud
-	Integer numeroSolicitud
-	Character estado
+  Date fechaSolicitud
+  Integer numeroSolicitud
+  Character estado
   String justificacion
   Integer idSolicitante
   Integer idAutoriza
-  Integer idRevisa
   Date fechaAutoriza
+  Integer idRevisa
+  Date fechaRevisa
   Integer idVb
   Date fechaVb
   Integer p01
@@ -31,15 +32,16 @@ class Solicitud {
 
 	static constraints = {
 		numeroSolicitud nullable: true, editable:false
-		fechaSolicitud nullable: true, editable:false
-		estado nullable: true, maxSize: 1, editable:false,
-			inList: [(char)'F', (char)'A', (char)'R', (char)'V', (char)'E', (char)'T', (char)'C']
+    fechaSolicitud nullable: true, editable:false
+    estado nullable: true, maxSize: 1, editable:false,
+      inList: [(char)'F', (char)'A', (char)'R', (char)'V', (char)'E', (char)'T', (char)'C']
     justificacion nullable: true, maxSize: 1500
-		comentarioVb nullable: true, maxSize: 1500
-		idSolicitante nullable: true, editable:false
+    comentarioVb nullable: true, maxSize: 1500
+    idSolicitante nullable: true, editable:false
     idAutoriza nullable: true
-		idRevisa nullable: true
 		fechaAutoriza nullable: true, editable:false
+    idRevisa nullable: true
+    fechaRevisa nullable: true, editable:false
 		idVb nullable: true
 		fechaVb nullable: true, editable:false
 		p01 nullable: true
