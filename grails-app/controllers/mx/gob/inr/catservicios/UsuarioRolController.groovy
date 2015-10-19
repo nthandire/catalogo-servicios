@@ -6,8 +6,8 @@ import org.springframework.dao.DataIntegrityViolationException
 @Secured(['ROLE_SAST_ADMIN'])
 class UsuarioRolController {
     static nombreMenu = "Usuarios-Roles"
-    static ordenMenu = 163
-    
+    static ordenMenu = -163
+
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
