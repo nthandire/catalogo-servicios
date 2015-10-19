@@ -14,7 +14,7 @@
 				<li><g:link class="list" action="listDetalle">Asignación de servicio</g:link></li>
         <%--
 				<li><g:link class="list" action="listAsignados">Solicitudes asignadas</g:link></li>
-				<li><g:link class="list" action="listTerminadas">Solicitudes termindadas</g:link></li>
+				<li><g:link class="list" action="listTerminadas">Solicitudes terminadas</g:link></li>
         --%>
 			</ul>
 		</div>

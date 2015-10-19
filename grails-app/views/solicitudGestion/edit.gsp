@@ -16,7 +16,7 @@
         <li><g:link class="list" action="listTodas">Todas</g:link></li>
         <li><g:link class="list" action="listAsignados">Solicitudes asignadas</g:link></li>
         <li><g:link class="list" action="listEncuestas">Solicitudes en encuesta</g:link></li>
-        <li><g:link class="list" action="listTerminadas">Solicitudes termindadas</g:link></li>
+        <li><g:link class="list" action="listTerminadas">Solicitudes terminadas</g:link></li>
 			</ul>
 		</div>
 		<div id="edit-solicitudDetalle" class="content scaffold-edit" role="main">
