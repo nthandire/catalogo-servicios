@@ -8,7 +8,7 @@ Junta del 7 de octubre.
 > 3.- Para los reportes, iniciar el tiempo de atención usando la fecha de "Revisión" del Gestor
 + 4.- REQUERIMIENTO NUEVO (o entendimiento nuevo por Daniel), El personal del área ve como tiempos de servicio los tiempos asignados a SU área (el segundo nivel)
 + 5.- REQUERIMIENTO NUEVO, volver a poner al Gestor la lista de solicitudes terminadas y de encuestas.
-~ 6.- REQUERIMIENTO NUEVO, El ordenamiento de las listas debe ser por fecha descendente.
++ 6.- REQUERIMIENTO NUEVO, El ordenamiento de las listas debe ser por fecha descendente.
 - 7.- REQUERIMIENTO NUEVO, En la encuesta de solicitud, quitar la Justificación
 - 8.- En la encuesta, no se ve el "NO" en las respuestas de la encuesta, en Chrome.
 - 9.- REQUERIMIENTO NUEVO, El personal de área ve como inicio de su tiempo para dar servicio, la fecha (con hora) de Gestión (Cuando el Gestor lo marca como Revisado).
