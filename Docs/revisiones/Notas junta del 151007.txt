@@ -12,7 +12,7 @@ Junta del 7 de octubre.
 + 7.- REQUERIMIENTO NUEVO, En la encuesta de solicitud, quitar la Justificación
 + 8.- En la encuesta, no se ve el "NO" en las respuestas de la encuesta, en Chrome.
 + 9.- REQUERIMIENTO NUEVO, El personal de área ve como inicio de su tiempo para dar servicio, la fecha (con hora) de Gestión (Cuando el Gestor lo marca como Revisado).
-- 10.- REQUERIMIENTO NUEVO,  En la vista de la encuesta, en lugar de la jsutificación, poner la lista de lo solicitado y solucionado.
++ 10.- REQUERIMIENTO NUEVO,  En la vista de la encuesta, en lugar de la jsutificación, poner la lista de lo solicitado y solucionado.
 - 11.- Corregir en el sespliegue de la Encuesta (Show), los siguientes problemas:
 Numero Solicitud      11
 (quitar)

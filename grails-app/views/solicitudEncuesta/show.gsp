@@ -9,6 +9,7 @@
 	</head>
 	<body>
 		<a href="#show-solicitud" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+    <g:set var="firmado" bean="firmadoService"/>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -25,59 +26,80 @@
 			</g:if>
 			<ol class="property-list solicitud">
 
-				<g:if test="${solicitudInstance?.numeroSolicitud}">
-				<li class="fieldcontain">
-					<span id="numeroSolicitud-label" class="property-label"><g:message code="solicitud.numeroSolicitud.label" default="Numero Solicitud" /></span>
+        <div class="row-fluid">
+          <div class="span5 offset1">
+            <g:if test="${solicitudInstance?.numeroSolicitud}">
+            <li class="fieldcontain">
+              <span id="numeroSolicitud-label" class="property-label"><g:message code="solicitud.numeroSolicitud.label" default="Numero Solicitud" /></span>
+                <span class="property-value" aria-labelledby="numeroSolicitud-label">
+                  ${solicitudInstance}
+                </span>
+            </li>
+            </g:if>
+          </div>
 
-						<span class="property-value" aria-labelledby="numeroSolicitud-label"><g:fieldValue bean="${solicitudInstance}" field="numeroSolicitud"/></span>
+          <div class="span5">
+            <g:if test="${solicitudInstance?.fechaSolicitud}">
+            <li class="fieldcontain">
+              <span id="fechaSolicitud-label" class="property-label"><g:message code="solicitud.fechaSolicitud.label" default="Fecha Solicitud" /></span>
+                <span class="property-value" aria-labelledby="fechaSolicitud-label"><g:formatDate date="${solicitudInstance?.fechaSolicitud}" /></span>
+            </li>
+            </g:if>
+          </div>
+        </div>
 
-				</li>
-				</g:if>
-
-				<g:if test="${solicitudInstance?.fechaSolicitud}">
-				<li class="fieldcontain">
-					<span id="fechaSolicitud-label" class="property-label"><g:message code="solicitud.fechaSolicitud.label" default="Fecha Solicitud" /></span>
-
-						<span class="property-value" aria-labelledby="fechaSolicitud-label"><g:formatDate date="${solicitudInstance?.fechaSolicitud}" /></span>
-
-				</li>
-				</g:if>
-
-				<g:if test="${solicitudInstance?.estado}">
-				<li class="fieldcontain">
-					<span id="estado-label" class="property-label"><g:message code="solicitud.estado.label" default="Estado" /></span>
-
-						<span class="property-value" aria-labelledby="estado-label"><g:fieldValue bean="${solicitudInstance}" field="estado"/></span>
-
-				</li>
-				</g:if>
-
-				<g:if test="${solicitudInstance?.justificacion}">
-				<li class="fieldcontain">
-					<span id="justificacion-label" class="property-label"><g:message code="solicitud.justificacion.label" default="Justificacion" /></span>
-
-						<span class="property-value" aria-labelledby="justificacion-label"><g:fieldValue bean="${solicitudInstance}" field="justificacion"/></span>
-
-				</li>
-				</g:if>
-
-				<g:if test="${solicitudInstance?.idSolicitante}">
-				<li class="fieldcontain">
-					<span id="idSolicitante-label" class="property-label"><g:message code="solicitud.idSolicitante.label" default="Id Solicitante" /></span>
-
-						<span class="property-value" aria-labelledby="idSolicitante-label"><g:fieldValue bean="${solicitudInstance}" field="idSolicitante"/></span>
-
-				</li>
-				</g:if>
+        <h1>Solicitudes y soluciones</h1>
+        <g:each in="${solicitudInstance?.detalles}" var="d">
+          <div class="fieldtablecontain">
+            ${"Solicitud: ${d?.encodeAsHTML()} : ${d?.descripcion.encodeAsHTML()}"}
+          </div>
+          <div class="fieldtablecontain">
+            ${"Solución: " + d?.solucion.encodeAsHTML()}
+          </div>
+          <div class="fieldtablecontain">
+            -------------------------------------------
+          </div>
+        </g:each>
+        <br/>
 
 				<g:if test="${solicitudInstance?.idAutoriza}">
 				<li class="fieldcontain">
-					<span id="idAutoriza-label" class="property-label"><g:message code="solicitud.idAutoriza.label" default="Id Autoriza" /></span>
+					<span id="idAutoriza-label" class="property-label"><g:message code="solicitud.idAutoriza.label" default="Autorizador" /></span>
 
 						<span class="property-value" aria-labelledby="idAutoriza-label"><g:fieldValue bean="${solicitudInstance}" field="idAutoriza"/></span>
 
 				</li>
 				</g:if>
+
+        <div class="row-fluid">
+          <div class="span4">
+            <div class="fieldtablecontain">
+              <label for="nombre-label">
+                <g:message code="solicitud.nombre.label" default="Autorizador"/>
+              </label>
+              <g:field type="text" name="nombre.no" disabled="true"
+                value="${firmado.usuarioNombre(solicitudInstance?.idAutoriza)}"/>
+            </div>
+          </div>
+          <div class="span3">
+            <div class="fieldtablecontain">
+              <label for="telefono-label">
+                <g:message code="solicitud.telefono.label" default="Extensión" />
+              </label>
+              <g:field type="text" name="telefono.no" disabled="true"
+                value="${firmado.usuarioNombre(solicitudInstance?.idAutoriza).extension}"/>
+            </div>
+          </div>
+          <div class="span3">
+            <div class="fieldtablecontain">
+              <label for="area-label">
+                <g:message code="solicitud.area.label" default="Área" />
+              </label>
+              <g:field type="text" name="area.no" disabled="true"
+                value="${firmado.areaNombre(solicitudInstance?.idAutoriza)}"/>
+            </div>
+          </div>
+        </div>
 
 				<g:if test="${solicitudInstance?.fechaAutoriza}">
 				<li class="fieldcontain">
@@ -174,18 +196,6 @@
 						<span class="property-value" aria-labelledby="archivos-label"><g:link controller="solicitudArchivoadjunto" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
 						</g:each>
 
-				</li>
-				</g:if>
-
-				<g:if test="${solicitudInstance?.detalles}">
-				<li class="fieldcontain">
-					<span id="detalles-label" class="property-label"><g:message code="solicitud.detalles.label" default="Detalles" /></span>
-						<g:each in="${solicitudInstance.detalles}" var="d">
-            <%--
-            <span class="property-value" aria-labelledby="detalles-label"><g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
-            --%>
-						<span class="property-value" aria-labelledby="detalles-label">${d?.encodeAsHTML()}</span>
-						</g:each>
 				</li>
 				</g:if>
 
