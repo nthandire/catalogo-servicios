@@ -14,14 +14,6 @@
 		required="" disabled="true"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: solicitudInstance, field: 'justificacion', 'error')} ">
-	<label for="justificacion">
-		<g:message code="solicitud.justificacion.label" default="Justificacion" />
-	</label>
-	<g:textArea name="justificacion" cols="40" rows="5" maxlength="1500"
-		value="${solicitudInstance?.justificacion}" disabled="true"/>
-</div>
-
 <h1>Solicitudes y soluciones</h1>
 <g:each in="${solicitudInstance?.detalles}" var="d">
   <div class="fieldtablecontain">
