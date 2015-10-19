@@ -8,7 +8,8 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#list-solicitudDetalle" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+    <a href="#list-solicitudDetalle" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+    <g:set var="firmado" bean="firmadoService"/>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -54,7 +55,7 @@
 
             <td>${fieldValue(bean: solicitudDetalleInstance, field: "idServcat")}</td>
 
-            <td>${fieldValue(bean: solicitudDetalleInstance, field: "idTecnico")}</td>
+            <td>${"${firmado.usuarioNombre(solicitudDetalleInstance.idTecnico)}"}</td>
 
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idServ")}</td>
 

@@ -48,7 +48,7 @@
 
 						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
 
-						<td>${Usuario.get(solicitudInstance.idSolicitante).username}</td>
+						<td>${Usuario.get(solicitudInstance.idSolicitante)}</td>
 
 						<td><g:formatDate date="${solicitudInstance.fechaVb?:solicitudInstance.fechaAutoriza}" /></td>
 

@@ -47,7 +47,7 @@
 
 						<td><g:link action="show" id="${solicitudInstance.id}" params="[back: 'list']">${solicitudInstance.toString()}</g:link></td>
 
-						<td>${Usuario.get(solicitudInstance.idSolicitante).username}</td>
+						<td>${Usuario.get(solicitudInstance.idSolicitante)}</td>
 
 						<td><g:formatDate date="${solicitudInstance.lastUpdated}" /></td>
 

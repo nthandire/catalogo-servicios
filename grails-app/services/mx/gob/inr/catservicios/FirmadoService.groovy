@@ -71,6 +71,10 @@ class FirmadoService {
     Cat_servResp.findByDescripcion(areaString.area)
   }
 
+  def usuarioNombre (Long usuario) {
+    Usuario.get(usuario)
+  }
+
   def areaNombre (Long usuario) {
     log.debug("usuario = ${usuario}")
     def area = ""
