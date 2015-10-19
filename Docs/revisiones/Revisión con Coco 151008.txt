@@ -3,4 +3,4 @@ Revisión con Coco 8 de octubre.
 
 
 
-- 1.- En autorización, no baja los archivos adjuntos, solo muestra caracteristicas
++ 1.- En autorización, no baja los archivos adjuntos, solo muestra caracteristicas

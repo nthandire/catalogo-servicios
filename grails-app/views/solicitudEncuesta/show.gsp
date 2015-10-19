@@ -165,9 +165,11 @@
 				<li class="fieldcontain">
 					<span id="archivos-label" class="property-label"><g:message code="solicitud.archivos.label" default="Archivos" /></span>
 
-						<g:each in="${solicitudInstance.archivos}" var="a">
-						<span class="property-value" aria-labelledby="archivos-label"><g:link controller="solicitudArchivoadjunto" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
-						</g:each>
+					<g:each in="${solicitudInstance.archivos}" var="a">
+						<span class="property-value" aria-labelledby="archivos-label">
+              <g:link controller="solicitudArchivoadjunto" action="download" id="${a.id}">${a?.encodeAsHTML()}</g:link>
+            </span>
+					</g:each>
 
 				</li>
 				</g:if>
