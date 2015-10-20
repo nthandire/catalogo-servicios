@@ -15,7 +15,8 @@
 </div>
 
 <h1>Solicitudes y soluciones</h1>
-<g:each in="${solicitudInstance?.detalles}" var="d">
+<g:each in="${SolicitudDetalle.findAllByIdSolicitudAndEstado(solicitudInstance,
+                            'A' as char)}" var="d">
   <div class="fieldtablecontain">
     ${"Solicitud: " + d?.descripcion.encodeAsHTML()}
   </div>

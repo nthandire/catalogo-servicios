@@ -77,24 +77,44 @@
 				<g:message code="solicitud.detalles.label" default="Descripción de la solicitud" />
 			</H1>
 
-			<div class="row-fluid">
-				<div class="span10 offset1">
-					<ul class="one-to-many">
-						<g:each in="${solicitudInstance?.detalles}" var="d">
-					    <li>
-                <g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link>
-                ${d?.idServ?.servSub?.descripcion}
-                ${d?.idServ?.descripcion}
-              </li>
-						</g:each>
-						<g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
-							<li class="add">
-								<g:link controller="solicitudDetalle" action="create" params="['solicitud.id': solicitudInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle')])}</g:link>
-							</li>
-						</g:if>
-					</ul>
-				</div>
-			</div>
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <table>
+            <g:if test="${solicitudInstance?.detalles}">
+              <tr>
+                <th>Categoría</th>
+                <th>Subcategoría</th>
+                <th>Tercer nivel</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+              </tr>
+            </g:if>
+            <g:each in="${solicitudInstance?.detalles}" var="d">
+              <tr>
+                <td>
+                  <g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link>
+                </td>
+                <td>${d?.idServ?.servSub?.descripcion}</td>
+                <td>${d?.idServ?.descripcion}</td>
+                <td>${d?.descripcion}</td>
+                <td>${message(code: "cat_servCat.estado.${d?.estado}")}</td>
+              </tr>
+            </g:each>
+            <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
+              <tr><td>
+                <g:link class="btn" controller="solicitudDetalle" action="create"
+                  params="['solicitud.id': solicitudInstance?.id]">
+                    ${message(code: 'default.add.label',
+                      args: [message(code: 'solicitudDetalle.label',
+                        default: 'SolicitudDetalle')])}
+                </g:link>
+              </td>
+              <td colspan="4"></td>
+              </tr>
+            </g:if>
+          </table>
+        </div>
+      </div>
 
 
 			<H1>
@@ -102,7 +122,7 @@
 			</H1>
 
 			<div class="row-fluid">
--				<div class="span10 offset1">
+				<div class="span10 offset1">
 					<ul class="one-to-many">
 						<g:each in="${solicitudInstance?.archivos}" var="a">
 						    <li><g:link controller="solicitudArchivoadjunto" action="download" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
@@ -110,7 +130,13 @@
 						<g:if test="${((!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char) &&
                            (!solicitudInstance?.archivos || solicitudInstance?.archivos?.size() <= 2))}">
 							<li class="add">
-								<g:link controller="solicitudArchivoadjunto" action="create" params="['solicitud.id': solicitudInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
+								<g:link class="btn" controller="solicitudArchivoadjunto"
+                  action="create"
+                  params="['solicitud.id': solicitudInstance?.id]">
+                  ${message(code: 'default.add.label',
+                    args: [message(code: 'solicitudArchivoadjunto.label',
+                      default: 'SolicitudArchivoadjunto')])}
+                </g:link>
 							</li>
 						</g:if>
 					</ul>

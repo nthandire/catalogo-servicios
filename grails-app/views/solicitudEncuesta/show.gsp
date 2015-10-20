@@ -1,5 +1,4 @@
-
-<%@ page import="mx.gob.inr.catservicios.Solicitud" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -49,7 +48,8 @@
         </div>
 
         <h1>Categoría del servicio</h1>
-        <g:each in="${solicitudInstance?.detalles}" var="d">
+        <g:each in="${SolicitudDetalle.findAllByIdSolicitudAndEstado(solicitudInstance,
+                            'A' as char)}" var="d">
           <div class="fieldtablecontain">
             ${"Solicitud: ${d?.encodeAsHTML()} : ${d?.descripcion.encodeAsHTML()}"}
           </div>

@@ -186,7 +186,9 @@ class SolicitudTecnicoController {
         def solicitud = solicitudDetalleInstance.idSolicitud
         log.debug("solicitud = $solicitud")
         def detallesPendientes =
-          SolicitudDetalle.countByIdSolicitudAndFechaSolucionIsNull(solicitud)
+          SolicitudDetalle.
+            countByIdSolicitudAndFechaSolucionIsNullAndEstado(solicitud,
+                                                              'A' as char)
         log.debug("detallesPendientes = $detallesPendientes")
         if (!detallesPendientes) {
             solicitud.estado = 'E' as char

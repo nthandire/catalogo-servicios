@@ -27,6 +27,7 @@ class SolicitudCoordinadorController {
         def query =
             "  from SolicitudDetalle d                    \n" +
             " where idTecnico is null                     \n" +
+            "   and d.estado = 'A'                        \n" +
             "   and exists                                \n" +
             "      ( from Cat_serv t,                     \n" +
             "             Cat_servResp r                  \n" +

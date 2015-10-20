@@ -30,5 +30,15 @@
     <g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Equipo" />
   </label>
   <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
-		from="${ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}" optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}" class="many-to-one" noSelection="${['':'Seleccione una...']}"/>
+    from="${ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}" optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}" class="many-to-one" noSelection="${['':'Seleccione una...']}"/>
 </div>
+
+<g:if test="${solicitudDetalleInstance.estado}">
+  <div class="fieldtablecontain">
+    <label for="estado">
+      <g:message code="solicitudDetalle.estado.label" default="Estado" />
+    </label>
+    <g:select name="estado" from="${solicitudDetalleInstance.constraints.estado.inList}"
+      valueMessagePrefix="cat_servCat.estado" value="${solicitudDetalleInstance.estado}"/>
+  </div>
+</g:if>

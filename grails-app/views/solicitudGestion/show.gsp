@@ -180,19 +180,31 @@
        <g:message code="solicitud.detalles.label" default="Descripción de la solicitud" />
      </H1>
 
-     <div class="row-fluid">
--        <div class="span10 offset1">
-         <ul class="one-to-many">
-           <g:each in="${solicitudInstance?.detalles}" var="d">
-             <li>
-               <g:link action="edit" id="${d.id}">${d?.encodeAsHTML()}</g:link>
-               ${d?.idServ?.servSub?.descripcion}
-               ${d?.idServ?.descripcion}
-             </li>
-           </g:each>
-         </ul>
-       </div>
-     </div>
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <table>
+            <g:if test="${solicitudInstance?.detalles}">
+              <tr>
+                <th>Categoría</th>
+                <th>Subcategoría</th>
+                <th>Tercer nivel</th>
+                <th>Descripción</th>
+              </tr>
+            </g:if>
+            <g:each in="${SolicitudDetalle.findAllByIdSolicitudAndEstado(solicitudInstance,
+                            'A' as char)}" var="d">
+              <tr>
+                <td><g:link action="edit" id="${d.id}">
+                  ${d?.encodeAsHTML()}
+                </g:link></td>
+                <td>${d?.idServ?.servSub?.descripcion}</td>
+                <td>${d?.idServ?.descripcion}</td>
+                <td>${d?.descripcion}</td>
+              </tr>
+            </g:each>
+          </table>
+        </div>
+      </div>
 
 
      <H1>

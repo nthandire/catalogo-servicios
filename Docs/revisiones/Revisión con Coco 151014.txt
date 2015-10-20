@@ -1,7 +1,7 @@
 Revisión con Coco 14 de octubre.
 --------------------------------
 
-- 1.- en solicitudDetalle, no se esta usando el estado
++ 1.- en solicitudDetalle, no se esta usando el estado
 - 2.- la solicitud 16, el aprovador (Marin) no esta viendo el detalle, aunque lo tiene el tecnico
 - 3.- ¿El técnico debe firmar cuando da solución a un detalle? Respuesta, para MS parece que no. Otra Respuesta, ya esta programado con firma, revisar con Richard.
 - 4.- No aparece el botón de "Marcar como solucionado" para el Técnico.

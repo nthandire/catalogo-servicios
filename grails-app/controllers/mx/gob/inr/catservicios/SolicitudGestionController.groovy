@@ -239,9 +239,11 @@ class SolicitudGestionController {
             return
         }
 
-        def detalles = SolicitudDetalle.countByIdSolicitudAndIdServIsNull(solicitudInstance)
-        log.debug("detalles = $detalles")
-        if (detalles) {
+        def detallesPendientes = SolicitudDetalle.
+          countByIdSolicitudAndEstadoAndIdServIsNull(solicitudInstance,
+                                                     'A' as char)
+        log.debug("detallesPendientes = $detallesPendientes")
+        if (detallesPendientes) {
             flash.error = "Debe capturar antes todos los servicios de tercer nivel."
             render(view: "show", model: [solicitudInstance: solicitudInstance])
             return
@@ -267,7 +269,10 @@ class SolicitudGestionController {
         }
 
         def areas = []
-        solicitudInstance.detalles.each {
+        def detalles = SolicitudDetalle.
+          findAllByIdSolicitudAndEstadoAndIdServIsNotNull(solicitudInstance,
+                                                          'A' as char)
+        detalles.each {
           if (!areas.contains(it.idServ.servResp2))
             areas << it.idServ.servResp2
         }

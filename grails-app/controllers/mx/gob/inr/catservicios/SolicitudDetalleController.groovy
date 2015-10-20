@@ -48,6 +48,7 @@ class SolicitudDetalleController {
         def solicitudDetalleInstance = new SolicitudDetalle(paramsFiltrado)
         def solicitud = Solicitud.get(params.idSolicitud)
         solicitudDetalleInstance.idSolicitud = solicitud
+        solicitudDetalleInstance.estado = 'A' as char
         if (!solicitudDetalleInstance?.idServcat?.id) {
             flash.error = "Debe capturar la categoría de su solicitud"
             render(view: "create", model: [solicitudDetalleInstance: solicitudDetalleInstance])
