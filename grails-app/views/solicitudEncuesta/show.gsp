@@ -178,7 +178,9 @@
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${solicitudInstance?.id}" />
-					<g:link class="edit" action="edit" id="${solicitudInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+          <g:if test="${solicitudInstance.estado == 'E' as char}">
+					 <g:link class="edit" action="edit" id="${solicitudInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+         </g:if>
 				</fieldset>
 			</g:form>
 		</div>

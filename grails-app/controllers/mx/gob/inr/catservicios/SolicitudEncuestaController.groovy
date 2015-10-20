@@ -40,6 +40,7 @@ class SolicitudEncuestaController {
             redirect(action: "list")
             return
         }
+        log.debug("Estado = ${solicitudInstance.estado}")
 
         [solicitudInstance: solicitudInstance]
     }
