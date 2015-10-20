@@ -1,4 +1,4 @@
 Revisión con Richard 14 de octubre.
 --------------------------------
 
-- 1.- CAMPO NUEVO, fecha_revisa en Solicitud.
++ 1.- CAMPO NUEVO, fecha_revisa en Solicitud.
