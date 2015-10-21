@@ -41,7 +41,9 @@
 				<g:each in="${solicitudInstanceList}" status="i" var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
+						<td><g:link action="edit" id="${solicitudInstance.id}">
+              ${solicitudInstance.toString()?: "Solicitud nueva"}
+            </g:link></td>
 
 						<td><g:formatDate date="${solicitudInstance.fechaSolicitud ?: solicitudInstance.lastUpdated}" /></td>
 

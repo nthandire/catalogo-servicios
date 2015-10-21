@@ -17,8 +17,11 @@
 		<div id="create-solicitud" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			 <div class="message" role="status">${flash.message}</div>
 			</g:if>
+      <g:if test="${flash.error}">
+        <div class="errors" role="status">${flash.error}</div>
+      </g:if>
 			<g:hasErrors bean="${solicitudInstance}">
 			<ul class="errors" role="alert">
 				<g:eachError bean="${solicitudInstance}" var="error">
@@ -28,10 +31,25 @@
 			</g:hasErrors>
 			<g:form action="save" >
 				<fieldset class="form">
-					<g:render template="form"/>
+          <g:render template="formDetalle"/>
+					<g:render template="formCreate"/>
 				</fieldset>
+
+        <script>
+          function detalle() {
+            $("#idServcat").prop("required", true);
+            $("#descripcion").prop("required", true);
+          }
+          function maestro() {
+            $("#idServcat").prop("required", false);
+            $("#descripcion").prop("required", false);
+          }
+        </script>
+
+
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<g:submitButton name="create" class="save"  onclick="detalle()"
+            value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>
 			</g:form>
 		</div>
