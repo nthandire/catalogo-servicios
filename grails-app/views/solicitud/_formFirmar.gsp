@@ -6,6 +6,6 @@
 		<g:message code="firmadigital.passwordfirma.label" default="Passwordfirma" />
 
 	</label>
-	<g:field name="passwordfirma" type="password" value="${firmadigitalInstance?.passwordfirma}" required="true"/>
+	<g:field name="passwordfirma" id="passwordfirma" type="password" value="${firmadigitalInstance?.passwordfirma}"/>
 </div>
 

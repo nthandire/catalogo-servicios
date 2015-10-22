@@ -68,30 +68,61 @@
         </div>
 
 
-        <script>
-          function detalle() {
-            $("#idServcat").prop("required", true);
-            $("#descripcion").prop("required", true);
-          }
-          function maestro() {
-            $("#idServcat").prop("required", false);
-            $("#descripcion").prop("required", false);
-          }
-        </script>
+        <!-- Modal para firmar -->
+        <div id="myModalFirmar" class="modal hide fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Firma digital</h3>
+          </div>
+          <div class="modal-body">
+            <fieldset class="form">
+              <g:render template="formFirmar"/>
+            </fieldset>
+          </div>
+          <fieldset class="buttons">
+            <g:actionSubmit class="save" action="firmarUpdate"
+              value="${message(code: 'default.button.update.label',
+                               default: 'Update')}" />
+          </fieldset>
+        </div>
+
+
+<script>
+  function detalle() {
+    $("#idServcat").prop("required", true);
+    $("#descripcion").prop("required", true);
+    $("#justificacion").prop("required", false);
+    $("#idAutoriza").prop("required", false);
+    $("#idAutoriza").prop("passwordfirma", false);
+  }
+  function maestro() {
+    $("#idServcat").prop("required", false);
+    $("#descripcion").prop("required", false);
+    $("#justificacion").prop("required", true);
+    $("#idAutoriza").prop("required", true);
+    $("#idAutoriza").prop("passwordfirma", false);
+  }
+  function firma() {
+    $("#idServcat").prop("required", false);
+    $("#descripcion").prop("required", false);
+    $("#justificacion").prop("required", true);
+    $("#idAutoriza").prop("required", true);
+    $("#idAutoriza").prop("passwordfirma", true);
+  }
+</script>
 
 
 				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
           <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
-            <g:link class="edit" action="edit" id="${solicitudInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-            <a href="#myModal" class="edit" data-toggle="modal">
-                ${message(code: 'default.add.label',
-                  args: [message(code: 'solicitudDetalle.label',
-                    default: 'SolicitudDetalle')])}</a>
-            <g:if test="${!solicitudInstance?.estado}">
-              <!-- Button to trigger modal -->
-              <a href="#myModal" class="edit" data-toggle="modal">Firmar</a>
+					  <g:actionSubmit class="save" action="update" onclick="maestro()"
+              value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+            <g:if test="${!solicitudInstance?.estado && solicitudInstance?.justificacion && solicitudInstance?.idAutoriza}">
+              <a href="#myModalFirmar" class="edit" data-toggle="modal"
+                onclick="firma()">Firmar</a>
             </g:if>
+            <g:else>
+              <a href="#" class="cancel" data-toggle="modal">Debe llenar todos los campos para poder firmar esta solicitud</a>
+            </g:else>
           </g:if>
         </fieldset>
       </g:form>

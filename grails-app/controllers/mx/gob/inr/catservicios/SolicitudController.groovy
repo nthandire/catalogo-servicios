@@ -280,7 +280,7 @@ class SolicitudController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
-        redirect(action: "show", id: solicitudInstance.id)
+        redirect(action: "edit", id: solicitudInstance.id)
     }
 
     def updateDetalle(Long id, Long version, Long idDetalle, Long versionDetalle) {

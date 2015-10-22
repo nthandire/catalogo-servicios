@@ -22,7 +22,7 @@
       <g:each in="${solicitudInstance?.detalles.sort {it.id}}" var="d">
         <tr>
           <td>
-            <g:link controller="solicitudDetalle" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link>
+            <g:link controller="solicitudDetalle" action="edit" id="${d.id}">${d?.encodeAsHTML()}</g:link>
           </td>
           <td>${d?.idServ?.servSub?.descripcion}</td>
           <td>${d?.idServ?.descripcion}</td>
@@ -59,7 +59,7 @@
       <label for="justificacion">
         <g:message code="solicitud.justificacion.label" default="Justificacion" />
       </label>
-      <g:textArea name="justificacion" cols="40" rows="5" maxlength="1500"
+      <g:textArea id="justificacion" name="justificacion" cols="40" rows="5" maxlength="1500"
         value="${solicitudInstance?.justificacion}"/>
     </div>
   </div>
