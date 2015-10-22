@@ -88,7 +88,9 @@ class SolicitudController {
     def save() {
         // Checar si el detalle esta bien
         log.debug("params = $params")
-        def paramsFiltrado = params.findAll {it.key != 'idSolicitud' && (it.key != 'idResguardoentregadetalle' || it.value )}
+        def paramsFiltrado = params.findAll {it.key != 'idSolicitud' &&
+                          it.key != 'estado' &&
+                          (it.key != 'idResguardoentregadetalle' || it.value )}
         log.debug("paramsFiltrado = $paramsFiltrado")
         def solicitudDetalleInstance = new SolicitudDetalle(paramsFiltrado)
         def solicitudInstance = new Solicitud(paramsFiltrado)
@@ -136,26 +138,6 @@ class SolicitudController {
         redirect(action: "edit", id: solicitudInstance.id)
     }
 
-    def show(Long id) {
-        def solicitudInstance = Solicitud.get(id)
-        if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
-            redirect(action: "list")
-            return
-        }
-
-      def autorizador = null
-      if (solicitudInstance?.idAutoriza) {
-        Usuario.withNewSession { sessionU ->
-          def usuarioAutorizador = Usuario.get(solicitudInstance?.idAutoriza)
-          autorizador = usuarioAutorizador.toString()
-        }
-      }
-
-        [solicitudInstance: solicitudInstance,
-          autorizador: autorizador]
-    }
-
     def listaDeAutorizadores() {
       def userID = springSecurityService.principal.id
       def area = UsuarioAutorizado.get(userID)?.area
@@ -191,7 +173,7 @@ class SolicitudController {
     }
 
     def firmarUpdate(Long id, Long version) {
-        log.debug("params = $params")
+        log.debug("En firmarUpdate: params = $params")
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
@@ -199,10 +181,13 @@ class SolicitudController {
             return
         }
 
-        if (solicitudInstance?.detalles?.size()) {
+        if (solicitudInstance?.detalles?.size() && (solicitudInstance.detalles.
+                    findAll {it.estado == 'A' as char}.size())) {
+          log.debug("solicitudInstance?.detalles = ${solicitudInstance?.detalles}")
+          log.debug("solicitudInstance?.detalles activos = ${solicitudInstance.detalles.findAll {it.estado == 'A' as char}}")
         } else {
-            flash.error = "Debe tener al menos un detalle para poderla firmar"
-            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            flash.error = "Debe tener al menos un detalle activo para poderla firmar"
+            render(view: "edit", model: [solicitudInstance: solicitudInstance])
             return
         }
 
@@ -211,7 +196,7 @@ class SolicitudController {
                 solicitudInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'solicitud.label', default: 'Solicitud')] as Object[],
                           "Alguien más ha modificado esta Solicitud mientras usted la estaba firmando")
-                render(view: "show", model: [solicitudInstance: solicitudInstance])
+                render(view: "edit", model: [solicitudInstance: solicitudInstance])
                 return
             }
         }
@@ -223,7 +208,7 @@ class SolicitudController {
         def firma = Firmadigital.findById(userID)?.passwordfirma
         if (firmaTeclada != firma) {
             flash.error = "Error en contaseña"
-            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            render(view: "edit", model: [solicitudInstance: solicitudInstance])
             return
         }
 
@@ -231,7 +216,7 @@ class SolicitudController {
         solicitudInstance.estado = 'F' as char
 
         if (!solicitudInstance.save(flush: true)) {
-            render(view: "show", model: [solicitudInstance: solicitudInstance])
+            render(view: "edit", model: [solicitudInstance: solicitudInstance])
             return
         }
 
@@ -251,7 +236,7 @@ class SolicitudController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
-        redirect(action: "show", id: solicitudInstance.id)
+        redirect(action: "edit", id: solicitudInstance.id)
     }
 
     def update(Long id, Long version) {
@@ -283,11 +268,10 @@ class SolicitudController {
         redirect(action: "edit", id: solicitudInstance.id)
     }
 
-    def updateDetalle(Long id, Long version, Long idDetalle, Long versionDetalle) {
+    def updateDetalle(Long id, Long version, Long idDetalle) {
       log.debug("id = $id")
       log.debug("version = $version")
       log.debug("idDetalle = $idDetalle")
-      log.debug("versionDetalle = $versionDetalle")
       log.debug("params = $params")
 
         def solicitudInstance = Solicitud.get(id)
@@ -310,6 +294,8 @@ class SolicitudController {
         def solicitudDetalleInstance = new SolicitudDetalle()
         if (idDetalle)
           solicitudDetalleInstance = SolicitudDetalle.get(idDetalle)
+        else
+          solicitudDetalleInstance.estado = 'A' as char
         solicitudDetalleInstance.properties = params
         log.debug("solicitudDetalleInstance.properties = ${solicitudDetalleInstance.properties}")
         // Checar el nuevo el detalle
@@ -332,7 +318,6 @@ class SolicitudController {
         // Tratar de salvar el detalle
         def solicitud = solicitudInstance
         solicitudDetalleInstance.idSolicitud = solicitud
-        solicitudDetalleInstance.estado = 'A' as char
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "edit", model: [solicitudInstance: solicitudInstance,
                                          autorizadores:listaDeAutorizadores(),

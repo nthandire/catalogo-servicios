@@ -39,17 +39,15 @@
   </div>
 </div>
 
-<div class="row-fluid">
+<div class="row-fluid" id="panelEstado" style="display:none;">
   <div class="span4">
-    <g:if test="${solicitudDetalleInstance?.estado}">
-      <div class="fieldtablecontain">
-        <label for="estado">
-          <g:message code="solicitudDetalle.estado.label" default="Estado" />
-        </label>
-        <g:select name="estado" from="${solicitudDetalleInstance.constraints.estado.inList}"
-          valueMessagePrefix="cat_servCat.estado" value="${solicitudDetalleInstance.estado}"/>
-      </div>
-    </g:if>
+    <div class="fieldtablecontain">
+      <label for="estado">
+        <g:message code="solicitudDetalle.estado.label" default="Estado" />
+      </label>
+      <g:select name="estado" id="estado" from="['A','I']"
+        valueMessagePrefix="cat_servCat.estado" value='A'/>
+    </div>
   </div>
 </div>
 

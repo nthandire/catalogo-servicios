@@ -22,7 +22,13 @@
       <g:each in="${solicitudInstance?.detalles.sort {it.id}}" var="d">
         <tr>
           <td>
+            <a data-toggle="modal" href="#responsive"
+              onclick="detalle(${d.id}, ${d.idServcat.id}, '${d.descripcion}', ${d.idResguardoentregadetalle?:0}, '${d.estado}')">
+              ${d?.encodeAsHTML()}
+            </a>
+            <%--
             <g:link controller="solicitudDetalle" action="edit" id="${d.id}">${d?.encodeAsHTML()}</g:link>
+            --%>
           </td>
           <td>${d?.idServ?.servSub?.descripcion}</td>
           <td>${d?.idServ?.descripcion}</td>
@@ -32,11 +38,11 @@
       </g:each>
       <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
         <tr><td>
-          <a class="btn" data-toggle="modal" href="#responsive" onclick="detalle()">
+          <a class="btn" data-toggle="modal" href="#responsive"
+            onclick="detalleNuevo()">
             ${message(code: 'default.add.label',
                 args: [message(code: 'solicitudDetalle.label',
-                  default: 'SolicitudDetalle')])}
-          </a>
+                  default: 'SolicitudDetalle')])}</a>
         </td>
         <td colspan="4"></td>
         </tr>

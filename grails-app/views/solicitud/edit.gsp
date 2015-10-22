@@ -34,7 +34,6 @@
         <g:hiddenField name="id" value="${solicitudInstance?.id}" />
         <g:hiddenField name="version" value="${solicitudInstance?.version}" />
         <g:hiddenField name="idDetalle" value="${solicitudDetalleInstance?.id}" />
-        <g:hiddenField name="versionDetalle" value="${solicitudDetalleInstance?.version}" />
         <fieldset class="form">
           <g:render template="form"/>
         </fieldset>
@@ -43,7 +42,8 @@
         <div id="responsive" class="modal hide fade" tabindex="-1"
           data-width="512" style="width:90%; position: fixed; left: 350px;">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" data-dismiss="modal"
+              aria-hidden="true">×</button>
             <h3 id="titulo">Captura detalle de la solicitud.</h3>
           </div>
           <div class="modal-body">
@@ -69,7 +69,9 @@
 
 
         <!-- Modal para firmar -->
-        <div id="myModalFirmar" class="modal hide fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="myModalFirmar" class="modal hide fade" tabindex="-1"
+          data-keyboard="true" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Firma digital</h3>
@@ -88,26 +90,45 @@
 
 
 <script>
-  function detalle() {
+  function detalleNuevo() {
     $("#idServcat").prop("required", true);
     $("#descripcion").prop("required", true);
     $("#justificacion").prop("required", false);
     $("#idAutoriza").prop("required", false);
-    $("#idAutoriza").prop("passwordfirma", false);
+    $("#passwordfirma").prop("required", false);
+    $("#idDetalle").val(null);
+    $("#idServcat").val(null);
+    $("#descripcion").text('');
+    $("#idResguardoentregadetalle").val(null);
+    $("#panelEstado").css("display", "none");
+    $("#estado").val(null);
+  }
+  function detalle(id, serv, descripcion, equipo, estado) {
+    $("#idServcat").prop("required", true);
+    $("#descripcion").prop("required", true);
+    $("#justificacion").prop("required", false);
+    $("#idAutoriza").prop("required", false);
+    $("#passwordfirma").prop("required", false);
+    $("#idDetalle").val(id);
+    $("#idServcat").val(serv);
+    $("#descripcion").text(descripcion);
+    $("#idResguardoentregadetalle").val(equipo);
+    $("#panelEstado").css("display", "block");
+    $("#estado").val(estado);
   }
   function maestro() {
     $("#idServcat").prop("required", false);
     $("#descripcion").prop("required", false);
     $("#justificacion").prop("required", true);
     $("#idAutoriza").prop("required", true);
-    $("#idAutoriza").prop("passwordfirma", false);
+    $("#passwordfirma").prop("required", false);
   }
   function firma() {
     $("#idServcat").prop("required", false);
     $("#descripcion").prop("required", false);
     $("#justificacion").prop("required", true);
     $("#idAutoriza").prop("required", true);
-    $("#idAutoriza").prop("passwordfirma", true);
+    $("#passwordfirma").prop("required", true);
   }
 </script>
 
@@ -120,17 +141,12 @@
               <a href="#myModalFirmar" class="edit" data-toggle="modal"
                 onclick="firma()">Firmar</a>
             </g:if>
-            <g:else>
+            <g:elseif test="${!solicitudInstance?.estado}">
               <a href="#" class="cancel" data-toggle="modal">Debe llenar todos los campos para poder firmar esta solicitud</a>
-            </g:else>
+            </g:elseif>
           </g:if>
         </fieldset>
       </g:form>
     </div>
   </body>
 </html>
-<%--
-            <g:link class="btn" controller="solicitudDetalle" action="create"
-              params="['solicitud.id': solicitudInstance?.id]">
-            </g:link>
---%>
