@@ -72,7 +72,8 @@ environments {
       grails.logging.jul.usebridge = true // false // TODO: apagar por performance
       // TODO: grails.serverURL = "http://www.changeme.com"
       // correo general, para pruebas y errores
-      correo.general = 'szarazua@inr.gob.mx'
+      // correo.general = 'szarazua@inr.gob.mx'
+      correo.general = 'dzamora@inr.gob.mx'
     }
 }
 
