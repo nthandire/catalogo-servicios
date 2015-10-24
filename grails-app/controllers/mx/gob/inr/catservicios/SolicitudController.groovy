@@ -222,7 +222,7 @@ class SolicitudController {
 
         def personasInstance = Usuario.get(solicitudInstance.idAutoriza)
         def liga = createLink(controller:"solicitudAutoriza", action: "show",
-                              id: solicitudInstance.id, absolute: "true")
+                   id: solicitudInstance.id, absolute: "true") //base: "http://192.168.16.59:8080/catalogo-servicios")//
         log.debug("liga = $liga")
         def correo = grailsApplication.config.correo.general
         log.debug("correo = $correo")
