@@ -32,7 +32,6 @@
 			<g:form action="save" >
 				<fieldset class="form">
           <g:render template="formDetalle"/>
-					<g:render template="formCreate"/>
 				</fieldset>
 
         <script>
