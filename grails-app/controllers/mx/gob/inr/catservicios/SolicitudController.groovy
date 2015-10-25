@@ -86,14 +86,15 @@ class SolicitudController {
     }
 
     def save() {
-        // Checar si el detalle esta bien
         log.debug("params = $params")
         def paramsFiltrado = params.findAll {it.key != 'idSolicitud' &&
-                          it.key != 'estado' &&
                           (it.key != 'idResguardoentregadetalle' || it.value )}
         log.debug("paramsFiltrado = $paramsFiltrado")
         def solicitudDetalleInstance = new SolicitudDetalle(paramsFiltrado)
-        def solicitudInstance = new Solicitud(paramsFiltrado)
+        def paramsFiltradoSolicitud = params.findAll {it.key != 'estado'}
+        log.debug("paramsFiltradoSolicitud = $paramsFiltradoSolicitud")
+        def solicitudInstance = new Solicitud(paramsFiltradoSolicitud)
+        // Checar si el detalle esta bien
         if (!solicitudDetalleInstance?.idServcat?.id) {
             flash.error = "Debe capturar la categoría de su solicitud"
             render(view: "create", model: [solicitudInstance: solicitudInstance,
@@ -114,6 +115,7 @@ class SolicitudController {
         solicitudInstance.idSolicitante = springSecurityService.principal.id
         solicitudInstance.ipTerminal = request.getRemoteAddr()
 
+        log.debug("solicitudInstance.estado = ${solicitudInstance.estado}")
         if (!solicitudInstance.save(flush: true)) {
             render(view: "create", model: [solicitudInstance: solicitudInstance,
                                    solicitudDetalleInstance: solicitudDetalleInstance,
@@ -125,7 +127,6 @@ class SolicitudController {
         def solicitud = solicitudInstance
         log.debug("solicitud.id = ${solicitud.id}")
         solicitudDetalleInstance.idSolicitud = solicitud
-        solicitudDetalleInstance.estado = 'A' as char
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "create", model: [solicitudInstance: solicitudInstance,
                                    solicitudDetalleInstance: solicitudDetalleInstance,
@@ -226,13 +227,15 @@ class SolicitudController {
         log.debug("liga = $liga")
         def correo = grailsApplication.config.correo.general
         log.debug("correo = $correo")
-        sendMail {
-          to correo // TODO: mandar el correo al que solicito       personasInstance.correo
-          subject "La solicitud ${solicitudInstance} requiere autorización"
-          html "Hola ${personasInstance}<br/><br/>La solicitud folio " +
+        def cuerpoCorreo = "Hola ${personasInstance}<br/><br/>La solicitud folio " +
             "${solicitudInstance} requiere que la autorices, " +
             "utilice la liga siguiente para revisarla y autorizarla. <br/><br/>" +
             "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
+        log.debug("cuerpoCorreo = $cuerpoCorreo")
+        sendMail {
+          to correo // TODO: mandar el correo al que solicito       personasInstance.correo
+          subject "La solicitud ${solicitudInstance} requiere autorización"
+          html cuerpoCorreo
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
@@ -242,7 +245,8 @@ class SolicitudController {
     def update(Long id, Long version) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
+            flash.message = message(code: 'default.not.found.message',
+              args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
             redirect(action: "list")
             return
         }
@@ -257,14 +261,18 @@ class SolicitudController {
             }
         }
 
-        solicitudInstance.properties = params
+        log.debug("params = $params")
+        def paramsFiltrado = params.findAll {it.key != 'estado'}
+        log.debug("paramsFiltrado = $paramsFiltrado")
+        solicitudInstance.properties = paramsFiltrado
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "edit", model: [solicitudInstance: solicitudInstance])
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
+        flash.message = message(code: 'default.updated.message',
+          args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "edit", id: solicitudInstance.id)
     }
 
@@ -276,7 +284,8 @@ class SolicitudController {
 
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
+            flash.message = message(code: 'default.not.found.message',
+              args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
             redirect(action: "list")
             return
         }
