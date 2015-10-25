@@ -1,0 +1,237 @@
+
+
+
+insert into cat_servcat
+(id_servcat,categoria,descripcion,id_servresp,valoracion,disponibilidad,estado,id_servcob)
+values
+(1, 'Voceo General', 'Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general', 1, 2, 90, 'A', 1),
+(2, 'Computo de usuario final', 'Asesoría en el uso y operación de computadoras, impresoras, video proyectores, UPS''s y periféricos, así como la reparación de fallas físicas o lógicas, además de Asignación, Reubicación,  Reasignación o baja de equipos', 1, 1, 90, 'A', 1)
+
+(3, 'Equipo de computo central, comunicaciones y Seguridad', 'Atención de fallas en la operación en los equipos de comunicaciones y seguridad, así como Asignación de antena parared inalámbrica', 1, 1, 90, 'A', 1),
+(4, 'Voceo general', 'Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general', 1, 2, 90, 'A', 1),
+(5, 'voceo general', 'Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general', 1, 2, 90, 'A', 1),
+(6, 'Sistemas Automatizado de Información Hospitalaria (SAIH)', 'Acceso, configuración y reparación de fallas de la aplicación, así como asesorías en el uso de los diferentes modulos que lo componen.', 14, 1, 95, 'A', 4),
+(7, 'Portal', 'Corrección de contenidos y  acceso a las ligas del portal, así como publicación y actualización de contenidos.',  3, 1, 90, 'A', 1),
+(8, 'Sistemas Integral Administrativo (SIA)', 'Acceso, configuración y/nreparación de fallas de la aplicación, así como asesorías en el uso de los diferentes modulos que lo componen.', 14, 1, 95, 'A', 3),
+(9, 'Correo Electrónico', 'Servicio para el envió y recepción de información vía correo electrónico institucional, atendiendo las altas y bajas,/nde cuentas de usuarios, así como solución de posibles fallas que se presenten en la operación del mismo.', 1, 2, 90, 'A', 1),
+(10, 'Difusión de Correos Masivos', 'Envió de comunicados de forma masiva por medio del correo electrónico institucional', 1, 1, 90, 'A', 1)
+
+
+
+
+
+
+
+
+
+
+
+select *
+  from cat_servresp;
+
+
+insert into cat_servresp
+(id_servresp, descripcion)
+values
+(1, 'DGAIT'),
+(2, 'MS'),
+(3, 'WM'),
+(4, 'PROV'),
+(5, 'Subdireccion'),
+(6, 'Dirección/ Subdireccion'),
+(7, 'DGAIT/PROV'),
+(8, 'MS/DGDST/DGAIT'),
+(9, 'STIC'),
+(10, 'Jefe de Servicio o Superior'),
+(11, 'Subdireccion'),
+(12, 'Dirección/ Subdireccion'),
+(13, 'MS/PROV'),
+(14, 'DGDST'),
+(15, 'STIC/WM'),
+(16, 'Dirección de Enseñanza / División de EC'),
+(17, 'Dirección General / Direcciones de área'),
+(18, 'Jefe de departamento de proyectos especiales'),
+(19, 'Direcctora de Administración /Subdir. Asuntos Juridicos'),
+(20, 'Subdir. De compras y suministros'),
+(21, 'Subdireccción de RH'),
+(22, 'Dirección')
+
+
+
+
+
+select *
+  from cat_servsub;
+
+
+insert into cat_servsub
+(id_servsub, id_servcat, descripcion, estado)
+values
+(1, 1, 'Bocinas', 'A'),
+(2, 2, 'CPU', 'A'),
+(3, 2, 'Monitor', 'A'),
+(4, 2, 'Mouse', 'A'),
+(5, 2, 'Teclado', 'A'),
+(6, 2, 'Impresora', 'A'),
+(7, 2, 'Laptop', 'A'),
+(8, 2, 'Scanner', 'A'),
+(9, 2, 'Videoproyector', 'A'),
+(10, 2, 'Periféricos (lectores de barras)', 'A'),
+(11, 2, 'Regulador', 'A'),
+(12, 2, 'UPS/No-break', 'A'),
+(13, 3, 'Servidores', 'A'),
+(14, 3, 'Switches', 'A'),
+(15, 3, 'AP', 'A'),
+(16, 3, 'Firewall', 'A'),
+(17, 3, 'Conmutador', 'A'),
+(18, 3, 'Consolas de operadora telefonica', 'A'),
+(19, 6, 'Agendas', 'A'),
+(20, 7, 'Publicaciones', 'A'),
+(21, 7, 'Operación', 'A'),
+(22, 7, 'Ligas', 'A'),
+(23, 6, 'Expediente Clinico', 'A'),
+(24, 8, 'Credencializacion', 'A'),
+(25, 8, 'Reportes y Estadisticas', 'A'),
+(26, 6, 'Expediente Clinico', 'A'),
+(27, 2, 'Asignación, sustitución, reubicación y baja de Equipo de computo', 'A'),
+(28, 2, 'Activación de password de arranque', 'A'),
+(29, 2, 'Actualización o cancelación de cédulas de Equipo de cómputo', 'A'),
+(30, 9, 'Buzón de correo', 'A'),
+(31, 10, 'Correo Electrónico Institucional', 'A'),
+(32, 1, 'Voceo', 'A'),
+(33, 6, 'Enfermeria', 'A');
+
+
+
+
+select *
+  from cat_serv;
+
+insert into cat_serv
+(id_serv, id_servsub, descripcion, portal, incidente, solicitud, problema, id_servresp1, id_servresp2, id_servresp3, tiempo1, tiempo2, tiempo3, id_tiempo1, id_tiempo2, id_tiempo3, impacto, id_servrespautoriza, id_servrespaprueba, plantilla, observaciones, estado_serv, id_usuario, fecha_modificacion, modificacion, ip_terminal)
+values
+
+(1, 1, 'El sonido tiene el volumen muy alto', true, true, null,  null,  2, 1, 1, 30, 60, 1, 1, 1, 3, 3, null,  null,  'plantilla general', null, 'A', 3, '2015-08-30 21:01:00.0', 0, '192.168.16.59'),
+
+(2, 2, 'Compartir archivos y carpetas', true, true, false, false, 2, 13, null,  15, 60, null,  1, 1, 1, 3, null,  null,  'No.de Inventario  del equipo a compartir: (validar con base de datos de activo fijo) /nNo. de Inventario del(los ) equipo(s) a donde se desea compartir los archivos: (validar con base de datos de activo fijo)', null, 'A', 9583, '2015-09-09 12:50:00.0', 2, '127.0.0.1'),
+
+(3, 2, 'Conectar/Desconectar por mantenimiento del área', true, true, false, false, 2, 13, 1, 15, 60, 48, 1, 1, 2, 2, null,  null,  null, 'Este servicio se cerrara una vez que sea conectado el equipo.', 'A', 9586, '2015-10-23 14:38:00.0' , 1, '192.168.30.98'),
+
+(4, 2, 'No enciende', true, true, false, false, 2, 13, 7, 15, 60, 21600, 1, 1, 1, 1, null, null, null, 'Los equipos de apoyo se proporcionaran de lunes a viernes en un horario de 9:00 a 18:00 hrs. de acuerdo a condiciones contractuales vigentes.', 'A', 9586, '2015-10-06 12:16:00.0' , 4, '192.168.13.15'),
+
+(5, 13, 'Configuración', false, true, false, false, 2, 1, 7, 15, 120, 240, 1, 1, 1, 1, null, null, 'IP: /nDirección MAC: /nVersión de la aplicación: ', null, 'A', 9583, '2015-09-09 12:51:00.0' , 1, '127.0.0.1'),
+
+(6, 20, 'Error en contenido', true, true, false, false, 2, 3, null, 15, 60, 0, 1, 1, 1, 2, null, null, 'Apartado a corregir: texto con 100 caracteres /nURL: texto con 100 caracteres', null, 'A', 9586, '2015-10-05 10:34:00.0' , 0, '192.168.13.15'),
+
+(7, 20, 'Cursos', true, false, true, false, 2, 3, null, 30, 4320, null, 1, 1, 1, 2, 16, 15, 'plantilla general/ Adjuntar documento en word', null, 'A', 9586, '2015-10-05 10:46:00.0' , 1, '192.168.13.15'),
+
+(8, 19, 'Mensaje ocurrió un error en el saih', true, true, false, true, 2, 14, 7, 15, 30, 24, 1, 1, 2, 1, null, null, 'No. expediente: /nNombre del paciente:', null, 'A', 9586, '2015-10-05 10:45:00.0' , 1, '192.168.13.15'),
+
+(9, 20, 'Congresos', true, false, true, false, 2, 3, null, 30, 7200, null, 1, 1, 1, 2, 16, 15, 'plantilla general/ Adjuntar documento en word', null, 'A', 9586, '2015-10-05 10:50:00.0' , 0, '192.168.13.15'),
+
+(10, 20, 'Servicios Institucionales', true, false, true, false, 2, 3, null, 30, 20160, null, 1, 1, 1, 2, 17, 9, 'plantilla general/ Adjuntar documento en word', null, 'A', 9586, '2015-10-05 10:54:00.0', 1, '192.168.13.15'),
+
+(11, 20, 'ISO-9001', false, false, true, false, 2, 3, null, 30, 2880, null, 1, 1, 1, 2, 18, 15, 'plantilla general/ Adjuntar documento en word o excel', null, 'A', 9586, '2015-10-05 10:57:00.0', 1, '192.168.13.15'),
+
+(12, 20, 'Transparencia', false, false, true, false, 2, 3, null, 30, 3, null, 1, 3, 1, 2, 19, 9, 'plantilla general/ Adjuntar documento en excel', null, 'A', 9586, '2015-10-07 14:11:00.0', 1, '192.168.13.1'),
+
+(13, 20, 'Convocatorias Relativas a la Contratación de Servicios', false, false, true, false, 2, 3, null, 30, 1440, null, 1, 1, 1, 2, 20, 9, 'plantilla general/ Adjuntar documento en word o excel', null,  'A', 9586, '2015-10-05 11:01:00.0' , 1, '192.168.13.15'),
+
+(14, 24, 'Generación de credencial para personal de INR', true, false, true, false, 2, 2, null,  30, 1440, null,  1, 1, 1, 3, 21, null,  'Nombre del empleado:texto con 50 caracteres /nDirección a la que pertenece:texto con 30 caracteres /nNombre de la Plaza o Puesto:texto con 30 caracteres /nCURP:texto con 20 caracteres /nRFC:texto con 15 caracteres /nVigencia (solo aplica para medicos residentes el periodo de residencia) /nArchivo adjunto.- Solamente para caso de extravio o robo el acta ante ministerio público. /nRequiere chip: Si [ ] No  [ ] /nNOTA: /n PREVIO AL REQUERIMIENTO PASAR A TOMARSE LA FOTO Y REGISTRAR SU FIRMA.', 'EN CASO DE RECHAZO DEBE DE ESTAR FIRMADO POR PARTE DEL JEFE DE DEPARTAMENTO DE DGOST', 'A', 9586, '2015-10-05 11:11:00.0' , 1, '192.168.13.15'),
+
+(15, 25, 'Solicitud de información de la Base de Datos (Reportes)', false, false, false, false, 2, 14, null,  30, 7200, null,  1, 1, 1, 3, 10, 14, 'texto abierto en el mismo formato de requerimiento', null,  'A', 9586, '2015-10-05 11:13:00.0' , 0, '192.168.13.15'),
+
+(16, 23, 'Modificación a la información de la Base de Datos', true, false, true, false, 2, 14, null,  30, 2, null,  1, 2, 1, 1, 12, 14, 'No. expediente:texto con 30 caracteres /nNombre del paciente:texto con 50 caracteres /nNombre de la Nota : texto de 100 caracteres /nNombre del Médico que laboro la nota: texto de 50 caracteres /nFecha de la nota: formato de fecha', null,  'A', 9586, '2015-10-05 11:14:00.0' , 0, '192.168.13.3'),
+
+(17, 27, 'Asignación de nuevo equipo de computo', true, false, true, false, 2, 7, null,  30, 5760, null,  1, 1, 1, 3, 22, 9, 'Tipo de equipo: (PC, Impresora, UPS, Lector de código de barras, camara web, scanner, otros _____) /nCuenta con servicio de datos: (SI/NO/NA) /nCuenta con servicio electrico: (SI/NO/NA) /nCuenta con mobiliario para su instalación:  (SI/NO) /nPersonal Responsable para fima de resguardo: (Válidar información con BD de Recursos Humanos) /nNOTA:dar opción de agregar tantos equipos se requieran', 'Cuando se rechasen se cerraran y se', 'A', 9586, '2015-10-06 12:25:00.0' , 1, '192.168.13.15'),
+
+(18, 27, 'Sustitución de  equipo de computo', false, false, false, false, 2, 7, null,  30, 5760, null,  1, 1, 1, 3, 22, 9, 'PC, Impresora, UPS, Lector de código de barras, camara web, scanner, otros _____) /nNo. de Inventario del equipo a sustituir: (válidar información con BD de Activo Fijo y que proporcione de manera automática el nombre del resguardante). /nNOTA:dar opción de agregar tantos equipos se requieran', null,  'A', 9586, '2015-10-06 12:25:00.0' , 0, '192.168.13.15'),
+
+(19, 31, 'Difusión de información por medio de correo electrónico masivo',  true, false,   true, false,   1, 1, null,  30, 2, null,  1, 3, 1, 2, 10, 1, 'Asunto::texto con 100 caracteres /nCuerpo del Mensaje:texto con 500 caracteres Adjuntar archivos (si hay archivos adjuntos tienen que ser en PDF no mayor a 200 kb) /nPeriodicidad (días y horarios): texto con 200 caracteres', null,  'A', 9586, '2015-10-08 12:38:00.0' , 0, '192.168.13.3'),
+
+(20, 32, 'Difusión de información por medio de voceo general', true, false, true, false, 2, 2, null,  30, 60, null,  1, 1, 1, 3, 10, 2, 'Texto del Mensaje:texto con 300 caracteres /nPeriodicidad (días y horarios): texto con 200 caracteres', null,  'A', 9586, '2015-10-08 14:20:00.0' , 0, '192.168.13.3'),
+
+(21, 30, 'Alta de cuenta de correo', true, false, true, false,   2, 1, null,  30, 2, null,  1, 3, 1, 3, 10, 1, 'Nombre de usuario: /nIdentificación de IFE: (Adjuntar archivo)', null,  'A', 9586, '2015-10-20 11:50:00.0' , 0, '192.168.13.3'),
+
+
+
+------------------ saturno -----------------------------
+
+select * from Cat_servCat;
+ID_SERVCAT   CATEGORIA   DESCRIPCION   DISPONIBILIDAD    ESTADO    ID_SERVCOB    ID_SERVRESP   VALORACION  
+1 Voceo General Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general 90  A 1 1 2
+2 Computo de usuario final  Asesoría en el uso y operación de computadoras, impresoras, video proyectores, UPS's y periféricos, así como la reparación de fallas físicas o lógicas, además de Asignación, Reubicación,  Reasignación o baja de equipos  90  A 1 1 1
+3 Equipo de comunicaciones y Seguridad  Atención de fallas en la operación en los equipos de comunicaciones y seguridad, así como Asignación de antena para red inalámbrica 90  A 1 1 1
+4 Voceo general Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general 90  A 1 1 2
+5 voceo general Reparación de bocinas y  control de volumen así como Comunicados mediante el sistema de voceo general 90  A 1 1 2
+(5 rows, 2 ms)
+
+
+
+select * from Cat_serv;
+ID_SERV   MODIFICACION    ID_SERVRESPAUTORIZA   DESCRIPCION   ESTADO_SERV   ID_USUARIO    IMPACTO   INCIDENTE   IP_TERMINAL   FECHA_MODIFICACION    OBSERVACIONES   PLANTILLA   PORTAL    PROBLEMA    ID_SERVRESPAPRUEBA    ID_SERVRESP1    ID_SERVRESP2    ID_SERVRESP3    ID_SERVSUB    SOLICITUD   TIEMPO1   TIEMPO2   TIEMPO3   ID_TIEMPO1    ID_TIEMPO2    ID_TIEMPO3  
+1 0 null  El sonido tiene el volumen muy alto A 3 3 TRUE  192.168.16.59 2015-08-30 21:01:00.0 null  plantilla general TRUE  null  null  2 1 1 1 null  30  60  1 1 1 3
+2 2 null  Compartir archivos y carpetas A 9583  3 TRUE  127.0.0.1 2015-09-09 12:50:00.0 null  No.de Inventario  del equipo a compartir: (validar con base de datos de activo fijo)/nNo. de Inventario del(los ) equipo(s) a donde se desea compartir los archivos: (validar con base de datos de activo fijo) TRUE  FALSE null  2 13  null  2 FALSE 15  60  null  1 1 1
+3 0 null  Conectar/Desconectar por mantenimiento del área A 9583  2 TRUE  192.168.13.1  2015-09-07 17:26:00.0 Este servicio se cerrara una vez que sea conectado el equipo. null  TRUE  FALSE null  2 13  null  2 FALSE 15  60  null  1 1 1
+4 3 null  No enciende A 9583  1 TRUE  192.168.13.1  2015-09-07 17:33:00.0 Los equipos de apoyo se proporcionaran de lunes a viernes en un horario de 9:00 a 18:00 hrs. de acuerdo a condiciones contractuales vigentes. null  TRUE  FALSE null  2 13  7 2 FALSE 15  60  21600 1 1 1
+5 1 null  Configuración A 9583  1 TRUE  127.0.0.1 2015-09-09 12:51:00.0 null  IP:/nDirección MAC:/nVersión de la aplicación:  FALSE FALSE null  2 1 7 13  FALSE 15  120 240 1 1 1
+(5 rows, 3 ms)
+
+
+
+select * from Cat_servsub;
+ID_SERVSUB    DESCRIPCION   ID_SERVCAT  
+1 Bocinas 1
+2 CPU 2
+3 Monitor 2
+4 Mouse 2
+5 Teclado 2
+6 Impresora 2
+7 Laptop  2
+8 Scanner 2
+9 Videoproyector  2
+10  Periféricos (lectores de barras 2
+11  Regulador 2
+12  UPS/No-break  2
+13  Informix  3
+14  CONTINUUM 3
+15  Antivirus 3
+16  Tarificador 3
+17   Conmutador 3
+18  Conmutador  3
+(18 rows, 1 ms)
+
+
+
+select * from solicitud_detalle;
+ID_SOLICITUDDETALLE   DESCRIPCION   DESCRIPCION_TECNICA   ESTADO_SOLICTUDDETALLE    FECHA_SOLUCION    ID_PROGRAMA   ID_RESGUARDOENTREGADETALLE    ID_SERV   ID_SERVCAT    ID_SOLICITUD    ID_TECNICO    SOLUCION    PRIORIDAD  
+1 Maquina con virus null  null  null  null  null  null  2 1 9584  null  null
+2 $$$ para un nuevo teclado null  null  null  null  null  null  2 3 9584  null  null
+4 Para poner un equipo y que el técnico lo vea  null  null  null  null  null  null  2 2 9584  null  0
+5 Para ver el equipo  null  null  null  null  3 null  2 4 9584  null  0
+6 tercer nivel  Para que la vea el técnico. null  null  null  7 4 2 5 9584  null  0
+8 Para lo coordinadores null  null  2015-09-21 02:17:00.085 3 null  2 2 7 9584  Los vi bien 0
+7 Para ver los vobos. null  null  null  null  null  3 2 6 9584  null  0
+9 Para ver si salen correos para los coordinadores  Si funciona null  2015-10-05 03:25:51.162 3 null  2 2 8 9584  Solucionado 1
+10  Para ver lo vobos null  null  null  null  11  null  2 9 null  null  0
+(9 rows, 2 ms)
+
+
+
+select * from solicitud;
+ID_SOLICITUD    MODIFICACION    ESTADO_SOLICITUD    FECHA_AUTORIZA    FECHA_SOLICITUD   FECHA_VB    ID_AUTORIZA   ID_SOLICITANTE    ID_VB   IP_TERMINAL   JUSTIFICACION   FECHAMODIFICACION   NUMERO_SOLICITUD    P01   P02   P03   P04   FECHA_MODIFICACION    COMENTARIO_VB   ID_REVISA   FECHA_REVISA  
+1 4 R 2015-09-14 03:05:19.822 2015-09-14 03:01:16.718 null  9581  9574  null  127.0.0.1 Mi equipo tiene problema (S1) null  1 null  null  null  null  2015-09-14 03:12:49.728 null  null  null
+3 3 R 2015-09-14 04:56:33.121 2015-09-14 04:52:47.069 null  9575  9576  null  127.0.0.1 Fallo en teclado  null  2 null  null  null  null  2015-09-14 04:57:24.622 null  null  null
+2 3 R 2015-09-17 06:05:49.102 2015-09-17 06:03:53.278 null  9576  9574  null  127.0.0.1 Otra solicitud  null  3 null  null  null  null  2015-09-17 06:06:46.745 null  null  null
+4 3 R 2015-09-17 06:22:00.074 2015-09-17 06:21:35.056 null  9576  9574  null  127.0.0.1 Para que el técnico ver el equipo null  4 null  null  null  null  2015-09-17 06:22:26.888 null  null  null
+5 3 R 2015-09-20 00:38:11.011 2015-09-20 00:34:39.151 null  9574  9574  null  127.0.0.1 Capturar tercer nivel con el gestor null  5 null  null  null  null  2015-09-20 02:12:36.823 null  null  null
+7 4 E 2015-09-20 23:17:33.559 2015-09-20 23:17:02.117 null  9575  9574  null  127.0.0.1 Para que los coordinadores vean solicitudes null  7 null  null  null  null  2015-09-21 02:17:00.097 null  null  null
+6 6 R 2015-09-20 18:16:16.009 2015-09-20 18:13:43.837 2015-09-20 20:06:52.2 9575  9574  9579  127.0.0.1 Para ver los autorizadores y vobos. null  6 null  null  null  null  2015-09-21 02:29:27.438 null  null  null
+8 35  T 2015-10-04 17:49:52.333 2015-10-04 15:21:47.717 2015-10-04 20:57:41.661 9575  9574  9578  0:0:0:0:0:0:0:1 Para ver si salen los correos a los coordinadores null  24  2 2 2 1 2015-10-05 03:39:09.021 Para ver el campo de cancelación  9583  null
+9 6 V 2015-10-05 06:04:43.989 2015-10-05 05:50:35.773 2015-10-05 06:14:42.726 9586  9582  9579  0:0:0:0:0:0:0:1 Para ver los telefonos de los autorizadores null  26  null  null  null  null  2015-10-05 06:14:42.728 null  null  null
+10  0 null  null  null  null  9579  9574  null  0:0:0:0:0:0:0:1 Para ver si limita los archivos a subir null  null  null  null  null  null  2015-10-05 07:24:50.0 null  null  null
+(10 rows, 2 ms)
+
+
+
+
