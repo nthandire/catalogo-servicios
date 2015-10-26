@@ -8,7 +8,7 @@ Junta del 23 de octubre.
 + 4.- Gestor, al agregar un archivo (al dar tercer nivel), la liga esta mál del regreso
 + 5.- Coordinador: no debe mostrar Estado de Cierre (hay un caso anterior)
 + 6.- Coordinador, no puso como técnico a Martin (en MS)
-- 7.- Coordinador, list: Dice "Id Solicitud"
++ 7.- Coordinador, list: Dice "Id Solicitud"
 - 8.- Coordinador : lo que dice como Categoría es el tercer nivel.
 - 9.- Técnico: el botón de subir archivo esta mal posicionado y no funciona el subir
 - 10.- Incidente : tiene un campo extra de equipo

@@ -27,10 +27,16 @@
 			
 				<g:if test="${solicitudDetalleInstance?.idSolicitud}">
 				<li class="fieldcontain">
-					<span id="idSolicitud-label" class="property-label"><g:message code="solicitudDetalle.idSolicitud.label" default="Id Solicitud" /></span>
-					
-						<span class="property-value" aria-labelledby="idSolicitud-label"><g:link controller="solicitud" action="show" id="${solicitudDetalleInstance?.idSolicitud?.id}">${solicitudDetalleInstance?.idSolicitud?.encodeAsHTML()}</g:link></span>
-					
+					<span id="idSolicitud-label" class="property-label">
+            <g:message code="solicitudDetalle.idSolicitud.label"
+              default="Solicitud" />
+          </span>
+					<span class="property-value" aria-labelledby="idSolicitud-label">
+            <g:link controller="solicitud" action="show"
+              id="${solicitudDetalleInstance?.idSolicitud?.id}">
+              ${solicitudDetalleInstance?.idSolicitud?.encodeAsHTML()}
+            </g:link>
+          </span>
 				</li>
 				</g:if>
 			
