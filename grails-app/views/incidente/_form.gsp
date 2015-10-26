@@ -350,7 +350,7 @@
 <g:if test="${tecnicos}">
   <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel', 'error')} ">
     <label for="idNivel">
-      <g:message code="incidente.idNivel.label" default="Técnico" />
+      <g:message code="incidente.idNivel.label" default="Atendido por ..." />
     </label>
     <g:select id="idNivel" name="idNivel" required="true"
       from="${tecnicos}"
