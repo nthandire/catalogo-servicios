@@ -13,7 +13,7 @@ Junta del 23 de octubre.
 + 9.- Técnico: el botón de subir archivo esta mal posicionado y no funciona el subir
 + 10.- Incidente : tiene un campo extra de equipo
 + 11 .- Hay que revisar cuales categorías se usan en incidentes (filtrado)
-- 12.- Incidente: Pantalla inicial, no debe mostrar nivel ni responsable
++ 12.- Incidente: Pantalla inicial, no debe mostrar nivel ni responsable
 - 13.- Incidente : la lista esta mal ordenada
 - 14.- Incidente: La etiqueta "Técnico" cambia a "Atendido por ..."
 + 15.- Incidente, Al escalar, pedir firma.

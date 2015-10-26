@@ -39,6 +39,9 @@
 
             <g:sortableColumn property="fechaIncidente" title="${message(code: 'incidente.fechaIncidente.label', default: 'Fecha Incidente')}" />
 
+            <g:sortableColumn property="nivel"
+              title="${message(code: 'incidente.nivel.label', default: 'Nivel')}" />
+
 						<g:sortableColumn property="estado" title="${message(code: 'incidente.estado.label', default: 'Estado')}" />
 
 						<g:sortableColumn property="idReporta" title="${message(code: 'incidente.idReporta.label', default: 'Reporta')}" />
@@ -71,6 +74,12 @@
             <td>
               <a href="${liga}">
                 <g:formatDate date="${incidenteInstance.fechaIncidente}" />
+              </a>
+            </td>
+
+            <td>
+              <a href="${liga}">
+                ${incidenteInstance.nivel}
               </a>
             </td>
 
