@@ -63,7 +63,7 @@ class SolicitudTecnicoController {
             render(view: "create", model: [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance])
             return
         }
-        redirect (action:'show', id: solicitud.id)
+        redirect (action:'edit', id: solicitud.id)
       }
     }
 
@@ -225,22 +225,4 @@ class SolicitudTecnicoController {
         redirect(action: "list")
     }
 
-    def x_delete(Long id) {
-        def solicitudDetalleInstance = SolicitudDetalle.get(id)
-        if (!solicitudDetalleInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            solicitudDetalleInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
-            redirect(action: "show", id: id)
-        }
-    }
 }

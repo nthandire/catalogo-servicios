@@ -57,14 +57,41 @@
         <g:hiddenField name="version" value="${solicitudDetalleInstance?.version}" />
         <fieldset class="form">
           <g:render template="form"/>
+
+
+          <H1>
+            <g:message code="solicitud.archivos.label" default="Archivos" />
+          </H1>
+
+          <div class="row-fluid">
+            <div class="span10 offset1">
+              <ul class="one-to-many">
+                <g:if test="${solicitudDetalleInstance.idSolicitud?.archivos}">
+                  <g:each in="${solicitudDetalleInstance.idSolicitud.archivos.sort{it.id}}" var="a">
+                    <li><g:link action="showArchivo" id="${a.id}">${a?.encodeAsHTML()}</g:link>
+                    &nbsp; : &nbsp;
+                    <g:link action="download" id="${a.id}">descargarlo</g:link></li>
+                  </g:each>
+                </g:if>
+                <li class="add">
+                  <g:link class="create" action="create" class="btn"
+                    params="['solicitud.id': solicitudDetalleInstance?.idSolicitud?.id, 'detalle.id': solicitudDetalleInstance?.id]">
+                      ${message(code: 'default.add.label',
+                        args: [message(code: 'solicitudArchivoadjunto.label',
+                          default: 'SolicitudArchivoadjunto')])}
+                  </g:link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+
         </fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
           <g:if test="${solicitudDetalleInstance?.idPrograma && solicitudDetalleInstance?.solucion}">
           <a href="#myModal" class="edit" data-toggle="modal">Marcar como solucionado</a>
           </g:if>
-          <g:link class="create" action="create"
-            params="['solicitud.id': solicitudDetalleInstance?.idSolicitud?.id, 'detalle.id': solicitudDetalleInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
 				</fieldset>
 			</g:form>
 		</div>
