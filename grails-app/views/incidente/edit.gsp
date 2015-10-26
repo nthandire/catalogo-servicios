@@ -89,6 +89,7 @@
         <script>
           function escala() {
             $("#titulo").text('Escalar incidente');
+            $("#titulo").text('Acciones realizadas');
             $("#idPrograma").prop("required", false);
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_escalaUpdate');
