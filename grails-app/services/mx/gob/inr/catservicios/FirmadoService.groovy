@@ -154,7 +154,7 @@ class FirmadoService {
         "         and t.portal = 't'        \n" +
         "         and t.solicitud = 't'     \n" +
         "      )                            \n" +
-        " order by s.id                     \n"
+        " order by c.id                     \n"
     log.debug("query = \n${query}")
 
     def categorias = Cat_servCat.executeQuery(query)

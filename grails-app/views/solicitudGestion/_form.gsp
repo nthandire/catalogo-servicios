@@ -40,8 +40,7 @@
       <span id="serviciosContainer">
         <g:if test="${solicitudDetalleInstance?.idServ}">
           <g:select id='idServ' name='idServ.id' required=''
-            from="${Cat_serv.findAllNotIncidenteByServSub(solicitudDetalleInstance?.idServ?.servSub,
-                      [order:'id'])}"
+            from="${[]}"
             value="${solicitudDetalleInstance?.idServ?.id}"
             onchange="servicesChanged(this.value)"
             optionKey='id' noSelection="['':'Seleccione una...']"/>
