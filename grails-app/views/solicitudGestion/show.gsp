@@ -190,18 +190,18 @@
                 <th>Tercer nivel</th>
                 <th>Descripción</th>
               </tr>
+              <g:each in="${SolicitudDetalle.findAllByIdSolicitudAndEstado(solicitudInstance,
+                              'A' as char).sort{it.id}}" var="d">
+                <tr>
+                  <td><g:link action="edit" id="${d.id}">
+                    ${d?.encodeAsHTML()}
+                  </g:link></td>
+                  <td>${d?.idServ?.servSub?.descripcion}</td>
+                  <td>${d?.idServ?.descripcion}</td>
+                  <td>${d?.descripcion}</td>
+                </tr>
+              </g:each>
             </g:if>
-            <g:each in="${SolicitudDetalle.findAllByIdSolicitudAndEstado(solicitudInstance,
-                            'A' as char)}" var="d">
-              <tr>
-                <td><g:link action="edit" id="${d.id}">
-                  ${d?.encodeAsHTML()}
-                </g:link></td>
-                <td>${d?.idServ?.servSub?.descripcion}</td>
-                <td>${d?.idServ?.descripcion}</td>
-                <td>${d?.descripcion}</td>
-              </tr>
-            </g:each>
           </table>
         </div>
       </div>
