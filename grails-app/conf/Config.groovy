@@ -63,7 +63,7 @@ grails.gorm.failOnError=true
 
 environments {
     development {
-      // grails.serverURL = "http://192.168.0.8:8888/catalogo-servicios"
+      grails.serverURL = "http://192.168.0.8:8888/catalogo-servicios"
       grails.logging.jul.usebridge = true
       // correo general, para pruebas y errores
       //correo.general=rpena@inr.gob.mx
@@ -71,7 +71,7 @@ environments {
     }
     production {
       grails.logging.jul.usebridge = true // false // TODO: apagar por performance
-      // grails.serverURL = "http://192.168.16.51:8888/catalogo-servicios"
+      grails.serverURL = "http://192.168.16.51:8888/catalogo-servicios"
       // correo general, para pruebas y errores
       // correo.general = 'szarazua@inr.gob.mx'
       correo.general = 'dzamora@inr.gob.mx'
