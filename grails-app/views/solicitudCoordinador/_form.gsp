@@ -147,17 +147,8 @@
       <g:textArea name="descripcion" cols="40" rows="5" maxlength="3000" value="${solicitudDetalleInstance?.descripcion}" disabled="true"/>
     </div>
   </div>
-  <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idPrograma', 'error')} ">
-      <label for="idPrograma">
-        <g:message code="solicitudDetalle.idPrograma.label" default="Estado de cierre" />
-      </label>
-      <g:field id="idPrograma" name="idPrograma.id" type="text"
-        value="${solicitudDetalleInstance?.idPrograma}" disabled="true"/>
-    </div>
-  </div>
 
-  <div class="span4">
+  <div class="span4 offset4">
     <g:if test="${solicitudDetalleInstance?.idResguardoentregadetalle}">
     <div class="fieldtablecontain">
       <label for="resguardo">
