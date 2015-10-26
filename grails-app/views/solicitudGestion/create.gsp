@@ -27,7 +27,8 @@
 			</ul>
 			</g:hasErrors>
 			<g:form action="save"  enctype="multipart/form-data">
-				<g:hiddenField name="idSolicitud" value="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}" />
+        <g:hiddenField name="idSolicitud" value="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}" />
+				<g:hiddenField name="detalle" value="${back}" />
 				<fieldset class="form">
 					<div class="fieldtablecontain ">
 						<br /><br /><br />

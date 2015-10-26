@@ -45,13 +45,15 @@
       <div class="row-fluid">
         <div class="span10 offset1">
           <ul class="one-to-many">
-            <g:each in="${solicitudDetalleInstance.idSolicitud?.archivos}" var="a">
-              <li><g:link action="showArchivo" id="${a.id}">${a?.encodeAsHTML()}</g:link>
-              &nbsp; : &nbsp;
-              <g:link action="download" id="${a.id}">descargarlo</g:link></li>
-            </g:each>
+            <g:if test="${solicitudDetalleInstance.idSolicitud?.archivos}">
+              <g:each in="${solicitudDetalleInstance.idSolicitud.archivos.sort{it.id}}" var="a">
+                <li><g:link action="showArchivo" id="${a.id}">${a?.encodeAsHTML()}</g:link>
+                &nbsp; : &nbsp;
+                <g:link action="download" id="${a.id}">descargarlo</g:link></li>
+              </g:each>
+            </g:if>
             <li class="add">
-              <g:link class="create" action="create"
+              <g:link class="create" action="create" class="btn"
                 params="['solicitud.id': solicitudDetalleInstance?.idSolicitud?.id, 'detalle.id': solicitudDetalleInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
             </li>
           </ul>
