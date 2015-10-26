@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.Solicitud" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 
 
 <style type="text/css">
@@ -56,7 +56,37 @@
 <p style="height:40px;"> </p>
 
 
+<H1>
+  <g:message code="solicitud.archivos.label" default="Archivos" />
+</H1>
 
+<div class="row-fluid">
+  <div class="span10 offset1">
+    <ul class="one-to-many" style="list-style-type:decimal;">
+      <g:if test="${solicitudInstance?.archivos}">
+        <g:each in="${solicitudInstance.archivos.sort{it.id}}" var="a">
+          <li><g:link controller="solicitudArchivoadjunto" action="download"
+            id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+        </g:each>
+      </g:if>
+      <g:if test="${((!solicitudInstance?.estado || solicitudInstance.estado == 'F' as char) &&
+               (!solicitudInstance?.archivos || solicitudInstance.archivos.size() < 2))}">
+        <li class="add">
+          <g:link class="btn" controller="solicitudArchivoadjunto" action="create"
+            params="['solicitud.id': solicitudInstance?.id]">
+            ${message(code: 'default.add.label',
+              args: [message(code: 'solicitudArchivoadjunto.label',
+                default: 'SolicitudArchivoadjunto')])}
+          </g:link>
+        </li>
+      </g:if>
+    </ul>
+  </div>
+</div>
+
+
+<h1> </h1>
+<p style="height:40px;"> </p>
 
 
 <div class="row-fluid">

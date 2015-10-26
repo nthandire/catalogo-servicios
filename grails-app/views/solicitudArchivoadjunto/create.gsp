@@ -11,7 +11,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="back" controller="solicitud" action="show" id="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}">Regresar a la solicitud</g:link></li>
+				<li><g:link class="back" controller="solicitud" action="edit" id="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}">Regresar a la solicitud</g:link></li>
 			</ul>
 		</div>
 		<div id="create-solicitudArchivoadjunto" class="content scaffold-create" role="main">
@@ -23,11 +23,12 @@
 			 <div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<g:hasErrors bean="${solicitudArchivoadjuntoInstance}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${solicitudArchivoadjuntoInstance}" var="error">
-				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
+  			<ul class="errors" role="alert">
+  				<g:eachError bean="${solicitudArchivoadjuntoInstance}" var="error">
+  				  <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>>
+              <g:message error="${error}"/></li>
+  				</g:eachError>
+  			</ul>
 			</g:hasErrors>
 			<g:form action="save"  enctype="multipart/form-data">
 				<g:hiddenField name="idSolicitud" value="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}" />

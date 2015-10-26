@@ -3,7 +3,7 @@ Junta del 23 de octubre.
 
 
 + 1.- Quitar la justificacion de la captura inicial
-- 2.- regresar el boton de agregar archivos
++ 2.- regresar el boton de agregar archivos
 - 3.- Gestor: al  dar tercer nivel , no mandar a show, mandar a edit
 - 4.- Gestor, al agregar un archivo (al dar tercer nivel), la liga esta mál del regreso
 - 5.- Coordinador: no debe mostrar Estado de Cierre (hay un caso anterior)

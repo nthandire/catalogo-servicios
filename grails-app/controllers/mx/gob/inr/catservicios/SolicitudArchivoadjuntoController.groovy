@@ -64,7 +64,7 @@ class SolicitudArchivoadjuntoController {
                                             solicitudArchivoadjuntoInstance])
             return
         }
-        redirect (controller: "solicitud", action:'show', id: solicitud.id)
+        redirect (controller: "solicitud", action:'edit', id: solicitud.id)
       }
     }
 
