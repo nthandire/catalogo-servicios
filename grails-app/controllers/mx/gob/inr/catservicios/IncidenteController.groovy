@@ -32,7 +32,9 @@ class IncidenteController {
         log.debug("list incidentes = ${incidentes}")
 
         def incidentesFiltrados =
-          incidentes.findAll {it?.idServresp?.descripcion?.contains areaDesc}
+          incidentes.findAll {it?.idServresp?.descripcion?.contains areaDesc}.
+            sort{a, b -> a.estado <=> b.estado ?: a.nivel <=> b.nivel ?:
+              b.fechaIncidente <=> a.fechaIncidente}
         log.debug("incidentesFiltrados = ${incidentesFiltrados}")
 
 
