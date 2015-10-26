@@ -8,6 +8,7 @@ import groovy.time.TimeCategory
 class SolicitudController {
     def springSecurityService
     def grailsApplication
+    def firmadoService
     static nombreMenu = "Solicitud"
     static ordenMenu = 80
 
@@ -61,19 +62,7 @@ class SolicitudController {
     }
 
     def categorias() {
-      def query =
-          "  from Cat_servCat c               \n" +
-          " where exists                      \n" +
-          "      ( from Cat_servSub s,        \n" +
-          "             Cat_serv t            \n" +
-          "       where s.id = t.servSub      \n" +
-          "         and t.incidente = 'f'     \n" +
-          "      )                            \n"
-      log.debug("query = \n${query}")
-
-      def categorias = Cat_servCat.executeQuery(query)
-      log.debug("numero de categorias = ${categorias.size()}")
-      categorias
+      firmadoService.categoriasSolicitudes()
     }
 
     def equipos() {

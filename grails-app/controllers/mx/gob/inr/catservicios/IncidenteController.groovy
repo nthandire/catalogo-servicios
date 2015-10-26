@@ -323,7 +323,7 @@ class IncidenteController {
         Cat_servCat category = Cat_servCat.get(categoryId)
         def subCategories = []
         if ( category != null ) {
-            subCategories = Cat_servSub.findAllByServCat(category, [order:'id'])
+            subCategories = firmadoService.subcategoriasIncidentes(category)
         }
         render g.select(id:'servSub', name:'servSub.id', required:'',
           onchange:rutinaALlamar + '(this.value)',
@@ -344,7 +344,7 @@ class IncidenteController {
         Cat_servSub subcategory = Cat_servSub.get(subcategoryId)
         def servicios = []
         if ( subcategory != null ) {
-            servicios = Cat_serv.findAllByServSub(subcategory, [order:'id'])
+            servicios = firmadoService.tercerNivelIncidentes(subcategory)
         }
         render g.select(id:campoAActualizar, name:campoAActualizar + '.id', required:'',
             from:servicios, optionKey:'id', noSelection:['':'Seleccione una...']

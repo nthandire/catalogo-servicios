@@ -202,17 +202,8 @@ class SolicitudGestionController {
             return
         }
 
-        def query =
-          "    from Cat_servSub s            \n" +
-          "   where s.servCat = ?            \n" +
-          "     and exists (                 \n" +
-          "       from Cat_serv t            \n" +
-          "      where s.id = t.servSub      \n" +
-          "        and t.incidente = 'f'     \n" +
-          "     )                            \n"
-
-        def subcategorias = Cat_servSub.executeQuery(query,
-          [solicitudDetalleInstance.idServcat])
+        def subcategorias = firmadoService.
+          subcategoriasSolicitudes(solicitudDetalleInstance.idServcat)
         log.debug("numero de subcategorias = ${subcategorias.size()}")
 
         [solicitudDetalleInstance: solicitudDetalleInstance,
@@ -424,7 +415,7 @@ class SolicitudGestionController {
     Cat_servSub subcategory = Cat_servSub.get(subcategoryId)
     def servicios = []
     if ( subcategory != null ) {
-      servicios = Cat_serv.findAllNotIncidenteByServSub(subcategory, [order:'id'])
+      servicios = firmadoService.tercerNivelSolicitudes(subcategory)
     }
     render g.select(id: 'idServ', name:'idServ.id', required:'',
       onchange:"servicesChanged(this.value)",

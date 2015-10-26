@@ -64,23 +64,43 @@
 
 
 
+<div class="row-fluid">
+  <div class="span4">
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idSistema', 'error')} ">
+      <label for="idSistema">
+        <g:message code="incidente.idSistema.label" default="Sistema" />
+      </label>
+      <g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['': '']"/>
+    </div>
+  </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idSistema', 'error')} ">
-	<label for="idSistema">
-		<g:message code="incidente.idSistema.label" default="Sistema" />
-	</label>
-	<g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['': '']"/>
-</div>
+  <div class="span4">
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance,
+        field: 'idResguardoentregadetalle', 'error')} ">
+      <label for="idResguardoentregadetalle">
+        <g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
+      </label>
+      <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
+        from="${ResguardoEntregaDetalle.executeQuery(
+          'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
+          optionKey="id" class="many-to-one" noSelection="['': '']"
+          value="${solicitudDetalleInstance?.idResguardoentregadetalle}"/>
+    </div>
+  </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
-  <label for="idResguardoentregadetalle">
-    <g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
-  </label>
-  <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
-    from="${ResguardoEntregaDetalle.executeQuery(
-      'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
-      optionKey="id" class="many-to-one" noSelection="['': '']"
-      value="${solicitudDetalleInstance?.idResguardoentregadetalle}"/>
+  <div class="span4">
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
+     <label for="idReporta">
+       <g:message code="incidente.idReporta.label" default="Quien Reporta" />
+     </label>
+      <%-- TODO: mejorar el select, solo los usuarios SAST --%>
+      <g:select id="idReporta" name="idReporta"
+        from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
+        required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
+        noSelection="${['':'Seleccione una...']}" optionKey="id"
+        optionValue="nombreMostrar"/>
+    </div>
+  </div>
 </div>
 
 <g:if test="${incidenteInstance.idReporta}">
@@ -120,7 +140,7 @@
     <div class="span4">
       <div class="fieldtablecontain">
         <label for="nombre-label">
-          <g:message code="incidente.idReporta.label" default="Quien Atendió nivel 1" />
+          <g:message code="incidente.idNivel1.label" default="Quien Atendió nivel 1" />
         </label>
         <g:field type="text" name="nombre.no" disabled="true"
           value="${Usuario.get(incidenteInstance.idNivel1)}"/>
@@ -152,7 +172,7 @@
     <div class="span4">
       <div class="fieldtablecontain">
         <label for="nombre-label">
-          <g:message code="incidente.idReporta.label" default="Quien Atendió nivel 2" />
+          <g:message code="incidente.idNivel2.label" default="Quien Atendió nivel 2" />
         </label>
         <g:field type="text" name="nombre.no" disabled="true"
           value="${Usuario.get(incidenteInstance.idNivel2)}"/>
@@ -184,7 +204,7 @@
     <div class="span4">
       <div class="fieldtablecontain">
         <label for="nombre-label">
-          <g:message code="incidente.idReporta.label" default="Quien Atendió nivel 3" />
+          <g:message code="incidente.idNivel3.label" default="Quien Atendió nivel 3" />
         </label>
         <g:field type="text" name="nombre.no" disabled="true"
           value="${Usuario.get(incidenteInstance.idNivel3)}"/>
@@ -211,6 +231,7 @@
   </div>
 </g:if>
 
+<g:set var="firmado" bean="firmadoService"/>
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
@@ -225,7 +246,7 @@
       </g:if>
       <g:else>
         <g:select id="servCat" name="idServ.servSub.servCat.id"
-          from="${Cat_servCat.list()}" optionKey="id" required=""
+          from="${firmado.categoriasIncidentes()}" optionKey="id" required=""
           value="${incidenteInstance?.idServ?.servSub?.servCat?.id}"
           class="many-to-one" onchange="categoryChanged(this.value)"
           noSelection="${['':'Seleccione una...']}"/>
@@ -248,7 +269,7 @@
         <g:else>
           <g:select id='servSub' name='servSub.id' required=''
             onchange='subcategoryChanged(this.value)' optionKey='id'
-            from="${Cat_servSub.findAllByServCat(incidenteInstance?.idServ?.servSub?.servCat, [order:'id'])}"
+            from="${[]}"
             value="${incidenteInstance?.idServ?.servSub?.id}" noSelection="['':' ']"/>
         </g:else>
       </span>
@@ -270,7 +291,7 @@
         <g:else>
           <g:select id='idServ' name='idServ.id' required=''
             optionKey='id' value="${incidenteInstance?.idServ?.id}"
-            from="${Cat_serv.findAllByServSub(incidenteInstance?.idServ?.servSub, [order:'id'])}"
+            from="${[]}"
             noSelection="['':' ']"/>
         </g:else>
       </span>

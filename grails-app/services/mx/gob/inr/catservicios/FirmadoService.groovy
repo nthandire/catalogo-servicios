@@ -95,4 +95,101 @@ class FirmadoService {
     area
   }
 
+  def categoriasIncidentes() {
+    def query =
+        "  from Cat_servCat c               \n" +
+        " where exists                      \n" +
+        "      ( from Cat_servSub s,        \n" +
+        "             Cat_serv t            \n" +
+        "       where s.servCat = c.id      \n" +
+        "         and s.id = t.servSub      \n" +
+        "         and t.incidente = 't'     \n" +
+        "      )                            \n" +
+        " order by c.id                     \n"
+    log.debug("query = \n${query}")
+
+    def categorias = Cat_servCat.executeQuery(query)
+    log.debug("numero de categorias = ${categorias.size()}")
+    categorias
+  }
+
+  def subcategoriasIncidentes(Cat_servCat categoria) {
+    def query =
+        "  from Cat_servSub s                   \n" +
+        " where s.servCat.id = ${categoria.id}  \n" +
+        "   and exists                          \n" +
+        "      ( from Cat_serv t                \n" +
+        "       where s.id = t.servSub          \n" +
+        "         and t.incidente = 't'         \n" +
+        "      )                                \n" +
+        " order by s.id                         \n"
+    log.debug("query = \n${query}")
+
+    def subcategorias = Cat_servSub.executeQuery(query)
+    log.debug("numero de subcategorias = ${subcategorias.size()}")
+    subcategorias
+  }
+
+  def tercerNivelIncidentes(Cat_servSub subcategoria) {
+    def query =
+        "  from Cat_serv t                         \n" +
+        " where t.servSub.id = ${subcategoria.id}  \n" +
+        "   and t.incidente = 't'                  \n" +
+        " order by t.id                            \n"
+    log.debug("query = \n${query}")
+
+    def tercerosNiveles = Cat_serv.executeQuery(query)
+    log.debug("numero de tercerosNiveles = ${tercerosNiveles.size()}")
+    tercerosNiveles
+  }
+
+  def categoriasSolicitudes() {
+    def query =
+        "  from Cat_servCat c               \n" +
+        " where exists                      \n" +
+        "      ( from Cat_servSub s,        \n" +
+        "             Cat_serv t            \n" +
+        "       where s.servCat = c.id      \n" +
+        "         and s.id = t.servSub      \n" +
+        "         and t.portal = 't'        \n" +
+        "         and t.solicitud = 't'     \n" +
+        "      )                            \n" +
+        " order by s.id                     \n"
+    log.debug("query = \n${query}")
+
+    def categorias = Cat_servCat.executeQuery(query)
+    log.debug("numero de categorias = ${categorias.size()}")
+    categorias
+  }
+
+  def subcategoriasSolicitudes(Cat_servCat categoria) {
+    def query =
+        "  from Cat_servSub s                   \n" +
+        " where s.servCat.id = ${categoria.id}  \n" +
+        "   and exists                          \n" +
+        "      ( from Cat_serv t                \n" +
+        "       where s.id = t.servSub          \n" +
+        "         and t.solicitud = 't'         \n" +
+        "      )                                \n" +
+        " order by s.id                         \n"
+    log.debug("query = \n${query}")
+
+    def subcategorias = Cat_servSub.executeQuery(query)
+    log.debug("numero de subcategorias = ${subcategorias.size()}")
+    subcategorias
+  }
+
+  def tercerNivelSolicitudes(Cat_servSub subcategoria) {
+    def query =
+        "  from Cat_serv t                         \n" +
+        " where t.servSub.id = ${subcategoria.id}  \n" +
+        "   and t.solicitud = 't'                  \n" +
+        " order by t.id                            \n"
+    log.debug("query = \n${query}")
+
+    def tercerosNiveles = Cat_serv.executeQuery(query)
+    log.debug("numero de tercerosNiveles = ${tercerosNiveles.size()}")
+    tercerosNiveles
+  }
+
 }
