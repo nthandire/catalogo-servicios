@@ -68,7 +68,6 @@
           <div class="modal-body">
             <div class="row-fluid">
               <div class="span12">
-                <h4>Solución del Incidente</h4>
                 <fieldset class="form">
                   <g:render template="formSolucion"/>
                 </fieldset>
@@ -86,6 +85,31 @@
           </div>
         </div>
 
+        <div id="responsiveTecnico" class="modal hide fade" tabindex="-1" data-width="512">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="tituloTec">Asignar Técnico</h3>
+          </div>
+          <div class="modal-body">
+            <div class="row-fluid">
+              <div class="span12">
+                <fieldset class="form">
+                  <g:render template="formTecnico"/>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <fieldset class="buttons">
+              <a data-dismiss="modal" class="cancel">Cancelar</a>
+              <input type="submit" name="_action_tecnicoUpdate" id="respButtonTec"
+                value="${message(code: 'default.button.update.label',
+                  default: 'Update')}"
+                class="save">
+            </fieldset>
+          </div>
+        </div>
+
         <script>
           function escala() {
             $("#titulo").text('Escalar incidente');
@@ -93,6 +117,7 @@
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_escalaUpdate');
             $("#passwordfirma").prop("required", true);
+            $("#passwordfirmaTec").prop("required", false);
             $("#solServCat").css("display", "none");
             $("#solServSub").css("display", "none");
             $("#solServ").css("display", "none");
@@ -106,6 +131,7 @@
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_solucionUpdate');
             $("#passwordfirma").prop("required", true);
+            $("#passwordfirmaTec").prop("required", false);
             $("#solServCat").css("display", "block");
             $("#solServSub").css("display", "block");
             $("#solServ").css("display", "block");
@@ -119,6 +145,7 @@
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_problemaUpdate');
             $("#passwordfirma").prop("required", true);
+            $("#passwordfirmaTec").prop("required", false);
             $("#solServCat").css("display", "none");
             $("#solServSub").css("display", "none");
             $("#solServ").css("display", "none");
@@ -132,6 +159,7 @@
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_cancelarUpdate');
             $("#passwordfirma").prop("required", true);
+            $("#passwordfirmaTec").prop("required", false);
             $("#solServCat").css("display", "none");
             $("#solServSub").css("display", "none");
             $("#solServ").css("display", "none");
@@ -143,6 +171,13 @@
             $("#idPrograma").prop("required", false);
             $("#solucionNivel").prop("required", false);
             $("#passwordfirma").prop("required", false);
+            $("#passwordfirmaTec").prop("required", false);
+          }
+          function tecnico() {
+            $("#idPrograma").prop("required", false);
+            $("#solucionNivel").prop("required", false);
+            $("#passwordfirma").prop("required", false);
+            $("#passwordfirmaTec").prop("required", true);
           }
         </script>
 
@@ -152,6 +187,8 @@
             value="${message(code: 'default.button.update.label',
                              default: 'Update')}"
             onclick="update()"/>
+          <a class="save" data-toggle="modal" href="#responsiveTecnico"
+            onclick="tecnico()">Asignar técnico</a>
           <g:if test="${idNivel == yo}">
             <a class="save" data-toggle="modal" href="#responsive"
               onclick="soluciona()">Solucionar Incidente</a>

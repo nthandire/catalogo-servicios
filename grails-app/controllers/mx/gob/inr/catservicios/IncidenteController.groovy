@@ -189,6 +189,10 @@ class IncidenteController {
             return
         }
 
+        preparaEdit(id, incidenteInstance)
+      }
+
+    def preparaEdit(Long id, Incidente incidenteInstance) {
         def userID = springSecurityService.principal.id
         log.debug("userID = ${userID}")
         def area = area()
@@ -278,7 +282,7 @@ class IncidenteController {
                 incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'incidente.label', default: 'Incidente')] as Object[],
                           "Another user has updated this Incidente while you were editing")
-                render(view: "edit", model: [incidenteInstance: incidenteInstance])
+                render(view: "edit", model: preparaEdit(id, incidenteInstance))
                 return
             }
         }
@@ -287,24 +291,15 @@ class IncidenteController {
 
       def nivel = incidenteInstance.nivel
       def userID = springSecurityService.principal.id
-      if (params["idNivel"] != incidenteInstance."idNivel${nivel}") {
-        incidenteInstance."idNivel${nivel}" = params["idNivel"].toLong()
-        incidenteInstance."fechaNivel${nivel}" = new Date()
-        if (nivel > 1) {
-          incidenteInstance."idAsignanivel${nivel}" = userID
-        }
-      }
-
       incidenteInstance.properties = params
       incidenteInstance."solucionNivel${nivel}" =
         params["solucionNivel"]
-
 
         incidenteInstance.idCaptura = springSecurityService.principal.id
         incidenteInstance.ipTerminal = request.getRemoteAddr()
 
         if (!incidenteInstance.save(flush: true)) {
-            render(view: "edit", model: [incidenteInstance: incidenteInstance])
+            render(view: "edit", model: preparaEdit(id, incidenteInstance))
             return
         }
 
@@ -367,7 +362,7 @@ class IncidenteController {
           incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                     [message(code: 'incidente.label', default: 'Incidente')] as Object[],
                     "Another user has updated this Incidente while you were editing")
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          render(view: "edit", model: preparaEdit(id, incidenteInstance))
           return
         }
       }
@@ -378,7 +373,7 @@ class IncidenteController {
 
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        render(view: "edit", model: preparaEdit(id, incidenteInstance))
         return
       }
 
@@ -386,7 +381,7 @@ class IncidenteController {
 
       if (incidenteInstance?."idNivel${nivel}" != userID) {
         flash.error = "Este incidente no esta asignado a Usted"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        render(view: "edit", model: preparaEdit(id, incidenteInstance))
         return
       }
 
@@ -409,6 +404,80 @@ class IncidenteController {
       redirect(action: "list")
     }
 
+    def tecnicoUpdate(Long id, Long version) {
+      log.debug("params = $params")
+      def incidenteInstance = Incidente.get(id)
+      if (!incidenteInstance) {
+          flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
+          redirect(action: "list")
+          return
+      }
+
+      if (version != null) {
+        if (incidenteInstance.version > version) {
+          incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                    [message(code: 'incidente.label', default: 'Incidente')] as Object[],
+                    "Another user has updated this Incidente while you were editing")
+          redirect(action: "edit", id: id)
+          return
+        }
+      }
+
+      def userID = springSecurityService.principal.id
+      def firmaTeclada = params['passwordfirmaTec']
+      def firma = Firmadigital.findById(userID)?.passwordfirma
+
+      if (firmaTeclada != firma) {
+        flash.error = "Error en contaseña"
+        redirect(action: "edit", id: id)
+        return
+      }
+
+      def nivel = incidenteInstance.nivel
+      def idTecnico = 0
+      if (params["idNivel"] != incidenteInstance."idNivel${nivel}") {
+        idTecnico = params["idNivel"].toLong()
+        incidenteInstance."idNivel${nivel}" = idTecnico
+        incidenteInstance."fechaNivel${nivel}" = new Date()
+        if (nivel > 1) {
+          incidenteInstance."idAsignanivel${nivel}" = userID
+        }
+
+        incidenteInstance.idCaptura = userID
+        incidenteInstance.ipTerminal = request.getRemoteAddr()
+
+        if (!incidenteInstance.save(flush: true)) {
+            redirect(action: "edit", id: id)
+            return
+        }
+      } else {
+        flash.error = "No cambio el técnico"
+        redirect(action: "edit", id: id)
+        return
+      }
+
+      def tecnico = Usuario.get(idTecnico)
+      def liga = createLink(controller:"Incidente", action: "edit",
+                            id: incidenteInstance.id, absolute: "true")
+      log.debug("liga = ${liga}")
+      def asunto = "El incidente ${incidenteInstance} a sido asignado a usted"
+      log.debug("asunto = ${asunto}")
+      def msg = "Hola ${tecnico}<br/><br/>El incidente folio: " +
+        "${incidenteInstance} requiere atención. " +
+        "Atiendela utilizando la siguiente liga: <br/><br/>" +
+        "<a href='${liga}'>${incidenteInstance}</a>"
+      log.debug("msg = ${msg}")
+      def correo = tecnico.correo ?: grailsApplication.config.correo.general
+      sendMail {
+        to correo
+        subject asunto
+        html msg
+      }
+
+      flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
+      redirect(action: "edit", id: id)
+    }
+
     def problemaUpdate(Long id, Long version) {
       log.debug("params = $params")
       def incidenteInstance = Incidente.get(id)
@@ -423,7 +492,7 @@ class IncidenteController {
           incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                     [message(code: 'incidente.label', default: 'Incidente')] as Object[],
                     "Another user has updated this Incidente while you were editing")
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          render(view: "edit", model: preparaEdit(id, incidenteInstance))
           return
         }
       }
@@ -433,7 +502,7 @@ class IncidenteController {
       def firma = Firmadigital.findById(userID)?.passwordfirma
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        render(view: "edit", model: preparaEdit(id, incidenteInstance))
         return
       }
 
@@ -441,7 +510,7 @@ class IncidenteController {
 
       if (incidenteInstance?."idNivel${nivel}" != userID) {
         flash.error = "Este incidente no esta asignado a Usted"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        render(view: "edit", model: preparaEdit(id, incidenteInstance))
         return
       }
 
@@ -457,7 +526,7 @@ class IncidenteController {
       incidenteInstance.estado = 'P' as char
 
       if (!incidenteInstance.save(flush: true)) {
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          render(view: "edit", model: preparaEdit(id, incidenteInstance))
           return
       }
 
@@ -492,7 +561,7 @@ class IncidenteController {
       problema.ipTerminal = request.getRemoteAddr()
 
       if (!problema.save(flush: true)) {
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          render(view: "edit", model: preparaEdit(id, incidenteInstance))
           return
       }
 
@@ -514,7 +583,7 @@ class IncidenteController {
           incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                     [message(code: 'incidente.label', default: 'Incidente')] as Object[],
                     "Another user has updated this Incidente while you were editing")
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          render(view: "edit", model: preparaEdit(id, incidenteInstance))
           return
         }
       }
@@ -524,7 +593,7 @@ class IncidenteController {
       def firma = Firmadigital.findById(userID)?.passwordfirma
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        render(view: "edit", model: preparaEdit(id, incidenteInstance))
         return
       }
 
@@ -532,7 +601,7 @@ class IncidenteController {
 
       if (incidenteInstance?."idNivel${nivel}" != userID) {
         flash.error = "Este incidente no esta asignado a Usted"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        render(view: "edit", model: preparaEdit(id, incidenteInstance))
         return
       }
 
@@ -548,7 +617,7 @@ class IncidenteController {
       incidenteInstance.estado = 'C' as char
 
       if (!incidenteInstance.save(flush: true)) {
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          render(view: "edit", model: preparaEdit(id, incidenteInstance))
           return
       }
 
@@ -570,7 +639,7 @@ class IncidenteController {
           incidenteInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                     [message(code: 'incidente.label', default: 'Incidente')] as Object[],
                     "Another user has updated this Incidente while you were editing")
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          render(view: "edit", model: preparaEdit(id, incidenteInstance))
           return
         }
       }
@@ -581,7 +650,7 @@ class IncidenteController {
 
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        render(view: "edit", model: preparaEdit(id, incidenteInstance))
         return
       }
 
@@ -589,7 +658,7 @@ class IncidenteController {
 
       if (incidenteInstance?."idNivel${nivel}" != userID) {
         flash.error = "Este incidente no esta asignado a Usted"
-        render(view: "edit", model: [incidenteInstance: incidenteInstance])
+        render(view: "edit", model: preparaEdit(id, incidenteInstance))
         return
       }
 
@@ -606,7 +675,7 @@ class IncidenteController {
         incidenteInstance.idServ."servResp${incidenteInstance.nivel}"
 
       if (!incidenteInstance.save(flush: true)) {
-          render(view: "edit", model: [incidenteInstance: incidenteInstance])
+          render(view: "edit", model: preparaEdit(id, incidenteInstance))
           return
       }
 

@@ -15,6 +15,7 @@ class Usuario {
   String paterno
   String materno
   String extension
+  String correo
   Character idUnidadMedica
 
   String getNombreMostrar() {
@@ -32,6 +33,7 @@ class Usuario {
     paterno nullable: true
 		materno nullable: true
     extension nullable: true, maxSize: 6
+    correo nullable: true, maxSize: 6
 		idUnidadMedica nullable: true
 	}
 

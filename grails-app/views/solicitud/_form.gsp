@@ -53,7 +53,7 @@
 
 
 <h1> </h1>
-<p style="height:40px;"> </p>
+<p style="height:15px;"> </p>
 
 
 <H1>
@@ -86,7 +86,7 @@
 
 
 <h1> </h1>
-<p style="height:40px;"> </p>
+<p style="height:15px;"> </p>
 
 
 <div class="row-fluid">
