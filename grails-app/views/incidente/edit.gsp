@@ -89,7 +89,6 @@
         <script>
           function escala() {
             $("#titulo").text('Escalar incidente');
-            $("#titulo").text('Acciones realizadas');
             $("#idPrograma").prop("required", false);
             $("#solucionNivel").prop("required", true);
             $("#respButton").attr('name','_action_escalaUpdate');
@@ -99,6 +98,7 @@
             $("#solServ").css("display", "none");
             $("#solEstadoCierre").css("display", "none");
             $("#solEstadoCierreProblema").css("display", "none");
+            $("#solSolucion").text('Acciones realizadas');
           }
           function soluciona() {
             $("#titulo").text('Soluciona incidente');

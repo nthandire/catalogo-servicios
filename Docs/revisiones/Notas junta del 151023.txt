@@ -19,4 +19,4 @@ Junta del 23 de octubre.
 + 15.- Incidente, Al escalar, pedir firma.
 - 16.- Al asignar técnico, pedir firma
 - 17.- Incidente, al crear, pedir firma
-- 18.- La etiqueta al escalar , en lugar de solucionar, es "Acciones realizadas"
++ 18.- La etiqueta al escalar , en lugar de solucionar, es "Acciones realizadas"
