@@ -39,10 +39,7 @@
       <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
         <tr><td>
           <a class="btn" data-toggle="modal" href="#responsive"
-            onclick="detalleNuevo()">
-            ${message(code: 'default.add.label',
-                args: [message(code: 'solicitudDetalle.label',
-                  default: 'SolicitudDetalle')])}</a>
+            onclick="detalleNuevo()">Agregar otro servicio</a>
         </td>
         <td colspan="4"></td>
         </tr>
