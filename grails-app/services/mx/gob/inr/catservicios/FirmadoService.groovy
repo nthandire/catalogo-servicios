@@ -105,7 +105,7 @@ class FirmadoService {
         "         and s.id = t.servSub      \n" +
         "         and t.incidente = 't'     \n" +
         "      )                            \n" +
-        " order by c.id                     \n"
+        " order by c.categoria              \n"
     log.debug("query = \n${query}")
 
     def categorias = Cat_servCat.executeQuery(query)
@@ -122,7 +122,7 @@ class FirmadoService {
         "       where s.id = t.servSub          \n" +
         "         and t.incidente = 't'         \n" +
         "      )                                \n" +
-        " order by s.id                         \n"
+        " order by s.descripcion                \n"
     log.debug("query = \n${query}")
 
     def subcategorias = Cat_servSub.executeQuery(query)
@@ -135,7 +135,7 @@ class FirmadoService {
         "  from Cat_serv t                         \n" +
         " where t.servSub.id = ${subcategoria.id}  \n" +
         "   and t.incidente = 't'                  \n" +
-        " order by t.id                            \n"
+        " order by t.descripcion                   \n"
     log.debug("query = \n${query}")
 
     def tercerosNiveles = Cat_serv.executeQuery(query)
@@ -154,7 +154,7 @@ class FirmadoService {
         "         and t.portal = 't'        \n" +
         "         and t.solicitud = 't'     \n" +
         "      )                            \n" +
-        " order by c.id                     \n"
+        " order by c.categoria              \n"
     log.debug("query = \n${query}")
 
     def categorias = Cat_servCat.executeQuery(query)
@@ -171,7 +171,7 @@ class FirmadoService {
         "       where s.id = t.servSub          \n" +
         "         and t.solicitud = 't'         \n" +
         "      )                                \n" +
-        " order by s.id                         \n"
+        " order by s.descripcion                \n"
     log.debug("query = \n${query}")
 
     def subcategorias = Cat_servSub.executeQuery(query)
@@ -184,7 +184,7 @@ class FirmadoService {
         "  from Cat_serv t                         \n" +
         " where t.servSub.id = ${subcategoria.id}  \n" +
         "   and t.solicitud = 't'                  \n" +
-        " order by t.id                            \n"
+        " order by t.descripcion                   \n"
     log.debug("query = \n${query}")
 
     def tercerosNiveles = Cat_serv.executeQuery(query)
