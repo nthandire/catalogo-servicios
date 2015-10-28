@@ -49,9 +49,9 @@
                 </li>
               </g:each>
               <li class="add">
-                <g:link class="create" action="createArchivo"
+                <g:link class="btn" action="createArchivo"
                   params="['incidente.id': incidenteInstance?.id]">
-                  ${message(code: 'default.add.label',
+                  ${message(code: 'default.subir.label',
                     args: [message(code: 'solicitudArchivoadjunto.label',
                                     default: 'Archivo')])}
                 </g:link>

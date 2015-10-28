@@ -71,7 +71,7 @@
         <li class="add">
           <g:link class="btn" controller="solicitudArchivoadjunto" action="create"
             params="['solicitud.id': solicitudInstance?.id]">
-            ${message(code: 'default.add.label',
+            ${message(code: 'default.subir.label',
               args: [message(code: 'solicitudArchivoadjunto.label',
                 default: 'SolicitudArchivoadjunto')])}
           </g:link>
