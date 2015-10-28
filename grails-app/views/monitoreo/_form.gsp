@@ -61,17 +61,20 @@
 <div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'monitoreoDetalles', 'error')} ">
 	<label for="monitoreoDetalles">
 		<g:message code="monitoreo.monitoreoDetalles.label" default="Monitoreo Detalles" />
-
 	</label>
 
-<ul class="one-to-many">
-<g:each in="${monitoreoInstance?.monitoreoDetalles?}" var="m">
-    <li><g:link controller="monitoreoDetalle" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="monitoreoDetalle" action="create" params="['monitoreo.id': monitoreoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'monitoreoDetalle.label', default: 'MonitoreoDetalle')])}</g:link>
-</li>
-</ul>
-
+  <ul class="one-to-many">
+    <g:each in="${monitoreoInstance?.monitoreoDetalles}" var="m">
+        <li><g:link controller="monitoreoDetalle" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+    </g:each>
+    <li class="add">
+      <g:link controller="monitoreoDetalle" action="create"
+        params="['monitoreo.id': monitoreoInstance?.id]">
+        ${message(code: 'default.add.label',
+          args: [message(code: 'monitoreoDetalle.label',
+            default: 'MonitoreoDetalle')])}
+      </g:link>
+    </li>
+  </ul>
 </div>
 
