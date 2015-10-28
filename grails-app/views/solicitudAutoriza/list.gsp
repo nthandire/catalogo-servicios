@@ -31,8 +31,7 @@
 				<thead>
 					<tr>
 
-						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Numero Solicitud')}" />
-
+          <th style="width:30px;"> </th>
 						<g:sortableColumn property="nombre" title="Solicitante" />
 
 						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha Modificación')}" />
@@ -42,16 +41,32 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${autorizablesInstanceList}" status="i" var="solicitudInstance">
+				<g:each in="${autorizablesInstanceList}" status="i"
+            var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="show" id="${solicitudInstance.id}" params="[back: 'list']">${solicitudInstance.toString()}</g:link></td>
+            <td> </td>
 
-						<td>${Usuario.get(solicitudInstance.idSolicitante)}</td>
+						<td>
+              <g:link action="show" id="${solicitudInstance.id}"
+                params="[back: 'list']">
+                ${Usuario.get(solicitudInstance.idSolicitante)}
+              </g:link>
+            </td>
 
-						<td><g:formatDate date="${solicitudInstance.lastUpdated}" /></td>
+						<td>
+              <g:link action="show" id="${solicitudInstance.id}"
+                params="[back: 'list']">
+                <g:formatDate date="${solicitudInstance.lastUpdated}" />
+              </g:link>
+            </td>
 
-						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
+						<td>
+              <g:link action="show" id="${solicitudInstance.id}"
+                params="[back: 'list']">
+                ${fieldValue(bean: solicitudInstance, field: "justificacion")}
+              </g:link>
+            </td>
 
 					</tr>
 				</g:each>
