@@ -5,4 +5,4 @@ Junta del 26 de octubre.
 + 1.- Ordenar los combos de Cat, subcat y tercer nivel en orden alfabético
 + 2.- En el botón de "agregar detalle" que diga "agregar otro servicio"
 + 3.- En el aviso de 'Solicitud "" actualizada'  quitar las comillas
-- 4.- En subir el archivo, la pantalla no debe decir "Crear Archivo" -> "AgregarArchivo"
++ 4.- En subir el archivo, la pantalla no debe decir "Crear Archivo" -> "Agregar Archivo"
