@@ -103,7 +103,7 @@
   </div>
 </div>
 
-<g:if test="${incidenteInstance.idReporta}">
+<g:if test="${incidenteInstance.id && incidenteInstance.idReporta}">
   <div class="row-fluid">
     <div class="span4">
       <div class="fieldtablecontain">
@@ -239,7 +239,7 @@
         <g:message code="cat_serv.servCat.label" default="Cat" />
         <span class="required-indicator">*</span>
       </label>
-      <g:if test="${incidenteInstance?.idServ}">
+      <g:if test="${incidenteInstance?.id && incidenteInstance.idServ}">
         <g:field id="servCat" name="idServ.servSub.servCat.id"
           value="${incidenteInstance?.idServ?.servSub?.servCat}"
           disabled="true"/>
@@ -261,11 +261,17 @@
         <span class="required-indicator">*</span>
       </label>
       <span id="subContainer">
-        <g:if test="${incidenteInstance?.idServ}">
+        <g:if test="${incidenteInstance.id && incidenteInstance.idServ}">
           <g:field id="servSub" name="servSub.id"
             value="${incidenteInstance?.idServ?.servSub}"
             disabled="true"/>
         </g:if>
+        <g:elseif test="${incidenteInstance.idServ}">
+          <g:select id='servSub' name='servSub.id' required=''
+            onchange='subcategoryChanged(this.value)' optionKey='id'
+            from="${firmado.subcategoriasIncidentes(incidenteInstance.idServ.servSub.servCat)}"
+            value="${incidenteInstance?.idServ?.servSub?.id}" noSelection="['':' ']"/>
+        </g:elseif>
         <g:else>
           <g:select id='servSub' name='servSub.id' required=''
             onchange='subcategoryChanged(this.value)' optionKey='id'
@@ -283,11 +289,17 @@
         <span class="required-indicator">*</span>
       </label>
       <span id="serviciosContainer">
-        <g:if test="${incidenteInstance?.idServ}">
+        <g:if test="${incidenteInstance.id && incidenteInstance.idServ}">
           <g:field id="idServ" name="idServ.id"
             value="${incidenteInstance?.idServ}"
             disabled="true"/>
         </g:if>
+        <g:elseif test="${incidenteInstance.idServ}">
+          <g:select id='idServ' name='idServ.id' required=''
+            optionKey='id' value="${incidenteInstance?.idServ?.id}"
+            from="${firmado.tercerNivelIncidentes(incidenteInstance.idServ.servSub)}"
+            noSelection="['':' ']"/>
+        </g:elseif>
         <g:else>
           <g:select id='idServ' name='idServ.id' required=''
             optionKey='id' value="${incidenteInstance?.idServ?.id}"
@@ -316,7 +328,7 @@
 	<label for="descripcion">
 		<g:message code="incidente.descripcion.label" default="Descripcion" />
 	</label>
-  <g:if test="${incidenteInstance?.descripcion}">
+  <g:if test="${incidenteInstance.id && incidenteInstance?.descripcion}">
     <g:textArea name="descripcion" cols="40" rows="5" maxlength="3000"
       value="${incidenteInstance?.descripcion}" disabled="true"/>
   </g:if>

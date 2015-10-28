@@ -43,6 +43,8 @@ class IncidenteController {
           :
             incidentesFiltrados
         log.debug("incidenteInstanceList = ${incidenteInstanceList}")
+        if (!incidenteInstanceList)
+          redirect(action: "create")
         [incidenteInstanceList: incidenteInstanceList,
           incidenteInstanceTotal: incidenteInstanceList.size()]
     }
@@ -74,6 +76,20 @@ class IncidenteController {
 
     def save() {
         def incidenteInstance = new Incidente(params)
+        log.debug("incidenteInstance.idServ = ${incidenteInstance.idServ}")
+        log.debug("incidenteInstance.idServ.servSub = ${incidenteInstance.idServ.servSub}")
+        log.debug("incidenteInstance.idServ.servSub.servCat = ${incidenteInstance.idServ.servSub.servCat}")
+
+        def userID = springSecurityService.principal.id
+        def firmaTeclada = params['passwordfirma']
+        def firma = Firmadigital.findById(userID)?.passwordfirma
+
+        if (firmaTeclada != firma) {
+          flash.error = "Error en contaseña"
+          render(view: "create", model: [incidenteInstance: incidenteInstance])
+          return
+        }
+
         incidenteInstance.fechaIncidente = new Date()
 
         // Asignarle el siguiente folio dentro del año

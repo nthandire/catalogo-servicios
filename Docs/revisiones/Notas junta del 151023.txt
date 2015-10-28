@@ -18,5 +18,5 @@ Junta del 23 de octubre.
 + 14.- Incidente: La etiqueta "Técnico" cambia a "Atendido por ..."
 + 15.- Incidente, Al escalar, pedir firma.
 + 16.- Al asignar técnico, pedir firma
-- 17.- Incidente, al crear, pedir firma
++ 17.- Incidente, al crear, pedir firma
 + 18.- La etiqueta al escalar , en lugar de solucionar, es "Acciones realizadas"

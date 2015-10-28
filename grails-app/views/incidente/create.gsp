@@ -17,7 +17,10 @@
     <div id="create-incidente" class="content scaffold-create" role="main">
       <h1><g:message code="default.create.label" args="[entityName]" /></h1>
       <g:if test="${flash.message}">
-      <div class="message" role="status">${flash.message}</div>
+        <div class="message" role="status">${flash.message}</div>
+      </g:if>
+      <g:if test="${flash.error}">
+        <div class="errors" role="status">${flash.error}</div>
       </g:if>
       <g:hasErrors bean="${incidenteInstance}">
       <ul class="errors" role="alert">
@@ -29,6 +32,19 @@
       <g:form action="save" >
         <fieldset class="form">
           <g:render template="form"/>
+
+          <div class="fieldtablecontain
+            ${hasErrors(bean: firmadigitalInstance,
+              field: 'passwordfirma', 'error')} ">
+            <label for="passwordfirma">
+              <g:message code="firmadigital.passwordfirma.label"
+                default="Passwordfirma" />
+            </label>
+            <g:field name="passwordfirma" id="passwordfirma" type="password"
+              value="${firmadigitalInstance?.passwordfirma}" required=""/>
+          </div>
+
+
         </fieldset>
         <fieldset class="buttons">
           <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
