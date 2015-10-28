@@ -20,6 +20,7 @@
     <g:javascript library="jquery" plugin="jquery"/>
 	</head>
 	<body>
+    <g:set var="ss" bean="springSecurityService"/>
 		<div id="Logo" role="banner" >
 			<table>
 				<tr>
@@ -40,9 +41,9 @@
 			</table>
 		</div>
 		<div class="row-fluid">
-			<div class="span2 offset8">
+			<div class="span3 offset7">
 				<sec:ifLoggedIn>
-					¡ Bienvenido: <span style="color:blue"><sec:username/></span> !
+					¡ Bienvenido: <span style="color:blue">${ss.currentUser}</span> !
 						<!-- <g:link controller="logout"><span style="color:red">Cerrar Sesion</span></g:link> -->
 				</sec:ifLoggedIn>
 			</div>
