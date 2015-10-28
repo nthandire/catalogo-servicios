@@ -170,17 +170,6 @@ class SolicitudGestionController {
         [solicitudDetalleInstance: solicitudDetalleInstance]
     }
 
-    def showArchivo(Long id) {
-        def solicitudArchivoadjuntoInstance = SolicitudArchivoadjunto.get(id)
-        if (!solicitudArchivoadjuntoInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance]
-    }
-
     def showNoFirma(Long id) {
         def solicitudInstance = Solicitud.get(id)
         if (!solicitudInstance) {
@@ -390,24 +379,6 @@ class SolicitudGestionController {
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
         redirect(action: "edit", id: solicitudDetalleInstance.id)
-    }
-
-    def download(long id) {
-        SolicitudArchivoadjunto solicitudArchivoadjuntoInstance =
-          SolicitudArchivoadjunto.get(id)
-        if ( SolicitudArchivoadjunto == null) {
-            flash.message = "Documento no encontrado."
-            redirect (controller: "solicitud", action:'list')
-        } else {
-            response.setContentType("APPLICATION/OCTET-STREAM")
-            response.setHeader("Content-Disposition",
-              "Attachment;Filename=\"${solicitudArchivoadjuntoInstance.nombre}\"")
-
-            def outputStream = response.getOutputStream()
-            outputStream << solicitudArchivoadjuntoInstance.datos
-            outputStream.flush()
-            outputStream.close()
-        }
     }
 
   def subcategoryChanged(long subcategoryId) {

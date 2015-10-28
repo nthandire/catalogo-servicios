@@ -47,9 +47,10 @@
           <ul class="one-to-many">
             <g:if test="${solicitudDetalleInstance.idSolicitud?.archivos}">
               <g:each in="${solicitudDetalleInstance.idSolicitud.archivos.sort{it.id}}" var="a">
-                <li><g:link action="showArchivo" id="${a.id}">${a?.encodeAsHTML()}</g:link>
-                &nbsp; : &nbsp;
-                <g:link action="download" id="${a.id}">descargarlo</g:link></li>
+                <li><g:link controller="solicitudArchivoadjunto"
+                            action="download" id="${a.id}">
+                  ${a?.encodeAsHTML()}
+                </g:link></li>
               </g:each>
             </g:if>
             <li class="add">
