@@ -34,7 +34,7 @@
           <th style="width:30px;"> </th>
 						<g:sortableColumn property="nombre" title="Solicitante" />
 
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha Modificación')}" />
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha de registro')}" />
 
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
 
@@ -57,7 +57,8 @@
 						<td>
               <g:link action="show" id="${solicitudInstance.id}"
                 params="[back: 'list']">
-                <g:formatDate date="${solicitudInstance.lastUpdated}" />
+                <g:formatDate date="${solicitudInstance.fechaSolicitud ?:
+                                      solicitudInstance.lastUpdated}" />
               </g:link>
             </td>
 
