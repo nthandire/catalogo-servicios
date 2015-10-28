@@ -187,8 +187,14 @@
             value="${message(code: 'default.button.update.label',
                              default: 'Update')}"
             onclick="update()"/>
-          <a class="save" data-toggle="modal" href="#responsiveTecnico"
-            onclick="tecnico()">Asignar técnico</a>
+          <sec:access expression="hasRole('ROLE_SAST_COORDINADOR_DE_GESTION')">
+            <a class="save" data-toggle="modal" href="#responsiveTecnico"
+              onclick="tecnico()">Asignar técnico</a>
+          </sec:access>
+          <sec:access expression="hasRole('ROLE_SAST_COORDINADOR')">
+            <a class="save" data-toggle="modal" href="#responsiveTecnico"
+              onclick="tecnico()">Asignar técnico</a>
+          </sec:access>
           <g:if test="${idNivel == yo}">
             <a class="save" data-toggle="modal" href="#responsive"
               onclick="soluciona()">Solucionar Incidente</a>
