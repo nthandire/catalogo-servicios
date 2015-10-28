@@ -6,13 +6,14 @@
 </style>
 
 
+<g:set var="firmado" bean="firmadoService"/>
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance,
                                               field: 'idServcat', 'error')} ">
-    	<label for="idServcat">
-    		<g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
-    	</label>
+      <label for="idServcat">
+        <g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
+      </label>
       <g:field type="text" name="idServcat.id" disabled="true"
         value="${solicitudDetalleInstance.idServcat}"/>
     </div>
@@ -40,7 +41,7 @@
       <span id="serviciosContainer">
         <g:if test="${solicitudDetalleInstance?.idServ}">
           <g:select id='idServ' name='idServ.id' required=''
-            from="${[]}"
+            from="${firmado.tercerNivelSolicitudes(solicitudDetalleInstance.idServ.servSub)}"
             value="${solicitudDetalleInstance?.idServ?.id}"
             onchange="servicesChanged(this.value)"
             optionKey='id' noSelection="['':'Seleccione una...']"/>
@@ -63,7 +64,6 @@
     }
 </script>
 
-<g:set var="firmado" bean="firmadoService"/>
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain">

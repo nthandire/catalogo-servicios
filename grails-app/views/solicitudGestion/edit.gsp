@@ -55,7 +55,7 @@
             </g:if>
             <li class="add">
               <g:link class="create" action="create" class="btn"
-                params="['solicitud.id': solicitudDetalleInstance?.idSolicitud?.id, 'detalle.id': solicitudDetalleInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
+                params="['solicitud.id': solicitudDetalleInstance?.idSolicitud?.id, 'detalle.id': solicitudDetalleInstance?.id]">${message(code: 'default.subir.label', args: [message(code: 'solicitudArchivoadjunto.label', default: 'SolicitudArchivoadjunto')])}</g:link>
             </li>
           </ul>
         </div>
@@ -63,8 +63,9 @@
 
 
 				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-
+					<g:actionSubmit class="save" action="update"
+            value="${message(code: 'default.button.update.label',
+                             default: 'Update')}" />
 				</fieldset>
 			</g:form>
 		</div>

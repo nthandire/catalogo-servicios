@@ -280,15 +280,33 @@ class SolicitudGestionController {
                               absolute: "true")
         log.debug("liga = $liga")
         def asunto = "Solicitud ${solicitudInstance} requiere procesarse"
-
         coordinadores.each {
           def msg = "Hola ${it}<br/><br/>La solicitud folio " +
             "${solicitudInstance} (${solicitudInstance.justificacion}) " +
             "ya fue revisada, debe atenderla a la brevedad. <br/><br/>" +
             "<a href='${liga}'>${solicitudInstance}</a>"
-          def correo = grailsApplication.config.correo.general
+          log.debug("msg = $msg")
+          def correo = it.correo ?: grailsApplication.config.correo.general
           sendMail {
-            to correo // TODO: mandar el correo al que lo solicito       coordinadores.email
+            to correo
+            subject asunto
+            html msg
+          }
+        }
+
+        asunto = "Acuse de la Solicitud realizada el ${solicitudInstance.fechaSolicitud}"
+        def correo = Usuario.get(solicitudInstance.idSolicitante).correo ?:
+                       grailsApplication.config.correo.general
+        solicitudInstance.detalles.findAll{it.estado = 'A' as char}.each {
+          def msg = "Acuse de la Solicitud realizada el " +
+            "${solicitudInstance.fechaSolicitud} <br/><br/>" +
+            "Folio: {solicitudInstance}  <br/>" +
+            "Fecha de Acuse: ${new Date()}. <br/>" +
+            "Tiempo de Atención: ${it?.idServ?.tiempo2} " +
+            "${it?.idServ?.unidades2?.descripcion}."
+          log.debug("msg = $msg")
+          sendMail {
+            to correo
             subject asunto
             html msg
           }
@@ -353,6 +371,7 @@ class SolicitudGestionController {
     }
 
     def update(Long id, Long version) {
+        log.debug("params = $params")
         def solicitudDetalleInstance = SolicitudDetalle.get(id)
         if (!solicitudDetalleInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
@@ -371,6 +390,7 @@ class SolicitudGestionController {
         }
 
         solicitudDetalleInstance.properties = params
+        log.debug("soli det idServ = ${(solicitudDetalleInstance.idServ)}")
 
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
