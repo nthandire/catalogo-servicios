@@ -162,7 +162,7 @@ class SolicitudVBController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
-        redirect(action: "show", id: solicitudInstance.id)
+        redirect(action: "list")
     }
 
     def cancelaUpdate(Long id) {

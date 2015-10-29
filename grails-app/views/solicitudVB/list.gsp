@@ -18,7 +18,7 @@
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Solicitudes a autorizar</h1>
+			<h1>Solicitudes para Vo.Bo.</h1>
 			<g:if test="${flash.message}">
 			  <div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -33,7 +33,7 @@
 
 						<g:sortableColumn property="nombre" title="Solicitante" />
 
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha Modificación')}" />
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha de registro')}" />
 
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
 
@@ -43,11 +43,12 @@
 				<g:each in="${autorizablesInstanceList}" status="i" var="solicitudInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="show" id="${solicitudInstance.id}" params="[back: 'list']">${solicitudInstance.toString()}</g:link></td>
+						<td><g:link action="show" id="${solicitudInstance.id}" params="[back: 'list']">${solicitudInstance}</g:link></td>
 
-						<td>${Usuario.get(solicitudInstance.idSolicitante).username}</td>
+						<td>${Usuario.get(solicitudInstance.idSolicitante)}</td>
 
-						<td><g:formatDate date="${solicitudInstance.lastUpdated}" /></td>
+						<td><g:formatDate date="${solicitudInstance.fechaSolicitud}" />
+            </td>
 
 						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
 

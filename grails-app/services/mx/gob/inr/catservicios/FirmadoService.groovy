@@ -192,4 +192,8 @@ class FirmadoService {
     tercerosNiveles
   }
 
+  def equipo(Long resguardo) {
+    ResguardoEntregaDetalle.get(resguardo).descripcion
+  }
+
 }

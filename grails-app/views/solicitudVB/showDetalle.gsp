@@ -9,6 +9,7 @@
 	</head>
 	<body>
 		<a href="#show-solicitudDetalle" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+    <g:set var="firmado" bean="firmadoService"/>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -27,45 +28,66 @@
 
 				<g:if test="${solicitudDetalleInstance?.idSolicitud}">
 				<li class="fieldcontain">
-					<span id="idSolicitud-label" class="property-label"><g:message code="solicitudDetalle.idSolicitud.label" default="Id Solicitud" /></span>
-					<span class="property-value" aria-labelledby="idSolicitud-label">${solicitudDetalleInstance?.idSolicitud?.encodeAsHTML()}</span>
+					<span id="idSolicitud-label" class="property-label"><g:message code="solicitudDetalle.idSolicitud.label" default="Nùmero de Solicitud" /></span>
+					<span class="property-value" aria-labelledby="idSolicitud-label">
+            ${solicitudDetalleInstance?.idSolicitud?.encodeAsHTML()}
+          </span>
 				</li>
 				</g:if>
 
-				<g:if test="${solicitudDetalleInstance?.idServ}">
-				<li class="fieldcontain">
-					<span id="idServ-label" class="property-label"><g:message code="solicitudDetalle.idServ.label" default="Id Serv" /></span>
-						<span class="property-value" aria-labelledby="idServ-label">${solicitudDetalleInstance?.idServ?.encodeAsHTML()}</span>
-				</li>
-				</g:if>
+        <g:if test="${solicitudDetalleInstance?.idServcat}">
+        <li class="fieldcontain">
+          <span id="idServcat-label" class="property-label"><g:message code="solicitudDetalle.idServcat.label" default="Categoría" /></span>
+            <span class="property-value" aria-labelledby="idServcat-label">${solicitudDetalleInstance?.idServcat?.encodeAsHTML()}</span>
+        </li>
+        </g:if>
 
-				<g:if test="${solicitudDetalleInstance?.idResguardoentregadetalle}">
-				<li class="fieldcontain">
-					<span id="idResguardoentregadetalle-label" class="property-label"><g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Id Resguardoentregadetalle" /></span>
-						<span class="property-value" aria-labelledby="idResguardoentregadetalle-label"><g:fieldValue bean="${solicitudDetalleInstance}" field="idResguardoentregadetalle"/></span>
-				</li>
-				</g:if>
+        <g:if test="${solicitudDetalleInstance?.idServ}">
+        <li class="fieldcontain">
+          <span id="idServcat-label" class="property-label"><g:message code="solicitudDetalle.idServcat.label" default="Subategoría" /></span>
+            <span class="property-value" aria-labelledby="idServcat-label">${solicitudDetalleInstance?.idServ?.servSub.encodeAsHTML()}</span>
+        </li>
 
-				<g:if test="${solicitudDetalleInstance?.descripcion}">
-				<li class="fieldcontain">
-					<span id="descripcion-label" class="property-label"><g:message code="solicitudDetalle.descripcion.label" default="Descripcion" /></span>
-						<span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${solicitudDetalleInstance}" field="descripcion"/></span>
-				</li>
-				</g:if>
+        <li class="fieldcontain">
+          <span id="idServ-label" class="property-label"><g:message code="solicitudDetalle.idServ.label" default="Categoría de Tercer nivel" /></span>
+            <span class="property-value" aria-labelledby="idServ-label">${solicitudDetalleInstance?.idServ?.encodeAsHTML()}</span>
+        </li>
+        </g:if>
 
-				<g:if test="${solicitudDetalleInstance?.idPrograma}">
-				<li class="fieldcontain">
-					<span id="idPrograma-label" class="property-label"><g:message code="solicitudDetalle.idPrograma.label" default="Estado de cierre" /></span>
-						<span class="property-value" aria-labelledby="idPrograma-label">${solicitudDetalleInstance?.idPrograma?.encodeAsHTML()}</span>
-				</li>
-				</g:if>
+        <g:if test="${solicitudDetalleInstance?.idResguardoentregadetalle}">
+        <li class="fieldcontain">
+          <span id="idResguardoentregadetalle-label" class="property-label"><g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Id Resguardoentregadetalle" /></span>
+            <span class="property-value" aria-labelledby="idResguardoentregadetalle-label">
+              ${firmado.equipo(solicitudDetalleInstance.idResguardoentregadetalle)}
+            </span>
+        </li>
+        </g:if>
 
-				<g:if test="${solicitudDetalleInstance?.idServcat}">
-				<li class="fieldcontain">
-					<span id="idServcat-label" class="property-label"><g:message code="solicitudDetalle.idServcat.label" default="Id Servcat" /></span>
-						<span class="property-value" aria-labelledby="idServcat-label">${solicitudDetalleInstance?.idServcat?.encodeAsHTML()}</span>
-				</li>
-				</g:if>
+        <g:if test="${solicitudDetalleInstance?.descripcion}">
+        <li class="fieldcontain">
+          <span id="descripcion-label" class="property-label"><g:message code="solicitudDetalle.descripcion.label" default="Descripcion" /></span>
+            <span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${solicitudDetalleInstance}" field="descripcion"/></span>
+        </li>
+        </g:if>
+
+        <g:if test="${solicitudDetalleInstance?.descripcionTecnica}">
+        <li class="fieldcontain">
+          <span id="descripcionTecnica-label" class="property-label">
+            <g:message code="solicitudDetalle.descripcionTecnica.label"
+              default="Descripción Técnica" />
+          </span>
+          <span class="property-value" aria-labelledby="descripcionTecnica-label">
+            <g:fieldValue bean="${solicitudDetalleInstance}" field="descripcionTecnica"/>
+          </span>
+        </li>
+        </g:if>
+
+        <g:if test="${solicitudDetalleInstance?.idPrograma}">
+        <li class="fieldcontain">
+          <span id="idPrograma-label" class="property-label"><g:message code="solicitudDetalle.idPrograma.label" default="Estado de cierre" /></span>
+            <span class="property-value" aria-labelledby="idPrograma-label">${solicitudDetalleInstance?.idPrograma?.encodeAsHTML()}</span>
+        </li>
+        </g:if>
 
 			</ol>
 			<g:form>
