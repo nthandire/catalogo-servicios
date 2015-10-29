@@ -697,7 +697,7 @@ class IncidenteController {
       redirect(action: "list")
     }
 
-  def listarEquipo = {
+  def listarEquipo() {
     log.debug("en listarEquipo")
     render serviciosService.listarEquipo(params) as JSON
   }

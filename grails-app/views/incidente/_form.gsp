@@ -7,7 +7,6 @@
 </style>
 
 
-<%--
 <table class="table table-condensed">
   <tr>
     <td width="290px">
@@ -60,7 +59,6 @@
     </td>
   </tr>
 </table>
---%>
 
 
 
