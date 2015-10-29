@@ -119,16 +119,25 @@
 
         <g:if test="${solicitudInstance?.idVb}">
           <div class="row-fluid">
-            <div class="span4">
-
+            <div class="span3">
               <li class="fieldcontain">
                 <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Visto Bueno" /></span>
                 <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idVb)}</span>
               </li>
-
             </div>
-            <div class="span3">
 
+            <div class="span3">
+              <li class="fieldcontain">
+                <span id="fVobo-label" class="property-label">
+                  Fecha de Vo.bo.
+                </span>
+                  <span class="property-value" aria-labelledby="fVobo-label">
+                    ${solicitudInstance.fechaVb}
+                  </span>
+              </li>
+            </div>
+
+            <div class="span3">
               <li class="fieldcontain">
                 <span id="telefono-label" class="property-label">
                   <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -137,10 +146,9 @@
                     ${Usuario.get(solicitudInstance?.idVb).extension}
                   </span>
               </li>
-
             </div>
-            <div class="span3">
 
+            <div class="span3">
               <li class="fieldcontain">
                 <span id="area-label" class="property-label">
                   <g:message code="solicitud.area.label" default="Área" />
@@ -149,7 +157,6 @@
                     ${areaVb}
                   </span>
               </li>
-
             </div>
           </div>
         </g:if>

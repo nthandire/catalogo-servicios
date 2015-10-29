@@ -397,7 +397,7 @@ class SolicitudGestionController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
+        flash.message = /"${solicitudDetalleInstance.toString()}" actualizado/
         redirect(action: "edit", id: solicitudDetalleInstance.id)
     }
 

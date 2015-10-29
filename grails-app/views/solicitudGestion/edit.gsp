@@ -63,9 +63,11 @@
 
 
 				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update"
-            value="${message(code: 'default.button.update.label',
-                             default: 'Update')}" />
+          <g:if test="${"AV".contains(solicitudDetalleInstance.idSolicitud.estado.toString())}">
+  					<g:actionSubmit class="save" action="update"
+              value="${message(code: 'default.button.update.label',
+                               default: 'Update')}" />
+           </g:if>
 				</fieldset>
 			</g:form>
 		</div>
