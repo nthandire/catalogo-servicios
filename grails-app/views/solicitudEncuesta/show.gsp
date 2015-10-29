@@ -103,15 +103,16 @@
 
 				<g:if test="${solicitudInstance?.idVb}">
 				<li class="fieldcontain">
-					<span id="idVb-label" class="property-label"><g:message code="solicitud.idVb.label" default="Id Vb" /></span>
-						<span class="property-value" aria-labelledby="idVb-label"><g:fieldValue bean="${solicitudInstance}" field="idVb"/></span>
-
+					<span id="idVb-label" class="property-label"><g:message code="solicitud.idVb.label" default="Vo.Bo." /></span>
+						<span class="property-value" aria-labelledby="idVb-label">
+              ${Usuario.get(solicitudInstance.idVb)}
+            </span>
 				</li>
 				</g:if>
 
 				<g:if test="${solicitudInstance?.fechaVb}">
 				<li class="fieldcontain">
-					<span id="fechaVb-label" class="property-label"><g:message code="solicitud.fechaVb.label" default="Fecha Vb" /></span>
+					<span id="fechaVb-label" class="property-label"><g:message code="solicitud.fechaVb.label" default="Fecha Vo.Bo." /></span>
 						<span class="property-value" aria-labelledby="fechaVb-label"><g:formatDate date="${solicitudInstance?.fechaVb}" /></span>
 
 				</li>

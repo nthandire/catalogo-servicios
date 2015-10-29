@@ -16,7 +16,7 @@
 			</ul>
 		</div>
 		<div id="list-solicitudDetalle" class="content scaffold-list" role="main">
-			<h1>Listado de Servicios</h1>
+			<h1>Servicios por atender</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -30,8 +30,6 @@
 						<th><g:message code="solicitudDetalle.idSolicitud.label" default="Solicitud" /></th>
 
             <th><g:message code="solicitudDetalle.idServcat.label" default="Categoría" /></th>
-
-            <th><g:message code="solicitudDetalle.idTecnico.label" default="Técnico" /></th>
 
 						<th><g:message code="solicitudDetalle.idServ.label" default="Tercer nivel" /></th>
 
@@ -54,8 +52,6 @@
 						<td><g:link action="edit" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>
 
             <td>${fieldValue(bean: solicitudDetalleInstance, field: "idServcat")}</td>
-
-            <td>${"${firmado.usuarioNombre(solicitudDetalleInstance.idTecnico)}"}</td>
 
 						<td>${fieldValue(bean: solicitudDetalleInstance, field: "idServ")}</td>
 

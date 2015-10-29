@@ -8,21 +8,30 @@
 
 <g:set var="firmado" bean="firmadoService"/>
 <div class="row-fluid">
-  <div class="span4 offset1">
+  <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
       <label for="idServcat">
         <g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
       </label>
-      <g:field id="idServcat" name="idServcat.id"
+      <g:field type="text" id="idServcat" name="idServcat.id"
         value="${solicitudDetalleInstance?.idServcat}" disabled="true"/>
     </div>
   </div>
-  <div class="span6">
+  <div class="span4">
+    <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServ', 'error')} ">
+      <label for="idServsub">
+        <g:message code="solicitudDetalle.idServsub.label" default="Subcategoría" />
+      </label>
+      <g:field type="text" id="idServsub" name="idServsub.id"
+        value="${solicitudDetalleInstance.idServ.servSub}" disabled="true"/>
+    </div>
+  </div>
+  <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServ', 'error')} ">
       <label for="idServ">
         <g:message code="solicitudDetalle.idServ.label" default="Tercer nivel" />
       </label>
-      <g:field id="idServ" name="idServ.id"
+      <g:field type="text" id="idServ" name="idServ.id"
         value="${solicitudDetalleInstance?.idServ}" disabled="true"/>
     </div>
   </div>
@@ -157,7 +166,20 @@
       <g:textArea name="descripcion" cols="40" rows="5" maxlength="3000" value="${solicitudDetalleInstance?.descripcion}" disabled="true"/>
     </div>
   </div>
-  <div class="span3">
+
+  <div class="span4 offset2">
+    <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcionTecnica', 'error')} ">
+      <label for="descripcionTecnica">
+        <g:message code="solicitudDetalle.descripcionTecnica.label" default="Descripción Técnica" />
+      </label>
+      <g:textArea name="descripcionTecnica" cols="40" rows="5" maxlength="3000"
+        value="${solicitudDetalleInstance?.descripcionTecnica}" disabled="true"/>
+    </div>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idPrograma', 'error')} ">
       <label for="idPrograma">
         <g:message code="solicitudDetalle.idPrograma.label" default="Estado de cierre" />
@@ -168,7 +190,7 @@
     </div>
   </div>
 
-  <div class="span5">
+  <div class="span5 offset2">
     <g:if test="${equipo}">
       <div class="fieldtablecontain">
         <label for="resguardo">
@@ -182,15 +204,6 @@
 </div>
 
 <div class="row-fluid">
-  <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcionTecnica', 'error')} ">
-      <label for="descripcionTecnica">
-        <g:message code="solicitudDetalle.descripcionTecnica.label" default="Descripción Técnica" />
-      </label>
-      <g:textArea name="descripcionTecnica" cols="40" rows="5" maxlength="3000"
-        value="${solicitudDetalleInstance?.descripcionTecnica}" disabled="true"/>
-    </div>
-  </div>
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'solucion', 'error')} ">
       <label for="solucion">
