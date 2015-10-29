@@ -34,16 +34,25 @@
        </g:if>
 
         <div class="row-fluid">
-          <div class="span4">
-
+          <div class="span3">
             <li class="fieldcontain">
               <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Solicitante" /></span>
               <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idSolicitante)}</span>
             </li>
-
           </div>
-          <div class="span3">
 
+          <div class="span3">
+            <li class="fieldcontain">
+              <span id="fsolicita-label" class="property-label">
+                Fecha de solicitud
+              </span>
+                <span class="property-value" aria-labelledby="fsolicita-label">
+                  ${solicitudInstance.fechaSolicitud}
+                </span>
+            </li>
+          </div>
+
+          <div class="span3">
             <li class="fieldcontain">
               <span id="telefono-label" class="property-label">
                 <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -52,10 +61,9 @@
                   ${Usuario.get(solicitudInstance?.idSolicitante).extension}
                 </span>
             </li>
-
           </div>
-          <div class="span3">
 
+          <div class="span3">
             <li class="fieldcontain">
               <span id="area-label" class="property-label">
                 <g:message code="solicitud.area.label" default="Área" />
@@ -64,21 +72,29 @@
                   ${area}
                 </span>
             </li>
-
           </div>
         </div>
 
         <div class="row-fluid">
-          <div class="span4">
-
+          <div class="span3">
             <li class="fieldcontain">
               <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Autorizador" /></span>
               <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idAutoriza)}</span>
             </li>
-
           </div>
-          <div class="span3">
 
+          <div class="span3">
+            <li class="fieldcontain">
+              <span id="fAutoriza-label" class="property-label">
+                Fecha de atorización
+              </span>
+                <span class="property-value" aria-labelledby="fAutoriza-label">
+                  ${solicitudInstance.fechaAutoriza}
+                </span>
+            </li>
+          </div>
+
+          <div class="span3">
             <li class="fieldcontain">
               <span id="telefono-label" class="property-label">
                 <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -87,10 +103,9 @@
                   ${Usuario.get(solicitudInstance?.idAutoriza).extension}
                 </span>
             </li>
-
           </div>
-          <div class="span3">
 
+          <div class="span3">
             <li class="fieldcontain">
               <span id="area-label" class="property-label">
                 <g:message code="solicitud.area.label" default="Área" />
@@ -99,7 +114,6 @@
                   ${areaAutoriza}
                 </span>
             </li>
-
           </div>
         </div>
 

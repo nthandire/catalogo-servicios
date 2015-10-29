@@ -77,6 +77,15 @@
   <div class="span3">
     <div class="fieldtablecontain">
       <label for="telefono-label">
+        Fecha de solicitud
+      </label>
+      <g:field type="date" name="fAutoriza" disabled="true"
+        value="${solicitudDetalleInstance?.idSolicitud?.fechaSolicitud}"/>
+    </div>
+  </div>
+  <div class="span2">
+    <div class="fieldtablecontain">
+      <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
       </label>
       <g:field type="text" name="telefono.no" disabled="true"
@@ -105,6 +114,15 @@
     </div>
   </div>
   <div class="span3">
+    <div class="fieldtablecontain">
+      <label for="fAutoriza-label">
+        Fecha de autorización
+      </label>
+      <g:field type="date" name="fAutoriza.no" disabled="true"
+        value="$solicitudDetalleInstance?.idSolicitud?.fechaAutoriza}"/>
+    </div>
+  </div>
+  <div class="span2">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
