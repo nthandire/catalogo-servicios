@@ -148,5 +148,6 @@
         </fieldset>
       </g:form>
     </div>
+    <dev><a href="${resource(dir: 'docs', file: 'Manual-Solicitudes-INR-V-0.1.pdf')}" download>Manual de captura de Solicitudes</a></dev>
   </body>
 </html>

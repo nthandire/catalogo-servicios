@@ -214,17 +214,18 @@ class SolicitudController {
 
         def personasInstance = Usuario.get(solicitudInstance.idAutoriza)
         def liga = createLink(controller:"solicitudAutoriza", action: "show",
-                   id: solicitudInstance.id, absolute: "true") //base: "http://192.168.16.59:8080/catalogo-servicios")//
+                   id: solicitudInstance.id, absolute: "true")
         log.debug("liga = $liga")
-        def correo = grailsApplication.config.correo.general
+        def correo = personasInstance.correo ?:
+                     grailsApplication.config.correo.general
         log.debug("correo = $correo")
-        def cuerpoCorreo = "Hola ${personasInstance}<br/><br/>La solicitud folio " +
-            "${solicitudInstance} requiere que la autorices, " +
+        def cuerpoCorreo = "Hola ${personasInstance}<br/><br/>La solicitud " +
+            "'${solicitudInstance}' requiere que la autorices, " +
             "utilice la liga siguiente para revisarla y autorizarla. <br/><br/>" +
             "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
         log.debug("cuerpoCorreo = $cuerpoCorreo")
         sendMail {
-          to correo // TODO: mandar el correo al que solicito       personasInstance.correo
+          to correo
           subject "La solicitud ${solicitudInstance} requiere autorización"
           html cuerpoCorreo
         }
