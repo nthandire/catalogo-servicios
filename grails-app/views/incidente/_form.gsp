@@ -84,7 +84,7 @@
         from="${ResguardoEntregaDetalle.executeQuery(
           'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
           optionKey="id" class="many-to-one" noSelection="['': '']"
-          value="${solicitudDetalleInstance?.idResguardoentregadetalle}"/>
+          value="${incidenteInstance?.idResguardoentregadetalle}"/>
     </div>
   </div>
 

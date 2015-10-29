@@ -43,8 +43,6 @@ class IncidenteController {
           :
             incidentesFiltrados
         log.debug("incidenteInstanceList = ${incidenteInstanceList}")
-        if (!incidenteInstanceList)
-          redirect(action: "create")
         [incidenteInstanceList: incidenteInstanceList,
           incidenteInstanceTotal: incidenteInstanceList.size()]
     }

@@ -35,7 +35,7 @@
 
             <th><g:message code="incidente.idSistema.label" default="Sistema" /></th>
 
-            <g:sortableColumn property="idResguardoentregadetalle" title="${message(code: 'incidente.idResguardoentregadetalle.label', default: 'Id Resguardoentregadetalle')}" />
+            <g:sortableColumn property="idResguardoentregadetalle" title="${message(code: 'incidente.idResguardoentregadetalle.label', default: 'Equipo')}" />
 
             <g:sortableColumn property="fechaIncidente" title="${message(code: 'incidente.fechaIncidente.label', default: 'Fecha Incidente')}" />
 

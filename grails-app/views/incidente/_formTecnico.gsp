@@ -7,7 +7,7 @@
     <label for="idNivel">
       <g:message code="incidente.idNivel.label" default="Atendido por ..." />
     </label>
-    <g:select id="idNivel" name="idNivel" required="true" from="${tecnicos}"
+    <g:select id="idNivel" name="idNivel" from="${tecnicos}"
       optionKey="id" value="${idNivel}" class="many-to-one"/>
   </div>
 <%--
