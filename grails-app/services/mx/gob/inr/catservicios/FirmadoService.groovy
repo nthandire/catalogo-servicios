@@ -107,9 +107,8 @@ class FirmadoService {
   }
 
   def _ubicacion (Long idEquipo) {
-    if (!idEquipo)
-      return null
     def idUbicacion = ResguardoEntregaDetalle.get(idEquipo)?.idUbicacion
+    log.debug("idUbicacion = $idUbicacion")
     if (!idUbicacion)
       return null
    Ubicacion.get(idUbicacion)

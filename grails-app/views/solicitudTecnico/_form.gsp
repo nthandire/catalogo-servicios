@@ -67,6 +67,30 @@
   </div>
 </div>
 
+<g:if test="${(solicitudDetalleInstance?.idResguardoentregadetalle)}">
+  <div class="row-fluid">
+    <div class="span7">
+      <div class="fieldtablecontain">
+        <label for="ubicacion-label">
+          <g:message code="solicitud.ubicacion.label" default="Ubicación"/>
+        </label>
+        <g:field type="text" name="ubicacion" disabled="true" style="width:600px"
+          value="${firmado.ubicacion(solicitudDetalleInstance?.idResguardoentregadetalle)}"/>
+      </div>
+    </div>
+
+    <div class="span5">
+      <div class="fieldtablecontain">
+        <label for="cuerpo-label">
+          <g:message code="solicitud.cuerpo.label" default="Cuerpo : Nivel"/>
+        </label>
+        <g:field type="text" name="cuerpo" disabled="true" style="width:400px"
+          value="${firmado.cuerpoNivel(solicitudDetalleInstance?.idResguardoentregadetalle)}"/>
+      </div>
+    </div>
+  </div>
+</g:if>
+
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain">
