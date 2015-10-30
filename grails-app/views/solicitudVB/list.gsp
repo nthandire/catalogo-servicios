@@ -33,7 +33,7 @@
 
 						<g:sortableColumn property="nombre" title="Solicitante" />
 
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha de registro')}" />
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitud.fechaSolicitud.label', default: 'Fecha de autorización')}" />
 
 						<g:sortableColumn property="justificacion" title="${message(code: 'solicitud.justificacion.label', default: 'Justificacion')}" />
 
@@ -47,7 +47,7 @@
 
 						<td>${Usuario.get(solicitudInstance.idSolicitante)}</td>
 
-						<td><g:formatDate date="${solicitudInstance.fechaSolicitud}" />
+						<td><g:formatDate date="${solicitudInstance.fechaAutoriza}" />
             </td>
 
 						<td>${fieldValue(bean: solicitudInstance, field: "justificacion")}</td>
