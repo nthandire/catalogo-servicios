@@ -20,6 +20,7 @@ class ResguardoEntregaDetalle {
 	String ipTerminal
 	Long idMarca
 	String desModelo
+  Integer idUbicacion
 
 	static belongsTo = [idResguardo:ResguardoEntrega]
 
@@ -28,6 +29,7 @@ class ResguardoEntregaDetalle {
 		idResguardo column: "id_resguardo"
 		lastUpdated column: "fecha_modificacion"
 		version "modificacion"
+    idUbicacion column:'id_ubicacion'
 		datasource "almacen"
 	}
 
@@ -48,6 +50,7 @@ class ResguardoEntregaDetalle {
 		ipTerminal nullable: true, maxSize: 15
 		idMarca nullable: true
 		desModelo nullable: true, maxSize: 50
+    idUbicacion nullable: true
 	}
 
   String toString() {

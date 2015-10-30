@@ -30,7 +30,6 @@
 <g:set var="firmado" bean="firmadoService"/>
 <div class="row-fluid">
   <div class="span4">
-
     <div class="fieldtablecontain">
       <label for="nombre-label">
         <g:message code="solicitud.nombre.label" default="Solicitante"/>
@@ -38,10 +37,9 @@
       <g:field type="text" name="nombre.no" disabled="true"
         value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
     </div>
-
   </div>
-  <div class="span3">
 
+  <div class="span3">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -49,10 +47,9 @@
       <g:field type="text" name="telefono.no" disabled="true"
         value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante).extension}"/>
     </div>
-
   </div>
-  <div class="span3">
 
+  <div class="span3">
     <div class="fieldtablecontain">
       <label for="area-label">
         <g:message code="solicitud.area.label" default="Área" />
@@ -60,8 +57,20 @@
       <g:field type="text" name="area.no" disabled="true"
         value="${firmado.areaNombre(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
     </div>
-
   </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span4">
+    <div class="fieldtablecontain">
+      <label for="ubicacion-label">
+        <g:message code="solicitud.ubicacion.label" default="Ubicación"/>
+      </label>
+      <g:field type="text" name="ubicacion.no" disabled="true"
+        value="${firmado.ubicacion(solicitudDetalleInstance?.idResguardoentregadetalle)}"/>
+    </div>
+  </div>
+
 </div>
 
 <div class="row-fluid">

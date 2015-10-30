@@ -95,6 +95,19 @@ class FirmadoService {
     area
   }
 
+  def ubicacion (Long idEquipo) {
+    _ubicacion(idEquipo)?.descripcion
+  }
+
+  def _ubicacion (Long idEquipo) {
+    if (!idEquipo)
+      return null
+    def idUbicacion = ResguardoEntregaDetalle.get(idEquipo)?.idUbicacion
+    if (!idUbicacion)
+      return null
+    Ubicacion.get(idUbicacion)
+  }
+
   def categoriasIncidentes() {
     def query =
         "  from Cat_servCat c               \n" +
