@@ -3,7 +3,7 @@ Junta del 26 de octubre.
 
 
 - 1.- pendientes - correos pedidos, selección del equipo, cuerpo y nivel
-- 2.- poder apagar el envío de correos en el sistema
++ 2.- poder apagar el envío de correos en el sistema
 - 3.- En VoBo, lista, el mensaje es "Fecha de Autorizacion", y esa es la que se muestra
 - 4.- Cambiar etiqueta Solicitud por Requerimiento
 - 5.- Incidente, hay dos botones de asignar tecnico

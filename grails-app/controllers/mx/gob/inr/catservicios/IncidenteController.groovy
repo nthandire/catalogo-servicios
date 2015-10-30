@@ -475,18 +475,12 @@ class IncidenteController {
                             id: incidenteInstance.id, absolute: "true")
       log.debug("liga = ${liga}")
       def asunto = "El incidente ${incidenteInstance} a sido asignado a usted"
-      log.debug("asunto = ${asunto}")
       def msg = "Hola ${tecnico}<br/><br/>El incidente folio: " +
         "${incidenteInstance} requiere atención. " +
         "Atiendela utilizando la siguiente liga: <br/><br/>" +
         "<a href='${liga}'>${incidenteInstance}</a>"
-      log.debug("msg = ${msg}")
       def correo = tecnico.correo ?: grailsApplication.config.correo.general
-      sendMail {
-        to correo
-        subject asunto
-        html msg
-      }
+      firmadoService.sendMailHTML(correo, asunto, msg)
 
       flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
       redirect(action: "edit", id: id)

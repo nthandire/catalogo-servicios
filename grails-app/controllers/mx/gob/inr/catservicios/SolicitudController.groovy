@@ -218,17 +218,12 @@ class SolicitudController {
         log.debug("liga = $liga")
         def correo = personasInstance.correo ?:
                      grailsApplication.config.correo.general
-        log.debug("correo = $correo")
         def cuerpoCorreo = "Hola ${personasInstance}<br/><br/>La solicitud " +
             "'${solicitudInstance}' requiere que la autorices, " +
             "utilice la liga siguiente para revisarla y autorizarla. <br/><br/>" +
             "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
-        log.debug("cuerpoCorreo = $cuerpoCorreo")
-        sendMail {
-          to correo
-          subject "La solicitud ${solicitudInstance} requiere autorización"
-          html cuerpoCorreo
-        }
+        def asunto = "La solicitud ${solicitudInstance} requiere autorización"
+        firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
 
         flash.message = message(code: 'default.updated.message.femenino',
                                 args: [message(code: 'solicitud.label',

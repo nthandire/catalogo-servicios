@@ -3,6 +3,7 @@ package mx.gob.inr.catservicios
 import javax.servlet.http.HttpSession
 
 class FirmadoService {
+  def grailsApplication
   static transactional = false
 
   Boolean isGestor(HttpSession sessionFirmado, Long userID) {
@@ -213,6 +214,32 @@ class FirmadoService {
 
   def equipo(Long resguardo) {
     ResguardoEntregaDetalle.get(resguardo).descripcion
+  }
+
+  def sendMail(String correo, String asunto, String msg) {
+    log.debug("correo = $correo")
+    log.debug("asunto = $asunto")
+    log.debug("msg = $msg")
+    if (grailsApplication.config.enviar.correos.toBoolean())
+      log.debug("si envio el correo")
+      sendMail {
+        to correo
+        subject asunto
+        body msg
+      }
+  }
+
+  def sendMailHTML(String correo, String asunto, String msg) {
+    log.debug("correo = $correo")
+    log.debug("asunto = $asunto")
+    log.debug("msg = $msg")
+    if (grailsApplication.config.enviar.correos.toBoolean())
+      log.debug("si envio el correo")
+      sendMail {
+        to correo
+        subject asunto
+        html msg
+      }
   }
 
 }

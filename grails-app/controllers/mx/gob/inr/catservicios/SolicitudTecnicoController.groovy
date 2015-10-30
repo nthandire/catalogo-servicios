@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class SolicitudTecnicoController {
     def springSecurityService
     def grailsApplication
+    def firmadoService
     static nombreMenu = "Solucionar Solicitudes"
     static ordenMenu = 86
 
@@ -203,19 +204,12 @@ class SolicitudTecnicoController {
                                   id: solicitud.id, absolute: "true")
             log.debug("liga = ${liga}")
             def asunto = "La solicitud ${solicitud} ya ha sido atendida"
-            log.debug("asunto = ${asunto}")
-            def msg = "Hola ${solicitante}<br/><br/>La solicitud folio " +
-              "${solicitud} ya ha sido atendida, es necesario que llenes " +
+            def cuerpoCorreo = "Hola ${solicitante}<br/><br/>La solicitud " +
+              "folio ${solicitud} ya ha sido atendida, es necesario que llenes " +
               "la forma de encuesta, usando la siguiente liga: <br/><br/>" +
               "<a href='${liga}'>${solicitud}</a>"
-            log.debug("msg = ${msg}")
-            def correo = grailsApplication.config.correo.general
-            sendMail {
-              to correo // TODO: mandar el correo al que solicito       solicitante.correo
-              subject asunto
-              html msg
-            }
-
+            def correo = solicitante.correo ?: grailsApplication.config.correo.general
+            firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
         }
 
         flash.message = message(code: 'default.updated.message',

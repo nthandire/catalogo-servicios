@@ -8,6 +8,7 @@ import groovy.time.TimeCategory
 class SolicitudCoordinadorController {
     def springSecurityService
     def grailsApplication
+    def firmadoService
     static nombreMenu = "Coordinación"
     static ordenMenu = 20
 
@@ -287,20 +288,18 @@ class SolicitudCoordinadorController {
         def liga = createLink(controller:"SolicitudTecnico", action: "edit",
                               id: solicitudDetalleInstance.id, absolute: "true")
         log.debug("liga = $liga")
-        def correo = grailsApplication.config.correo.general
-        sendMail {
-          to correo // TODO: mandar el correo al que solicito       tecnico.correo
-          subject "La solicitud ${solicitudDetalleInstance.idSolicitud} requiere ser atendida"
-          html "Hola ${tecnico}<br/><br/>La solicitud folio " +
-            "${solicitudDetalleInstance.idSolicitud} requiere ser atendida, se autorizo el " +
-            formatDate(date:solicitudDetalleInstance.idSolicitud.fechaVb?:
-                            solicitudDetalleInstance.idSolicitud.fechaAutoriza) +
-            " y debe ser respondida en ${solicitudDetalleInstance?.idServ?.tiempo1}" +
-            " ${solicitudDetalleInstance?.idServ?.unidades1?.descripcion}." +
-            "<br/><br/>" +
-            "utilice la liga siguiente para atenderla. <br/><br/>" +
-            "<a href='${liga}'>${solicitudDetalleInstance.idSolicitud}</a>"
-        }
+        def correo = tecnico.correo ?: grailsApplication.config.correo.general
+        def asunto = "La solicitud ${solicitudDetalleInstance.idSolicitud} requiere ser atendida"
+        def cuerpoCorreo = "Hola ${tecnico}<br/><br/>La solicitud folio " +
+          "${solicitudDetalleInstance.idSolicitud} requiere ser atendida, se autorizo el " +
+          formatDate(date:solicitudDetalleInstance.idSolicitud.fechaVb?:
+                          solicitudDetalleInstance.idSolicitud.fechaAutoriza) +
+          " y debe ser respondida en ${solicitudDetalleInstance?.idServ?.tiempo1}" +
+          " ${solicitudDetalleInstance?.idServ?.unidades1?.descripcion}." +
+          "<br/><br/>" +
+          "utilice la liga siguiente para atenderla. <br/><br/>" +
+          "<a href='${liga}'>${solicitudDetalleInstance.idSolicitud}</a>"
+        firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
         redirect(action: "listDetalle")

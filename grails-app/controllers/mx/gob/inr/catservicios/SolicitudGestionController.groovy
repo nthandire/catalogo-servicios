@@ -285,13 +285,8 @@ class SolicitudGestionController {
             "${solicitudInstance} (${solicitudInstance.justificacion}) " +
             "ya fue revisada, debe atenderla a la brevedad. <br/><br/>" +
             "<a href='${liga}'>${solicitudInstance}</a>"
-          log.debug("msg = $msg")
           def correo = it.correo ?: grailsApplication.config.correo.general
-          sendMail {
-            to correo
-            subject asunto
-            html msg
-          }
+          firmadoService.sendMailHTML(correo, asunto, msg)
         }
 
         asunto = "Acuse de la Solicitud realizada el ${solicitudInstance.fechaSolicitud}"
@@ -305,11 +300,7 @@ class SolicitudGestionController {
             "Tiempo de Atención: ${it?.idServ?.tiempo2} " +
             "${it?.idServ?.unidades2?.descripcion}."
           log.debug("msg = $msg")
-          sendMail {
-            to correo
-            subject asunto
-            html msg
-          }
+          firmadoService.sendMailHTML(correo, asunto, msg)
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
@@ -352,19 +343,17 @@ class SolicitudGestionController {
         }
 
         def idUsuario = springSecurityService.principal.id
-        def personasInstance = Usuario.get(solicitudInstance.idVb)
+        def persona = Usuario.get(solicitudInstance.idVb)
         def liga = createLink(controller:"solicitudVB", action: "show",
                               id: solicitudInstance.id, absolute: "true")
         log.debug("liga = $liga")
-        def correo = grailsApplication.config.correo.general
-        sendMail {
-          to correo // TODO: mandar el correo al que solicito       personasInstance.correo
-          subject "Solicitud ${solicitudInstance.toString()} requiere un visto bueno"
-          html "Hola ${personasInstance}<br/><br/>La solicitud folio " +
-            "${solicitudInstance} requiere que le de su visto bueno, " +
-            "utilice la liga siguiente para revisarla y autorizarla. <br/><br/>" +
-            "<a href='${liga}'>${solicitudInstance}</a>"
-        }
+        def correo = persona.correo ?: grailsApplication.config.correo.general
+        def asunto = "Solicitud ${solicitudInstance.toString()} requiere un visto bueno"
+        def cuerpoCorreo = "Hola ${persona}<br/><br/>La solicitud folio " +
+          "${solicitudInstance} requiere que le de su visto bueno, " +
+          "utilice la liga siguiente para revisarla y autorizarla. <br/><br/>" +
+          "<a href='${liga}'>${solicitudInstance}</a>"
+        firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "list")

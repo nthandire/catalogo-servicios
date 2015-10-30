@@ -175,7 +175,7 @@ class SolicitudAutorizaController {
 
         def idUsuario = solicitudInstance.idSolicitante
         def persona = Usuario.get(idUsuario)
-        /*
+        /* TODO: quitar código basura
         def tiempo = 0
         def unidad = 0
         SolicitudDetalle.findAllByIdSolicitud(solicitudInstance).each{
@@ -194,13 +194,8 @@ class SolicitudAutorizaController {
           "Hola ${persona}\n\nSu solicitud " +
             "(${solicitudInstance.justificacion}) "+
             "fue cancelada, investigue con su autorizador el motivo."
-        def correo = grailsApplication.config.correo.general
-
-        sendMail {
-          to correo // TODO: mandar el correo al que lo solicito       persona.email
-          subject asunto
-          body msg
-        }
+        def correo = persona.correo ?: grailsApplication.config.correo.general
+        firmadoService.sendMail(correo, asunto, msg)
 
         if (estado == 'A' as char) {
           def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_COORDINADOR_DE_GESTION")}
@@ -217,11 +212,8 @@ class SolicitudAutorizaController {
               "ya fue autorizada, debe atenderla a la brevedad.<br/><br/>" +
               "Utilice la liga siguiente para revisarla. <br/><br/>" +
               "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
-            sendMail {
-              to correo // TODO: mandar el correo al que lo solicito       gestores.email
-              subject asunto
-              html msg
-            }
+            correo = it.correo ?: grailsApplication.config.correo.general
+            firmadoService.sendMailHTML(correo, asunto, msg)
           }
         }
 

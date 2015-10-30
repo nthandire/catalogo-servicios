@@ -61,6 +61,8 @@ grails.hibernate.cache.queries = false
 
 grails.gorm.failOnError=true
 
+enviar.correos=true
+
 environments {
     development {
       // grails.serverURL = "http://192.168.0.8:8888/catalogo-servicios"

@@ -8,6 +8,7 @@ import groovy.time.TimeCategory
 class SolicitudVBController {
     def springSecurityService
     def grailsApplication
+    def firmadoService
     static nombreMenu = "Visto Bueno"
     static ordenMenu = 85
 
@@ -129,16 +130,13 @@ class SolicitudVBController {
 
         def idSolicitante = solicitudInstance.idSolicitante
         def asunto = "La solicitud ${solicitudInstance} ya recibió el visto bueno"
-        def personasInstance = Usuario.get(idSolicitante)
-        def correo = grailsApplication.config.correo.general
-        sendMail {
-          to correo // TODO: mandar el correo al que solicito       personasInstance.email
-          subject asunto
-          body "Hola ${personasInstance}\n\nSu solicitud folio " +
-            "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
-            "ya ha recibido el visto bueno, pronto seras contactado con relación " +
-            "a esta solicitud.\n"
-        }
+        def persona = Usuario.get(idSolicitante)
+        def correo = persona.correo ?: grailsApplication.config.correo.general
+        def msg = "Hola ${persona}\n\nSu solicitud folio " +
+          "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
+          "ya ha recibido el visto bueno, pronto seras contactado con relación " +
+          "a esta solicitud.\n"
+        firmadoService.sendMail(correo, asunto, msg)
 
         def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_COORDINADOR_DE_GESTION")}
         def gestores = UsuarioRol.withNewSession {UsuarioRol.findAllByRol(rolGestor)["usuario"]}
@@ -149,16 +147,13 @@ class SolicitudVBController {
         log.debug("liga = $liga")
 
         gestores.each {
-          def msg = "Hola ${it} <br/><br/>La solicitud folio " +
+          def cuerpoCorreo = "Hola ${it} <br/><br/>La solicitud folio " +
             "${solicitudInstance} (${solicitudInstance.justificacion}) " +
             "ya recibió el visto bueno, debe atenderla a la brevedad.<br/><br/>" +
             "Utilice la liga siguiente para revisarla. <br/><br/>" +
             "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
-          sendMail {
-            to correo // TODO: mandar el correo al que lo solicito       gestores.email
-            subject asunto
-            html msg
-          }
+          correo = it.correo ?: grailsApplication.config.correo.general
+          firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
@@ -204,16 +199,14 @@ class SolicitudVBController {
         }
 
         def idSolicitante = solicitudInstance.idSolicitante
-        def personasInstance = Usuario.get(idSolicitante)
-        def correo = grailsApplication.config.correo.general
-        sendMail {
-          to correo // TODO: mandar el correo al que solicito       personasInstance.email
-          subject "Solicitud ${solicitudInstance} no recibio el visto bueno"
-          body "Hola ${personasInstance}\n\nSu solicitud folio " +
-            "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
-            "no recibio visto bueno, contacte a la mesa de servicio si requiere " +
-            "más información.\n"
-        }
+        def persona = Usuario.get(idSolicitante)
+        def correo = persona.correo ?: grailsApplication.config.correo.general
+        def asunto = "Solicitud ${solicitudInstance} no recibio el visto bueno"
+        def msg = "Hola ${persona}\n\nSu solicitud folio " +
+          "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
+          "no recibio visto bueno, contacte a la mesa de servicio si requiere " +
+          "más información.\n"
+        firmadoService.sendMail(correo, asunto, msg)
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "show", id: solicitudInstance.id)
