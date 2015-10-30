@@ -99,13 +99,20 @@ class FirmadoService {
     _ubicacion(idEquipo)?.descripcion
   }
 
+  def cuerpoNivel (Long idEquipo) {
+    def ubicacion = _ubicacion(idEquipo)
+    if (!ubicacion)
+      return null
+    CuerpoNivel.get(ubicacion.idCuerpoNivel)?.toString()
+  }
+
   def _ubicacion (Long idEquipo) {
     if (!idEquipo)
       return null
     def idUbicacion = ResguardoEntregaDetalle.get(idEquipo)?.idUbicacion
     if (!idUbicacion)
       return null
-    Ubicacion.get(idUbicacion)
+   Ubicacion.get(idUbicacion)
   }
 
   def categoriasIncidentes() {
