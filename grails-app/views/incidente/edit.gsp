@@ -187,11 +187,7 @@
             value="${message(code: 'default.button.update.label',
                              default: 'Update')}"
             onclick="update()"/>
-          <sec:access expression="hasRole('ROLE_SAST_COORDINADOR_DE_GESTION')">
-            <a class="save" data-toggle="modal" href="#responsiveTecnico"
-              onclick="tecnico()">Asignar técnico</a>
-          </sec:access>
-          <sec:access expression="hasRole('ROLE_SAST_COORDINADOR')">
+          <sec:access expression="hasAnyRole('ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_COORDINADOR')">
             <a class="save" data-toggle="modal" href="#responsiveTecnico"
               onclick="tecnico()">Asignar técnico</a>
           </sec:access>
