@@ -8,6 +8,7 @@
 
 
 <g:set var="firmado" bean="firmadoService"/>
+<%--
 <table class="table table-condensed">
   <tr>
     <td width="290px">
@@ -60,25 +61,10 @@
     </td>
   </tr>
 </table>
-
+--%>
 
 
 <div class="row-fluid">
-  <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idSistema', 'error')} ">
-      <label for="idSistema">
-        <g:message code="incidente.idSistema.label" default="Sistema" />
-      </label>
-      <g:if test="${!incidenteInstance.idSistema}">
-        <g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['': '']"/>
-    </g:if>
-    <g:else>
-        <g:field id="idSistema-show" name="idSistema-show.id"
-          value="${incidenteInstance.idSistema}" disabled="true"/>
-      </g:else>
-    </div>
-  </div>
-
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance,
         field: 'idResguardoentregadetalle', 'error')} ">

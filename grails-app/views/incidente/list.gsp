@@ -33,8 +33,6 @@
 
 						<g:sortableColumn property="numeroIncidente" title="${message(code: 'incidente.numeroIncidente.label', default: 'Incidente')}" />
 
-            <th><g:message code="incidente.idSistema.label" default="Sistema" /></th>
-
             <g:sortableColumn property="idResguardoentregadetalle" title="${message(code: 'incidente.idResguardoentregadetalle.label', default: 'Equipo')}" />
 
             <g:sortableColumn property="fechaIncidente" title="${message(code: 'incidente.fechaIncidente.label', default: 'Fecha Incidente')}" />
@@ -57,12 +55,6 @@
               <a href="${liga}">
                 ${incidenteInstance.toString()}
               </a>
-            </td>
-
-            <td>
-                <a href="${liga}">
-                  ${fieldValue(bean: incidenteInstance, field: "idSistema")}
-                </a>
             </td>
 
             <td>
