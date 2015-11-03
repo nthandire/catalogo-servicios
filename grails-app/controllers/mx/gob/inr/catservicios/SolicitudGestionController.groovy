@@ -293,14 +293,15 @@ class SolicitudGestionController {
         def correo = Usuario.get(solicitudInstance.idSolicitante).correo ?:
                        grailsApplication.config.correo.general
         solicitudInstance.detalles.findAll{it.estado = 'A' as char}.each {
-          def msg = "Acuse de la Solicitud realizada el " +
-            "${solicitudInstance.fechaSolicitud} <br/><br/>" +
-            "Folio: {solicitudInstance}  <br/>" +
-            "Fecha de Acuse: ${new Date()}. <br/>" +
-            "Tiempo de Atención: ${it?.idServ?.tiempo2} " +
-            "${it?.idServ?.unidades2?.descripcion}."
+          def fecha = solicitudInstance.fechaSolicitud
+          def msg = """Acuse de la Solicitud de Servicio de Tecnologías de la Información realizada el ${fecha.format('dd')} de ${fecha.format('MMMMM')} a las ${fecha.format('hh:mm')} :
+
+Folio: ${solicitudInstance}
+Fecha de Acuse: ${solicitudInstance.fechaRevisa.format('dd/MM/yy hh:mm')} hrs.
+Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
+"""
           log.debug("msg = $msg")
-          firmadoService.sendMailHTML(correo, asunto, msg)
+          firmadoService.sendMail(correo, asunto, msg)
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
