@@ -50,7 +50,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'servicio', 'error')} required">
 	<label for="servicio">
-		<g:message code="cat_serv.label" default="Servicio 2" />
+		<g:message code="cat_serv.label" default="Servicio" />
 		<span class="required-indicator">*</span>
 	</label>
 	<span id="serviciosContainer"></span>

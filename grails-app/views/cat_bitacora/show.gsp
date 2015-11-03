@@ -88,7 +88,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'descripcion', 'error')} required">
 	<label for="descripcion">
-		<g:message code="cat_bitacora.descripcion.label" default="Justificación" />
+		<g:message code="cat_bitacora.descripcion.label" default="Descripcion" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textArea name="descripcion" cols="40" rows="5" maxlength="1000" required=""

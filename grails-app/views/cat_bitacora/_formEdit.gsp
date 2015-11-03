@@ -50,7 +50,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'servicio', 'error')} required">
 	<label for="servicio">
-		<g:message code="cat_bitacora.servicio.label" default="Servicio" />
+		<g:message code="cat_serv.label" default="Servicio" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="servicio" name="servicio.id" from="${Cat_serv.list()}" optionKey="id" required="" value="${cat_bitacoraInstance?.servicio?.id}" class="many-to-one" disabled="true"/><!-- TODO: efientizar el from -->
