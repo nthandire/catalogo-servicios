@@ -186,10 +186,12 @@ class SolicitudAutorizaController {
           "La solicitud ${solicitudInstance} ya fue autorizada"
           :
           "La solicitud ${solicitudInstance} fue cancelada"
+        def fecha = solicitudInstance.fechaSolicitud
         def msg = (estado == 'A' as char) ?
-          "Hola ${persona}\n\nSu solicitud folio " +
-            "${solicitudInstance.toString()} (${solicitudInstance.justificacion}) "+
-            "ya fue autorizada, pronto tendras respuestas a tu solicitud."
+          """Hola ${persona}
+
+Su solicitud de Servicio de Tecnologías de la Información realizada el ${fecha.format('dd')} de ${fecha.format('MMMMM')} a las ${fecha.format('hh:mm')} ya fue autorizada.
+"""
           :
           "Hola ${persona}\n\nSu solicitud " +
             "(${solicitudInstance.justificacion}) "+
