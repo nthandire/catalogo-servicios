@@ -67,7 +67,7 @@
 
             <td>
               <a href="${liga}">
-                ${fieldValue(bean: incidenteInstance, field: "idResguardoentregadetalle")}
+                ${incidenteInstance.idResguardoentregadetalle ? ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle) : ""}
               </a>
             </td>
 

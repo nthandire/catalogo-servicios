@@ -25,31 +25,30 @@
 			  <div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<ol class="property-list catPrograma">
-			
+
 				<g:if test="${catProgramaInstance?.desPrograma}">
 				<li class="fieldcontain">
-					<span id="desPrograma-label" class="property-label"><g:message code="catPrograma.desPrograma.label" default="Des Programa" /></span>
-					
+					<span id="desPrograma-label" class="property-label"><g:message code="catPrograma.desPrograma.label" default="Descripción" /></span>
+
 						<span class="property-value" aria-labelledby="desPrograma-label"><g:fieldValue bean="${catProgramaInstance}" field="desPrograma"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${catProgramaInstance?.estadoPrograma}">
 				<li class="fieldcontain">
-					<span id="estadoPrograma-label" class="property-label"><g:message code="catPrograma.estadoPrograma.label" default="Estado Programa" /></span>
-					
-						<span class="property-value" aria-labelledby="estadoPrograma-label"><g:fieldValue bean="${catProgramaInstance}" field="estadoPrograma"/></span>
-					
+					<span id="estadoPrograma-label" class="property-label"><g:message code="catPrograma.estadoPrograma.label" default="Estado" /></span>
+					<span class="property-value" aria-labelledby="estadoPrograma-label">
+            ${message(code:"cat_servCat.estado.${catProgramaInstance.estadoPrograma}")}
+          </span>
 				</li>
 				</g:if>
-			
+
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${catProgramaInstance?.id}" />
 					<g:link class="edit" action="edit" id="${catProgramaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<!--g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /-->
 				</fieldset>
 			</g:form>
 		</div>

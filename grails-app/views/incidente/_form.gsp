@@ -69,7 +69,13 @@
       <label for="idSistema">
         <g:message code="incidente.idSistema.label" default="Sistema" />
       </label>
-      <g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['': '']"/>
+      <g:if test="${!incidenteInstance.idSistema}">
+        <g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}" optionKey="id" value="${incidenteInstance?.idSistema?.id}" class="many-to-one" noSelection="['': '']"/>
+    </g:if>
+    <g:else>
+        <g:field id="idSistema-show" name="idSistema-show.id"
+          value="${incidenteInstance.idSistema}" disabled="true"/>
+      </g:else>
     </div>
   </div>
 
@@ -79,26 +85,34 @@
       <label for="idResguardoentregadetalle">
         <g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
       </label>
-      <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
-        from="${ResguardoEntregaDetalle.executeQuery(
-          'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
-          optionKey="id" class="many-to-one" noSelection="['': '']"
-          value="${incidenteInstance?.idResguardoentregadetalle}"/>
+      <g:if test="${!incidenteInstance.idResguardoentregadetalle}">
+        <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
+          from="${ResguardoEntregaDetalle.executeQuery(
+            'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
+            optionKey="id" class="many-to-one" noSelection="['': '']"
+            value="${incidenteInstance?.idResguardoentregadetalle}"/>
+      </g:if>
+      <g:else>
+        <g:field id="idResguardoentregadetalle-show" name="idResguardoentregadetalle-show"
+          disabled="true" value="${ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle)}"/>
+      </g:else>
     </div>
   </div>
 
   <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
-     <label for="idReporta">
-       <g:message code="incidente.idReporta.label" default="Quien Reporta" />
-     </label>
-      <%-- TODO: mejorar el select, solo los usuarios SAST --%>
-      <g:select id="idReporta" name="idReporta"
-        from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
-        required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
-        noSelection="${['':'Seleccione una...']}" optionKey="id"
-        optionValue="nombreMostrar"/>
-    </div>
+    <g:if test="${!incidenteInstance.idReporta}">
+      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
+       <label for="idReporta">
+         <g:message code="incidente.idReporta.label" default="Quien Reporta" />
+       </label>
+        <%-- TODO: mejorar el select, solo los usuarios SAST --%>
+        <g:select id="idReporta" name="idReporta"
+          from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
+          required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
+          noSelection="${['':'Seleccione una...']}" optionKey="id"
+          optionValue="nombreMostrar"/>
+      </div>
+    </g:if>
   </div>
 </div>
 

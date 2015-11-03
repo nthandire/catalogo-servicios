@@ -26,21 +26,21 @@
 			<table>
 				<thead>
 					<tr>
-					
-						<g:sortableColumn property="desPrograma" title="${message(code: 'catPrograma.desPrograma.label', default: 'Des Programa')}" />
-					
-						<g:sortableColumn property="estadoPrograma" title="${message(code: 'catPrograma.estadoPrograma.label', default: 'Estado Programa')}" />
-					
+
+						<g:sortableColumn property="desPrograma" title="${message(code: 'catPrograma.desPrograma.label', default: 'Descripción')}" />
+
+						<g:sortableColumn property="estadoPrograma" title="${message(code: 'catPrograma.estadoPrograma.label', default: 'Estado')}" />
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${catProgramaInstanceList}" status="i" var="catProgramaInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="show" id="${catProgramaInstance.id}">${fieldValue(bean: catProgramaInstance, field: "desPrograma")}</g:link></td>
-					
+
 						<td>${fieldValue(bean: catProgramaInstance, field: "estadoPrograma")}</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>

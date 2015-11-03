@@ -73,7 +73,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'servicio', 'error')} required">
 	<label for="servicio">
-		<g:message code="cat_bitacora.servicio.label" default="Servicio" />
+		<g:message code="cat_serv.label" default="Servicio" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="servicio" name="servicio.id" from="${Cat_serv.list()}" optionKey="id"
@@ -88,7 +88,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'descripcion', 'error')} required">
 	<label for="descripcion">
-		<g:message code="cat_bitacora.descripcion.label" default="Descripcion" />
+		<g:message code="cat_bitacora.descripcion.label" default="Justificación" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textArea name="descripcion" cols="40" rows="5" maxlength="1000" required=""

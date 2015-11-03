@@ -6,7 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException
 @Secured(['ROLE_SAST_ADMIN'])
 class CatTiposervcioController {
     static nombreMenu = "Tipos de Servicios"
-    static ordenMenu = 103
+    static ordenMenu = -103 // TODO: Borrar este controlador, y posiblemente la tabla también
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 

@@ -29,7 +29,7 @@
 
 						<g:sortableColumn property="fuente" title="${message(code: 'problema.fuente.label', default: 'Fuente')}" />
 
-						<g:sortableColumn property="idFuente" title="${message(code: 'problema.idFuente.label', default: 'Id Fuente')}" />
+						<g:sortableColumn property="idFuente" title="${message(code: 'problema.idFuente.label', default: 'Folio original')}" />
 
 						<g:sortableColumn property="fechaProblema" title="${message(code: 'problema.fechaProblema.label', default: 'Fecha Problema')}" />
 

@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 @Secured(['ROLE_SAST_ADMIN'])
 class CatProgramaController {
-    static nombreMenu = "Programas"
+    static nombreMenu = "Estado de cierre"
     static ordenMenu = 101
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
