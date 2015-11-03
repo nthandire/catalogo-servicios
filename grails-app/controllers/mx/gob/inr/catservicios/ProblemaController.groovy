@@ -6,7 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException
 @Secured(['ROLE_SAST_ADMIN'])
 class ProblemaController {
     static nombreMenu = "Problemas"
-    static ordenMenu = 90
+    static ordenMenu = -90
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
