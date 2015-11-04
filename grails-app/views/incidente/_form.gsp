@@ -360,33 +360,41 @@
   </g:else>
 </div>
 
-<g:if test="${incidenteInstance.id}">
-  <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'nivel', 'error')} ">
-    <label for="nivel">
-      <g:message code="incidente.nivel.label" default="Nivel" />
-    </label>
-    <g:field name="nivel" type="number" min="1" max="3"
-      value="${incidenteInstance.nivel}" disabled="true"/>
+<div class="row-fluid">
+  <div class="span4">
+    <g:if test="${incidenteInstance.id}">
+      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'nivel', 'error')} ">
+        <label for="nivel">
+          <g:message code="incidente.nivel.label" default="Nivel" />
+        </label>
+        <g:field name="nivel" type="number" min="1" max="3"
+          value="${incidenteInstance.nivel}" disabled="true"/>
+      </div>
+    </g:if>
   </div>
-</g:if>
 
-<g:if test="${incidenteInstance.id || incidenteInstance.idServresp}">
-  <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServresp', 'error')} ">
-    <label for="idServresp">
-      <g:message code="incidente.idServresp.label" default="Responsable" />
-    </label>
-    <g:select id="idServresp" name="idServresp.id" from="${Cat_servResp.list()}"
-      optionKey="id" value="${incidenteInstance?.idServresp?.id}" class="many-to-one"
-      noSelection="['': '']" disabled="true"/>
+  <div class="span4">
+    <g:if test="${incidenteInstance.id || incidenteInstance.idServresp}">
+      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServresp', 'error')} ">
+        <label for="idServresp">
+          <g:message code="incidente.idServresp.label" default="Responsable" />
+        </label>
+        <g:select id="idServresp" name="idServresp.id" from="${Cat_servResp.list()}"
+          optionKey="id" value="${incidenteInstance?.idServresp?.id}" class="many-to-one"
+          noSelection="['': '']" disabled="true"/>
+      </div>
+    </g:if>
   </div>
-</g:if>
 
-<g:if test="${tecnicos}">
-  <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel', 'error')} ">
-    <label for="idNivel">
-      <g:message code="incidente.idNivel.label" default="Atendido por ..." />
-    </label>
-    <g:field id="idNivel-show" name="idNivel-show"
-        value="${Usuario.get(idNivel)}" disabled="true"/>
+  <div class="span4">
+    <g:if test="${tecnicos}">
+      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel', 'error')} ">
+        <label for="idNivel">
+          <g:message code="incidente.idNivel.label" default="Atendido por ..." />
+        </label>
+        <g:field id="idNivel-show" name="idNivel-show"
+            value="${Usuario.get(idNivel)}" disabled="true"/>
+      </div>
+    </g:if>
   </div>
-</g:if>
+</div>

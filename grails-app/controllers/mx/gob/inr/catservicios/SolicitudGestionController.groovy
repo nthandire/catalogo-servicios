@@ -248,17 +248,50 @@ class SolicitudGestionController {
             return
         }
 
-        def areas = []
-        def detalles = SolicitudDetalle.
-          findAllByIdSolicitudAndEstadoAndIdServIsNotNull(solicitudInstance,
-                                                          'A' as char)
-        detalles.each {
-          if (!areas.contains(it.idServ.servResp2))
-            areas << it.idServ.servResp2
+        def fecha = solicitudInstance.fechaSolicitud
+
+        solicitudInstance.detalles.findAll{it.estado = 'A' as char}.each {
+
+          coordinadores(it.idServ.servResp2).each { coord ->
+            def asunto = "Solicitud ${solicitudInstance} requiere procesarse"
+            def liga = createLink(controller: "SolicitudCoordinador",
+                                  action: "edit", id: it.id,
+                                  absolute: "true")
+            log.debug("liga = $liga")
+            def cuerpoCorreo = """Hola ${coord}<br/><br/>
+Tiene una nueva solicitud para su aprobación:
+<br/><br/>
+Folio: ${solicitudInstance}<br/>
+Fecha de Acuse: ${solicitudInstance.fechaRevisa.format('dd/MM/yy hh:mm')} hrs.<br/>
+Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}<br/>
+Prioridad: ${message(code:"intensidad.valor.${it.prioridad}")}
+<br/><br/>
+<a href='${liga}'>${solicitudInstance}</a>
+"""
+            def correo = coord.correo ?: grailsApplication.config.correo.general
+            firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
+          }
+
+          def asunto = "Acuse de la Solicitud realizada el ${solicitudInstance.fechaSolicitud}"
+          def correo = Usuario.get(solicitudInstance.idSolicitante).correo ?:
+                         grailsApplication.config.correo.general
+          def msg = """Acuse de la Solicitud de Servicio de Tecnologías de la Información realizada el ${fecha.format('dd')} de ${fecha.format('MMMMM')} a las ${fecha.format('hh:mm')} :
+
+Folio: ${solicitudInstance}
+Fecha de Acuse: ${solicitudInstance.fechaRevisa.format('dd/MM/yy hh:mm')} hrs.
+Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
+"""
+          log.debug("msg = $msg")
+          firmadoService.sendMail(correo, asunto, msg)
         }
-        log.debug("areas = ${areas}")
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
+        redirect(action: "list")
+    }
+
+    def coordinadores(Cat_servResp area) {
         def areasExpandidas = []
-        areas.each {areasExpandidas += it.descripcion.split("/")}
+        areasExpandidas += area.descripcion.split("/")
         areasExpandidas = areasExpandidas.flatten()
         log.debug("areasExpandidas = ${areasExpandidas}")
         def usuariosDelArea = []
@@ -274,38 +307,7 @@ class SolicitudGestionController {
 
         def coordinadores = usuarios.findAll{firmadoService.thisIsCoordinador(it.id)}
         log.debug("coordinadores = ${coordinadores}")
-
-        def liga = createLink(controller: "SolicitudCoordinador",
-                              action: "edit", id: solicitudInstance.id,
-                              absolute: "true")
-        log.debug("liga = $liga")
-        def asunto = "Solicitud ${solicitudInstance} requiere procesarse"
-        coordinadores.each {
-          def msg = "Hola ${it}<br/><br/>La solicitud folio " +
-            "${solicitudInstance} (${solicitudInstance.justificacion}) " +
-            "ya fue revisada, debe atenderla a la brevedad. <br/><br/>" +
-            "<a href='${liga}'>${solicitudInstance}</a>"
-          def correo = it.correo ?: grailsApplication.config.correo.general
-          firmadoService.sendMailHTML(correo, asunto, msg)
-        }
-
-        asunto = "Acuse de la Solicitud realizada el ${solicitudInstance.fechaSolicitud}"
-        def correo = Usuario.get(solicitudInstance.idSolicitante).correo ?:
-                       grailsApplication.config.correo.general
-        solicitudInstance.detalles.findAll{it.estado = 'A' as char}.each {
-          def fecha = solicitudInstance.fechaSolicitud
-          def msg = """Acuse de la Solicitud de Servicio de Tecnologías de la Información realizada el ${fecha.format('dd')} de ${fecha.format('MMMMM')} a las ${fecha.format('hh:mm')} :
-
-Folio: ${solicitudInstance}
-Fecha de Acuse: ${solicitudInstance.fechaRevisa.format('dd/MM/yy hh:mm')} hrs.
-Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
-"""
-          log.debug("msg = $msg")
-          firmadoService.sendMail(correo, asunto, msg)
-        }
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
-        redirect(action: "show", id: solicitudInstance.id)
+        coordinadores
     }
 
     def updateVB(Long id, Long version) {
@@ -388,7 +390,7 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
         }
 
         flash.message = /"${solicitudDetalleInstance.toString()}" actualizado/
-        redirect(action: "edit", id: solicitudDetalleInstance.id)
+        redirect(action: "show", id: solicitudDetalleInstance.idSolicitud.id)
     }
 
   def subcategoryChanged(long subcategoryId) {
