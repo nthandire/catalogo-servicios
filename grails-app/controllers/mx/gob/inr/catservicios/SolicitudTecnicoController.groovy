@@ -204,10 +204,13 @@ class SolicitudTecnicoController {
                                   id: solicitud.id, absolute: "true")
             log.debug("liga = ${liga}")
             def asunto = "La solicitud ${solicitud} ya ha sido atendida"
-            def cuerpoCorreo = "Hola ${solicitante}<br/><br/>La solicitud " +
-              "folio ${solicitud} ya ha sido atendida, es necesario que llenes " +
-              "la forma de encuesta, usando la siguiente liga: <br/><br/>" +
-              "<a href='${liga}'>${solicitud}</a>"
+            def cuerpoCorreo = """Hola ${solicitante}<br/><br/>
+
+Su solicitud ${solicitud} ya ha sido atendida, para mejorar la calidad del servicio se solicita conteste la siguiente encuesta, usando la siguiente liga:<br/><br/>
+
+<a href='${liga}'>${solicitud}</a>
+              """
+
             def correo = solicitante.correo ?: grailsApplication.config.correo.general
             firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
         }
