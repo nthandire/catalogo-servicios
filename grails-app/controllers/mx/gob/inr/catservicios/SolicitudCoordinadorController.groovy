@@ -152,25 +152,19 @@ class SolicitudCoordinadorController {
         collect{it.id}
       log.debug("miembros = ${miembros}")
 
-      def rolUsuarios = null
+      def rolTecnicos = null
+      def rolCoordinadores = null
       Rol.withNewSession { session ->
-        rolUsuarios = Rol.findByAuthority('ROLE_SAST_TECNICO')
+        rolTecnicos = Rol.findByAuthority('ROLE_SAST_TECNICO')
       }
-      log.debug("rolUsuarios = $rolUsuarios")
-      def usuariosRolesIds = []
+      log.debug("rolTecnicos = $rolTecnicos")
+      def tecnicos = []
       UsuarioRol.withNewSession { sessionUR ->
-        usuariosRolesIds = UsuarioRol.findAllByRol(rolUsuarios).
-          findAll {it.usuario.id in miembros}.collect {it.usuario.id}
+        tecnicos = UsuarioRol.findAllByRol(rolTecnicos).
+          findAll {it.usuario.id in miembros}.collect {it.usuario}
       }
-      log.debug("usuariosRolesIds = $usuariosRolesIds")
-
-       def tecnicos = []
-       Usuario.withNewSession { sessionU ->
-        tecnicos = Usuario.findAllByIdInList(usuariosRolesIds)
-       }
-
-      log.debug("numero de tecnicos = ${tecnicos.size()}")
-      return tecnicos
+      log.debug("tecnicos = $tecnicos")
+      tecnicos
     }
 
     def vistoBueno(Long id) {
@@ -290,15 +284,20 @@ class SolicitudCoordinadorController {
         log.debug("liga = $liga")
         def correo = tecnico.correo ?: grailsApplication.config.correo.general
         def asunto = "La solicitud ${solicitudDetalleInstance.idSolicitud} requiere ser atendida"
-        def cuerpoCorreo = "Hola ${tecnico}<br/><br/>La solicitud folio " +
-          "${solicitudDetalleInstance.idSolicitud} requiere ser atendida, se autorizo el " +
-          formatDate(date:solicitudDetalleInstance.idSolicitud.fechaVb?:
-                          solicitudDetalleInstance.idSolicitud.fechaAutoriza) +
-          " y debe ser respondida en ${solicitudDetalleInstance?.idServ?.tiempo1}" +
-          " ${solicitudDetalleInstance?.idServ?.unidades1?.descripcion}." +
-          "<br/><br/>" +
-          "utilice la liga siguiente para atenderla. <br/><br/>" +
-          "<a href='${liga}'>${solicitudDetalleInstance.idSolicitud}</a>"
+        def cuerpoCorreo = """Hola ${tecnico}<br/><br/>
+
+Tiene una nueva solicitud para su atención:<br/><br/>
+
+Folio: ${solicitudDetalleInstance.idSolicitud}<br/>
+Fecha de Acuse: ${solicitudDetalleInstance.idSolicitud.fechaRevisa.
+  format('dd/MM/yy hh:mm')} hrs.<br/>
+Tiempo de Atención: ${solicitudDetalleInstance.idServ.tiempo2}
+  ${solicitudDetalleInstance.idServ.unidades2.descripcion}<br/>
+Prioridad: Alta<br/><br/>
+
+utilice la liga siguiente para atenderla. <br/><br/>
+<a href='${liga}'>${solicitudDetalleInstance.idSolicitud}</a>
+          """
         firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), solicitudDetalleInstance.toString()])
