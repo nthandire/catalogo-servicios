@@ -13,6 +13,6 @@ x 8.- No, el funcionamiento pedido y programado es que pase por un aprobador (MS
 > 9.- EL VO.BO. ES DE MANERA GENERAL, SIENDO QUE DEBE SER POR DETALLE.¿ (Sistemas lo evaluara en etapa de pruebas)
 > 10.- Qué posibilidades hay de que al entrar al sistema le aparezca una notificación al iniciar su sesión, para darle a conocer el número de solicitudes pendientes de atender (símbolo indicando). (Si se va a pruebas)
 > 11.- En un requerimiento de equipo de cómputo puede referirse a más de un equipo, máximo 10 equipos (Si se va a pruebas)
-- 12.- correos pedidos
++ 12.- correos pedidos
 - 13.- selección del equipo
 + 14.- cuerpo y nivel (Consultando con Martín, se decidio ponerlo para técnicos y aprovadores)

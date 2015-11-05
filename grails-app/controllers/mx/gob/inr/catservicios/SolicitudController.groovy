@@ -238,7 +238,7 @@ class SolicitudController {
                                 args: [message(code: 'solicitud.label',
                                                default: 'Solicitud'),
                                 solicitudInstance.toString()])
-        redirect(action: "edit", id: solicitudInstance.id)
+        redirect(action: "list")
     }
 
     def update(Long id, Long version) {

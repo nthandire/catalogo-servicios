@@ -191,12 +191,7 @@ class SolicitudGestionController {
             return
         }
 
-        def subcategorias = firmadoService.
-          subcategoriasSolicitudes(solicitudDetalleInstance.idServcat)
-        log.debug("numero de subcategorias = ${subcategorias.size()}")
-
-        [solicitudDetalleInstance: solicitudDetalleInstance,
-            subcategorias: subcategorias]
+        [solicitudDetalleInstance: solicitudDetalleInstance]
     }
 
     def listaDeVobos() {

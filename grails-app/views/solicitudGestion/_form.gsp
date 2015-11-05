@@ -7,6 +7,7 @@
 
 
 <g:set var="firmado" bean="firmadoService"/>
+<g:set var="solicitudInstance" value="${solicitudDetalleInstance.idSolicitud}" />
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance,
@@ -27,7 +28,7 @@
       </label>
       <g:select id='servSub' name='servSub' required=''
         onchange="subcategoryChanged(this.value)"
-        from="${subcategorias}"
+        from="${firmado.subcategoriasSolicitudes(solicitudDetalleInstance.idServcat)}"
         value="${solicitudDetalleInstance?.idServ?.servSub?.id}"
         optionKey='id' noSelection="['':'Seleccione una...']"/>
     </div>
@@ -71,7 +72,7 @@
         <g:message code="solicitud.nombre.label" default="Solicitante"/>
       </label>
       <g:field type="text" name="nombre.no" disabled="true"
-        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
+        value="${Usuario.get(solicitudInstance.idSolicitante)}"/>
     </div>
   </div>
   <div class="span3">
@@ -79,8 +80,13 @@
       <label for="telefono-label">
         Fecha de solicitud
       </label>
-      <g:field type="date" name="fAutoriza" disabled="true"
-        value="${solicitudDetalleInstance?.idSolicitud?.fechaSolicitud}"/>
+      <%--
+      <input name="solicitudInstance.fechaSolicitud" disabled="true"
+        value="${solicitudInstance.fechaSolicitud}"/>
+      --%>
+      <g:field type="datetime" disabled="true"
+        name="solicitudInstance.fechaSolicitud"
+        value="$solicitudInstance.fechaSolicitud"/>
     </div>
   </div>
   <div class="span2">
@@ -89,7 +95,7 @@
         <g:message code="solicitud.telefono.label" default="Extensión" />
       </label>
       <g:field type="text" name="telefono.no" disabled="true"
-        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante).extension}"/>
+        value="${Usuario.get(solicitudInstance.idSolicitante).extension}"/>
     </div>
   </div>
   <div class="span3">
@@ -98,7 +104,7 @@
         <g:message code="solicitud.area.label" default="Área" />
       </label>
       <g:field type="text" name="area.no" disabled="true"
-        value="${firmado.areaNombre(solicitudInstance?.idSolicitante)}"/>
+        value="${firmado.areaNombre(solicitudInstance.idSolicitante)}"/>
     </div>
   </div>
 </div>
@@ -110,7 +116,7 @@
         <g:message code="solicitud.nombre.label" default="Autorizador"/>
       </label>
       <g:field type="text" name="nombre.no" disabled="true"
-        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
+        value="${Usuario.get(solicitudInstance.idAutoriza)}"/>
     </div>
   </div>
   <div class="span3">
@@ -118,8 +124,8 @@
       <label for="fAutoriza-label">
         Fecha de autorización
       </label>
-      <g:field type="date" name="fAutoriza.no" disabled="true"
-        value="$solicitudDetalleInstance?.idSolicitud?.fechaAutoriza}"/>
+      <g:field type="datetime" name="fAutoriza.no" disabled="true"
+        value="${solicitudInstance.fechaAutoriza}"/>
     </div>
   </div>
   <div class="span2">
@@ -128,7 +134,7 @@
         <g:message code="solicitud.telefono.label" default="Extensión" />
       </label>
       <g:field type="text" name="telefono.no" disabled="true"
-        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza).extension}"/>
+        value="${Usuario.get(solicitudInstance.idAutoriza).extension}"/>
     </div>
   </div>
   <div class="span3">
@@ -142,7 +148,7 @@
   </div>
 </div>
 
-<g:if test="${solicitudDetalleInstance?.idSolicitud?.idVb}">
+<g:if test="${solicitudInstance.idVb}">
   <div class="row-fluid">
     <div class="span4">
       <div class="fieldtablecontain">
@@ -150,16 +156,25 @@
           <g:message code="solicitud.nombre.label" default="Visto Bueno"/>
         </label>
         <g:field type="text" name="nombre.no" disabled="true"
-          value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
+          value="${Usuario.get(solicitudInstance.idVb)}"/>
       </div>
     </div>
     <div class="span3">
+      <div class="fieldtablecontain">
+        <label for="fVoBo-label">
+          Fecha de Visto Bueno
+        </label>
+        <g:field type="datetime" name="fVoBo.no" disabled="true"
+          value="${solicitudInstance.fechaVb}"/>
+      </div>
+    </div>
+    <div class="span2">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
         </label>
         <g:field type="text" name="telefono.no" disabled="true"
-          value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb).extension}"/>
+          value="${Usuario.get(solicitudInstance.idVb).extension}"/>
       </div>
     </div>
     <div class="span3">
