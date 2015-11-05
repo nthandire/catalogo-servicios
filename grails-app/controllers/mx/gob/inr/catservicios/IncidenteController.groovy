@@ -42,8 +42,14 @@ class IncidenteController {
             incidentesFiltrados.findAll {it."idNivel${it.nivel}" == userID}
           :
             incidentesFiltrados
-        log.debug("incidenteInstanceList = ${incidenteInstanceList}")
-        [incidenteInstanceList: incidenteInstanceList,
+
+        def paramMax = (params['max']?:'0').toInteger()
+        def paramOffset = (params['offset']?:'0').toInteger()
+
+        def incidentesPaginación = incidenteInstanceList[paramOffset..
+          Math.min(paramOffset+paramMax-1, incidenteInstanceList.size()-1)]
+        log.debug("incidentesPaginación = ${incidentesPaginación}")
+        [incidenteInstanceList: incidentesPaginación,
           incidenteInstanceTotal: incidenteInstanceList.size()]
     }
 
@@ -122,6 +128,7 @@ class IncidenteController {
       incidenteInstance.ipTerminal = request.getRemoteAddr()
       incidenteInstance.idNivel1 = springSecurityService.principal.id
       incidenteInstance.fechaNivel1 = new Date()
+      incidenteInstance.idServfinal = incidenteInstance.idServ
 
       if (!incidenteInstance.save(flush: true)) {
           render(view: "create", model: [incidenteInstance: incidenteInstance])
@@ -210,12 +217,14 @@ class IncidenteController {
         def userID = springSecurityService.principal.id
         log.debug("userID = ${userID}")
         def area = area()
-        log.debug("area = ${area}")
+        log.debug("area = <${area}>")
         def areaLab = message(code: "area.de.laboratorio")
-        log.debug("areaLab = ${areaLab}")
+        log.debug("areaLab = <${areaLab}>")
         def minPrograma = message(code: "laboratorio.programa.normal").toInteger()
-        if (area == areaLab)
+        if (area?.descripcion == areaLab) {
+          log.debug("Es DGAIT")
           minPrograma = message(code: "laboratorio.programa.DGAIT").toInteger()
+        }
         log.debug("minPrograma = ${minPrograma}")
         def programas = CatPrograma.findAllByIdGreaterThanEquals(minPrograma)
         log.debug("programas = ${programas}")
