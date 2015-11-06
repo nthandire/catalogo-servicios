@@ -49,7 +49,6 @@
           <div class="modal-body">
             <div class="row-fluid">
               <div class="span12">
-                <h4>Solución del Incidente</h4>
                 <fieldset class="form">
                   <g:render template="formDetalle"/>
                 </fieldset>
