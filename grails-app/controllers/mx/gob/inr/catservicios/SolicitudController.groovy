@@ -9,7 +9,7 @@ class SolicitudController {
     def springSecurityService
     def grailsApplication
     def firmadoService
-    static nombreMenu = "Solicitud"
+    static nombreMenu = "Requerimiento"
     static ordenMenu = 80
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]

@@ -18,7 +18,7 @@
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Solicitudes para Vo.Bo.</h1>
+			<h1>Requerimientos para Vo.Bo.</h1>
 			<g:if test="${flash.message}">
 			  <div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -29,7 +29,7 @@
 				<thead>
 					<tr>
 
-						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Numero Solicitud')}" />
+						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Requerimiento')}" />
 
 						<g:sortableColumn property="nombre" title="Solicitante" />
 

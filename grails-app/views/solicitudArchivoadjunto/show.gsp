@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="back" controller="solicitud" action="show" id="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}">Regresar a la solicitud</g:link></li>
+				<li><g:link class="back" controller="solicitud" action="show" id="${solicitudArchivoadjuntoInstance?.idSolicitud?.id}">Regresar al requerimiento</g:link></li>
 			</ul>
 		</div>
 		<div id="show-solicitudArchivoadjunto" class="content scaffold-show" role="main">

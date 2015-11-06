@@ -16,7 +16,7 @@
 			</ul>
 		</div>
 		<div id="edit-solicitud" class="content scaffold-edit" role="main">
-      <h1>Descripción de la solicitud</h1>
+      <h1>Descripción del requerimiento</h1>
       <g:if test="${flash.message}">
       <div class="message" role="status">${flash.message}</div>
       </g:if>

@@ -12,15 +12,15 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list">Solicitudes a revisar</g:link></li>
+				<li><g:link class="list" action="list">Requerimientos a revisar</g:link></li>
         <li><g:link class="list" action="listTodas">Todas</g:link></li>
-				<li><g:link class="list" action="listAsignados">Solicitudes asignadas</g:link></li>
-        <li><g:link class="list" action="listEncuestas">Solicitudes en encuesta</g:link></li>
-				<li><g:link class="list" action="listTerminadas">Solicitudes terminadas</g:link></li>
+				<li><g:link class="list" action="listAsignados">Requerimientos asignadas</g:link></li>
+        <li><g:link class="list" action="listEncuestas">Requerimientos en encuesta</g:link></li>
+				<li><g:link class="list" action="listTerminadas">Requerimientos terminadas</g:link></li>
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Solicitudes en encuesta</h1>
+			<h1>Requerimientos en encuesta</h1>
 			<g:if test="${flash.message}">
 			  <div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -31,7 +31,7 @@
 				<thead>
 					<tr>
 
-						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Numero Solicitud')}" />
+						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Requerimiento')}" />
 
 						<g:sortableColumn property="nombre" title="Solicitante" />
 

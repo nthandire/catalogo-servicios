@@ -32,7 +32,7 @@
 
 						<th>
               <g:message code="solicitudDetalle.idSolicitud.label"
-                default="Solicitud" />
+                default="Requerimiento" />
             </th>
 
             <g:sortableColumn property="lastUpdated"

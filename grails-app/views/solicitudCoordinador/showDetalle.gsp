@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="back" action="show" id="${solicitudDetalleInstance?.idSolicitud?.id}">Regresar a la solicitud</g:link></li>
+				<li><g:link class="back" action="show" id="${solicitudDetalleInstance?.idSolicitud?.id}">Regresar al requerimiento</g:link></li>
 			</ul>
 		</div>
 		<div id="show-solicitudDetalle" class="content scaffold-show" role="main">
@@ -24,7 +24,7 @@
 			  <div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<ol class="property-list solicitudDetalle">
-			
+
 				<g:if test="${solicitudDetalleInstance?.idSolicitud}">
 				<li class="fieldcontain">
 					<span id="idSolicitud-label" class="property-label">
@@ -39,52 +39,52 @@
           </span>
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudDetalleInstance?.idServ}">
 				<li class="fieldcontain">
 					<span id="idServ-label" class="property-label"><g:message code="solicitudDetalle.idServ.label" default="Id Serv" /></span>
-					
+
 						<span class="property-value" aria-labelledby="idServ-label"><g:link controller="cat_serv" action="show" id="${solicitudDetalleInstance?.idServ?.id}">${solicitudDetalleInstance?.idServ?.encodeAsHTML()}</g:link></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudDetalleInstance?.idResguardoentregadetalle}">
 				<li class="fieldcontain">
 					<span id="idResguardoentregadetalle-label" class="property-label"><g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Id Resguardoentregadetalle" /></span>
-					
+
 						<span class="property-value" aria-labelledby="idResguardoentregadetalle-label"><g:fieldValue bean="${solicitudDetalleInstance}" field="idResguardoentregadetalle"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudDetalleInstance?.descripcion}">
 				<li class="fieldcontain">
 					<span id="descripcion-label" class="property-label"><g:message code="solicitudDetalle.descripcion.label" default="Descripcion" /></span>
-					
+
 						<span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${solicitudDetalleInstance}" field="descripcion"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudDetalleInstance?.idPrograma}">
 				<li class="fieldcontain">
 					<span id="idPrograma-label" class="property-label"><g:message code="solicitudDetalle.idPrograma.label" default="Estado de cierre" /></span>
-					
+
 						<span class="property-value" aria-labelledby="idPrograma-label"><g:link controller="catPrograma" action="show" id="${solicitudDetalleInstance?.idPrograma?.id}">${solicitudDetalleInstance?.idPrograma?.encodeAsHTML()}</g:link></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${solicitudDetalleInstance?.idServcat}">
 				<li class="fieldcontain">
 					<span id="idServcat-label" class="property-label"><g:message code="solicitudDetalle.idServcat.label" default="Id Servcat" /></span>
-					
+
 						<span class="property-value" aria-labelledby="idServcat-label"><g:link controller="cat_servCat" action="show" id="${solicitudDetalleInstance?.idServcat?.id}">${solicitudDetalleInstance?.idServcat?.encodeAsHTML()}</g:link></span>
-					
+
 				</li>
 				</g:if>
-			
+
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
