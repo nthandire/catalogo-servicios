@@ -56,7 +56,7 @@
 
         <g:if test="${solicitudDetalleInstance?.idResguardoentregadetalle}">
         <li class="fieldcontain">
-          <span id="idResguardoentregadetalle-label" class="property-label"><g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Id Resguardoentregadetalle" /></span>
+          <span id="idResguardoentregadetalle-label" class="property-label"><g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Equipo" /></span>
             <span class="property-value" aria-labelledby="idResguardoentregadetalle-label">
               ${firmado.equipo(solicitudDetalleInstance.idResguardoentregadetalle)}
             </span>

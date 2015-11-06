@@ -7,7 +7,7 @@
 
 
 <div class="row-fluid">
-  <div class="span4 offset1">
+  <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
       <label for="idServcat">
         <g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
@@ -16,7 +16,16 @@
         value="${solicitudDetalleInstance?.idServcat}" disabled="true"/>
     </div>
   </div>
-  <div class="span6">
+  <div class="span4">
+    <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServSub', 'error')} ">
+      <label for="idServSub">
+        <g:message code="solicitudDetalle.idServSub.label" default="Subcategoría" />
+      </label>
+      <g:field id="idServSub" name="idServSub.id"
+        value="${solicitudDetalleInstance?.idServ.servSub}" disabled="true"/>
+    </div>
+  </div>
+  <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServ', 'error')} ">
       <label for="idServ">
         <g:message code="solicitudDetalle.idServ.label" default="Tercer nivel" />
