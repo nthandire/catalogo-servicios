@@ -41,23 +41,31 @@ class ServiciosService {
             or to_char(inventario) like ?)
     """
     def query2 = """
-      from ResguardoEntregaDetalle as d where d.observaciones = ?
+      from ResguardoEntregaDetalle as d where d.observaciones = '?'
     """
+    def query4 = """
+      from ResguardoEntregaDetalle d where d.id = 2
+    """
+    def query5 = """
+      from ResguardoEntregaDetalle
+    """
+
     // def clist = ResguardoEntregaDetalle.createCriteria().list(query)
     // def clist = ResguardoEntregaDetalle.find(query2,[codigos, "%" + term, term],
     //                                          [max: 50])
-    def clist = ResguardoEntregaDetalle.find(query2, ['CARGA IRI'],
-                                             [max: 50])
+    def clist = ResguardoEntregaDetalle.findAll(query5, [], [max: 15])
+      // ResguardoEntregaDetalle.find(query5, [], [max: 50])
+    log.debug("clist = ${clist}")
 
     def cSelectList = [] // to add each company details
     clist.each {
       def eqMap = [:] // add to map. jQuery autocomplete expects the JSON object to be with id/label/value.
-      eqMap.put("serie", it[5])
-      eqMap.put("label", "${it[3]} : ${it[4]}")
-      eqMap.put("value", it[0])
-      eqMap.put("marca", it[1]) // will use this to pre-populate the Emp Id
-      eqMap.put("modelo", it[2])
-      eqMap.put("economico", it[3])
+      eqMap.put("serie", it['serie'])
+      eqMap.put("label", "${it['inventario']} : ${it['descripcion']}")
+      eqMap.put("value", it['id'])
+      eqMap.put("marca", it['idMarca']) // will use this to pre-populate the Emp Id
+      eqMap.put("modelo", it['desModelo'])
+      eqMap.put("economico", it['inventario'])
       cSelectList.add(eqMap) // add to the arraylist
     }
     return cSelectList
