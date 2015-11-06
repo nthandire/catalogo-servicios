@@ -124,7 +124,7 @@ class SolicitudController {
             return
         }
         // Ir a edit maestro
-        flash.message = message(code: 'default.created.message.femenino',
+        flash.message = message(code: 'default.created.message',
           args: [message(code: 'solicitud.label', default: 'Solicitud'),
                  solicitudInstance.toString()]).minus(/""/)
         redirect(action: "edit", id: solicitudInstance.id)
@@ -234,7 +234,7 @@ class SolicitudController {
         def asunto = "La solicitud '${solicitudInstance}' requiere autorización"
         firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
 
-        flash.message = message(code: 'default.updated.message.femenino',
+        flash.message = message(code: 'default.updated.message',
                                 args: [message(code: 'solicitud.label',
                                                default: 'Solicitud'),
                                 solicitudInstance.toString()])
@@ -270,7 +270,7 @@ class SolicitudController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message.femenino',
+        flash.message = message(code: 'default.updated.message',
           args: [message(code: 'solicitud.label', default: 'Solicitud'),
                  solicitudInstance.toString()]).minus(/""/)
         redirect(action: "edit", id: solicitudInstance.id)
@@ -335,7 +335,7 @@ class SolicitudController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message.femenino', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "edit", id: id)
     }
 
