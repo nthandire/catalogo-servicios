@@ -4,11 +4,11 @@ import net.sf.jasperreports.engine.util.JRProperties
 class BootStrap {
 
   def init = { servletContext ->
-    JRProperties.setProperty("net.sf.jasperreports.awt.ignore.missing.font", "true")
-    JRProperties.setProperty("net.sf.jasperreports.default.font.name", "Helvetica")
-    JRProperties.setProperty("net.sf.jasperreports.default.pdf.font.name", "Helvetica")
-    JRProperties.setProperty("net.sf.jasperreports.default.pdf.encoding", "UTF-8")
-    JRProperties.setProperty("net.sf.jasperreports.default.pdf.embedded", "false")
+    // JRProperties.setProperty("net.sf.jasperreports.awt.ignore.missing.font", "true")
+    // JRProperties.setProperty("net.sf.jasperreports.default.font.name", "Helvetica")
+    // JRProperties.setProperty("net.sf.jasperreports.default.pdf.font.name", "Helvetica")
+    // JRProperties.setProperty("net.sf.jasperreports.default.pdf.encoding", "UTF-8")
+    // JRProperties.setProperty("net.sf.jasperreports.default.pdf.embedded", "true")
 
     if (Usuario.count() == 0) {
   /*

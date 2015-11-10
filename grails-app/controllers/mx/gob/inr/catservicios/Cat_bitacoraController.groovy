@@ -135,8 +135,8 @@ class Cat_bitacoraController {
   def reporteBitacoraSolicitudesDeCambio() {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
-    params.titulo = "REPORTE DE LA BITÁCORA DE CAMBIOS AL PORTAFOLIO DE SERVICIOS"
-    
+    params.titulo = "Bitácora de cambios al portafolio de servicios de TIC"
+
     def startDate = params.startDate
     startDate[Calendar.HOUR_OF_DAY] = 0
     startDate[Calendar.MINUTE] = 0
