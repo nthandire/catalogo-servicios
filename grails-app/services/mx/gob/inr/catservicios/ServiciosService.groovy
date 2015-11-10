@@ -71,4 +71,15 @@ class ServiciosService {
     return cSelectList
   }
 
+  def nombreEquipo(id){
+    log.debug("en nombreEquipo")
+
+    def equipo = ""
+    if (id) {
+      equipo = ResguardoEntregaDetalle.get(id).toString()
+    }
+    log.debug("equipo = $equipo")
+    equipo
+  }
+
 }

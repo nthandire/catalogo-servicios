@@ -9,6 +9,7 @@
 	</head>
 	<body>
 		<a href="#show-incidente" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+    <g:set var="servicios" bean="serviciosService"/>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -17,27 +18,27 @@
 		</div>
 		<div id="show-incidente" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			  <div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<g:if test="${flash.error}">
-			  <div class="errors" role="status">${flash.error}</div>
-			</g:if>
+      <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+      </g:if>
+      <g:if test="${flash.error}">
+        <div class="errors" role="status">${flash.error}</div>
+      </g:if>
 
-      <div class="row-fluid">
-        <div class="span4 offset1">
-          <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
-            <label for="idResguardoentregadetalle">
-              <g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
-            </label>
-            <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
-              from="${ResguardoEntregaDetalle.executeQuery(
-                'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
-                optionKey="id" class="many-to-one" noSelection="['': '']" disabled="true"
-                value="${solicitudDetalleInstance?.idResguardoentregadetalle}"/>
+      <g:if test="${incidenteInstance?.idResguardoentregadetalle}">
+        <div class="row-fluid">
+          <div class="span4">
+            <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
+              <label for="idResguardoentregadetalle">
+                <g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
+              </label>
+              <g:field id="idResguardoentregadetalle" name="idResguardoentregadetalle"
+                  disabled="true"
+                  value="${servicios.nombreEquipo(incidenteInstance?.idResguardoentregadetalle)}"/>
+            </div>
           </div>
         </div>
-      </div>
+			</g:if>
 
       <div class="row-fluid">
         <div class="span4">
@@ -133,17 +134,18 @@
 			</g:if>
 
       <div class="row-fluid">
-        <div class="span6">
+        <div class="span6 offset1">
           <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'descripcion', 'error')} ">
             <label for="descripcion">
               <g:message code="incidente.descripcion.label" default="Descripcion" />
             </label>
             <g:textArea name="descripcion" cols="40" rows="5" maxlength="3000"
+              style="width:550px;"
               value="${incidenteInstance?.descripcion}" disabled="true"/>
           </div>
         </div>
 
-        <div class="span6">
+        <div class="span5">
           <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'estado', 'error')} ">
             <label for="estado">
               <g:message code="incidente.estado.label" default="Estado" />
