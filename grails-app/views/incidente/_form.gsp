@@ -8,6 +8,7 @@
 
 
 <g:set var="firmado" bean="firmadoService"/>
+<%--
 <table class="table table-condensed">
   <tr>
     <td width="290px">
@@ -60,7 +61,7 @@
     </td>
   </tr>
 </table>
-
+--%>
 
 <div class="row-fluid">
   <div class="span4">

@@ -8,3 +8,5 @@ Pendientes
 - Revisar en todos los casos que el archivo no sea mayor a 5 M
 - En el menú, solo poner opciones si el rol del usuario lo permite (autorizar, vb)
 - En incidentes y solicitudes, cambiar el ancho de los combos para sub y tercer nivel,  style="width:350px;" y  style="width:300px;"
+- Agregar el tiempo de solución para el nivel actual.
+- Cuando se escala el servicio no muestra las acciones realizadas en niveles anteriores.
