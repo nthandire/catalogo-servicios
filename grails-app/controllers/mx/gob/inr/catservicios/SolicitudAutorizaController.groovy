@@ -199,25 +199,26 @@ Su solicitud de Servicio de Tecnologías de la Información realizada el ${fecha
         def correo = persona.correo ?: grailsApplication.config.correo.general
         firmadoService.sendMail(correo, asunto, msg)
 
-        if (estado == 'A' as char) {
-          def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_COORDINADOR_DE_GESTION")}
-          def gestores = UsuarioRol.withNewSession {UsuarioRol.findAllByRol(rolGestor)["usuario"]}
-          log.debug("gestores = ${gestores}")
+        // TODO: Quitar.
+        // if (estado == 'A' as char) {
+        //   def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_COORDINADOR_DE_GESTION")}
+        //   def gestores = UsuarioRol.withNewSession {UsuarioRol.findAllByRol(rolGestor)["usuario"]}
+        //   log.debug("gestores = ${gestores}")
 
-          def liga = createLink(controller:"solicitudGestion", action: "show",
-                                id: solicitudInstance.id, absolute: "true")
-          log.debug("liga = $liga")
+        //   def liga = createLink(controller:"solicitudGestion", action: "show",
+        //                         id: solicitudInstance.id, absolute: "true")
+        //   log.debug("liga = $liga")
 
-          gestores.each {
-            msg = "Hola ${it} <br/><br/>La solicitud folio " +
-              "${solicitudInstance} (${solicitudInstance.justificacion}) " +
-              "ya fue autorizada, debe atenderla a la brevedad.<br/><br/>" +
-              "Utilice la liga siguiente para revisarla. <br/><br/>" +
-              "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
-            correo = it.correo ?: grailsApplication.config.correo.general
-            firmadoService.sendMailHTML(correo, asunto, msg)
-          }
-        }
+        //   gestores.each {
+        //     msg = "Hola ${it} <br/><br/>La solicitud folio " +
+        //       "${solicitudInstance} (${solicitudInstance.justificacion}) " +
+        //       "ya fue autorizada, debe atenderla a la brevedad.<br/><br/>" +
+        //       "Utilice la liga siguiente para revisarla. <br/><br/>" +
+        //       "<a href='${liga}'>Solicitud: ${solicitudInstance}</a>"
+        //     correo = it.correo ?: grailsApplication.config.correo.general
+        //     firmadoService.sendMailHTML(correo, asunto, msg)
+        //   }
+        // }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "list")

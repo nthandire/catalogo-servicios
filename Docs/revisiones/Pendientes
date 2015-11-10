@@ -10,3 +10,8 @@ Pendientes
 - En incidentes y solicitudes, cambiar el ancho de los combos para sub y tercer nivel,  style="width:350px;" y  style="width:300px;"
 - Agregar el tiempo de solución para el nivel actual.
 - Cuando se escala el servicio no muestra las acciones realizadas en niveles anteriores.
+- Un solo correo de notificación de la autorización al solicitante, mencionando categoria, tiempo de atención
+Servicio: Categoría/ Subcategoría/ Categoría de 3er nivel: xx xx  tiempo de solución.
+PE:
+Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Social/Alta de cuenta de usuario: 60 minutos de tiempo de solución.
+
