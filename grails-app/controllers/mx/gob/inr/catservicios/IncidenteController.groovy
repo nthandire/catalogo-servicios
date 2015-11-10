@@ -423,6 +423,22 @@ class IncidenteController {
           return
       }
 
+            def solicitante = Usuario.get(incidenteInstance.idReporta)
+            def liga = createLink(controller:"SolicitudEncuesta", action: "editIncidente",
+                                  id: incidenteInstance.id, absolute: "true")
+            log.debug("liga = ${liga}")
+            def asunto = "El incidente ${incidenteInstance} ya ha sido atendida"
+            def cuerpoCorreo = """Hola ${solicitante}<br/><br/>
+
+Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad del servicio se solicita conteste la siguiente encuesta, usando la siguiente liga:<br/><br/>
+
+<a href='${liga}'>${incidenteInstance}</a>
+              """
+
+            def correo = solicitante.correo ?: grailsApplication.config.correo.general
+            firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
+
+
       flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
       redirect(action: "list")
     }
