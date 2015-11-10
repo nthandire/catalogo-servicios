@@ -1,7 +1,7 @@
 package mx.gob.inr.catservicios
 
 class Cat_bitacora {
-  Integer folio // TODO: El sistema la debe generar, reinicio por año. Se debe mostrar con relación al año ##/2015
+  Integer folio
   String descripcion
   Date lastUpdated
   Integer idUsuario
@@ -20,15 +20,14 @@ class Cat_bitacora {
 
   static mapping = {
     table 'cat_serv_hist'
-    id column:'id_servhist'
+    id column:'id_servhist', generator: 'increment'
     servicio column:'id_serv'
-    id generator: 'increment'
     lastUpdated column:'fecha_modificacion'
     version false
   }
 
   String toString() {
-    "Solicitud de Cambio ${folio}"
+    "${folio}/${lastUpdated[Calendar.YEAR]}"
   }
 
 }

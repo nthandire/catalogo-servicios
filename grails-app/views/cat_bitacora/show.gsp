@@ -36,7 +36,7 @@
 		<g:message code="cat_bitacora.folio.label" default="Folio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="folio" type="number" value="${cat_bitacoraInstance.folio}" disabled="true"/>
+	<g:field name="folio" type="text" value="${cat_bitacoraInstance}" disabled="true"/>
 </div>
 		</td>
 

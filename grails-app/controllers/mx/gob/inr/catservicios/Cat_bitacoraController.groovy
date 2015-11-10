@@ -2,6 +2,7 @@ package mx.gob.inr.catservicios
 
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
+import groovy.time.TimeCategory
 
 @Secured(['ROLE_SAST_ADMIN'])
 class Cat_bitacoraController {
@@ -28,6 +29,29 @@ class Cat_bitacoraController {
         def cat_bitacoraInstance = new Cat_bitacora(params)
         cat_bitacoraInstance.idUsuario = springSecurityService.principal.id
         cat_bitacoraInstance.ipTerminal = request.getRemoteAddr()
+
+
+        // Asignarle el siguiente folio dentro del año
+        def startDate = new Date().clearTime()
+        startDate[Calendar.MONTH] = 0
+        startDate[Calendar.DATE] = 1
+        log.debug("startDate = $startDate")
+        def endDate = startDate.clone()
+        use(TimeCategory) {
+          endDate = endDate + 1.years - 1.seconds
+        }
+        log.debug("endDate = $endDate")
+
+        def maxID = Cat_bitacora.withCriteria { // TODO: un test para ver si este algoritmo sique funcionando
+          between("lastUpdated", startDate, endDate)
+          projections {
+            max "folio"
+          }
+        }[0] ?: 0
+        log.debug("maxID = $maxID")
+
+        cat_bitacoraInstance.folio = ++maxID
+
         if (!cat_bitacoraInstance.save(flush: true)) {
             render(view: "create", model: [cat_bitacoraInstance: cat_bitacoraInstance])
             return

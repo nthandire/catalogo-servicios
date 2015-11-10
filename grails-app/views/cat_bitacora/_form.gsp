@@ -9,21 +9,6 @@
 <table class="table table-condensed">
 	<tr>
 		<td>
-<div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'folio', 'error')} required">
-	<label for="folio">
-		<g:message code="cat_bitacora.folio.label" default="Folio" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="folio" type="number" value="${cat_bitacoraInstance.folio}" required=""/>
-</div>
-		</td>
-
-		<td colspan="2">
-		</td>
-
-	</tr>
-	<tr>
-		<td>
 
 <div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servicio', 'error')} required">
 	<label>

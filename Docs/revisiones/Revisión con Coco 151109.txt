@@ -3,7 +3,7 @@ Revisión con Coco 9 de noviembre.
 
 
 
-- 1.- En bitacora de cambios, que el folio sea automatico
++ 1.- En bitacora de cambios, que el folio sea automatico
 > 2.- En la bitacora de cambios, agregar campos para tipo de solicitud (incidente, requerimiento, problema)
 > 3.- En la bitacora de cambios, agregar campos para tipo de cambio, (alta, modificación o baja)
 - 4.- En la bitacora de cambios, no esta poniendo como obligatorio los campos de la categoria, sub y tercer nivel

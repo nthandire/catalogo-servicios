@@ -26,27 +26,27 @@
 			<table>
 				<thead>
 					<tr>
-					
+
 						<g:sortableColumn property="folio" title="${message(code: 'cat_bitacora.folio.label', default: 'Folio')}" />
-					
+
 						<th><g:message code="cat_bitacora.servicio.label" default="Servicio" /></th>
-					
+
 						<g:sortableColumn property="descripcion" title="${message(code: 'cat_bitacora.descripcion.label', default: 'Descripcion')}" />
-					
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${cat_bitacoraInstanceList}" status="i" var="cat_bitacoraInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="show" id="${cat_bitacoraInstance.id}">
-									${cat_bitacoraInstance.folio}
+									${cat_bitacoraInstance}
 						</g:link></td>
-					
+
 						<td>${fieldValue(bean: cat_bitacoraInstance, field: "servicio")}</td>
-					
+
 						<td>${fieldValue(bean: cat_bitacoraInstance, field: "descripcion")}</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>
