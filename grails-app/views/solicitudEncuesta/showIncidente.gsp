@@ -26,17 +26,6 @@
 
       <div class="row-fluid">
         <div class="span4 offset1">
-          <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idSistema', 'error')} ">
-            <label for="idSistema">
-              <g:message code="incidente.idSistema.label" default="Sistema" />
-            </label>
-            <g:select id="idSistema" name="idSistema.id" from="${CatSistema.list()}"
-              optionKey="id" value="${incidenteInstance?.idSistema?.id}"
-              class="many-to-one" noSelection="['': '']" disabled="true"/>
-          </div>
-        </div>
-
-        <div class="span4 offset1">
           <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idResguardoentregadetalle', 'error')} ">
             <label for="idResguardoentregadetalle">
               <g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
@@ -85,7 +74,7 @@
         <div class="span4">
           <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
             <label for="idServ">
-              <g:message code="cat_bitacora.servicio.label" default="Servicio" />
+              <g:message code="cat_serv.label" default="Servicio" />
               <span class="required-indicator">*</span>
             </label>
             <span id="serviciosContainer">
@@ -131,7 +120,7 @@
         <div class="span4">
           <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServfinal', 'error')}">
             <label for="idServfinal">
-              <g:message code="cat_bitacora.servicio.final.label" default="Servicio final" />
+              <g:message code="cat_serv.label" default="Servicio final" /> final
             </label>
             <span id="serviciosContainerFinal">
             <g:select id='idServfinal' name='idServfinal.id' disabled="true"
@@ -209,7 +198,7 @@
 
       <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'p02', 'error')} ">
         <label for="p02">
-          <span id="p02-label" class="property-label"><g:message code="solicitud.p03.label" default="P02" /></span>
+          <span id="p02-label" class="property-label"><g:message code="solicitud.p02.label" default="P02" /></span>
         </label>
         <g:select name="p02" disabled="true"
           from="${[1,2]}" style="width: 60px"

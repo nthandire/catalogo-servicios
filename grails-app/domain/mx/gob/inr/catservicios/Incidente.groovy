@@ -2,7 +2,6 @@ package mx.gob.inr.catservicios
 
 class Incidente {
 
-	CatSistema idSistema
 	Long idResguardoentregadetalle
 	Date fechaIncidente
 	Integer numeroIncidente
@@ -41,7 +40,6 @@ class Incidente {
 
 	static mapping = {
 		id column: "id_incidente", generator: "increment"
-		idSistema column: "id_sistema"
 		estado column: "estado_incidente"
 		idServ column:'id_serv'
 		idServfinal column:'id_servfinal'
@@ -52,7 +50,6 @@ class Incidente {
 	}
 
 	static constraints = {
-		idSistema nullable: true
 		idResguardoentregadetalle nullable: true
 		fechaIncidente nullable: true
 		numeroIncidente nullable: true
