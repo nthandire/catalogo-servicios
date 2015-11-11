@@ -10,12 +10,17 @@
 	<tr>
 		<td>
 
-<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servicio', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: cat_servInstance, field: 'servicio', 'error')}">
 	<label>
 		<g:message code="cat_serv.servCat.label" default="Cat" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servCat" name="servCat.id" from="${Cat_servCat.list()}" optionKey="id" required="" value="${cat_bitacoraInstance?.servicio?.servSub?.servCat?.id}" class="many-to-one" onchange="categoryChanged(this.value)" noSelection="${['null':'Seleccione una...']}"/>
+	<g:select id="servCat" name="servCat.id" required="true"
+    from="${Cat_servCat.list()}"
+    optionKey="id" class="many-to-one"
+    value="${cat_bitacoraInstance?.servicio?.servSub?.servCat?.id}"
+    onchange="categoryChanged(this.value)"
+    noSelection="${['':'Seleccione una...']}"/>
 </div>
 
 		</td>
