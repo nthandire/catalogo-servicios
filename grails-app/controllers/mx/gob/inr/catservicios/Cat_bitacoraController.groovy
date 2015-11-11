@@ -179,6 +179,7 @@ class Cat_bitacoraController {
         categoria:it.servicio?.servSub?.servCat?.categoria,
         descripcion:it.descripcion,
         observaciones:it.descripcion,
+        responsable:Usuario.get(it.idUsuario),
       )
       data.add(rowBitacora)
     }
@@ -195,4 +196,5 @@ class RptBitacora {
     String subcategoria
     String descripcion
     String observaciones
+    String responsable
 }

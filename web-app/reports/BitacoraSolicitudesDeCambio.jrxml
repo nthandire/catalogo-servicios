@@ -16,6 +16,7 @@
 	<field name="num_solicitud" class="java.lang.Integer"/>
 	<field name="subcategoria" class="java.lang.String"/>
 	<field name="observaciones" class="java.lang.String"/>
+	<field name="responsable" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -147,6 +148,10 @@
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="513" y="10" width="77" height="41" uuid="ce7b328d-302e-43be-b0db-01820f875e4c"/>
+				<textFieldExpression><![CDATA[$F{responsable}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
