@@ -75,4 +75,16 @@
 
 		</td>
 	</tr>
+<%-- // TODO: Quitar.
+   <tr>
+     <td colspan="3">
+      <div class="fieldtablecontain ${hasErrors(bean: cat_bitacoraInstance, field: 'observaciones', 'error')} ">
+       <label for="observaciones">
+         <g:message code="cat_bitacora.observaciones.label" default="Solución" />
+       </label>
+       <g:textArea name="observaciones" cols="40" rows="5" maxlength="3000" value="${cat_bitacoraInstance?.observaciones}"/>
+      </div>
+     </td>
+   </tr>
+--%>
 </table>

@@ -140,7 +140,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement x="673" y="10" width="129" height="41" uuid="bd76d4c4-cd78-45fe-bd42-df844078e9bf"/>
-				<textFieldExpression><![CDATA[$F{servicio}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="593" y="10" width="75" height="41" uuid="87a60b42-d169-4a49-bdd3-16d8da66db36"/>
