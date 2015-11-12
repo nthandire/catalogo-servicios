@@ -1,12 +1,17 @@
-select u.idusuario, u.nombre, u.paterno, u.materno, u.rfc, p.desc_perfil, p.idperfil
+Para refrescar una página
+<meta http-equiv="refresh" content="300">
+
+select u.rfc, u.idusuario, u.nombre, u.paterno, u.materno, p.desc_perfil, p.idperfil
   from usuario u,
        usuario_perfil up,
        perfil p
  where p.idperfil >= 56
-   --and u.idusuario in (9584,9585,6558,9586,9583)
    and p.idperfil = up.idperfil
    and up.idusuario = u.idusuario
  order by u.idusuario;
+
+
+
 idusuario nombre  paterno materno rfc desc_perfil idperfil
 6558  SUPER - USUARIO PRUEBA      SAIH940101  ROLE_SAST_ADMIN 57
 6558  SUPER - USUARIO PRUEBA      SAIH940101  ROLE_SAST_USUARIO 58

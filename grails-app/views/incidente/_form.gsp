@@ -8,82 +8,110 @@
 
 
 <g:set var="firmado" bean="firmadoService"/>
-<%--
+<g:set var="servicios" bean="serviciosService"/>
 <table class="table table-condensed">
-  <tr>
-    <td width="290px">
-      &nbsp;
-    </td>
-    <td>
-      <label for="cpuauto">Inventario o Número de Serie</label>
-      <g:textField id="cpuauto" name="cpuauto" style="width: 250px;" />
-    </td>
-    <td>
-      <div id="area" style="visibility: hidden">
-        <label for="nombreArea">Area</label>
-        <g:textField name="nombreArea" style="width: 250px;text-transform: uppercase;" />
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>
-        <label for="equipo"><g:message code="servicios.equipo.label" default="Equipo" /></label>
-        <g:textField name="equipo" value="${serviciosInstance?.equipo}" required="" readonly="true" style="width: 250px;text-transform: uppercase;"/>
-    </td>
-    <td>
-        <label for="marca">
-          <g:message code="servicios.marca.label" default="Marca" />
-        </label>
-        <g:textField name="marca" value="${serviciosInstance?.marca}" required="" readonly="true" style="width: 250px;text-transform: uppercase;"/>
-    </td>
-    <td>
-        <label for="modelo">
-          <g:message code="servicios.modelo.label" default="Modelo" />
-        </label>
-        <g:textField name="modelo" value="${serviciosInstance?.modelo}" required="" readonly="true" style="width: 250px;text-transform: uppercase;"/>
-    </td>
-  </tr>
-  <tr>
-    <td>
-        <label for="serie">
-          <g:message code="servicios.serie.label" default="Serie" />
-          <span class="required-indicator">*</span>
-        </label>
-        <g:textField name="serie" value="${serviciosInstance?.serie}" required="" readonly="true" style="width: 250px;text-transform: uppercase;" />
-    </td>
-    <td>
-        <label for="economico">
-          <g:message code="servicios.economico.label" default="Economico" />
-        </label>
-        <g:textField name="economico" value="${serviciosInstance?.economico}" readonly="true" style="width: 250px;"/>
-    </td>
-    <td>
-    </td>
-  </tr>
+  <g:if test="${!incidenteInstance?.id}">
+    <tr>
+      <td width="290px">
+        &nbsp;
+      </td>
+      <td>
+        <label for="cpuauto">Inventario o Número de Serie</label>
+        <g:textField id="cpuauto" name="idResguardoentregadetalle" style="width: 250px;" />
+      </td>
+      <td>
+        <div id="area" style="visibility: hidden">
+          <label for="nombreArea">Area</label>
+          <g:textField name="nombreArea" style="width: 250px;text-transform: uppercase;" />
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+          <label for="equipo"><g:message code="servicios.equipo.label" default="Equipo" /></label>
+          <g:textField name="equipo" value="${serviciosInstance?.equipo}"
+            readonly="true" style="width: 250px;text-transform: uppercase;"/>
+      </td>
+      <td>
+          <label for="marca">
+            <g:message code="servicios.marca.label" default="Marca" />
+          </label>
+          <g:textField name="marca" value="${serviciosInstance?.marca}"
+            readonly="true" style="width: 250px;text-transform: uppercase;"/>
+      </td>
+      <td>
+          <label for="modelo">
+            <g:message code="servicios.modelo.label" default="Modelo" />
+          </label>
+          <g:textField name="modelo" value="${serviciosInstance?.modelo}"
+            readonly="true" style="width: 250px;text-transform: uppercase;"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+          <label for="serie">
+            <g:message code="servicios.serie.label" default="Serie" />
+            <span class="required-indicator">*</span>
+          </label>
+          <g:textField name="serie" value="${serviciosInstance?.serie}"
+            readonly="true" style="width: 250px;text-transform: uppercase;" />
+      </td>
+      <td>
+          <label for="economico">
+            <g:message code="servicios.economico.label" default="Economico" />
+          </label>
+          <g:textField name="economico" value="${serviciosInstance?.economico}" readonly="true" style="width: 250px;"/>
+      </td>
+      <td>
+      </td>
+    </tr>
+  </g:if>
+  <g:elseif test="$incidenteInstance.idResguardoentregadetalle">
+    <g:set var="equipo"
+      value="${ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle)}" />
+    <tr>
+      <td>
+          <label for="equipo"><g:message code="servicios.equipo.label" default="Equipo" /></label>
+          <g:textField name="equipo" value="${equipo.descripcion}"
+            readonly="true" style="width: 250px;text-transform: uppercase;"/>
+      </td>
+      <td>
+          <label for="marca">
+            <g:message code="servicios.marca.label" default="Marca" />
+          </label>
+          <g:textField name="marca" value="${servicios.descMarca(equipo.idMarca)}"
+            readonly="true" style="width: 250px;text-transform: uppercase;"/>
+      </td>
+      <td>
+          <label for="modelo">
+            <g:message code="servicios.modelo.label" default="Modelo" />
+          </label>
+          <g:textField name="modelo" value="${equipo.desModelo}"
+            readonly="true" style="width: 250px;text-transform: uppercase;"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+          <label for="serie">
+            <g:message code="servicios.serie.label" default="Serie" />
+            <span class="required-indicator">*</span>
+          </label>
+          <g:textField name="serie" value="${equipo.serie}"
+            readonly="true" style="width: 250px;text-transform: uppercase;" />
+      </td>
+      <td>
+          <label for="economico">
+            <g:message code="servicios.economico.label" default="Economico" />
+          </label>
+          <g:textField name="economico" value="${equipo.inventario}" readonly="true" style="width: 250px;"/>
+      </td>
+      <td>
+      </td>
+    </tr>
+  </g:elseif>
 </table>
---%>
 
 <div class="row-fluid">
-  <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance,
-        field: 'idResguardoentregadetalle', 'error')} ">
-      <label for="idResguardoentregadetalle">
-        <g:message code="incidente.idResguardoentregadetalle.label" default="Equipo" />
-      </label>
-      <g:if test="${!incidenteInstance.idResguardoentregadetalle}">
-        <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
-          from="${ResguardoEntregaDetalle.executeQuery(
-            'from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
-            optionKey="id" class="many-to-one" noSelection="['': '']"
-            value="${incidenteInstance?.idResguardoentregadetalle}"/>
-      </g:if>
-      <g:else>
-        <g:field id="idResguardoentregadetalle-show" name="idResguardoentregadetalle-show"
-          disabled="true" value="${ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle)}"/>
-      </g:else>
-    </div>
-  </div>
-
   <div class="span4">
     <g:if test="${!incidenteInstance.idReporta}">
       <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
