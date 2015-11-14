@@ -47,6 +47,10 @@ grails.project.dependency.resolution = {
 
     // runtime 'mysql:mysql-connector-java:5.1.22'
     compile ('cglib:cglib-nodep:2.2')
+    compile('com.google.visualization:visualization-datasource:1.1.1') {
+      exclude (group: 'commons-logging', name: 'commons-logging')
+      exclude (group: 'commons-lang', name: 'commons-lang')
+    }
   }
 
   plugins {
@@ -55,6 +59,7 @@ grails.project.dependency.resolution = {
       runtime ":resources:1.2"
       runtime ":twitter-bootstrap:2.3.2"
       runtime ":database-migration:1.3.2"
+      runtime ":google-visualization:0.5.6"
 
       // Uncomment these (or add new ones) to enable additional resources capabilities
       //runtime ":zipped-resources:1.0"
@@ -68,8 +73,10 @@ grails.project.dependency.resolution = {
       compile ":jquery-ui:1.10.4"
       compile ':cache:1.0.1'
       compile ':spring-security-core:1.2.7.3'
+      compile ":webxml:1.4.1"
       compile ":jasper:1.11.0"
       compile ":mail:1.0.7"
+      compile ":easygrid:1.4.1"
   }
 
   environments {
