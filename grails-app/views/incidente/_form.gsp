@@ -58,7 +58,7 @@
       </td>
       <td>
           <label for="economico">
-            <g:message code="servicios.economico.label" default="Economico" />
+            <g:message code="servicios.economico.label" default="Inventario" />
           </label>
           <g:textField name="economico" value="${serviciosInstance?.economico}" readonly="true" style="width: 250px;"/>
       </td>
@@ -101,7 +101,7 @@
       </td>
       <td>
           <label for="economico">
-            <g:message code="servicios.economico.label" default="Economico" />
+            <g:message code="servicios.economico.label" default="Inventario" />
           </label>
           <g:textField name="economico" value="${equipo.inventario}" readonly="true" style="width: 250px;"/>
       </td>

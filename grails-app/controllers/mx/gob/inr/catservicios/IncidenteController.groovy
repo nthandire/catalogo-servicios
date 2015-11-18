@@ -499,7 +499,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
       def liga = createLink(controller:"Incidente", action: "edit",
                             id: incidenteInstance.id, absolute: "true")
       log.debug("liga = ${liga}")
-      def asunto = "El incidente ${incidenteInstance} a sido asignado a usted"
+      def asunto = "El incidente ${incidenteInstance} ha sido asignado a usted"
       def msg = "Hola ${tecnico}<br/><br/>El incidente folio: " +
         "${incidenteInstance} requiere atención. " +
         "Atiendela utilizando la siguiente liga: <br/><br/>" +
