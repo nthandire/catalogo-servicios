@@ -34,7 +34,7 @@
        </g:if>
 
         <div class="row-fluid">
-          <div class="span3">
+          <div class="span4">
             <li class="fieldcontain">
               <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Solicitante" /></span>
               <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idSolicitante)}</span>
@@ -52,10 +52,10 @@
             </li>
           </div>
 
-          <div class="span3">
+          <div class="span2">
             <li class="fieldcontain">
               <span id="telefono-label" class="property-label">
-                <g:message code="solicitud.telefono.label" default="Extensión" />
+                <g:message code="solicitud.telefono.label" default="Ext:" />
               </span>
                 <span class="property-value" aria-labelledby="telefono-label">
                   ${Usuario.get(solicitudInstance?.idSolicitante).extension}
@@ -76,7 +76,7 @@
         </div>
 
         <div class="row-fluid">
-          <div class="span3">
+          <div class="span4">
             <li class="fieldcontain">
               <span id="nombre-label" class="property-label"><g:message code="solicitud.nombre.label" default="Autorizador" /></span>
               <span class="property-value" aria-labelledby="nombre-label">${Usuario.get(solicitudInstance?.idAutoriza)}</span>
@@ -94,10 +94,10 @@
             </li>
           </div>
 
-          <div class="span3">
+          <div class="span2">
             <li class="fieldcontain">
               <span id="telefono-label" class="property-label">
-                <g:message code="solicitud.telefono.label" default="Extensión" />
+                <g:message code="solicitud.telefono.label" default="Ext:" />
               </span>
                 <span class="property-value" aria-labelledby="telefono-label">
                   ${Usuario.get(solicitudInstance?.idAutoriza).extension}
