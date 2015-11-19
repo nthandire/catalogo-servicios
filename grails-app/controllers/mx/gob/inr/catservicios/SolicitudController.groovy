@@ -255,7 +255,10 @@ class SolicitudController {
                 solicitudInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'solicitud.label', default: 'Solicitud')] as Object[],
                           "Alguien más ha modificado esta Solicitud mientras usted la estaba editando")
-                render(view: "edit", model: [solicitudInstance: solicitudInstance])
+                render(view: "edit", model: [solicitudInstance: solicitudInstance,
+                                             autorizadores:listaDeAutorizadores(),
+                                             categorias: categorias(),
+                                             equipos: equipos()])
                 return
             }
         }
@@ -265,8 +268,23 @@ class SolicitudController {
         log.debug("paramsFiltrado = $paramsFiltrado")
         solicitudInstance.properties = paramsFiltrado
 
+        if (solicitudInstance.justificacion) {
+          solicitudInstance.justificacion = solicitudInstance.justificacion.trim()
+        }
+        if (!(solicitudInstance.justificacion)) {
+          flash.error = "Debe capturar la justificación"
+          render(view: "edit", model: [solicitudInstance: solicitudInstance,
+                                       autorizadores:listaDeAutorizadores(),
+                                       categorias: categorias(),
+                                       equipos: equipos()])
+          return
+        }
+
         if (!solicitudInstance.save(flush: true)) {
-            render(view: "edit", model: [solicitudInstance: solicitudInstance])
+            render(view: "edit", model: [solicitudInstance: solicitudInstance,
+                                         autorizadores:listaDeAutorizadores(),
+                                         categorias: categorias(),
+                                         equipos: equipos()])
             return
         }
 
