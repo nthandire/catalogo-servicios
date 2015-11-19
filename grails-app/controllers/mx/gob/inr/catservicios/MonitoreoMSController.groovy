@@ -24,33 +24,69 @@ class MonitoreoMSController {
       inlineEdit false
       columns {
         numeroSolicitud {
-          value { det ->
-            det.idSolicitud.toString()
+          value { it.idSolicitud.toString() }
+          enableFilter false
+          jqgrid {
+            sortable false
           }
         }
-        inicioatencion { value { it.idSolicitud.fechaAutoriza } }
+        inicioatencion { value { it.idSolicitud.fechaAutoriza }
+          label """<div style="height: auto; padding: 4px 0;"><span>Fecha del inicio</span><br/><span>de la Atención</span></div>"""
+          enableFilter false
+          jqgrid {
+              sortable false
+          }
+        }
         solicitante {
           value { Usuario.get(it.idSolicitud.idSolicitante).toString() }
+          enableFilter false
+          jqgrid {
+              sortable false
+          }
         }
         area {
           value { firmadoService.areaNombre(it.idSolicitud.idSolicitante) }
+          enableFilter false
+          jqgrid {
+              sortable false
+          }
         }
         extension {
           value { Usuario.get(it.idSolicitud.idSolicitante).extension }
+          enableFilter false
+          jqgrid {
+              sortable false
+          }
         }
-        categoria { value { it.idServcat.toString() } }
-        subcategoria { value { it?.idServ?.servSub?.toString() } }
-        idServ { value { it?.idServ?.toString() } }
+        categoria { value { it.idServcat.toString() }
+          enableFilter false
+          jqgrid {
+              sortable false
+          }
+        }
+        subcategoria { value { it?.idServ?.servSub?.toString() }
+          enableFilter false
+          jqgrid {
+              sortable false
+          }
+        }
+        idServ { value { it?.idServ?.toString() }
+          enableFilter false
+          jqgrid {
+              sortable false
+          }
+        }
         estado {
           value { it.idSolicitud.estado ?
             g.message(code:"solicitud.estado.${it.idSolicitud.estado}") :
             "Pendiente de firmar por el solicitante"}
+          enableFilter false
+          jqgrid {
+              sortable false
+          }
         }
       }
     }
-
-            // justificacion
-            // estado
 
 
 

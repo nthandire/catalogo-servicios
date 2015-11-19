@@ -5,8 +5,10 @@
     <meta name="layout" content="main">
     <meta http-equiv="refresh" content="300">
     <g:set var="entityName" value="${message(code: 'author.label', default: 'Requerimientos')}"/>
-
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <style type="text/css">
+    .ui-jqgrid .ui-jqgrid-labels .ui-th-column>div {height: auto}
+    </style>
 </head>
 
 <body>

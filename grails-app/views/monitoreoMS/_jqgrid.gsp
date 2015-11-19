@@ -13,6 +13,6 @@
 <r:require modules="easygrid-jqgrid-dev,export"/>
 
 <grid:grid id='jqgridinitial' name='requerimientos' jqgrid.caption="'Requerimientos'" jqgrid.width='"1200"' columns.name.jqgrid.formatter='customWikiFormat'/>
-
+<%--
 <grid:exportButton name='requerimientos'/>
-
+--%>
