@@ -113,19 +113,24 @@
 
 <div class="row-fluid">
   <div class="span4">
-    <g:if test="${!incidenteInstance.idReporta}">
-      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
-       <label for="idReporta">
-         <g:message code="incidente.idReporta.label" default="Quien Reporta" />
-       </label>
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
+      <label for="idReporta">
+        <g:message code="incidente.idReporta.label" default="Quien Reporta" />
+      </label>
+      <g:if test="${!incidenteInstance.id}">
         <%-- TODO: mejorar el select, solo los usuarios SAST --%>
         <g:select id="idReporta" name="idReporta"
           from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
           required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
           noSelection="${['':'Seleccione una...']}" optionKey="id"
           optionValue="nombreMostrar"/>
-      </div>
-    </g:if>
+      </g:if>
+      <g:else>
+        <g:field id="idReportaShow" name="idReportaShow"
+          value="${Usuario.get(incidenteInstance?.idReporta)}"
+          readonly="true"/>
+      </g:else>
+    </div>
   </div>
 </div>
 

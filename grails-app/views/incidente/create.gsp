@@ -29,7 +29,21 @@
         </g:eachError>
       </ul>
       </g:hasErrors>
-      <g:form action="save" >
+
+      <script>
+        function validar() {
+          var x = document.getElementById("cpuauto").value;
+          if (isNaN(x)) {
+            alert("El Equipo debe ser un numero")
+            document.getElementById("cpuauto").focus();
+            return false
+          }
+          return true
+        }
+      </script>
+
+
+      <g:form action="save" onsubmit="return validar()">
         <fieldset class="form">
           <g:render template="form"/>
 

@@ -88,6 +88,13 @@ class IncidenteController {
         def firmaTeclada = params['passwordfirma']
         def firma = Firmadigital.findById(userID)?.passwordfirma
 
+        if (incidenteInstance.idResguardoentregadetalle &&
+            !(ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle))) {
+          flash.error = "No escogio el equipo de la lista"
+          render(view: "create", model: [incidenteInstance: incidenteInstance])
+          return
+        }
+
         if (firmaTeclada != firma) {
           flash.error = "Error en contaseña"
           render(view: "create", model: [incidenteInstance: incidenteInstance])
