@@ -26,6 +26,9 @@ class MonitoreoMSController {
         numeroSolicitud {
           value { it.idSolicitud.toString() }
           enableFilter false
+          // filterClosure { Filter filter ->
+          //   eq('idSolicitud.numeroSolicitud', "%${filter.paramValue}%")
+          // }
           jqgrid {
             sortable false
           }
@@ -70,13 +73,16 @@ class MonitoreoMSController {
               sortable false
           }
         }
-        idServ { value { it?.idServ?.toString() }
+        idServ {
+          label """<div style="height: auto; padding: 4px 0;"><span>Categoría de</span><br/><span>Tercer nivel</span></div>"""
+          value { it?.idServ?.toString() }
           enableFilter false
           jqgrid {
               sortable false
           }
         }
         estado {
+          label """<div style="height: auto; padding: 4px 0;"><span>Estado del</span><br/><span>requerimiento</span></div>"""
           value { it.idSolicitud.estado ?
             g.message(code:"solicitud.estado.${it.idSolicitud.estado}") :
             "Pendiente de firmar por el solicitante"}
