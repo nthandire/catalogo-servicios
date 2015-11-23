@@ -10,27 +10,17 @@ class ServiciosService {
 
   @Transactional(readOnly = true)
   def listarEquipo(params){
-    def term = params.term.toUpperCase()
+    def term = params.term.toUpperCase().trim()
     log.debug("en listarEquipo, term = $term")
 
     def codigos = ResguardoEntrega.findAllByCodigoLike("515%").collect {it.id}
     log.debug("número de codigos = ${codigos.size()}")
-    log.debug("codigos = ${codigos}")
-    log.debug("esta (12 as Long) = ${(12 as Long) in codigos}")
-    log.debug("esta (144 as Long) = ${(144 as Long) in codigos}")
-    log.debug("esta 144 = ${codigos[143] in codigos}")
-    log.debug("tipo de 144 = ${codigos[143].getClass()}")
-    log.debug("tercero = ${codigos[2]}")
-    log.debug("143 = ${codigos[143]}")
-    log.debug("200 = ${codigos[200]}")
-    log.debug("290 = ${codigos[290]}")
-    log.debug("295 = ${codigos[295]}")
 
     def MAX_EQUIPOS = 2 // Es el consecutivo maximo a considerar,
       // TODO. aplicar un orden -  order("inventario","asc")
     def query =
        "  from ResguardoEntregaDetalle as d     " +
-       " where d.id in (:codigos)               " +
+       " where d.idResguardo.id in (:codigos)               " +
        "   and d.consecutivo <= ${MAX_EQUIPOS}  " +
        "   and (serie like :serie               " +
        "        or inventario = :inventario)    "
