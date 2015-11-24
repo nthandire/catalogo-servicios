@@ -1,36 +1,68 @@
 <%@ page import="mx.gob.inr.catservicios.*" %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta name="layout" content="main">
-    <meta http-equiv="refresh" content="300">
-    <g:set var="entityName" value="${message(code: 'author.label', default: 'Requerimientos')}"/>
-    <title><g:message code="default.list.label" args="[entityName]"/></title>
-    <style type="text/css">
-    .ui-jqgrid .ui-jqgrid-labels .ui-th-column>div {height: auto}
-    </style>
-</head>
+	<head>
+		<meta name="layout" content="main">
+		<g:set var="entityName" value="${message(code: 'autoriza.label', default: 'Autoriza')}" />
+		<title><g:message code="default.list.label" args="[entityName]" /></title>
+	</head>
+	<body>
+		<a href="#list-autoriza" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+    <g:set var="firmado" bean="firmadoService"/>
+		<div class="nav" role="navigation">
+			<ul>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+			</ul>
+		</div>
+		<div id="list-autoriza" class="content scaffold-list" role="main">
+			<h1>Requerimientos</h1>
+			<g:if test="${flash.message}">
+			  <div class="message" role="status">${flash.message}</div>
+			</g:if>
+			<g:if test="${flash.error}">
+			  <div class="errors" role="status">${flash.error}</div>
+			</g:if>
+			<table>
+				<thead>
+					<tr>
 
-<body>
-<a href="#list-requerimiento" class="skip" tabindex="-1">
-  <g:message code="default.link.skip.label"
-    default="Skip to content&hellip;"/>
-</a>
+						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitudDetalle.numeroSolicitud.label', default: 'Requerimiento')}" />
 
-<div class="nav" role="navigation">
-      <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-      </ul>
-</div>
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitudDetalle.inicioatencion.label', default: 'Fecha de atención')}" />
 
-<div id="list-requerimiento" class="content scaffold-list" role="main">
-    <h1><g:message code="default.list.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
+            <g:sortableColumn property="nombre" title="Solicitante" />
 
-    <g:render template="jqgrid"/>
+						<g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
 
-</div>
-</body>
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${autorizadosInstanceList}" status="i" var="solicitudInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
+						<td><g:link action="show" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
+
+						<td><g:formatDate date="${solicitudInstance.fechaRevisa?:solicitudInstance.fechaVb?:solicitudInstance.fechaAutoriza}" /></td>
+
+            <td>${firmado.usuarioNombre(solicitudInstance.idSolicitante)}</td>
+
+						<td>
+							<g:if test="${solicitudInstance?.estado}">
+								<span class="property-value" aria-labelledby="estado-label">
+									<g:select name="estado" disabled="true"
+										from="${['F' as char, 'A' as char, 'R' as char, 'V' as char, 'E' as char, 'T' as char, 'C' as char]}"
+										valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
+								</span>
+							</g:if>
+						</td>
+
+					</tr>
+				</g:each>
+				</tbody>
+			</table>
+			<div class="pagination">
+				<g:paginate total="${autorizadosInstanceTotal}" />
+			</div>
+		</div>
+	</body>
 </html>
