@@ -2,6 +2,6 @@ Junta del 25 de noviembre.
 ------------------------
 
 
-- 1.- Cambiar Rol Coordinador por Aprovador
++ 1.- Cambiar Rol Coordinador por Aprovador
 - 2.- Al buscar el equipo, desplegar el usuario y el área
 - 3.- La busqueda de equipos, implementarla también en Requerimientos

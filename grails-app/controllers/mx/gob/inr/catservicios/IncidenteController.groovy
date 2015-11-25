@@ -6,8 +6,8 @@ import groovy.time.TimeCategory
 import grails.converters.JSON
 
 
-@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION','ROLE_SAST_TECNICO',
-          'ROLE_SAST_COORDINADOR'])
+@Secured(['ROLE_SAST_GESTOR','ROLE_SAST_TECNICO',
+          'ROLE_SAST_APROBADOR'])
 class IncidenteController {
     def springSecurityService
     def firmadoService

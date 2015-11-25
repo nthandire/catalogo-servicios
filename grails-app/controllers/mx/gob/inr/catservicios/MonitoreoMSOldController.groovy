@@ -7,7 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
 @Easygrid
-@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION'])
+@Secured(['ROLE_SAST_GESTOR'])
 class MonitoreoMSOldController {
     def firmadoService
     static nombreMenu = "Administración de servicio"

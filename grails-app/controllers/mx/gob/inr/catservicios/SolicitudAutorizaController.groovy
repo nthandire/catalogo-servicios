@@ -201,7 +201,7 @@ Su solicitud de Servicio de Tecnologías de la Información realizada el ${fecha
 
         // TODO: Quitar.
         // if (estado == 'A' as char) {
-        //   def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_COORDINADOR_DE_GESTION")}
+        //   def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_GESTOR")}
         //   def gestores = UsuarioRol.withNewSession {UsuarioRol.findAllByRol(rolGestor)["usuario"]}
         //   log.debug("gestores = ${gestores}")
 

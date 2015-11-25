@@ -9,7 +9,7 @@ def query2 = "  from Usuario u            " +
             "                and exists         " +
             "                    ( from Rol r        " +
             "                     where r.id = ur.rol.id        " +
-            "                       and r.authority = 'ROLE_TECNICO'))        " 
+            "                       and r.authority = 'ROLE_TECNICO'))        "
 
 def query = "  from Usuario u            " +
             " where exists( from UsuarioRol ur      " +
@@ -17,12 +17,12 @@ def query = "  from Usuario u            " +
             "                and exists         " +
             "                    ( from Rol r        " +
             "                     where r.id = ur.rol.id        " +
-            "                       and r.authority = 'ROLE_SAST_COORDINADOR_DE_GESTION'))        " 
+            "                       and r.authority = 'ROLE_SAST_GESTOR'))        "
 
 println Usuario.executeQuery(query)
 
 def queryR = "  from Rol r                          " +
-             " where r.authority = 'ROLE_TECNICO'   " 
+             " where r.authority = 'ROLE_TECNICO'   "
 
 println Rol.executeQuery(queryR)
 

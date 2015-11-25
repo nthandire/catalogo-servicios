@@ -4,7 +4,7 @@ import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
-@Secured(['ROLE_SAST_COORDINADOR_DE_GESTION'])
+@Secured(['ROLE_SAST_GESTOR'])
 class SolicitudGestionController {
     def springSecurityService
     def firmadoService

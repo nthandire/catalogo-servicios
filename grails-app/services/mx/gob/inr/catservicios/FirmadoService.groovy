@@ -7,7 +7,7 @@ class FirmadoService {
   static transactional = false
 
   Boolean isGestor(HttpSession sessionFirmado, Long userID) {
-    isRol("gestor", "ROLE_SAST_COORDINADOR_DE_GESTION", sessionFirmado, userID)
+    isRol("gestor", "ROLE_SAST_GESTOR", sessionFirmado, userID)
   }
 
   Boolean isTecnico(HttpSession sessionFirmado, Long userID) {
@@ -15,7 +15,7 @@ class FirmadoService {
   }
 
   Boolean isCoordinador(HttpSession sessionFirmado, Long userID) {
-    isRol("coordinador", "ROLE_SAST_COORDINADOR", sessionFirmado, userID)
+    isRol("coordinador", "ROLE_SAST_APROBADOR", sessionFirmado, userID)
   }
 
   Boolean isRol(String rol, String rolCadena, HttpSession sessionFirmado, Long userID) {
@@ -34,11 +34,11 @@ class FirmadoService {
   }
 
   Boolean thisIsGestor(Long userID) {
-    thisIsRol("gestor", "ROLE_SAST_COORDINADOR_DE_GESTION", userID)
+    thisIsRol("gestor", "ROLE_SAST_GESTOR", userID)
   }
 
   Boolean thisIsCoordinador(Long userID) {
-    thisIsRol("coordinador", "ROLE_SAST_COORDINADOR", userID)
+    thisIsRol("coordinador", "ROLE_SAST_APROBADOR", userID)
   }
 
   Boolean thisIsRol(String rol, String rolCadena, Long userID) {

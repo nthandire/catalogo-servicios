@@ -138,7 +138,7 @@ class SolicitudVBController {
         firmadoService.sendMail(correo, asunto, msg)
 
         // TODO: Quitar.
-        // def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_COORDINADOR_DE_GESTION")}
+        // def rolGestor = Rol.withNewSession {Rol.findByAuthority("ROLE_SAST_GESTOR")}
         // def gestores = UsuarioRol.withNewSession {UsuarioRol.findAllByRol(rolGestor)["usuario"]}
         // log.debug("gestores = ${gestores}")
 
