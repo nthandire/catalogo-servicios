@@ -32,6 +32,10 @@
 
             <g:sortableColumn property="nombre" title="Solicitante" />
 
+            <g:sortableColumn property="nombre" title="Área" />
+
+            <g:sortableColumn property="nombre" title="Extensión" />
+
 						<g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
 
 					</tr>
@@ -46,12 +50,14 @@
 
             <td>${firmado.usuarioNombre(solicitudInstance.idSolicitante)}</td>
 
+            <td>${firmado.areaNombre(solicitudInstance.idSolicitante)}</td>
+
+            <td>${Usuario.get(solicitudInstance.idSolicitante).extension}</td>
+
 						<td>
 							<g:if test="${solicitudInstance?.estado}">
 								<span class="property-value" aria-labelledby="estado-label">
-									<g:select name="estado" disabled="true"
-										from="${['F' as char, 'A' as char, 'R' as char, 'V' as char, 'E' as char, 'T' as char, 'C' as char]}"
-										valueMessagePrefix="solicitud.estado" value="${solicitudInstance.estado}" />
+									<g:message code="solicitud.estado.${solicitudInstance.estado}" />
 								</span>
 							</g:if>
 						</td>
