@@ -37,7 +37,7 @@
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance,
                                          field: 'idServ', 'error')} required">
       <label for="idServ">
-        <g:message code="cat_bitacora.servicio.label" default="Servicio" />
+        <g:message code="cat_bitacora.servicio.label" default="Categoría de tercer nivel" />
         <span class="required-indicator">*</span>
       </label>
       <span id="serviciosContainer">
@@ -193,7 +193,7 @@
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcion', 'error')} ">
-      <label for="descripcion">
+      <label for="descripción">
         <g:message code="solicitudDetalle.descripcion.label" default="Descripcion" />
       </label>
       <g:textArea name="descripcion" cols="40" rows="5" maxlength="3000"

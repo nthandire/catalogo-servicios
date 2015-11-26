@@ -69,14 +69,14 @@
 
 				<g:if test="${solicitudInstance?.justificacion}">
 				<li class="fieldcontain">
-					<span id="justificacion-label" class="property-label"><g:message code="solicitud.justificacion.label" default="Justificacion" /></span>
+					<span id="justificacion-label" class="property-label"><g:message code="solicitud.justificacion.label" default="Justificación" /></span>
 					<span class="property-value" aria-labelledby="justificacion-label"><g:fieldValue bean="${solicitudInstance}" field="justificacion"/></span>
 				</li>
 				</g:if>
 
 				<g:if test="${solicitudInstance?.lastUpdated}">
 				<li class="fieldcontain">
-					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha Modificacion" /></span>
+					<span id="lastUpdated-label" class="property-label"><g:message code="solicitud.lastUpdated.label" default="Fecha de Modificación" /></span>
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${solicitudInstance?.lastUpdated}" /></span>
 				</li>
 				</g:if>
@@ -85,7 +85,7 @@
 
 
 			<H1>
-				<g:message code="solicitud.detalles.label" default="Descripción del requerimiento" />
+				<g:message code="solicitud.detalles.label" default="Descripción del Requerimiento" />
 			</H1>
 
       <div class="row-fluid">
