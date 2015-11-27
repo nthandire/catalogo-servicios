@@ -8,8 +8,65 @@ select u.rfc, u.idusuario, u.nombre, u.paterno, u.materno, p.desc_perfil, p.idpe
  order by u.idusuario;
 
 
+select id_empleado,*
+  from usuario
+ where id_empleado in (359,3631,1043,1043,1043,1043,359,359,359,359,919,4439,4439,4439,4439,3209,3209,3209,3209,413,0,4765);
+
+
 Para refrescar una página
 <meta http-equiv="refresh" content="300">
+
+
+
+rfc idusuario nombre  paterno materno desc_perfil idperfil
+SAIH940101  6558  SUPER - USUARIO PRUEBA      EDITA SERVICIO AGUDOS Y SUBAGUDOS 62
+SAIH940101  6558  SUPER - USUARIO PRUEBA      REPORTES REHABILITACION NEUROLOGICA 61
+CAMA571121  7607  Alejandra Castillo    ROLE_SAST_USUARIO 58
+DERA791215  8456  DEMANOS ROMERO ARTURO <null>  <null>  ROLE_SAST_USUARIO 58
+DERA791215  8456  DEMANOS ROMERO ARTURO <null>  <null>  ROLE_SAST_APROBADOR 56
+RETR760604  9524  REBOLLO REBOLLO <null>  ROLE_SAST_USUARIO 58
+MEPO751211  9574  Omar Mercado    <null>  ROLE_SAST_USUARIO 58
+MEPO751211  9574  Omar Mercado    <null>  ROLE_SAST_APROBADOR 56
+ROBY751227  9575  Yazmin de la Rosa   <null>  ROLE_SAST_TECNICO 59
+ROBY751227  9575  Yazmin de la Rosa   <null>  ROLE_SAST_USUARIO 58
+MAIM680222  9576  Margarita Maldonado   <null>  ROLE_SAST_TECNICO 59
+MAIM680222  9576  Margarita Maldonado   <null>  ROLE_SAST_USUARIO 58
+CAET840823  9577  Tatiana Castro    <null>  ROLE_SAST_USUARIO 58
+CAET840823  9577  Tatiana Castro    <null>  ROLE_SAST_TECNICO 59
+MASI760508  9578  Israel Marin    <null>  ROLE_SAST_USUARIO 58
+MASI760508  9578  Israel Marin    <null>  ROLE_SAST_TECNICO 59
+TOGJ660804  9579  Javier  Torres  <null>  ROLE_SAST_USUARIO 58
+TOGJ660804  9579  Javier  Torres  <null>  ROLE_SAST_APROBADOR 56
+AAGA810815  9580  Alonso  Alanis  <null>  ROLE_SAST_APROBADOR 56
+AAGA810815  9580  Alonso  Alanis  <null>  ROLE_SAST_USUARIO 58
+CARL740622  9581  David Cano  <null>  ROLE_SAST_USUARIO 58
+CARL740622  9581  David Cano  <null>  ROLE_SAST_APROBADOR 56
+MEPK800306  9582  Kanek Mercado <null>  ROLE_SAST_USUARIO 58
+MEPK800306  9582  Kanek Mercado <null>  ROLE_SAST_TECNICO 59
+VENR690106  9583  Martin  Vergara <null>  ROLE_SAST_GESTOR  60
+VENR690106  9583  Martin  Vergara <null>  ROLE_SAST_APROBADOR 56
+VENR690106  9583  Martin  Vergara <null>  ROLE_SAST_USUARIO 58
+MAMJ690912  9584  Juan Carlos  Martinez <null>  ROLE_SAST_USUARIO 58
+MAMJ690912  9584  Juan Carlos  Martinez <null>  ROLE_SAST_TECNICO 59
+ZAML680508  9585  María de Lourdes  Zaldivar  <null>  ROLE_SAST_USUARIO 58
+ZAML680508  9585  María de Lourdes  Zaldivar  <null>  ROLE_SAST_APROBADOR 56
+EIVA721207  9586  Anabel Espino   <null>  ROLE_SAST_ADMIN 57
+EIVA721207  9586  Anabel Espino   <null>  ROLE_SAST_GESTOR  60
+EIVA721207  9586  Anabel Espino   <null>  ROLE_SAST_USUARIO 58
+TEMA680912  9587  Angelica  Trejo <null>  ROLE_SAST_USUARIO 58
+TECNPROV  9588  TECNICO 1 AMR <null>  ROLE_SAST_TECNICO 59
+
+
+id_empleado idusuario rfc nombre
+1043  9574  MEPO751211  Omar Mercado
+359 9575  ROBY751227  Yazmin de la Rosa
+919 9576  MAIM680222  Margarita Maldonado
+4439  9577  CAET840823  Tatiana Castro
+3209  9578  MASI760508  Israel Marin
+413 9586  EIVA721207  Anabel Espino
+
+
+
 
 
 idusuario nombre  paterno materno rfc desc_perfil idperfil

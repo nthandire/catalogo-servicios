@@ -16,33 +16,50 @@ class ServiciosService {
     def codigos = ResguardoEntrega.findAllByCodigoLike("515%").collect {it.id}
     log.debug("número de codigos = ${codigos.size()}")
 
-    def empleado = null
+    def empleados = null
     if (term && !(term =~ /[0-9]/)) {
       def queryEmpleado =
         "  from Usuario as u     " +
-        " where upper(nombre) || case when paterno is null then  '' else ' ' || upper(paterno) end || case when materno is null then  '' else ' ' || upper(materno) end like '%${term}%'   "
-    log.debug("queryEmpleado = $queryEmpleado")
-      // def empleados = Usuario.findAll(queryEmpleado, [],
-      //                 [max: 8]).findAll{it}.collect {it.idEmpleado}
-      // log.debug("empleados = $empleados")
+    //    " where upper(nombre) || case when paterno is null then  '' else ' ' || upper(paterno) end || case when materno is null then  '' else ' ' || upper(materno) end like '%${term}%'   "
+        " where upper(nombre) || ' ' || upper(nvl(paterno,''))  || ' ' || upper(nvl(materno,'')) like '%${term}%'   "
+      log.debug("queryEmpleado = $queryEmpleado")
+      empleados = Usuario.findAll(queryEmpleado, [],
+                      [max: 8]).collect {it.idEmpleado as Integer}.findAll{it}
+      log.debug("empleados = $empleados")
     }
 
-
     def MAX_EQUIPOS = 2 // Es el consecutivo maximo a considerar,
+
       // TODO. aplicar un orden -  order("inventario","asc")
-    def query =
-       "  from ResguardoEntregaDetalle as d     " +
-       " where d.idResguardo.id in (:codigos)   " +
-       "   and d.consecutivo <= ${MAX_EQUIPOS}  " +
-       "   and (serie like :serie               " +
-       "        or inventario = :inventario)    "
+
+    def paramQuery = [codigos: codigos]
+    def query = ""
+    if (empleados) {
+      log.debug("primer empleado es de tipo ${empleados[0].getClass()}")
+      if (empleados.size() > 1) {
+        log.debug("encontro más de un empleado")
+        return []
+      }
+      query =
+        "  from ResguardoEntregaDetalle as d     " +
+        " where d.idResguardo.id in (:codigos)   " +
+        "   and d.consecutivo <= ${MAX_EQUIPOS}  " +
+        "   and d.idEmpleado in (:empleados)    "
+        paramQuery << [empleados: empleados]
+    } else {
+      query =
+        "  from ResguardoEntregaDetalle as d     " +
+        " where d.idResguardo.id in (:codigos)   " +
+        "   and d.consecutivo <= ${MAX_EQUIPOS}  " +
+        "   and (serie like :serie               " +
+        "        or inventario = :inventario)    "
+        def inventario = term.isNumber() ? term.toLong() : new Long(0)
+        log.debug("inventario = ${inventario}")
+        paramQuery << [serie: "%$term%", inventario: inventario]
+    }
     log.debug("query = $query")
 
-    log.debug("inventario = ${((term.isNumber())?term.toLong():0)}")
-    def clist = ResguardoEntregaDetalle.
-      findAll(query, [codigos: codigos, serie: "%$term%",
-                      inventario:term.isNumber()? term.toLong() : new Long(0)],
-                      [max: 15])
+    def clist = ResguardoEntregaDetalle.findAll(query, paramQuery, [max: 15])
     log.debug("clist = ${clist}")
 
     def cSelectList = [] // cada uno de los resultados
