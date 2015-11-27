@@ -21,7 +21,8 @@ $(document).ready(function() {
     	   $("#marca").val(ui.item.marca); // populate the employee field with the nasdaq symbol.
     	   $("#modelo").val(ui.item.modelo);
     	   $("#economico").val(ui.item.economico);
-    	   $("#equipo").val(ui.item.equipo);
+         $("#equipo").val(ui.item.equipo);
+    	   $("#empleado").val(ui.item.empleado);
     	  }
 	 	});
 	})

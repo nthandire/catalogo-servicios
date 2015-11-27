@@ -12,11 +12,8 @@
 <table class="table table-condensed">
   <g:if test="${!incidenteInstance?.id}">
     <tr>
-      <td width="290px">
-        &nbsp;
-      </td>
       <td>
-        <label for="cpuauto">Inventario o Número de Serie</label>
+        <label for="cpuauto">Empleado o Inventario o No. de Serie</label>
         <g:textField id="cpuauto" name="idResguardoentregadetalle" style="width: 250px;" />
       </td>
       <td>
@@ -65,6 +62,26 @@
       <td>
       </td>
     </tr>
+    <tr>
+      <td>
+        <label for="empleado">
+          <g:message code="servicios.empleado.label" default="Empleado" />
+          <span class="required-indicator">*</span>
+        </label>
+        <g:textField name="empleado" value="${serviciosInstance?.empleado}"
+          readonly="true" style="width: 250px;text-transform: uppercase;" />
+      </td>
+      %{--
+      <td>
+          <label for="area">
+            <g:message code="servicios.economico.label" default="Área" />
+          </label>
+          <g:textField name="economico" value="${serviciosInstance?.economico}" readonly="true" style="width: 250px;"/>
+      </td>
+      --}%
+      <td>
+      </td>
+    </tr>
   </g:if>
   <g:elseif test="$incidenteInstance.idResguardoentregadetalle">
     <g:set var="equipo"
@@ -105,6 +122,26 @@
           </label>
           <g:textField name="economico" value="${equipo.inventario}" readonly="true" style="width: 250px;"/>
       </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="empleado">
+          <g:message code="servicios.empleado.label" default="Empleado" />
+          <span class="required-indicator">*</span>
+        </label>
+        <g:textField name="empleado" value="${firmado.nombreEmpleado(equipo?.idEmpleado)}"
+          readonly="true" style="width: 250px;text-transform: uppercase;" />
+      </td>
+      %{--
+      <td>
+          <label for="area">
+            <g:message code="servicios.economico.label" default="Área" />
+          </label>
+          <g:textField name="economico" value="${serviciosInstance?.economico}" readonly="true" style="width: 250px;"/>
+      </td>
+      --}%
       <td>
       </td>
     </tr>

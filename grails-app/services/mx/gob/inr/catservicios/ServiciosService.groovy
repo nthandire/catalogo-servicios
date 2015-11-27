@@ -73,6 +73,8 @@ class ServiciosService {
       eqMap.put("modelo", it['desModelo'])
       eqMap.put("economico", it['inventario'])
       eqMap.put("equipo", it['descripcion'])
+      eqMap.put("empleado", Usuario.findByIdEmpleado(it['idEmpleado']).toString())
+      // log.debug("empleado = ${eqMap['empleado']}")
       cSelectList.add(eqMap)
     }
     return cSelectList

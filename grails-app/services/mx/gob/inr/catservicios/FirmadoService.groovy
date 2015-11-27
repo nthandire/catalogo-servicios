@@ -76,6 +76,10 @@ class FirmadoService {
     Usuario.get(usuario)
   }
 
+  def nombreEmpleado (Long empleado) {
+    Usuario.findByIdEmpleado(empleado)
+  }
+
   def areaNombre (Long usuario) {
     log.debug("usuario = ${usuario}")
     def area = ""
