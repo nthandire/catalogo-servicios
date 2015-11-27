@@ -16,11 +16,23 @@ class ServiciosService {
     def codigos = ResguardoEntrega.findAllByCodigoLike("515%").collect {it.id}
     log.debug("número de codigos = ${codigos.size()}")
 
+    def empleado = null
+    if (term && !(term =~ /[0-9]/)) {
+      def queryEmpleado =
+        "  from Usuario as u     " +
+        " where upper(nombre) || case when paterno is null then  '' else ' ' || upper(paterno) end || case when materno is null then  '' else ' ' || upper(materno) end like '%${term}%'   "
+    log.debug("queryEmpleado = $queryEmpleado")
+      // def empleados = Usuario.findAll(queryEmpleado, [],
+      //                 [max: 8]).findAll{it}.collect {it.idEmpleado}
+      // log.debug("empleados = $empleados")
+    }
+
+
     def MAX_EQUIPOS = 2 // Es el consecutivo maximo a considerar,
       // TODO. aplicar un orden -  order("inventario","asc")
     def query =
        "  from ResguardoEntregaDetalle as d     " +
-       " where d.idResguardo.id in (:codigos)               " +
+       " where d.idResguardo.id in (:codigos)   " +
        "   and d.consecutivo <= ${MAX_EQUIPOS}  " +
        "   and (serie like :serie               " +
        "        or inventario = :inventario)    "
