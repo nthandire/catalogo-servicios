@@ -48,7 +48,6 @@
       <td>
           <label for="serie">
             <g:message code="servicios.serie.label" default="Serie" />
-            <span class="required-indicator">*</span>
           </label>
           <g:textField name="serie" value="${serviciosInstance?.serie}"
             readonly="true" style="width: 250px;text-transform: uppercase;" />
@@ -65,8 +64,7 @@
     <tr>
       <td>
         <label for="empleado">
-          <g:message code="servicios.empleado.label" default="Empleado" />
-          <span class="required-indicator">*</span>
+          <g:message code="servicios.empleado.label" default="Empleado que resguarda el equipo" />
         </label>
         <g:textField name="empleado" value="${serviciosInstance?.empleado}"
           readonly="true" style="width: 250px;text-transform: uppercase;" />
@@ -111,7 +109,6 @@
       <td>
           <label for="serie">
             <g:message code="servicios.serie.label" default="Serie" />
-            <span class="required-indicator">*</span>
           </label>
           <g:textField name="serie" value="${equipo.serie}"
             readonly="true" style="width: 250px;text-transform: uppercase;" />
@@ -128,8 +125,7 @@
     <tr>
       <td>
         <label for="empleado">
-          <g:message code="servicios.empleado.label" default="Empleado" />
-          <span class="required-indicator">*</span>
+          <g:message code="servicios.empleado.label" default="Empleado que resguarda el equipo" />
         </label>
         <g:textField name="empleado" value="${firmado.nombreEmpleado(equipo?.idEmpleado)}"
           readonly="true" style="width: 250px;text-transform: uppercase;" />
