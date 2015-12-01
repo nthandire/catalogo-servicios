@@ -1,3 +1,12 @@
+/*
+
+Al inicio del desarrollo se les llamava Coordinadores a los Aprovadores,
+por eso, este modulo se llama así.
+
+No hay problema en cambiar el nombre, simplemente hay que hacer muchos cambios
+y probar y probar.
+
+*/
 package mx.gob.inr.catservicios
 
 import grails.plugins.springsecurity.Secured
@@ -272,6 +281,8 @@ class SolicitudCoordinadorController {
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
             return
         }
+
+        solicitudDetalleInstance.idAprobador = userID
 
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])

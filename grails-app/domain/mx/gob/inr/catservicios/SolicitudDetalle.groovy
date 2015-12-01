@@ -13,6 +13,7 @@ class SolicitudDetalle {
   Integer prioridad = 0
 	Date fechaSolucion
 	String descripcionTecnica
+  Integer idAprobador
 
 	static belongsTo = [idSolicitud:Solicitud]
 
@@ -39,6 +40,7 @@ class SolicitudDetalle {
 		idPrograma nullable: true
 		idServcat nullable: true
 		descripcionTecnica nullable: true, maxSize: 2500
+    idAprobador nullable: true
 	}
 
   String toString() {
