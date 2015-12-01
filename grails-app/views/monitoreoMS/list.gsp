@@ -50,7 +50,7 @@
 				<g:each in="${detallesInstanceList}" status="i" var="detalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="showDetalle" id="${detalleInstance.id}" params="[offset: bOffset]">
+						<td><g:link action="showDetalle" id="${detalleInstance.id}" params="[offset: bOffset?:0]">
               ${detalleInstance.idSolicitud.toString()}
             </g:link></td>
 

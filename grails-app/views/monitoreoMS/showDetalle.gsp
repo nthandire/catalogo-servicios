@@ -106,13 +106,13 @@
         </li>
         </g:if>
 
-        <g:if test="${solicitudDetalleInstance.idSolicitud?.fechaVb}">
+        <g:if test="${solicitudDetalleInstance?.fechaAprobador}">
         <li class="fieldcontain">
-          <span id="fecha-vobo-label" class="property-label">
-            <g:message code="solicitudDetalle.fecha-vobo.label" default="Fecha de visto bueno" />
+          <span id="fecha-aprobacion-label" class="property-label">
+            <g:message code="solicitudDetalle.fecha-aprobacion.label" default="Fecha de Aprobación" />
           </span>
-          <span class="property-value" aria-labelledby="fecha-vobo-label">
-            ${solicitudDetalleInstance?.idSolicitud?.fechaVb}
+          <span class="property-value" aria-labelledby="fecha-aprobacion-label">
+            ${solicitudDetalleInstance?.fechaAprobador}
           </span>
         </li>
         </g:if>
