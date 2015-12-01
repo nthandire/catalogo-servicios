@@ -8,16 +8,33 @@ import groovy.time.TimeCategory
 
 @Secured(['ROLE_SAST_GESTOR'])
 class MonitoreoMSController {
+    def firmadoService
     static nombreMenu = "Administración de servicio"
     static ordenMenu = 89
 
+    def iniciarSemaforos() {
+      if (!(session["semaforoPeligro"])) {
+        log.debug("Inicio semaforo")
+        session["semaforoPeligro"] = g.message(code:"semaforo.peligro").toLong()
+        session["semaforoSeguro"] = g.message(code:"semaforo.seguro").toLong()
+      }
+    }
+
+
     def index() {
-        redirect(action: "list", params: params)
+      iniciarSemaforos()
+      redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         log.debug("params = $params")
+
+        session['semaforoPeligro'] += -1
+        session['semaforoSeguro'] += -1
+        log.debug("session['semaforoPeligro'] = ${session['semaforoPeligro']}")
+        log.debug("session['semaforoSeguro'] = ${session['semaforoSeguro']}")
+
         def query =
             "  from Solicitud              " +
             " where estado <> 'F'          " +
@@ -32,7 +49,10 @@ class MonitoreoMSController {
           "select count (*) " + queryDetalle, [solicitudes: solicitudes])[0]
         log.debug("numero de detalles = ${detalles}")
         //query += " order by fechaSolicitud desc"
-        [detallesInstanceList: Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes], params),
+        def detallesList = Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes], params)
+        detallesList.each{firmadoService.retraso(session, it)}
+
+        [detallesInstanceList: detallesList,
             detallesInstanceTotal: detalles, bOffset: params.offset]
     }
 

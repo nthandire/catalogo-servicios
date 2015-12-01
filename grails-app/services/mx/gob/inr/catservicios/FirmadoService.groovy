@@ -1,6 +1,7 @@
 package mx.gob.inr.catservicios
 
 import javax.servlet.http.HttpSession
+import groovy.time.*
 
 class FirmadoService {
   def grailsApplication
@@ -246,6 +247,37 @@ class FirmadoService {
         subject asunto
         html msg
       }
+    }
+  }
+
+  Long retraso(HttpSession sessionFirmado, SolicitudDetalle caso) {
+    if (caso.idSolicitud.estado != 'R' as char) {
+      return 0
+    } else {
+      def fecha = caso.idSolicitud.fechaRevisa
+      def minutos = caso?.idServ?.tiempo2
+      switch ( caso?.idServ?.unidades2?.id ) {
+        case 2: // Horas
+          minutos *= 60
+          break
+        case 3: // Días
+          minutos *= 60 * 24
+          break
+        case 4: // Semanas
+          minutos *= 60 * 24 * 7
+          break
+      }
+
+      def now = new Date()
+      println now
+      def fechaLimite = fecha
+      use(TimeCategory) {
+        fechaLimite = fecha + minutos.minutes
+      }
+
+      log.debug("fecha = $fecha")
+      log.debug("minutos = $minutos")
+      log.debug("fechaLimite = $fechaLimite")
     }
   }
 
