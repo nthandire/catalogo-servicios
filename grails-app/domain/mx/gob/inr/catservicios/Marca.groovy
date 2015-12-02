@@ -5,6 +5,7 @@ class Marca {
 	String desMarca
 
 	static mapping = {
+    table 'cat_marca'
 		id column: "id_marca", generator: "increment"
 		version false
     datasource "almacen"
