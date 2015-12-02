@@ -39,7 +39,7 @@ class MonitoreoMSController {
             "  from Solicitud              " +
             " where estado <> 'F'          " +
             "   and estado is not null     "
-        def solicitudes = Solicitud.executeQuery(query) //.collect{it.id}
+        def solicitudes = Solicitud.executeQuery(query)
         log.debug("numero de solicitudes = ${solicitudes.size()}")
         def queryDetalle =
             "  from SolicitudDetalle                 " +
@@ -50,10 +50,15 @@ class MonitoreoMSController {
         log.debug("numero de detalles = ${detalles}")
         //query += " order by fechaSolicitud desc"
         def detallesList = Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes], params)
-        detallesList.each{firmadoService.retraso(session, it)}
+        def listaOrdenar = detallesList.collect{new Ordenado(caso: it,
+                              orden: firmadoService.retraso(session, it))}
+        def listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
+          a.caso.idSolicitud.fechaSolicitud <=> a.caso.idSolicitud.fechaSolicitud :
+          a.orden <=> b.orden }
+        def detallesOrdenadaList = listaOrdenada.collect{it.caso}
 
-        [detallesInstanceList: detallesList,
-            detallesInstanceTotal: detalles, bOffset: params.offset]
+        [detallesInstanceList: listaOrdenada,
+          detallesInstanceTotal: detalles, bOffset: params.offset]
     }
 
   def showDetalle(Long id) {
@@ -70,3 +75,13 @@ class MonitoreoMSController {
   }
 
 }
+
+class Ordenado {
+  SolicitudDetalle caso
+  Long orden
+
+  String toString() {
+    "$orden : [$caso]"
+  }
+}
+

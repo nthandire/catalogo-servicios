@@ -50,28 +50,32 @@
 				<g:each in="${detallesInstanceList}" status="i" var="detalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="showDetalle" id="${detalleInstance.id}" params="[offset: bOffset?:0]">
-              ${detalleInstance.idSolicitud.toString()}
+						<td><g:link action="showDetalle" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
+              ${detalleInstance.caso.idSolicitud.toString()}
             </g:link></td>
 
-						<td><g:formatDate date="${detalleInstance.idSolicitud.fechaRevisa?:detalleInstance.idSolicitud.fechaVb?:detalleInstance.idSolicitud.fechaAutoriza}" /></td>
+            <td style="background-color: ${detalleInstance.orden == 1 ? 'red' : detalleInstance.orden == 2 ? 'yellow' : detalleInstance.orden == 3 ? 'green' : 'white'};">
+              <g:formatDate date="${detalleInstance.caso.idSolicitud.fechaRevisa?:detalleInstance.caso.idSolicitud.fechaVb?:detalleInstance.caso.idSolicitud.fechaAutoriza}" />
+            </td>
 
-            <td>${firmado.usuarioNombre(detalleInstance.idSolicitud.idSolicitante)}</td>
+            <td>
+              ${firmado.usuarioNombre(detalleInstance.caso.idSolicitud.idSolicitante)}
+            </td>
 
-            <td>${firmado.areaNombre(detalleInstance.idSolicitud.idSolicitante)}</td>
+            <td>${firmado.areaNombre(detalleInstance.caso.idSolicitud.idSolicitante)}</td>
 
-            <td>${Usuario.get(detalleInstance.idSolicitud.idSolicitante).extension}</td>
+            <td>${Usuario.get(detalleInstance.caso.idSolicitud.idSolicitante).extension}</td>
 
-            <td>${detalleInstance.idServcat.categoria}</td>
+            <td>${detalleInstance.caso.idServcat.categoria}</td>
 
-            <td>${detalleInstance.idServ?.servSub}</td>
+            <td>${detalleInstance.caso.idServ?.servSub}</td>
 
-            <td>${detalleInstance.idServ}</td>
+            <td>${detalleInstance.caso.idServ}</td>
 
 						<td>
-							<g:if test="${detalleInstance?.idSolicitud.estado}">
+							<g:if test="${detalleInstance.caso?.idSolicitud.estado}">
 								<span class="property-value" aria-labelledby="estado-label">
-									<g:message code="solicitud.estado.${detalleInstance.idSolicitud.estado}" />
+									<g:message code="solicitud.estado.${detalleInstance.caso.idSolicitud.estado}" />
 								</span>
 							</g:if>
 						</td>

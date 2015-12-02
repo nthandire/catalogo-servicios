@@ -252,32 +252,56 @@ class FirmadoService {
 
   Long retraso(HttpSession sessionFirmado, SolicitudDetalle caso) {
     if (caso.idSolicitud.estado != 'R' as char) {
-      return 0
+      return 4
     } else {
       def fecha = caso.idSolicitud.fechaRevisa
-      def minutos = caso?.idServ?.tiempo2
+      log.debug "requerimiento = $caso.idSolicitud, fecha = $fecha"
+      def plazoMinutos = caso?.idServ?.tiempo2
       switch ( caso?.idServ?.unidades2?.id ) {
         case 2: // Horas
-          minutos *= 60
+          plazoMinutos *= 60
           break
         case 3: // Días
-          minutos *= 60 * 24
+          plazoMinutos *= 60 * 24
           break
         case 4: // Semanas
-          minutos *= 60 * 24 * 7
+          plazoMinutos *= 60 * 24 * 7
           break
       }
+      log.debug "tercer nivel = ${caso?.idServ}"
+      log.debug "tiempo2 = ${caso?.idServ?.tiempo2}"
+      log.debug "unidades2 = ${caso?.idServ?.unidades2}"
+      log.debug "plazoMinutos = $plazoMinutos"
 
-      def now = new Date()
-      println now
-      def fechaLimite = fecha
-      use(TimeCategory) {
-        fechaLimite = fecha + minutos.minutes
+      def ahora = new Date()
+      log.debug "ahora = $ahora"
+
+      def minutos = 0
+      def diff = 0
+      use ( TimeCategory ) {
+        diff = ahora - fecha
+        log.debug "dias = $diff.days"
+        minutos = diff.minutes + diff.hours * 60 + diff.days * 24 * 60
       }
 
-      log.debug("fecha = $fecha")
-      log.debug("minutos = $minutos")
-      log.debug("fechaLimite = $fechaLimite")
+      log.debug "minutos = $minutos"
+
+      def primeraMarca = sessionFirmado["semaforoSeguro"]
+      def segundaMarca = sessionFirmado["semaforoPeligro"]
+
+      def segundoValor = plazoMinutos * segundaMarca / 100
+      if (minutos > segundoValor) {
+        log.debug("Rojo")
+        return 1
+      }
+      def primerValor = plazoMinutos * primeraMarca / 100
+      if (minutos > primerValor) {
+        log.debug("Amarillo")
+        return 2
+      } else {
+        log.debug("Verde")
+        return 3
+      }
     }
   }
 
