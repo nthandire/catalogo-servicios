@@ -250,9 +250,9 @@ class FirmadoService {
     }
   }
 
-  Long retraso(HttpSession sessionFirmado, SolicitudDetalle caso) {
+  Integer retraso(List semaforo, SolicitudDetalle caso) {
     if (caso.idSolicitud.estado != 'R' as char) {
-      return 4
+      return semaforo.size()
     } else {
       def fecha = caso.idSolicitud.fechaRevisa
       log.debug "requerimiento = $caso.idSolicitud, fecha = $fecha"
@@ -283,25 +283,15 @@ class FirmadoService {
         log.debug "dias = $diff.days"
         minutos = diff.minutes + diff.hours * 60 + diff.days * 24 * 60
       }
-
       log.debug "minutos = $minutos"
 
-      def primeraMarca = sessionFirmado["semaforoSeguro"]
-      def segundaMarca = sessionFirmado["semaforoPeligro"]
-
-      def segundoValor = plazoMinutos * segundaMarca / 100
-      if (minutos > segundoValor) {
-        log.debug("Rojo")
-        return 1
+      Integer idxSemaforo = 0
+      while (idxSemaforo < semaforo.size()) {
+        if (minutos >= (plazoMinutos * (semaforo[idxSemaforo].min) / 100)) break
+        ++idxSemaforo
       }
-      def primerValor = plazoMinutos * primeraMarca / 100
-      if (minutos > primerValor) {
-        log.debug("Amarillo")
-        return 2
-      } else {
-        log.debug("Verde")
-        return 3
-      }
+      log.debug("color = ${semaforo[idxSemaforo].color}")
+      return idxSemaforo
     }
   }
 

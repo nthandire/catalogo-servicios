@@ -54,7 +54,7 @@
               ${detalleInstance.caso.idSolicitud.toString()}
             </g:link></td>
 
-            <td style="background-color: ${detalleInstance.orden == 1 ? 'red' : detalleInstance.orden == 2 ? 'yellow' : detalleInstance.orden == 3 ? 'green' : 'white'};">
+            <td style="background-color: ${detalleInstance.color};">
               <g:formatDate date="${detalleInstance.caso.idSolicitud.fechaRevisa?:detalleInstance.caso.idSolicitud.fechaVb?:detalleInstance.caso.idSolicitud.fechaAutoriza}" />
             </td>
 

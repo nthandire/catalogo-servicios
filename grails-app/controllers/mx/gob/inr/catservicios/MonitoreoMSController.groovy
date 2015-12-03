@@ -18,6 +18,12 @@ class MonitoreoMSController {
         session["semaforoPeligro"] = g.message(code:"semaforo.peligro").toLong()
         session["semaforoSeguro"] = g.message(code:"semaforo.seguro").toLong()
       }
+
+      if (!(session["semaforo"])) {
+        log.debug("Inicio semaforo")
+        session["semaforo"] = Semaforo.list().sort{-it.min}
+        log.debug("session['semaforo'] = ${session['semaforo']}")
+      }
     }
 
 
@@ -35,15 +41,10 @@ class MonitoreoMSController {
         }
         log.debug("params = $params")
 
-        session['semaforoPeligro'] += -1
-        session['semaforoSeguro'] += -1
-        log.debug("session['semaforoPeligro'] = ${session['semaforoPeligro']}")
-        log.debug("session['semaforoSeguro'] = ${session['semaforoSeguro']}")
-
         def query =
-            "  from Solicitud              " +
-            " where estado <> 'F'          " +
-            "   and estado is not null     "
+            "  from Solicitud                " +
+            " where estado in ('A','V','R')  " +
+            "   and estado is not null       "
         def solicitudes = Solicitud.executeQuery(query)
         log.debug("numero de solicitudes = ${solicitudes.size()}")
         def queryDetalle =
@@ -53,17 +54,15 @@ class MonitoreoMSController {
         def detalles = SolicitudDetalle.executeQuery (
           "select count (*) " + queryDetalle, [solicitudes: solicitudes])[0]
         log.debug("numero de detalles = ${detalles}")
-        //query += " order by fechaSolicitud desc"
         def detallesList = Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes])
+        def semaforo = session["semaforo"]
         def listaOrdenar = detallesList.collect{new Ordenado(caso: it,
-                              orden: firmadoService.retraso(session, it))}
+                              orden: firmadoService.retraso(semaforo, it))}
+        listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
         def listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
           a.caso.idSolicitud.fechaSolicitud <=> a.caso.idSolicitud.fechaSolicitud :
           a.orden <=> b.orden }
-        log.debug("params.offset = ${params.offset}")
-        log.debug("params.offset+params.max-1 = ${params.offset+params.max-1}")
-        log.debug("listaOrdenada.size()-1 = ${listaOrdenada.size()-1}")
-        def detallesOrdenadaList = listaOrdenada.collect{it.caso}
+        log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
 
         [detallesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
           detallesInstanceTotal: detalles, bOffset: params.offset]
@@ -86,10 +85,11 @@ class MonitoreoMSController {
 
 class Ordenado {
   SolicitudDetalle caso
-  Long orden
+  Integer orden
+  String color
 
   String toString() {
-    "$orden : [$caso]"
+    "$orden : $color : [$caso]"
   }
 }
 
