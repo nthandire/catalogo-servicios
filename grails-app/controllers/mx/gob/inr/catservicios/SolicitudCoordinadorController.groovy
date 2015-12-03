@@ -261,7 +261,8 @@ class SolicitudCoordinadorController {
                 solicitudDetalleInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle')] as Object[],
                           "Another user has updated this SolicitudDetalle while you were editing")
-                render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+                render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
+                                              tecnicos:listaDeTecnicos()])
                 return
             }
         }
@@ -278,7 +279,8 @@ class SolicitudCoordinadorController {
 
         if (firmaTeclada != firma) {
             flash.error = "Error en contaseña"
-            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
+                                          tecnicos:listaDeTecnicos()])
             return
         }
 
@@ -286,7 +288,8 @@ class SolicitudCoordinadorController {
         solicitudDetalleInstance.fechaAprobador = new Date()
 
         if (!solicitudDetalleInstance.save(flush: true)) {
-            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
+            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
+                                          tecnicos:listaDeTecnicos()])
             return
         }
 
