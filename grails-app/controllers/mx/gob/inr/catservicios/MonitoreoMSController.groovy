@@ -28,6 +28,11 @@ class MonitoreoMSController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+        if (!params.offset)
+          params["offset"] = 0
+        else {
+          params.offset = params.offset.toLong()
+        }
         log.debug("params = $params")
 
         session['semaforoPeligro'] += -1
@@ -49,15 +54,18 @@ class MonitoreoMSController {
           "select count (*) " + queryDetalle, [solicitudes: solicitudes])[0]
         log.debug("numero de detalles = ${detalles}")
         //query += " order by fechaSolicitud desc"
-        def detallesList = Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes], params)
+        def detallesList = Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes])
         def listaOrdenar = detallesList.collect{new Ordenado(caso: it,
                               orden: firmadoService.retraso(session, it))}
         def listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
           a.caso.idSolicitud.fechaSolicitud <=> a.caso.idSolicitud.fechaSolicitud :
           a.orden <=> b.orden }
+        log.debug("params.offset = ${params.offset}")
+        log.debug("params.offset+params.max-1 = ${params.offset+params.max-1}")
+        log.debug("listaOrdenada.size()-1 = ${listaOrdenada.size()-1}")
         def detallesOrdenadaList = listaOrdenada.collect{it.caso}
 
-        [detallesInstanceList: listaOrdenada,
+        [detallesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
           detallesInstanceTotal: detalles, bOffset: params.offset]
     }
 
