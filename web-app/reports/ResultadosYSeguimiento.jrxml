@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bitacora de cambios" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f31b505-9f6f-4905-bb8f-a313eca9443b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="image_dir" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="mes" class="java.lang.String"/>
+	<parameter name="anio" class="java.lang.String"/>
+	<parameter name="tipo-servicio" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="fecha" class="java.util.Date"/>
+	<field name="servicio" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="num_solicitud" class="java.lang.Integer"/>
+	<field name="subcategoria" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="responsable" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="14" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="126" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="20" y="0" width="50" height="60" uuid="d2ef19c9-7883-46fc-90e8-2da935a9fc94"/>
+				<imageExpression><![CDATA[$P{image_dir} + "logo_INR.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="80" y="0" width="400" height="20" uuid="4c4f2f97-e06f-4e40-ad35-bd5d6ba42e0c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN GENERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="20" width="400" height="30" uuid="1414eec3-2fd2-402a-a4ae-01291ca31fd0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUBDIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACION Y COMUNICACIONES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="80" width="467" height="22" uuid="3c2ba8ac-0418-407e-9d70-aa76dee0defd"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESULTADOS Y SEGUIMIENTO A LA OPERACIÓN DE LA MESA DE SERVICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="50" width="400" height="30" uuid="0d88b210-84e1-4974-860e-6d24771fd9ee"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO DE GESTIÓN Y OPERACIÓN DE SERVICIOS DE TIC]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="101" width="467" height="22" uuid="68178375-72f3-4351-ab64-148d513c1825"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mes} $P{anio} - $P{tipo-servicio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="241" y="0" width="105" height="41" backcolor="#8B8B8B" uuid="95880383-ca68-4392-b9be-3cd23680a914"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subcategoria del servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="513" y="0" width="77" height="41" backcolor="#8B8B8B" uuid="3919055d-6125-4cdc-b7e3-32e235e00985"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsable del cambio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="593" y="0" width="75" height="41" backcolor="#8B8B8B" uuid="00f5994f-7eda-41f7-9c54-e78cf162c215"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha del cambio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="350" y="0" width="61" height="41" backcolor="#8B8B8B" uuid="61531a69-d34e-4915-99bd-fa4503985923"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de cambio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="160" y="0" width="77" height="41" backcolor="#8B8B8B" uuid="02de939d-b5ed-4021-b16a-3cc818a89965"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoría del servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="413" y="0" width="98" height="41" backcolor="#8B8B8B" uuid="bcbe193b-a642-4a0c-963f-aa56db2fd28e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción del Cambio Solicitado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="673" y="0" width="129" height="41" backcolor="#8B8B8B" uuid="73e4f80b-80f7-4337-9c33-10bc1306d086"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solución]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="80" y="0" width="76" height="41" backcolor="#8B8B8B" uuid="0ef5ff88-e953-4c6c-b58a-497410a8f718"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de solicitud de servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="75" height="41" backcolor="#8B8B8B" uuid="71984599-387d-4582-bb1d-998388d421cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de Solicitud]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="56" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="160" y="10" width="77" height="41" uuid="09085703-9220-4054-931b-ce9fb4ecdc2e"/>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="241" y="10" width="105" height="41" uuid="4fff2991-142c-48b7-ba24-eeae2cf62e2d"/>
+				<textFieldExpression><![CDATA[$F{subcategoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="10" width="75" height="41" uuid="87abdd68-fdde-4bfd-aedc-053e432c9983"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{num_solicitud}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="413" y="10" width="98" height="41" uuid="38417c11-5b4d-4284-9859-4e36239804fd"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="673" y="10" width="129" height="41" uuid="bd76d4c4-cd78-45fe-bd42-df844078e9bf"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="593" y="10" width="75" height="41" uuid="87a60b42-d169-4a49-bdd3-16d8da66db36"/>
+				<textElement markup="none">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="513" y="10" width="77" height="41" uuid="ce7b328d-302e-43be-b0db-01820f875e4c"/>
+				<textFieldExpression><![CDATA[$F{responsable}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="10" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="10" splitType="Stretch"/>
+	</summary>
+</jasperReport>
