@@ -251,48 +251,64 @@ class FirmadoService {
   }
 
   Integer retraso(List semaforo, SolicitudDetalle caso) {
-    if (caso.idSolicitud.estado != 'R' as char) {
+    def fecha = new Date()
+    def minutos = 0
+    def plazoMinutos = 0
+    def unidades = 0
+    def estado = caso.idSolicitud.estado
+    if (!(estado.toString() in ['R','V','A'])) {
       return semaforo.size()
-    } else {
-      def fecha = caso.idSolicitud.fechaRevisa
-      log.debug "requerimiento = $caso.idSolicitud, fecha = $fecha"
-      def plazoMinutos = caso?.idServ?.tiempo2
-      switch ( caso?.idServ?.unidades2?.id ) {
-        case 2: // Horas
-          plazoMinutos *= 60
-          break
-        case 3: // Días
-          plazoMinutos *= 60 * 24
-          break
-        case 4: // Semanas
-          plazoMinutos *= 60 * 24 * 7
-          break
+    } else if (estado == 'A') {
+      if (caso.idSolicitud.idVb) {
+        return semaforo.size()
+      } else {
+        fecha = caso.idSolicitud.fechaAutoriza
+        plazoMinutos = caso?.idServ?.tiempo1
+        unidades = caso?.idServ?.unidades1?.id
       }
-      log.debug "tercer nivel = ${caso?.idServ}"
-      log.debug "tiempo2 = ${caso?.idServ?.tiempo2}"
-      log.debug "unidades2 = ${caso?.idServ?.unidades2}"
-      log.debug "plazoMinutos = $plazoMinutos"
-
-      def ahora = new Date()
-      log.debug "ahora = $ahora"
-
-      def minutos = 0
-      def diff = 0
-      use ( TimeCategory ) {
-        diff = ahora - fecha
-        log.debug "dias = $diff.days"
-        minutos = diff.minutes + diff.hours * 60 + diff.days * 24 * 60
-      }
-      log.debug "minutos = $minutos"
-
-      Integer idxSemaforo = 0
-      while (idxSemaforo < semaforo.size()) {
-        if (minutos >= (plazoMinutos * (semaforo[idxSemaforo].min) / 100)) break
-        ++idxSemaforo
-      }
-      log.debug("color = ${semaforo[idxSemaforo].color}")
-      return idxSemaforo
+    } else if (estado == 'V') {
+      fecha = caso.idSolicitud.fechaVb
+      plazoMinutos = caso?.idServ?.tiempo1
+      unidades = caso?.idServ?.unidades1?.id
+    } else { // estado == 'R'
+      fecha = caso.idSolicitud.fechaRevisa
+      plazoMinutos = caso?.idServ?.tiempo2
+      unidades = caso?.idServ?.unidades2?.id
     }
+    log.debug "requerimiento = $caso.idSolicitud, fecha = $fecha"
+    switch ( unidades ) {
+      case 2: // Horas
+        plazoMinutos *= 60
+        break
+      case 3: // Días
+        plazoMinutos *= 60 * 24
+        break
+      case 4: // Semanas
+        plazoMinutos *= 60 * 24 * 7
+        break
+    }
+    log.debug "tercer nivel = ${caso?.idServ}"
+    log.debug "unidades = ${unidades}"
+    log.debug "plazoMinutos = $plazoMinutos"
+
+    def ahora = new Date()
+    log.debug "ahora = $ahora"
+
+    def diff = 0
+    use ( TimeCategory ) {
+      diff = ahora - fecha
+      log.debug "dias = $diff.days"
+      minutos = diff.minutes + diff.hours * 60 + diff.days * 24 * 60
+    }
+    log.debug "minutos = $minutos"
+
+    Integer idxSemaforo = 0
+    while (idxSemaforo < semaforo.size()) {
+      if (minutos >= (plazoMinutos * (semaforo[idxSemaforo].min) / 100)) break
+      ++idxSemaforo
+    }
+    log.debug("color = ${semaforo[idxSemaforo].color}")
+    return idxSemaforo
   }
 
 }

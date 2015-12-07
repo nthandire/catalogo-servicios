@@ -8,7 +8,7 @@ import groovy.time.TimeCategory
 class ReportesController {
     def springSecurityService
     static nombreMenu = "Reportes"
-    static ordenMenu = 8
+    static ordenMenu = -8
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
@@ -26,7 +26,7 @@ class ReportesController {
     params.image_dir = "${servletContext.getRealPath('/images')}/"
     params.mes = "Diciembre"
 	params.mes = "2015"
-	
+
     def startDate = params.startDate
     startDate[Calendar.HOUR_OF_DAY] = 0
     startDate[Calendar.MINUTE] = 0
