@@ -68,6 +68,40 @@ class MonitoreoMSController {
           detallesInstanceTotal: detalles, bOffset: params.offset]
     }
 
+    def listPorFolio(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        if (!params.offset)
+          params["offset"] = 0
+        else {
+          params.offset = params.offset.toLong()
+        }
+        log.debug("params = $params")
+
+        def query =
+            "  from Solicitud                " +
+            " where estado in ('A','V','R')  " +
+            "   and estado is not null       "
+        def solicitudes = Solicitud.executeQuery(query)
+        log.debug("numero de solicitudes = ${solicitudes.size()}")
+        def queryDetalle =
+            "  from SolicitudDetalle                 " +
+            " where idSolicitud in (:solicitudes)    "
+
+        def detalles = SolicitudDetalle.executeQuery (
+          "select count (*) " + queryDetalle, [solicitudes: solicitudes])[0]
+        log.debug("numero de detalles = ${detalles}")
+        def detallesList = Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes])
+        def semaforo = session["semaforo"]
+        def listaOrdenar = detallesList.collect{new Ordenado(caso: it,
+                              orden: firmadoService.retraso(semaforo, it))}
+        listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
+        def listaOrdenada = listaOrdenar.sort{it.caso.idSolicitud.numeroSolicitud}
+        log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
+
+        [detallesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
+          detallesInstanceTotal: detalles, bOffset: params.offset]
+    }
+
   def showDetalle(Long id) {
     log.debug("params = $params")
     def solicitudDetalleInstance = SolicitudDetalle.get(id)

@@ -11,13 +11,13 @@
     <g:set var="firmado" bean="firmadoService"/>
 		<div class="nav" role="navigation">
 			<ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
         <li><g:link class="list" action="list">Por semaforo</g:link></li>
         <li><g:link class="list" action="listPorFolio">Por número</g:link></li>
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Requerimientos por semaforo</h1>
+			<h1>Requerimientos por número</h1>
 			<g:if test="${flash.message}">
 			  <div class="message" role="status">${flash.message}</div>
 			</g:if>
