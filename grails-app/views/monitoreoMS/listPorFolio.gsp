@@ -28,23 +28,29 @@
 				<thead>
 					<tr>
 
-						<g:sortableColumn property="numeroSolicitud" title="${message(code: 'solicitudDetalle.numeroSolicitud.label', default: 'Requerimiento')}" />
+            <th>
+            ${message(code: 'solicitudDetalle.numeroSolicitud.label', default: 'Requerimiento')}
+            </th>
 
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'solicitudDetalle.err..inicioatencion.label', default: 'Inicio de atención')}" />
+            <th>
+            ${message(code: 'solicitudDetalle.err..inicioatencion.label', default: 'Inicio de atención')}
+            </th>
 
-            <g:sortableColumn property="nombre" title="Solicitante" />
+            <th>Solicitante</th>
 
-            <g:sortableColumn property="nombre" title="Área" />
+            <th>Área</th>
 
-            <g:sortableColumn property="nombre" title="Extensión" />
+            <th>Extensión</th>
 
-            <g:sortableColumn property="nombre" title="Categoría" />
+            <th>Categoría</th>
 
-            <g:sortableColumn property="nombre" title="Subcategoría" />
+            <th>Subcategoría</th>
 
-            <g:sortableColumn property="nombre" title="Categoría de Tercer nivel" />
+            <th>Categoría de Tercer nivel</th>
 
-						<g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
+            <th>${message(code: 'solicitud.estado.label', default: 'Estado')}</th>
+
+            <th>Correo</th>
 
 					</tr>
 				</thead>
@@ -52,7 +58,7 @@
 				<g:each in="${detallesInstanceList}" status="i" var="detalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="showDetalle" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
+						<td><g:link action="showDetallePorFolio" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
               ${detalleInstance.caso.idSolicitud.toString()}
             </g:link></td>
 
@@ -74,13 +80,21 @@
 
             <td>${detalleInstance.caso.idServ}</td>
 
-						<td>
-							<g:if test="${detalleInstance.caso?.idSolicitud.estado}">
-								<span class="property-value" aria-labelledby="estado-label">
-									<g:message code="solicitud.estado.${detalleInstance.caso.idSolicitud.estado}" />
-								</span>
-							</g:if>
-						</td>
+            <td>
+              <g:if test="${detalleInstance.caso?.idSolicitud.estado}">
+                <span class="property-value" aria-labelledby="estado-label">
+                  <g:message code="solicitud.estado.${detalleInstance.caso.idSolicitud.estado}" />
+                </span>
+              </g:if>
+            </td>
+
+            <td>
+              <g:if test="${detalleInstance.orden == 0}">
+                <g:link class="list" action="correo" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
+                  enviar
+                </g:link>
+              </g:if>
+            </td>
 
 					</tr>
 				</g:each>

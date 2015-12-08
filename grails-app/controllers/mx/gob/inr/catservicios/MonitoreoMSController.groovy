@@ -115,6 +115,18 @@ class MonitoreoMSController {
     [solicitudDetalleInstance: solicitudDetalleInstance, bOffset: params.offset]
   }
 
+  def showDetallePorFolio(Long id) {
+    log.debug("params = $params")
+    def solicitudDetalleInstance = SolicitudDetalle.get(id)
+    if (!solicitudDetalleInstance) {
+        flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+        redirect(action: "listPorFolio")
+        return
+    }
+
+    log.debug("bOffset = $params.offset")
+    [solicitudDetalleInstance: solicitudDetalleInstance, bOffset: params.offset]
+  }
 
   def correo(Long id) {
     log.debug("params = $params, id = $id")
