@@ -34,9 +34,9 @@ class MonitoreoMSController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        if (!params.offset)
+        if (!params.offset) {
           params["offset"] = 0
-        else {
+        } else {
           params.offset = params.offset.toLong()
         }
         log.debug("params = $params")
@@ -113,6 +113,38 @@ class MonitoreoMSController {
 
     log.debug("bOffset = $params.offset")
     [solicitudDetalleInstance: solicitudDetalleInstance, bOffset: params.offset]
+  }
+
+
+  def correo(Long id) {
+    log.debug("params = $params, id = $id")
+    def asunto = "Aviso de servicio retrasado"
+    def caso = SolicitudDetalle.get(id)
+    def usuarios = []
+    if (caso.idSolicitud.estado == 'R' as char) {
+      if (caso.idTecnico) {
+        usuarios << Usuario.get(caso.idTecnico)
+      } else {
+        usuarios = firmadoService.aprobadores(caso.idServ?.servResp2)
+      }
+    } else if (caso.idSolicitud.estado == 'V' as char) {
+      usuarios = firmadoService.aprobadores(caso.idServ?.servResp2)
+    } else /* estado == 'A' */ if (caso.idSolicitud.idVb) {
+      usuarios << Usuario.get(caso.idSolicitud.idVb)
+    } else {
+      usuarios = firmadoService.aprobadores(caso.idServ?.servResp1)
+    }
+
+    usuarios.each {
+      def correo = it.correo ?:
+                     grailsApplication.config.correo.general
+      def msg = """Hola ${it},
+
+      El requerimiento ${caso.idSolicitud} esta retrasado, favor de atenderlo de inmediato:"""
+      firmadoService.sendMail(correo, asunto, msg)
+    }
+
+    redirect(action: "list", params: params)
   }
 
 }

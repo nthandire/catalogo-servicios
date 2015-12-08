@@ -247,7 +247,7 @@ class SolicitudGestionController {
 
         solicitudInstance.detalles.findAll{it.estado = 'A' as char}.each {
 
-          coordinadores(it.idServ.servResp2).each { coord ->
+          firmadoService.aprobadores(it.idServ.servResp2).each { coord ->
             def asunto = "Solicitud ${solicitudInstance} requiere procesarse"
             def liga = createLink(controller: "SolicitudCoordinador",
                                   action: "edit", id: it.id,
@@ -282,27 +282,6 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "list")
-    }
-
-    def coordinadores(Cat_servResp area) {
-        def areasExpandidas = []
-        areasExpandidas += area.descripcion.split("/")
-        areasExpandidas = areasExpandidas.flatten()
-        log.debug("areasExpandidas = ${areasExpandidas}")
-        def usuariosDelArea = []
-        areasExpandidas.each{
-          usuariosDelArea += UsuarioAutorizado.findAllByArea(it)["id"]
-        }
-        log.debug("usuariosDelArea = ${usuariosDelArea}")
-
-        def usuarios = Usuario.withNewSession { session ->
-          Usuario.findAllEnabledByIdInList(usuariosDelArea)
-        }
-        log.debug("usuarios = ${usuarios}")
-
-        def coordinadores = usuarios.findAll{firmadoService.thisIsCoordinador(it.id)}
-        log.debug("coordinadores = ${coordinadores}")
-        coordinadores
     }
 
     def updateVB(Long id, Long version) {

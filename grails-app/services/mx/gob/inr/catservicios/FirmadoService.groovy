@@ -311,4 +311,25 @@ class FirmadoService {
     return idxSemaforo
   }
 
+    def aprobadores(Cat_servResp area) {
+        def areasExpandidas = []
+        areasExpandidas += area.descripcion.split("/")
+        areasExpandidas = areasExpandidas.flatten()
+        log.debug("areasExpandidas = ${areasExpandidas}")
+        def usuariosDelArea = []
+        areasExpandidas.each{
+          usuariosDelArea += UsuarioAutorizado.findAllByArea(it)["id"]
+        }
+        log.debug("usuariosDelArea = ${usuariosDelArea}")
+
+        def usuarios = Usuario.withNewSession { session ->
+          Usuario.findAllEnabledByIdInList(usuariosDelArea)
+        }
+        log.debug("usuarios = ${usuarios}")
+
+        def aprobadores = usuarios.findAll{thisIsCoordinador(it.id)}
+        log.debug("aprobadores = ${aprobadores}")
+        aprobadores
+    }
+
 }
