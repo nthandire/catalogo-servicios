@@ -12,10 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="listMonitoreo">Requerimientos por semaforo</g:link></li>
-        <li><g:link class="list" action="listPorFolio">Requerimientos por número</g:link></li>
-        <li><g:link class="list" action="listIncidentes">Incidentes por semaforo</g:link></li>
-        <li><g:link class="list" action="listPorFolio">Incidentes por número</g:link></li>
+        <g:render template="ligas"/>
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">

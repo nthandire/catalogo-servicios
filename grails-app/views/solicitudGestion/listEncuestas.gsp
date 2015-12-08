@@ -12,11 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list">Requerimientos a revisar</g:link></li>
-        <li><g:link class="list" action="listTodas">Todas</g:link></li>
-				<li><g:link class="list" action="listAsignados">Requerimientos asignadas</g:link></li>
-        <li><g:link class="list" action="listEncuestas">Requerimientos en encuesta</g:link></li>
-				<li><g:link class="list" action="listTerminadas">Requerimientos terminadas</g:link></li>
+        <g:render template="ligas"/>
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">

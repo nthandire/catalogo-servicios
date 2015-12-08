@@ -5,6 +5,28 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'autoriza.label', default: 'Autoriza')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
+    <style>
+      a:link {
+        color: black;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:visited {
+        color: pink;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:hover {
+        color: blue;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      a:active {
+        color: orange;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+    </style>
 	</head>
 	<body>
 		<a href="#list-autoriza" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -12,14 +34,15 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="list">Requerimientos por semaforo</g:link></li>
+        <li><g:link class="list" action="listMonitoreo">Requerimientos por semaforo</g:link></li>
         <li><g:link class="list" action="listPorFolio">Requerimientos por número</g:link></li>
+        <li><g:link class="list" action="listPorEstado">Requerimientos por estado</g:link></li>
         <li><g:link class="list" action="listIncidentes">Incidentes por semaforo</g:link></li>
         <li><g:link class="list" action="listPorFolio">Incidentes por número</g:link></li>
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Requerimientos por número</h1>
+			<h1>Requerimientos por estado</h1>
 			<g:if test="${flash.message}">
 			  <div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -58,13 +81,13 @@
 				</thead>
 				<tbody>
 				<g:each in="${detallesInstanceList}" status="i" var="detalleInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					<tr style="background-color: ${detalleInstance.color};">
 
 						<td><g:link action="showDetallePorFolio" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
               ${detalleInstance.caso.idSolicitud.toString()}
             </g:link></td>
 
-            <td style="background-color: ${detalleInstance.color};">
+            <td>
               <g:formatDate date="${detalleInstance.caso.idSolicitud.fechaRevisa?:detalleInstance.caso.idSolicitud.fechaVb?:detalleInstance.caso.idSolicitud.fechaAutoriza}" />
             </td>
 
@@ -92,7 +115,7 @@
 
             <td>
               <g:if test="${detalleInstance.orden == 0}">
-                <g:link class="list" action="correo" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
+                <g:link class="btn" action="correoFolio" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
                   enviar
                 </g:link>
               </g:if>

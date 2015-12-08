@@ -10,7 +10,7 @@ import groovy.time.TimeCategory
 class MonitoreoMSController {
     def firmadoService
     static nombreMenu = "Administración de servicio"
-    static ordenMenu = 89
+    static ordenMenu = -89 // TODO: Borrar este controlador
 
     def iniciarSemaforos() {
       if (!(session["semaforoPeligro"])) {
@@ -29,11 +29,11 @@ class MonitoreoMSController {
 
     def index() {
       iniciarSemaforos()
-      redirect(action: "list", params: params)
+      redirect(action: "listMonitoreo", params: params)
     }
 
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def listMonitoreo(Integer max) {
+        params.max = Math.min(max ?: 50, 100)
         if (!params.offset) {
           params["offset"] = 0
         } else {
@@ -43,8 +43,7 @@ class MonitoreoMSController {
 
         def query =
             "  from Solicitud                " +
-            " where estado in ('A','V','R')  " +
-            "   and estado is not null       "
+            " where estado in ('A','V','R')  "
         def solicitudes = Solicitud.executeQuery(query)
         log.debug("numero de solicitudes = ${solicitudes.size()}")
         def queryDetalle =
@@ -67,7 +66,7 @@ class MonitoreoMSController {
     }
 
     def listPorFolio(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 50, 100)
         if (!params.offset)
           params["offset"] = 0
         else {
@@ -77,8 +76,7 @@ class MonitoreoMSController {
 
         def query =
             "  from Solicitud                " +
-            " where estado in ('A','V','R')  " +
-            "   and estado is not null       "
+            " where estado in ('A','V','R')  "
         def solicitudes = Solicitud.executeQuery(query)
         log.debug("numero de solicitudes = ${solicitudes.size()}")
         def queryDetalle =
@@ -92,6 +90,39 @@ class MonitoreoMSController {
                               orden: firmadoService.retraso(semaforo, it))}
         listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
         def listaOrdenada = listaOrdenar.sort{it.caso.idSolicitud.numeroSolicitud}
+        log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
+
+        [detallesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
+          detallesInstanceTotal: detalles, bOffset: params.offset]
+    }
+
+    def listPorEstado(Integer max) {
+        params.max = Math.min(max ?: 50, 100)
+        if (!params.offset)
+          params["offset"] = 0
+        else {
+          params.offset = params.offset.toLong()
+        }
+        log.debug("params = $params")
+
+        def query =
+            "  from Solicitud                " +
+            " where estado in ('A','V','R')  "
+        def solicitudes = Solicitud.executeQuery(query)
+        log.debug("numero de solicitudes = ${solicitudes.size()}")
+        def queryDetalle =
+            "  from SolicitudDetalle                 " +
+            " where idSolicitud in (:solicitudes)    "
+        def detallesList = Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes])
+        def detalles = detallesList.size()
+        log.debug("numero de detalles = ${detalles}")
+        def semaforo = session["semaforo"]
+        def listaOrdenar = detallesList.collect{new Ordenado(caso: it,
+                              orden: firmadoService.retraso(semaforo, it))}
+        listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
+        def listaOrdenada = listaOrdenar.sort{a,b -> a.caso.idSolicitud.estado == b.caso.idSolicitud.estado ?
+          a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
+          a.caso.idSolicitud.estado <=> b.caso.idSolicitud.estado}
         log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
 
         [detallesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
@@ -131,7 +162,7 @@ class MonitoreoMSController {
     def solicitudDetalleInstance = SolicitudDetalle.get(id)
     if (!solicitudDetalleInstance) {
         flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
-        redirect(action: "list")
+        redirect(action: "listMonitoreo")
         return
     }
 
@@ -153,6 +184,24 @@ class MonitoreoMSController {
   }
 
   def correo(Long id) {
+    enviaCorreo(id)
+
+    redirect(action: "listMonitoreo", params: params)
+  }
+
+  def correoFolio(Long id) {
+    enviaCorreo(id)
+
+    redirect(action: "listPorFolio", params: params)
+  }
+
+  def correoEstado(Long id) {
+    enviaCorreo(id)
+
+    redirect(action: "listPorEstado", params: params)
+  }
+
+  def enviaCorreo(Long id) {
     log.debug("params = $params, id = $id")
     def asunto = "Aviso de servicio retrasado"
     def caso = SolicitudDetalle.get(id)
@@ -179,8 +228,6 @@ class MonitoreoMSController {
       El requerimiento con No. de folio ${caso.idSolicitud} a rebasado el tiempo de atención acordado, por lo que se solicita se atienda a la brevedad"""
       firmadoService.sendMail(correo, asunto, msg)
     }
-
-    redirect(action: "list", params: params)
   }
 
 }
