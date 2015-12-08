@@ -19,7 +19,7 @@
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Requerimientos por semaforo</h1>
+			<h1>Incidentes por semaforo</h1>
 			<g:if test="${flash.message}">
 			  <div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -31,9 +31,9 @@
 					<tr>
 
             <th>
-            ${message(code: 'solicitudDetalle.numeroSolicitud.label', default: 'Requerimiento')}
+            ${message(code: 'solicitudDetalle.numeroSolicitud.label', default: 'Incidente')}
             </th>
-
+%{--
             <th>
             ${message(code: 'solicitudDetalle.err..inicioatencion.label', default: 'Inicio de atención')}
             </th>
@@ -53,17 +53,17 @@
             <th>${message(code: 'solicitud.estado.label', default: 'Estado')}</th>
 
             <th>Correo</th>
-
+--}%
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${detallesInstanceList}" status="i" var="detalleInstance">
+				<g:each in="${incidentesInstanceList}" status="i" var="detalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
 						<td><g:link action="showDetalle" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
-              ${detalleInstance.caso.idSolicitud.toString()}
+              ${detalleInstance.caso.toString()}
             </g:link></td>
-
+%{--
             <td style="background-color: ${detalleInstance.color};">
               <g:formatDate date="${detalleInstance.caso.idSolicitud.fechaRevisa?:detalleInstance.caso.idSolicitud.fechaVb?:detalleInstance.caso.idSolicitud.fechaAutoriza}" />
             </td>
@@ -97,13 +97,13 @@
                 </g:link>
               </g:if>
             </td>
-
+--}%
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${detallesInstanceTotal}" />
+				<g:paginate total="${incidentesInstanceTotal}" />
 			</div>
 		</div>
 	</body>

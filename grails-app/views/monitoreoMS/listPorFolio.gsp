@@ -12,8 +12,10 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="list">Por semaforo</g:link></li>
-        <li><g:link class="list" action="listPorFolio">Por número</g:link></li>
+        <li><g:link class="list" action="list">Requerimientos por semaforo</g:link></li>
+        <li><g:link class="list" action="listPorFolio">Requerimientos por número</g:link></li>
+        <li><g:link class="list" action="listIncidentes">Incidentes por semaforo</g:link></li>
+        <li><g:link class="list" action="listPorFolio">Incidentes por número</g:link></li>
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">

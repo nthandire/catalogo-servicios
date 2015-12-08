@@ -50,17 +50,15 @@ class MonitoreoMSController {
         def queryDetalle =
             "  from SolicitudDetalle                 " +
             " where idSolicitud in (:solicitudes)    "
-
-        def detalles = SolicitudDetalle.executeQuery (
-          "select count (*) " + queryDetalle, [solicitudes: solicitudes])[0]
-        log.debug("numero de detalles = ${detalles}")
         def detallesList = Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes])
+        def detalles = detallesList.size()
+        log.debug("numero de detalles = ${detalles}")
         def semaforo = session["semaforo"]
         def listaOrdenar = detallesList.collect{new Ordenado(caso: it,
                               orden: firmadoService.retraso(semaforo, it))}
         listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
         def listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
-          a.caso.idSolicitud.fechaSolicitud <=> a.caso.idSolicitud.fechaSolicitud :
+          a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
           a.orden <=> b.orden }
         log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
 
@@ -86,11 +84,9 @@ class MonitoreoMSController {
         def queryDetalle =
             "  from SolicitudDetalle                 " +
             " where idSolicitud in (:solicitudes)    "
-
-        def detalles = SolicitudDetalle.executeQuery (
-          "select count (*) " + queryDetalle, [solicitudes: solicitudes])[0]
-        log.debug("numero de detalles = ${detalles}")
         def detallesList = Solicitud.executeQuery(queryDetalle, [solicitudes: solicitudes])
+        def detalles = detallesList.size()
+        log.debug("numero de detalles = ${detalles}")
         def semaforo = session["semaforo"]
         def listaOrdenar = detallesList.collect{new Ordenado(caso: it,
                               orden: firmadoService.retraso(semaforo, it))}
@@ -101,6 +97,34 @@ class MonitoreoMSController {
         [detallesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
           detallesInstanceTotal: detalles, bOffset: params.offset]
     }
+
+  def listIncidentes(Integer max) {
+    params.max = Math.min(max ?: 10, 100)
+    if (!params.offset) {
+      params["offset"] = 0
+    } else {
+      params.offset = params.offset.toLong()
+    }
+    log.debug("params = $params")
+
+    def query =
+      "  from Incidente                " +
+      " where estado = 'A'             "
+    def incidentesList = Incidente.executeQuery(query)
+    def incidentes = incidentesList.size()
+    log.debug("numero de incidentes = ${incidentes}")
+    def semaforo = session["semaforo"]
+    def listaOrdenar = incidentesList.collect{new IncidenteOrdenado(caso: it,
+                          orden: 0)} // firmadoService.retraso(semaforo, it))}
+    listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
+    def listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
+      a.caso.fechaIncidente <=> b.caso.fechaIncidente :
+      a.orden <=> b.orden }
+    log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
+
+    [incidentesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
+      incidentesInstanceTotal: incidentes, bOffset: params.offset]
+  }
 
   def showDetalle(Long id) {
     log.debug("params = $params")
@@ -152,7 +176,7 @@ class MonitoreoMSController {
                      grailsApplication.config.correo.general
       def msg = """Hola ${it},
 
-      El requerimiento ${caso.idSolicitud} esta retrasado, favor de atenderlo de inmediato:"""
+      El requerimiento con No. de folio ${caso.idSolicitud} a rebasado el tiempo de atención acordado, por lo que se solicita se atienda a la brevedad"""
       firmadoService.sendMail(correo, asunto, msg)
     }
 
@@ -171,3 +195,12 @@ class Ordenado {
   }
 }
 
+class IncidenteOrdenado {
+  Incidente caso
+  Integer orden
+  String color
+
+  String toString() {
+    "$orden : $color : [$caso]"
+  }
+}
