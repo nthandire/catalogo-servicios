@@ -266,6 +266,7 @@ class IncidenteController {
     }
 
   def listaDeTecnicos(Cat_servResp servresp) {
+    log.debug("servresp = $servresp")
     def rolTecnicos = Rol.withNewSession { session ->
       Rol.findByAuthority('ROLE_SAST_TECNICO')
     }

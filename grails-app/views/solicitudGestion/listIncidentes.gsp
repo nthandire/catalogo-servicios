@@ -5,34 +5,13 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'autoriza.label', default: 'Autoriza')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
-    <style>
-      a:link {
-        color: black;
-        background-color: transparent;
-        text-decoration: none;
-      }
-      a:visited {
-        color: pink;
-        background-color: transparent;
-        text-decoration: none;
-      }
-      a:hover {
-        color: blue;
-        background-color: transparent;
-        text-decoration: underline;
-      }
-      a:active {
-        color: orange;
-        background-color: transparent;
-        text-decoration: underline;
-      }
-    </style>
-	</head>
-	<body>
-		<a href="#list-autoriza" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+    <g:render template="stiloLigas"/>
+  </head>
+  <body>
+    <a href="#list-autoriza" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
     <g:set var="firmado" bean="firmadoService"/>
-		<div class="nav" role="navigation">
-			<ul>
+    <div class="nav" role="navigation">
+      <ul>
         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
         <g:render template="ligas"/>
 			</ul>
@@ -60,9 +39,8 @@
             <th>Solicitante</th>
 
             <th>Área</th>
-%{--
 
-            <th>Extensión</th>
+            <th>Cuerpo : Nivel</th>
 
             <th>Categoría</th>
 
@@ -73,51 +51,51 @@
             <th>${message(code: 'solicitud.estado.label', default: 'Estado')}</th>
 
             <th>Correo</th>
---}%
+
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${incidentesInstanceList}" status="i" var="instance">
-					<tr style="background-color: ${instance.color};">
+				<g:each in="${incidentesInstanceList}" status="i" var="incidente">
+					<tr style="background-color: ${incidente.color};">
 
-						<td><g:link action="showIncidente" id="${instance.caso.id}" params="[offset: bOffset?:0]">
-              ${instance.caso.toString()}
+						<td><g:link action="showIncidente" id="${incidente.caso.id}" params="[offset: bOffset?:0]">
+              ${incidente.caso.toString()}
             </g:link></td>
 
-            <td style="background-color: ${instance.color};">
-              <g:formatDate date="${instance.caso.fechaIncidente}" />
+            <td style="background-color: ${incidente.color};">
+              <g:formatDate date="${incidente.caso.fechaIncidente}" />
             </td>
 
             <td>
-              ${firmado.usuarioNombre(instance.caso.idReporta)}
+              ${firmado.usuarioNombre(incidente.caso.idReporta)}
             </td>
 
-            <td>${firmado.areaNombre(instance.caso.idReporta)}</td>
-%{--
-            <td>${Usuario.get(instance.caso.idSolicitud.idSolicitante).extension}</td>
+            <td>${firmado.areaNombre(incidente.caso.idReporta)}</td>
 
-            <td>${instance.caso.idServcat.categoria}</td>
+            <td>${firmado.cuerpoNivel(incidente.caso.idResguardoentregadetalle)}</td>
 
-            <td>${instance.caso.idServ?.servSub}</td>
+            <td>${incidente.caso.idServ?.servSub.servCat.categoria}</td>
 
-            <td>${instance.caso.idServ}</td>
+            <td>${incidente.caso.idServ?.servSub}</td>
+
+            <td>${incidente.caso.idServ}</td>
 
             <td>
-              <g:if test="${instance.caso?.idSolicitud.estado}">
+              <g:if test="${incidente.caso?.estado}">
                 <span class="property-value" aria-labelledby="estado-label">
-                  <g:message code="solicitud.estado.${instance.caso.idSolicitud.estado}" />
+                  <g:message code="solicitud.estado.${incidente.caso.estado}" />
                 </span>
               </g:if>
             </td>
 
             <td>
-              <g:if test="${instance.orden == 0}">
-                <g:link class="btn" action="correo" id="${instance.caso.id}" params="[offset: bOffset?:0]">
+              <g:if test="${incidente.orden == 0}">
+                <g:link class="btn" action="correoIncidente" id="${incidente.caso.id}" params="[offset: bOffset?:0]">
                   enviar
                 </g:link>
               </g:if>
             </td>
---}%
+
 					</tr>
 				</g:each>
 				</tbody>

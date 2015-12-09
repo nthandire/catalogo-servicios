@@ -81,27 +81,27 @@
       </td>
     </tr>
   </g:if>
-  <g:elseif test="$incidenteInstance.idResguardoentregadetalle">
+  <g:elseif test="${incidenteInstance.idResguardoentregadetalle}">
     <g:set var="equipo"
       value="${ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle)}" />
     <tr>
       <td>
           <label for="equipo"><g:message code="servicios.equipo.label" default="Equipo" /></label>
-          <g:textField name="equipo" value="${equipo.descripcion}"
+          <g:textField name="equipo" value="${equipo?.descripcion}"
             readonly="true" style="width: 250px;text-transform: uppercase;"/>
       </td>
       <td>
           <label for="marca">
             <g:message code="servicios.marca.label" default="Marca" />
           </label>
-          <g:textField name="marca" value="${servicios.descMarca(equipo.idMarca)}"
+          <g:textField name="marca" value="${servicios.descMarca(equipo?.idMarca)}"
             readonly="true" style="width: 250px;text-transform: uppercase;"/>
       </td>
       <td>
           <label for="modelo">
             <g:message code="servicios.modelo.label" default="Modelo" />
           </label>
-          <g:textField name="modelo" value="${equipo.desModelo}"
+          <g:textField name="modelo" value="${equipo?.desModelo}"
             readonly="true" style="width: 250px;text-transform: uppercase;"/>
       </td>
     </tr>
@@ -110,14 +110,14 @@
           <label for="serie">
             <g:message code="servicios.serie.label" default="Serie" />
           </label>
-          <g:textField name="serie" value="${equipo.serie}"
+          <g:textField name="serie" value="${equipo?.serie}"
             readonly="true" style="width: 250px;text-transform: uppercase;" />
       </td>
       <td>
           <label for="economico">
             <g:message code="servicios.economico.label" default="Inventario" />
           </label>
-          <g:textField name="economico" value="${equipo.inventario}" readonly="true" style="width: 250px;"/>
+          <g:textField name="economico" value="${equipo?.inventario}" readonly="true" style="width: 250px;"/>
       </td>
       <td>
       </td>
@@ -144,28 +144,47 @@
   </g:elseif>
 </table>
 
-<div class="row-fluid">
-  <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
-      <label for="idReporta">
-        <g:message code="incidente.idReporta.label" default="Quien Reporta" />
-      </label>
-      <g:if test="${!incidenteInstance.id}">
-        <%-- TODO: mejorar el select, solo los usuarios SAST --%>
-        <g:select id="idReporta" name="idReporta"
-          from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
-          required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
-          noSelection="${['':'Seleccione una...']}" optionKey="id"
-          optionValue="nombreMostrar"/>
-      </g:if>
-      <g:else>
-        <g:field id="idReportaShow" name="idReportaShow"
-          value="${Usuario.get(incidenteInstance?.idReporta)}"
-          readonly="true"/>
-      </g:else>
+<g:if test="${(incidenteInstance?.idResguardoentregadetalle)}">
+  <div class="row-fluid">
+    <div class="span7">
+      <div class="fieldtablecontain">
+        <label for="ubicacion-label">
+          <g:message code="solicitud.ubicacion.label" default="Ubicación"/>
+        </label>
+        <g:field type="text" name="ubicacion" disabled="true" style="width:600px"
+          value="${firmado.ubicacion(incidenteInstance?.idResguardoentregadetalle)}"/>
+      </div>
+    </div>
+
+    <div class="span5">
+      <div class="fieldtablecontain">
+        <label for="cuerpo-label">
+          <g:message code="solicitud.cuerpo.label" default="Cuerpo : Nivel"/>
+        </label>
+        <g:field type="text" name="cuerpo" disabled="true" style="width:400px"
+          value="${firmado.cuerpoNivel(incidenteInstance?.idResguardoentregadetalle)}"/>
+      </div>
     </div>
   </div>
-</div>
+</g:if>
+
+<g:if test="${!incidenteInstance.id}">
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
+        <label for="idReporta">
+          <g:message code="incidente.idReporta.label" default="Quien Reporta" />
+        </label>
+          <%-- TODO: mejorar el select, solo los usuarios SAST --%>
+          <g:select id="idReporta" name="idReporta"
+            from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
+            required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
+            noSelection="${['':'Seleccione una...']}" optionKey="id"
+            optionValue="nombreMostrar"/>
+      </div>
+    </div>
+  </div>
+</g:if>
 
 <g:if test="${incidenteInstance.id && incidenteInstance.idReporta}">
   <div class="row-fluid">
@@ -197,30 +216,6 @@
       </div>
     </div>
   </div>
-
-  <g:if test="${(incidenteInstance?.idResguardoentregadetalle)}">
-    <div class="row-fluid">
-      <div class="span7">
-        <div class="fieldtablecontain">
-          <label for="ubicacion-label">
-            <g:message code="solicitud.ubicacion.label" default="Ubicación"/>
-          </label>
-          <g:field type="text" name="ubicacion" disabled="true" style="width:600px"
-            value="${firmado.ubicacion(incidenteInstance?.idResguardoentregadetalle)}"/>
-        </div>
-      </div>
-
-      <div class="span5">
-        <div class="fieldtablecontain">
-          <label for="cuerpo-label">
-            <g:message code="solicitud.cuerpo.label" default="Cuerpo : Nivel"/>
-          </label>
-          <g:field type="text" name="cuerpo" disabled="true" style="width:400px"
-            value="${firmado.cuerpoNivel(incidenteInstance?.idResguardoentregadetalle)}"/>
-        </div>
-      </div>
-    </div>
-  </g:if>
 </g:if>
 
 <g:if test="${incidenteInstance.fechaSolnivel1}">

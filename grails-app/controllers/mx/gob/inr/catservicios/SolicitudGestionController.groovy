@@ -557,15 +557,15 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
 
   def showIncidente(Long id) {
     log.debug("params = $params")
-    def solicitudDetalleInstance = SolicitudDetalle.get(id)
-    if (!solicitudDetalleInstance) {
-        flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+    def incidente = Incidente.get(id)
+    if (!incidente) {
+        flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'incidente'), id])
         redirect(action: "listIncidentes")
         return
     }
 
     log.debug("bOffset = $params.offset")
-    [solicitudDetalleInstance: solicitudDetalleInstance, bOffset: params.offset]
+    [incidente: incidente, bOffset: params.offset]
   }
 
   def correo(Long id) {
@@ -584,6 +584,12 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
     enviaCorreo(id)
 
     redirect(action: "listPorEstado", params: params)
+  }
+
+  def correoIncidente(Long id) {
+    enviaCorreo(id)
+
+    redirect(action: "listIncidentes", params: params)
   }
 
   def enviaCorreo(Long id) {

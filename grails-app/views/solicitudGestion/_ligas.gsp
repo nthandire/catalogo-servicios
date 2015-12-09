@@ -7,4 +7,6 @@
         <li><g:link class="list" action="listPorFolio">Requerimientos por número</g:link></li>
         <li><g:link class="list" action="listPorEstado">Requerimientos por estado</g:link></li>
         <li><g:link class="list" action="listIncidentes">Incidentes por semaforo</g:link></li>
+        %{--
         <li><g:link class="list" action="listPorFolio">Incidentes por número</g:link></li>
+        --}%
