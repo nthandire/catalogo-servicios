@@ -42,7 +42,7 @@
 
             <g:if test="${solicitudInstance.instanceOf(Solicitud)}">
 
-              <td><g:link action="edit" id="${solicitudInstance.id}">Solicitud</g:link></td>
+              <td><g:link action="edit" id="${solicitudInstance.id}">Requerimiento</g:link></td>
 
               <td><g:link action="edit" id="${solicitudInstance.id}">${solicitudInstance.toString()}</g:link></td>
 

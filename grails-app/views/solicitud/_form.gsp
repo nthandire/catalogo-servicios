@@ -22,10 +22,15 @@
       <g:each in="${solicitudInstance?.detalles.sort {it.id}}" var="d">
         <tr>
           <td>
+            <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
             <a data-toggle="modal" href="#responsive"
               onclick="detalle(${d.id}, ${d.idServcat.id}, '${d.descripcion}', ${d.idResguardoentregadetalle?:0}, '${d.estado}')">
               ${d?.encodeAsHTML()}
             </a>
+            </g:if>
+            <g:else>
+              ${d?.encodeAsHTML()}
+            </g:else>
             <%--
             <g:link controller="solicitudDetalle" action="edit" id="${d.id}">${d?.encodeAsHTML()}</g:link>
             --%>
@@ -37,7 +42,7 @@
         </tr>
       </g:each>
       <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
-        <tr><td>
+        <tr><td colspan="2">
           <a class="btn" data-toggle="modal" href="#responsive"
             onclick="detalleNuevo()">Agregar otro servicio</a>
         </td>
