@@ -231,23 +231,3 @@ class MonitoreoMSController {
   }
 
 }
-
-class Ordenado {
-  SolicitudDetalle caso
-  Integer orden
-  String color
-
-  String toString() {
-    "$orden : $color : [$caso]"
-  }
-}
-
-class IncidenteOrdenado {
-  Incidente caso
-  Integer orden
-  String color
-
-  String toString() {
-    "$orden : $color : [$caso]"
-  }
-}

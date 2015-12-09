@@ -15,7 +15,8 @@ class SolicitudGestionController {
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
-        redirect(action: "list", params: params)
+      iniciarSemaforos()
+      redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
@@ -376,22 +377,19 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
       value:"${Cat_serv.get(servicesId).impacto}")
   }
 
+/*****
+*
+*   Administración de servicios.
+*
+*****/
 
     def iniciarSemaforos() {
-      if (!(session["semaforoPeligro"])) {
-        log.debug("Inicio semaforo")
-        session["semaforoPeligro"] = g.message(code:"semaforo.peligro").toLong()
-        session["semaforoSeguro"] = g.message(code:"semaforo.seguro").toLong()
-      }
-
       if (!(session["semaforo"])) {
         log.debug("Inicio semaforo")
         session["semaforo"] = Semaforo.list().sort{-it.min}
         log.debug("session['semaforo'] = ${session['semaforo']}")
       }
     }
-
-// Administración de servicios.
 
     def listMonitoreo(Integer max) {
         params.max = Math.min(max ?: 50, 100)
@@ -557,6 +555,19 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
     [solicitudDetalleInstance: solicitudDetalleInstance, bOffset: params.offset]
   }
 
+  def showIncidente(Long id) {
+    log.debug("params = $params")
+    def solicitudDetalleInstance = SolicitudDetalle.get(id)
+    if (!solicitudDetalleInstance) {
+        flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'SolicitudDetalle'), id])
+        redirect(action: "listIncidentes")
+        return
+    }
+
+    log.debug("bOffset = $params.offset")
+    [solicitudDetalleInstance: solicitudDetalleInstance, bOffset: params.offset]
+  }
+
   def correo(Long id) {
     enviaCorreo(id)
 
@@ -612,7 +623,7 @@ class Ordenado {
   String color
 
   String toString() {
-    "$orden : $color : [$caso]"
+    "$orden : $color : $caso"
   }
 }
 
@@ -622,6 +633,6 @@ class IncidenteOrdenado {
   String color
 
   String toString() {
-    "$orden : $color : [$caso]"
+    "$orden : $color : $caso"
   }
 }
