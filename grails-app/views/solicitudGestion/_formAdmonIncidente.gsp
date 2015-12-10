@@ -45,16 +45,23 @@
 
 <g:each var="nivel" in="${1..incidente.nivel}">
   <li class="fieldcontain">
-    <span class="property-label">Nivel ${nivel}</span>
+    <span class="property-label" style="font-weight: 900;">Nivel ${nivel}</span>
     <span class="property-value">
       ${Usuario.get(incidente["idNivel"+nivel])}
     </span>
   </li>
 
   <li class="fieldcontain">
-    <span class="property-label"> Comentarios</span>
+    <span class="property-label" style="font-weight: 100;">--> Comentarios</span>
     <span class="property-value">
       ${incidente["solucionNivel"+nivel]}
+    </span>
+  </li>
+
+  <li class="fieldcontain">
+    <span class="property-label" style="font-weight: 100;">--> Fecha</span>
+    <span class="property-value">
+      ${incidente["fechaSolnivel"+nivel]}
     </span>
   </li>
 </g:each>
