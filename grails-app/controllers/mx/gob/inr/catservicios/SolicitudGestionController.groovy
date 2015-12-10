@@ -505,11 +505,24 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
     log.debug("numero de incidentes = ${incidentes}")
     def semaforo = session["semaforo"]
     def listaOrdenar = incidentesList.collect{new IncidenteOrdenado(caso: it,
-                          orden: 0)} // firmadoService.retraso(semaforo, it))}
+                          orden: firmadoService.retrasoIncidente(semaforo, it))}
     listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
-    def listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
-      a.caso.fechaIncidente <=> b.caso.fechaIncidente :
-      a.orden <=> b.orden }
+
+    def listaOrdenada = []
+    if (!params.sort || params.sort == "semaforo") {
+      listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
+        a.caso.fechaIncidente <=> b.caso.fechaIncidente :
+        !params.order || params.order == "asc" ? a.orden <=> b.orden : b.orden <=> a.orden}
+    } else if (params.sort == "folio") {
+      listaOrdenada = listaOrdenar.sort{!params.order || params.order == "asc" ?
+        it.caso.id : -it.caso.id}
+    } else { // params.sort == "estado"
+      listaOrdenada = listaOrdenar.sort{firmadoService.asignado(it.caso)}
+      if (params.order == "desc") {
+        listaOrdenada = listaOrdenada.reverse()
+      }
+    }
+
     log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
 
     [incidentesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
@@ -586,12 +599,6 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
     redirect(action: "listPorEstado", params: params)
   }
 
-  def correoIncidente(Long id) {
-    enviaCorreo(id)
-
-    redirect(action: "listIncidentes", params: params)
-  }
-
   def enviaCorreo(Long id) {
     log.debug("params = $params, id = $id")
     def asunto = "Aviso de servicio retrasado"
@@ -619,6 +626,38 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
       El requerimiento con No. de folio ${caso.idSolicitud} a rebasado el tiempo de atención acordado, por lo que se solicita se atienda a la brevedad"""
       firmadoService.sendMail(correo, asunto, msg)
     }
+  }
+
+  def correoIncidente(Long id) {
+    error()
+    log.debug("params = $params, id = $id")
+    def asunto = "Aviso de servicio retrasado"
+    def caso = SolicitudDetalle.get(id)
+    def usuarios = []
+    if (caso.idSolicitud.estado == 'R' as char) {
+      if (caso.idTecnico) {
+        usuarios << Usuario.get(caso.idTecnico)
+      } else {
+        usuarios = firmadoService.aprobadores(caso.idServ?.servResp2)
+      }
+    } else if (caso.idSolicitud.estado == 'V' as char) {
+      usuarios = firmadoService.aprobadores(caso.idServ?.servResp2)
+    } else /* estado == 'A' */ if (caso.idSolicitud.idVb) {
+      usuarios << Usuario.get(caso.idSolicitud.idVb)
+    } else {
+      usuarios = firmadoService.aprobadores(caso.idServ?.servResp1)
+    }
+
+    usuarios.each {
+      def correo = it.correo ?:
+                     grailsApplication.config.correo.general
+      def msg = """Hola ${it},
+
+      El requerimiento con No. de folio ${caso.idSolicitud} a rebasado el tiempo de atención acordado, por lo que se solicita se atienda a la brevedad"""
+      firmadoService.sendMail(correo, asunto, msg)
+    }
+
+    redirect(action: "listIncidentes", params: params)
   }
 
 }

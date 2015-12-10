@@ -311,6 +311,69 @@ class FirmadoService {
     return idxSemaforo
   }
 
+  Boolean asignado(Incidente caso) {
+    caso."idNivel${caso.nivel}"
+  }
+
+  Integer retrasoIncidente(List semaforo, Incidente caso) {
+    def fecha = new Date()
+    def minutos = 0
+    def plazoMinutos = 0
+    def unidades = 0
+    def estado = caso.estado
+    def nivel = caso.nivel
+    if (!(estado.toString() in ['A'])) {
+      return semaforo.size()
+    } else { // estado == 'A'
+    log.debug("nivel = $nivel")
+    if (nivel == 1) {
+      fecha = caso.fechaIncidente
+    } else if (caso."idNivel$nivel") { // asignado
+      fecha = caso."fechaNivel$nivel"
+    } else { // no asignado
+      fecha = caso."fechaSolnivel${nivel - 1}"
+    }
+
+    plazoMinutos = caso?.idServ?."tiempo$nivel"
+    unidades = caso?.idServ?."unidades$nivel"?.id
+    }
+
+    log.debug "Incidente = ${caso}, fecha = ${fecha}"
+    switch ( unidades ) {
+      case 2: // Horas
+        plazoMinutos *= 60
+        break
+      case 3: // Días
+        plazoMinutos *= 60 * 24
+        break
+      case 4: // Semanas
+        plazoMinutos *= 60 * 24 * 7
+        break
+    }
+    log.debug "tercer nivel = ${caso?.idServ}"
+    log.debug "unidades = ${unidades}"
+    log.debug "plazoMinutos = $plazoMinutos"
+
+    def ahora = new Date()
+    log.debug "ahora = $ahora"
+
+    def diff = 0
+    use ( TimeCategory ) {
+      diff = ahora - fecha
+      log.debug "dias = $diff.days"
+      minutos = diff.minutes + diff.hours * 60 + diff.days * 24 * 60
+    }
+    log.debug "minutos = $minutos"
+
+    Integer idxSemaforo = 0
+    while (idxSemaforo < semaforo.size()) {
+      if (minutos >= (plazoMinutos * (semaforo[idxSemaforo].min) / 100)) break
+      ++idxSemaforo
+    }
+    log.debug("color = ${semaforo[idxSemaforo].color}")
+    return idxSemaforo
+  }
+
     def aprobadores(Cat_servResp area) {
         def areasExpandidas = []
         areasExpandidas += area.descripcion.split("/")

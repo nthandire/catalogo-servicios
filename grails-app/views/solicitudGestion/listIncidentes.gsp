@@ -5,7 +5,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'autoriza.label', default: 'Autoriza')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
-    <g:render template="stiloLigas"/>
+    <g:render template="estiloLigas"/>
   </head>
   <body>
     <a href="#list-autoriza" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -28,13 +28,9 @@
 				<thead>
 					<tr>
 
-            <th>
-            No. Incidente
-            </th>
+            <g:sortableColumn property="folio" title="${message(code: 'incidente.folio.label', default: 'No. Incidente')}" />
 
-            <th>
-            ${message(code: 'solicitudDetalle.err.inicioatencion.label', default: 'Inicio de atención')}
-            </th>
+            <g:sortableColumn property="semaforo" title="${message(code: 'solicitudDetalle.err.inicioatencion.label', default: 'Inicio de atención')}" />
 
             <th>Solicitante</th>
 
@@ -48,7 +44,7 @@
 
             <th>Categoría de Tercer nivel</th>
 
-            <th>${message(code: 'solicitud.estado.label', default: 'Estado')}</th>
+            <g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
 
             <th>Correo</th>
 
@@ -83,7 +79,7 @@
             <td>
               <g:if test="${incidente.caso?.estado}">
                 <span class="property-value" aria-labelledby="estado-label">
-                  <g:message code="solicitud.estado.${incidente.caso.estado}" />
+                  ${incidente.caso.estado == 'A' as char ? firmado.asignado(incidente.caso) ? "Asignado" : "Abierto" : Cerrado}
                 </span>
               </g:if>
             </td>

@@ -19,10 +19,7 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 - en Solicitud, Gestion, Show: Cambiar como se muestran solicitante y autorizador, de bootstrap grid a table. Aplica para otras pantallas también
 
 
-- semaforo (calcularlo)
-- poner color
-- ordenar el semaforo
-- segunda pantalla
-
+- en Admon de Incidentes, poner la garantia
+- en busqueda de equipo, en lugar de la descripción, usar la tabla cat_tipoanexotecnico
 
 https://docs.google.com/spreadsheets/d/1LGmqK2EB0-fbKyST-EllHpIfleuTn2gIO6AgjaWqZN8/edit#gid=716845027
