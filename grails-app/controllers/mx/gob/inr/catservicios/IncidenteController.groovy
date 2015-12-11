@@ -54,6 +54,36 @@ class IncidenteController {
           incidenteInstanceTotal: incidenteInstanceList.size()]
     }
 
+    def listTerminadas(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        def userID = springSecurityService.principal.id
+        def area = area()
+        def areaDesc = area.descripcion
+        log.debug("area = ${area}, area.id = ${area?.id}")
+
+        def incidenteInstanceTotal = Incidente.countByEstadoOrEstado('T' as char, 'C' as char)
+        def incidenteInstanceList = Incidente.findAllByEstadoOrEstado('T' as char, 'C' as char, params)
+        log.debug("incidenteInstanceList = ${incidenteInstanceList}")
+
+        [incidenteInstanceList: incidenteInstanceList,
+          incidenteInstanceTotal: incidenteInstanceTotal]
+    }
+
+    def listEncuestas(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        def userID = springSecurityService.principal.id
+        def area = area()
+        def areaDesc = area.descripcion
+        log.debug("area = ${area}, area.id = ${area?.id}")
+
+        def incidenteInstanceTotal = Incidente.countByEstado('E' as char)
+        def incidenteInstanceList = Incidente.findAllByEstado('E' as char, params)
+        log.debug("incidenteInstanceList = ${incidenteInstanceList}")
+
+        [incidenteInstanceList: incidenteInstanceList,
+          incidenteInstanceTotal: incidenteInstanceTotal]
+    }
+
   def listIncidentes(Integer max) {
     params.max = Math.min(max ?: 10, 100)
     if (!params.offset) {
