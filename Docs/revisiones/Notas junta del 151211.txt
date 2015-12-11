@@ -1,0 +1,22 @@
+Junta del 23 de octubre.
+------------------------
+
+
++ Creación de incidente, la etiqueta : "Empleado o Inventario o No. de Serie" debe decir "Inventario o No. de Serie o Usuario"
+- El menú de Coordinación cambia a "Aprobador"
+- En Aprobador, al asignar un técnico (solicitudCoordinador/edit) se debe mostrar el numero de requerimiento
+- En Técnico, (solicitudTecnico/edit)  se debe mostrar el numero de requerimiento
+- Mover el semáforo de Incidentes al menú de incidentes, y solo lo pueden ver gestores
+- Los nuevos listados para incidentes (terminadas y en encuestas) agregarlas en el menú de Incidentes
+- En la búsqueda, en el combo, agregar:
+-        usuario
+-        marca
+-        modelo
+- En la búsqueda, al seleccionar, agregar:
+-        garantía
+-        área
+-        cuerpo
+-        nivel
++ En búsquedas, la etiqueta que dice "Empleado que resguarda el equipo" pasa a "Usuario que resguarda el equipo"
+- Requerimiento nuevo, en incidentes, mostrar inmediatamente la extensión del solicitante
+
