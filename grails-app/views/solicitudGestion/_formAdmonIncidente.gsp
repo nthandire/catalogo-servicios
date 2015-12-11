@@ -34,6 +34,11 @@
     <span class="property-label">Inventario</span>
     <span class="property-value">${equipo['inventario']}</span>
   </li>
+
+  <li class="fieldcontain">
+    <span class="property-label">Garantia</span>
+    <span class="property-value">${servicios.garantia(equipo)}</span>
+  </li>
   </g:if>
 
   <li class="fieldcontain">

@@ -19,7 +19,13 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 - en Solicitud, Gestion, Show: Cambiar como se muestran solicitante y autorizador, de bootstrap grid a table. Aplica para otras pantallas también
 
 
-- en Admon de Incidentes, poner la garantia
 - en busqueda de equipo, en lugar de la descripción, usar la tabla cat_tipoanexotecnico
+- pasar el monitor de requerimientos a un solo listado
+
+- Listado de incidentes terminados, últimos 500, incluye cancelados
+- Listado de incidentes en encuesta
+
+> Listado para aprobadores de requerimientos en proceso
+> Listado para aprobadores de incidentes en proceso
 
 https://docs.google.com/spreadsheets/d/1LGmqK2EB0-fbKyST-EllHpIfleuTn2gIO6AgjaWqZN8/edit#gid=716845027

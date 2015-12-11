@@ -99,4 +99,15 @@ class ServiciosService {
     marca
   }
 
+  Date garantia(ResguardoEntregaDetalle equipo){
+    log.debug("equipo = $equipo")
+    Date garantia = null
+    if (equipo.idTipoanexotecnico == 1) {
+      def cpu = Cpu.findByIdResguardoentregadetalle(equipo.id)
+      log.debug("cpu = $cpu")
+      garantia = cpu?.fechaVenceGarantia
+    }
+    garantia
+  }
+
 }
