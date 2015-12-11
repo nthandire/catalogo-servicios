@@ -5,7 +5,23 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'autoriza.label', default: 'Autoriza')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
-    <g:render template="estiloLigas"/>
+    <style>
+      a:link, a:visited {
+        color: black;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:hover {
+        color: blue;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      a:active {
+        color: orange;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+    </style>
 	</head>
 	<body>
 		<a href="#list-autoriza" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

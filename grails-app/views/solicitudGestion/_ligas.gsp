@@ -4,4 +4,3 @@
         <li><g:link class="list" action="listEncuestas">Requerimientos en encuesta</g:link></li>
         <li><g:link class="list" action="listTerminadas">Requerimientos terminadas</g:link></li>
         <li><g:link class="list" action="listMonitoreo">Semaforo de Requerimientos</g:link></li>
-        <li><g:link class="list" action="listIncidentes">Semaforo de Incidentes</g:link></li>

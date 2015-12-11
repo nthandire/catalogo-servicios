@@ -3,16 +3,31 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'autoriza.label', default: 'Autoriza')}" />
+		<g:set var="entityName" value="${message(code: 'incidente.label', default: 'Incidente')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
-    <g:render template="estiloLigas"/>
+    <style>
+      a:link, a:visited {
+        color: black;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:hover {
+        color: blue;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      a:active {
+        color: orange;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
     <a href="#list-autoriza" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
     <g:set var="firmado" bean="firmadoService"/>
     <div class="nav" role="navigation">
       <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
         <g:render template="ligas"/>
 			</ul>
 		</div>

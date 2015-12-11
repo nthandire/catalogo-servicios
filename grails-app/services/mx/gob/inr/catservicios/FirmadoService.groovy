@@ -395,4 +395,12 @@ class FirmadoService {
         aprobadores
     }
 
+    def iniciarSemaforos(HttpSession sessionFirmado) {
+      if (!(sessionFirmado["semaforo"])) {
+        log.debug("Inicio semaforo")
+        sessionFirmado["semaforo"] = Semaforo.list().sort{-it.min}
+        log.debug("sessionFirmado['semaforo'] = ${sessionFirmado['semaforo']}")
+      }
+    }
+
 }

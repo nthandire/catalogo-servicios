@@ -18,7 +18,8 @@ class IncidenteController {
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
     def index() {
-        redirect(action: "list", params: params)
+      firmadoService.iniciarSemaforos(session)
+      redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
@@ -52,6 +53,84 @@ class IncidenteController {
         [incidenteInstanceList: incidentesPaginación,
           incidenteInstanceTotal: incidenteInstanceList.size()]
     }
+
+  def listIncidentes(Integer max) {
+    params.max = Math.min(max ?: 10, 100)
+    if (!params.offset) {
+      params["offset"] = 0
+    } else {
+      params.offset = params.offset.toLong()
+    }
+    log.debug("params = $params")
+
+    def query =
+      "  from Incidente                " +
+      " where estado = 'A'             "
+    def incidentesList = Incidente.executeQuery(query)
+    def incidentes = incidentesList.size()
+    log.debug("numero de incidentes = ${incidentes}")
+    def semaforo = session["semaforo"]
+    def listaOrdenar = incidentesList.collect{new IncidenteOrdenado(caso: it,
+                          orden: firmadoService.retrasoIncidente(semaforo, it))}
+    listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
+
+    def listaOrdenada = []
+    if (!params.sort || params.sort == "semaforo") {
+      listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
+        a.caso.fechaIncidente <=> b.caso.fechaIncidente :
+        !params.order || params.order == "asc" ? a.orden <=> b.orden : b.orden <=> a.orden}
+    } else if (params.sort == "folio") {
+      listaOrdenada = listaOrdenar.sort{!params.order || params.order == "asc" ?
+        it.caso.id : -it.caso.id}
+    } else { // params.sort == "estado"
+      listaOrdenada = listaOrdenar.sort{firmadoService.asignado(it.caso)}
+      if (params.order == "desc") {
+        listaOrdenada = listaOrdenada.reverse()
+      }
+    }
+
+    log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
+
+    [incidentesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
+      incidentesInstanceTotal: incidentes, bOffset: params.offset]
+  }
+
+  def showIncidente(Long id) {
+    log.debug("params = $params")
+    def incidente = Incidente.get(id)
+    if (!incidente) {
+        flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'incidente'), id])
+        redirect(action: "listIncidentes")
+        return
+    }
+
+    log.debug("bOffset = $params.offset")
+    [incidente: incidente, bOffset: params.offset]
+  }
+
+  def correoIncidente(Long id) {
+    log.debug("params = $params, id = $id")
+    def asunto = "Aviso de servicio retrasado"
+    def caso = Incidente.get(id)
+    def nivel = caso.nivel
+    def usuarios = []
+    if (firmadoService.asignado(caso)) {
+      usuarios << Usuario.get(caso."idNivel$nivel")
+    } else {
+      usuarios = firmadoService.aprobadores(caso.idServresp)
+    }
+
+    usuarios.each {
+      def correo = it.correo ?:
+                     grailsApplication.config.correo.general
+      def msg = """Hola ${it},
+
+      El incidente con No. de folio ${caso} a rebasado el tiempo de atención acordado, por lo que se solicita se atienda a la brevedad"""
+      firmadoService.sendMail(correo, asunto, msg)
+    }
+
+    redirect(action: "listIncidentes", params: params)
+  }
 
     Boolean isTecnico() {
       firmadoService.isTecnico(session, springSecurityService.principal.id)
