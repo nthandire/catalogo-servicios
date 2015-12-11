@@ -13,7 +13,7 @@
   <g:if test="${!incidenteInstance?.id}">
     <tr>
       <td>
-        <label for="cpuauto">Empleado o Inventario o No. de Serie</label>
+        <label for="cpuauto">Inventario o No. de Serie o Usuario</label>
         <g:textField id="cpuauto" name="idResguardoentregadetalle" style="width: 250px;" />
       </td>
       <td>
@@ -64,7 +64,7 @@
     <tr>
       <td>
         <label for="empleado">
-          <g:message code="servicios.empleado.label" default="Empleado que resguarda el equipo" />
+          <g:message code="servicios.empleado.label" default="Usuario que resguarda el equipo" />
         </label>
         <g:textField name="empleado" value="${serviciosInstance?.empleado}"
           readonly="true" style="width: 250px;text-transform: uppercase;" />
@@ -125,7 +125,7 @@
     <tr>
       <td>
         <label for="empleado">
-          <g:message code="servicios.empleado.label" default="Empleado que resguarda el equipo" />
+          <g:message code="servicios.empleado.label" default="Usuario que resguarda el equipo" />
         </label>
         <g:textField name="empleado" value="${firmado.nombreEmpleado(equipo?.idEmpleado)}"
           readonly="true" style="width: 250px;text-transform: uppercase;" />

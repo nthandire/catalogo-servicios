@@ -13,7 +13,7 @@ class IncidenteController {
     def firmadoService
     def serviciosService
     static nombreMenu = "Incidentes"
-    static ordenMenu = 90
+    static ordenMenu = 81
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 

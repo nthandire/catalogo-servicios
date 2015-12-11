@@ -15,7 +15,7 @@
 			</ul>
 		</div>
 		<div id="edit-solicitudDetalle" class="content scaffold-edit" role="main">
-			<h1>Editar Requerimiento</h1>
+			<h1>Editar Requerimiento ${solicitudDetalleInstance.idSolicitud}</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
