@@ -17,7 +17,7 @@
 			</ul>
 		</div>
 		<div id="list-autoriza" class="content scaffold-list" role="main">
-			<h1>Requerimientos por semaforo</h1>
+			<h1>Semaforo de Requerimientos</h1>
 			<g:if test="${flash.message}">
 			  <div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -28,12 +28,14 @@
 				<thead>
 					<tr>
 
-            <th>
-            ${message(code: 'solicitudDetalle.numeroSolicitud.label', default: 'Requerimiento')}
-            </th>
+            <g:sortableColumn property="semaforo" title="Semaforo" />
+
+            <g:sortableColumn property="folio"
+              title="${message(code: 'solicitudDetalle.numeroSolicitud.label',
+                               default: 'Requerimiento')}" />
 
             <th>
-            ${message(code: 'solicitudDetalle.err..inicioatencion.label', default: 'Inicio de atención')}
+            ${message(code: 'solicitudDetalle.err.inicioatencion.label', default: 'Inicio de atención')}
             </th>
 
             <th>Solicitante</th>
@@ -48,7 +50,7 @@
 
             <th>Categoría de Tercer nivel</th>
 
-            <th>${message(code: 'solicitud.estado.label', default: 'Estado')}</th>
+            <g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
 
             <th>Correo</th>
 
@@ -56,9 +58,11 @@
 				</thead>
 				<tbody>
 				<g:each in="${detallesInstanceList}" status="i" var="detalleInstance">
-					<tr style="background-color: ${detalleInstance.color};">
+					<tr>
 
-						<td><g:link action="showDetalle" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
+            <td style="background-color: ${detalleInstance.color};">&nbsp;</td>
+
+            <td><g:link action="showDetalle" id="${detalleInstance.caso.id}" params="[offset: bOffset?:0]">
               ${detalleInstance.caso.idSolicitud.toString()}
             </g:link></td>
 

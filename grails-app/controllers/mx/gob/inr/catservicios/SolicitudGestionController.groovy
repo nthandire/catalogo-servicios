@@ -415,9 +415,26 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
         def listaOrdenar = detallesList.collect{new Ordenado(caso: it,
                               orden: firmadoService.retraso(semaforo, it))}
         listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
-        def listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
-          a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
-          a.orden <=> b.orden }
+
+        def listaOrdenada = []
+        if (!params.sort || params.sort == "semaforo") {
+          listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
+            a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
+            a.orden <=> b.orden}
+          if (params.order == "desc") {
+            listaOrdenada = listaOrdenada.reverse()
+          }
+        } else if (params.sort == "folio") {
+          listaOrdenada = listaOrdenar.sort{!params.order || params.order == "asc" ?
+            it.caso.idSolicitud.numeroSolicitud : -it.caso.idSolicitud.numeroSolicitud}
+        } else { // params.sort == "estado"
+          listaOrdenada = listaOrdenar.sort{a,b -> a.caso.idSolicitud.estado == b.caso.idSolicitud.estado ?
+            a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
+            a.caso.idSolicitud.estado <=> b.caso.idSolicitud.estado}
+          if (params.order == "desc") {
+            listaOrdenada = listaOrdenada.reverse()
+          }
+        }
         log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
 
         [detallesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],

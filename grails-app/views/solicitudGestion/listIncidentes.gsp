@@ -28,9 +28,14 @@
 				<thead>
 					<tr>
 
+            <g:sortableColumn property="semaforo" title="Semaforo" />
+
             <g:sortableColumn property="folio" title="${message(code: 'incidente.folio.label', default: 'No. Incidente')}" />
 
-            <g:sortableColumn property="semaforo" title="${message(code: 'solicitudDetalle.err.inicioatencion.label', default: 'Inicio de atención')}" />
+
+            <th>
+              ${message(code: 'solicitudDetalle.err.inicioatencion.label', default: 'Inicio de atención')}
+            </th>
 
             <th>Solicitante</th>
 
@@ -52,13 +57,15 @@
 				</thead>
 				<tbody>
 				<g:each in="${incidentesInstanceList}" status="i" var="incidente">
-					<tr style="background-color: ${incidente.color};">
+					<tr>
+
+            <td style="background-color: ${incidente.color};">&nbsp;</td>
 
 						<td><g:link action="showIncidente" id="${incidente.caso.id}" params="[offset: bOffset?:0]">
               ${incidente.caso.toString()}
             </g:link></td>
 
-            <td style="background-color: ${incidente.color};">
+            <td>
               <g:formatDate date="${incidente.caso.fechaIncidente}" />
             </td>
 
