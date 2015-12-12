@@ -281,7 +281,7 @@ class SolicitudCoordinadorController {
             flash.error = "Error en contaseña"
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
                                           tecnicos:listaDeTecnicos()])
-            return
+            return // TODO: aquí voy
         }
 
         solicitudDetalleInstance.idAprobador = userID
