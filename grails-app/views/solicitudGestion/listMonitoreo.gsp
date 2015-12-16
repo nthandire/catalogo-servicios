@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
+    <meta http-equiv="refresh" content="120">
 		<g:set var="entityName" value="${message(code: 'autoriza.label', default: 'Autoriza')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
     <style>
