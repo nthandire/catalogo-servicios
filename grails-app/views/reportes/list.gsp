@@ -39,7 +39,7 @@
 				          		</td>
 				          		<td>
 							          <% def ini = new Date(); ini[Calendar.DATE] = 1; %>
-							          <g:datePicker name="startDate" value="${ini}" precision="day" years="${2015..2020}"/>
+							          <g:datePicker name="startDate" value="${ini}" precision="day" years="${2015..2025}"/>
 				          		</td>
 				          	</tr>
 				          	<tr>
@@ -47,7 +47,7 @@
 							          a la fecha
 				          		</td>
 				          		<td>
-							          <g:datePicker name="endDate" value="${new Date()}" precision="day" years="${2015..2020}"/>
+							          <g:datePicker name="endDate" value="${new Date()}" precision="day" years="${2015..2025}"/>
 				          		</td>
 				          	</tr>
 				          </table>

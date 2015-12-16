@@ -8,7 +8,7 @@
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
 	<parameter name="anio" class="java.lang.String"/>
-	<parameter name="tipo-servicio" class="java.lang.String"/>
+	<parameter name="tipoServicio" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -65,7 +65,7 @@
 				<textElement textAlignment="Center" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{mes} $P{anio} - $P{tipo-servicio}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["$P{mes} $P{anio} - $P{tipoServicio}"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

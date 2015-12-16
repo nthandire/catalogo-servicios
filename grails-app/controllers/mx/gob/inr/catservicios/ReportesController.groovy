@@ -18,14 +18,15 @@ class ReportesController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [cat_bitacoraInstanceList: Cat_bitacora.list(params), cat_bitacoraInstanceTotal: Cat_bitacora.count()]
+        []
     }
 
   def reporteResultadosYSeguimiento() {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
     params.mes = "Diciembre"
-	params.mes = "2015"
+    params.anio = "2015"
+	  params.tipoServicio = "Requerimientos" //"Incidentes"
 
     def startDate = params.startDate
     startDate[Calendar.HOUR_OF_DAY] = 0
