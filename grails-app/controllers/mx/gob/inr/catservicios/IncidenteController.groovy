@@ -85,7 +85,7 @@ class IncidenteController {
     }
 
   def listIncidentes(Integer max) {
-    params.max = Math.min(max ?: 10, 100)
+    params.max = Math.min(max ?: 50, 100)
     if (!params.offset) {
       params["offset"] = 0
     } else {

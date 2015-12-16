@@ -45,7 +45,7 @@
 
             <g:sortableColumn property="semaforo" title="Semaforo" />
 
-            <g:sortableColumn property="folio" title="${message(code: 'incidente.folio.label', default: 'No. Incidente')}" />
+            <g:sortableColumn property="folio" title="${message(code: 'incidente.folio.label', default: 'Incidente')}" />
 
 
             <th>
@@ -62,7 +62,7 @@
 
             <th>Subcategoría</th>
 
-            <th>Categoría de Tercer nivel</th>
+            <th>Tercer nivel</th>
 
             <g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
 
