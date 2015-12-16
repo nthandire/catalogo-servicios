@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bitacora de cambios" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f31b505-9f6f-4905-bb8f-a313eca9443b">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="4"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="titulo" class="java.lang.String"/>
@@ -65,7 +65,7 @@
 				<textElement textAlignment="Center" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$P{mes} $P{anio} - $P{tipoServicio}"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{mes} + " " + $P{anio} + " - " + $P{tipoServicio}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

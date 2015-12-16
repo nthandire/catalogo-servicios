@@ -8,7 +8,7 @@ import groovy.time.TimeCategory
 class ReportesController {
     def springSecurityService
     static nombreMenu = "Reportes"
-    static ordenMenu = -120
+    static ordenMenu = 120
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
@@ -29,11 +29,15 @@ class ReportesController {
 	  params.tipoServicio = "Requerimientos" //"Incidentes"
 
     def startDate = params.startDate
+    startDate[Calendar.DATE] = 1
     startDate[Calendar.HOUR_OF_DAY] = 0
     startDate[Calendar.MINUTE] = 0
-    def endDate = params.endDate
-    endDate[Calendar.HOUR_OF_DAY] = 23
-    endDate[Calendar.MINUTE] = 59
+    def endDate = startDate.clone()
+    use(TimeCategory) {
+      endDate = endDate + 1.month - 1.seconds
+    }
+    log.debug("startDate = $startDate")
+    log.debug("endDate = $endDate")
 
     def lista = Cat_bitacora.findAllByLastUpdatedGreaterThanEqualsAndLastUpdatedLessThanEquals(startDate, endDate)
 

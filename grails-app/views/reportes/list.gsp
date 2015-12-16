@@ -39,17 +39,19 @@
 				          		</td>
 				          		<td>
 							          <% def ini = new Date(); ini[Calendar.DATE] = 1; %>
-							          <g:datePicker name="startDate" value="${ini}" precision="day" years="${2015..2025}"/>
+							          <g:datePicker name="startDate" value="${ini}" precision="month" years="${2015..2025}"/>
 				          		</td>
 				          	</tr>
-				          	<tr>
-				          		<td>
-							          a la fecha
-				          		</td>
-				          		<td>
-							          <g:datePicker name="endDate" value="${new Date()}" precision="day" years="${2015..2025}"/>
-				          		</td>
-				          	</tr>
+                    %{--
+                    <tr>
+                      <td>
+                        a la fecha
+                      </td>
+                      <td>
+                        <g:datePicker name="endDate" value="${new Date()}" precision="month" years="${2015..2025}"/>
+                      </td>
+                    </tr>
+                    --}%
 				          </table>
 				  </g:jasperReport>
 				</div>

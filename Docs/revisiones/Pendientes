@@ -20,10 +20,8 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 
 
 - en busqueda de equipo, en lugar de la descripción, usar la tabla cat_tipoanexotecnico
-- pasar el monitor de requerimientos a un solo listado
 
-- Listado de incidentes terminados, últimos 500, incluye cancelados
-- Listado de incidentes en encuesta
+- Listado de incidentes terminados, que solo muestre los últimos 500
 
 > Listado para aprobadores de requerimientos en proceso
 > Listado para aprobadores de incidentes en proceso
