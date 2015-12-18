@@ -1,5 +1,7 @@
 package mx.gob.inr.catservicios
 
+import java.text.*
+
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
@@ -48,6 +50,18 @@ class ReportesController {
     params["preg3No"] = contar(requerimientos(startDate, endDate),"p03", 2)
     params["preg4Si"] = contar(requerimientos(startDate, endDate),"p04", 1)
     params["preg4No"] = contar(requerimientos(startDate, endDate),"p04", 2)
+
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
+    params["recibidas"] = formato.format(45879)
+    params["resueltas"] = formato.format(532)
+    params["pendientes"] = formato.format(16)
+    params["enTiempo"] = formato.format(3468)
+    params["satisfechos"] = formato.format(681)
+    params["insatisfechos"] = formato.format(4681)
+
+
     log.debug("startDate = $startDate")
     log.debug("endDate = $endDate")
     log.debug("params = $params")
