@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bitacora de cambios" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f31b505-9f6f-4905-bb8f-a313eca9443b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bitacora de cambios" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f31b505-9f6f-4905-bb8f-a313eca9443b">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="4"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="150"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
 	<parameter name="anio" class="java.lang.String"/>
 	<parameter name="tipoServicio" class="java.lang.String"/>
+	<parameter name="preg1" class="java.lang.String"/>
+	<parameter name="preg2" class="java.lang.String"/>
+	<parameter name="preg3" class="java.lang.String"/>
+	<parameter name="preg4" class="java.lang.String"/>
+	<parameter name="preg1Si" class="java.lang.String"/>
+	<parameter name="preg1No" class="java.lang.String"/>
+	<parameter name="preg2Si" class="java.lang.String"/>
+	<parameter name="preg2No" class="java.lang.String"/>
+	<parameter name="preg3Si" class="java.lang.String"/>
+	<parameter name="preg3No" class="java.lang.String"/>
+	<parameter name="preg4Si" class="java.lang.String"/>
+	<parameter name="preg4No" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -70,115 +82,178 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="44" splitType="Stretch">
+		<band height="591" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="241" y="0" width="105" height="41" backcolor="#8B8B8B" uuid="95880383-ca68-4392-b9be-3cd23680a914"/>
+				<reportElement mode="Opaque" x="16" y="199" width="550" height="41" backcolor="#8B8B8B" uuid="460726c4-bfae-4dcc-b393-3eb68e0dc19a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="16" y="199" width="336" height="41" backcolor="#8B8B8B" uuid="31980858-d59c-482e-ae7c-2ee850de2903"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Preguntas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="10" width="111" height="20" uuid="331b6812-8016-44e0-9ff5-3021dfc7ab72"/>
+				<text><![CDATA[Solicitudes recibidas: 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="50" width="111" height="20" uuid="d02287f2-d0c8-4d7b-92c4-772ae792106e"/>
+				<text><![CDATA[Solicitudes pendientes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="30" width="111" height="20" uuid="65ae9a76-49f0-4947-80f2-a784310f91c7"/>
+				<text><![CDATA[Solicitudes resueltas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="10" y="70" width="149" height="41" backcolor="#8B8B8B" uuid="56e4858e-3623-4947-812f-fb5880dc1831"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitudes Resueltas en el tiempo comprometido]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="352" y="120" width="147" height="41" uuid="d4534fb5-99fc-4823-afc8-3eaa45ab062f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{subcategoria}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="163" y="120" width="186" height="41" uuid="2bed5387-5773-495f-90d2-4184272416b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="163" y="70" width="186" height="41" backcolor="#8B8B8B" uuid="e473fff3-ec83-4313-81fe-199f09bf5540"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuarios Satisfechos con el servicio]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="120" width="149" height="41" uuid="afa53ae7-91cb-4aba-a815-11aa55e54aca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{num_solicitud}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="352" y="70" width="147" height="41" backcolor="#8B8B8B" uuid="a7f342e4-5067-4518-8426-fd709f97c5f6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="DejaVu Sans" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Subcategoria del servicio]]></text>
+				<text><![CDATA[Usuarios No Satisfechos con el servicio]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="513" y="0" width="77" height="41" backcolor="#8B8B8B" uuid="3919055d-6125-4cdc-b7e3-32e235e00985"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Responsable del cambio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="593" y="0" width="75" height="41" backcolor="#8B8B8B" uuid="00f5994f-7eda-41f7-9c54-e78cf162c215"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha del cambio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="350" y="0" width="61" height="41" backcolor="#8B8B8B" uuid="61531a69-d34e-4915-99bd-fa4503985923"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="DejaVu Sans" size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tipo de cambio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="160" y="0" width="77" height="41" backcolor="#8B8B8B" uuid="02de939d-b5ed-4021-b16a-3cc818a89965"/>
+				<reportElement mode="Opaque" x="352" y="220" width="107" height="20" backcolor="#8B8B8B" uuid="74a842c1-4981-4d03-9bed-f962d0da0fd3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Categoría del servicio]]></text>
+				<text><![CDATA[Si]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="413" y="0" width="98" height="41" backcolor="#8B8B8B" uuid="bcbe193b-a642-4a0c-963f-aa56db2fd28e"/>
+				<reportElement mode="Opaque" x="459" y="220" width="107" height="20" backcolor="#8B8B8B" uuid="95561141-5f9b-45bd-99c2-753ce2f81713"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Descripción del Cambio Solicitado]]></text>
+				<text><![CDATA[No]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="673" y="0" width="129" height="41" backcolor="#8B8B8B" uuid="73e4f80b-80f7-4337-9c33-10bc1306d086"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Solución]]></text>
+				<reportElement x="15" y="10" width="275" height="20" uuid="13511c54-093d-48b3-a5cd-664a45fce84d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Encuesta de Satisfacción]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="80" y="0" width="76" height="41" backcolor="#8B8B8B" uuid="0ef5ff88-e953-4c6c-b58a-497410a8f718"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="DejaVu Sans" size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tipo de solicitud de servicio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="75" height="41" backcolor="#8B8B8B" uuid="71984599-387d-4582-bb1d-998388d421cc"/>
+				<reportElement mode="Opaque" x="352" y="199" width="214" height="21" backcolor="#8B8B8B" uuid="37ebf7a0-d0b6-4d40-a8aa-e323ca760244"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Número de Solicitud]]></text>
+				<text><![CDATA[Respuesta]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="10" y="495" width="556" height="95" uuid="775ee2ac-4113-4c43-a8cb-457723f24356"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nota: Este reporte se tiene que realizar para incidentes y otro para requerimientos;
+ Este reporte deberá tener la opción de indicar el mes y el año que se desea consultar y ser reflejado en el reporte,
+En relación a la encuesta se requiere que se puedan modificar las preguntas en caso de una solicitud de cambio,
+La encuesta de satisfacción, correspondera solo a los servicios NO satisfechos, para el calculo de numero de solicitudes resueltas en el tiempo comprometido se debe considerar lo indicado en la Hoja Monitoreo de OLA y SLA del apartado  ∑ solicitudes resueltas en el tiempo comprometido
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="253" width="329" height="37" uuid="e1d23c60-2afb-423c-b9b6-ac108ef77151"/>
+				<textFieldExpression><![CDATA[$P{preg1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="293" width="329" height="37" uuid="c2d8e030-66ef-4c87-9f5c-aba0534812b7"/>
+				<textFieldExpression><![CDATA[$P{preg2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="333" width="329" height="37" uuid="5020e32a-5aef-474f-8d78-a31e6937c56f"/>
+				<textFieldExpression><![CDATA[$P{preg3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="373" width="329" height="37" uuid="807c413a-17c1-4341-8f58-3dea9cbc241f"/>
+				<textFieldExpression><![CDATA[$P{preg4}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="16" y="199" width="550" height="1" uuid="2f1aaf36-2127-40fb-b20c-dbfc3150379e"/>
+			</line>
+			<line>
+				<reportElement x="16" y="240" width="550" height="1" uuid="03924faf-4ed0-4ac7-8c12-cee0a57978b1"/>
+			</line>
+			<textField>
+				<reportElement x="352" y="253" width="107" height="37" uuid="461f772f-5387-4c2e-b304-d1bd247a51fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{preg1Si}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="458" y="253" width="107" height="37" uuid="9d0fa771-49cf-4f12-aa46-4d20eb26ef06"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{preg1No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="293" width="107" height="37" uuid="6f181975-dd7a-47d0-a8c0-399e45af1312"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{preg2Si}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="458" y="293" width="107" height="37" uuid="251a7c44-ee6f-485c-a70d-ccac928833a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{preg2No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="333" width="107" height="37" uuid="e876a3bd-0359-42da-8e6e-de6fc9eb665d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{preg3Si}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="458" y="333" width="107" height="37" uuid="ba95cfe3-80a9-4040-9829-4b3fa9544ac9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{preg3No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="373" width="107" height="37" uuid="11b6a02e-4d8c-44bd-bd0c-981317fff73b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{preg4Si}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="458" y="373" width="107" height="37" uuid="583752f1-01ab-4c02-994c-fa06b843f62d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{preg4No}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="56" splitType="Stretch">
-			<textField isStretchWithOverflow="true">
-				<reportElement x="160" y="10" width="77" height="41" uuid="09085703-9220-4054-931b-ce9fb4ecdc2e"/>
-				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="241" y="10" width="105" height="41" uuid="4fff2991-142c-48b7-ba24-eeae2cf62e2d"/>
-				<textFieldExpression><![CDATA[$F{subcategoria}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="10" width="75" height="41" uuid="87abdd68-fdde-4bfd-aedc-053e432c9983"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{num_solicitud}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="413" y="10" width="98" height="41" uuid="38417c11-5b4d-4284-9859-4e36239804fd"/>
-				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="673" y="10" width="129" height="41" uuid="bd76d4c4-cd78-45fe-bd42-df844078e9bf"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="593" y="10" width="75" height="41" uuid="87a60b42-d169-4a49-bdd3-16d8da66db36"/>
-				<textElement markup="none">
-					<font fontName="Arial"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="513" y="10" width="77" height="41" uuid="ce7b328d-302e-43be-b0db-01820f875e4c"/>
-				<textFieldExpression><![CDATA[$F{responsable}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="5" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
 		<band height="7" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="10" splitType="Stretch"/>
+		<band height="6" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="10" splitType="Stretch"/>
+		<band height="3" splitType="Stretch"/>
 	</summary>
 </jasperReport>
