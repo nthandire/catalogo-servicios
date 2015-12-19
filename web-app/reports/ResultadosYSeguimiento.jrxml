@@ -119,36 +119,36 @@
 				<text><![CDATA[Solicitudes resueltas:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="10" y="100" width="149" height="41" backcolor="#8B8B8B" uuid="56e4858e-3623-4947-812f-fb5880dc1831"/>
+				<reportElement mode="Opaque" x="40" y="100" width="149" height="41" backcolor="#8B8B8B" uuid="56e4858e-3623-4947-812f-fb5880dc1831"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Solicitudes Resueltas en el tiempo comprometido]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="352" y="150" width="147" height="41" uuid="d4534fb5-99fc-4823-afc8-3eaa45ab062f"/>
+				<reportElement x="382" y="150" width="147" height="41" uuid="d4534fb5-99fc-4823-afc8-3eaa45ab062f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{insatisfechos}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="163" y="150" width="186" height="41" uuid="2bed5387-5773-495f-90d2-4184272416b4"/>
+				<reportElement x="193" y="150" width="186" height="41" uuid="2bed5387-5773-495f-90d2-4184272416b4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{satisfechos}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="163" y="100" width="186" height="41" backcolor="#8B8B8B" uuid="e473fff3-ec83-4313-81fe-199f09bf5540"/>
+				<reportElement mode="Opaque" x="193" y="100" width="186" height="41" backcolor="#8B8B8B" uuid="e473fff3-ec83-4313-81fe-199f09bf5540"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Usuarios Satisfechos con el servicio]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="10" y="150" width="149" height="41" uuid="afa53ae7-91cb-4aba-a815-11aa55e54aca"/>
+				<reportElement x="40" y="150" width="149" height="41" uuid="afa53ae7-91cb-4aba-a815-11aa55e54aca"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{enTiempo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="352" y="100" width="147" height="41" backcolor="#8B8B8B" uuid="a7f342e4-5067-4518-8426-fd709f97c5f6"/>
+				<reportElement mode="Opaque" x="382" y="100" width="147" height="41" backcolor="#8B8B8B" uuid="a7f342e4-5067-4518-8426-fd709f97c5f6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="DejaVu Sans" size="11" isBold="true"/>
 				</textElement>

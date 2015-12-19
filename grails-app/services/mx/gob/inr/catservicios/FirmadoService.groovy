@@ -2,6 +2,7 @@ package mx.gob.inr.catservicios
 
 import javax.servlet.http.HttpSession
 import groovy.time.*
+import groovy.time.TimeCategory
 
 class FirmadoService {
   def grailsApplication
@@ -402,5 +403,104 @@ class FirmadoService {
         log.debug("sessionFirmado['semaforo'] = ${sessionFirmado['semaforo']}")
       }
     }
+
+    // Reportes
+
+  def requerimientosConEncuesta(Date startDate, Date endDate) {
+    Solicitud.findAllByEstadoAndLastUpdatedBetween('T' as char, startDate, endDate)
+  }
+
+  def recibidas(Date startDate, Date endDate) {
+    Solicitud.countByEstadoIsNotNullAndFechaAutorizaBetween(startDate, endDate)
+  }
+
+  def resueltas(Date startDate, Date endDate) {
+    def estados = ['T' as char, 'E' as char]
+    Solicitud.countByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
+  }
+
+  def pendientes(Date startDate, Date endDate) {
+    def estados = ['A' as char, 'V' as char, 'R' as char]
+    Solicitud.countByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
+  }
+
+  Integer satisfechos(Date startDate, Date endDate) {
+    def requerimientos =
+      Solicitud.findAllByEstadoAndLastUpdatedBetween('T' as char, startDate, endDate)
+    def cuantos = 0
+    requerimientos.each {
+      cuantos += it.p01 == 1 && it.p02 == 1 && it.p03 == 1 && it.p04 == 1 ? 1 : 0
+    }
+    cuantos
+  }
+
+  Integer insatisfechos(Date startDate, Date endDate) {
+    def requerimientos = Solicitud.findAllByEstadoAndLastUpdatedBetween('T' as char,
+                                                            startDate, endDate)
+    def cuantos = 0
+    requerimientos.each {
+      cuantos += it.p01 == 2 || it.p02 == 2 || it.p03 == 2 || it.p04 == 2 ? 1 : 0
+    }
+    cuantos
+  }
+
+  Integer aMinutos(Long unidades, Integer cantidad) { // TODO: Usarlo 2 veces más en este mismo archivo
+    switch ( unidades ) {
+      case 1: // Horas
+        cantidad
+        break
+      case 2: // Horas
+        cantidad * 60
+        break
+      case 3: // Días
+        cantidad * 60 * 24
+        break
+      case 4: // Semanas
+        cantidad * 60 * 24 * 7
+        break
+    }
+  }
+
+  Integer tiempoAsignado(Cat_serv serv) {
+    def minutos = aMinutos(serv.unidades1.id, serv.tiempo1) +
+      aMinutos(serv.unidades2.id, serv.tiempo2)
+    log.debug("servicio = $serv, minutos = $minutos")
+    minutos
+  }
+
+  Integer diff(Date inicio, Date fin) { // TODO: Usarlo 2 veces más en este mismo archivo
+    def minutos = 0
+    use ( TimeCategory ) {
+      def diff = fin - inicio
+      log.debug "dias = $diff.days"
+      minutos = diff.minutes + diff.hours * 60 + diff.days * 24 * 60
+    }
+    log.debug "minutos = $minutos"
+    minutos
+  }
+
+  Integer enTiempo(Date startDate, Date endDate) {
+    def estados = ['T' as char, 'E' as char]
+    def requerimientos = Solicitud.findAllByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
+    def casos = 0
+    requerimientos.each {
+      def buscando = true
+      def incremento = 1
+      def inicio = it.fechaVb ?: it.fechaAutoriza
+      it.detalles.each { det ->
+        if (buscando) {
+          def tiempoPermitido = tiempoAsignado(det.idServ)
+          def fin = det.fechaSolucion
+          def tiempoUsado = diff(inicio, fin)
+          if (tiempoUsado > tiempoPermitido) {
+            incremento = 0
+            buscando = false
+          }
+        }
+      }
+      casos += incremento
+    }
+    casos
+  }
 
 }

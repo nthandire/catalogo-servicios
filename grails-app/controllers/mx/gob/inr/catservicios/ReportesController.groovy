@@ -8,7 +8,7 @@ import groovy.time.TimeCategory
 
 @Secured(['ROLE_SAST_ADMIN'])
 class ReportesController {
-    def springSecurityService
+    def firmadoService
     static nombreMenu = "Reportes"
     static ordenMenu = 120
 
@@ -42,24 +42,24 @@ class ReportesController {
     }
     params["mes"] = startDate.format('MMMM').toString()
     params["anio"] = startDate.format('YYYY')
-    params["preg1Si"] = contar(requerimientos(startDate, endDate),"p01", 1)
-    params["preg1No"] = contar(requerimientos(startDate, endDate),"p01", 2)
-    params["preg2Si"] = contar(requerimientos(startDate, endDate),"p02", 1)
-    params["preg2No"] = contar(requerimientos(startDate, endDate),"p02", 2)
-    params["preg3Si"] = contar(requerimientos(startDate, endDate),"p03", 1)
-    params["preg3No"] = contar(requerimientos(startDate, endDate),"p03", 2)
-    params["preg4Si"] = contar(requerimientos(startDate, endDate),"p04", 1)
-    params["preg4No"] = contar(requerimientos(startDate, endDate),"p04", 2)
+    params["preg1Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 1)
+    params["preg1No"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 2)
+    params["preg2Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p02", 1)
+    params["preg2No"] = contar(requerimientosConEncuesta(startDate, endDate),"p02", 2)
+    params["preg3Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p03", 1)
+    params["preg3No"] = contar(requerimientosConEncuesta(startDate, endDate),"p03", 2)
+    params["preg4Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 1)
+    params["preg4No"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 2)
 
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
-    params["recibidas"] = formato.format(45879)
-    params["resueltas"] = formato.format(532)
-    params["pendientes"] = formato.format(16)
-    params["enTiempo"] = formato.format(3468)
-    params["satisfechos"] = formato.format(681)
-    params["insatisfechos"] = formato.format(4681)
+    params["recibidas"] = formato.format(firmadoService.recibidas(startDate, endDate))
+    params["resueltas"] = formato.format(firmadoService.resueltas(startDate, endDate))
+    params["pendientes"] = formato.format(firmadoService.pendientes(startDate, endDate))
+    params["enTiempo"] = formato.format(firmadoService.enTiempo(startDate, endDate))
+    params["satisfechos"] = formato.format(firmadoService.satisfechos(startDate, endDate))
+    params["insatisfechos"] = formato.format(firmadoService.insatisfechos(startDate, endDate))
 
 
     log.debug("startDate = $startDate")
@@ -85,10 +85,11 @@ class ReportesController {
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 
-  def requerimientos(Date startDate, Date endDate) {
+  def requerimientosConEncuesta(Date startDate, Date endDate) {
     if (!request["listaRequerimientos"]) {
       log.debug("si lei los requerimientos")
-      request["listaRequerimientos"] = Solicitud.findAllByEstadoAndLastUpdatedBetween('T' as char, startDate, endDate)
+      request["listaRequerimientos"] =
+        firmadoService.requerimientosConEncuesta(startDate, endDate)
       log.debug("requerimientos = ${request["listaRequerimientos"]}")
     }
     request["listaRequerimientos"]
