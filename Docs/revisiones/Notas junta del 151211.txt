@@ -7,7 +7,7 @@ Junta del 23 de octubre.
 + En Aprobador, al asignar un técnico (solicitudCoordinador/edit) se debe mostrar el numero de requerimiento
 + En Técnico, (solicitudTecnico/edit)  se debe mostrar el numero de requerimiento
 + Mover el semáforo de Incidentes al menú de incidentes, y solo lo pueden ver gestores
-- Los nuevos listados para incidentes (terminadas y en encuestas) agregarlas en el menú de Incidentes
++ Los nuevos listados para incidentes (terminadas y en encuestas) agregarlas en el menú de Incidentes
 - En la búsqueda, en el combo, agregar:
 -        usuario
 -        marca

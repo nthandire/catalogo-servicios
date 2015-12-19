@@ -148,6 +148,8 @@ class SolicitudCoordinadorController {
             return
         }
 
+        log.debug("checkpoint edit 1")
+
         [solicitudDetalleInstance: solicitudDetalleInstance,
           tecnicos:listaDeTecnicos()]
     }
@@ -174,17 +176,6 @@ class SolicitudCoordinadorController {
       }
       log.debug("tecnicos = $tecnicos")
       tecnicos
-    }
-
-    def vistoBueno(Long id) {
-        def solicitudInstance = Solicitud.get(id)
-        if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
-            redirect(action: "show", id: solicitudInstance.id)
-            return
-        }
-
-        [solicitudInstance: solicitudInstance]
     }
 
     def revisar(Long id) {
@@ -218,35 +209,6 @@ class SolicitudCoordinadorController {
         redirect(action: "show", id: solicitudInstance.id)
     }
 
-    def updateVB(Long id, Long version) {
-        def solicitudInstance = Solicitud.get(id)
-        if (!solicitudInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
-            redirect(action: "list")
-            return
-        }
-
-        if (version != null) {
-            if (solicitudInstance.version > version) {
-                solicitudInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'solicitud.label', default: 'Solicitud')] as Object[],
-                          "Another user has updated this Solicitud while you were editing")
-                render(view: "vistoBueno", model: [solicitudInstance: solicitudInstance])
-                return
-            }
-        }
-
-        solicitudInstance.properties = params
-
-        if (!solicitudInstance.save(flush: true)) {
-            render(view: "vistoBueno", model: [solicitudInstance: solicitudInstance])
-            return
-        }
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
-        redirect(action: "list")
-    }
-
     def update(Long id, Long version) {
       log.debug("params = $params")
         def solicitudDetalleInstance = SolicitudDetalle.get(id)
@@ -278,20 +240,26 @@ class SolicitudCoordinadorController {
         solicitudDetalleInstance.properties = params
 
         if (firmaTeclada != firma) {
+            log.debug("checkpoint 0")
             flash.error = "Error en contaseña"
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
                                           tecnicos:listaDeTecnicos()])
             return // TODO: aquí voy
         }
+        log.debug("checkpoint 1")
 
         solicitudDetalleInstance.idAprobador = userID
+        log.debug("checkpoint 2")
         solicitudDetalleInstance.fechaAprobador = new Date()
+        log.debug("checkpoint 3")
 
         if (!solicitudDetalleInstance.save(flush: true)) {
+        log.debug("checkpoint 4")
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
                                           tecnicos:listaDeTecnicos()])
             return
         }
+        log.debug("checkpoint 5")
 
         def tecnico = Usuario.get(solicitudDetalleInstance.idTecnico)
         def liga = createLink(controller:"SolicitudTecnico", action: "edit",
