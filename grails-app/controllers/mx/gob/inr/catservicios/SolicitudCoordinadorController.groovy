@@ -148,8 +148,6 @@ class SolicitudCoordinadorController {
             return
         }
 
-        log.debug("checkpoint edit 1")
-
         [solicitudDetalleInstance: solicitudDetalleInstance,
           tecnicos:listaDeTecnicos()]
     }
@@ -240,27 +238,18 @@ class SolicitudCoordinadorController {
         solicitudDetalleInstance.properties = params
 
         if (firmaTeclada != firma) {
-            log.debug("checkpoint 0")
-            flash.error = "Error en contaseña"
+           flash.error = "Error en contaseña"
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
                                           tecnicos:listaDeTecnicos()])
             return // TODO: aquí voy
         }
-        log.debug("checkpoint 1")
-
         solicitudDetalleInstance.idAprobador = userID
-        log.debug("checkpoint 2")
-        solicitudDetalleInstance.fechaAprobador = new Date()
-        log.debug("checkpoint 3")
-
+       solicitudDetalleInstance.fechaAprobador = new Date()
         if (!solicitudDetalleInstance.save(flush: true)) {
-        log.debug("checkpoint 4")
-            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
+           render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
                                           tecnicos:listaDeTecnicos()])
             return
         }
-        log.debug("checkpoint 5")
-
         def tecnico = Usuario.get(solicitudDetalleInstance.idTecnico)
         def liga = createLink(controller:"SolicitudTecnico", action: "edit",
                               id: solicitudDetalleInstance.id, absolute: "true")

@@ -224,14 +224,3 @@
     </div>
   </div>
 </div>
-
-<div class="row-fluid">
-  <div class="span4 offset4">
-    <div class="fieldtablecontain ${hasErrors(bean: firmadigitalInstance, field: 'passwordfirma', 'error')} ">
-      <label for="passwordfirma">
-        <g:message code="firmadigital.passwordfirma.label" default="Passwordfirma" />
-      </label>
-      <g:field name="passwordfirma" type="password" value="${firmadigitalInstance?.passwordfirma}" required="true"/>
-    </div>
-  </div>
-</div>

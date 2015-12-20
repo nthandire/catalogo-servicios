@@ -36,10 +36,31 @@
 					<g:render template="form"/>
 				</fieldset>
 
-        <fieldset class="buttons">
-          <g:actionSubmit class="save" action="update"
-            value="${message(code: 'default.button.update.label',
-              default: 'Update')}" />
+      <!-- Modal para Autorizar -->
+      <div id="myModal" class="modal hide fade" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Firma digital</h3>
+        </div>
+        <g:form method="post" >
+          <div class="modal-body">
+
+            <fieldset class="form">
+              <g:render template="formFirmar"/>
+            </fieldset>
+
+          </div>
+            <fieldset class="buttons">
+              <g:actionSubmit class="save" action="update"
+                value="${message(code: 'default.button.update.label',
+                  default: 'Update')}" />
+            </fieldset>
+        </g:form>
+      </div>
+
+				<fieldset class="buttons">
+          <!-- Button to trigger modal -->
+          <a href="#myModal" class="edit" data-toggle="modal">${message(code: 'default.button.update.label', default: 'Update')}</a>
 				</fieldset>
 			</g:form>
 		</div>
