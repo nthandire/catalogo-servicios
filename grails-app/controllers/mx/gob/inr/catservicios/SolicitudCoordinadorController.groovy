@@ -235,14 +235,14 @@ class SolicitudCoordinadorController {
         def firma = Firmadigital.findById(userID)?.passwordfirma
         log.debug("firma = $firma")
 
-        solicitudDetalleInstance.properties = params
-
         if (firmaTeclada != firma) {
            flash.error = "Error en contaseña"
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
                                           tecnicos:listaDeTecnicos()])
             return // TODO: aquí voy
         }
+
+        solicitudDetalleInstance.properties = params
         solicitudDetalleInstance.idAprobador = userID
        solicitudDetalleInstance.fechaAprobador = new Date()
         if (!solicitudDetalleInstance.save(flush: true)) {
