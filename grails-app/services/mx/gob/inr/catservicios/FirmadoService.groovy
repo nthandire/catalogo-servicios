@@ -468,6 +468,30 @@ class FirmadoService {
     minutos
   }
 
+  Integer tiempoAsignadoNivel(Cat_serv serv, Integer nivel) {
+    def minutos = aMinutos(serv."unidades$nivel".id, serv."tiempo$nivel")
+    log.debug("servicio = $serv, minutos = $minutos")
+    minutos // TODO: es mucho más pequeña si se quitan los debug
+  }
+
+  Integer cuantosEnTiempoNivel(ArrayList lista, Integer nivel) {
+    Integer cuantos = 0
+    lista.each {
+      // calcular tiempo asignado
+      Integer tiempoAsignado = 0
+      for (i in 1..nivel) {
+        tiempoAsignado += tiempoAsignadoNivel(it.idServ, i)
+      }
+      log.debug("tiempoAsignado = $tiempoAsignado")
+      // calcular tiempo gastado
+      def tiempoGastado = diff(it.fechaIncidente, it."fechaSolnivel$nivel")
+      log.debug("tiempoGastado = $tiempoGastado")
+      // decidir
+      cuantos += tiempoGastado <= tiempoAsignado ? 1 : 0
+    }
+    cuantos
+  }
+
   Integer diff(Date inicio, Date fin) { // TODO: Usarlo 2 veces más en este mismo archivo
     def minutos = 0
     use ( TimeCategory ) {

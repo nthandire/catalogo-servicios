@@ -150,7 +150,7 @@
 			<staticText>
 				<reportElement mode="Opaque" x="382" y="100" width="147" height="41" backcolor="#8B8B8B" uuid="a7f342e4-5067-4518-8426-fd709f97c5f6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Usuarios No Satisfechos con el servicio]]></text>
 			</staticText>

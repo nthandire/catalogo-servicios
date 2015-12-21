@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Resultados y Seguimiento" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f31b505-9f6f-4905-bb8f-a313eca9443b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="4"/>
+	<parameter name="image_dir" class="java.lang.String"/>
+	<parameter name="mes" class="java.lang.String"/>
+	<parameter name="anio" class="java.lang.String"/>
+	<parameter name="inciResueltoPrimer" class="java.lang.String"/>
+	<parameter name="inciResueltoSegundo" class="java.lang.String"/>
+	<parameter name="inciResueltoTercer" class="java.lang.String"/>
+	<parameter name="inciResueltoTotal" class="java.lang.String"/>
+	<parameter name="inciResueltoPrimerEnTiempo" class="java.lang.String"/>
+	<parameter name="inciResueltoSegundoEnTiempo" class="java.lang.String"/>
+	<parameter name="inciResueltoTercerEnTiempo" class="java.lang.String"/>
+	<parameter name="inciResueltoTotalEnTiempo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="fecha" class="java.util.Date"/>
+	<field name="servicio" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="num_solicitud" class="java.lang.Integer"/>
+	<field name="subcategoria" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="responsable" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="14" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="126" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="20" y="0" width="50" height="60" uuid="d2ef19c9-7883-46fc-90e8-2da935a9fc94"/>
+				<imageExpression><![CDATA[$P{image_dir} + "logo_INR.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="80" y="0" width="400" height="20" uuid="4c4f2f97-e06f-4e40-ad35-bd5d6ba42e0c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN GENERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="20" width="400" height="30" uuid="1414eec3-2fd2-402a-a4ae-01291ca31fd0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUBDIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACION Y COMUNICACIONES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="80" width="467" height="22" uuid="3c2ba8ac-0418-407e-9d70-aa76dee0defd"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monitoreo de Niveles de Operacionales (OLA) y de Servicio (SLA)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="50" width="400" height="30" uuid="0d88b210-84e1-4974-860e-6d24771fd9ee"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO DE GESTIÓN Y OPERACIÓN DE SERVICIOS DE TIC]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="101" width="467" height="22" uuid="68178375-72f3-4351-ab64-148d513c1825"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mes} + " " + $P{anio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="402" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="91" y="21" width="80" height="60" backcolor="#8B8B8B" uuid="56e4858e-3623-4947-812f-fb5880dc1831"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitudes Resueltas por nivel]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="81" width="80" height="30" uuid="afa53ae7-91cb-4aba-a815-11aa55e54aca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{inciResueltoPrimer}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="91" y="0" width="320" height="21" backcolor="#8B8B8B" uuid="af19b8d5-eebd-468c-b039-3e6f17561216"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Incidentes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="411" y="0" width="320" height="21" backcolor="#8B8B8B" uuid="cc559594-a6e3-4af9-a60d-81ee2c06daef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Requerimientos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="171" y="21" width="80" height="60" backcolor="#8B8B8B" uuid="1f043eee-41ab-4fb8-9957-9eabbe793a6b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitudes Resueltas en el tiempo comprometido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="251" y="21" width="80" height="60" backcolor="#8B8B8B" uuid="0702c985-c3c1-46f8-8490-dd8690670cb8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitudes Resueltas después del tiempo comprometido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="331" y="21" width="80" height="60" backcolor="#8B8B8B" uuid="68975b8a-3362-428a-ab9a-cf06d0223b48"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[% de Eficiencia de OLA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="411" y="21" width="80" height="60" backcolor="#8B8B8B" uuid="4198aea9-002c-4b69-8c15-99bed8742be2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitudes Resueltas por nivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="491" y="21" width="80" height="60" backcolor="#8B8B8B" uuid="4c41014d-f1cc-4c47-9f20-7cf79fe068d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitudes Resueltas en el tiempo comprometido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="571" y="21" width="80" height="60" backcolor="#8B8B8B" uuid="d20899e5-1a99-49d7-b371-879f9cc18c35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitudes Resueltas después del tiempo comprometido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="651" y="21" width="80" height="60" backcolor="#8B8B8B" uuid="a73d7dba-c2d7-4550-8540-bd7b611b500f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[% de Eficiencia de OLA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="171" y="81" width="80" height="30" uuid="4f15900d-04cd-4d57-8863-f83c871cb7ec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{inciResueltoPrimerEnTiempo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="81" width="80" height="30" uuid="1aac4881-ad01-4729-8f32-c78c8f8a6afc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="331" y="81" width="80" height="30" uuid="f634c01b-7e9b-496d-b943-002ff305391c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="491" y="81" width="80" height="30" uuid="67d481c7-d035-421a-8824-03e77b9424d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="651" y="81" width="80" height="30" uuid="7afe599c-a6a3-43c7-a747-416ca6c77211"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="81" width="80" height="30" uuid="390a3741-ebec-444b-b55c-cb3b63af5def"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="571" y="81" width="80" height="30" uuid="0a5f4030-1c47-4d6c-b9ed-cb7960963830"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="81" width="80" height="30" uuid="a06014f2-e0bb-42bb-ac5a-2164f321b660"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+				<text><![CDATA[Primer Nivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="111" width="80" height="30" uuid="e965cb2e-593c-457a-969e-cf8ea4b859f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+				<text><![CDATA[Segundo Nivel]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="651" y="111" width="80" height="30" uuid="60a049d7-0c3a-402c-ab91-8eb264c0518e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="491" y="111" width="80" height="30" uuid="6e6b76a1-234b-4ba7-b8a4-e7d0fc26b409"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="111" width="80" height="30" uuid="0dc4fa1d-4ace-413b-b3a2-ef82ed085a96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{inciResueltoSegundoEnTiempo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="331" y="111" width="80" height="30" uuid="7e51fd36-806b-4266-90c7-5a745fbcce53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="571" y="111" width="80" height="30" uuid="ba387d23-d122-4b28-bce3-787148c04972"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="111" width="80" height="30" uuid="0c4942f2-078b-4313-a892-dd0a07d75128"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{inciResueltoSegundo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="111" width="80" height="30" uuid="a9b68d73-188b-4e35-a9dc-5d008ed0253b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="111" width="80" height="30" uuid="8a1728d8-4891-45e5-9ccf-6d852eef19dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="651" y="141" width="80" height="30" uuid="6ea467d5-5bba-450d-803e-7530aad9feb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="331" y="141" width="80" height="30" uuid="c65f5657-b12a-4e8a-a6a4-b10e169e9545"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="141" width="80" height="30" uuid="e6bc561e-1bb9-4a7a-a52a-213a2774c102"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="571" y="141" width="80" height="30" uuid="6dc41384-360c-488a-8be3-ec807f527bf9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="141" width="80" height="30" uuid="f77227cd-036f-4bcb-94a0-3d8f30d1b480"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="141" width="80" height="30" uuid="9466957c-9b2c-49a2-bffe-b88d7e260156"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{inciResueltoTercer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="141" width="80" height="30" uuid="358d9e59-6472-4472-b1a6-c2ab29442529"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{inciResueltoTercerEnTiempo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="141" width="80" height="30" uuid="953d2277-c9c2-4586-839e-a111e12bc400"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+				<text><![CDATA[Tercer Nivel]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="491" y="141" width="80" height="30" uuid="b7165024-fe52-470d-8a13-f737d9a9c03b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="171" width="80" height="30" uuid="1fae9246-ff1a-49b4-9b22-8491b2916db3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+				<text><![CDATA[Solicitudes Recibidas
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="651" y="171" width="80" height="30" uuid="06f15c5d-09a0-4f15-ab8d-4d33bc99b559"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="491" y="171" width="80" height="30" uuid="ef1b1850-22a8-4aad-b438-e093203ff750"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="171" width="80" height="30" uuid="284165c0-709d-424d-b9b0-cbeaf1576111"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{inciResueltoTotalEnTiempo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="331" y="171" width="80" height="30" uuid="915101c1-a80a-49fe-baab-93941429720f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="571" y="171" width="80" height="30" uuid="d77672fc-2997-496d-a47d-42e7e956197b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="171" width="80" height="30" uuid="9c0cceaa-479f-4631-9c14-8f2b9fa61066"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{inciResueltoTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="171" width="80" height="30" uuid="c9eb681a-8f3f-4c38-ad0e-fb0db0519e11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="171" width="80" height="30" uuid="65fafb42-4ac5-4e3a-974a-5b9daa688c5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="5" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="6" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>
