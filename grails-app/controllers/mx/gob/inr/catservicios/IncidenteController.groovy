@@ -296,10 +296,6 @@ class IncidenteController {
       }
     }
 
-    def equipoLista = {
-        render autoCompleteService.equipoLista(params) as JSON
-    }
-
     def download(long id) {
         IncidenteArchivoadjunto incidenteArchivoadjuntoInstance =
           IncidenteArchivoadjunto.get(id)

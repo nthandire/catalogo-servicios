@@ -20,7 +20,6 @@ class ServiciosService {
     if (term && !(term =~ /[0-9]/)) {
       def queryEmpleado =
         "  from Usuario as u     " +
-    //    " where upper(nombre) || case when paterno is null then  '' else ' ' || upper(paterno) end || case when materno is null then  '' else ' ' || upper(materno) end like '%${term}%'   "
         " where upper(nombre) || ' ' || upper(nvl(paterno,''))  || ' ' || upper(nvl(materno,'')) like '%${term}%'   "
       log.debug("queryEmpleado = $queryEmpleado")
       empleados = Usuario.findAll(queryEmpleado, [],
@@ -66,14 +65,17 @@ class ServiciosService {
     clist.each {
       def eqMap = [:] // add to map. jQuery autocomplete expects the JSON object to be with id/label/value.
       eqMap.put("serie", it['serie'])
-      eqMap.put("label", "${it['inventario']} : ${it['serie']} : ${it['descripcion']}")
+      def empleado = Usuario.findByIdEmpleado(it['idEmpleado']).toString()
+      log.debug("it['idTipoanexotecnico'] = ${it['idTipoanexotecnico']}")
+      def tipoEquipo = AnexoTecnico.get(it['idTipoanexotecnico'] as Long)
       eqMap.put("value", it['id'])
       def marca = serviciosService.descMarca(it['idMarca'])
+      eqMap.put("label", "${it['inventario']} : ${it['serie']} : $tipoEquipo : $empleado : $marca : ${it['desModelo']}")
       eqMap.put("marca", marca)
       eqMap.put("modelo", it['desModelo'])
       eqMap.put("economico", it['inventario'])
       eqMap.put("equipo", it['descripcion'])
-      eqMap.put("empleado", Usuario.findByIdEmpleado(it['idEmpleado']).toString())
+      eqMap.put("empleado", empleado)
       // log.debug("empleado = ${eqMap['empleado']}")
       cSelectList.add(eqMap)
     }
