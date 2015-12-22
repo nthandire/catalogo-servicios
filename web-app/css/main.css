@@ -190,7 +190,7 @@ img {
 	text-decoration: underline;
 }
 
-.nav a.home, .nav a.list, .nav a.back, .nav a.create, .nav a.logout {
+.nav a.home, .nav a.list, .nav a.back, .nav a.semaforo, .nav a.create, .nav a.logout {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
@@ -206,6 +206,10 @@ img {
 
 .nav a.back {
 	background-image: url(../images/skin/Arrows-Left-Arrow-icon.png);
+}
+
+.nav a.semaforo {
+	background-image: url(../images/skin/semaforo.png);
 }
 
 .nav a.create {
