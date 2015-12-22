@@ -404,6 +404,23 @@ class FirmadoService {
       }
     }
 
+  def tiempoDeAtencionFormateado(Incidente caso) {
+    def valor = tiempoDeAtencion(caso)
+    valor.format("yyyy/MM/dd HH:mm")
+  }
+
+  def tiempoDeAtencion(Incidente caso) {
+    def tiempoAsignado = 0
+    for (i in 1..caso.nivel) {
+      tiempoAsignado += tiempoAsignadoNivel(caso.idServ, i)
+    }
+    def tiempoDeAtencion = caso.fechaIncidente.clone()
+    use ( TimeCategory ) {
+      tiempoDeAtencion += tiempoAsignado.minutes
+    }
+    tiempoDeAtencion
+  }
+
     // Reportes
 
   def requerimientosConEncuesta(Date startDate, Date endDate) {

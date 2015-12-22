@@ -87,7 +87,7 @@
     <tr>
       <td>
           <label for="equipo"><g:message code="servicios.equipo.label" default="Equipo" /></label>
-          <g:textField name="equipo" value="${equipo?.descripcion}"
+          <g:textField name="equipo" value="${AnexoTecnico.get(equipo.idTipoanexotecnico)}"
             readonly="true" style="width: 250px;text-transform: uppercase;"/>
       </td>
       <td>
@@ -441,7 +441,7 @@
 
 
 <div class="row-fluid">
-  <div class="span4">
+  <div class="span3">
     <g:if test="${incidenteInstance.id}">
       <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'nivel', 'error')} ">
         <label for="nivel">
@@ -453,7 +453,7 @@
     </g:if>
   </div>
 
-  <div class="span4">
+  <div class="span3">
     <g:if test="${incidenteInstance.id || incidenteInstance.idServresp}">
       <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServresp', 'error')} ">
         <label for="idServresp">
@@ -466,7 +466,7 @@
     </g:if>
   </div>
 
-  <div class="span4">
+  <div class="span3">
     <g:if test="${tecnicos}">
       <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel', 'error')} ">
         <label for="idNivel">
@@ -474,6 +474,16 @@
         </label>
         <g:field id="idNivel-show" name="idNivel-show"
             value="${Usuario.get(idNivel)}" disabled="true"/>
+      </div>
+    </g:if>
+  </div>
+
+  <div class="span3">
+    <g:if test="${incidenteInstance.id}">
+      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idNivel', 'error')} ">
+        <label for="idNivel">Tiempo final de atención</label>
+        <g:field id="tiempo" name="tiempo"
+            value="${firmado.tiempoDeAtencionFormateado(incidenteInstance)}" disabled="true"/>
       </div>
     </g:if>
   </div>

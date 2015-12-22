@@ -74,7 +74,7 @@ class ServiciosService {
       eqMap.put("marca", marca)
       eqMap.put("modelo", it['desModelo'])
       eqMap.put("economico", it['inventario'])
-      eqMap.put("equipo", it['descripcion'])
+      eqMap.put("equipo", tipoEquipo.descripcion)
       eqMap.put("empleado", empleado)
       // log.debug("empleado = ${eqMap['empleado']}")
       cSelectList.add(eqMap)
