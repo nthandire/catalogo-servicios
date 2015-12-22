@@ -420,6 +420,26 @@
   </g:else>
 </div>
 
+%{-- Acciones anteriores --}%
+<g:set var="nivel" value="${incidenteInstance.nivel}" />
+<g:if test="${nivel > 1}">
+  <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'descripcion', 'error')} ">
+    <label for="descripcion">Acciones en nivel 1</label>
+    <g:textArea name="acciones1" cols="40" rows="5" maxlength="3000"
+      value="${incidenteInstance?.solucionNivel1}" disabled="true"/>
+  </div>
+</g:if>
+
+<g:if test="${nivel > 2}">
+  <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'descripcion', 'error')} ">
+    <label for="descripcion">Acciones en nivel 2</label>
+    <g:textArea name="acciones2" cols="40" rows="5" maxlength="3000"
+      value="${incidenteInstance?.solucionNivel2}" disabled="true"/>
+  </div>
+</g:if>
+
+
+
 <div class="row-fluid">
   <div class="span4">
     <g:if test="${incidenteInstance.id}">
