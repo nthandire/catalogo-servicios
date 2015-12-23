@@ -22,7 +22,8 @@ $(document).ready(function() {
     	   $("#modelo").val(ui.item.modelo);
     	   $("#economico").val(ui.item.economico);
          $("#equipo").val(ui.item.equipo);
-    	   $("#empleado").val(ui.item.empleado);
+           $("#empleado").val(ui.item.empleado);
+    	   $("#garantia").val(ui.item.garantia);
     	  }
 	 	});
 

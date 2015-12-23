@@ -69,15 +69,10 @@
         <g:textField name="empleado" value="${serviciosInstance?.empleado}"
           readonly="true" style="width: 250px;text-transform: uppercase;" />
       </td>
-      %{--
       <td>
-          <label for="area">
-            <g:message code="servicios.economico.label" default="Área" />
-          </label>
-          <g:textField name="economico" value="${serviciosInstance?.economico}" readonly="true" style="width: 250px;"/>
-      </td>
-      --}%
-      <td>
+        <label for="garantia">Garantía</label>
+        <g:textField name="garantia" value="${serviciosInstance?.garantia}"
+          readonly="true" style="width: 250px;text-transform: uppercase;" />
       </td>
     </tr>
   </g:if>
@@ -130,15 +125,10 @@
         <g:textField name="empleado" value="${firmado.nombreEmpleado(equipo?.idEmpleado)}"
           readonly="true" style="width: 250px;text-transform: uppercase;" />
       </td>
-      %{--
       <td>
-          <label for="area">
-            <g:message code="servicios.economico.label" default="Área" />
-          </label>
-          <g:textField name="economico" value="${serviciosInstance?.economico}" readonly="true" style="width: 250px;"/>
-      </td>
-      --}%
-      <td>
+        <label for="garantia">Garantía</label>
+        <g:textField name="garantia" value="${servicios.garantia(equipo)}"
+          readonly="true" style="width: 250px;text-transform: uppercase;" />
       </td>
     </tr>
   </g:elseif>

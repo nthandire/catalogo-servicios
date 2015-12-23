@@ -76,6 +76,7 @@ class ServiciosService {
       eqMap.put("economico", it['inventario'])
       eqMap.put("equipo", tipoEquipo.descripcion)
       eqMap.put("empleado", empleado)
+      eqMap.put("garantia", garantiaFormateada(it))
       // log.debug("empleado = ${eqMap['empleado']}")
       cSelectList.add(eqMap)
     }
@@ -109,23 +110,28 @@ class ServiciosService {
     marca
   }
 
-  Date garantia(ResguardoEntregaDetalle equipo){
+  String garantiaFormateada(ResguardoEntregaDetalle equipo) {
+    def fecha = garantia(equipo)
+    fecha?.format("yyyy/MM/dd HH:mm") ?: ""
+  }
+
+  Date garantia(ResguardoEntregaDetalle equipo) {
     log.debug("equipo = $equipo")
     Date garantia = null
     if (equipo.idTipoanexotecnico in [1, 2]) {
     log.debug("CPU o Monitor")
       def cpu = Cpu.findByIdResguardoentregadetalle(equipo.id)
-      log.debug("cpu = $cpu.id")
+      log.debug("cpu = ${cpu?.id}")
       garantia = cpu?.fechaVenceGarantia
     } else if (equipo.idTipoanexotecnico == 5) {
     log.debug("Impresora")
       def impresora = Impresora.findByIdResguardoentregadetalle(equipo.id)
-      log.debug("impresora = $impresora.id")
+      log.debug("impresora = ${impresora?.id}")
       garantia = impresora?.fechaVenceGarantia
     } else if (equipo.idTipoanexotecnico == 6) {
     log.debug("UPS")
       def ups = Ups.findByIdResguardoentregadetalle(equipo.id)
-      log.debug("ups = $ups.id")
+      log.debug("ups = ${ups?.id}")
       garantia = ups?.fechaVenceGarantia
     }
 
