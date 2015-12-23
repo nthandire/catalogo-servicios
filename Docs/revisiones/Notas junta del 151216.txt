@@ -1,0 +1,10 @@
+Junta del 16 de diciembre.
+--------------------------
+
+
++ Pedir a sistemas tabla de parámetros.
++ Tiempo de refresco para monitor, 2 minutos.
+- Parametrizar el tiempo de refreso del monitor.
+- Bitacoras - Conmutador (Teléfonia) (Rodrigo).
+- Bitacoras - Enfermo - enfermera.
+~ Junta el 17 a las 11, ver a Javier Torres y Rodigo y Moises.

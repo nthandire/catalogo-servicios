@@ -12,11 +12,10 @@ Junta del 11 de diciembre.
 +        usuario
 +        marca
 +        modelo
-- En la búsqueda, al seleccionar, agregar:
++ En la búsqueda, al seleccionar, agregar:
 +        garantía
 +        área
 +        cuerpo
 +        nivel
 + En búsquedas, la etiqueta que dice "Empleado que resguarda el equipo" pasa a "Usuario que resguarda el equipo"
 + Requerimiento nuevo, en incidentes, mostrar inmediatamente la extensión del solicitante
-
