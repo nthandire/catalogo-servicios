@@ -82,6 +82,14 @@ class ServiciosService {
     return cSelectList
   }
 
+  @Transactional(readOnly = true)
+  def extension(params){
+    def reporta = params.reporta.toLong()
+    log.debug("en extension, reporta = $reporta")
+
+    Usuario.get(reporta).extension ?: ""
+  }
+
   def nombreEquipo(id){
     log.debug("en nombreEquipo")
 

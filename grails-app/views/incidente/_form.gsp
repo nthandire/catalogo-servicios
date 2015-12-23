@@ -175,12 +175,19 @@
         <label for="idReporta">
           <g:message code="incidente.idReporta.label" default="Quien Reporta" />
         </label>
-          <%-- TODO: mejorar el select, solo los usuarios SAST --%>
-          <g:select id="idReporta" name="idReporta"
-            from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
-            required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
-            noSelection="${['':'Seleccione una...']}" optionKey="id"
-            optionValue="nombreMostrar"/>
+        <%-- TODO: mejorar el select, solo los usuarios SAST --%>
+        <g:select id="idReporta" name="idReporta"
+          from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
+          required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
+          noSelection="${['':'Seleccione una...']}" optionKey="id"
+          optionValue="nombreMostrar"/>
+      </div>
+    </div>
+
+    <div class="span4">
+      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
+        <label for="idReporta">Extención</label>
+        <g:field type="text" id="extension" name="extension" disabled="true" value=""/>
       </div>
     </div>
   </div>

@@ -834,4 +834,9 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
     render serviciosService.listarEquipo(params) as JSON
   }
 
+  def extension() {
+    log.debug("params = $params")
+    render serviciosService.extension(params)
+  }
+
 }
