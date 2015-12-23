@@ -1,0 +1,9 @@
+Junta del 12 de diciembre. (aproximadamente)
+------------------------
+
+
++ Listado de incidentes Terminados (incluyen cancelados)
++ Listado de incidentes en Encuestas
+>d (deseable, no dentro del alcance) 
+>d Listado para Aprobadores de requerimientos en proceso
+>d Listado para Aprobadores de incidentes en proceso
