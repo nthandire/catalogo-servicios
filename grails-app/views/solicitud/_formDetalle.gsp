@@ -1,3 +1,5 @@
+<g:javascript src="servicios.js" />
+
 <style type="text/css">
   textArea { width: 412px; }
 </style>
@@ -7,7 +9,6 @@
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
       <label for="idServcat">
         <g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
-
       </label>
       <g:select id="idServcat" name="idServcat.id" from="${categorias}"
         optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}"
@@ -29,12 +30,10 @@
   <div class="span4">
     <div class="fieldtablecontain">
       <label for="resguardo">
-        <g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Equipo" />
+        Inventario o No. de Serie o Usuario
       </label>
-      <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
-        from="${equipos}" optionKey="id"
-        value="${solicitudDetalleInstance?.idResguardoentregadetalle}"
-        class="many-to-one" noSelection="${['':'Seleccione una...']}"/>
+      <g:textField id="cpuauto" name="idResguardoentregadetalle"
+        style="width: 250px;" />
     </div>
   </div>
 </div>

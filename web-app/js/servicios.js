@@ -22,7 +22,9 @@ $(document).ready(function() {
     	   $("#modelo").val(ui.item.modelo);
     	   $("#economico").val(ui.item.economico);
          $("#equipo").val(ui.item.equipo);
-           $("#empleado").val(ui.item.empleado);
+         $("#ubicacion").val(ui.item.ubicacion);
+         $("#cuerpo").val(ui.item.cuerpo);
+         $("#empleado").val(ui.item.empleado);
     	   $("#garantia").val(ui.item.garantia);
     	  }
 	 	});

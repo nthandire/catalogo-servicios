@@ -63,6 +63,16 @@
     </tr>
     <tr>
       <td>
+        <label for="ubicacion">Ubicación</label>
+        <g:textField name="ubicacion" value="${serviciosInstance?.ubicacion}" readonly="true" style="width: 600px;"/>
+      </td>
+      <td>
+        <label for="garantia">Cuerpo : Nivel</label>
+        <g:textField name="cuerpo" value="${serviciosInstance?.cuerpo}" readonly="true" style="width: 250px;"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <label for="empleado">
           <g:message code="servicios.empleado.label" default="Usuario que resguarda el equipo" />
         </label>
@@ -117,6 +127,20 @@
       <td>
       </td>
     </tr>
+    <g:if test="${firmado.ubicacion(incidenteInstance?.idResguardoentregadetalle) || firmado.cuerpoNivel(incidenteInstance?.idResguardoentregadetalle)}">
+      <tr>
+        <td>
+          <label for="ubicacion">Ubicación</label>
+          <g:field type="text" name="ubicacion" disabled="true" style="width:600px"
+            value="${firmado.ubicacion(incidenteInstance?.idResguardoentregadetalle)}"/>
+        </td>
+        <td>
+          <label for="garantia">Cuerpo : Nivel</label>
+          <g:field type="text" name="cuerpo" disabled="true" style="width:400px"
+            value="${firmado.cuerpoNivel(incidenteInstance?.idResguardoentregadetalle)}"/>
+        </td>
+      </tr>
+    </g:if>
     <tr>
       <td>
         <label for="empleado">
@@ -133,30 +157,6 @@
     </tr>
   </g:elseif>
 </table>
-
-<g:if test="${(incidenteInstance?.idResguardoentregadetalle)}">
-  <div class="row-fluid">
-    <div class="span7">
-      <div class="fieldtablecontain">
-        <label for="ubicacion-label">
-          <g:message code="solicitud.ubicacion.label" default="Ubicación"/>
-        </label>
-        <g:field type="text" name="ubicacion" disabled="true" style="width:600px"
-          value="${firmado.ubicacion(incidenteInstance?.idResguardoentregadetalle)}"/>
-      </div>
-    </div>
-
-    <div class="span5">
-      <div class="fieldtablecontain">
-        <label for="cuerpo-label">
-          <g:message code="solicitud.cuerpo.label" default="Cuerpo : Nivel"/>
-        </label>
-        <g:field type="text" name="cuerpo" disabled="true" style="width:400px"
-          value="${firmado.cuerpoNivel(incidenteInstance?.idResguardoentregadetalle)}"/>
-      </div>
-    </div>
-  </div>
-</g:if>
 
 <g:if test="${!incidenteInstance.id}">
   <div class="row-fluid">

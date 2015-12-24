@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 
 class ServiciosService {
   static transactional = true
-  def serviciosService
+  def firmadoService
 
   @Transactional(readOnly = true)
   def listarEquipo(params){
@@ -65,11 +65,11 @@ class ServiciosService {
     clist.each {
       def eqMap = [:] // add to map. jQuery autocomplete expects the JSON object to be with id/label/value.
       eqMap.put("serie", it['serie'])
-      def empleado = Usuario.findByIdEmpleado(it['idEmpleado']).toString()
+      def empleado = Usuario.findByIdEmpleado(it['idEmpleado'])?.toString() ?: "Error en dato de empleado"
       log.debug("it['idTipoanexotecnico'] = ${it['idTipoanexotecnico']}")
       def tipoEquipo = AnexoTecnico.get(it['idTipoanexotecnico'] as Long)
       eqMap.put("value", it['id'])
-      def marca = serviciosService.descMarca(it['idMarca'])
+      def marca = descMarca(it['idMarca'])
       eqMap.put("label", "${it['inventario']} : ${it['serie']} : $tipoEquipo : $empleado : $marca : ${it['desModelo']}")
       eqMap.put("marca", marca)
       eqMap.put("modelo", it['desModelo'])
@@ -77,7 +77,8 @@ class ServiciosService {
       eqMap.put("equipo", tipoEquipo.descripcion)
       eqMap.put("empleado", empleado)
       eqMap.put("garantia", garantiaFormateada(it))
-      // log.debug("empleado = ${eqMap['empleado']}")
+      eqMap.put("ubicacion", firmadoService.ubicacion(it.id))
+      eqMap.put("cuerpo", firmadoService.cuerpoNivel(it.id))
       cSelectList.add(eqMap)
     }
     return cSelectList
