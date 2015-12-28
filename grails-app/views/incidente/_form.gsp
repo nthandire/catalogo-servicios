@@ -17,10 +17,6 @@
         <g:textField id="cpuauto" name="idResguardoentregadetalle" style="width: 250px;" />
       </td>
       <td>
-        <div id="area" style="visibility: hidden">
-          <label for="nombreArea">Area</label>
-          <g:textField name="nombreArea" style="width: 250px;text-transform: uppercase;" />
-        </div>
       </td>
     </tr>
     <tr>
@@ -62,7 +58,7 @@
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <label for="ubicacion">Ubicación</label>
         <g:textField name="ubicacion" value="${serviciosInstance?.ubicacion}" readonly="true" style="width: 600px;"/>
       </td>
@@ -129,7 +125,7 @@
     </tr>
     <g:if test="${firmado.ubicacion(incidenteInstance?.idResguardoentregadetalle) || firmado.cuerpoNivel(incidenteInstance?.idResguardoentregadetalle)}">
       <tr>
-        <td>
+        <td colspan="2">
           <label for="ubicacion">Ubicación</label>
           <g:field type="text" name="ubicacion" disabled="true" style="width:600px"
             value="${firmado.ubicacion(incidenteInstance?.idResguardoentregadetalle)}"/>
