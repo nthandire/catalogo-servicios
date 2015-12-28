@@ -63,6 +63,18 @@ class ServiciosService {
 
     def cSelectList = [] // cada uno de los resultados
     clist.each {
+      cSelectList.add(detallesEquipo(it))
+    }
+    return cSelectList
+  }
+
+  @Transactional(readOnly = true)
+  def detallesById(id) {
+    id ? detallesEquipo(ResguardoEntregaDetalle.get(id)) : 0
+  }
+
+  @Transactional(readOnly = true)
+  def detallesEquipo(ResguardoEntregaDetalle it) {
       def eqMap = [:] // add to map. jQuery autocomplete expects the JSON object to be with id/label/value.
       eqMap.put("serie", it['serie'])
       def empleado = Usuario.findByIdEmpleado(it['idEmpleado'])?.toString() ?: "Error en dato de empleado"
@@ -79,9 +91,7 @@ class ServiciosService {
       eqMap.put("garantia", garantiaFormateada(it))
       eqMap.put("ubicacion", firmadoService.ubicacion(it.id))
       eqMap.put("cuerpo", firmadoService.cuerpoNivel(it.id))
-      cSelectList.add(eqMap)
-    }
-    return cSelectList
+      eqMap
   }
 
   @Transactional(readOnly = true)

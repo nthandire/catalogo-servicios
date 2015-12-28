@@ -106,8 +106,20 @@
     $("#idResguardoentregadetalle").val(null);
     $("#panelEstado").css("display", "none");
     $("#estado").val(null);
+    ponerDetalles("", "", "", "", "", "", "", "", "")
   }
-  function detalle(id, serv, descripcion, equipo, estado) {
+  function ponerDetalles(serie, marca, modelo, economico, equipo, ubicacion, cuerpo, empleado, garantia) {
+    $("#serie").val(serie);
+    $("#marca").val(marca);
+    $("#modelo").val(modelo);
+    $("#economico").val(economico);
+    $("#equipo").val(equipo);
+    $("#ubicacion").val(ubicacion);
+    $("#cuerpo").val(cuerpo);
+    $("#empleado").val(empleado);
+    $("#garantia").val(garantia);
+  }
+  function detalle(id, serv, descripcion, serie, marca, modelo, economico, equipo, ubicacion, cuerpo, empleado, garantia, estado) {
     $("#idServcat").prop("required", true);
     $("#descripcion").prop("required", true);
     $("#justificacion").prop("required", false);
@@ -116,7 +128,10 @@
     $("#idDetalle").val(id);
     $("#idServcat").val(serv);
     $("#descripcion").text(descripcion);
-    $("#idResguardoentregadetalle").val(equipo);
+    // $("#cpuauto").val(equipo);
+
+    ponerDetalles(serie, marca, modelo, economico, equipo, ubicacion, cuerpo, empleado, garantia)
+
     $("#panelEstado").css("display", "block");
     $("#estado").val(estado);
   }

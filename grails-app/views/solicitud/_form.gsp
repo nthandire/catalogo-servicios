@@ -11,6 +11,7 @@
     <p style="height:10px;"> </p>
     <table>
       <g:if test="${solicitudInstance?.detalles}">
+        <g:set var="servicios" bean="serviciosService"/>
         <tr>
           <th>Categoría</th>
           <th>Subcategoría</th>
@@ -23,10 +24,11 @@
         <tr>
           <td>
             <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
+            <g:set var="equipo" value="${servicios.detallesById(d.idResguardoentregadetalle)}" />
             <a data-toggle="modal" href="#responsive"
-              onclick="detalle(${d.id}, ${d.idServcat.id}, '${d.descripcion}', ${d.idResguardoentregadetalle?:0}, '${d.estado}')">
+              onclick="detalle(${d.id}, ${d.idServcat.id}, '${d.descripcion}', '${equipo.serie}', '${equipo.marca}', '${equipo.modelo}', '${equipo.economico}', '${equipo.equipo}', '${equipo.ubicacion}', '${equipo.cuerpo}', '${equipo.empleado}', '${equipo.garantia}', '${d.estado}')">
               ${d?.encodeAsHTML()}
-            </a>
+            </equipo.a>
             </g:if>
             <g:else>
               ${d?.encodeAsHTML()}
