@@ -5,6 +5,11 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'solicitud.label', default: 'Solicitud')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+    <style type="text/css">
+      ul.ui-autocomplete {
+          z-index: 1100;
+      }
+    </style>
 	</head>
 	<body>
 		<a href="#edit-solicitud" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
