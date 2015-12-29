@@ -165,22 +165,88 @@ class ReportesController {
         inciResueltoTercer
     log.debug("inciResueltoTotal = $inciResueltoTotal")
     params["inciResueltoTotal"] = formato.format(inciResueltoTotal)
-    log.debug("params['inciResueltoTotal'] = ${params['inciResueltoTotal']}")
+
 
     Integer inciResueltoPrimerEnTiempo = firmadoService.
         cuantosEnTiempoNivel(inciResueltoPrimerList, 1)
     params["inciResueltoPrimerEnTiempo"] = formato.format(inciResueltoPrimerEnTiempo)
 
+    params["inciNoResueltoPrimerEnTiempo"] = formato.format(inciResueltoPrimerList.size() - inciResueltoPrimerEnTiempo)
+
     Integer inciResueltoSegundoEnTiempo = firmadoService.
         cuantosEnTiempoNivel(inciResueltoSegundoList, 2)
     params["inciResueltoSegundoEnTiempo"] = formato.format(inciResueltoSegundoEnTiempo)
+
+    params["inciNoResueltoSegundoEnTiempo"] = formato.format(inciResueltoSegundoList.size() - inciResueltoSegundoEnTiempo)
 
     Integer inciResueltoTercerEnTiempo = firmadoService.
         cuantosEnTiempoNivel(inciResueltoTercerList, 3)
     params["inciResueltoTercerEnTiempo"] = formato.format(inciResueltoTercerEnTiempo)
 
+    params["inciNoResueltoTercerEnTiempo"] = formato.format(inciResueltoTercerList.size() - inciResueltoTercerEnTiempo)
+
     params["inciResueltoTotalEnTiempo"] = formato.format(inciResueltoPrimerEnTiempo
         + inciResueltoSegundoEnTiempo + inciResueltoTercerEnTiempo)
+
+    params["inciNoResueltoTotalEnTiempo"] = formato.format(incidentes.size() - params["inciResueltoTotalEnTiempo"].toInteger())
+
+
+    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
+
+    params["primerOLA"] = formatoFijo.format(inciResueltoTotal / inciResueltoPrimer * 100) + " %"
+    params["segundoOLA"] = formatoFijo.format(inciResueltoTotal / inciResueltoSegundo * 100) + " %"
+    params["terceroOLA"] = formatoFijo.format(inciResueltoTotal / inciResueltoTercer * 100) + " %"
+
+
+
+    query =
+      "  from Solicitud                             " +
+      " where estado in ('T', 'E')                  " +
+      "   and fechaAutoriza between ? and ?         "
+    log.debug("query = $query")
+    def requerimientos = Solicitud.findAll(query, [startDate, endDate])
+    log.debug("requerimientos = $requerimientos")
+
+    // contar cuantas se resolvieron en segundo nivel
+    Integer contRequerimientos = 0
+    requerimientos.each {
+      it.detalles.each { det ->
+        if (det.estado == 'A' as char) {
+          contRequerimientos += 1
+        }
+      }
+    }
+    params["reqResueltoSegundo"] = formato.format(contRequerimientos)
+
+
+    // contar cuantas se resolvieron en total
+    Integer reqResueltoTotal = contRequerimientos
+    log.debug("reqResueltoTotal = $reqResueltoTotal")
+    params["reqResueltoTotal"] = formato.format(reqResueltoTotal)
+
+
+    Integer reqResueltoPrimerEnTiempo = firmadoService.
+        cuantosReqEnTiempoNivel(requerimientos, 1)
+    params["reqResueltoPrimerEnTiempo"] = formato.format(reqResueltoPrimerEnTiempo)
+
+    params["reqNoResueltoPrimerEnTiempo"] = formato.format(contRequerimientos -
+        reqResueltoPrimerEnTiempo)
+
+    Integer reqResueltoSegundoEnTiempo = firmadoService.
+        cuantosReqEnTiempoNivel(requerimientos, 2)
+    params["reqResueltoSegundoEnTiempo"] = formato.format(reqResueltoSegundoEnTiempo)
+
+    params["reqNoResueltoSegundoEnTiempo"] = formato.format(contRequerimientos -
+        reqResueltoSegundoEnTiempo)
+
+    params["reqResueltoTotalEnTiempo"] = formato.format(reqResueltoSegundoEnTiempo)
+
+    params["reqNoResueltoTotalEnTiempo"] = formato.format(contRequerimientos -
+        params["reqResueltoTotalEnTiempo"].toInteger())
+
+
+    params["segundoReqOLA"] = formatoFijo.format(reqResueltoSegundoEnTiempo / contRequerimientos * 100) + " %"
+
 
 
     log.debug("startDate = $startDate")

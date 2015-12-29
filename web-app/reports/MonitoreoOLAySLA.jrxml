@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="4"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
 	<parameter name="anio" class="java.lang.String"/>
@@ -15,6 +15,22 @@
 	<parameter name="inciResueltoSegundoEnTiempo" class="java.lang.String"/>
 	<parameter name="inciResueltoTercerEnTiempo" class="java.lang.String"/>
 	<parameter name="inciResueltoTotalEnTiempo" class="java.lang.String"/>
+	<parameter name="inciNoResueltoPrimerEnTiempo" class="java.lang.String"/>
+	<parameter name="inciNoResueltoSegundoEnTiempo" class="java.lang.String"/>
+	<parameter name="inciNoResueltoTercerEnTiempo" class="java.lang.String"/>
+	<parameter name="inciNoResueltoTotalEnTiempo" class="java.lang.String"/>
+	<parameter name="primerOLA" class="java.lang.String"/>
+	<parameter name="segundoOLA" class="java.lang.String"/>
+	<parameter name="terceroOLA" class="java.lang.String"/>
+	<parameter name="reqResueltoSegundo" class="java.lang.String"/>
+	<parameter name="reqResueltoTotal" class="java.lang.String"/>
+	<parameter name="reqResueltoPrimerEnTiempo" class="java.lang.String"/>
+	<parameter name="reqNoResueltoPrimerEnTiempo" class="java.lang.String"/>
+	<parameter name="reqResueltoSegundoEnTiempo" class="java.lang.String"/>
+	<parameter name="reqNoResueltoSegundoEnTiempo" class="java.lang.String"/>
+	<parameter name="reqResueltoTotalEnTiempo" class="java.lang.String"/>
+	<parameter name="reqNoResueltoTotalEnTiempo" class="java.lang.String"/>
+	<parameter name="segundoReqOLA" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -160,17 +176,17 @@
 			<textField>
 				<reportElement x="251" y="81" width="80" height="30" uuid="1aac4881-ad01-4729-8f32-c78c8f8a6afc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{inciNoResueltoPrimerEnTiempo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="331" y="81" width="80" height="30" uuid="f634c01b-7e9b-496d-b943-002ff305391c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{primerOLA}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="491" y="81" width="80" height="30" uuid="67d481c7-d035-421a-8824-03e77b9424d9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reqResueltoPrimerEnTiempo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="651" y="81" width="80" height="30" uuid="7afe599c-a6a3-43c7-a747-416ca6c77211"/>
@@ -185,7 +201,7 @@
 			<textField>
 				<reportElement x="571" y="81" width="80" height="30" uuid="0a5f4030-1c47-4d6c-b9ed-cb7960963830"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reqNoResueltoPrimerEnTiempo}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="11" y="81" width="80" height="30" uuid="a06014f2-e0bb-42bb-ac5a-2164f321b660"/>
@@ -200,12 +216,12 @@
 			<textField>
 				<reportElement x="651" y="111" width="80" height="30" uuid="60a049d7-0c3a-402c-ab91-8eb264c0518e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{segundoReqOLA}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="491" y="111" width="80" height="30" uuid="6e6b76a1-234b-4ba7-b8a4-e7d0fc26b409"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reqResueltoSegundoEnTiempo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="171" y="111" width="80" height="30" uuid="0dc4fa1d-4ace-413b-b3a2-ef82ed085a96"/>
@@ -215,12 +231,12 @@
 			<textField>
 				<reportElement x="331" y="111" width="80" height="30" uuid="7e51fd36-806b-4266-90c7-5a745fbcce53"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{segundoOLA}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="571" y="111" width="80" height="30" uuid="ba387d23-d122-4b28-bce3-787148c04972"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reqNoResueltoSegundoEnTiempo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="91" y="111" width="80" height="30" uuid="0c4942f2-078b-4313-a892-dd0a07d75128"/>
@@ -230,12 +246,12 @@
 			<textField>
 				<reportElement x="411" y="111" width="80" height="30" uuid="a9b68d73-188b-4e35-a9dc-5d008ed0253b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reqResueltoSegundo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="251" y="111" width="80" height="30" uuid="8a1728d8-4891-45e5-9ccf-6d852eef19dc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{inciNoResueltoSegundoEnTiempo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="651" y="141" width="80" height="30" uuid="6ea467d5-5bba-450d-803e-7530aad9feb9"/>
@@ -245,12 +261,12 @@
 			<textField>
 				<reportElement x="331" y="141" width="80" height="30" uuid="c65f5657-b12a-4e8a-a6a4-b10e169e9545"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{terceroOLA}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="251" y="141" width="80" height="30" uuid="e6bc561e-1bb9-4a7a-a52a-213a2774c102"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{inciNoResueltoTercerEnTiempo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="571" y="141" width="80" height="30" uuid="6dc41384-360c-488a-8be3-ec807f527bf9"/>
@@ -296,7 +312,7 @@
 			<textField>
 				<reportElement x="491" y="171" width="80" height="30" uuid="ef1b1850-22a8-4aad-b438-e093203ff750"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reqResueltoTotalEnTiempo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="171" y="171" width="80" height="30" uuid="284165c0-709d-424d-b9b0-cbeaf1576111"/>
@@ -311,7 +327,7 @@
 			<textField>
 				<reportElement x="571" y="171" width="80" height="30" uuid="d77672fc-2997-496d-a47d-42e7e956197b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reqNoResueltoTotalEnTiempo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="91" y="171" width="80" height="30" uuid="9c0cceaa-479f-4631-9c14-8f2b9fa61066"/>
@@ -321,12 +337,24 @@
 			<textField>
 				<reportElement x="411" y="171" width="80" height="30" uuid="c9eb681a-8f3f-4c38-ad0e-fb0db0519e11"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reqResueltoTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="251" y="171" width="80" height="30" uuid="65fafb42-4ac5-4e3a-974a-5b9daa688c5b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{inciNoResueltoTotalEnTiempo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="76" y="279" width="50" height="20" uuid="b4fcdaf5-8bf9-411b-bd2b-7fce540a29b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SLA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="275" width="80" height="30" uuid="b2088cac-4fac-4314-bc2a-f8762eb782cb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{segundoReqOLA}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>

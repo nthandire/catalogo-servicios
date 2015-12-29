@@ -509,6 +509,24 @@ class FirmadoService {
     cuantos
   }
 
+  Integer cuantosReqEnTiempoNivel(ArrayList lista, Integer nivel) {
+    Integer cuantos = 0
+    lista.each {
+      def fechaInicio = it.fechaVb?:it.fechaAutoriza
+      it.detalles.each { det ->
+        if (det.estado == 'A' as char) {
+          Integer tiempoAsignado = 0
+          for (i in 1..nivel) {
+            tiempoAsignado += tiempoAsignadoNivel(det.idServ, i)
+          }
+          def tiempoGastado = diff(fechaInicio, det.fechaSolucion)
+          cuantos += tiempoGastado <= tiempoAsignado ? 1 : 0
+        }
+      }
+    }
+    cuantos
+  }
+
   Integer diff(Date inicio, Date fin) { // TODO: Usarlo 2 veces más en este mismo archivo
     def minutos = 0
     use ( TimeCategory ) {
