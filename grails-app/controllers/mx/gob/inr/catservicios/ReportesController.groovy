@@ -40,7 +40,7 @@ class ReportesController {
     use(TimeCategory) {
       endDate = endDate + 1.month - 1.seconds
     }
-    params["mes"] = startDate.format('MMMM').toString()
+    params["mes"] = startDate.format('MMMM')
     params["anio"] = startDate.format('YYYY')
     params["preg1Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 1)
     params["preg1No"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 2)
@@ -308,38 +308,28 @@ class ReportesController {
     log.debug("params = $params")
 
     detalles.each { it ->
-      def estado = ""
-      switch (it.idSolicitud.estado) {
-        case 'A' as char:
-          if (it.idVb) {
-            estado = "solicita VoBo"
-          } else {
-            estado = "aceptado"
-          }
-          break
-        case 'V' as char:
-          estado = "visto bueno"
-          break
-        case 'R' as char:
-          estado = "revisado"
-          break
-        case 'C' as char:
-          estado = "cancelado"
-          break
-        case 'E' as char:
-          estado = "encuesta"
-          break
-        case 'T' as char:
-          estado = "terminado"
-          break
+      def inventario = ""
+      if (it?.idResguardoentregadetalle) {
+        def equipo = ResguardoEntregaDetalle.get(it.idResguardoentregadetalle)
+        inventario = equipo.inventario.toString()
       }
       def renglon = new RptSolicitud (
         folio: it.idSolicitud.toString(),
         tipo: "Requerimiento",
-        estado: estado,
+        estado: firmadoService.estadoDescriptivo(it.idSolicitud),
         area: firmadoService.areaNombre(it.idSolicitud.id),
         nombre: Usuario.get(it.idSolicitud.idSolicitante).toString(),
         categoria: it.idServcat.toString(),
+        subcategoria: it?.idServ?.servSub?.toString(),
+        tercerNivel: it?.idServ?.toString(),
+        descripcion: it?.descripcion,
+        inventario: inventario,
+        responsable: it.idServcat.servResp.toString(),
+        gestionadoA: "¿?",
+        prioridad: message(code:"intensidad.valor.${it.prioridad}"),
+        fechaRecepcion: it.idSolicitud.fechaAutoriza ? (it.idSolicitud.fechaAutoriza).format("YYYY-MM-dd HH:mm") : "",
+        fechaCierre: it.fechaSolucion ? (it.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
+        solucion: it.solucion ?: "",
       )
       data.add(renglon)
     }
@@ -356,6 +346,16 @@ class RptSolicitud {
   String area
   String nombre
   String categoria
+  String subcategoria
+  String tercerNivel
+  String descripcion
+  String inventario
+  String responsable
+  String gestionadoA
+  String prioridad
+  String fechaRecepcion
+  String fechaCierre
+  String solucion
 }
 
 // class RptSolicitud {

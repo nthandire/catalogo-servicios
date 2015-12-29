@@ -102,6 +102,35 @@ class FirmadoService {
     area
   }
 
+  String estadoDescriptivo(Solicitud caso) {
+    def descripcion = ""
+    switch (caso.estado) {
+      case 'A' as char:
+        if (caso.idVb) {
+          descripcion = "solicita VoBo"
+        } else {
+          descripcion = "aceptado"
+        }
+        break
+      case 'V' as char:
+        descripcion = "visto bueno"
+        break
+      case 'R' as char:
+        descripcion = "revisado"
+        break
+      case 'C' as char:
+        descripcion = "cancelado"
+        break
+      case 'E' as char:
+        descripcion = "encuesta"
+        break
+      case 'T' as char:
+        descripcion = "terminado"
+        break
+    }
+    descripcion
+  }
+
   def ubicacion (Long idEquipo) {
     _ubicacion(idEquipo)?.descripcion
   }
