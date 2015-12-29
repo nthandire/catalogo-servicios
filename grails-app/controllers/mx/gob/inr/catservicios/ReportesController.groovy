@@ -248,7 +248,6 @@ class ReportesController {
     params["segundoReqOLA"] = formatoFijo.format(reqResueltoSegundoEnTiempo / contRequerimientos * 100) + " %"
 
 
-
     log.debug("startDate = $startDate")
     log.debug("endDate = $endDate")
     log.debug("params = $params")
@@ -265,5 +264,108 @@ class ReportesController {
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 
+  def reporteSolicitudes() {
+    def data = []
+    params.image_dir = "${servletContext.getRealPath('/images')}/"
+
+    def startDate = params.startDate
+    startDate[Calendar.DATE] = 1
+    startDate[Calendar.HOUR_OF_DAY] = 0
+    startDate[Calendar.MINUTE] = 0
+    def endDate = startDate.clone()
+    use(TimeCategory) {
+      endDate = endDate + 1.month - 1.seconds
+    }
+    params["mes"] = startDate.format('MMMM').toString()
+    params["anio"] = startDate.format('YYYY')
+
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
+    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
+
+
+    def query =
+      "  from Solicitud                          " +
+      " where estado is not null                 " +
+      "   and estado <> 'F'                      " +
+      "   and fechaAutoriza between ? and ?      "
+    log.debug("query = $query")
+    def requerimientos = Solicitud.findAll(query, [startDate, endDate])
+    log.debug("requerimientos = $requerimientos")
+    def detalles = []
+    requerimientos.each {
+      it.detalles.each { det ->
+        if (det.estado == 'A' as char) {
+          detalles << det
+        }
+      }
+    }
+
+
+    log.debug("startDate = $startDate")
+    log.debug("endDate = $endDate")
+    log.debug("params = $params")
+
+    detalles.each { it ->
+      def estado = ""
+      switch (it.idSolicitud.estado) {
+        case 'A' as char:
+          if (it.idVb) {
+            estado = "solicita VoBo"
+          } else {
+            estado = "aceptado"
+          }
+          break
+        case 'V' as char:
+          estado = "visto bueno"
+          break
+        case 'R' as char:
+          estado = "revisado"
+          break
+        case 'C' as char:
+          estado = "cancelado"
+          break
+        case 'E' as char:
+          estado = "encuesta"
+          break
+        case 'T' as char:
+          estado = "terminado"
+          break
+      }
+      def renglon = new RptSolicitud (
+        folio: it.idSolicitud.toString(),
+        tipo: "Requerimiento",
+        estado: estado,
+        area: firmadoService.areaNombre(it.idSolicitud.id),
+        nombre: Usuario.get(it.idSolicitud.idSolicitante).toString(),
+        categoria: it.idServcat.toString(),
+      )
+      data.add(renglon)
+    }
+
+    chain (controller:"jasper", action:"index", model:[data:data], params:params)
+  }
+
 }
 
+class RptSolicitud {
+  String folio
+  String tipo
+  String estado
+  String area
+  String nombre
+  String categoria
+}
+
+// class RptSolicitud {
+//     String servicio
+//     Integer num_solicitud
+//     Date fecha
+//     String servicio
+//     String categoria
+//     String subcategoria
+//     String descripcion
+//     String observaciones
+//     String responsable
+// }

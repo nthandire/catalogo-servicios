@@ -88,7 +88,7 @@ class FirmadoService {
     if (usuario) {
       area = UsuarioAutorizado.get(usuario)?.area
       if (!area || area.length() == 1) {
-        def idArea = area ?: Usuario.get(usuario).idUnidadMedica
+        def idArea = area ?: Usuario.get(usuario)?.idUnidadMedica
         log.debug("idArea = ${idArea}")
         if (idArea) {
           def unidMed = UnidadMedica.get(idArea as char)
