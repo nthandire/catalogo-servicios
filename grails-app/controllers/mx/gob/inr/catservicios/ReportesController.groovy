@@ -337,6 +337,80 @@ class ReportesController {
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 
+  def reportePortafolio() {
+    def data = []
+    params.image_dir = "${servletContext.getRealPath('/images')}/"
+
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
+    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
+
+    // obtener las catecorias con estado A
+    def categorias = Cat_servCat.findAllByEstado('A' as char)
+    // de esas , obtener las subcategorias con estado A
+    def subcategorias = Cat_servSub.findAllByEstadoAndServCatInList('A' as char, categorias)
+    // y de esas, obtener los servicios con estado A
+    def servicios = Cat_serv.findAllByEstadoServAndServSubInList('A' as char, subcategorias, [sort: "id"])
+
+    log.debug("servicios = $servicios")
+    log.debug("params = $params")
+
+    servicios.each { it ->
+      def categoria = it.servSub.servCat
+      def renglon = new RptPortafolio (
+        id: it.id.toString(),
+        categoria: categoria.toString(),
+        descripcion: it.descripcion,
+        responsable: categoria.toString(),
+        valoracion: "0 %",
+        disponibilidad: "0 %",
+        cobertura: "cobertura",
+      )
+      data.add(renglon)
+    }
+
+    chain (controller:"jasper", action:"index", model:[data:data], params:params)
+  }
+
+  def reporteSubcategoria() {
+    def data = []
+    params.image_dir = "${servletContext.getRealPath('/images')}/"
+
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
+    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
+
+    // obtener las catecorias con estado A
+    def categorias = Cat_servCat.findAllByEstado('A' as char)
+    // de esas , obtener las subcategorias con estado A
+    def subcategorias = Cat_servSub.findAllByEstadoAndServCatInList('A' as char,
+      categorias, [sort: "servCat"])
+
+    log.debug("subcategorias = $subcategorias")
+    log.debug("params = $params")
+
+    subcategorias.each { it ->
+      def categoria = it.servCat
+      def renglon = new rptSubcategoria (
+        id: categoria.id.toString(),
+        categoria: categoria.toString(),
+        categoria_id: categoria.id.toString(),
+        descripcion: categoria.descripcion,
+        responsable: categoria.toString(),
+        valoracion: "0 %",
+        disponibilidad: "0 %",
+        cobertura: "cobertura",
+        subcategoria: it.toString(),
+      )
+      log.debug("sub = ${renglon.subcategoria}")
+      data.add(renglon)
+    }
+
+    chain (controller:"jasper", action:"index", model:[data:data], params:params)
+  }
+
 }
 
 class RptSolicitud {
@@ -358,14 +432,24 @@ class RptSolicitud {
   String solucion
 }
 
-// class RptSolicitud {
-//     String servicio
-//     Integer num_solicitud
-//     Date fecha
-//     String servicio
-//     String categoria
-//     String subcategoria
-//     String descripcion
-//     String observaciones
-//     String responsable
-// }
+class RptPortafolio {
+  String id
+  String categoria
+  String descripcion
+  String responsable
+  String valoracion
+  String disponibilidad
+  String cobertura
+}
+
+class rptSubcategoria {
+  String id
+  String categoria
+  String categoria_id
+  String descripcion
+  String responsable
+  String valoracion
+  String disponibilidad
+  String cobertura
+  String subcategoria
+}

@@ -104,6 +104,32 @@
 				</div>
 			</div>
 
+			<div class="row-fluid">
+				<div class="span10 offset1">
+				  <g:jasperReport
+				          controller="Reportes"
+				          action="reportePortafolio"
+				          jasper="Portafolio"
+				          format="pdf"
+				          name="PORTAFOLIO DE SERVICIOS POR CATEGORIA"
+				          description="Portafolio De Servicios Por Categoría">
+				  </g:jasperReport>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10 offset1">
+				  <g:jasperReport
+				          controller="Reportes"
+				          action="reporteSubcategoria"
+				          jasper="Subcategorias"
+				          format="pdf"
+				          name="PORTAFOLIO DE SERVICIOS POR SUBCATEGORIA"
+				          description="Portafolio De Servicios Por Subcategoria">
+				  </g:jasperReport>
+				</div>
+			</div>
+
 		</div>
 	</body>
 </html>
