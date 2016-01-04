@@ -411,6 +411,60 @@ class ReportesController {
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 
+  def reporteServicios() {
+    def data = []
+    params.image_dir = "${servletContext.getRealPath('/images')}/"
+
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
+    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
+
+    def servicios = Cat_serv.list(sort: "servSub.id")
+
+    log.debug("params = $params")
+
+    servicios.each {
+      def categoria = it.servSub.servCat
+      def renglon = new rptServicios (
+        id: it.id.toString(),
+        categoria: categoria.toString(),
+        descripcion: it.descripcion,
+        responsable: categoria.servResp.toString(),
+        valoracion: message(code:"intensidad.valor.${categoria.valoracion}"),
+        disponibilidad: "${categoria.disponibilidad} %",
+        estado: it.estadoServ,
+        cobertura: categoria.servCob,
+        subcategoria: it.servSub.toString(),
+        tercerNivel: it.toString(),
+        visible: it.portal ? "*" : "",
+        incidente: it.incidente ? "*" : "",
+        solicitud: it.solicitud ? "*" : "",
+        problema: it.problema ? "*" : "",
+      )
+      data.add(renglon)
+    }
+
+    chain (controller:"jasper", action:"index", model:[data:data], params:params)
+  }
+
+}
+
+class rptServicios {
+  String id
+  String categoria
+  String descripcion
+  String responsable
+  String valoracion
+  String disponibilidad
+  String estado
+  String cobertura
+  String subcategoria
+  String tercerNivel
+  String visible
+  String incidente
+  String solicitud
+  String problema
 }
 
 class RptSolicitud {

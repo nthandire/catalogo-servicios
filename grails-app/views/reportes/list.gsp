@@ -130,6 +130,19 @@
 				</div>
 			</div>
 
+			<div class="row-fluid">
+				<div class="span10 offset1">
+				  <g:jasperReport
+				          controller="Reportes"
+				          action="reporteServicios"
+				          jasper="Servicios"
+				          format="pdf"
+				          name="CATALOGO DE SERVICIOS DE TIC"
+				          description="Catálogo De Servicios De TIC">
+				  </g:jasperReport>
+				</div>
+			</div>
+
 		</div>
 	</body>
 </html>
