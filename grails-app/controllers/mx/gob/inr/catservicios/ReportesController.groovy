@@ -185,8 +185,9 @@ class ReportesController {
 
     params["inciNoResueltoTercerEnTiempo"] = formato.format(inciResueltoTercerList.size() - inciResueltoTercerEnTiempo)
 
-    params["inciResueltoTotalEnTiempo"] = formato.format(inciResueltoPrimerEnTiempo
-        + inciResueltoSegundoEnTiempo + inciResueltoTercerEnTiempo)
+    def inciResueltoTotalEnTiempo = inciResueltoPrimerEnTiempo +
+        inciResueltoSegundoEnTiempo + inciResueltoTercerEnTiempo
+    params["inciResueltoTotalEnTiempo"] = formato.format(inciResueltoTotalEnTiempo)
 
     params["inciNoResueltoTotalEnTiempo"] = formato.format(incidentes.size() - params["inciResueltoTotalEnTiempo"].toInteger())
 
@@ -246,6 +247,7 @@ class ReportesController {
 
 
     params["segundoReqOLA"] = formatoFijo.format(reqResueltoSegundoEnTiempo / contRequerimientos * 100) + " %"
+    params["SLA"] = formatoFijo.format(inciResueltoTotalEnTiempo / inciResueltoTotal * 100) + " %"
 
 
     log.debug("startDate = $startDate")
