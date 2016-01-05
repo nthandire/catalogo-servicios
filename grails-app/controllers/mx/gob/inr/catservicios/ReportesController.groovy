@@ -365,9 +365,9 @@ class ReportesController {
         categoria: categoria.toString(),
         descripcion: it.descripcion,
         responsable: categoria.toString(),
-        valoracion: "0 %",
-        disponibilidad: "0 %",
-        cobertura: "cobertura",
+        valoracion: message(code:"intensidad.valor.${categoria.valoracion}"),
+        disponibilidad: "${categoria.disponibilidad} %",
+        cobertura: categoria.servCob,
       )
       data.add(renglon)
     }
@@ -401,9 +401,9 @@ class ReportesController {
         categoria_id: categoria.id.toString(),
         descripcion: categoria.descripcion,
         responsable: categoria.toString(),
-        valoracion: "0 %",
-        disponibilidad: "0 %",
-        cobertura: "cobertura",
+        valoracion: message(code:"intensidad.valor.${categoria.valoracion}"),
+        disponibilidad: "${categoria.disponibilidad} %",
+        cobertura: categoria.servCob,
         subcategoria: it.toString(),
       )
       log.debug("sub = ${renglon.subcategoria}")
