@@ -22,6 +22,7 @@
 			<g:if test="${flash.error}">
 			  <div class="errors" role="status">${flash.error}</div>
 			</g:if>
+
 			<div class="row-fluid">
 				<div class="span10 offset1">
 				  <g:jasperReport
@@ -51,6 +52,30 @@
                       </td>
                     </tr>
                     --}%
+				          </table>
+				  </g:jasperReport>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10 offset1">
+				  <g:jasperReport
+				          controller="Reportes"
+				          action="reporteInciResultadosYSeguimiento"
+				          jasper="ResultadosYSeguimiento"
+				          format="pdf"
+				          name="Resultados Y Seguimiento"
+				          description="Resultados Y Seguimiento. Incidentes">
+				          <table>
+				          	<tr>
+				          		<td>
+							          del mes:
+				          		</td>
+				          		<td>
+							          <% def ini = new Date(); ini[Calendar.DATE] = 1; %>
+							          <g:datePicker name="startDate" value="${ini}" precision="month" years="${2015..2025}"/>
+				          		</td>
+				          	</tr>
 				          </table>
 				  </g:jasperReport>
 				</div>

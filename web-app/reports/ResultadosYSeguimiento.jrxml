@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="120"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
@@ -88,7 +88,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="591" splitType="Stretch">
+		<band height="467" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="16" y="229" width="550" height="41" backcolor="#8B8B8B" uuid="460726c4-bfae-4dcc-b393-3eb68e0dc19a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
@@ -179,15 +179,6 @@
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Respuesta]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="10" y="495" width="556" height="95" uuid="775ee2ac-4113-4c43-a8cb-457723f24356"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Nota: Este reporte se tiene que realizar para incidentes y otro para requerimientos;
- Este reporte deberá tener la opción de indicar el mes y el año que se desea consultar y ser reflejado en el reporte,
-En relación a la encuesta se requiere que se puedan modificar las preguntas en caso de una solicitud de cambio,
-La encuesta de satisfacción, correspondera solo a los servicios NO satisfechos, para el calculo de numero de solicitudes resueltas en el tiempo comprometido se debe considerar lo indicado en la Hoja Monitoreo de OLA y SLA del apartado  ∑ solicitudes resueltas en el tiempo comprometido
-]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="20" y="283" width="329" height="37" uuid="e1d23c60-2afb-423c-b9b6-ac108ef77151"/>
