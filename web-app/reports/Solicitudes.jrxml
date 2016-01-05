@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Resultados y Seguimiento" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f31b505-9f6f-4905-bb8f-a313eca9443b">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<property name="ireport.zoom" value="1.771561000000001"/>
-	<property name="ireport.x" value="628"/>
-	<property name="ireport.y" value="41"/>
+	<property name="ireport.zoom" value="1.4641000000000017"/>
+	<property name="ireport.x" value="25"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
 	<parameter name="anio" class="java.lang.String"/>
@@ -54,10 +54,13 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="14" splitType="Stretch"/>
+		<band height="14" splitType="Stretch">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="126" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
 			<image scaleImage="FillFrame">
 				<reportElement x="20" y="0" width="50" height="60" uuid="d2ef19c9-7883-46fc-90e8-2da935a9fc94"/>
 				<imageExpression><![CDATA[$P{image_dir} + "logo_INR.gif"]]></imageExpression>
@@ -101,6 +104,7 @@
 	</pageHeader>
 	<columnHeader>
 		<band height="40" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
 			<staticText>
 				<reportElement mode="Opaque" x="326" y="0" width="50" height="40" backcolor="#8B8B8B" uuid="f917b33b-0c65-46d6-bed0-9eb2868bf1d3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
@@ -332,19 +336,18 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="7" splitType="Stretch"/>
+		<band height="11" splitType="Stretch">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="50" splitType="Stretch">
-			<staticText>
-				<reportElement x="20" y="0" width="708" height="50" uuid="b7d39718-4bb5-4e97-9be0-1ce46540abd4"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Nota:    El repositorio de Solicitudes debe incluir la totalidad de las Solicitudes de Servicio con opción de consulta por No. de solicitud, Solicitante, Numero del Inventario,  estado del servicio (Nuevo, primer nivel, segundo nivel, pendientes, etc.), así como por un rango de fecha determinado.
-Este reporte se requiere exportar a excel, en su totalidad o de acuerdo a la consulta.]]></text>
-			</staticText>
+		<band height="12" splitType="Stretch">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="3" splitType="Stretch"/>
+		<band height="28" splitType="Stretch">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+		</band>
 	</summary>
 </jasperReport>

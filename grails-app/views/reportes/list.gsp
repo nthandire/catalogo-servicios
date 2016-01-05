@@ -86,7 +86,7 @@
 				          controller="Reportes"
 				          action="reporteSolicitudes"
 				          jasper="Solicitudes"
-				          format="pdf"
+				          format="xls"
 				          name="Solicitudes de Servicio"
 				          description="Solicitudes de Servicio">
 				          <table>
