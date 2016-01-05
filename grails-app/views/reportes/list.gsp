@@ -143,6 +143,30 @@
 				</div>
 			</div>
 
+			<div class="row-fluid">
+				<div class="span10 offset1">
+				  <g:jasperReport
+				          controller="Reportes"
+				          action="reporteNiveles"
+				          jasper="Niveles2"
+				          format="pdf"
+				          name="Tiempo de solución por nivel de atención"
+				          description="Tiempo de solución por nivel de atención">
+				          <table>
+				          	<tr>
+				          		<td>
+							          del mes:
+				          		</td>
+				          		<td>
+							          <% def ini = new Date(); ini[Calendar.DATE] = 1; %>
+							          <g:datePicker name="startDate" value="${ini}" precision="month" years="${2015..2025}"/>
+				          		</td>
+				          	</tr>
+				          </table>
+				  </g:jasperReport>
+				</div>
+			</div>
+
 		</div>
 	</body>
 </html>

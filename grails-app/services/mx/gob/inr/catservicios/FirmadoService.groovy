@@ -515,9 +515,7 @@ class FirmadoService {
   }
 
   Integer tiempoAsignadoNivel(Cat_serv serv, Integer nivel) {
-    def minutos = aMinutos(serv."unidades$nivel".id, serv."tiempo$nivel")
-    log.debug("servicio = $serv, minutos = $minutos")
-    minutos // TODO: es mucho más pequeña si se quitan los debug
+    aMinutos(serv."unidades$nivel".id, serv."tiempo$nivel")
   }
 
   Integer cuantosEnTiempoNivel(ArrayList lista, Integer nivel) {

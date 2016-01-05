@@ -448,6 +448,87 @@ class ReportesController {
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 
+  def reporteNiveles() {
+    def data = []
+    params.image_dir = "${servletContext.getRealPath('/images')}/"
+
+    def startDate = params.startDate
+    startDate[Calendar.DATE] = 1
+    startDate[Calendar.HOUR_OF_DAY] = 0
+    startDate[Calendar.MINUTE] = 0
+    def endDate = startDate.clone()
+    use(TimeCategory) {
+      endDate = endDate + 1.month - 1.seconds
+    }
+    log.debug("startDate = $startDate, endDate = $endDate")
+    params["mes"] = startDate.format('MMMM').toString()
+    params["anio"] = startDate.format('YYYY')
+
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
+    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
+
+    def query =
+      "  from Solicitud                          " +
+      " where estado in ('T','E')                " +
+      "   and lastUpdated between ? and ?      "
+    log.debug("query = $query")
+    def requerimientos = Solicitud.findAll(query, [startDate, endDate])
+    log.debug("requerimientos = $requerimientos")
+    def detalles = []
+    requerimientos.each {
+      it.detalles.each { det ->
+        if (det.estado == 'A' as char && det.fechaSolucion >= startDate &&
+            det.fechaSolucion <= endDate) {
+          detalles << det
+        }
+      }
+    }
+
+    log.debug("params = $params")
+
+    detalles.each {
+      def solicitud = it.idSolicitud
+      def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 2)
+      def tiempoReal = firmadoService.diff(solicitud.fechaRevisa, it.fechaSolucion)
+      def renglon = new rptNiveles (
+        folio: solicitud.toString(),
+        nivel: "segundo",
+        area: firmadoService.areaNombre(solicitud.id),
+        nombre: Usuario.get(solicitud.idSolicitante).toString(),
+        categoria: it.idServcat.toString(),
+        subcategoria: it.idServ.servSub.toString(),
+        tercerNivel: it.toString(),
+        descripcion: it?.descripcion,
+        fechaInicio: (solicitud.fechaRevisa).format("YYYY-MM-dd HH:mm"),
+        fechaFinal: (it.fechaSolucion).format("YYYY-MM-dd HH:mm"),
+        tiempoPrometido: tiempoAsignado,
+        tiempoReal: tiempoReal,
+        cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
+      )
+      data.add(renglon)
+    }
+
+    chain (controller:"jasper", action:"index", model:[data:data], params:params)
+  }
+
+}
+
+class rptNiveles {
+  String folio
+  String nivel
+  String area
+  String nombre
+  String categoria
+  String subcategoria
+  String tercerNivel
+  String descripcion
+  String fechaInicio
+  String fechaFinal
+  String tiempoPrometido
+  String tiempoReal
+  String cumple
 }
 
 class rptServicios {
