@@ -2,7 +2,7 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'fechaMonitoreo', 'error')} required">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'fechaMonitoreo', 'error')} required">
 	<label for="fechaMonitoreo">
 		<g:message code="monitoreo.fechaMonitoreo.label" default="Fecha Monitoreo" />
 		<span class="required-indicator">*</span>
@@ -10,7 +10,7 @@
 	<g:datePicker name="fechaMonitoreo" precision="day"  value="${monitoreoInstance?.fechaMonitoreo}"  />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'numeroMonitoreo', 'error')} required">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'numeroMonitoreo', 'error')} required">
 	<label for="numeroMonitoreo">
 		<g:message code="monitoreo.numeroMonitoreo.label" default="Numero Monitoreo" />
 		<span class="required-indicator">*</span>
@@ -18,7 +18,7 @@
 	<g:field name="numeroMonitoreo" type="number" value="${monitoreoInstance.numeroMonitoreo}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
 	<label for="bitacora">
 		<g:message code="monitoreo.bitacora.label" default="Bitacora" />
 		<span class="required-indicator">*</span>
@@ -26,7 +26,7 @@
 	<g:select id="bitacora" name="bitacora.id" from="${Bitacora.list()}" optionKey="id" required="" value="${monitoreoInstance?.bitacora?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'estadoMonitoreo', 'error')} required">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'estadoMonitoreo', 'error')} required">
 	<label for="estadoMonitoreo">
 		<g:message code="monitoreo.estadoMonitoreo.label" default="Estado Monitoreo" />
 		<span class="required-indicator">*</span>
@@ -34,7 +34,7 @@
 	<g:select name="estadoMonitoreo" from="${monitoreoInstance.constraints.estadoMonitoreo.inList}" required="" value="${fieldValue(bean: monitoreoInstance, field: 'estadoMonitoreo')}" valueMessagePrefix="monitoreo.estadoMonitoreo"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'semaforo', 'error')} required">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'semaforo', 'error')} required">
 	<label for="semaforo">
 		<g:message code="monitoreo.semaforo.label" default="Semaforo" />
 		<span class="required-indicator">*</span>
@@ -42,7 +42,7 @@
 	<g:field name="semaforo" type="number" min="1" max="3" value="${monitoreoInstance.semaforo}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'nota', 'error')} ">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'nota', 'error')} ">
 	<label for="nota">
 		<g:message code="monitoreo.nota.label" default="Nota" />
 
@@ -50,7 +50,7 @@
 	<g:textArea name="nota" cols="40" rows="5" maxlength="3000" value="${monitoreoInstance?.nota}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'modificacion', 'error')} required">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'modificacion', 'error')} required">
 	<label for="modificacion">
 		<g:message code="monitoreo.modificacion.label" default="Modificacion" />
 		<span class="required-indicator">*</span>
@@ -58,7 +58,7 @@
 	<g:field name="modificacion" type="number" value="${monitoreoInstance.modificacion}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: monitoreoInstance, field: 'monitoreoDetalles', 'error')} ">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'monitoreoDetalles', 'error')} ">
 	<label for="monitoreoDetalles">
 		<g:message code="monitoreo.monitoreoDetalles.label" default="Monitoreo Detalles" />
 	</label>

@@ -1,5 +1,10 @@
 Pendientes
 
+- El monitoreo no necesita capturar el numero, debe ser automatico
+- el estado del monitoreo
+
+
+
 - Admon de Servicios, no debe permitir cambiar el técnico, porque resetea el tiempo de atención
 - Solicitud, en la lista del gestor "Todas", manda al show, revisar si funciona
 - Checar en INR que el recordar password funcione, o como es que no le funciono a Coco
