@@ -399,7 +399,7 @@ class ReportesController {
         descripcion: it?.descripcion,
         inventario: inventario,
         responsable: it.idServcat.servResp.toString(),
-        gestionadoA: "¿?",
+        gestionadoA: it.idTecnico ? Usuario.get(it.idTecnico).toString() : it.idServcat.servResp.toString(),
         prioridad: message(code:"intensidad.valor.${it.prioridad}"),
         fechaRecepcion: it.idSolicitud.fechaAutoriza ? (it.idSolicitud.fechaAutoriza).format("YYYY-MM-dd HH:mm") : "",
         fechaCierre: it.fechaSolucion ? (it.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
