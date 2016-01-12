@@ -27,10 +27,10 @@ class ReportesController {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
     params.tipoServicio = "Requerimientos"
-    params.preg1 = g.message(code:"solicitud.p01.label", default:"Numero Solicitud")
-    params.preg2 = g.message(code:"solicitud.p02.label", default:"Numero Solicitud")
-    params.preg3 = g.message(code:"solicitud.p03.label", default:"Numero Solicitud")
-    params.preg4 = g.message(code:"solicitud.p04.label", default:"Numero Solicitud")
+    params.preg1 = g.message(code:"solicitud.p01.reporte", default:"Numero Solicitud")
+    params.preg2 = g.message(code:"solicitud.p02.reporte", default:"Numero Solicitud")
+    params.preg3 = g.message(code:"solicitud.p03.reporte", default:"Numero Solicitud")
+    params.preg4 = g.message(code:"solicitud.p04.reporte", default:"Numero Solicitud")
 
     def startDate = params.startDate
     startDate[Calendar.DATE] = 1
@@ -89,10 +89,10 @@ class ReportesController {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
     params.tipoServicio = "Incidentes"
-    params.preg1 = g.message(code:"solicitud.p01.label", default:"Numero Solicitud")
-    params.preg2 = g.message(code:"solicitud.p02.label", default:"Numero Solicitud")
-    params.preg3 = g.message(code:"solicitud.p03.label", default:"Numero Solicitud")
-    params.preg4 = g.message(code:"solicitud.p04.label", default:"Numero Solicitud")
+    params.preg1 = g.message(code:"solicitud.p01.reporte", default:"Numero Solicitud")
+    params.preg2 = g.message(code:"solicitud.p02.reporte", default:"Numero Solicitud")
+    params.preg3 = g.message(code:"solicitud.p03.reporte", default:"Numero Solicitud")
+    params.preg4 = g.message(code:"solicitud.p04.reporte", default:"Numero Solicitud")
 
     def startDate = params.startDate
     startDate[Calendar.DATE] = 1
@@ -191,7 +191,7 @@ class ReportesController {
     params["anio"] = startDate.format('YYYY')
 
     // TODO: Quitar
-    // obtener todos los incidentes de ese mes 
+    // obtener todos los incidentes de ese mes
     // def estados = ['T' as char, 'E' as char]
     // def incidentes = Incidente.findAllByEstadoInListAndLastUpdatedBetween(estados, startDate, endDate)
     // log.debug("incidentes = $incidentes")
