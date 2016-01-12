@@ -266,9 +266,9 @@ class ReportesController {
 
     def formatoFijo = new DecimalFormat("#,##0.00", dfs)
 
-    params["primerOLA"] = formatoFijo.format(inciResueltoTotal / inciResueltoPrimer * 100) + " %"
-    params["segundoOLA"] = formatoFijo.format(inciResueltoTotal / inciResueltoSegundo * 100) + " %"
-    params["terceroOLA"] = formatoFijo.format(inciResueltoTotal / inciResueltoTercer * 100) + " %"
+    params["primerOLA"] = !inciResueltoPrimer ? "0 %" : formatoFijo.format(inciResueltoTotal / inciResueltoPrimer * 100) + " %"
+    params["segundoOLA"] = !inciResueltoSegundo ? "0 %" : formatoFijo.format(inciResueltoTotal / inciResueltoSegundo * 100) + " %"
+    params["terceroOLA"] = !inciResueltoTercer ? "0 %" : formatoFijo.format(inciResueltoTotal / inciResueltoTercer * 100) + " %"
 
 
 
@@ -318,8 +318,8 @@ class ReportesController {
         params["reqResueltoTotalEnTiempo"].toInteger())
 
 
-    params["segundoReqOLA"] = formatoFijo.format(reqResueltoSegundoEnTiempo / contRequerimientos * 100) + " %"
-    params["SLA"] = formatoFijo.format(inciResueltoTotalEnTiempo / inciResueltoTotal * 100) + " %"
+    params["segundoReqOLA"] = !contRequerimientos ? "0 %" : formatoFijo.format(reqResueltoSegundoEnTiempo / contRequerimientos * 100) + " %"
+    params["SLA"] = !inciResueltoTotal ? "0 %" : formatoFijo.format(inciResueltoTotalEnTiempo / inciResueltoTotal * 100) + " %"
 
 
     log.debug("startDate = $startDate")
@@ -367,44 +367,83 @@ class ReportesController {
     log.debug("query = $query")
     def requerimientos = Solicitud.findAll(query, [startDate, endDate])
     log.debug("requerimientos = $requerimientos")
-    def detalles = []
+    def casos = []
     requerimientos.each {
       it.detalles.each { det ->
         if (det.estado == 'A' as char) {
-          detalles << det
+          casos << new Servicio (caso: det, tipo: "Requerimiento",
+            orden: det.idSolicitud.fechaAutoriza.format("YYYY-MM-dd HH:mm"))
         }
       }
     }
 
+    def queryInci =
+      "  from Incidente                          " +
+      " where fechaIncidente between ? and ?     "
+    log.debug("queryInci = $queryInci")
+    def incidentes = Incidente.findAll(queryInci, [startDate, endDate])
+    log.debug("incidentes = $incidentes")
+    incidentes.each {
+      casos << new Servicio (caso: it, tipo: "Incidente",
+        orden: it.fechaIncidente.format("YYYY-MM-dd HH:mm"))
+    }
 
     log.debug("startDate = $startDate")
     log.debug("endDate = $endDate")
     log.debug("params = $params")
 
-    detalles.each { it ->
+    casos.each { it ->
+      def caso = it.caso
       def inventario = ""
-      if (it?.idResguardoentregadetalle) {
-        def equipo = ResguardoEntregaDetalle.get(it.idResguardoentregadetalle)
+      if (caso.idResguardoentregadetalle) {
+        def equipo = ResguardoEntregaDetalle.get(caso.idResguardoentregadetalle)
         inventario = equipo.inventario.toString()
       }
-      def renglon = new RptSolicitud (
-        folio: it.idSolicitud.toString(),
-        tipo: "Requerimiento",
-        estado: firmadoService.estadoDescriptivo(it.idSolicitud),
-        area: firmadoService.areaNombre(it.idSolicitud.id),
-        nombre: Usuario.get(it.idSolicitud.idSolicitante).toString(),
-        categoria: it.idServcat.toString(),
-        subcategoria: it?.idServ?.servSub?.toString(),
-        tercerNivel: it?.idServ?.toString(),
-        descripcion: it?.descripcion,
-        inventario: inventario,
-        responsable: it.idServcat.servResp.toString(),
-        gestionadoA: it.idTecnico ? Usuario.get(it.idTecnico).toString() : it.idServcat.servResp.toString(),
-        prioridad: message(code:"intensidad.valor.${it.prioridad}"),
-        fechaRecepcion: it.idSolicitud.fechaAutoriza ? (it.idSolicitud.fechaAutoriza).format("YYYY-MM-dd HH:mm") : "",
-        fechaCierre: it.fechaSolucion ? (it.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
-        solucion: it.solucion ?: "",
-      )
+
+      def renglon = null
+      // switch (caso.getClass()) {
+      //   case Requerimiento
+          renglon = new RptSolicitud (
+            folio: caso.idSolicitud.toString(),
+            tipo: it.tipo,
+            estado: firmadoService.estadoDescriptivo(caso.idSolicitud),
+            area: firmadoService.areaNombre(caso.idSolicitud.id),
+            nombre: Usuario.get(caso.idSolicitud.idSolicitante).toString(),
+            categoria: caso.idServcat.toString(),
+            subcategoria: caso?.idServ?.servSub?.toString(),
+            tercerNivel: caso?.idServ?.toString(),
+            descripcion: caso?.descripcion,
+            inventario: inventario,
+            responsable: caso.idServcat.servResp.toString(),
+            gestionadoA: caso.idTecnico ? Usuario.get(caso.idTecnico).toString() : caso.idServcat.servResp.toString(),
+            prioridad: message(code:"intensidad.valor.${caso.prioridad}"),
+            fechaRecepcion: caso.idSolicitud.fechaAutoriza ? (caso.idSolicitud.fechaAutoriza).format("YYYY-MM-dd HH:mm") : "",
+            fechaCierre: caso.fechaSolucion ? (caso.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
+            solucion: caso.solucion ?: "",
+          )
+      //     break
+      //   case Incidente
+      //     renglon = new RptSolicitud (
+      //       folio: caso.toString(),
+      //       tipo: it.tipo,
+      //       estado: firmadoService.estadoDescriptivo(caso.idSolicitud),
+      //       area: firmadoService.areaNombre(caso.idSolicitud.id),
+      //       nombre: Usuario.get(caso.idSolicitud.idSolicitante).toString(),
+      //       categoria: caso.idServcat.toString(),
+      //       subcategoria: caso?.idServ?.servSub?.toString(),
+      //       tercerNivel: caso?.idServ?.toString(),
+      //       descripcion: caso?.descripcion,
+      //       inventario: inventario,
+      //       responsable: caso.idServcat.servResp.toString(),
+      //       gestionadoA: caso.idTecnico ? Usuario.get(caso.idTecnico).toString() : caso.idServcat.servResp.toString(),
+      //       prioridad: message(code:"intensidad.valor.${caso.prioridad}"),
+      //       fechaRecepcion: caso.idSolicitud.fechaAutoriza ? (caso.idSolicitud.fechaAutoriza).format("YYYY-MM-dd HH:mm") : "",
+      //       fechaCierre: caso.fechaSolucion ? (caso.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
+      //       solucion: caso.solucion ?: "",
+      //     )
+      //     break
+      // }
+
       data.add(renglon)
     }
 
@@ -587,6 +626,12 @@ class ReportesController {
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 
+}
+
+class Servicio {
+  Object caso
+  String tipo
+  String orden
 }
 
 class rptNiveles {

@@ -131,6 +131,29 @@ class FirmadoService {
     descripcion
   }
 
+  String estadoDescriptivo(Incidente caso) {
+    def nivel = caso.nivel
+    def descripcion = ""
+    switch (caso.estado) {
+      case 'A' as char:
+        descripcion = nivel == 1 ? "1er Nivel" : nivel == 2 ? "2do Nivel" : "3er Nivel"
+        if (caso."idNivel$nivel") {
+          descripcion += ", asignado"
+        }
+        break
+      case 'C' as char:
+        descripcion = "cancelado"
+        break
+      case 'E' as char:
+        descripcion = "encuesta"
+        break
+      case 'T' as char:
+        descripcion = "terminado"
+        break
+    }
+    descripcion
+  }
+
   def ubicacion (Long idEquipo) {
     _ubicacion(idEquipo)?.descripcion
   }
