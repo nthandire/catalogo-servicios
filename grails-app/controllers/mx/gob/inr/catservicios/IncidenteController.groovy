@@ -680,8 +680,6 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
 
       problema.fuente = "Incidente"
       problema.idFuente = incidenteInstance.id
-      problema.idFuente = incidenteInstance.id
-      problema.folio = incidenteInstance.id
 
         // Asignarle el siguiente folio dentro del año
         // TODO: Pasarlo a un servicio
@@ -702,6 +700,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
       }[0] ?: 0
       log.debug("maxID = $maxID")
       problema.folio = ++maxID
+      problema.fechaProblema = new Date()
       problema.observaciones = params["solucionNivel"]
       problema.idUsuario = incidenteInstance.idReporta
       problema.ipTerminal = request.getRemoteAddr()

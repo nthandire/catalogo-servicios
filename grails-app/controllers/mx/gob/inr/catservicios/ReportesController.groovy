@@ -410,16 +410,28 @@ class ReportesController {
         orden: it.fechaIncidente.format("YYYY-MM-dd HH:mm"))
     }
 
+    def queryProblema =
+      "  from Problema                          " +
+      " where fechaProblema between ? and ?     "
+    log.debug("queryProblema = $queryProblema")
+    def problemas = Problema.findAll(queryProblema, [startDate, endDate])
+    log.debug("problemas = $problemas")
+    problemas.each {
+      casos << new Servicio (caso: it, tipo: "Problema",
+        orden: it.fechaProblema.format("YYYY-MM-dd HH:mm"))
+    }
+
     log.debug("startDate = $startDate")
     log.debug("endDate = $endDate")
     log.debug("params = $params")
 
+    casos.sort{it.orden}
+
     casos.each { it ->
       def caso = it.caso
       def inventario = ""
-      if (caso.idResguardoentregadetalle) {
-        def equipo = ResguardoEntregaDetalle.get(caso.idResguardoentregadetalle)
-        inventario = equipo.inventario.toString()
+      if (!(caso instanceof Problema)) {
+        inventario = inventario(fuente)
       }
 
       def renglon = null
@@ -467,12 +479,72 @@ class ReportesController {
             solucion: caso.estado in 'ET' ? caso."solucionNivel$nivel" : "",
           )
           break
+        case Problema:
+          def fuente = null
+          switch (caso.fuente) {
+            case "Incidente":
+              fuente = Incidente.get(caso.idFuente)
+              inventario = inventario(fuente)
+              renglon = new RptSolicitud (
+                folio: caso.toString(),
+                tipo: it.tipo,
+                estado: "",
+                area: firmadoService.areaNombre(caso.idUsuario),
+                nombre: Usuario.get(caso.idUsuario).toString(),
+                categoria: fuente.idServ.servSub.servCat.toString(),
+                subcategoria: fuente?.idServ?.servSub?.toString(),
+                tercerNivel: fuente?.idServ?.toString(),
+                descripcion: fuente?.descripcion,
+                inventario: inventario,
+                responsable: fuente.idServ.servSub.servCat.servResp.toString(),
+                gestionadoA: fuente."idNivel$nivel" ? Usuario.get(fuente."idNivel$nivel").toString() :
+                  fuente.idServ."servResp$nivel".toString(),
+                prioridad: message(code:"intensidad.valor.${fuente.idServ.impacto}"),
+                fechaRecepcion: caso.fechaProblema.format("YYYY-MM-dd HH:mm"),
+                fechaCierre: caso.fechaSolucion ? caso.fechaSolucion.format("YYYY-MM-dd HH:mm") : "",
+                solucion: caso.solucion ?: "",
+              )
+              break
+            case "Solicitud":
+              fuente = SolicitudDetalle.get(caso.idFuente)
+              inventario = inventario(fuente)
+              def solicitud = fuente.idSolicitud
+              renglon = new RptSolicitud (
+                folio: solicitud.toString(),
+                tipo: it.tipo,
+                estado: firmadoService.estadoDescriptivo(solicitud),
+                area: firmadoService.areaNombre(solicitud.idSolicitante),
+                nombre: Usuario.get(solicitud.idSolicitante).toString(),
+                categoria: fuente.idServcat.toString(),
+                subcategoria: fuente?.idServ?.servSub?.toString(),
+                tercerNivel: fuente?.idServ?.toString(),
+                descripcion: fuente?.descripcion,
+                inventario: inventario,
+                responsable: fuente.idServcat.servResp.toString(),
+                gestionadoA: fuente.idTecnico ? Usuario.get(fuente.idTecnico).toString() : fuente.idServcat.servResp.toString(),
+                prioridad: message(code:"intensidad.valor.${fuente.prioridad}"),
+                fechaRecepcion: caso.fechaProblema.format("YYYY-MM-dd HH:mm"),
+                fechaCierre: caso.fechaSolucion ? caso.fechaSolucion.format("YYYY-MM-dd HH:mm") : "",
+                solucion: caso.solucion ?: "",
+              )
+              break
+          }
+          break
       }
 
       data.add(renglon)
     }
 
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
+  }
+
+  String inventario(Object fuente) {
+    def inventario = ""
+    if (fuente.idResguardoentregadetalle) {
+      def equipo = ResguardoEntregaDetalle.get(fuente.idResguardoentregadetalle)
+      inventario = equipo.inventario.toString()
+    }
+    inventario
   }
 
   def reportePortafolio() {
