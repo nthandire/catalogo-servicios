@@ -42,14 +42,24 @@ class ReportesController {
     }
     params["mes"] = startDate.format('MMMM')
     params["anio"] = startDate.format('YYYY')
-    params["preg1Si"] = contar(incidentesConEncuesta(startDate, endDate),"p01", 1)
-    params["preg1No"] = contar(incidentesConEncuesta(startDate, endDate),"p01", 2)
-    params["preg2Si"] = contar(incidentesConEncuesta(startDate, endDate),"p02", 1)
-    params["preg2No"] = contar(incidentesConEncuesta(startDate, endDate),"p02", 2)
-    params["preg3Si"] = contar(incidentesConEncuesta(startDate, endDate),"p03", 1)
-    params["preg3No"] = contar(incidentesConEncuesta(startDate, endDate),"p03", 2)
-    params["preg4Si"] = contar(incidentesConEncuesta(startDate, endDate),"p04", 1)
-    params["preg4No"] = contar(incidentesConEncuesta(startDate, endDate),"p04", 2)
+
+    def requerimientos = requerimientosConEncuesta(startDate, endDate)
+    log.debug("requerimientos = $requerimientos")
+
+    if (!requerimientos) {
+      flash.error = "No hay datos"
+      redirect(action: "list")
+      return
+    }
+
+    params["preg1Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 1)
+    params["preg1No"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 2)
+    params["preg2Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p02", 1)
+    params["preg2No"] = contar(requerimientosConEncuesta(startDate, endDate),"p02", 2)
+    params["preg3Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p03", 1)
+    params["preg3No"] = contar(requerimientosConEncuesta(startDate, endDate),"p03", 2)
+    params["preg4Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 1)
+    params["preg4No"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 2)
 
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
@@ -82,6 +92,8 @@ class ReportesController {
       data.add(rowBitacora)
     }
 
+    flash.error = ""
+    redirect(action: "list")
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 
@@ -102,16 +114,26 @@ class ReportesController {
     use(TimeCategory) {
       endDate = endDate + 1.month - 1.seconds
     }
+
+    def incidentes = incidentesConEncuesta(startDate, endDate)
+    log.debug("incidentes 2 = $incidentes")
+
+    if (!incidentes) {
+      flash.error = "No hay datos"
+      redirect(action: "list")
+      return
+    }
+
     params["mes"] = startDate.format('MMMM')
     params["anio"] = startDate.format('YYYY')
-    params["preg1Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 1)
-    params["preg1No"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 2)
-    params["preg2Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p02", 1)
-    params["preg2No"] = contar(requerimientosConEncuesta(startDate, endDate),"p02", 2)
-    params["preg3Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p03", 1)
-    params["preg3No"] = contar(requerimientosConEncuesta(startDate, endDate),"p03", 2)
-    params["preg4Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 1)
-    params["preg4No"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 2)
+    params["preg1Si"] = contar(incidentesConEncuesta(startDate, endDate),"p01", 1)
+    params["preg1No"] = contar(incidentesConEncuesta(startDate, endDate),"p01", 2)
+    params["preg2Si"] = contar(incidentesConEncuesta(startDate, endDate),"p02", 1)
+    params["preg2No"] = contar(incidentesConEncuesta(startDate, endDate),"p02", 2)
+    params["preg3Si"] = contar(incidentesConEncuesta(startDate, endDate),"p03", 1)
+    params["preg3No"] = contar(incidentesConEncuesta(startDate, endDate),"p03", 2)
+    params["preg4Si"] = contar(incidentesConEncuesta(startDate, endDate),"p04", 1)
+    params["preg4No"] = contar(incidentesConEncuesta(startDate, endDate),"p04", 2)
 
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
@@ -159,10 +181,10 @@ class ReportesController {
 
   def incidentesConEncuesta(Date startDate, Date endDate) {
     if (!request["listaIncidentes"]) {
-      log.debug("si lei los requerimientos")
+      log.debug("si lei los incidentes")
       request["listaIncidentes"] =
         firmadoService.incidentesConEncuesta(startDate, endDate)
-      log.debug("requerimientos = ${request["listaIncidentes"]}")
+      log.debug("incidentes = ${request["listaIncidentes"]}")
     }
     request["listaIncidentes"]
   }
@@ -401,14 +423,15 @@ class ReportesController {
       }
 
       def renglon = null
-      // switch (caso.getClass()) {
-      //   case Requerimiento
+      switch (caso.getClass()) {
+        case SolicitudDetalle:
+          def solicitud = caso.idSolicitud
           renglon = new RptSolicitud (
-            folio: caso.idSolicitud.toString(),
+            folio: solicitud.toString(),
             tipo: it.tipo,
-            estado: firmadoService.estadoDescriptivo(caso.idSolicitud),
-            area: firmadoService.areaNombre(caso.idSolicitud.id),
-            nombre: Usuario.get(caso.idSolicitud.idSolicitante).toString(),
+            estado: firmadoService.estadoDescriptivo(solicitud),
+            area: firmadoService.areaNombre(solicitud.idSolicitante),
+            nombre: Usuario.get(solicitud.idSolicitante).toString(),
             categoria: caso.idServcat.toString(),
             subcategoria: caso?.idServ?.servSub?.toString(),
             tercerNivel: caso?.idServ?.toString(),
@@ -421,28 +444,30 @@ class ReportesController {
             fechaCierre: caso.fechaSolucion ? (caso.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
             solucion: caso.solucion ?: "",
           )
-      //     break
-      //   case Incidente
-      //     renglon = new RptSolicitud (
-      //       folio: caso.toString(),
-      //       tipo: it.tipo,
-      //       estado: firmadoService.estadoDescriptivo(caso.idSolicitud),
-      //       area: firmadoService.areaNombre(caso.idSolicitud.id),
-      //       nombre: Usuario.get(caso.idSolicitud.idSolicitante).toString(),
-      //       categoria: caso.idServcat.toString(),
-      //       subcategoria: caso?.idServ?.servSub?.toString(),
-      //       tercerNivel: caso?.idServ?.toString(),
-      //       descripcion: caso?.descripcion,
-      //       inventario: inventario,
-      //       responsable: caso.idServcat.servResp.toString(),
-      //       gestionadoA: caso.idTecnico ? Usuario.get(caso.idTecnico).toString() : caso.idServcat.servResp.toString(),
-      //       prioridad: message(code:"intensidad.valor.${caso.prioridad}"),
-      //       fechaRecepcion: caso.idSolicitud.fechaAutoriza ? (caso.idSolicitud.fechaAutoriza).format("YYYY-MM-dd HH:mm") : "",
-      //       fechaCierre: caso.fechaSolucion ? (caso.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
-      //       solucion: caso.solucion ?: "",
-      //     )
-      //     break
-      // }
+          break
+        case Incidente:
+          def nivel = caso.nivel
+          renglon = new RptSolicitud (
+            folio: caso.toString(),
+            tipo: it.tipo,
+            estado: firmadoService.estadoDescriptivo(caso),
+            area: firmadoService.areaNombre(caso.idReporta),
+            nombre: Usuario.get(caso.idReporta).toString(),
+            categoria: caso.idServ.servSub.servCat.toString(),
+            subcategoria: caso?.idServ?.servSub?.toString(),
+            tercerNivel: caso?.idServ?.toString(),
+            descripcion: caso?.descripcion,
+            inventario: inventario,
+            responsable: caso.idServ.servSub.servCat.servResp.toString(),
+            gestionadoA: caso."idNivel$nivel" ? Usuario.get(caso."idNivel$nivel").toString() :
+              caso.idServ."servResp$nivel".toString(),
+            prioridad: message(code:"intensidad.valor.${caso.idServ.impacto}"),
+            fechaRecepcion: caso.fechaIncidente.format("YYYY-MM-dd HH:mm"),
+            fechaCierre: caso.estado in 'ET' ? caso."fechaSolnivel$nivel" : "",
+            solucion: caso.estado in 'ET' ? caso."solucionNivel$nivel" : "",
+          )
+          break
+      }
 
       data.add(renglon)
     }
