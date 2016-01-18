@@ -437,7 +437,6 @@ class ReportesController {
       def caso = it.caso
       def inventario = ""
       if (!(caso instanceof Problema)) {
-        log.debug("entré con caso = $caso (${caso.getClass()})")
         inventario = inventarioEquipo(caso)
       }
 
@@ -547,7 +546,6 @@ class ReportesController {
   }
 
   def inventarioEquipo(fuente) {
-    log.debug("Entre a inventario")
     def inventario = ""
     if (fuente.idResguardoentregadetalle) {
       def equipo = ResguardoEntregaDetalle.get(fuente.idResguardoentregadetalle)
