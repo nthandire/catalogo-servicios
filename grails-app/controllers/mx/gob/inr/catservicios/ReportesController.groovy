@@ -425,13 +425,20 @@ class ReportesController {
     log.debug("endDate = $endDate")
     log.debug("params = $params")
 
+    if (!casos) {
+      flash.error = "No hay datos de solicitudes"
+      redirect(action: "list")
+      return
+    }
+
     casos.sort{it.orden}
 
     casos.each { it ->
       def caso = it.caso
       def inventario = ""
       if (!(caso instanceof Problema)) {
-        inventario = inventario(fuente)
+        log.debug("entré con caso = $caso (${caso.getClass()})")
+        inventario = inventarioEquipo(caso)
       }
 
       def renglon = null
@@ -484,7 +491,8 @@ class ReportesController {
           switch (caso.fuente) {
             case "Incidente":
               fuente = Incidente.get(caso.idFuente)
-              inventario = inventario(fuente)
+              def nivel = fuente.nivel
+              inventario = inventarioEquipo(fuente)
               renglon = new RptSolicitud (
                 folio: caso.toString(),
                 tipo: it.tipo,
@@ -507,7 +515,7 @@ class ReportesController {
               break
             case "Solicitud":
               fuente = SolicitudDetalle.get(caso.idFuente)
-              inventario = inventario(fuente)
+              inventario = inventarioEquipo(fuente)
               def solicitud = fuente.idSolicitud
               renglon = new RptSolicitud (
                 folio: solicitud.toString(),
@@ -538,7 +546,8 @@ class ReportesController {
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
   }
 
-  String inventario(Object fuente) {
+  def inventarioEquipo(fuente) {
+    log.debug("Entre a inventario")
     def inventario = ""
     if (fuente.idResguardoentregadetalle) {
       def equipo = ResguardoEntregaDetalle.get(fuente.idResguardoentregadetalle)
