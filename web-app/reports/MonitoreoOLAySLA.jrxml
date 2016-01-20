@@ -187,7 +187,7 @@
 			<textField>
 				<reportElement x="491" y="81" width="80" height="30" uuid="67d481c7-d035-421a-8824-03e77b9424d9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{reqResueltoPrimerEnTiempo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="651" y="81" width="80" height="30" uuid="7afe599c-a6a3-43c7-a747-416ca6c77211"/>
@@ -202,7 +202,7 @@
 			<textField>
 				<reportElement x="571" y="81" width="80" height="30" uuid="0a5f4030-1c47-4d6c-b9ed-cb7960963830"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{reqNoResueltoPrimerEnTiempo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="11" y="81" width="80" height="30" uuid="a06014f2-e0bb-42bb-ac5a-2164f321b660"/>

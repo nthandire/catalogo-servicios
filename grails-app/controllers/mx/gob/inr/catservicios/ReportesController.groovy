@@ -288,9 +288,9 @@ class ReportesController {
 
     def formatoFijo = new DecimalFormat("#,##0.00", dfs)
 
-    params["primerOLA"] = !inciResueltoPrimer ? "0 %" : formatoFijo.format(inciResueltoTotal / inciResueltoPrimer * 100) + " %"
-    params["segundoOLA"] = !inciResueltoSegundo ? "0 %" : formatoFijo.format(inciResueltoTotal / inciResueltoSegundo * 100) + " %"
-    params["terceroOLA"] = !inciResueltoTercer ? "0 %" : formatoFijo.format(inciResueltoTotal / inciResueltoTercer * 100) + " %"
+    params["primerOLA"] = !inciResueltoPrimer ? "0 %" : formatoFijo.format(inciResueltoPrimerEnTiempo / inciResueltoPrimer * 100) + " %"
+    params["segundoOLA"] = !inciResueltoSegundo ? "0 %" : formatoFijo.format(inciResueltoSegundoEnTiempo / inciResueltoSegundo * 100) + " %"
+    params["terceroOLA"] = !inciResueltoTercer ? "0 %" : formatoFijo.format(inciResueltoTercerEnTiempo / inciResueltoTercer * 100) + " %"
 
 
 
@@ -319,11 +319,12 @@ class ReportesController {
     log.debug("reqResueltoTotal = $reqResueltoTotal")
     params["reqResueltoTotal"] = formato.format(reqResueltoTotal)
 
-
+    // TODO: Quitar.
     Integer reqResueltoPrimerEnTiempo = firmadoService.
         cuantosReqEnTiempoNivel(requerimientos, 1)
     params["reqResueltoPrimerEnTiempo"] = formato.format(reqResueltoPrimerEnTiempo)
 
+    // TODO: Quitar.
     params["reqNoResueltoPrimerEnTiempo"] = formato.format(contRequerimientos -
         reqResueltoPrimerEnTiempo)
 
