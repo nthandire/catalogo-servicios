@@ -24,11 +24,19 @@
         <tr>
           <td>
             <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
-            <g:set var="equipo" value="${servicios.detallesById(d.idResguardoentregadetalle)}" />
-            <a data-toggle="modal" href="#responsive"
-              onclick="detalle(${d.id}, ${d.idServcat.id}, '${d.descripcion}', '${equipo.serie}', '${equipo.marca}', '${equipo.modelo}', '${equipo.economico}', '${equipo.equipo}', '${equipo.ubicacion}', '${equipo.cuerpo}', '${equipo.empleado}', '${equipo.garantia}', '${d.estado}')">
-              ${d?.encodeAsHTML()}
-            </equipo.a>
+              <g:if test="${d.idResguardoentregadetalle}">
+                <g:set var="equipo" value="${servicios.detallesById(d.idResguardoentregadetalle)}" />
+                <a data-toggle="modal" href="#responsive"
+                  onclick="detalle(${d.id}, ${d.idServcat.id}, '${d.descripcion}', '${equipo.serie}', '${equipo.marca}', '${equipo.modelo}', '${equipo.economico}', '${equipo.equipo}', '${equipo.ubicacion}', '${equipo.cuerpo}', '${equipo.empleado}', '${equipo.garantia}', '${d.estado}')">
+                  ${d?.encodeAsHTML()}
+                </a>
+              </g:if>
+              <g:else>
+                <a data-toggle="modal" href="#responsive"
+                  onclick="detalle(${d.id}, ${d.idServcat.id}, '${d.descripcion}', '', '', '', '', '', '', '', '', '', '${d.estado}')">
+                  ${d?.encodeAsHTML()}
+                </a>
+              </g:else>
             </g:if>
             <g:else>
               ${d?.encodeAsHTML()}
