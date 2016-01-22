@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.4641000000000017"/>
 	<property name="ireport.x" value="427"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="26"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
 	<parameter name="anio" class="java.lang.String"/>
@@ -351,7 +351,14 @@
 	</pageFooter>
 	<summary>
 		<band height="28" splitType="Stretch">
-			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+			<textField>
+				<reportElement x="396" y="8" width="100" height="20" uuid="015ecce0-1686-4ebb-a056-bac441a60c12"/>
+				<textFieldExpression><![CDATA[(new Date()).format("dd/MM/yyyy HH:mm")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="284" y="8" width="112" height="20" uuid="f0f9d1ae-71ec-4baf-a395-f89871aacede"/>
+				<text><![CDATA[Fecha y Hora:]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>
