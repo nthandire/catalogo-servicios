@@ -64,7 +64,7 @@ class SolicitudTecnicoController {
             render(view: "create", model: [solicitudArchivoadjuntoInstance: solicitudArchivoadjuntoInstance])
             return
         }
-        redirect (action:'edit', id: solicitud.id)
+        redirect (action:'edit', id: params.idDetalle)
       }
     }
 

@@ -23,7 +23,7 @@
         <g:message code="solicitudDetalle.idServsub.label" default="Subcategoría" />
       </label>
       <g:field type="text" id="idServsub" name="idServsub.id"
-        value="${solicitudDetalleInstance.idServ.servSub}" disabled="true"/>
+        value="${solicitudDetalleInstance?.idServ?.servSub}" disabled="true"/>
     </div>
   </div>
   <div class="span4">
