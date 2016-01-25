@@ -564,26 +564,20 @@ class ReportesController {
     def formato = new DecimalFormat("#,##0", dfs)
     def formatoFijo = new DecimalFormat("#,##0.00", dfs)
 
-    // obtener las catecorias con estado A
     def categorias = Cat_servCat.findAllByEstado('A' as char)
-    // de esas , obtener las subcategorias con estado A
-    def subcategorias = Cat_servSub.findAllByEstadoAndServCatInList('A' as char, categorias)
-    // y de esas, obtener los servicios con estado A
-    def servicios = Cat_serv.findAllByEstadoServAndServSubInList('A' as char, subcategorias, [sort: "id"])
 
-    log.debug("servicios = $servicios")
+    log.debug("categorias = $categorias")
     log.debug("params = $params")
 
-    servicios.each { it ->
-      def categoria = it.servSub.servCat
+    categorias.each { it ->
       def renglon = new RptPortafolio (
         id: it.id.toString(),
-        categoria: categoria.toString(),
+        categoria: it,
         descripcion: it.descripcion,
-        responsable: categoria.toString(),
-        valoracion: message(code:"intensidad.valor.${categoria.valoracion}"),
-        disponibilidad: "${categoria.disponibilidad} %",
-        cobertura: categoria.servCob,
+        responsable: it.servResp,
+        valoracion: message(code:"intensidad.valor.${it.valoracion}"),
+        disponibilidad: "${it.disponibilidad} %",
+        cobertura: it.servCob,
       )
       data.add(renglon)
     }

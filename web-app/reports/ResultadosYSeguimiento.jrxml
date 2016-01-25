@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="120"/>
+	<property name="ireport.y" value="208"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
@@ -47,18 +47,18 @@
 	<pageHeader>
 		<band height="126" splitType="Stretch">
 			<image scaleImage="FillFrame">
-				<reportElement x="20" y="0" width="50" height="60" uuid="d2ef19c9-7883-46fc-90e8-2da935a9fc94"/>
+				<reportElement x="520" y="0" width="50" height="60" uuid="d2ef19c9-7883-46fc-90e8-2da935a9fc94"/>
 				<imageExpression><![CDATA[$P{image_dir} + "logo_INR.gif"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="80" y="0" width="400" height="20" uuid="4c4f2f97-e06f-4e40-ad35-bd5d6ba42e0c"/>
+				<reportElement x="120" y="0" width="400" height="20" uuid="4c4f2f97-e06f-4e40-ad35-bd5d6ba42e0c"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DIRECCIÓN GENERAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="20" width="400" height="30" uuid="1414eec3-2fd2-402a-a4ae-01291ca31fd0"/>
+				<reportElement x="120" y="20" width="400" height="30" uuid="1414eec3-2fd2-402a-a4ae-01291ca31fd0"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
@@ -72,7 +72,7 @@
 				<text><![CDATA[RESULTADOS Y SEGUIMIENTO A LA OPERACIÓN DE LA MESA DE SERVICIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="50" width="400" height="30" uuid="0d88b210-84e1-4974-860e-6d24771fd9ee"/>
+				<reportElement x="120" y="50" width="400" height="30" uuid="0d88b210-84e1-4974-860e-6d24771fd9ee"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
@@ -85,6 +85,10 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{mes} + " " + $P{anio} + " - " + $P{tipoServicio}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="2" y="0" width="118" height="40" uuid="65e1ec63-d480-4144-bc87-b2d3ad5baf3b"/>
+				<imageExpression><![CDATA[$P{image_dir} + "logo_salud.png"]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -269,6 +273,31 @@
 		<band height="6" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="3" splitType="Stretch"/>
+		<band height="28" splitType="Immediate">
+			<textField>
+				<reportElement x="77" y="8" width="100" height="20" uuid="f274dbe2-40a9-44b5-8133-470bfc54a779"/>
+				<textFieldExpression><![CDATA[(new Date()).format("dd/MM/yyyy HH:mm")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="8" width="67" height="20" uuid="ea879551-1d22-4803-b638-d050e360e178"/>
+				<text><![CDATA[Fecha y Hora:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="477" y="2" width="44" height="20" uuid="0def1137-7d14-4039-bcbe-06aa6ab57d9b"/>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="531" y="2" width="18" height="20" uuid="54c9b1ff-f8b2-4b38-a3fb-2c7d5f8866bb"/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="516" y="2" width="12" height="20" uuid="0162a6df-b0c1-4de2-902b-8acec2c13229"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="549" y="2" width="22" height="20" uuid="34a5e1c2-b617-4a0e-84c6-289f80047cf2"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>
