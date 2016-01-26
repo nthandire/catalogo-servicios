@@ -606,15 +606,15 @@ class ReportesController {
     subcategorias.each { it ->
       def categoria = it.servCat
       def renglon = new rptSubcategoria (
-        id: categoria.id.toString(),
-        categoria: categoria.toString(),
-        categoria_id: categoria.id.toString(),
+        id: categoria.id,
+        categoria: categoria,
+        categoria_id: categoria.id,
         descripcion: categoria.descripcion,
-        responsable: categoria.toString(),
+        responsable: categoria.servResp,
         valoracion: message(code:"intensidad.valor.${categoria.valoracion}"),
         disponibilidad: "${categoria.disponibilidad} %",
         cobertura: categoria.servCob,
-        subcategoria: it.toString(),
+        subcategoria: it,
       )
       log.debug("sub = ${renglon.subcategoria}")
       data.add(renglon)
