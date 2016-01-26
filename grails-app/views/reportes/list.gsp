@@ -199,7 +199,7 @@
 				          action="reporteTiempos"
 				          jasper="Tiempos"
 				          format="pdf"
-				          name="Tiempo de solución por nivel de atención"
+				          name="Tiempo de solución"
 				          description="Tiempo de solución">
 				          <table>
 				          	<tr>
