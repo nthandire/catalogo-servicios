@@ -632,23 +632,23 @@ class ReportesController {
     def formato = new DecimalFormat("#,##0", dfs)
     def formatoFijo = new DecimalFormat("#,##0.00", dfs)
 
-    def servicios = Cat_serv.list(sort: "servSub.id")
+    def servicios = Cat_serv.list()
 
     log.debug("params = $params")
 
     servicios.each {
       def categoria = it.servSub.servCat
       def renglon = new rptServicios (
-        id: it.id.toString(),
-        categoria: categoria.toString(),
-        descripcion: it.descripcion,
-        responsable: categoria.servResp.toString(),
+        id: it.id,
+        categoria: categoria,
+        descripcion: categoria.descripcion,
+        responsable: categoria.servResp,
         valoracion: message(code:"intensidad.valor.${categoria.valoracion}"),
         disponibilidad: "${categoria.disponibilidad} %",
-        estado: it.estadoServ,
+        estado: it.estadoServ == 'A' as char ? "Activo" : "Incactivo",
         cobertura: categoria.servCob,
-        subcategoria: it.servSub.toString(),
-        tercerNivel: it.toString(),
+        subcategoria: it.servSub,
+        tercerNivel: it,
         visible: it.portal ? "*" : "",
         incidente: it.incidente ? "*" : "",
         solicitud: it.solicitud ? "*" : "",
