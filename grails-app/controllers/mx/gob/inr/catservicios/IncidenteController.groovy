@@ -3,7 +3,6 @@ package mx.gob.inr.catservicios
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
-import grails.converters.JSON
 
 
 @Secured(['ROLE_SAST_GESTOR','ROLE_SAST_TECNICO',
@@ -827,11 +826,6 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
       flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])
       redirect(action: "list")
     }
-
-  def listarEquipo() {
-    log.debug("en listarEquipo")
-    render serviciosService.listarEquipo(params) as JSON
-  }
 
   def extension() {
     log.debug("params = $params")

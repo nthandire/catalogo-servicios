@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("#cpuauto").autocomplete({
     	  source: function(request, response){
     	   $.ajax({
-    	    url: "/catalogo-servicios/incidente/listarEquipo" , // remote datasource
+    	    url: "/catalogo-servicios/solicitud/listarEquipo" , // remote datasource
     	    data: request,
     	    success: function(data){
     	     response(data); // set the response

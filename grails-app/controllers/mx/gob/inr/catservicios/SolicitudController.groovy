@@ -1,14 +1,20 @@
 package mx.gob.inr.catservicios
 
-import grails.plugins.springsecurity.Secured
-import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
+
+import org.springframework.dao.DataIntegrityViolationException
+
+import grails.plugins.springsecurity.Secured
+import grails.converters.JSON
+
 
 @Secured(['ROLE_SAST_USUARIO'])
 class SolicitudController {
     def springSecurityService
     def grailsApplication
     def firmadoService
+    def serviciosService
+
     static nombreMenu = "Requerimientos"
     static ordenMenu = 80
 
@@ -356,5 +362,10 @@ class SolicitudController {
         flash.message = message(code: 'default.updated.message', args: [message(code: 'solicitud.label', default: 'Solicitud'), solicitudInstance.toString()])
         redirect(action: "edit", id: id)
     }
+
+  def listarEquipo() {
+    log.debug("en listarEquipo")
+    render serviciosService.listarEquipo(params) as JSON
+  }
 
 }
