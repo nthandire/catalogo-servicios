@@ -40,7 +40,7 @@ class ReportesController {
     use(TimeCategory) {
       endDate = endDate + 1.month - 1.seconds
     }
-    params["mes"] = startDate.format('MMMM')
+    params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
 
     def requerimientos = requerimientosConEncuesta(startDate, endDate)
@@ -124,7 +124,7 @@ class ReportesController {
       return
     }
 
-    params["mes"] = startDate.format('MMMM')
+    params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
     params["preg1Si"] = contar(incidentesConEncuesta(startDate, endDate),"p01", 1)
     params["preg1No"] = contar(incidentesConEncuesta(startDate, endDate),"p01", 2)
@@ -209,7 +209,7 @@ class ReportesController {
     use(TimeCategory) {
       endDate = endDate + 1.month - 1.seconds
     }
-    params["mes"] = startDate.format('MMMM').toString()
+    params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
 
     // TODO: Quitar
@@ -373,7 +373,7 @@ class ReportesController {
     use(TimeCategory) {
       endDate = endDate + 1.month - 1.seconds
     }
-    params["mes"] = startDate.format('MMMM').toString()
+    params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
 
     def locale = new Locale('es', 'MX')
@@ -673,7 +673,7 @@ class ReportesController {
       endDate = endDate + 1.month - 1.seconds
     }
     log.debug("startDate = $startDate, endDate = $endDate")
-    params["mes"] = startDate.format('MMMM').toString()
+    params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
 
     def locale = new Locale('es', 'MX')
@@ -738,7 +738,7 @@ class ReportesController {
       endDate = endDate + 1.month - 1.seconds
     }
     log.debug("startDate = $startDate, endDate = $endDate")
-    params["mes"] = startDate.format('MMMM').toString()
+    params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
 
     def locale = new Locale('es', 'MX')
@@ -764,24 +764,28 @@ class ReportesController {
     }
 
     log.debug("params = $params")
+    log.debug("detalles = ${detalles.collect {it.id}}")
 
     detalles.each {
+      // log.debug(it.id) // TODO: Quitar.
       def solicitud = it.idSolicitud
       def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 2)
       def tiempoReal = firmadoService.diff(solicitud.fechaRevisa, it.fechaSolucion)
+      def tiempoRealString = firmadoService.diffString(solicitud.fechaRevisa, it.fechaSolucion)
+      log.debug("tiempoRealString = $tiempoRealString")
       def renglon = new rptNiveles (
-        folio: solicitud.toString(),
+        folio: solicitud,
         nivel: "segundo",
         area: firmadoService.areaNombre(solicitud.id),
-        nombre: Usuario.get(solicitud.idSolicitante).toString(),
-        categoria: it.idServcat.toString(),
-        subcategoria: it.idServ.servSub.toString(),
-        tercerNivel: it.toString(),
+        nombre: Usuario.get(solicitud.idSolicitante),
+        categoria: it.idServcat,
+        subcategoria: it.idServ.servSub,
+        tercerNivel: it,
         descripcion: it?.descripcion,
         fechaInicio: (solicitud.fechaRevisa).format("YYYY-MM-dd HH:mm"),
         fechaFinal: (it.fechaSolucion).format("YYYY-MM-dd HH:mm"),
         tiempoPrometido: tiempoAsignado,
-        tiempoReal: tiempoReal,
+        tiempoReal: tiempoRealString,
         cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
       )
       data.add(renglon)

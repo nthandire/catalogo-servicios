@@ -46,7 +46,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SUBDIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACION Y COMUNICACIONES]]></text>
+				<text><![CDATA[SUBDIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIONES]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="143" y="80" width="467" height="22" uuid="3c2ba8ac-0418-407e-9d70-aa76dee0defd"/>
@@ -278,13 +278,9 @@
 	<pageFooter>
 		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement x="77" y="4" width="100" height="20" uuid="f09c2706-4fc6-4664-8e64-a7652109a139"/>
+				<reportElement x="10" y="4" width="100" height="20" uuid="f09c2706-4fc6-4664-8e64-a7652109a139"/>
 				<textFieldExpression><![CDATA[(new Date()).format("dd/MM/yyyy HH:mm")]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="10" y="4" width="67" height="20" uuid="c85a1332-8c9d-4839-bb50-4edcaedab43a"/>
-				<text><![CDATA[Fecha y Hora:]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="638" y="4" width="44" height="20" uuid="1a926033-79e7-4eca-be5d-c5ea62109074"/>
 				<text><![CDATA[Página:]]></text>

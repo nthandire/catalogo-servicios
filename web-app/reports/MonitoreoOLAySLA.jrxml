@@ -52,48 +52,52 @@
 	<pageHeader>
 		<band height="126" splitType="Stretch">
 			<image scaleImage="FillFrame">
-				<reportElement x="20" y="0" width="50" height="60" uuid="d2ef19c9-7883-46fc-90e8-2da935a9fc94"/>
+				<reportElement x="692" y="0" width="50" height="60" uuid="d2ef19c9-7883-46fc-90e8-2da935a9fc94"/>
 				<imageExpression><![CDATA[$P{image_dir} + "logo_INR.gif"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="80" y="0" width="400" height="20" uuid="4c4f2f97-e06f-4e40-ad35-bd5d6ba42e0c"/>
+				<reportElement x="176" y="0" width="400" height="20" uuid="4c4f2f97-e06f-4e40-ad35-bd5d6ba42e0c"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DIRECCIÓN GENERAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="20" width="400" height="30" uuid="1414eec3-2fd2-402a-a4ae-01291ca31fd0"/>
+				<reportElement x="176" y="20" width="400" height="30" uuid="1414eec3-2fd2-402a-a4ae-01291ca31fd0"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SUBDIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACION Y COMUNICACIONES]]></text>
+				<text><![CDATA[SUBDIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIONES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="47" y="80" width="467" height="22" uuid="3c2ba8ac-0418-407e-9d70-aa76dee0defd"/>
+				<reportElement x="143" y="80" width="467" height="22" uuid="3c2ba8ac-0418-407e-9d70-aa76dee0defd"/>
 				<textElement textAlignment="Center" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Monitoreo de Niveles de Operacionales (OLA) y de Servicio (SLA)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="50" width="400" height="30" uuid="0d88b210-84e1-4974-860e-6d24771fd9ee"/>
+				<reportElement x="176" y="50" width="400" height="30" uuid="0d88b210-84e1-4974-860e-6d24771fd9ee"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DEPARTAMENTO DE GESTIÓN Y OPERACIÓN DE SERVICIOS DE TIC]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="47" y="101" width="467" height="22" uuid="68178375-72f3-4351-ab64-148d513c1825"/>
+				<reportElement x="143" y="101" width="467" height="22" uuid="68178375-72f3-4351-ab64-148d513c1825"/>
 				<textElement textAlignment="Center" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{mes} + " " + $P{anio}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="5" y="7" width="140" height="48" uuid="30422f24-144e-4122-8cb4-adfe2b142340"/>
+				<imageExpression><![CDATA[$P{image_dir} + "logo_salud.png"]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="402" splitType="Stretch">
+		<band height="380" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="91" y="21" width="80" height="60" backcolor="#8B8B8B" uuid="56e4858e-3623-4947-812f-fb5880dc1831"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
@@ -358,17 +362,29 @@
 				<textFieldExpression><![CDATA[$P{SLA}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="396" y="279" width="50" height="20" uuid="8a932afe-9804-477d-93c6-252321926263"/>
+				<reportElement x="456" y="279" width="50" height="20" uuid="8a932afe-9804-477d-93c6-252321926263"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SLA]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="451" y="275" width="80" height="30" uuid="f414d6db-be23-4304-9acd-fd1172a1604a"/>
+				<reportElement x="511" y="275" width="80" height="30" uuid="f414d6db-be23-4304-9acd-fd1172a1604a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{segundoReqOLA}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="11" y="111" width="720" height="1" uuid="4a20eb2c-a47d-4df2-953f-4fa7820656ab"/>
+			</line>
+			<line>
+				<reportElement x="411" y="0" width="1" height="201" uuid="f7f241fc-a15e-42b0-ad2e-ec9aa238941a"/>
+			</line>
+			<line>
+				<reportElement x="11" y="141" width="720" height="1" uuid="99fe6090-4418-4413-af25-3ccffcff45a5"/>
+			</line>
+			<line>
+				<reportElement x="11" y="171" width="720" height="1" uuid="fff503f9-7a1b-49c4-a49b-82f024611e9a"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
@@ -378,7 +394,28 @@
 		<band height="7" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="6" splitType="Stretch"/>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="8" width="100" height="20" uuid="9e4a3cff-f4bb-43c7-a0b7-b8db37149f36"/>
+				<textFieldExpression><![CDATA[(new Date()).format("dd/MM/yyyy HH:mm")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="638" y="8" width="44" height="20" uuid="3e454eb3-a40b-4e13-8d1c-0e867ad857fb"/>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="692" y="8" width="18" height="20" uuid="4bf10b53-0cbd-45db-9ef1-30c9be5efbaf"/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="677" y="8" width="12" height="20" uuid="168ae07c-2643-4338-8c37-a0c233fd270f"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="710" y="8" width="22" height="20" uuid="cb4824cd-5b9b-4831-99c9-e1670fb10469"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="3" splitType="Stretch"/>

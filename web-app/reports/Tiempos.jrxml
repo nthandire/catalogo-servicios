@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Resultados y Seguimiento" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f31b505-9f6f-4905-bb8f-a313eca9443b">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.3310000000000006"/>
-	<property name="ireport.x" value="199"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
@@ -47,7 +47,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SUBDIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACION Y COMUNICACIONES]]></text>
+				<text><![CDATA[SUBDIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIONES]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="143" y="80" width="467" height="22" uuid="3c2ba8ac-0418-407e-9d70-aa76dee0defd"/>
@@ -121,7 +121,7 @@
 				<text><![CDATA[Subcategoría]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="269" y="0" width="90" height="40" backcolor="#8B8B8B" uuid="60221a50-1606-43b3-8708-73855651d75a"/>
+				<reportElement mode="Opaque" x="269" y="0" width="80" height="40" backcolor="#8B8B8B" uuid="60221a50-1606-43b3-8708-73855651d75a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="7" isBold="false"/>
 				</textElement>
@@ -163,7 +163,7 @@
 				<text><![CDATA[Fecha de cierre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="359" y="0" width="167" height="40" backcolor="#8B8B8B" uuid="fa0552e5-ef0d-431b-865e-6cd8f8a29ee5"/>
+				<reportElement mode="Opaque" x="349" y="0" width="177" height="40" backcolor="#8B8B8B" uuid="fa0552e5-ef0d-431b-865e-6cd8f8a29ee5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="7" isBold="false"/>
 				</textElement>
@@ -188,7 +188,7 @@
 				<textFieldExpression><![CDATA[$F{tiempoReal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="269" y="1" width="90" height="30" uuid="d543a3c6-3dd3-4b29-adae-129c15997e92"/>
+				<reportElement stretchType="RelativeToTallestObject" x="269" y="1" width="80" height="30" uuid="d543a3c6-3dd3-4b29-adae-129c15997e92"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Arial" size="7"/>
 				</textElement>
@@ -261,7 +261,7 @@
 				<reportElement x="1" y="0" width="749" height="1" uuid="8aed8fd7-6a2b-4324-aecf-fb40746ccec7"/>
 			</line>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="359" y="0" width="167" height="30" uuid="2a087405-2711-47bf-b70b-2e3570712c22"/>
+				<reportElement stretchType="RelativeToTallestObject" x="349" y="0" width="177" height="30" uuid="2a087405-2711-47bf-b70b-2e3570712c22"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Arial" size="7"/>
 				</textElement>
@@ -275,13 +275,9 @@
 	<pageFooter>
 		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement x="77" y="6" width="100" height="20" uuid="e1d83c50-7818-4a3c-8eff-ed0b6b1cbfef"/>
+				<reportElement x="10" y="6" width="100" height="20" uuid="e1d83c50-7818-4a3c-8eff-ed0b6b1cbfef"/>
 				<textFieldExpression><![CDATA[(new Date()).format("dd/MM/yyyy HH:mm")]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="10" y="6" width="67" height="20" uuid="77ba0ad9-785e-447e-aa9d-58e6507fb89d"/>
-				<text><![CDATA[Fecha y Hora:]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="638" y="6" width="44" height="20" uuid="31fe7c5d-56fa-400d-b165-fb277e5e61f7"/>
 				<text><![CDATA[Página:]]></text>
