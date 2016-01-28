@@ -379,7 +379,7 @@ class ReportesController {
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
-    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
+    def formato6 = new DecimalFormat("000000", dfs)
 
 
     def query =
@@ -446,18 +446,18 @@ class ReportesController {
         case SolicitudDetalle:
           def solicitud = caso.idSolicitud
           renglon = new RptSolicitud (
-            folio: solicitud.toString(),
+            folio: solicitud,
             tipo: it.tipo,
             estado: firmadoService.estadoDescriptivo(solicitud),
             area: firmadoService.areaNombre(solicitud.idSolicitante),
-            nombre: Usuario.get(solicitud.idSolicitante).toString(),
-            categoria: caso.idServcat.toString(),
-            subcategoria: caso?.idServ?.servSub?.toString() ?: "",
-            tercerNivel: caso?.idServ?.toString() ?: "",
-            descripcion: caso?.descripcion,
+            nombre: Usuario.get(solicitud.idSolicitante),
+            categoria: caso.idServcat,
+            subcategoria: caso?.idServ?.servSub ?: "",
+            tercerNivel: caso?.idServ ?: "",
+            descripcion: caso?.descripcion ?: "",
             inventario: inventario,
-            responsable: caso.idServcat.servResp.toString(),
-            gestionadoA: caso.idTecnico ? Usuario.get(caso.idTecnico).toString() : caso.idServcat.servResp.toString(),
+            responsable: caso.idServcat.servResp,
+            gestionadoA: caso.idTecnico ? Usuario.get(caso.idTecnico) : caso.idServcat.servResp,
             prioridad: message(code:"intensidad.valor.${caso.prioridad}"),
             fechaRecepcion: caso.idSolicitud.fechaAutoriza ? (caso.idSolicitud.fechaAutoriza).format("YYYY-MM-dd HH:mm") : "",
             fechaCierre: caso.fechaSolucion ? (caso.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
@@ -467,19 +467,19 @@ class ReportesController {
         case Incidente:
           def nivel = caso.nivel
           renglon = new RptSolicitud (
-            folio: caso.toString(),
+            folio: caso,
             tipo: it.tipo,
             estado: firmadoService.estadoDescriptivo(caso),
             area: firmadoService.areaNombre(caso.idReporta),
-            nombre: Usuario.get(caso.idReporta).toString(),
-            categoria: caso.idServ.servSub.servCat.toString(),
-            subcategoria: caso?.idServ?.servSub?.toString(),
-            tercerNivel: caso?.idServ?.toString(),
-            descripcion: caso?.descripcion,
+            nombre: Usuario.get(caso.idReporta),
+            categoria: caso.idServ.servSub.servCat,
+            subcategoria: caso?.idServ?.servSub ?: "",
+            tercerNivel: caso?.idServ ?: "",
+            descripcion: caso?.descripcion ?: "",
             inventario: inventario,
-            responsable: caso.idServ.servSub.servCat.servResp.toString(),
-            gestionadoA: caso."idNivel$nivel" ? Usuario.get(caso."idNivel$nivel").toString() :
-              caso.idServ."servResp$nivel".toString(),
+            responsable: caso.idServ.servSub.servCat.servResp,
+            gestionadoA: caso."idNivel$nivel" ? Usuario.get(caso."idNivel$nivel") :
+              caso.idServ."servResp$nivel",
             prioridad: message(code:"intensidad.valor.${caso.idServ.impacto}"),
             fechaRecepcion: caso.fechaIncidente.format("YYYY-MM-dd HH:mm"),
             fechaCierre: caso.estado in 'ET' ? caso."fechaSolnivel$nivel" : "",
@@ -494,19 +494,19 @@ class ReportesController {
               def nivel = fuente.nivel
               inventario = inventarioEquipo(fuente)
               renglon = new RptSolicitud (
-                folio: caso.toString(),
+                folio: caso,
                 tipo: it.tipo,
                 estado: "",
                 area: firmadoService.areaNombre(caso.idUsuario),
-                nombre: Usuario.get(caso.idUsuario).toString(),
-                categoria: fuente.idServ.servSub.servCat.toString(),
-                subcategoria: fuente?.idServ?.servSub?.toString(),
-                tercerNivel: fuente?.idServ?.toString(),
-                descripcion: fuente?.descripcion,
+                nombre: Usuario.get(caso.idUsuario),
+                categoria: fuente.idServ.servSub.servCat,
+                subcategoria: fuente?.idServ?.servSub ?: "",
+                tercerNivel: fuente?.idServ ?: "",
+                descripcion: fuente?.descripcion ?: "",
                 inventario: inventario,
-                responsable: fuente.idServ.servSub.servCat.servResp.toString(),
-                gestionadoA: fuente."idNivel$nivel" ? Usuario.get(fuente."idNivel$nivel").toString() :
-                  fuente.idServ."servResp$nivel".toString(),
+                responsable: fuente.idServ.servSub.servCat.servResp,
+                gestionadoA: fuente."idNivel$nivel" ? Usuario.get(fuente."idNivel$nivel") :
+                  fuente.idServ."servResp$nivel",
                 prioridad: message(code:"intensidad.valor.${fuente.idServ.impacto}"),
                 fechaRecepcion: caso.fechaProblema.format("YYYY-MM-dd HH:mm"),
                 fechaCierre: caso.fechaSolucion ? caso.fechaSolucion.format("YYYY-MM-dd HH:mm") : "",
@@ -518,18 +518,18 @@ class ReportesController {
               inventario = inventarioEquipo(fuente)
               def solicitud = fuente.idSolicitud
               renglon = new RptSolicitud (
-                folio: solicitud.toString(),
+                folio: solicitud,
                 tipo: it.tipo,
                 estado: firmadoService.estadoDescriptivo(solicitud),
                 area: firmadoService.areaNombre(solicitud.idSolicitante),
-                nombre: Usuario.get(solicitud.idSolicitante).toString(),
-                categoria: fuente.idServcat.toString(),
-                subcategoria: fuente?.idServ?.servSub?.toString(),
-                tercerNivel: fuente?.idServ?.toString(),
-                descripcion: fuente?.descripcion,
+                nombre: Usuario.get(solicitud.idSolicitante),
+                categoria: fuente.idServcat,
+                subcategoria: fuente?.idServ?.servSub ?: "",
+                tercerNivel: fuente?.idServ ?: "",
+                descripcion: fuente?.descripcion ?: "",
                 inventario: inventario,
-                responsable: fuente.idServcat.servResp.toString(),
-                gestionadoA: fuente.idTecnico ? Usuario.get(fuente.idTecnico).toString() : fuente.idServcat.servResp.toString(),
+                responsable: fuente.idServcat.servResp,
+                gestionadoA: fuente.idTecnico ? Usuario.get(fuente.idTecnico) : fuente.idServcat.servResp,
                 prioridad: message(code:"intensidad.valor.${fuente.prioridad}"),
                 fechaRecepcion: caso.fechaProblema.format("YYYY-MM-dd HH:mm"),
                 fechaCierre: caso.fechaSolucion ? caso.fechaSolucion.format("YYYY-MM-dd HH:mm") : "",
@@ -562,7 +562,6 @@ class ReportesController {
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
-    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
 
     def categorias = Cat_servCat.findAllByEstado('A' as char)
 
@@ -592,7 +591,6 @@ class ReportesController {
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
-    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
 
     // obtener las catecorias con estado A
     def categorias = Cat_servCat.findAllByEstado('A' as char)
@@ -630,7 +628,6 @@ class ReportesController {
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
-    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
 
     def servicios = Cat_serv.list()
 
@@ -679,7 +676,6 @@ class ReportesController {
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
-    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
 
     def query =
       "  from Solicitud                          " +
@@ -728,6 +724,8 @@ class ReportesController {
   def reporteTiempos() {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
+    params.tipoServicio = "Requerimientos"
+
 
     def startDate = params.startDate
     startDate[Calendar.DATE] = 1
@@ -744,7 +742,6 @@ class ReportesController {
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
-    def formatoFijo = new DecimalFormat("#,##0.00", dfs)
 
     def query =
       "  from Solicitud                          " +
@@ -770,6 +767,9 @@ class ReportesController {
       // log.debug(it.id) // TODO: Quitar.
       def solicitud = it.idSolicitud
       def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 2)
+      log.debug("tiempoAsignado = $tiempoAsignado")
+      def tiempoAsignadoString = firmadoService.minutesToString(tiempoAsignado)
+      log.debug("tiempoAsignado = $tiempoAsignado")
       def tiempoReal = firmadoService.diff(solicitud.fechaRevisa, it.fechaSolucion)
       def tiempoRealString = firmadoService.diffString(solicitud.fechaRevisa, it.fechaSolucion)
       log.debug("tiempoRealString = $tiempoRealString")
@@ -784,7 +784,7 @@ class ReportesController {
         descripcion: it?.descripcion,
         fechaInicio: (solicitud.fechaRevisa).format("YYYY-MM-dd HH:mm"),
         fechaFinal: (it.fechaSolucion).format("YYYY-MM-dd HH:mm"),
-        tiempoPrometido: tiempoAsignado,
+        tiempoPrometido: tiempoAsignadoString,
         tiempoReal: tiempoRealString,
         cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
       )

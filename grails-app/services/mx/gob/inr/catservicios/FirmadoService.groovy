@@ -427,6 +427,37 @@ class FirmadoService {
     return idxSemaforo
   }
 
+  def diffString(Date startDate, Date endDate) {
+    def diff = null
+    def string = ''
+    use ( TimeCategory ) {
+      diff = endDate - startDate
+      def minutos = diff.minutes
+      def horas = diff.hours
+      def dias = diff.days
+      string = "${dias ? dias.toString() + (dias == 1 ? ' dia ' : ' dias ') : ''}"
+      string += "${horas ? horas.toString() + (horas == 1 ? ' hora ' : ' horas ') : ''}"
+      string += "${minutos ? minutos.toString() + (minutos == 1 ? ' minuto ' : ' minutos ') : ''}"
+    }
+    string
+  }
+
+  def minutesToString(Integer minutos) {
+    def string = ''
+
+    Integer horas = minutos / 60
+    minutos %= 60
+
+    Integer dias = horas / 24
+    horas %= 24
+
+    string = "${dias ? dias.toString() + (dias == 1 ? ' dia ' : ' dias ') : ''}"
+    string += "${horas ? horas.toString() + (horas == 1 ? ' hora ' : ' horas ') : ''}"
+    string += "${minutos ? minutos.toString() + (minutos == 1 ? ' minuto ' : ' minutos ') : ''}"
+
+    string
+  }
+
     def aprobadores(Cat_servResp area) {
         def areasExpandidas = []
         areasExpandidas += area.descripcion.split("/")

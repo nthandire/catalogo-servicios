@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="main1250">
     <meta http-equiv="refresh" content="120">
 		<g:set var="entityName" value="${message(code: 'incidente.label', default: 'Incidente')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
