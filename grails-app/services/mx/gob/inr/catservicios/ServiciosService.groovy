@@ -32,24 +32,22 @@ class ServiciosService {
       // TODO. aplicar un orden -  order("inventario","asc")
 
     def paramQuery = [codigos: codigos]
-    def query = ""
+    def query =
+        "  from ResguardoEntregaDetalle as d     " +
+        " where d.idResguardo.id in (:codigos)   " +
+        "   and d.consecutivo <= ${MAX_EQUIPOS}  " +
+        "   and d.idTipoanexotecnico is not null "
     if (empleados) {
       log.debug("primer empleado es de tipo ${empleados[0].getClass()}")
       if (empleados.size() > 1) {
         log.debug("encontro más de un empleado")
         return []
       }
-      query =
-        "  from ResguardoEntregaDetalle as d     " +
-        " where d.idResguardo.id in (:codigos)   " +
-        "   and d.consecutivo <= ${MAX_EQUIPOS}  " +
+      query +=
         "   and d.idEmpleado in (:empleados)    "
         paramQuery << [empleados: empleados]
     } else {
-      query =
-        "  from ResguardoEntregaDetalle as d     " +
-        " where d.idResguardo.id in (:codigos)   " +
-        "   and d.consecutivo <= ${MAX_EQUIPOS}  " +
+      query +=
         "   and (serie like :serie               " +
         "        or inventario = :inventario)    "
         def inventario = term.isNumber() ? term.toLong() : new Long(0)
@@ -82,15 +80,18 @@ class ServiciosService {
       def tipoEquipo = AnexoTecnico.get(it['idTipoanexotecnico'] as Long)
       eqMap.put("value", it['id'])
       def marca = descMarca(it['idMarca'])
-      eqMap.put("label", "${it['inventario']} : ${it['serie']} : $tipoEquipo : $empleado : $marca : ${it['desModelo']}")
+      def ubicacion = firmadoService.ubicacion(it.id)
+      def cuerpo = firmadoService.cuerpoNivel(it.id)
+      eqMap.put("label", "${it['inventario']} : ${it['serie']} : $tipoEquipo : " +
+        "$empleado : $marca : ${it['desModelo']}${ubicacion ? ' : ' + ubicacion + ' : ' + cuerpo : ''}")
       eqMap.put("marca", marca)
       eqMap.put("modelo", it['desModelo'])
       eqMap.put("economico", it['inventario'])
       eqMap.put("equipo", tipoEquipo.descripcion)
       eqMap.put("empleado", empleado)
       eqMap.put("garantia", garantiaFormateada(it))
-      eqMap.put("ubicacion", firmadoService.ubicacion(it.id))
-      eqMap.put("cuerpo", firmadoService.cuerpoNivel(it.id))
+      eqMap.put("ubicacion", ubicacion)
+      eqMap.put("cuerpo", cuerpo)
       eqMap
   }
 
