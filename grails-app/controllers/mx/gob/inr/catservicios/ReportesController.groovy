@@ -61,12 +61,10 @@ class ReportesController {
     params["preg4Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 1)
     params["preg4No"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 2)
 
-    def locale = new Locale('es', 'MX')
-    def dfs = new DecimalFormatSymbols(locale)
-    def formato = new DecimalFormat("#,##0", dfs)
     params["recibidas"] = formato.format(firmadoService.recibidas(startDate, endDate))
     params["resueltas"] = formato.format(firmadoService.resueltas(startDate, endDate))
     params["pendientes"] = formato.format(firmadoService.pendientes(startDate, endDate))
+    params["canceladas"] = formato.format(firmadoService.canceladas(startDate, endDate))
     params["enTiempo"] = formato.format(firmadoService.enTiempo(startDate, endDate))
     params["satisfechos"] = formato.format(firmadoService.satisfechos(startDate, endDate))
     params["insatisfechos"] = formato.format(firmadoService.insatisfechos(startDate, endDate))
@@ -135,12 +133,10 @@ class ReportesController {
     params["preg4Si"] = contar(incidentesConEncuesta(startDate, endDate),"p04", 1)
     params["preg4No"] = contar(incidentesConEncuesta(startDate, endDate),"p04", 2)
 
-    def locale = new Locale('es', 'MX')
-    def dfs = new DecimalFormatSymbols(locale)
-    def formato = new DecimalFormat("#,##0", dfs)
     params["recibidas"] = formato.format(firmadoService.inciRecibidas(startDate, endDate))
     params["resueltas"] = formato.format(firmadoService.inciResueltas(startDate, endDate))
     params["pendientes"] = formato.format(firmadoService.inciPendientes(startDate, endDate))
+    params["canceladas"] = formato.format(firmadoService.inciCanceladas(startDate, endDate))
     params["enTiempo"] = formato.format(firmadoService.enTiempoInci(startDate, endDate))
     params["satisfechos"] = formato.format(firmadoService.inciSatisfechos(startDate, endDate))
     params["insatisfechos"] = formato.format(firmadoService.inciInsatisfechos(startDate, endDate))
@@ -379,7 +375,6 @@ class ReportesController {
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
-    def formato6 = new DecimalFormat("000000", dfs)
 
 
     def query =
@@ -559,10 +554,6 @@ class ReportesController {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
 
-    def locale = new Locale('es', 'MX')
-    def dfs = new DecimalFormatSymbols(locale)
-    def formato = new DecimalFormat("#,##0", dfs)
-
     def categorias = Cat_servCat.findAllByEstado('A' as char)
 
     log.debug("categorias = $categorias")
@@ -587,10 +578,6 @@ class ReportesController {
   def reporteSubcategoria() {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
-
-    def locale = new Locale('es', 'MX')
-    def dfs = new DecimalFormatSymbols(locale)
-    def formato = new DecimalFormat("#,##0", dfs)
 
     // obtener las catecorias con estado A
     def categorias = Cat_servCat.findAllByEstado('A' as char)
@@ -627,9 +614,14 @@ class ReportesController {
 
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
-    def formato = new DecimalFormat("#,##0", dfs)
+    def formato8 = new DecimalFormat("00000000", dfs)
 
-    def servicios = Cat_serv.list()
+    def paraOrdenar = Cat_serv.list().collect { new Servicio(caso:it, tipo:"",
+      orden:formato8.format(it.servSub.servCat.id) +
+        formato8.format(it.servSub.id) + formato8.format(it.id))}
+    paraOrdenar.sort{it.orden}
+    def servicios = paraOrdenar.collect {it.caso}
+    log.debug("paraOrdenar = ${paraOrdenar.collect{it.orden}}")
 
     log.debug("params = $params")
 
@@ -672,10 +664,6 @@ class ReportesController {
     log.debug("startDate = $startDate, endDate = $endDate")
     params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
-
-    def locale = new Locale('es', 'MX')
-    def dfs = new DecimalFormatSymbols(locale)
-    def formato = new DecimalFormat("#,##0", dfs)
 
     def query =
       "  from Solicitud                          " +
@@ -738,10 +726,6 @@ class ReportesController {
     log.debug("startDate = $startDate, endDate = $endDate")
     params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
-
-    def locale = new Locale('es', 'MX')
-    def dfs = new DecimalFormatSymbols(locale)
-    def formato = new DecimalFormat("#,##0", dfs)
 
     def query =
       "  from Solicitud                          " +

@@ -528,6 +528,11 @@ class FirmadoService {
     Solicitud.countByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
   }
 
+  def canceladas(Date startDate, Date endDate) {
+    def estados = ['C' as char]
+    Solicitud.countByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
+  }
+
   Integer satisfechos(Date startDate, Date endDate) {
     def requerimientos =
       Solicitud.findAllByEstadoAndLastUpdatedBetween('T' as char, startDate, endDate)
@@ -559,6 +564,10 @@ class FirmadoService {
 
   def inciPendientes(Date startDate, Date endDate) {
     Incidente.countByEstadoAndLastUpdatedBetween('A' as char,startDate, endDate)
+  }
+
+  def inciCanceladas(Date startDate, Date endDate) {
+    Incidente.countByEstadoAndLastUpdatedBetween('C' as char,startDate, endDate)
   }
 
   Integer inciSatisfechos(Date startDate, Date endDate) {

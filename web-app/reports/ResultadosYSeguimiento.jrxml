@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="250"/>
+	<property name="ireport.y" value="10"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
@@ -27,6 +27,7 @@
 	<parameter name="enTiempo" class="java.lang.String"/>
 	<parameter name="satisfechos" class="java.lang.String"/>
 	<parameter name="insatisfechos" class="java.lang.String"/>
+	<parameter name="canceladas" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -123,36 +124,36 @@
 				<text><![CDATA[Solicitudes resueltas:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="40" y="100" width="149" height="41" backcolor="#8B8B8B" uuid="56e4858e-3623-4947-812f-fb5880dc1831"/>
+				<reportElement mode="Opaque" x="40" y="110" width="149" height="41" backcolor="#8B8B8B" uuid="56e4858e-3623-4947-812f-fb5880dc1831"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Solicitudes Resueltas en el tiempo comprometido]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="382" y="150" width="147" height="41" uuid="d4534fb5-99fc-4823-afc8-3eaa45ab062f"/>
+				<reportElement x="382" y="160" width="147" height="30" uuid="d4534fb5-99fc-4823-afc8-3eaa45ab062f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{insatisfechos}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="193" y="150" width="186" height="41" uuid="2bed5387-5773-495f-90d2-4184272416b4"/>
+				<reportElement x="193" y="160" width="186" height="30" uuid="2bed5387-5773-495f-90d2-4184272416b4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{satisfechos}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="193" y="100" width="186" height="41" backcolor="#8B8B8B" uuid="e473fff3-ec83-4313-81fe-199f09bf5540"/>
+				<reportElement mode="Opaque" x="193" y="110" width="186" height="41" backcolor="#8B8B8B" uuid="e473fff3-ec83-4313-81fe-199f09bf5540"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Usuarios Satisfechos con el servicio]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="40" y="150" width="149" height="41" uuid="afa53ae7-91cb-4aba-a815-11aa55e54aca"/>
+				<reportElement x="40" y="160" width="149" height="30" uuid="afa53ae7-91cb-4aba-a815-11aa55e54aca"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{enTiempo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="382" y="100" width="147" height="41" backcolor="#8B8B8B" uuid="a7f342e4-5067-4518-8426-fd709f97c5f6"/>
+				<reportElement mode="Opaque" x="382" y="110" width="147" height="41" backcolor="#8B8B8B" uuid="a7f342e4-5067-4518-8426-fd709f97c5f6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
@@ -260,6 +261,16 @@
 				<reportElement x="136" y="50" width="40" height="20" uuid="466034cd-d70a-4af0-82b9-8154b5560407"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{pendientes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="70" width="118" height="20" uuid="3c661dc8-b82b-4083-aac5-69876bed2ee6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Solicitudes canceladas:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="136" y="70" width="40" height="20" uuid="88584373-bf35-4206-b8d0-04a0b88117ab"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{canceladas}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
