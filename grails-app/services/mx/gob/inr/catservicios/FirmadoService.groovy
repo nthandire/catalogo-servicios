@@ -533,6 +533,10 @@ class FirmadoService {
     Solicitud.countByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
   }
 
+  Integer revisarEncuestas(Date startDate, Date endDate) {
+    Solicitud.countByEstadoAndLastUpdatedBetween('E' as char, startDate, endDate)
+  }
+
   Integer satisfechos(Date startDate, Date endDate) {
     def requerimientos =
       Solicitud.findAllByEstadoAndLastUpdatedBetween('T' as char, startDate, endDate)
