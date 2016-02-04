@@ -788,15 +788,16 @@ class ReportesController {
     incidentes.each {
       for (nivel in 1..it.nivel) {
         def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, nivel)
+        log.debug("incidente = $it")
         log.debug("tiempoAsignado = $tiempoAsignado")
         def tiempoAsignadoString = firmadoService.minutesToString(tiempoAsignado)
         log.debug("tiempoAsignado = $tiempoAsignado")
-        log.debug("it.fechaNivel$nivel = ${it."fechaNivel$nivel"}")
-        log.debug("it.fechaSolnivel$nivel o new Date() = ${it."fechaSolnivel$nivel"?: new Date()}")
+        def inicio = it."fechaNivel$nivel" ?: it.fechaIncidente
+        log.debug("inicio = $inicio")
         def solucion = it."fechaSolnivel$nivel" ?: new Date()
         log.debug("solucion = $solucion")
-        def tiempoReal = firmadoService.diff(it."fechaNivel$nivel", it."fechaSolnivel$nivel" ?: new Date())
-        def tiempoRealString = firmadoService.diffString(it."fechaNivel$nivel", it."fechaSolnivel$nivel"?: new Date())
+        def tiempoReal = firmadoService.diff(inicio, solucion)
+        def tiempoRealString = firmadoService.diffString(inicio, solucion)
         log.debug("tiempoRealString = $tiempoRealString")
         def renglon = new rptNiveles (
           folio: it,
@@ -807,8 +808,8 @@ class ReportesController {
           subcategoria: it.idServ.servSub,
           tercerNivel: it.idServ,
           descripcion: it?.descripcion,
-          fechaInicio: (it."fechaNivel$nivel").format("YYYY-MM-dd HH:mm"),
-          fechaFinal: (it."fechaSolnivel$nivel"?: new Date()).format("YYYY-MM-dd HH:mm"),
+          fechaInicio: inicio.format("YYYY-MM-dd HH:mm"),
+          fechaFinal: solucion.format("YYYY-MM-dd HH:mm"),
           tiempoPrometido: tiempoAsignadoString,
           tiempoReal: tiempoRealString,
           cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",

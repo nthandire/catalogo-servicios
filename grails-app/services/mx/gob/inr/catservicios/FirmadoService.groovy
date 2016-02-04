@@ -438,6 +438,9 @@ class FirmadoService {
       string = "${dias ? dias.toString() + (dias == 1 ? ' dia ' : ' dias ') : ''}"
       string += "${horas ? horas.toString() + (horas == 1 ? ' hora ' : ' horas ') : ''}"
       string += "${minutos ? minutos.toString() + (minutos == 1 ? ' minuto ' : ' minutos ') : ''}"
+      if (!string && minutos == 0) {
+        string = "0 minutos"
+      }
     }
     string
   }
@@ -660,6 +663,7 @@ class FirmadoService {
 
   Integer diff(Date inicio, Date fin) { // TODO: Usarlo 2 veces más en este mismo archivo
     def minutos = 0
+    log.debug("inicio = $inicio, fin = $fin")
     use ( TimeCategory ) {
       def diff = fin - inicio
       log.debug "dias = $diff.days"
