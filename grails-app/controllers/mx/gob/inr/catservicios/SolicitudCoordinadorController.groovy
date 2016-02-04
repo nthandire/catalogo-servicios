@@ -244,7 +244,7 @@ class SolicitudCoordinadorController {
 
         solicitudDetalleInstance.properties = params
         solicitudDetalleInstance.idAprobador = userID
-       solicitudDetalleInstance.fechaAprobador = new Date()
+        solicitudDetalleInstance.fechaAprobador = new Date()
         if (!solicitudDetalleInstance.save(flush: true)) {
            render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance,
                                           tecnicos:listaDeTecnicos()])
