@@ -224,7 +224,31 @@
 				          jasper="Tiempos"
 				          format="pdf"
 				          name="Tiempo de solución"
-				          description="Tiempo de solución">
+				          description="Tiempo de solución - Requerimientos">
+				          <table>
+				          	<tr>
+				          		<td>
+							          del mes:
+				          		</td>
+				          		<td>
+							          <% def ini = new Date(); ini[Calendar.DATE] = 1; %>
+							          <g:datePicker name="startDate" value="${ini}" precision="month" years="${2015..2025}"/>
+				          		</td>
+				          	</tr>
+				          </table>
+				  </g:jasperReport>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10 offset1">
+				  <g:jasperReport
+				          controller="Reportes"
+				          action="reporteInciTiempos"
+				          jasper="Tiempos"
+				          format="pdf"
+				          name="Tiempo de solución"
+				          description="Tiempo de solución - Incidentes">
 				          <table>
 				          	<tr>
 				          		<td>

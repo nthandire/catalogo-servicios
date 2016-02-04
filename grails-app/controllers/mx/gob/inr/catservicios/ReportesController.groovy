@@ -678,8 +678,8 @@ class ReportesController {
     def query =
       "  from Solicitud                          " +
       " where estado is not null                 " +
-      "   and estado <> 'F'                 " +
-      "   and lastUpdated between ? and ?      "
+      "   and estado <> 'F'                      " +
+      "   and lastUpdated between ? and ?        "
     log.debug("query = $query")
     def requerimientos = Solicitud.findAll(query, [startDate, endDate])
     log.debug("requerimientos = $requerimientos")
@@ -778,7 +778,7 @@ class ReportesController {
 
     def query =
       "  from Incidente                          " +
-      " where fechaIncidente between ? and ?      "
+      " where fechaIncidente between ? and ?     "
     log.debug("query = $query")
     def incidentes = Incidente.findAll(query, [startDate, endDate])
     log.debug("incidentes = $incidentes")
@@ -841,8 +841,9 @@ class ReportesController {
 
     def query =
       "  from Solicitud                          " +
-      " where estado in ('T','E')                " +
-      "   and lastUpdated between ? and ?      "
+      " where estado is not null                 " +
+      "   and estado <> 'F'                      " +
+      "   and fechaSolicitud between ? and ?     "
     log.debug("query = $query")
     def requerimientos = Solicitud.findAll(query, [startDate, endDate])
     log.debug("requerimientos = $requerimientos")
@@ -854,6 +855,12 @@ class ReportesController {
           detalles << det
         }
       }
+    }
+
+    if (!detalles) {
+      flash.error = "No hay datos"
+      redirect(action: "list")
+      return
     }
 
     log.debug("params = $params")
@@ -871,14 +878,81 @@ class ReportesController {
       def renglon = new rptNiveles (
         folio: solicitud,
         nivel: "segundo",
-        area: firmadoService.areaNombre(solicitud.id),
+        area: firmadoService.areaNombre(solicitud.idSolicitante),
         nombre: Usuario.get(solicitud.idSolicitante),
         categoria: it.idServcat,
         subcategoria: it.idServ.servSub,
-        tercerNivel: it,
+        tercerNivel: it.idServ,
         descripcion: it?.descripcion,
         fechaInicio: (solicitud.fechaRevisa).format("YYYY-MM-dd HH:mm"),
         fechaFinal: (it.fechaSolucion).format("YYYY-MM-dd HH:mm"),
+        tiempoPrometido: tiempoAsignadoString,
+        tiempoReal: tiempoRealString,
+        cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
+      )
+      data.add(renglon)
+    }
+
+    chain (controller:"jasper", action:"index", model:[data:data], params:params)
+  }
+
+  def reporteInciTiempos() {
+    def data = []
+    params.image_dir = "${servletContext.getRealPath('/images')}/"
+    params.tipoServicio = "Incidentes"
+
+
+    def startDate = params.startDate
+    startDate[Calendar.DATE] = 1
+    startDate[Calendar.HOUR_OF_DAY] = 0
+    startDate[Calendar.MINUTE] = 0
+    def endDate = startDate.clone()
+    use(TimeCategory) {
+      endDate = endDate + 1.month - 1.seconds
+    }
+    log.debug("startDate = $startDate, endDate = $endDate")
+    params["mes"] = startDate.format('MMMM').capitalize()
+    params["anio"] = startDate.format('YYYY')
+
+    def query =
+      "  from Incidente                          " +
+      " where fechaIncidente between ? and ?     "
+    log.debug("query = $query")
+    def incidentes = Incidente.findAll(query, [startDate, endDate])
+    log.debug("incidentes = $incidentes")
+
+    if (!incidentes) {
+      flash.error = "No hay datos"
+      redirect(action: "list")
+      return
+    }
+
+    log.debug("params = $params")
+
+    incidentes.each {
+      def nivel = it.nivel
+      def tiempoAsignado = 0
+      for (i in 1..nivel) {
+        tiempoAsignado += firmadoService.tiempoAsignadoNivel(it.idServ, i)
+      }
+      log.debug("tiempoAsignado = $tiempoAsignado")
+      def tiempoAsignadoString = firmadoService.minutesToString(tiempoAsignado)
+      log.debug("tiempoAsignado = $tiempoAsignado")
+      def fin = it."fechaSolnivel$nivel" ?: new Date()
+      def tiempoReal = firmadoService.diff(it.fechaIncidente, fin)
+      def tiempoRealString = firmadoService.diffString(it.fechaIncidente, fin)
+      log.debug("tiempoRealString = $tiempoRealString")
+      def renglon = new rptNiveles (
+        folio: it,
+        nivel: nivel,
+        area: firmadoService.areaNombre(it.idReporta),
+        nombre: Usuario.get(it.idReporta),
+        categoria: it.idServ.servSub.servCat,
+        subcategoria: it.idServ.servSub,
+        tercerNivel: it.idServ,
+        descripcion: it?.descripcion,
+        fechaInicio: (it.fechaIncidente).format("YYYY-MM-dd HH:mm"),
+        fechaFinal: fin.format("YYYY-MM-dd HH:mm"),
         tiempoPrometido: tiempoAsignadoString,
         tiempoReal: tiempoRealString,
         cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
