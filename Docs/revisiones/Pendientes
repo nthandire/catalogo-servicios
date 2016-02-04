@@ -33,11 +33,7 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 
 - Reporte, Resultados Y Seguimiento: En Ubuntu saca signos raros en lugar de acentos e interrogaciones abiertas
 
-- Reporte, Niveles: Quitar el niveles2
-
-- Reportes: Quitar notas
-
-- Reporte,     Niveles: Agregar Incidentes
+- Reporte,     Tiempos: Agregar Incidentes
 
 - Reporte, Grafica
 

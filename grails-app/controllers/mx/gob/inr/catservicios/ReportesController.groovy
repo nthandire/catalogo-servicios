@@ -52,6 +52,10 @@ class ReportesController {
       return
     }
 
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
+
     params["preg1Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 1)
     params["preg1No"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 2)
     params["preg2Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p02", 1)
@@ -121,6 +125,10 @@ class ReportesController {
       redirect(action: "list")
       return
     }
+
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
 
     params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
@@ -669,7 +677,8 @@ class ReportesController {
 
     def query =
       "  from Solicitud                          " +
-      " where estado in ('T','E')                " +
+      " where estado is not null                 " +
+      "   and estado <> 'F'                 " +
       "   and lastUpdated between ? and ?      "
     log.debug("query = $query")
     def requerimientos = Solicitud.findAll(query, [startDate, endDate])
@@ -689,29 +698,61 @@ class ReportesController {
 
     detalles.each {
       def solicitud = it.idSolicitud
-      def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 2)
+
+      // reportar el tiempo del gestor
+      def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 1)
       log.debug("tiempoAsignado = $tiempoAsignado")
       def tiempoAsignadoString = firmadoService.minutesToString(tiempoAsignado)
       log.debug("tiempoAsignado = $tiempoAsignado")
-      def tiempoReal = firmadoService.diff(solicitud.fechaRevisa, it.fechaSolucion)
-      def tiempoRealString = firmadoService.diffString(solicitud.fechaRevisa, it.fechaSolucion)
+      def inicio = solicitud.fechaVb ?: solicitud.fechaAutoriza
+      def fin = solicitud.fechaRevisa ?: new Date()
+      def tiempoReal = firmadoService.diff(inicio, fin)
+      def tiempoRealString = firmadoService.diffString(inicio, fin)
       log.debug("tiempoRealString = $tiempoRealString")
       def renglon = new rptNiveles (
         folio: solicitud,
-        nivel: "segundo",
+        nivel: "gestoria",
         area: firmadoService.areaNombre(solicitud.idSolicitante),
         nombre: Usuario.get(solicitud.idSolicitante),
         categoria: it.idServcat,
         subcategoria: it.idServ.servSub,
         tercerNivel: it,
         descripcion: it?.descripcion,
-        fechaInicio: (solicitud.fechaRevisa).format("YYYY-MM-dd HH:mm"),
-        fechaFinal: (it.fechaSolucion).format("YYYY-MM-dd HH:mm"),
+        fechaInicio: inicio.format("YYYY-MM-dd HH:mm"),
+        fechaFinal: fin.format("YYYY-MM-dd HH:mm"),
         tiempoPrometido: tiempoAsignadoString,
         tiempoReal: tiempoRealString,
         cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
       )
       data.add(renglon)
+
+      if (solicitud.fechaRevisa) {
+        tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 2)
+        log.debug("tiempoAsignado = $tiempoAsignado")
+        tiempoAsignadoString = firmadoService.minutesToString(tiempoAsignado)
+        log.debug("tiempoAsignado = $tiempoAsignado")
+        inicio = solicitud.fechaRevisa
+        fin = it.fechaSolucion ?: new Date()
+        tiempoReal = firmadoService.diff(inicio, fin)
+        tiempoRealString = firmadoService.diffString(inicio, fin)
+        log.debug("tiempoRealString = $tiempoRealString")
+        def renglon2 = new rptNiveles (
+          folio: solicitud,
+          nivel: "segundo",
+          area: "",
+          nombre: "",
+          categoria: "",
+          subcategoria: "",
+          tercerNivel: "",
+          descripcion: '',
+          fechaInicio: inicio.format("YYYY-MM-dd HH:mm"),
+          fechaFinal: fin.format("YYYY-MM-dd HH:mm"),
+          tiempoPrometido: tiempoAsignadoString,
+          tiempoReal: tiempoRealString,
+          cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
+        )
+        data.add(renglon2)
+      }
     }
 
     chain (controller:"jasper", action:"index", model:[data:data], params:params)
@@ -720,7 +761,7 @@ class ReportesController {
   def reporteInciNiveles() {
     def data = []
     params.image_dir = "${servletContext.getRealPath('/images')}/"
-    params.tipoServicio = "Requerimientos"
+    params.tipoServicio = "Incidentes"
 
 
     def startDate = params.startDate
@@ -737,8 +778,7 @@ class ReportesController {
 
     def query =
       "  from Incidente                          " +
-      " where estado in ('T','E')                " +
-      "   and fechaIncidente between ? and ?      "
+      " where fechaIncidente between ? and ?      "
     log.debug("query = $query")
     def incidentes = Incidente.findAll(query, [startDate, endDate])
     log.debug("incidentes = $incidentes")
