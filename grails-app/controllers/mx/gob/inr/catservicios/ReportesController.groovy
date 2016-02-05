@@ -370,28 +370,75 @@ class ReportesController {
     params.image_dir = "${servletContext.getRealPath('/images')}/"
 
     def startDate = params.startDate
-    startDate[Calendar.DATE] = 1
-    startDate[Calendar.HOUR_OF_DAY] = 0
-    startDate[Calendar.MINUTE] = 0
-    def endDate = startDate.clone()
-    use(TimeCategory) {
-      endDate = endDate + 1.month - 1.seconds
+    def endDate = params.endDate
+
+    if (endDate < startDate) {
+      flash.error = "La fecha final no puede ser menor que la inicial"
+      redirect(action: "list")
+      return
     }
-    params["mes"] = startDate.format('MMMM').capitalize()
+
+    use(TimeCategory) {
+      endDate = endDate + 1.day - 1.seconds
+    }
+    log.debug("startDate = $startDate, endDate = $endDate")
+    params["rangoFechas"] = "del ${startDate.format("YYYY-MM-dd")} al ${endDate.format("YYYY-MM-dd")}"
     params["anio"] = startDate.format('YYYY')
+    def folio = params.folio.toInteger()
+    log.debug("folio = ${folio}")
+    def anioFolio = params.anioFolio
+    log.debug("anioFolio = ${anioFolio.format("YYYY-MM-dd")}")
+    def inventarioParam = params.inventario.toInteger()
+    log.debug("inventarioParam = $inventarioParam")
+    def estado = params.estado
+    log.debug("estado = $estado")
+
+    def capturados = 0
+    capturados += folio ? 1 : 0
+    log.debug("folio = $folio")
+    log.debug("capturados, folio = ${folio ? 1 : 0}")
+    capturados += inventarioParam ? 1 : 0
+    log.debug("inventarioParam = $inventarioParam")
+    log.debug("capturados, inventarioParam = ${inventarioParam ? 1 : 0}")
+    capturados += estado ? 1 : 0
+    log.debug("capturados, estado = ${estado ? 1 : 0}")
+
+    if (capturados > 1) {
+      flash.error = "Escoja solo uno de los tres, o preguntar por el folio, o por el numero de inventario o por el estado"
+      redirect(action: "list")
+      return
+    }
 
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
 
-
     def query =
       "  from Solicitud                          " +
       " where estado is not null                 " +
-      "   and estado <> 'F'                      " +
-      "   and fechaAutoriza between ? and ?      "
+      "   and estado <> 'F'                      "
+
+      def parametros = []
+      if (!folio) {
+        query +=
+          "   and fechaAutoriza between ? and ?      "
+        parametros << startDate
+        parametros << endDate
+      }
+
+      if (folio) {
+        query +=
+          "   and numeroSolicitud = ?                       " +
+          // "   and fechaSolicitud > to_date('1/1/2016 00:30:56','%d/%m/%Y')"
+          "   and TO_CHAR(fechaSolicitud,'%Y') = ? "
+        parametros << folio
+        parametros << (anioFolio[Calendar.YEAR].toString())
+      }
+
     log.debug("query = $query")
-    def requerimientos = Solicitud.findAll(query, [startDate, endDate])
+    log.debug("parametros = $parametros")
+    log.debug("año clase = ${(anioFolio[Calendar.YEAR]).getClass()}")
+    def requerimientos = Solicitud.findAll(query, parametros)
     log.debug("requerimientos = $requerimientos")
     def casos = []
     requerimientos.each {

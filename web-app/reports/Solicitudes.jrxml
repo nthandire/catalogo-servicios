@@ -2,11 +2,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Resultados y Seguimiento" language="groovy" pageWidth="1008" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f31b505-9f6f-4905-bb8f-a313eca9443b">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.4641000000000017"/>
-	<property name="ireport.x" value="4"/>
-	<property name="ireport.y" value="26"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="image_dir" class="java.lang.String"/>
-	<parameter name="mes" class="java.lang.String"/>
-	<parameter name="anio" class="java.lang.String"/>
+	<parameter name="rangoFechas" class="java.lang.String"/>
 	<parameter name="inciResueltoPrimer" class="java.lang.String"/>
 	<parameter name="inciResueltoSegundo" class="java.lang.String"/>
 	<parameter name="inciResueltoTercer" class="java.lang.String"/>
@@ -98,7 +97,7 @@
 				<textElement textAlignment="Center" markup="none">
 					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{mes} + " " + $P{anio}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{rangoFechas}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame">
 				<reportElement x="888" y="12" width="50" height="60" uuid="3571d26f-1df7-4882-bb01-c2a70bd00bee"/>

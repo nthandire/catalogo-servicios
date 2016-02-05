@@ -42,16 +42,6 @@
 							          <g:datePicker name="startDate" value="${ini}" precision="month" years="${2015..2025}"/>
 				          		</td>
 				          	</tr>
-                    %{--
-                    <tr>
-                      <td>
-                        a la fecha
-                      </td>
-                      <td>
-                        <g:datePicker name="endDate" value="${new Date()}" precision="month" years="${2015..2025}"/>
-                      </td>
-                    </tr>
-                    --}%
 				          </table>
 				  </g:jasperReport>
 				</div>
@@ -117,13 +107,46 @@
 				          <table>
 				          	<tr>
 				          		<td>
-							          del mes:
+							          de la fecha:
 				          		</td>
 				          		<td>
 							          <% def ini = new Date(); ini[Calendar.DATE] = 1; %>
-							          <g:datePicker name="startDate" value="${ini}" precision="month" years="${2015..2025}"/>
+							          <g:datePicker name="startDate" value="${ini}" precision="day" years="${2015..2025}"/>
 				          		</td>
 				          	</tr>
+                    <tr>
+                      <td>
+                        a la fecha
+                      </td>
+                      <td>
+                        <g:datePicker name="endDate" value="${new Date()}" precision="day" years="${2015..2025}"/>
+                      </td>
+                    </tr>
+				          </table>
+				          <table>
+                    <tr>
+                      <td>
+                        del número de solicitud&nbsp;&nbsp;
+                      	<g:field type="number" name="folio" min="0" value="0"/>
+                      </td>
+                      <td>
+                        del año&nbsp;&nbsp;<g:datePicker name="anioFolio" value="${new Date()}" precision="year" years="${2015..2025}"/>
+                      </td>
+				          </table>
+				          <table>
+                    <tr>
+                      <td>
+                        del número de Inventario&nbsp;&nbsp;
+                      	<g:field type="number" name="inventario" min="0" value="0"/>
+                      </td>
+				          </table>
+				          <table>
+                    <tr>
+                      <td>
+                        del estado&nbsp;&nbsp;
+                      	<g:select name="estado" from="${['Nuevo', 'primer nivel', 'segundo nivel', 'pendientes']}"
+          								noSelection="['':'']"/>
+                      </td>
 				          </table>
 				  </g:jasperReport>
 				</div>
