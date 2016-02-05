@@ -429,7 +429,6 @@ class ReportesController {
       if (folio) {
         query +=
           "   and numeroSolicitud = ?                       " +
-          // "   and fechaSolicitud > to_date('1/1/2016 00:30:56','%d/%m/%Y')"
           "   and TO_CHAR(fechaSolicitud,'%Y') = ? "
         parametros << folio
         parametros << (anioFolio[Calendar.YEAR].toString())
@@ -444,8 +443,15 @@ class ReportesController {
     requerimientos.each {
       it.detalles.each { det ->
         if (det.estado == 'A' as char) {
-          casos << new Servicio (caso: det, tipo: "Requerimiento",
-            orden: det.idSolicitud.fechaAutoriza.format("YYYY-MM-dd HH:mm"))
+          if (inventarioParam) {
+            if (det.idResguardoentregadetalle == inventarioParam) {
+              casos << new Servicio (caso: det, tipo: "Requerimiento",
+                orden: det.idSolicitud.fechaAutoriza.format("YYYY-MM-dd HH:mm"))
+            }
+          } else {
+            casos << new Servicio (caso: det, tipo: "Requerimiento",
+              orden: det.idSolicitud.fechaAutoriza.format("YYYY-MM-dd HH:mm"))
+          }
         }
       }
     }
