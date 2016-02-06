@@ -388,7 +388,7 @@ class ReportesController {
     log.debug("folio = ${folio}")
     def anioFolio = params.anioFolio
     log.debug("anioFolio = ${anioFolio.format("YYYY-MM-dd")}")
-    def inventarioParam = params.inventario.toInteger()
+    def inventarioParam = params.inventario.toLong()
     log.debug("inventarioParam = $inventarioParam")
     def estado = params.estado
     log.debug("estado = $estado")
@@ -458,9 +458,33 @@ class ReportesController {
 
     def queryInci =
       "  from Incidente                          " +
-      " where fechaIncidente between ? and ?     "
+      " where estado is not null                 "
+    parametros = []
+
+      if (!folio) {
+        queryInci +=
+          "   and fechaIncidente between ? and ?      "
+        parametros << startDate
+        parametros << endDate
+      }
+
+      if (folio) {
+        queryInci +=
+          "   and numeroIncidente = ?                  " +
+          "   and TO_CHAR(fechaIncidente,'%Y') = ?     "
+        parametros << folio
+        parametros << (anioFolio[Calendar.YEAR].toString())
+      }
+
+      if (inventarioParam) {
+        queryInci +=
+          "   and idResguardoentregadetalle = ?                  "
+        parametros << inventarioParam
+      }
+
+
     log.debug("queryInci = $queryInci")
-    def incidentes = Incidente.findAll(queryInci, [startDate, endDate])
+    def incidentes = Incidente.findAll(queryInci, parametros)
     log.debug("incidentes = $incidentes")
     incidentes.each {
       casos << new Servicio (caso: it, tipo: "Incidente",
