@@ -832,7 +832,10 @@ class ReportesController {
       def inicio = solicitud.fechaVb ?: solicitud.fechaAutoriza
       def fin = solicitud.fechaRevisa ?: new Date()
       def tiempoReal = firmadoService.diff(inicio, fin)
-      def tiempoRealString = firmadoService.diffString(inicio, fin)
+      def tiempoRealString = ""
+      if (solicitud.fechaRevisa) {
+        tiempoRealString = firmadoService.diffString(inicio, fin)
+      }
       log.debug("tiempoRealString = $tiempoRealString")
       def renglon = new rptNiveles (
         folio: solicitud,
@@ -844,10 +847,10 @@ class ReportesController {
         tercerNivel: it,
         descripcion: it?.descripcion,
         fechaInicio: inicio.format("YYYY-MM-dd HH:mm"),
-        fechaFinal: fin.format("YYYY-MM-dd HH:mm"),
+        fechaFinal: solicitud.fechaRevisa ? fin.format("YYYY-MM-dd HH:mm") : "",
         tiempoPrometido: tiempoAsignadoString,
         tiempoReal: tiempoRealString,
-        cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
+        cumple: tiempoAsignado >= tiempoReal ? solicitud.fechaRevisa ? "SI" : "" : "NO",
       )
       data.add(renglon)
 
@@ -859,7 +862,10 @@ class ReportesController {
         inicio = solicitud.fechaRevisa
         fin = it.fechaSolucion ?: new Date()
         tiempoReal = firmadoService.diff(inicio, fin)
-        tiempoRealString = firmadoService.diffString(inicio, fin)
+        tiempoRealString = ""
+        if (it.fechaSolucion) {
+          tiempoRealString = firmadoService.diffString(inicio, fin)
+        }
         log.debug("tiempoRealString = $tiempoRealString")
         def renglon2 = new rptNiveles (
           folio: solicitud,
@@ -871,10 +877,10 @@ class ReportesController {
           tercerNivel: "",
           descripcion: '',
           fechaInicio: inicio.format("YYYY-MM-dd HH:mm"),
-          fechaFinal: fin.format("YYYY-MM-dd HH:mm"),
+          fechaFinal: it.fechaSolucion ? fin.format("YYYY-MM-dd HH:mm") : "",
           tiempoPrometido: tiempoAsignadoString,
           tiempoReal: tiempoRealString,
-          cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
+          cumple: tiempoAsignado >= tiempoReal ? it.fechaSolucion ? "SI" : "" : "NO",
         )
         data.add(renglon2)
       }
@@ -922,7 +928,10 @@ class ReportesController {
         def solucion = it."fechaSolnivel$nivel" ?: new Date()
         log.debug("solucion = $solucion")
         def tiempoReal = firmadoService.diff(inicio, solucion)
-        def tiempoRealString = firmadoService.diffString(inicio, solucion)
+        def tiempoRealString = ""
+        if (it."fechaSolnivel$nivel") {
+          tiempoRealString = firmadoService.diffString(inicio, solucion)
+        }
         log.debug("tiempoRealString = $tiempoRealString")
         def renglon = new rptNiveles (
           folio: it,
@@ -934,10 +943,10 @@ class ReportesController {
           tercerNivel: it.idServ,
           descripcion: it?.descripcion,
           fechaInicio: inicio.format("YYYY-MM-dd HH:mm"),
-          fechaFinal: solucion.format("YYYY-MM-dd HH:mm"),
+          fechaFinal: (it."fechaSolnivel$nivel") ? solucion.format("YYYY-MM-dd HH:mm") : "",
           tiempoPrometido: tiempoAsignadoString,
           tiempoReal: tiempoRealString,
-          cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
+          cumple: tiempoAsignado >= tiempoReal ? it."fechaSolnivel$nivel" ? "SI" : "" : "NO",
         )
         data.add(renglon)
       }
