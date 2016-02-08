@@ -557,6 +557,21 @@ class ReportesController {
       switch (caso.getClass()) {
         case SolicitudDetalle:
           def solicitud = caso.idSolicitud
+          def gestionado = ""
+          if (solicitud.fechaRevisa) {
+            if (caso.idTecnico) {
+              gestionado = Usuario.get(caso.idTecnico)
+            } else {
+              gestionado = caso.idServ.servResp2
+            }
+          } else if (caso.idAprobador) {
+            gestionado = Usuario.get(caso.idAprobador)
+          } else if (caso.idServ) {
+            gestionado = caso.idServ.servResp1
+          } else {
+            gestionado = caso.idServcat.servResp
+          }
+          log.debug("caso = $caso, gestionado = $gestionado")
           renglon = new RptSolicitud (
             folio: solicitud,
             tipo: it.tipo,
@@ -569,7 +584,7 @@ class ReportesController {
             descripcion: caso?.descripcion ?: "",
             inventario: inventario ?: "",
             responsable: caso.idServcat.servResp,
-            gestionadoA: caso.idTecnico ? Usuario.get(caso.idTecnico) : caso.idServcat.servResp,
+            gestionadoA: gestionado,
             prioridad: message(code:"intensidad.valor.${caso.prioridad}"),
             fechaRecepcion: caso.idSolicitud.fechaAutoriza ? (caso.idSolicitud.fechaAutoriza).format("YYYY-MM-dd HH:mm") : "",
             fechaCierre: caso.fechaSolucion ? (caso.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
@@ -652,7 +667,7 @@ class ReportesController {
           break
       }
 
-      log.debug("renglon = ${renglon}, ${renglon.folio}, ${renglon.tipo}, ${renglon.nombre}, ${renglon.tercerNivel}")
+      // log.debug("renglon = ${renglon}, ${renglon.folio}, ${renglon.tipo}, ${renglon.nombre}, ${renglon.tercerNivel}")
       data.add(renglon)
     }
 
