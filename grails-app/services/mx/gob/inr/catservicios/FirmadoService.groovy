@@ -316,8 +316,13 @@ class FirmadoService {
         return semaforo.size()
       } else {
         fecha = caso.idSolicitud.fechaAutoriza
-        plazoMinutos = caso?.idServ?.tiempo1
-        unidades = caso?.idServ?.unidades1?.id
+        if (caso.idServ) {
+          plazoMinutos = caso?.idServ?.tiempo1
+          unidades = caso?.idServ?.unidades1?.id
+        } else {
+          plazoMinutos = 30 // TODO: estoy poniendo media hora
+          unidades = 1 // TODO: minutos, no deberia ser un numero mágico
+        }
       }
     } else if (estado == 'V') {
       fecha = caso.idSolicitud.fechaVb
