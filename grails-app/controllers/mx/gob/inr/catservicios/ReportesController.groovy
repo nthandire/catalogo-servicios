@@ -444,7 +444,7 @@ class ReportesController {
       it.detalles.each { det ->
         if (det.estado == 'A' as char) {
           if (inventarioParam) {
-            if (det.idResguardoentregadetalle == inventarioParam) {
+            if (inventarioEquipo(det) == inventarioParam) {
               casos << new Servicio (caso: det, tipo: "Requerimiento",
                 orden: det.idSolicitud.fechaAutoriza.format("YYYY-MM-dd HH:mm"))
             }
@@ -459,47 +459,78 @@ class ReportesController {
     def queryInci =
       "  from Incidente                          " +
       " where estado is not null                 "
+
     parametros = []
+    if (!folio) {
+      queryInci +=
+        "   and fechaIncidente between ? and ?      "
+      parametros << startDate
+      parametros << endDate
+    }
 
-      if (!folio) {
-        queryInci +=
-          "   and fechaIncidente between ? and ?      "
-        parametros << startDate
-        parametros << endDate
-      }
+    if (folio) {
+      queryInci +=
+        "   and numeroIncidente = ?                  " +
+        "   and TO_CHAR(fechaIncidente,'%Y') = ?     "
+      parametros << folio
+      parametros << (anioFolio[Calendar.YEAR].toString())
+    }
 
-      if (folio) {
-        queryInci +=
-          "   and numeroIncidente = ?                  " +
-          "   and TO_CHAR(fechaIncidente,'%Y') = ?     "
-        parametros << folio
-        parametros << (anioFolio[Calendar.YEAR].toString())
-      }
-
-      if (inventarioParam) {
-        queryInci +=
-          "   and idResguardoentregadetalle = ?                  "
-        parametros << inventarioParam
-      }
 
 
     log.debug("queryInci = $queryInci")
+    log.debug("parametros = $parametros")
     def incidentes = Incidente.findAll(queryInci, parametros)
     log.debug("incidentes = $incidentes")
     incidentes.each {
-      casos << new Servicio (caso: it, tipo: "Incidente",
-        orden: it.fechaIncidente.format("YYYY-MM-dd HH:mm"))
+      if (inventarioParam) {
+        if (inventarioEquipo(it) == inventarioParam)
+          casos << new Servicio (caso: it, tipo: "Incidente",
+            orden: it.fechaIncidente.format("YYYY-MM-dd HH:mm"))
+      } else {
+        casos << new Servicio (caso: it, tipo: "Incidente",
+          orden: it.fechaIncidente.format("YYYY-MM-dd HH:mm"))
+      }
     }
 
     def queryProblema =
-      "  from Problema                          " +
-      " where fechaProblema between ? and ?     "
+      "  from Problema                    " +
+      " where idFuente is not null        "
+
+    parametros = []
+    if (!folio) {
+      queryProblema +=
+        "   and fechaProblema between ? and ?      "
+      parametros << startDate
+      parametros << endDate
+    }
+
+    if (folio) {
+      queryProblema +=
+        "   and folio = ?                  " +
+        "   and TO_CHAR(fechaProblema,'%Y') = ?     "
+      parametros << folio
+      parametros << (anioFolio[Calendar.YEAR].toString())
+    }
+
+
     log.debug("queryProblema = $queryProblema")
-    def problemas = Problema.findAll(queryProblema, [startDate, endDate])
+    log.debug("parametros = $parametros")
+    def problemas = Problema.findAll(queryProblema, parametros)
     log.debug("problemas = $problemas")
     problemas.each {
-      casos << new Servicio (caso: it, tipo: "Problema",
-        orden: it.fechaProblema.format("YYYY-MM-dd HH:mm"))
+      if (inventarioParam) {
+        if (it.fuente == 'Incidente') { // TODO: Agregar logica para cuando no sea el problema originado por un incidente, sino por una bitacora
+          def incidente = Incidente.get(it.idFuente)
+          if (inventarioEquipo(incidente) == inventarioParam) {
+            casos << new Servicio (caso: it, tipo: "Problema",
+              orden: it.fechaProblema.format("YYYY-MM-dd HH:mm"))
+          }
+        }
+      } else {
+        casos << new Servicio (caso: it, tipo: "Problema",
+          orden: it.fechaProblema.format("YYYY-MM-dd HH:mm"))
+      }
     }
 
     log.debug("startDate = $startDate")
@@ -513,6 +544,7 @@ class ReportesController {
     }
 
     casos.sort{it.orden}
+    log.debug("casos = $casos")
 
     casos.each { it ->
       def caso = it.caso
@@ -535,7 +567,7 @@ class ReportesController {
             subcategoria: caso?.idServ?.servSub ?: "",
             tercerNivel: caso?.idServ ?: "",
             descripcion: caso?.descripcion ?: "",
-            inventario: inventario,
+            inventario: inventario ?: "",
             responsable: caso.idServcat.servResp,
             gestionadoA: caso.idTecnico ? Usuario.get(caso.idTecnico) : caso.idServcat.servResp,
             prioridad: message(code:"intensidad.valor.${caso.prioridad}"),
@@ -556,7 +588,7 @@ class ReportesController {
             subcategoria: caso?.idServ?.servSub ?: "",
             tercerNivel: caso?.idServ ?: "",
             descripcion: caso?.descripcion ?: "",
-            inventario: inventario,
+            inventario: inventario ?: "",
             responsable: caso.idServ.servSub.servCat.servResp,
             gestionadoA: caso."idNivel$nivel" ? Usuario.get(caso."idNivel$nivel") :
               caso.idServ."servResp$nivel",
@@ -583,7 +615,7 @@ class ReportesController {
                 subcategoria: fuente?.idServ?.servSub ?: "",
                 tercerNivel: fuente?.idServ ?: "",
                 descripcion: fuente?.descripcion ?: "",
-                inventario: inventario,
+                inventario: inventario ?: "",
                 responsable: fuente.idServ.servSub.servCat.servResp,
                 gestionadoA: fuente."idNivel$nivel" ? Usuario.get(fuente."idNivel$nivel") :
                   fuente.idServ."servResp$nivel",
@@ -607,7 +639,7 @@ class ReportesController {
                 subcategoria: fuente?.idServ?.servSub ?: "",
                 tercerNivel: fuente?.idServ ?: "",
                 descripcion: fuente?.descripcion ?: "",
-                inventario: inventario,
+                inventario: inventario ?: "",
                 responsable: fuente.idServcat.servResp,
                 gestionadoA: fuente.idTecnico ? Usuario.get(fuente.idTecnico) : fuente.idServcat.servResp,
                 prioridad: message(code:"intensidad.valor.${fuente.prioridad}"),
@@ -620,6 +652,7 @@ class ReportesController {
           break
       }
 
+      log.debug("renglon = ${renglon}, ${renglon.folio}, ${renglon.tipo}, ${renglon.nombre}, ${renglon.tercerNivel}")
       data.add(renglon)
     }
 
@@ -627,10 +660,10 @@ class ReportesController {
   }
 
   def inventarioEquipo(fuente) {
-    def inventario = ""
+    def inventario = 0
     if (fuente.idResguardoentregadetalle) {
       def equipo = ResguardoEntregaDetalle.get(fuente.idResguardoentregadetalle)
-      inventario = equipo.inventario.toString()
+      inventario = equipo.inventario
     }
     inventario
   }
@@ -1046,6 +1079,10 @@ class Servicio {
   Object caso
   String tipo
   String orden
+
+  String toString() {
+    caso.toString()
+  }
 }
 
 class rptNiveles {
