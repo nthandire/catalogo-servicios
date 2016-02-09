@@ -515,52 +515,70 @@ class FirmadoService {
     // Reportes
 
   def requerimientosConEncuesta(Date startDate, Date endDate) {
-    Solicitud.findAllByEstadoAndLastUpdatedBetween('T' as char, startDate, endDate)
+    Solicitud.findAllByEstadoAndFechaAutorizaBetween('T' as char, startDate, endDate)
   }
 
   def incidentesConEncuesta(Date startDate, Date endDate) {
-    Incidente.findAllByEstadoAndLastUpdatedBetween('T' as char, startDate, endDate)
+    Incidente.findAllByEstadoAndFechaIncidenteBetween('T' as char, startDate, endDate)
   }
 
   def recibidas(Date startDate, Date endDate) {
-    Solicitud.countByEstadoIsNotNullAndFechaAutorizaBetween(startDate, endDate)
+    def lista = Solicitud.findAllByEstadoIsNotNullAndEstadoNotEqualAndFechaAutorizaBetween('F' as char, startDate, endDate)
+    log.debug("recibidas = $lista")
+    Solicitud.countByEstadoIsNotNullAndEstadoNotEqualAndFechaAutorizaBetween('F' as char, startDate, endDate)
   }
 
   def resueltas(Date startDate, Date endDate) {
     def estados = ['T' as char, 'E' as char]
+    def lista = Solicitud.findAllByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
+    log.debug("resueltas = $lista")
     Solicitud.countByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
   }
 
   def pendientes(Date startDate, Date endDate) {
     def estados = ['A' as char, 'V' as char, 'R' as char]
+    def lista = Solicitud.findAllByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
+    log.debug("pendientes = $lista")
     Solicitud.countByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
   }
 
   def canceladas(Date startDate, Date endDate) {
     def estados = ['C' as char]
+    def lista = Solicitud.findAllByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
+    log.debug("canceladas = $lista")
     Solicitud.countByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
   }
 
   Integer revisarEncuestas(Date startDate, Date endDate) {
-    Solicitud.countByEstadoAndLastUpdatedBetween('E' as char, startDate, endDate)
+    Solicitud.countByEstadoAndFechaAutorizaBetween('E' as char, startDate, endDate)
   }
 
   Integer satisfechos(Date startDate, Date endDate) {
+    def estados = ['T' as char, 'E' as char]
     def requerimientos =
-      Solicitud.findAllByEstadoAndLastUpdatedBetween('T' as char, startDate, endDate)
+      Solicitud.findAllByEstadoInListAndFechaAutorizaBetween(estados, startDate, endDate)
     def cuantos = 0
+    def hoy = new Date()
     requerimientos.each {
-      cuantos += it.p01 == 1 && it.p02 == 1 && it.p03 == 1 && it.p04 == 1 ? 1 : 0
+      if (it.estado == 'E' as char) {
+        if (hoy - it.lastUpdated > 7) {
+          cuantos++
+        }
+      } else {
+        cuantos += it.p01 == 1 && it.p02 == 1 && it.p03 == 1 && it.p04 == 1 ? 1 : 0
+      }
+      log.debug("satisfechos $it $cuantos")
     }
     cuantos
   }
 
   Integer insatisfechos(Date startDate, Date endDate) {
-    def requerimientos = Solicitud.findAllByEstadoAndLastUpdatedBetween('T' as char,
+    def requerimientos = Solicitud.findAllByEstadoAndFechaAutorizaBetween('T' as char,
                                                             startDate, endDate)
     def cuantos = 0
     requerimientos.each {
       cuantos += it.p01 == 2 || it.p02 == 2 || it.p03 == 2 || it.p04 == 2 ? 1 : 0
+      log.debug("insatisfechos $it $cuantos")
     }
     cuantos
   }
@@ -571,33 +589,43 @@ class FirmadoService {
 
   def inciResueltas(Date startDate, Date endDate) {
     def estados = ['T' as char, 'E' as char]
-    Incidente.countByEstadoInListAndLastUpdatedBetween(estados,startDate, endDate)
+    Incidente.countByEstadoInListAndFechaIncidenteBetween(estados,startDate, endDate)
   }
 
   def inciPendientes(Date startDate, Date endDate) {
-    Incidente.countByEstadoAndLastUpdatedBetween('A' as char,startDate, endDate)
+    Incidente.countByEstadoAndFechaIncidenteBetween('A' as char,startDate, endDate)
   }
 
   def inciCanceladas(Date startDate, Date endDate) {
-    Incidente.countByEstadoAndLastUpdatedBetween('C' as char,startDate, endDate)
+    Incidente.countByEstadoAndFechaIncidenteBetween('C' as char,startDate, endDate)
   }
 
   Integer inciSatisfechos(Date startDate, Date endDate) {
+    def estados = ['T' as char, 'E' as char]
     def incidentes =
-      Incidente.findAllByEstadoAndLastUpdatedBetween('T' as char, startDate, endDate)
+      Incidente.findAllByEstadoInListAndFechaIncidenteBetween(estados, startDate, endDate)
     def cuantos = 0
+    def hoy = new Date()
     incidentes.each {
-      cuantos += it.p01 == 1 && it.p02 == 1 && it.p03 == 1 && it.p04 == 1 ? 1 : 0
+      if (it.estado == 'E' as char) {
+        if (hoy - it.lastUpdated > 7) {
+          cuantos++
+        }
+      } else {
+        cuantos += it.p01 == 1 && it.p02 == 1 && it.p03 == 1 && it.p04 == 1 ? 1 : 0
+      }
+      log.debug("satisfechos $it $cuantos")
     }
     cuantos
   }
 
   Integer inciInsatisfechos(Date startDate, Date endDate) {
-    def incidentes = Incidente.findAllByEstadoAndLastUpdatedBetween('T' as char,
+    def incidentes = Incidente.findAllByEstadoAndFechaIncidenteBetween('T' as char,
                                                             startDate, endDate)
     def cuantos = 0
     incidentes.each {
       cuantos += it.p01 == 2 || it.p02 == 2 || it.p03 == 2 || it.p04 == 2 ? 1 : 0
+      log.debug("insatisfechos $it $cuantos")
     }
     cuantos
   }
@@ -681,17 +709,21 @@ class FirmadoService {
   Integer enTiempo(Date startDate, Date endDate) {
     def estados = ['T' as char, 'E' as char]
     def requerimientos = Solicitud.findAllByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
+    log.debug("requerimientos = $requerimientos")
     def casos = 0
     requerimientos.each {
+      log.debug("caso = $it")
       def buscando = true
       def incremento = 1
       def inicio = it.fechaVb ?: it.fechaAutoriza
       it.detalles.each { det ->
+        log.debug("detalle = ${det.id} $det")
         if (buscando) {
           def tiempoPermitido = tiempoAsignado(det.idServ)
           def fin = det.fechaSolucion
           def tiempoUsado = diff(inicio, fin)
           if (tiempoUsado > tiempoPermitido) {
+            log.debug("^ este fallo")
             incremento = 0
             buscando = false
           }
@@ -704,10 +736,10 @@ class FirmadoService {
 
   Integer enTiempoInci(Date startDate, Date endDate) {
     def estados = ['T' as char, 'E' as char]
-    def incidentes = Incidente.findAllByEstadoInListAndLastUpdatedBetween(estados,startDate, endDate)
+    def incidentes = Incidente.findAllByEstadoInListAndFechaIncidenteBetween(estados,startDate, endDate)
     def casos = 0
     incidentes.each {
-      log.debug("incidente = $it")
+      log.debug("incidente = $it, $it.estado")
       def inicio = it.fechaIncidente
       def nivel = it.nivel
 

@@ -804,15 +804,14 @@ class ReportesController {
       "  from Solicitud                          " +
       " where estado is not null                 " +
       "   and estado <> 'F'                      " +
-      "   and lastUpdated between ? and ?        "
+      "   and fechaAutoriza between ? and ?        "
     log.debug("query = $query")
     def requerimientos = Solicitud.findAll(query, [startDate, endDate])
     log.debug("requerimientos = $requerimientos")
     def detalles = []
     requerimientos.each {
       it.detalles.each { det ->
-        if (det.estado == 'A' as char && det.fechaSolucion >= startDate &&
-            det.fechaSolucion <= endDate) {
+        if (det.estado == 'A' as char) {
           detalles << det
         }
       }
@@ -984,8 +983,7 @@ class ReportesController {
     def detalles = []
     requerimientos.each {
       it.detalles.each { det ->
-        if (det.estado == 'A' as char && det.fechaSolucion >= startDate &&
-            det.fechaSolucion <= endDate) {
+        if (det.estado == 'A' as char) {
           detalles << det
         }
       }
@@ -1002,12 +1000,18 @@ class ReportesController {
 
     detalles.each {
       def solicitud = it.idSolicitud
-      def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 2)
+      def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 1) +
+        firmadoService.tiempoAsignadoNivel(it.idServ, 2)
       log.debug("tiempoAsignado = $tiempoAsignado")
       def tiempoAsignadoString = firmadoService.minutesToString(tiempoAsignado)
       log.debug("tiempoAsignado = $tiempoAsignado")
-      def tiempoReal = firmadoService.diff(solicitud.fechaRevisa, it.fechaSolucion)
-      def tiempoRealString = firmadoService.diffString(solicitud.fechaRevisa, it.fechaSolucion)
+      def inicio = solicitud.fechaVb ?: solicitud.fechaAutoriza
+      def fin = it.fechaSolucion ?: new Date()
+      def tiempoReal = firmadoService.diff(inicio, fin)
+      def tiempoRealString = ""
+      if (it.fechaSolucion) {
+        tiempoRealString = firmadoService.diffString(solicitud.fechaRevisa, it.fechaSolucion)
+      }
       log.debug("tiempoRealString = $tiempoRealString")
       def renglon = new rptNiveles (
         folio: solicitud,
@@ -1019,10 +1023,10 @@ class ReportesController {
         tercerNivel: it.idServ,
         descripcion: it?.descripcion,
         fechaInicio: (solicitud.fechaRevisa).format("YYYY-MM-dd HH:mm"),
-        fechaFinal: (it.fechaSolucion).format("YYYY-MM-dd HH:mm"),
+        fechaFinal: it.fechaSolucion ? (it.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
         tiempoPrometido: tiempoAsignadoString,
         tiempoReal: tiempoRealString,
-        cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
+        cumple: tiempoAsignado >= tiempoReal ? it.fechaSolucion ? "SI" : "" : "NO",
       )
       data.add(renglon)
     }
