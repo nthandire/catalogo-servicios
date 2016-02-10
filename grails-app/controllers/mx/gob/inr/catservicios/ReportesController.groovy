@@ -468,11 +468,11 @@ class ReportesController {
           if (inventarioParam) {
             if (inventarioEquipo(det) == inventarioParam) {
               casos << new Servicio (caso: det, tipo: "Requerimiento",
-                orden: det.idSolicitud.fechaAutoriza.format("YYYY-MM-dd HH:mm"))
+                orden: det.idSolicitud.numeroSolicitud)
             }
           } else {
             casos << new Servicio (caso: det, tipo: "Requerimiento",
-              orden: det.idSolicitud.fechaAutoriza.format("YYYY-MM-dd HH:mm"))
+              orden: det.idSolicitud.numeroSolicitud)
           }
         }
       }
@@ -508,10 +508,10 @@ class ReportesController {
       if (inventarioParam) {
         if (inventarioEquipo(it) == inventarioParam)
           casos << new Servicio (caso: it, tipo: "Incidente",
-            orden: it.fechaIncidente.format("YYYY-MM-dd HH:mm"))
+            orden: it.numeroIncidente)
       } else {
         casos << new Servicio (caso: it, tipo: "Incidente",
-          orden: it.fechaIncidente.format("YYYY-MM-dd HH:mm"))
+          orden: it.numeroIncidente)
       }
     }
 
@@ -546,12 +546,12 @@ class ReportesController {
           def incidente = Incidente.get(it.idFuente)
           if (inventarioEquipo(incidente) == inventarioParam) {
             casos << new Servicio (caso: it, tipo: "Problema",
-              orden: it.fechaProblema.format("YYYY-MM-dd HH:mm"))
+              orden: it.folio)
           }
         }
       } else {
         casos << new Servicio (caso: it, tipo: "Problema",
-          orden: it.fechaProblema.format("YYYY-MM-dd HH:mm"))
+          orden: it.folio)
       }
     }
 

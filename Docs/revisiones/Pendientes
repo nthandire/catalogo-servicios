@@ -31,12 +31,7 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 > Listado para aprobadores de requerimientos en proceso
 > Listado para aprobadores de incidentes en proceso
 
-- Reporte, Resultados Y Seguimiento: En Ubuntu saca signos raros en lugar de acentos e interrogaciones abiertas
-
-- Reporte,     Tiempos: Agregar Incidentes
-
-- Solicitudes, algunos incidentes aparecen como fila vacia
-
+- en algun reporte se considera que al pasar 5 dìas (7, una semana) la encuesta ya ha sido realizada y satisfactoria, modificar la BD para mostrar este cambio
 
 
 
