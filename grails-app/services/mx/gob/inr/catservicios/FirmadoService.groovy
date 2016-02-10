@@ -109,7 +109,7 @@ class FirmadoService {
         if (caso.idVb) {
           descripcion = "solicita VoBo"
         } else {
-          descripcion = "aceptado"
+          descripcion = "autorizado"
         }
         break
       case 'V' as char:
