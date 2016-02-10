@@ -55,6 +55,7 @@ class ReportesController {
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
+    def formatoPorciento = new DecimalFormat("#,##0.00", dfs)
 
     params["preg1Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 1)
     params["preg1No"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 2)
@@ -67,7 +68,8 @@ class ReportesController {
 
     def recibidas = firmadoService.recibidas(startDate, endDate)
     params["recibidas"] = formato.format(recibidas)
-    params["resueltas"] = formato.format(firmadoService.resueltas(startDate, endDate))
+    def resueltas = firmadoService.resueltas(startDate, endDate)
+    params["resueltas"] = formato.format(resueltas)
     params["pendientes"] = formato.format(firmadoService.pendientes(startDate, endDate))
     params["canceladas"] = formato.format(firmadoService.canceladas(startDate, endDate))
     def enTiempo = firmadoService.enTiempo(startDate, endDate)
@@ -76,8 +78,8 @@ class ReportesController {
     params["satisfechos"] = formato.format(satisfechos)
     params["insatisfechos"] = formato.format(firmadoService.insatisfechos(startDate, endDate))
 
-    params["calidad"] = formato.format(satisfechos / recibidas * 100)
-    params["eficiencia"] = formato.format(enTiempo / recibidas * 100)
+    params["calidad"] = formatoPorciento.format(satisfechos / resueltas * 100)
+    params["eficiencia"] = formatoPorciento.format(enTiempo / recibidas * 100)
 
 
     log.debug("startDate = $startDate")
@@ -135,6 +137,7 @@ class ReportesController {
     def locale = new Locale('es', 'MX')
     def dfs = new DecimalFormatSymbols(locale)
     def formato = new DecimalFormat("#,##0", dfs)
+    def formatoPorciento = new DecimalFormat("#,##0.00", dfs)
 
     params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
@@ -149,7 +152,8 @@ class ReportesController {
 
     def recibidas = firmadoService.inciRecibidas(startDate, endDate)
     params["recibidas"] = formato.format(recibidas)
-    params["resueltas"] = formato.format(firmadoService.inciResueltas(startDate, endDate))
+    def resueltas = firmadoService.inciResueltas(startDate, endDate)
+    params["resueltas"] = formato.format(resueltas)
     params["pendientes"] = formato.format(firmadoService.inciPendientes(startDate, endDate))
     params["canceladas"] = formato.format(firmadoService.inciCanceladas(startDate, endDate))
     def enTiempo = firmadoService.enTiempoInci(startDate, endDate)
@@ -158,8 +162,8 @@ class ReportesController {
     params["satisfechos"] = formato.format(satisfechos)
     params["insatisfechos"] = formato.format(firmadoService.inciInsatisfechos(startDate, endDate))
 
-    params["calidad"] = formato.format(satisfechos / recibidas * 100)
-    params["eficiencia"] = formato.format(enTiempo / recibidas * 100)
+    params["calidad"] = formatoPorciento.format(satisfechos / resueltas * 100)
+    params["eficiencia"] = formatoPorciento.format(enTiempo / recibidas * 100)
 
 
     log.debug("startDate = $startDate")
