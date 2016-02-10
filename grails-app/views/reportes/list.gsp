@@ -1,5 +1,8 @@
 
-<%@ page import="mx.gob.inr.catservicios.Cat_bitacora" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
+%{--
+<g:javascript src="servicios.js" />
+--}%
 <!DOCTYPE html>
 <html>
 	<head>
@@ -133,6 +136,24 @@
                         del año&nbsp;&nbsp;<g:datePicker name="anioFolio" value="${new Date()}" precision="year" years="${2015..2025}"/>
                       </td>
 				          </table>
+				          %{--
+				          <table>
+                    <tr>
+                      <td>
+                        del empleado&nbsp;&nbsp;
+								        <g:select id="idReporta" name="idReporta"
+								          from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
+								          value="${incidenteInstance?.idReporta}" class="many-to-one"
+								          noSelection="${['':'']}" optionKey="id"
+								          optionValue="nombreMostrar"/>
+                      </td>
+                      <td>
+                      Extención&nbsp;&nbsp;
+        							<g:field type="text" id="extension" name="extension"
+        								disabled="true" value=""/>
+                      </td>
+				          </table>
+				          --}%
 				          <table>
                     <tr>
                       <td>
