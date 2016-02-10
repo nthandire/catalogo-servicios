@@ -306,8 +306,7 @@
 			<staticText>
 				<reportElement x="11" y="171" width="80" height="30" uuid="1fae9246-ff1a-49b4-9b22-8491b2916db3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
-				<text><![CDATA[Solicitudes Recibidas
-]]></text>
+				<text><![CDATA[Total]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="651" y="171" width="80" height="30" uuid="06f15c5d-09a0-4f15-ab8d-4d33bc99b559"/>

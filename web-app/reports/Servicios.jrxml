@@ -298,11 +298,11 @@
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="233" y="4" width="287" height="20" uuid="fba69acf-169b-4b13-8cc5-bf52c75f34e2"/>
+				<reportElement x="294" y="4" width="165" height="20" uuid="fba69acf-169b-4b13-8cc5-bf52c75f34e2"/>
 				<textElement verticalAlignment="Middle" markup="none">
 					<font size="7"/>
 				</textElement>
-				<text><![CDATA[* I = Incidente, R = Solicitud, requerimiento, P = Problema]]></text>
+				<text><![CDATA[* I = Incidente, R = Requerimiento, P = Problema]]></text>
 			</staticText>
 		</band>
 	</pageFooter>
