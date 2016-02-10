@@ -472,11 +472,11 @@ class ReportesController {
           if (inventarioParam) {
             if (inventarioEquipo(det) == inventarioParam) {
               casos << new Servicio (caso: det, tipo: "Requerimiento",
-                orden: det.idSolicitud.numeroSolicitud)
+                orden: it.fechaSolicitud[Calendar.YEAR] * 10000 + it.numeroSolicitud)
             }
           } else {
             casos << new Servicio (caso: det, tipo: "Requerimiento",
-              orden: det.idSolicitud.numeroSolicitud)
+              orden: it.fechaSolicitud[Calendar.YEAR] * 10000 + it.numeroSolicitud)
           }
         }
       }
@@ -512,10 +512,10 @@ class ReportesController {
       if (inventarioParam) {
         if (inventarioEquipo(it) == inventarioParam)
           casos << new Servicio (caso: it, tipo: "Incidente",
-            orden: it.numeroIncidente)
+            orden: it.fechaIncidente[Calendar.YEAR] * 10000 + it.numeroIncidente)
       } else {
         casos << new Servicio (caso: it, tipo: "Incidente",
-          orden: it.numeroIncidente)
+          orden: it.fechaIncidente[Calendar.YEAR] * 10000 + it.numeroIncidente)
       }
     }
 
@@ -550,12 +550,12 @@ class ReportesController {
           def incidente = Incidente.get(it.idFuente)
           if (inventarioEquipo(incidente) == inventarioParam) {
             casos << new Servicio (caso: it, tipo: "Problema",
-              orden: it.folio)
+              orden: it.fechaIncidente[Calendar.YEAR] * 10000 + it.numeroIncidente)
           }
         }
       } else {
         casos << new Servicio (caso: it, tipo: "Problema",
-          orden: it.folio)
+          orden: it.fechaIncidente[Calendar.YEAR] * 10000 + it.numeroIncidente)
       }
     }
 
