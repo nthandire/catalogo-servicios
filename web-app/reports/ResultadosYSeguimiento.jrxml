@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="10"/>
+	<property name="ireport.y" value="298"/>
 	<parameter name="image_dir" class="java.lang.String"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
@@ -28,6 +28,8 @@
 	<parameter name="satisfechos" class="java.lang.String"/>
 	<parameter name="insatisfechos" class="java.lang.String"/>
 	<parameter name="canceladas" class="java.lang.String"/>
+	<parameter name="calidad" class="java.lang.String"/>
+	<parameter name="eficiencia" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -93,7 +95,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="467" splitType="Stretch">
+		<band height="550" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="16" y="229" width="550" height="41" backcolor="#8B8B8B" uuid="460726c4-bfae-4dcc-b393-3eb68e0dc19a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
@@ -271,6 +273,26 @@
 				<reportElement x="136" y="70" width="40" height="20" uuid="88584373-bf35-4206-b8d0-04a0b88117ab"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{canceladas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="460" width="68" height="20" uuid="e1ce4fbf-34cd-4944-9660-e5b16b9572b1"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[% Calidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="490" width="68" height="20" uuid="a53e8d5e-af97-4029-bd20-1cc984104349"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[% Eficiencia]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="144" y="460" width="68" height="20" uuid="2e9b9422-838b-4a89-a644-0be2c33487b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{calidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="490" width="68" height="20" uuid="4a858dca-7fe9-43c1-b6bc-baab317082fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{eficiencia}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>

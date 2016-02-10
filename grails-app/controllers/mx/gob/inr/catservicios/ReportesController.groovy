@@ -65,13 +65,19 @@ class ReportesController {
     params["preg4Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 1)
     params["preg4No"] = contar(requerimientosConEncuesta(startDate, endDate),"p04", 2)
 
-    params["recibidas"] = formato.format(firmadoService.recibidas(startDate, endDate))
+    def recibidas = firmadoService.recibidas(startDate, endDate)
+    params["recibidas"] = formato.format(recibidas)
     params["resueltas"] = formato.format(firmadoService.resueltas(startDate, endDate))
     params["pendientes"] = formato.format(firmadoService.pendientes(startDate, endDate))
     params["canceladas"] = formato.format(firmadoService.canceladas(startDate, endDate))
-    params["enTiempo"] = formato.format(firmadoService.enTiempo(startDate, endDate))
-    params["satisfechos"] = formato.format(firmadoService.satisfechos(startDate, endDate))
+    def enTiempo = firmadoService.enTiempo(startDate, endDate)
+    params["enTiempo"] = formato.format(enTiempo)
+    def satisfechos = firmadoService.satisfechos(startDate, endDate)
+    params["satisfechos"] = formato.format(satisfechos)
     params["insatisfechos"] = formato.format(firmadoService.insatisfechos(startDate, endDate))
+
+    params["calidad"] = formato.format(satisfechos / recibidas * 100)
+    params["eficiencia"] = formato.format(enTiempo / recibidas * 100)
 
 
     log.debug("startDate = $startDate")
@@ -141,13 +147,19 @@ class ReportesController {
     params["preg4Si"] = contar(incidentesConEncuesta(startDate, endDate),"p04", 1)
     params["preg4No"] = contar(incidentesConEncuesta(startDate, endDate),"p04", 2)
 
-    params["recibidas"] = formato.format(firmadoService.inciRecibidas(startDate, endDate))
+    def recibidas = firmadoService.inciRecibidas(startDate, endDate)
+    params["recibidas"] = formato.format(recibidas)
     params["resueltas"] = formato.format(firmadoService.inciResueltas(startDate, endDate))
     params["pendientes"] = formato.format(firmadoService.inciPendientes(startDate, endDate))
     params["canceladas"] = formato.format(firmadoService.inciCanceladas(startDate, endDate))
-    params["enTiempo"] = formato.format(firmadoService.enTiempoInci(startDate, endDate))
-    params["satisfechos"] = formato.format(firmadoService.inciSatisfechos(startDate, endDate))
+    def enTiempo = firmadoService.enTiempoInci(startDate, endDate)
+    params["enTiempo"] = formato.format(enTiempo)
+    def satisfechos = firmadoService.inciSatisfechos(startDate, endDate)
+    params["satisfechos"] = formato.format(satisfechos)
     params["insatisfechos"] = formato.format(firmadoService.inciInsatisfechos(startDate, endDate))
+
+    params["calidad"] = formato.format(satisfechos / recibidas * 100)
+    params["eficiencia"] = formato.format(enTiempo / recibidas * 100)
 
 
     log.debug("startDate = $startDate")
@@ -297,24 +309,34 @@ class ReportesController {
     params["terceroOLA"] = !inciResueltoTercer ? "0 %" : formatoFijo.format(inciResueltoTercerEnTiempo / inciResueltoTercer * 100) + " %"
 
 
-
     query =
-      "  from Solicitud                             " +
-      " where estado in ('T', 'E')                  " +
-      "   and fechaAutoriza between ? and ?         "
+      "  from SolicitudDetalle                    " +
+      " where estado = 'A'                        " +
+      "   and fechaSolucion between ? and ?       "
     log.debug("query = $query")
-    def requerimientos = Solicitud.findAll(query, [startDate, endDate])
-    log.debug("requerimientos = $requerimientos")
+    def detalles = SolicitudDetalle.findAll(query, [startDate, endDate])
+    log.debug("detalles = $detalles")
 
-    // contar cuantas se resolvieron en segundo nivel
-    Integer contRequerimientos = 0
-    requerimientos.each {
-      it.detalles.each { det ->
-        if (det.estado == 'A' as char) {
-          contRequerimientos += 1
-        }
+    def requerimientosSet = [] as Set
+
+    detalles.each { det ->
+      if (det.idSolicitud.estado in ['T' as char, 'E' as char]) {
+        requerimientosSet << det.idSolicitud
       }
     }
+    def requerimientos = []
+    requerimientosSet.each {
+      def enRango = true
+      it.detalles.each { det ->
+        if (det.fechaSolucion > endDate) {
+          enRango = false
+        }
+      }
+      if (enRango) {
+        requerimientos << it
+      }
+    }
+    Integer contRequerimientos = requerimientos.size()
     params["reqResueltoSegundo"] = formato.format(contRequerimientos)
 
 

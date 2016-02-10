@@ -680,16 +680,18 @@ class FirmadoService {
     Integer cuantos = 0
     lista.each {
       def fechaInicio = it.fechaVb?:it.fechaAutoriza
+      def incrementar = true
       it.detalles.each { det ->
-        if (det.estado == 'A' as char) {
+        if (incrementar && det.estado == 'A' as char) {
           Integer tiempoAsignado = 0
           for (i in 1..nivel) {
             tiempoAsignado += tiempoAsignadoNivel(det.idServ, i)
           }
           def tiempoGastado = diff(fechaInicio, det.fechaSolucion)
-          cuantos += tiempoGastado <= tiempoAsignado ? 1 : 0
+          incrementar = tiempoGastado <= tiempoAsignado
         }
       }
+      cuantos += incrementar ? 1 : 0
     }
     cuantos
   }
