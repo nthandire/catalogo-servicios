@@ -472,11 +472,12 @@ class ReportesController {
           if (inventarioParam) {
             if (inventarioEquipo(det) == inventarioParam) {
               casos << new Servicio (caso: det, tipo: "Requerimiento",
-                orden: it.fechaSolicitud[Calendar.YEAR] * 10000 + it.numeroSolicitud)
+                orden: it.fechaSolicitud[Calendar.YEAR] * 10000 + (it.numeroSolicitud ?: 0))
             }
           } else {
+            log.debug("it = $it, it.fechaSolicitud = ${it.fechaSolicitud}, it.numeroSolicitud = ${it.numeroSolicitud}")
             casos << new Servicio (caso: det, tipo: "Requerimiento",
-              orden: it.fechaSolicitud[Calendar.YEAR] * 10000 + it.numeroSolicitud)
+              orden: it.fechaSolicitud[Calendar.YEAR] * 10000 + (it.numeroSolicitud ?: 0))
           }
         }
       }
@@ -550,12 +551,12 @@ class ReportesController {
           def incidente = Incidente.get(it.idFuente)
           if (inventarioEquipo(incidente) == inventarioParam) {
             casos << new Servicio (caso: it, tipo: "Problema",
-              orden: it.fechaIncidente[Calendar.YEAR] * 10000 + it.numeroIncidente)
+              orden: it.fechaProblema[Calendar.YEAR] * 10000 + it.folio)
           }
         }
       } else {
         casos << new Servicio (caso: it, tipo: "Problema",
-          orden: it.fechaIncidente[Calendar.YEAR] * 10000 + it.numeroIncidente)
+          orden: it.fechaProblema[Calendar.YEAR] * 10000 + it.folio)
       }
     }
 
@@ -850,7 +851,7 @@ class ReportesController {
       def solicitud = it.idSolicitud
 
       // reportar el tiempo del gestor
-      def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 1)
+      def tiempoAsignado = it.idServ ? firmadoService.tiempoAsignadoNivel(it.idServ, 1) : 30
       log.debug("tiempoAsignado = $tiempoAsignado")
       def tiempoAsignadoString = firmadoService.minutesToString(tiempoAsignado)
       log.debug("tiempoAsignado = $tiempoAsignado")
@@ -868,8 +869,8 @@ class ReportesController {
         area: firmadoService.areaNombre(solicitud.idSolicitante),
         nombre: Usuario.get(solicitud.idSolicitante),
         categoria: it.idServcat,
-        subcategoria: it.idServ.servSub,
-        tercerNivel: it,
+        subcategoria: it.idServ?.servSub ?: "",
+        tercerNivel: it.idServ ?: "",
         descripcion: it?.descripcion,
         fechaInicio: inicio.format("YYYY-MM-dd HH:mm"),
         fechaFinal: solicitud.fechaRevisa ? fin.format("YYYY-MM-dd HH:mm") : "",
@@ -1026,8 +1027,8 @@ class ReportesController {
 
     detalles.each {
       def solicitud = it.idSolicitud
-      def tiempoAsignado = firmadoService.tiempoAsignadoNivel(it.idServ, 1) +
-        firmadoService.tiempoAsignadoNivel(it.idServ, 2)
+      def tiempoAsignado = it.idServ ? firmadoService.tiempoAsignadoNivel(it.idServ, 1) +
+        firmadoService.tiempoAsignadoNivel(it.idServ, 2) : 30 + 60
       log.debug("tiempoAsignado = $tiempoAsignado")
       def tiempoAsignadoString = firmadoService.minutesToString(tiempoAsignado)
       log.debug("tiempoAsignado = $tiempoAsignado")
@@ -1045,10 +1046,10 @@ class ReportesController {
         area: firmadoService.areaNombre(solicitud.idSolicitante),
         nombre: Usuario.get(solicitud.idSolicitante),
         categoria: it.idServcat,
-        subcategoria: it.idServ.servSub,
-        tercerNivel: it.idServ,
+        subcategoria: it.idServ?.servSub ?: "",
+        tercerNivel: it.idServ ?: "",
         descripcion: it?.descripcion,
-        fechaInicio: (solicitud.fechaRevisa).format("YYYY-MM-dd HH:mm"),
+        fechaInicio: solicitud.fechaRevisa ? (solicitud.fechaRevisa).format("YYYY-MM-dd HH:mm") : "",
         fechaFinal: it.fechaSolucion ? (it.fechaSolucion).format("YYYY-MM-dd HH:mm") : "",
         tiempoPrometido: tiempoAsignadoString,
         tiempoReal: tiempoRealString,
@@ -1116,10 +1117,10 @@ class ReportesController {
         tercerNivel: it.idServ,
         descripcion: it?.descripcion,
         fechaInicio: (it.fechaIncidente).format("YYYY-MM-dd HH:mm"),
-        fechaFinal: fin.format("YYYY-MM-dd HH:mm"),
+        fechaFinal: it."fechaSolnivel$nivel" ? fin.format("YYYY-MM-dd HH:mm") : "",
         tiempoPrometido: tiempoAsignadoString,
-        tiempoReal: tiempoRealString,
-        cumple: tiempoAsignado >= tiempoReal ? "SI" : "NO",
+        tiempoReal: it."fechaSolnivel$nivel" ? tiempoRealString : "",
+        cumple: tiempoAsignado >= tiempoReal ? it."fechaSolnivel$nivel" ? "SI" : "" : "NO",
       )
       data.add(renglon)
     }

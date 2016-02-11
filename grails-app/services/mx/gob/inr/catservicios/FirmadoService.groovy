@@ -655,6 +655,7 @@ class FirmadoService {
   }
 
   Integer tiempoAsignadoNivel(Cat_serv serv, Integer nivel) {
+    log.debug("serv = $serv, nivel = $nivel")
     aMinutos(serv."unidades$nivel".id, serv."tiempo$nivel")
   }
 
@@ -720,7 +721,7 @@ class FirmadoService {
       def inicio = it.fechaVb ?: it.fechaAutoriza
       it.detalles.each { det ->
         log.debug("detalle = ${det.id} $det")
-        if (buscando) {
+        if (buscando && det.estado == 'A' as char) {
           def tiempoPermitido = tiempoAsignado(det.idServ)
           def fin = det.fechaSolucion
           def tiempoUsado = diff(inicio, fin)
