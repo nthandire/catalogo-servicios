@@ -392,6 +392,8 @@ class ReportesController {
     log.debug("folio = ${folio}")
     def anioFolio = params.anioFolio
     log.debug("anioFolio = ${anioFolio.format("YYYY-MM-dd")}")
+    def idReporta = params.idReporta.toInteger()
+    log.debug("idReporta = ${idReporta}")
     def inventarioParam = params.inventario.toLong()
     log.debug("inventarioParam = $inventarioParam")
     def estado = params.estado
@@ -404,6 +406,9 @@ class ReportesController {
     capturados += inventarioParam ? 1 : 0
     log.debug("inventarioParam = $inventarioParam")
     log.debug("capturados, inventarioParam = ${inventarioParam ? 1 : 0}")
+    capturados += idReporta ? 1 : 0
+    log.debug("idReporta = $idReporta")
+    log.debug("capturados, idReporta = ${idReporta ? 1 : 0}")
     capturados += estado ? 1 : 0
     log.debug("capturados, estado = ${estado ? 1 : 0}")
 
@@ -422,21 +427,27 @@ class ReportesController {
       " where estado is not null                 " +
       "   and estado <> 'F'                      "
 
-      def parametros = []
-      if (!folio) {
-        query +=
-          "   and fechaAutoriza between ? and ?      "
-        parametros << startDate
-        parametros << endDate
-      }
+    def parametros = []
+    if (!folio) {
+      query +=
+        "   and fechaAutoriza between ? and ?      "
+      parametros << startDate
+      parametros << endDate
+    }
 
-      if (folio) {
-        query +=
-          "   and numeroSolicitud = ?                       " +
-          "   and TO_CHAR(fechaSolicitud,'%Y') = ? "
-        parametros << folio
-        parametros << (anioFolio[Calendar.YEAR].toString())
-      }
+    if (folio) {
+      query +=
+        "   and numeroSolicitud = ?                       " +
+        "   and TO_CHAR(fechaSolicitud,'%Y') = ? "
+      parametros << folio
+      parametros << (anioFolio[Calendar.YEAR].toString())
+    }
+
+    if (idReporta) {
+      query +=
+        "   and idSolicitante = ?                       "
+      parametros << idReporta
+    }
 
     log.debug("query = $query")
     log.debug("parametros = $parametros")
@@ -481,6 +492,11 @@ class ReportesController {
       parametros << (anioFolio[Calendar.YEAR].toString())
     }
 
+    if (idReporta) {
+      queryInci +=
+        "   and idReporta = ?                       "
+      parametros << idReporta
+    }
 
 
     log.debug("queryInci = $queryInci")
@@ -524,12 +540,19 @@ class ReportesController {
     def problemas = Problema.findAll(queryProblema, parametros)
     log.debug("problemas = $problemas")
     problemas.each {
-      if (inventarioParam) {
+      if (inventarioParam || idReporta) {
         if (it.fuente == 'Incidente') { // TODO: Agregar logica para cuando no sea el problema originado por un incidente, sino por una bitacora
           def incidente = Incidente.get(it.idFuente)
-          if (inventarioEquipo(incidente) == inventarioParam) {
-            casos << new Servicio (caso: it, tipo: "Problema",
-              orden: it.fechaProblema[Calendar.YEAR] * 10000 + it.folio)
+          if (inventarioParam) {
+            if (inventarioEquipo(incidente) == inventarioParam) {
+              casos << new Servicio (caso: it, tipo: "Problema",
+                orden: it.fechaProblema[Calendar.YEAR] * 10000 + it.folio)
+            }
+          } else {
+            if (incidente.idReporta == idReporta) {
+              casos << new Servicio (caso: it, tipo: "Problema",
+                orden: it.fechaProblema[Calendar.YEAR] * 10000 + it.folio)
+            }
           }
         }
       } else {

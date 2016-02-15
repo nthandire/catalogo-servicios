@@ -1,8 +1,5 @@
 
 <%@ page import="mx.gob.inr.catservicios.*" %>
-%{--
-<g:javascript src="servicios.js" />
---}%
 <!DOCTYPE html>
 <html>
 	<head>
@@ -136,7 +133,6 @@
                         del año&nbsp;&nbsp;<g:datePicker name="anioFolio" value="${new Date()}" precision="year" years="${2015..2025}"/>
                       </td>
 				          </table>
-				          %{--
 				          <table>
                     <tr>
                       <td>
@@ -147,13 +143,7 @@
 								          noSelection="${['':'']}" optionKey="id"
 								          optionValue="nombreMostrar"/>
                       </td>
-                      <td>
-                      Extención&nbsp;&nbsp;
-        							<g:field type="text" id="extension" name="extension"
-        								disabled="true" value=""/>
-                      </td>
 				          </table>
-				          --}%
 				          <table>
                     <tr>
                       <td>
