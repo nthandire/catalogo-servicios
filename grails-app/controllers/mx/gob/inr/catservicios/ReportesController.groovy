@@ -832,7 +832,8 @@ class ReportesController {
       "  from Solicitud                          " +
       " where estado is not null                 " +
       "   and estado <> 'F'                      " +
-      "   and fechaAutoriza between ? and ?        "
+      "   and fechaAutoriza between ? and ?      " +
+      " order by numeroSolicitud                 "
     log.debug("query = $query")
     def requerimientos = Solicitud.findAll(query, [startDate, endDate])
     log.debug("requerimientos = $requerimientos")
@@ -936,7 +937,8 @@ class ReportesController {
 
     def query =
       "  from Incidente                          " +
-      " where fechaIncidente between ? and ?     "
+      " where fechaIncidente between ? and ?     " +
+      " order by numeroIncidente                 "
     log.debug("query = $query")
     def incidentes = Incidente.findAll(query, [startDate, endDate])
     log.debug("incidentes = $incidentes")
@@ -1004,7 +1006,8 @@ class ReportesController {
       "  from Solicitud                          " +
       " where estado is not null                 " +
       "   and estado <> 'F'                      " +
-      "   and fechaAutoriza between ? and ?     "
+      "   and fechaAutoriza between ? and ?      " +
+      " order by numeroSolicitud                 "
     log.debug("query = $query")
     def requerimientos = Solicitud.findAll(query, [startDate, endDate])
     log.debug("requerimientos = $requerimientos")
@@ -1082,7 +1085,8 @@ class ReportesController {
 
     def query =
       "  from Incidente                          " +
-      " where fechaIncidente between ? and ?     "
+      " where fechaIncidente between ? and ?     " +
+      " order by numeroIncidente                 "
     log.debug("query = $query")
     def incidentes = Incidente.findAll(query, [startDate, endDate])
     log.debug("incidentes = $incidentes")
