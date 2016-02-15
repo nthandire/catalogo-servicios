@@ -410,6 +410,7 @@ class ReportesController {
     log.debug("idReporta = $idReporta")
     log.debug("capturados, idReporta = ${idReporta ? 1 : 0}")
     capturados += estado ? 1 : 0
+    log.debug("estado = $estado")
     log.debug("capturados, estado = ${estado ? 1 : 0}")
 
     if (capturados > 1) {
@@ -447,6 +448,41 @@ class ReportesController {
       query +=
         "   and idSolicitante = ?                       "
       parametros << idReporta
+    }
+
+    if (estado) {
+      switch (estado) {
+        case "primer nivel":
+          query +=
+            "   and estado in ('A', 'V')           "
+          break
+        case "segundo nivel":
+          query +=
+            "   and estado = 'R'                   "
+          break
+        case "tercer nivel":
+          query +=
+            "   and estado = 'X'                   "
+          break
+        case "terminado":
+          query +=
+            "   and estado = 'T'                   "
+          break
+        case "encuesta":
+          query +=
+            "   and estado = 'E'                   "
+          break
+        case "cancelado":
+          query +=
+            "   and estado = 'C'                   "
+          break
+        case "visto bueno":
+          query +=
+            "   and (estado = 'V'                  " +
+            "        or (estado = 'A'              " +
+            "          and idVb is not null))      "
+          break
+      }
     }
 
     log.debug("query = $query")
@@ -496,6 +532,42 @@ class ReportesController {
       queryInci +=
         "   and idReporta = ?                       "
       parametros << idReporta
+    }
+
+    if (estado) {
+      switch (estado) {
+        case "primer nivel":
+          queryInci +=
+            "   and nivel = 1                      " +
+            "   and estado = 'A'                   "
+          break
+        case "segundo nivel":
+          queryInci +=
+            "   and nivel = 2                      " +
+            "   and estado = 'A'                   "
+          break
+        case "tercer nivel":
+          queryInci +=
+            "   and nivel = 3                      " +
+            "   and estado = 'A'                   "
+          break
+        case "terminado":
+          queryInci +=
+            "   and estado = 'T'                   "
+          break
+        case "encuesta":
+          queryInci +=
+            "   and estado = 'E'                   "
+          break
+        case "cancelado":
+          queryInci +=
+            "   and estado = 'C'                   "
+          break
+        case "visto bueno":
+          queryInci +=
+            "   and estado = 'X'                   "
+          break
+      }
     }
 
 
