@@ -232,28 +232,19 @@ class ReportesController {
     params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
 
-    // TODO: Quitar
-    // obtener todos los incidentes de ese mes
-    // def estados = ['T' as char, 'E' as char]
-    // def incidentes = Incidente.findAllByEstadoInListAndLastUpdatedBetween(estados, startDate, endDate)
-    // log.debug("incidentes = $incidentes")
 
-    // los incidentes con soluciones en ese mes
     def query =
     //    " where upper(nombre) || case when paterno is null then  '' else ' ' || upper(paterno) end || case when materno is null then  '' else ' ' || upper(materno) end like '%${term}%'   "
       // " where upper(nombre) || ' ' || upper(nvl(paterno,''))  || ' ' || upper(nvl(materno,'')) like '%${term}%'   "
       "  from Incidente                             " +
-      " where estado in ('T', 'E')                  " +
-      "   and (fechaSolnivel1 between ? and ?       " +
-      "        or fechaSolnivel2 between ? and ?    " +
-      "        or fechaSolnivel3 between ? and ?    " +
-      "       )                                     "
+      " where fechaIncidente between ? and ?        "
     log.debug("query = $query")
-    def incidentes = Incidente.findAll(query, [startDate, endDate, startDate, endDate, startDate, endDate])
+    def incidentes = Incidente.findAll(query, [startDate, endDate])
     log.debug("incidentes = $incidentes")
 
+    def incidentesTerminados = incidentes.findAll {it.estado in ['E' as char, 'T' as char]}
     // contar cuantas se resolvieron en primer nivel
-    def inciResueltoPrimerList = incidentes.findAll { it.fechaSolnivel1 && !it.fechaSolnivel2 }
+    def inciResueltoPrimerList = incidentesTerminados.findAll { it.fechaSolnivel1 && !it.fechaSolnivel2 }
     log.debug("inciResueltoPrimerList = $inciResueltoPrimerList")
     Integer inciResueltoPrimer = inciResueltoPrimerList.size()
 
@@ -263,13 +254,13 @@ class ReportesController {
     params["inciResueltoPrimer"] = formato.format(inciResueltoPrimer)
 
     // contar cuantas se resolvieron en segundo nivel
-    def inciResueltoSegundoList = incidentes.findAll { it.fechaSolnivel2 && !it.fechaSolnivel3 }
+    def inciResueltoSegundoList = incidentesTerminados.findAll { it.fechaSolnivel2 && !it.fechaSolnivel3 }
     log.debug("inciResueltoSegundoList = $inciResueltoSegundoList")
     Integer inciResueltoSegundo = inciResueltoSegundoList.size()
     params["inciResueltoSegundo"] = formato.format(inciResueltoSegundo)
 
     // contar cuantas se resolvieron en tercer nivel
-    def inciResueltoTercerList = incidentes.findAll { it.fechaSolnivel3 }
+    def inciResueltoTercerList = incidentesTerminados.findAll { it.fechaSolnivel3 }
     log.debug("inciResueltoTercerList = $inciResueltoTercerList")
     Integer inciResueltoTercer = inciResueltoTercerList.size()
     params["inciResueltoTercer"] = formato.format(inciResueltoTercer)
@@ -303,7 +294,8 @@ class ReportesController {
         inciResueltoSegundoEnTiempo + inciResueltoTercerEnTiempo
     params["inciResueltoTotalEnTiempo"] = formato.format(inciResueltoTotalEnTiempo)
 
-    params["inciNoResueltoTotalEnTiempo"] = formato.format(incidentes.size() - params["inciResueltoTotalEnTiempo"].toInteger())
+    def inciRecibidos = incidentes.count {it.estado != 'C' as char}
+    params["inciNoResueltoTotalEnTiempo"] = formato.format(inciRecibidos - params["inciResueltoTotalEnTiempo"].toInteger())
 
 
     def formatoFijo = new DecimalFormat("#,##0.00", dfs)
@@ -312,35 +304,21 @@ class ReportesController {
     params["segundoOLA"] = !inciResueltoSegundo ? "0 %" : formatoFijo.format(inciResueltoSegundoEnTiempo / inciResueltoSegundo * 100) + " %"
     params["terceroOLA"] = !inciResueltoTercer ? "0 %" : formatoFijo.format(inciResueltoTercerEnTiempo / inciResueltoTercer * 100) + " %"
 
+    params["SLA"] = !inciResueltoTotal ? "0 %" : formatoFijo.format(inciResueltoTotalEnTiempo / inciRecibidos * 100) + " %"
+
+// seleccionar las solicitudes en el rango
+// ver si todos sus detalles terminaron en tiempo
 
     query =
-      "  from SolicitudDetalle                    " +
-      " where estado = 'A'                        " +
-      "   and fechaSolucion between ? and ?       "
+      "  from Solicitud                           " +
+      " where fechaAutoriza between ? and ?     "
     log.debug("query = $query")
-    def detalles = SolicitudDetalle.findAll(query, [startDate, endDate])
-    log.debug("detalles = $detalles")
+    def requerimientos = Solicitud.findAll(query, [startDate, endDate])
+    log.debug("requerimientos = $requerimientos")
 
-    def requerimientosSet = [] as Set
+    def recibidas = requerimientos.size()
 
-    detalles.each { det ->
-      if (det.idSolicitud.estado in ['T' as char, 'E' as char]) {
-        requerimientosSet << det.idSolicitud
-      }
-    }
-    def requerimientos = []
-    requerimientosSet.each {
-      def enRango = true
-      it.detalles.each { det ->
-        if (det.fechaSolucion > endDate) {
-          enRango = false
-        }
-      }
-      if (enRango) {
-        requerimientos << it
-      }
-    }
-    Integer contRequerimientos = requerimientos.size()
+    Integer contRequerimientos = firmadoService.cuantosReqEnTiempoNivel(requerimientos, 2)
     params["reqResueltoSegundo"] = formato.format(contRequerimientos)
 
 
@@ -371,8 +349,8 @@ class ReportesController {
         params["reqResueltoTotalEnTiempo"].toInteger())
 
 
-    params["segundoReqOLA"] = !contRequerimientos ? "0 %" : formatoFijo.format(reqResueltoSegundoEnTiempo / contRequerimientos * 100) + " %"
-    params["SLA"] = !inciResueltoTotal ? "0 %" : formatoFijo.format(inciResueltoTotalEnTiempo / inciResueltoTotal * 100) + " %"
+    Integer contTotalRequerimientos = requerimientos.count {it.estado != 'C' as char}
+    params["segundoReqOLA"] = !contRequerimientos ? "0 %" : formatoFijo.format(reqResueltoSegundoEnTiempo / contTotalRequerimientos * 100) + " %"
 
 
     log.debug("startDate = $startDate")
@@ -788,7 +766,7 @@ class ReportesController {
     servicios.each {
       def categoria = it.servSub.servCat
       def renglon = new rptServicios (
-        id: it.id,
+        id: categoria.id,
         categoria: categoria,
         descripcion: categoria.descripcion,
         responsable: categoria.servResp,
@@ -1003,7 +981,7 @@ class ReportesController {
       "  from Solicitud                          " +
       " where estado is not null                 " +
       "   and estado <> 'F'                      " +
-      "   and fechaSolicitud between ? and ?     "
+      "   and fechaAutoriza between ? and ?     "
     log.debug("query = $query")
     def requerimientos = Solicitud.findAll(query, [startDate, endDate])
     log.debug("requerimientos = $requerimientos")
@@ -1042,7 +1020,7 @@ class ReportesController {
       log.debug("tiempoRealString = $tiempoRealString")
       def renglon = new rptNiveles (
         folio: solicitud,
-        nivel: "segundo",
+        nivel: it.fechaSolucion ? "segundo" : "",
         area: firmadoService.areaNombre(solicitud.idSolicitante),
         nombre: Usuario.get(solicitud.idSolicitante),
         categoria: it.idServcat,
@@ -1109,7 +1087,7 @@ class ReportesController {
       log.debug("tiempoRealString = $tiempoRealString")
       def renglon = new rptNiveles (
         folio: it,
-        nivel: nivel,
+        nivel: it."fechaSolnivel$nivel" ? nivel : "",
         area: firmadoService.areaNombre(it.idReporta),
         nombre: Usuario.get(it.idReporta),
         categoria: it.idServ.servSub.servCat,

@@ -688,7 +688,7 @@ class FirmadoService {
           for (i in 1..nivel) {
             tiempoAsignado += tiempoAsignadoNivel(det.idServ, i)
           }
-          def tiempoGastado = diff(fechaInicio, det.fechaSolucion)
+          def tiempoGastado = diff(fechaInicio, det.fechaSolucion ?: new Date())
           incrementar = tiempoGastado <= tiempoAsignado
         }
       }
