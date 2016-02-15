@@ -392,7 +392,7 @@ class ReportesController {
     log.debug("folio = ${folio}")
     def anioFolio = params.anioFolio
     log.debug("anioFolio = ${anioFolio.format("YYYY-MM-dd")}")
-    def idReporta = params.idReporta.toInteger()
+    def idReporta = params.idReporta ? params.idReporta.toInteger() : 0
     log.debug("idReporta = ${idReporta}")
     def inventarioParam = params.inventario.toLong()
     log.debug("inventarioParam = $inventarioParam")
