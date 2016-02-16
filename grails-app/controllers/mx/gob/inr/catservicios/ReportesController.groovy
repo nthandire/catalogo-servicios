@@ -452,6 +452,11 @@ class ReportesController {
 
     if (estado) {
       switch (estado) {
+        case "autorizado":
+          query +=
+            "   and idVb is null                   " +
+            "   and estado = 'A'                   "
+          break
         case "primer nivel":
           query +=
             "   and estado in ('A', 'V')           "
@@ -467,6 +472,10 @@ class ReportesController {
         case "terminado":
           query +=
             "   and estado = 'T'                   "
+          break
+        case "revisado":
+          query +=
+            "   and estado = 'R'                   "
           break
         case "encuesta":
           query +=
@@ -536,6 +545,10 @@ class ReportesController {
 
     if (estado) {
       switch (estado) {
+        case "autorizado":
+          queryInci +=
+            "   and estado = 'X'                   "
+          break
         case "primer nivel":
           queryInci +=
             "   and nivel = 1                      " +
@@ -554,6 +567,10 @@ class ReportesController {
         case "terminado":
           queryInci +=
             "   and estado = 'T'                   "
+          break
+        case "revisado":
+          queryInci +=
+            "   and estado = 'X'                   "
           break
         case "encuesta":
           queryInci +=

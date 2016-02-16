@@ -155,7 +155,7 @@
                     <tr>
                       <td>
                         del estado&nbsp;&nbsp;
-                      	<g:select name="estado" from="${['primer nivel', 'segundo nivel', 'tercer nivel', 'asignado', 'cancelado', 'encuesta', 'revisado', 'terminado', 'visto bueno', 'Mantenimiento', 'aprovisionamiento', 'autorizado']}"
+                      	<g:select name="estado" from="${['autorizado', 'visto bueno', 'revisado', 'primer nivel', 'segundo nivel', 'tercer nivel', 'cancelado', 'encuesta', 'terminado']}"
           								noSelection="['':'']"/>
                       </td>
 				          </table>

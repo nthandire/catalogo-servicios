@@ -172,7 +172,7 @@
 
     <div class="span4">
       <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
-        <label for="idReporta">Extención</label>
+        <label for="idReporta">Extensión</label>
         <g:field type="text" id="extension" name="extension" disabled="true" value=""/>
       </div>
     </div>
