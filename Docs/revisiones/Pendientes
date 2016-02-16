@@ -37,4 +37,4 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 
 - Reporte, Grafica
 
-
+- Reporte, Solicitudes, filtros de estado from="${['asignado', 'Mantenimiento', 'aprovisionamiento']}"
