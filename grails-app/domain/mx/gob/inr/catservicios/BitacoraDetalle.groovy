@@ -2,24 +2,26 @@ package mx.gob.inr.catservicios
 
 class BitacoraDetalle {
 
-  String desBitacoradetalle
-  char estado_bitacoradetalle = (char)'A'
+  String descripcion
+  char estado = (char)'A'
   static belongsTo = [bitacora:Bitacora]
 
   static constraints = {
-    desBitacoradetalle maxSize:255, widget: 'textarea'
-    estado_bitacoradetalle blank:false, inList: [(char)'A',(char)'I']
+    descripcion maxSize:255, widget: 'textarea'
+    estado blank:false, inList: [(char)'A',(char)'I']
   }
 
   static mapping = {
     id column:'id_bitacoradetalle'
-    bitacora column:'id_bitacora'
-    estado_bitacoradetalle length: 1, columnDefinition: 'char(1)',
+    descripcion column:'des_bitacoradetalle'
+    estado column: "estado_bitacoradetalle"
+    estado length: 1, columnDefinition: 'char(1)',
       defaultValue: "'A'"
+    bitacora column:'id_bitacora'
     version false
-  } 
+  }
 
   String toString() {
-    desBitacoradetalle
+    descripcion
   }
 }

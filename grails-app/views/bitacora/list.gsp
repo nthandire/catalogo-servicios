@@ -28,7 +28,7 @@
 
 						<g:sortableColumn property="descripcion" title="${message(code: 'bitacora.descripcion.label', default: 'Descripción')}" />
 
-						<g:sortableColumn property="estadoBitacora" title="${message(code: 'bitacora.estadoBitacora.label', default: 'Estado')}" />
+						<g:sortableColumn property="estado" title="${message(code: 'bitacora.estado.label', default: 'Estado')}" />
 
 					</tr>
 				</thead>
@@ -40,7 +40,7 @@
 
 						<td>${fieldValue(bean: bitacoraInstance, field: "descripcion")}</td>
 
-						<td>${fieldValue(bean: bitacoraInstance, field: "estadoBitacora")}</td>
+						<td><g:message code="cat_servCat.estado.${bitacoraInstance.estado}" /></td>
 
 					</tr>
 				</g:each>

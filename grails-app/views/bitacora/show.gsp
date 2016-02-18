@@ -25,7 +25,7 @@
 
 				<g:if test="${bitacoraInstance?.tipoBitacora}">
 				<li class="fieldcontain">
-					<span id="tipoBitacora-label" class="property-label"><g:message code="bitacora.tipoBitacora.label" default="Tipo Bitacora" /></span>
+					<span id="tipoBitacora-label" class="property-label"><g:message code="bitacora.tipoBitacora.label" default="Tipo" /></span>
 
 						<span class="property-value" aria-labelledby="tipoBitacora-label"><g:fieldValue bean="${bitacoraInstance}" field="tipoBitacora"/></span>
 
@@ -34,18 +34,18 @@
 
 				<g:if test="${bitacoraInstance?.descripcion}">
 				<li class="fieldcontain">
-					<span id="descripcion-label" class="property-label"><g:message code="bitacora.descripcion.label" default="Des Bitacora" /></span>
+					<span id="descripcion-label" class="property-label"><g:message code="bitacora.descripcion.label" default="Descripción" /></span>
 
 						<span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${bitacoraInstance}" field="descripcion"/></span>
 
 				</li>
 				</g:if>
 
-				<g:if test="${bitacoraInstance?.estadoBitacora}">
+				<g:if test="${bitacoraInstance?.estado}">
 				<li class="fieldcontain">
-					<span id="estadoBitacora-label" class="property-label"><g:message code="bitacora.estadoBitacora.label" default="Estado Bitacora" /></span>
+					<span id="estado-label" class="property-label"><g:message code="bitacora.estado.label" default="Estado" /></span>
 
-						<span class="property-value" aria-labelledby="estadoBitacora-label"><g:fieldValue bean="${bitacoraInstance}" field="estadoBitacora"/></span>
+						<span class="property-value" aria-labelledby="estado-label"><g:message code="cat_servCat.estado.${bitacoraInstance.estado}" /></span>
 
 				</li>
 				</g:if>
