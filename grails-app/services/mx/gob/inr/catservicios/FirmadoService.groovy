@@ -608,8 +608,18 @@ class FirmadoService {
     def hoy = new Date()
     incidentes.each {
       if (it.estado == 'E' as char) {
-        if (hoy - it.lastUpdated > 7) {
+        def nivel = it.nivel
+        def fechaSolución = it."fechaSolnivel$nivel"
+        if (hoy - fechaSolución > 7) {
+          it.estado = 'T' as char
+          def si = 1 // TODO: relacionado con propertie encuesta.valor.1=Si, crear un valor global
+          it.p01 = si
+          it.p02 = si
+          it.p03 = si
+          it.p04 = si
+          it.save(flush: true)
           cuantos++
+          log.debug("¡¡¡¡¡ cambie un valor en la BD incidente, $it !!!!!")
         }
       } else {
         cuantos += it.p01 == 1 && it.p02 == 1 && it.p03 == 1 && it.p04 == 1 ? 1 : 0

@@ -125,6 +125,14 @@ class ReportesController {
       endDate = endDate + 1.month - 1.seconds
     }
 
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
+    def formatoPorciento = new DecimalFormat("#,##0.00", dfs)
+
+    def satisfechos = firmadoService.inciSatisfechos(startDate, endDate)
+    params["satisfechos"] = formato.format(satisfechos)
+
     def incidentes = incidentesConEncuesta(startDate, endDate)
     log.debug("incidentes 2 = $incidentes")
 
@@ -133,11 +141,6 @@ class ReportesController {
       redirect(action: "list")
       return
     }
-
-    def locale = new Locale('es', 'MX')
-    def dfs = new DecimalFormatSymbols(locale)
-    def formato = new DecimalFormat("#,##0", dfs)
-    def formatoPorciento = new DecimalFormat("#,##0.00", dfs)
 
     params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
@@ -158,8 +161,6 @@ class ReportesController {
     params["canceladas"] = formato.format(firmadoService.inciCanceladas(startDate, endDate))
     def enTiempo = firmadoService.enTiempoInci(startDate, endDate)
     params["enTiempo"] = formato.format(enTiempo)
-    def satisfechos = firmadoService.inciSatisfechos(startDate, endDate)
-    params["satisfechos"] = formato.format(satisfechos)
     params["insatisfechos"] = formato.format(firmadoService.inciInsatisfechos(startDate, endDate))
 
     params["calidad"] = formatoPorciento.format(satisfechos / resueltas * 100)
@@ -350,7 +351,8 @@ class ReportesController {
 
 
     Integer contTotalRequerimientos = requerimientos.count {it.estado != 'C' as char}
-    params["segundoReqOLA"] = !contRequerimientos ? "0 %" : formatoFijo.format(reqResueltoSegundoEnTiempo / contTotalRequerimientos * 100) + " %"
+    params["segundoReqOLA"] = !contRequerimientos ? "0 %" : formatoFijo.format(reqResueltoSegundoEnTiempo / contRequerimientos * 100) + " %"
+    params["reqSLA"] = !contTotalRequerimientos ? "0 %" : formatoFijo.format(reqResueltoSegundoEnTiempo / contTotalRequerimientos * 100) + " %"
 
 
     log.debug("startDate = $startDate")
@@ -1135,7 +1137,7 @@ class ReportesController {
       log.debug("tiempoRealString = $tiempoRealString")
       def renglon = new rptNiveles (
         folio: solicitud,
-        nivel: it.fechaSolucion ? "segundo" : "",
+        nivel: it.fechaSolucion ? "2" : "",
         area: firmadoService.areaNombre(solicitud.idSolicitante),
         nombre: Usuario.get(solicitud.idSolicitante),
         categoria: it.idServcat,

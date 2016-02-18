@@ -32,6 +32,7 @@
 	<parameter name="reqNoResueltoTotalEnTiempo" class="java.lang.String"/>
 	<parameter name="segundoReqOLA" class="java.lang.String"/>
 	<parameter name="SLA" class="java.lang.String"/>
+	<parameter name="reqSLA" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -370,7 +371,7 @@
 			<textField>
 				<reportElement x="511" y="275" width="80" height="30" uuid="f414d6db-be23-4304-9acd-fd1172a1604a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{segundoReqOLA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reqSLA}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="11" y="111" width="720" height="1" uuid="4a20eb2c-a47d-4df2-953f-4fa7820656ab"/>
