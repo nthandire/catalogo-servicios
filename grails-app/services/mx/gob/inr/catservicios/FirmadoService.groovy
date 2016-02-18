@@ -558,11 +558,19 @@ class FirmadoService {
     def requerimientos =
       Solicitud.findAllByEstadoInListAndFechaAutorizaBetween(estados, startDate, endDate)
     def cuantos = 0
-    def hoy = new Date()
     requerimientos.each {
       if (it.estado == 'E' as char) {
+        def hoy = new Date()
         if (hoy - it.lastUpdated > 7) {
+          it.estado = 'T' as char
+          def si = 1 // TODO: relacionado con propertie encuesta.valor.1=Si, crear un valor global
+          it.p01 = si
+          it.p02 = si
+          it.p03 = si
+          it.p04 = si
+          it.save(flush: true)
           cuantos++
+          log.debug("¡¡¡¡¡ cambie un valor en la BD solicitudes, $it !!!!!")
         }
       } else {
         cuantos += it.p01 == 1 && it.p02 == 1 && it.p03 == 1 && it.p04 == 1 ? 1 : 0

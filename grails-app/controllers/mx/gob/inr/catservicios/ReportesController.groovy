@@ -43,6 +43,14 @@ class ReportesController {
     params["mes"] = startDate.format('MMMM').capitalize()
     params["anio"] = startDate.format('YYYY')
 
+    def locale = new Locale('es', 'MX')
+    def dfs = new DecimalFormatSymbols(locale)
+    def formato = new DecimalFormat("#,##0", dfs)
+    def formatoPorciento = new DecimalFormat("#,##0.00", dfs)
+
+    def satisfechos = firmadoService.satisfechos(startDate, endDate)
+    params["satisfechos"] = formato.format(satisfechos)
+
     def requerimientos = requerimientosConEncuesta(startDate, endDate)
     log.debug("requerimientos = $requerimientos")
 
@@ -51,11 +59,6 @@ class ReportesController {
       redirect(action: "list")
       return
     }
-
-    def locale = new Locale('es', 'MX')
-    def dfs = new DecimalFormatSymbols(locale)
-    def formato = new DecimalFormat("#,##0", dfs)
-    def formatoPorciento = new DecimalFormat("#,##0.00", dfs)
 
     params["preg1Si"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 1)
     params["preg1No"] = contar(requerimientosConEncuesta(startDate, endDate),"p01", 2)
@@ -74,8 +77,6 @@ class ReportesController {
     params["canceladas"] = formato.format(firmadoService.canceladas(startDate, endDate))
     def enTiempo = firmadoService.enTiempo(startDate, endDate)
     params["enTiempo"] = formato.format(enTiempo)
-    def satisfechos = firmadoService.satisfechos(startDate, endDate)
-    params["satisfechos"] = formato.format(satisfechos)
     params["insatisfechos"] = formato.format(firmadoService.insatisfechos(startDate, endDate))
 
     params["calidad"] = formatoPorciento.format(satisfechos / resueltas * 100)
