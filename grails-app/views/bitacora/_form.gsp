@@ -23,47 +23,42 @@
 </div>
 
 <g:if test="${bitacoraInstance.id}">
+
 <div class="fieldtablecontain ${hasErrors(bean: bitacoraInstance, field: 'estado', 'error')} required">
-	<label for="estado">
-		<g:message code="bitacora.estado.label" default="Estado" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select name="estado" from="${bitacoraInstance.constraints.estado.inList}" required="" value="${fieldValue(bean: bitacoraInstance, field: 'estado')}" valueMessagePrefix="cat_servCat.estado"/>
+  <label for="estado">
+    <g:message code="bitacora.estado.label" default="Estado" />
+  </label>
+  <g:select name="estado" from="${bitacoraInstance.constraints.estado.inList}" required="" value="${fieldValue(bean: bitacoraInstance, field: 'estado')}" valueMessagePrefix="cat_servCat.estado"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: bitacoraInstance, field: 'bitacoraDetalles', 'error')} ">
 	<label for="bitacoraDetalles">
-		<g:message code="bitacora.bitacoraDetalles.label" default="Bitacora Detalles" />
-
+		<g:message code="bitacora.bitacoraDetalles.label" default="Detalles" />
 	</label>
-
-<ul class="one-to-many">
-<g:each in="${bitacoraInstance?.bitacoraDetalles}" var="b">
-    <li><g:link controller="bitacoraDetalle" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="bitacoraDetalle" action="create" params="['bitacora.id': bitacoraInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'bitacoraDetalle.label', default: 'BitacoraDetalle')])}</g:link>
-</li>
-</ul>
-
+  <ul class="one-to-many">
+    <g:each in="${bitacoraInstance?.bitacoraDetalles}" var="b">
+        <li><g:link controller="bitacoraDetalle" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></li>
+    </g:each>
+    <li class="add">
+    <g:link controller="bitacoraDetalle" action="create" params="['bitacora.id': bitacoraInstance?.id]">${message(code: 'default.add.label', args: ['Detalles'])}</g:link>
+    </li>
+  </ul>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: bitacoraInstance, field: 'monitoreos', 'error')} ">
 	<label for="monitoreos">
 		<g:message code="bitacora.monitoreos.label" default="Monitoreos" />
-
 	</label>
-
-<ul class="one-to-many">
-<g:each in="${bitacoraInstance?.monitoreos}" var="m">
-    <li><g:link controller="monitoreo" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="monitoreo" action="create" params="['bitacora.id': bitacoraInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'monitoreo.label', default: 'Monitoreo')])}</g:link>
-</li>
-</ul>
+  <ul class="one-to-many">
+    <g:each in="${bitacoraInstance?.monitoreos}" var="m">
+        <li><g:link controller="monitoreo" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+    </g:each>
+    <li class="add">
+    <g:link controller="monitoreo" action="create" params="['bitacora.id': bitacoraInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'monitoreo.label', default: 'Monitoreo')])}</g:link>
+    </li>
+  </ul>
+</div>
 
 </g:if>
 
-</div>
 

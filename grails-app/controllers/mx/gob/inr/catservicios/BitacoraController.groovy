@@ -20,11 +20,17 @@ class BitacoraController {
     }
 
     def create() {
+        log.debug("Entré a create")
         [bitacoraInstance: new Bitacora(params)]
     }
 
     def save() {
+        log.debug("Entré a save")
         def bitacoraInstance = new Bitacora(params)
+        if (!bitacoraInstance.validate()) {
+          render(view: "create", model: [bitacoraInstance: bitacoraInstance])
+          return
+        }
         if (!bitacoraInstance.save(flush: true)) {
             render(view: "create", model: [bitacoraInstance: bitacoraInstance])
             return
@@ -85,22 +91,4 @@ class BitacoraController {
         redirect(action: "show", id: bitacoraInstance.id)
     }
 
-    def x_delete(Long id) {
-        def bitacoraInstance = Bitacora.get(id)
-        if (!bitacoraInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'bitacora.label', default: 'Bitacora'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            bitacoraInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'bitacora.label', default: 'Bitacora'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'bitacora.label', default: 'Bitacora'), id])
-            redirect(action: "show", id: id)
-        }
-    }
 }

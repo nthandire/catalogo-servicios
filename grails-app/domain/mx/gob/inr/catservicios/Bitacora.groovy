@@ -3,18 +3,18 @@ package mx.gob.inr.catservicios
 class Bitacora {
   String tipoBitacora
   String descripcion
-  char estado = (char)'A'
+  Character estado = 'A' as char
 
   static hasMany = [bitacoraDetalles: BitacoraDetalle, monitoreos: Monitoreo]
 
   static constraints = {
     tipoBitacora maxSize:100, blank:false, widget: 'text'
     descripcion maxSize:255, blank:false, size: 5..255, widget: 'textarea'
-    estado blank:false, inList: [(char)'A',(char)'I']
+    estado blank:false, inList: ['A' as char,'I' as char]
   }
 
   static mapping = {
-    id column:'id_bitacora'
+    id column: "id_bitacora", generator: "increment"
     descripcion column:'des_bitacora'
     estado column: "estado_bitacora"
     estado length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
@@ -22,6 +22,6 @@ class Bitacora {
   }
 
   String toString() {
-    "Tipo: $tipoBitacora {${id}}"
+    "${id}: $tipoBitacora"
   }
 }
