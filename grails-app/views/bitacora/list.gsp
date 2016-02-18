@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="create" action="create"><g:message code="default.new.label.femenino" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-bitacora" class="content scaffold-list" role="main">
@@ -23,25 +23,25 @@
 			<table>
 				<thead>
 					<tr>
-					
-						<g:sortableColumn property="tipoBitacora" title="${message(code: 'bitacora.tipoBitacora.label', default: 'Tipo Bitacora')}" />
-					
-						<g:sortableColumn property="desBitacora" title="${message(code: 'bitacora.desBitacora.label', default: 'Des Bitacora')}" />
-					
-						<g:sortableColumn property="estadoBitacora" title="${message(code: 'bitacora.estadoBitacora.label', default: 'Estado Bitacora')}" />
-					
+
+						<g:sortableColumn property="tipoBitacora" title="${message(code: 'bitacora.tipoBitacora.label', default: 'Tipo')}" />
+
+						<g:sortableColumn property="descripcion" title="${message(code: 'bitacora.descripcion.label', default: 'Descripción')}" />
+
+						<g:sortableColumn property="estadoBitacora" title="${message(code: 'bitacora.estadoBitacora.label', default: 'Estado')}" />
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${bitacoraInstanceList}" status="i" var="bitacoraInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="show" id="${bitacoraInstance.id}">${fieldValue(bean: bitacoraInstance, field: "tipoBitacora")}</g:link></td>
-					
-						<td>${fieldValue(bean: bitacoraInstance, field: "desBitacora")}</td>
-					
+
+						<td>${fieldValue(bean: bitacoraInstance, field: "descripcion")}</td>
+
 						<td>${fieldValue(bean: bitacoraInstance, field: "estadoBitacora")}</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>
