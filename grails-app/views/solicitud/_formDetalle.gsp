@@ -19,7 +19,7 @@
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcion', 'error')} ">
       <label for="descripcion">
-        <g:message code="solicitudDetalle.descripcion.label" default="Descripcion" />
+        <g:message code="solicitudDetalle.descripcion.label" default="Descripción" />
       </label>
       <g:textArea id="descripcion" name="descripcion" cols="40" rows="5"
         maxlength="3000" value="${solicitudDetalleInstance?.descripcion}"/>

@@ -401,7 +401,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'descripcion', 'error')} ">
 	<label for="descripcion">
-		<g:message code="incidente.descripcion.label" default="Descripcion" />
+		<g:message code="incidente.descripcion.label" default="Descripción" />
 	</label>
   <g:if test="${incidenteInstance.id && incidenteInstance?.descripcion}">
     <g:textArea name="descripcion" cols="40" rows="5" maxlength="3000"
