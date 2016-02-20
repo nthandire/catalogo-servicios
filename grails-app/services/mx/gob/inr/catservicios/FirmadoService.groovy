@@ -83,18 +83,14 @@ class FirmadoService {
   }
 
   def areaNombre (Long usuario) {
-    log.debug("usuario = ${usuario}")
     def area = ""
     if (usuario) {
       area = UsuarioAutorizado.get(usuario)?.area
       if (!area || area.length() == 1) {
         def idArea = area ?: Usuario.get(usuario)?.idUnidadMedica
-        log.debug("idArea = ${idArea}")
         if (idArea) {
           def unidMed = UnidadMedica.get(idArea as char)
-          log.debug("unidMed = ${unidMed}")
           area = unidMed.descripcion
-          log.debug("area = ${area}")
           } else
             area = "Error, revisar con desarrollo de sistemas"
       }
@@ -618,6 +614,7 @@ class FirmadoService {
       if (it.estado == 'E' as char) {
         def nivel = it.nivel
         def fechaSolución = it."fechaSolnivel$nivel"
+        log.debug("Modificando BD incidentes, caso = $it, estado = 'E'. nivel = $nivel, fecha = $fechaSolución")
         if (hoy - fechaSolución > 7) {
           it.estado = 'T' as char
           def si = 1 // TODO: relacionado con propertie encuesta.valor.1=Si, crear un valor global
