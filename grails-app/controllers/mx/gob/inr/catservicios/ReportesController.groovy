@@ -389,7 +389,7 @@ class ReportesController {
       endDate = endDate + 1.day - 1.seconds
     }
     log.debug("startDate = $startDate, endDate = $endDate")
-    params["rangoFechas"] = "del ${startDate.format("YYYY-MM-dd")} al ${endDate.format("YYYY-MM-dd")}"
+    def titulo = "del ${startDate.format("YYYY-MM-dd")} al ${endDate.format("YYYY-MM-dd")}"
     params["anio"] = startDate.format('YYYY')
     def folio = params.folio.toInteger()
     log.debug("folio = ${folio}")
@@ -445,15 +445,18 @@ class ReportesController {
         "   and TO_CHAR(fechaSolicitud,'%Y') = ? "
       parametros << folio
       parametros << (anioFolio[Calendar.YEAR].toString())
+      titulo += ", folio $folio/${anioFolio[Calendar.YEAR]}"
     }
 
     if (idReporta) {
       query +=
         "   and idSolicitante = ?                       "
       parametros << idReporta
+      titulo += ", solicitante ${Usuario.get(idReporta)}"
     }
 
     if (estado) {
+      titulo += ", estado ${estado}"
       switch (estado) {
         case "autorizado":
           query +=
@@ -497,11 +500,18 @@ class ReportesController {
       }
     }
 
+
     log.debug("query = $query")
     log.debug("parametros = $parametros")
     log.debug("año clase = ${(anioFolio[Calendar.YEAR]).getClass()}")
     def requerimientos = Solicitud.findAll(query, parametros)
     log.debug("requerimientos = $requerimientos")
+
+    if (inventarioParam) {
+      titulo += ", inventario ${inventarioParam}"
+    }
+    params["rangoFechas"] = titulo
+
     def casos = []
     requerimientos.each {
       it.detalles.each { det ->
@@ -729,8 +739,8 @@ class ReportesController {
               caso.idServ."servResp$nivel",
             prioridad: message(code:"intensidad.valor.${caso.idServ.impacto}"),
             fechaRecepcion: caso.fechaIncidente.format("YYYY-MM-dd HH:mm"),
-            fechaCierre: caso.estado in 'ET' ? caso."fechaSolnivel$nivel" : "",
-            solucion: caso.estado in 'ET' ? caso."solucionNivel$nivel" : "",
+            fechaCierre: caso.estado in ['E' as char, 'T' as char] ? caso."fechaSolnivel$nivel" : "",
+            solucion: caso.estado in ['E' as char, 'T' as char] ? caso."solucionNivel$nivel" : "",
           )
           break
         case Problema:
