@@ -80,7 +80,8 @@ class ReportesController {
     params["insatisfechos"] = formato.format(firmadoService.insatisfechos(startDate, endDate))
 
     params["calidad"] = formatoPorciento.format(satisfechos / resueltas * 100)
-    params["eficiencia"] = formatoPorciento.format(enTiempo / recibidas * 100)
+    def recibidasSinCancelar = firmadoService.recibidasSinCancelar(startDate, endDate)
+    params["eficiencia"] = formatoPorciento.format(enTiempo / recibidasSinCancelar * 100)
 
 
     log.debug("startDate = $startDate")

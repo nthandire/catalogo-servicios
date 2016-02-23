@@ -524,6 +524,12 @@ class FirmadoService {
     Solicitud.countByEstadoIsNotNullAndEstadoNotEqualAndFechaAutorizaBetween('F' as char, startDate, endDate)
   }
 
+  def recibidasSinCancelar(Date startDate, Date endDate) {
+    def lista = Solicitud.findAllByEstadoIsNotNullAndEstadoNotEqualAndEstadoNotEqualAndFechaAutorizaBetween('F' as char, 'C' as char, startDate, endDate)
+    log.debug("recibidasSinCancelar = $lista")
+    Solicitud.countByEstadoIsNotNullAndEstadoNotEqualAndEstadoNotEqualAndFechaAutorizaBetween('F' as char, 'C' as char, startDate, endDate)
+  }
+
   def resueltas(Date startDate, Date endDate) {
     def estados = ['T' as char, 'E' as char]
     def lista = Solicitud.findAllByEstadoInListAndFechaAutorizaBetween(estados,startDate, endDate)
@@ -613,9 +619,12 @@ class FirmadoService {
     incidentes.each {
       if (it.estado == 'E' as char) {
         def nivel = it.nivel
+        log.debug("nivel = $nivel")
         def fechaSolución = it."fechaSolnivel$nivel"
+        log.debug("fechaSolución = $fechaSolución")
         log.debug("Modificando BD incidentes, caso = $it, estado = 'E'. nivel = $nivel, fecha = $fechaSolución")
         if (hoy - fechaSolución > 7) {
+          log.debug("Entré por fecha, $fechaSolución")
           it.estado = 'T' as char
           def si = 1 // TODO: relacionado con propertie encuesta.valor.1=Si, crear un valor global
           it.p01 = si
@@ -624,7 +633,7 @@ class FirmadoService {
           it.p04 = si
           it.save(flush: true)
           cuantos++
-          log.debug("¡¡¡¡¡ cambie un valor en la BD incidente, $it !!!!!")
+          log.debug("¡¡¡¡¡ cambie un valor en la BD incidente, $it !!!!! , ${it.estado}")
         }
       } else {
         cuantos += it.p01 == 1 && it.p02 == 1 && it.p03 == 1 && it.p04 == 1 ? 1 : 0
