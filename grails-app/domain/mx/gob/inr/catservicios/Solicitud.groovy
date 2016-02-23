@@ -20,6 +20,8 @@ class Solicitud {
   Date lastUpdated
   String ipTerminal
   String comentarioVb
+  Character encuesta
+  Date fechaEncuesta
 
   static hasMany = [detalles: SolicitudDetalle, archivos: SolicitudArchivoadjunto]
 
@@ -50,6 +52,9 @@ class Solicitud {
 		p04 nullable: true
 		lastUpdated nullable: true, editable:false
 		ipTerminal nullable: true, maxSize: 15, display:false, editable:false
+    encuesta nullable: true, maxSize: 1, editable:false,
+      inList: [(char)'U', (char)'S']
+    fechaEncuesta nullable: true, editable:false
 	}
 
   String toString() {

@@ -37,6 +37,8 @@ class Incidente {
 	CatPrograma idPrograma
 	Date lastUpdated
 	String ipTerminal
+  Character encuesta
+  Date fechaEncuesta
 
 	static mapping = {
 		id column: "id_incidente", generator: "increment"
@@ -85,6 +87,9 @@ class Incidente {
 		idPrograma nullable: true
 		lastUpdated nullable: true
 		ipTerminal nullable: true, maxSize: 15
+    encuesta nullable: true, maxSize: 1, editable:false,
+      inList: [(char)'U', (char)'S']
+    fechaEncuesta nullable: true, editable:false
 	}
 
   String toString() {

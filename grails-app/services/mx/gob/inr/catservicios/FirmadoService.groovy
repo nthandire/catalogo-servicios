@@ -570,6 +570,8 @@ class FirmadoService {
           it.p02 = si
           it.p03 = si
           it.p04 = si
+          it.encuesta = 'S' as char
+          it.fechaEncuesta = new Date()
           it.save(flush: true)
           cuantos++
           log.debug("¡¡¡¡¡ cambie un valor en la BD solicitudes, $it !!!!!")
@@ -631,6 +633,8 @@ class FirmadoService {
           it.p02 = si
           it.p03 = si
           it.p04 = si
+          it.encuesta = 'S' as char
+          it.fechaEncuesta = new Date()
           it.save(flush: true)
           cuantos++
           log.debug("¡¡¡¡¡ cambie un valor en la BD incidente, $it !!!!! , ${it.estado}")

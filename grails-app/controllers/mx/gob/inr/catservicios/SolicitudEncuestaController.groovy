@@ -129,6 +129,8 @@ class SolicitudEncuestaController {
 
         solicitudInstance.properties = params
         solicitudInstance.estado = 'T' as char
+        solicitudInstance.encuesta = 'U' as char
+        solicitudInstance.fechaEncuesta = new Date()
 
         if (!solicitudInstance.save(flush: true)) {
             render(view: "edit", model: [solicitudInstance: solicitudInstance])
@@ -166,6 +168,8 @@ class SolicitudEncuestaController {
 
         incidenteInstance.properties = params
         incidenteInstance.estado = 'T' as char
+        incidenteInstance.encuesta = 'U' as char
+        incidenteInstance.fechaEncuesta = new Date()
 
         if (!incidenteInstance.save(flush: true)) {
             render(view: "editIncidente", model: [incidenteInstance: incidenteInstance])
