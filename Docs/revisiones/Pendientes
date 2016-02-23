@@ -38,3 +38,18 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 - Reporte, Grafica
 
 - Reporte, Solicitudes, filtros de estado from="${['asignado', 'Mantenimiento', 'aprovisionamiento']}"
+
+
+Plan
+
+- Bitacoras
+  - supongo que si ya existe un monitoreo capturado, ya no se puede editar una bitacora
+
+
+
+- crear rool para bitacoras
+  - para capturar bitacoras, admon
+  - para realizar monitoreos, bitacoras
+- asignar un usuario a ese rol
+  - alguien de Javier Torres
+
