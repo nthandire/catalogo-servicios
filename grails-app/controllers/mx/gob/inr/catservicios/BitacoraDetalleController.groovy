@@ -25,6 +25,7 @@ class BitacoraDetalleController {
 
     def save() {
         def bitacoraDetalleInstance = new BitacoraDetalle(params)
+        bitacoraDetalleInstance.estado = 'A' as char
         if (!bitacoraDetalleInstance.save(flush: true)) {
             render(view: "create", model: [bitacoraDetalleInstance: bitacoraDetalleInstance])
             return

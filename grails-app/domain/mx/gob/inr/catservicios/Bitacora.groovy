@@ -5,7 +5,7 @@ class Bitacora {
   String descripcion
   Character estado = 'A' as char
 
-  static hasMany = [bitacoraDetalles: BitacoraDetalle, monitoreos: Monitoreo]
+  static hasMany = [detalles: BitacoraDetalle, monitoreos: Monitoreo]
 
   static constraints = {
     tipoBitacora maxSize:100, blank:false, widget: 'text'

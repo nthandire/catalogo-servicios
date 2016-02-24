@@ -50,12 +50,14 @@
 				</li>
 				</g:if>
 
-				<g:if test="${bitacoraInstance?.bitacoraDetalles}">
+				<g:if test="${bitacoraInstance?.id}">
 				<li class="fieldcontain">
-					<span id="bitacoraDetalles-label" class="property-label"><g:message code="bitacora.bitacoraDetalles.label" default="Bitacora Detalles" /></span>
+					<span id="detalles-label" class="property-label"><g:message code="bitacora.detalles.label" default="Detalles" /></span>
 
-						<g:each in="${bitacoraInstance.bitacoraDetalles}" var="b">
-						<span class="property-value" aria-labelledby="bitacoraDetalles-label"><g:link controller="bitacoraDetalle" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></span>
+						<g:each in="${bitacoraInstance.detalles.sort{it.id}}" var="b">
+						<span class="property-value" aria-labelledby="detalles-label">
+							<g:link controller="bitacoraDetalle" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link>
+						</span>
 						</g:each>
 
 				</li>

@@ -31,12 +31,12 @@
   <g:select name="estado" from="${bitacoraInstance.constraints.estado.inList}" required="" value="${fieldValue(bean: bitacoraInstance, field: 'estado')}" valueMessagePrefix="cat_servCat.estado"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: bitacoraInstance, field: 'bitacoraDetalles', 'error')} ">
-	<label for="bitacoraDetalles">
-		<g:message code="bitacora.bitacoraDetalles.label" default="Detalles" />
+<div class="fieldtablecontain ${hasErrors(bean: bitacoraInstance, field: 'detalles', 'error')} ">
+	<label for="detalles">
+		<g:message code="bitacora.detalles.label" default="Detalles" />
 	</label>
   <ul class="one-to-many">
-    <g:each in="${bitacoraInstance?.bitacoraDetalles}" var="b">
+    <g:each in="${bitacoraInstance?.detalles}" var="b">
         <li><g:link controller="bitacoraDetalle" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></li>
     </g:each>
     <li class="add">
