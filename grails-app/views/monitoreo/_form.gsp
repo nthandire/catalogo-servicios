@@ -23,7 +23,7 @@
 		<g:message code="monitoreo.bitacora.label" default="Bitacora" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="bitacora" name="bitacora.id" from="${Bitacora.list()}" optionKey="id" required="" value="${monitoreoInstance?.bitacora?.id}" class="many-to-one"/>
+	<g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char)}" optionKey="id" required="" value="${monitoreoInstance?.bitacora?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'estadoMonitoreo', 'error')} required">
