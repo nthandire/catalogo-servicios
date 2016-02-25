@@ -563,7 +563,7 @@ class FirmadoService {
     requerimientos.each {
       if (it.estado == 'E' as char) {
         def hoy = new Date()
-        if (hoy - it.lastUpdated > 7) {
+        if (hoy - it.lastUpdated > 6) {
           it.estado = 'T' as char
           def si = 1 // TODO: relacionado con propertie encuesta.valor.1=Si, crear un valor global
           it.p01 = si
@@ -625,7 +625,7 @@ class FirmadoService {
         def fechaSolución = it."fechaSolnivel$nivel"
         log.debug("fechaSolución = $fechaSolución")
         log.debug("Modificando BD incidentes, caso = $it, estado = 'E'. nivel = $nivel, fecha = $fechaSolución")
-        if (hoy - fechaSolución > 7) {
+        if (hoy - fechaSolución > 6) {
           log.debug("Entré por fecha, $fechaSolución")
           it.estado = 'T' as char
           def si = 1 // TODO: relacionado con propertie encuesta.valor.1=Si, crear un valor global
