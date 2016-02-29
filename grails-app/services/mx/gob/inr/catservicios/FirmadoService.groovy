@@ -511,11 +511,13 @@ class FirmadoService {
     // Reportes
 
   def requerimientosConEncuesta(Date startDate, Date endDate) {
-    Solicitud.findAllByEstadoAndFechaAutorizaBetween('T' as char, startDate, endDate)
+    def estados = ['T' as char, 'E' as char]
+    Solicitud.findAllByEstadoInListAndFechaAutorizaBetween(estados, startDate, endDate)
   }
 
   def incidentesConEncuesta(Date startDate, Date endDate) {
-    Incidente.findAllByEstadoAndFechaIncidenteBetween('T' as char, startDate, endDate)
+    def estados = ['T' as char, 'E' as char]
+    Incidente.findAllByEstadoInListAndFechaIncidenteBetween(estados, startDate, endDate)
   }
 
   def recibidas(Date startDate, Date endDate) {

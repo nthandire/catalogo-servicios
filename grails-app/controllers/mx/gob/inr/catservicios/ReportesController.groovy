@@ -51,6 +51,7 @@ class ReportesController {
     def satisfechos = firmadoService.satisfechos(startDate, endDate)
     params["satisfechos"] = formato.format(satisfechos)
 
+    log.debug("startDate = $startDate, endDate = $endDate")
     def requerimientos = requerimientosConEncuesta(startDate, endDate)
     log.debug("requerimientos = $requerimientos")
 
