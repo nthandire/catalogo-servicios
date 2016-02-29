@@ -15,8 +15,8 @@ class BitacoraDetalle {
   static mapping = {
     id column:'id_bitacoradetalle', generator: "increment"
     descripcion column:'des_bitacoradetalle'
-    estado column: "estado_bitacoradetalle"
-    estado length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
+    estado column: "estado_bitacoradetalle",
+      length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
     bitacora column:'id_bitacora'
     version false
   }
