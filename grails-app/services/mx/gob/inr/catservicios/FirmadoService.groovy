@@ -712,7 +712,7 @@ class FirmadoService {
     lista.each {
       def fechaInicio = it.fechaVb?:it.fechaAutoriza
       def incrementar = true
-      it.detalles.each { det ->
+      it.detalles.findAll{it.estado in ['T' as char, 'E' as char]}.each { det ->
         if (incrementar && det.estado == 'A' as char) {
           Integer tiempoAsignado = 0
           for (i in 1..nivel) {
