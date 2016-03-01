@@ -708,11 +708,15 @@ class FirmadoService {
   }
 
   Integer cuantosReqEnTiempoNivel(ArrayList lista, Integer nivel) {
+    log.debug("cuantosReqEnTiempoNivel, lista = $lista, nivel = $nivel")
     Integer cuantos = 0
     lista.each {
       def fechaInicio = it.fechaVb?:it.fechaAutoriza
-      def incrementar = true
+      def incrementar = false
+      log.debug("voy a evaluar $it")
       it.detalles.findAll{it.estado in ['T' as char, 'E' as char]}.each { det ->
+        incrementar = true
+        log.debug("evaluando $it")
         if (incrementar && det.estado == 'A' as char) {
           Integer tiempoAsignado = 0
           for (i in 1..nivel) {

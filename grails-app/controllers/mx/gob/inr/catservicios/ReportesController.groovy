@@ -280,26 +280,31 @@ class ReportesController {
         cuantosEnTiempoNivel(inciResueltoPrimerList, 1)
     params["inciResueltoPrimerEnTiempo"] = formato.format(inciResueltoPrimerEnTiempo)
 
-    params["inciNoResueltoPrimerEnTiempo"] = formato.format(inciResueltoPrimerList.size() - inciResueltoPrimerEnTiempo)
+    def inciNoResueltoPrimerEnTiempo = inciResueltoPrimerList.size() - inciResueltoPrimerEnTiempo
+    params["inciNoResueltoPrimerEnTiempo"] = formato.format(inciNoResueltoPrimerEnTiempo)
 
     Integer inciResueltoSegundoEnTiempo = firmadoService.
         cuantosEnTiempoNivel(inciResueltoSegundoList, 2)
     params["inciResueltoSegundoEnTiempo"] = formato.format(inciResueltoSegundoEnTiempo)
 
-    params["inciNoResueltoSegundoEnTiempo"] = formato.format(inciResueltoSegundoList.size() - inciResueltoSegundoEnTiempo)
+    def inciNoResueltoSegundoEnTiempo = inciResueltoSegundoList.size() - inciResueltoSegundoEnTiempo
+    params["inciNoResueltoSegundoEnTiempo"] = formato.format(inciNoResueltoSegundoEnTiempo)
 
     Integer inciResueltoTercerEnTiempo = firmadoService.
         cuantosEnTiempoNivel(inciResueltoTercerList, 3)
     params["inciResueltoTercerEnTiempo"] = formato.format(inciResueltoTercerEnTiempo)
 
-    params["inciNoResueltoTercerEnTiempo"] = formato.format(inciResueltoTercerList.size() - inciResueltoTercerEnTiempo)
+    def inciNoResueltoTercerEnTiempo = inciResueltoTercerList.size() - inciResueltoTercerEnTiempo
+    params["inciNoResueltoTercerEnTiempo"] = formato.format(inciNoResueltoTercerEnTiempo)
 
     def inciResueltoTotalEnTiempo = inciResueltoPrimerEnTiempo +
         inciResueltoSegundoEnTiempo + inciResueltoTercerEnTiempo
     params["inciResueltoTotalEnTiempo"] = formato.format(inciResueltoTotalEnTiempo)
 
     def inciRecibidos = incidentes.count {it.estado != 'C' as char}
-    params["inciNoResueltoTotalEnTiempo"] = formato.format(inciRecibidos - params["inciResueltoTotalEnTiempo"].toInteger())
+    def inciNoResueltoTotalEnTiempo = inciNoResueltoPrimerEnTiempo +
+      inciNoResueltoSegundoEnTiempo + inciResueltoTercerEnTiempo
+    params["inciNoResueltoTotalEnTiempo"] = formato.format(inciNoResueltoTotalEnTiempo)
 
 
     def formatoFijo = new DecimalFormat("#,##0.00", dfs)
