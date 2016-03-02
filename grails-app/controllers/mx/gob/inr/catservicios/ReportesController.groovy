@@ -281,6 +281,7 @@ class ReportesController {
     params["inciResueltoPrimerEnTiempo"] = formato.format(inciResueltoPrimerEnTiempo)
 
     def inciNoResueltoPrimerEnTiempo = inciResueltoPrimerList.size() - inciResueltoPrimerEnTiempo
+    log.debug("inciNoResueltoPrimerEnTiempo = $inciNoResueltoPrimerEnTiempo")
     params["inciNoResueltoPrimerEnTiempo"] = formato.format(inciNoResueltoPrimerEnTiempo)
 
     Integer inciResueltoSegundoEnTiempo = firmadoService.
@@ -288,6 +289,7 @@ class ReportesController {
     params["inciResueltoSegundoEnTiempo"] = formato.format(inciResueltoSegundoEnTiempo)
 
     def inciNoResueltoSegundoEnTiempo = inciResueltoSegundoList.size() - inciResueltoSegundoEnTiempo
+    log.debug("inciNoResueltoSegundoEnTiempo = $inciNoResueltoSegundoEnTiempo")
     params["inciNoResueltoSegundoEnTiempo"] = formato.format(inciNoResueltoSegundoEnTiempo)
 
     Integer inciResueltoTercerEnTiempo = firmadoService.
@@ -295,6 +297,7 @@ class ReportesController {
     params["inciResueltoTercerEnTiempo"] = formato.format(inciResueltoTercerEnTiempo)
 
     def inciNoResueltoTercerEnTiempo = inciResueltoTercerList.size() - inciResueltoTercerEnTiempo
+    log.debug("inciNoResueltoTercerEnTiempo = $inciNoResueltoTercerEnTiempo")
     params["inciNoResueltoTercerEnTiempo"] = formato.format(inciNoResueltoTercerEnTiempo)
 
     def inciResueltoTotalEnTiempo = inciResueltoPrimerEnTiempo +
@@ -303,7 +306,8 @@ class ReportesController {
 
     def inciRecibidos = incidentes.count {it.estado != 'C' as char}
     def inciNoResueltoTotalEnTiempo = inciNoResueltoPrimerEnTiempo +
-      inciNoResueltoSegundoEnTiempo + inciResueltoTercerEnTiempo
+      inciNoResueltoSegundoEnTiempo + inciNoResueltoTercerEnTiempo
+      log.debug("inciNoResueltoTotalEnTiempo = $inciNoResueltoTotalEnTiempo")
     params["inciNoResueltoTotalEnTiempo"] = formato.format(inciNoResueltoTotalEnTiempo)
 
 
