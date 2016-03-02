@@ -20,7 +20,7 @@
 		<g:message code="bitacoraDetalle.estado.label" default="Estado" />
 		<span class="required-indicator">*</span>
 	</label>
-  <g:select name="estado" from="${bitacoraDetalle?.constraints?.estado?.inList}" required="" value="${fieldValue(bean: bitacoraDetalle, field: 'estado')}" valueMessagePrefix="cat_servCat.estado"/>
+  <g:select name="estado" from="${bitacoraDetalleInstance.constraints.estado.inList}" required="" value="${fieldValue(bean: bitacoraDetalleInstance, field: 'estado')}" valueMessagePrefix="cat_servCat.estado"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: bitacoraDetalleInstance, field: 'bitacora', 'error')} required">
