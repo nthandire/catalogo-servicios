@@ -57,6 +57,7 @@
 						<g:each in="${bitacoraInstance.detalles.sort{it.id}}" var="b">
 						<span class="property-value" aria-labelledby="detalles-label">
 							<g:link controller="bitacoraDetalle" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link>
+							&nbsp;&nbsp;<g:message code="cat_servCat.estado.${b.estado}" />
 						</span>
 						</g:each>
 
