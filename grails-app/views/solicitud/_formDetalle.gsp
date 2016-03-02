@@ -30,8 +30,7 @@
     <div class="span4">
       <div class="fieldtablecontain">
         <label for="resguardo">Inventario o No. de Serie o Usuario</label>
-        <g:textField id="cpuauto" name="idResguardoentregadetalle"
-          style="width: 250px;"/>
+        <g:textField id="cpuauto" name="idResguardoentregadetalle"/>
       </div>
     </div>
   </g:if>
