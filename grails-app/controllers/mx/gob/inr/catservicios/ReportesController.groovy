@@ -400,7 +400,7 @@ class ReportesController {
       endDate = endDate + 1.day - 1.seconds
     }
     log.debug("startDate = $startDate, endDate = $endDate")
-    def titulo = "del ${startDate.format("YYYY-MM-dd")} al ${endDate.format("YYYY-MM-dd")}"
+    def titulo = "del ${startDate[Calendar.YEAR]}${startDate.format("-MM-dd")} al ${endDate[Calendar.YEAR]}${endDate.format("-MM-dd")}"
     params["anio"] = startDate.format('YYYY')
     def folio = params.folio.toInteger()
     log.debug("folio = ${folio}")
