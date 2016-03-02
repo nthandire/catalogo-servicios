@@ -59,9 +59,16 @@
           <g:render template="form"/>
 
 
-          <H1>
-            <g:message code="solicitud.archivos.label" default="Archivos" />
-          </H1>
+          <div class="row-fluid">
+            <div class="span3">
+              <H1>
+                <g:message code="solicitud.archivos.label" default="Archivos" />
+              </H1>
+            </div>
+            <div class="span4" style="padding-top: 50px;">
+              (Selecciona Actualizar antes de agregar archivo)
+            </div>
+          </div>
 
           <div class="row-fluid">
             <div class="span10 offset1">
