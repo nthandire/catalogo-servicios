@@ -34,10 +34,12 @@
 
 				<g:if test="${bitacoraInstance?.descripcion}">
 				<li class="fieldcontain">
-					<span id="descripcion-label" class="property-label"><g:message code="bitacora.descripcion.label" default="Descripción" /></span>
-
-						<span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${bitacoraInstance}" field="descripcion"/></span>
-
+					<span id="descripcion-label" class="property-label">
+						<g:message code="bitacora.descripcion.label" default="Descripción" />
+					</span>
+					<span class="property-value" aria-labelledby="descripcion-label">
+						<g:fieldValue bean="${bitacoraInstance}" field="descripcion"/>
+					</span>
 				</li>
 				</g:if>
 

@@ -4,29 +4,24 @@
   textArea { width: 412px; }
 </style>
 
-<g:if test="${monitoreoInstance.id}">
 
+<g:if test="${monitoreoInstance.id}">
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'fechaMonitoreo', 'error')} required">
 	<label for="fechaMonitoreo">
-		<g:message code="monitoreo.fechaMonitoreo.label" default="Fecha Monitoreo" />
+		<g:message code="monitoreo.fechaMonitoreo.label" default="Fecha" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="fechaMonitoreo" precision="day"  value="${monitoreoInstance?.fechaMonitoreo}"  />
+	<g:field name="fechaMonitoreo" type="text" disabled="true"
+    value="${monitoreoInstance?.fechaMonitoreo.format("dd/MMM/YYYY")}"
+    style="text-align: center;" />
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'numeroMonitoreo', 'error')} required">
   <label for="numeroMonitoreo">
-    <g:message code="monitoreo.numeroMonitoreo.label" default="Numero Monitoreo" />
+    <g:message code="monitoreo.numeroMonitoreo.label" default="Número" />
   </label>
-  <g:field name="numeroMonitoreo" type="number" value="${monitoreoInstance.numeroMonitoreo}" required=""/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
-  <label for="bitacora">
-    <g:message code="monitoreo.bitacora.label" default="Bitacora" />
-  </label>
-  <g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char).sort{it.id}}"
-    value="${monitoreoInstance.estado}" />
+  <g:field name="numeroMonitoreo" type="text" value="${monitoreoInstance}"
+    disabled="true" style="text-align: center;" />
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
@@ -37,10 +32,10 @@
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'estado', 'error')} required">
-	<label for="estado">
-		<g:message code="monitoreo.estado.label" default="Estado Monitoreo" />
-	</label>
-	<g:select name="estado" 
+  <label for="estado">
+    <g:message code="monitoreo.estado.label" default="Estado" />
+  </label>
+  <g:select name="estado" 
     from="${monitoreoInstance.constraints.estado.inList}" required=""
     value="${fieldValue(bean: monitoreoInstance, field: 'estado')}"
     valueMessagePrefix="cat_servCat.estado"/>
@@ -53,7 +48,7 @@
   <label for="bitacora">
     <g:message code="monitoreo.bitacora.label" default="Bitacora" />
   </label>
-  <g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char)}"
+  <g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char).sort{it.id}}"
     optionKey="id" optionValue="${monitoreoInstance.bitacora}" />
 </div>
 
@@ -79,7 +74,7 @@
 <g:if test="${monitoreoInstance.id}">
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'detalles', 'error')} ">
 	<label for="detalles">
-		<g:message code="monitoreo.detalles.label" default="Monitoreo Detalles" />
+		<g:message code="monitoreo.detalles.label" default="Detalles" />
 	</label>
 
   <ul class="one-to-many">
