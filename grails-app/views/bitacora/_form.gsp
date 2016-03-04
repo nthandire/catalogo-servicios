@@ -28,7 +28,9 @@
   <label for="estado">
     <g:message code="bitacora.estado.label" default="Estado" />
   </label>
-  <g:select name="estado" from="${bitacoraInstance.constraints.estado.inList}" required="" value="${fieldValue(bean: bitacoraInstance, field: 'estado')}" valueMessagePrefix="cat_servCat.estado"/>
+  <g:select name="estado" from="${bitacoraInstance.constraints.estado.inList}"
+    required="" value="${fieldValue(bean: bitacoraInstance, field: 'estado')}"
+    valueMessagePrefix="cat_servCat.estado"/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: bitacoraInstance, field: 'detalles', 'error')} ">

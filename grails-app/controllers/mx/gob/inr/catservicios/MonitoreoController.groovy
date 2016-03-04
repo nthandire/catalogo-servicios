@@ -2,9 +2,11 @@ package mx.gob.inr.catservicios
 
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
+import groovy.time.TimeCategory
 
 @Secured(['ROLE_SAST_ADMIN'])
 class MonitoreoController {
+    def springSecurityService
     static nombreMenu = "Monitoreos"
     static ordenMenu = 33
 
@@ -25,7 +27,31 @@ class MonitoreoController {
 
     def save() {
         def monitoreoInstance = new Monitoreo(params)
+        monitoreoInstance.fechaMonitoreo = new Date()
+        monitoreoInstance.estado = 'A' as char
+        monitoreoInstance.idUsuario = springSecurityService.principal.id
         monitoreoInstance.ipTerminal = request.getRemoteAddr()
+
+        def startDate = new Date().clearTime()
+        startDate[Calendar.MONTH] = 0
+        startDate[Calendar.DATE] = 1
+        log.debug("startDate = $startDate")
+        def endDate = startDate.clone()
+        use(TimeCategory) {
+            endDate = endDate + 1.years - 1.seconds
+        }
+        log.debug("endDate = $endDate")
+
+        Long maxID = Monitoreo.withCriteria { // TODO: un test para ver si este algoritmo sique funcionando
+          between("fechaMonitoreo", startDate, endDate)
+          projections {
+            max "numeroMonitoreo"
+          }
+        }[0] ?: 0
+        log.debug("maxID = $maxID")
+
+        monitoreoInstance.numeroMonitoreo = ++maxID
+
         if (!monitoreoInstance.save(flush: true)) {
             render(view: "create", model: [monitoreoInstance: monitoreoInstance])
             return

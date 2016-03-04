@@ -27,13 +27,13 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="fechaMonitoreo" title="${message(code: 'monitoreo.fechaMonitoreo.label', default: 'Fecha Monitoreo')}" />
+						<g:sortableColumn property="fechaMonitoreo" title="${message(code: 'monitoreo.fechaMonitoreo.label', default: 'Fecha')}" />
 					
-						<g:sortableColumn property="numeroMonitoreo" title="${message(code: 'monitoreo.numeroMonitoreo.label', default: 'Numero Monitoreo')}" />
+						<g:sortableColumn property="numeroMonitoreo" title="${message(code: 'monitoreo.numeroMonitoreo.label', default: 'Numero')}" />
 					
 						<th><g:message code="monitoreo.bitacora.label" default="Bitacora" /></th>
 					
-						<g:sortableColumn property="estadoMonitoreo" title="${message(code: 'monitoreo.estadoMonitoreo.label', default: 'Estado Monitoreo')}" />
+						<g:sortableColumn property="estado" title="${message(code: 'monitoreo.estado.label', default: 'Estado')}" />
 					
 						<g:sortableColumn property="semaforo" title="${message(code: 'monitoreo.semaforo.label', default: 'Semaforo')}" />
 					
@@ -47,13 +47,13 @@
 					
 						<td><g:link action="show" id="${monitoreoInstance.id}">${fieldValue(bean: monitoreoInstance, field: "fechaMonitoreo")}</g:link></td>
 					
-						<td>${fieldValue(bean: monitoreoInstance, field: "numeroMonitoreo")}</td>
+						<td>${monitoreoInstance}</td>
 					
 						<td>${fieldValue(bean: monitoreoInstance, field: "bitacora")}</td>
 					
-						<td>${fieldValue(bean: monitoreoInstance, field: "estadoMonitoreo")}</td>
-					
-						<td>${fieldValue(bean: monitoreoInstance, field: "semaforo")}</td>
+						<td><g:message code="cat_servCat.estado.${monitoreoInstance.estado}" /></td>
+
+						<td><g:message code="intensidad.valor.${monitoreoInstance.semaforo}" /></td>
 					
 						<td>${fieldValue(bean: monitoreoInstance, field: "nota")}</td>
 					

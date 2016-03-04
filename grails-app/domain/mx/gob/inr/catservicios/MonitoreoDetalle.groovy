@@ -14,9 +14,9 @@ class MonitoreoDetalle {
   static mapping = {
     id column:'id_monitoreodetalle'
     monitoreo column:'id_monitoreo'
-    bitacoradetalle column:'id_bitacoradetalle'
+    bitacoradetalle column:'id_bitacoradetalle', editable:false
     estado length: 1, columnDefinition: 'char(1)',
-      defaultValue: "'A'"
+      defaultValue: "'A'", editable:false
     version false
   } 
 

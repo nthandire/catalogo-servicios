@@ -1,6 +1,10 @@
 <%@ page import="mx.gob.inr.catservicios.*" %>
 
+<style type="text/css">
+  textArea { width: 412px; }
+</style>
 
+<g:if test="${monitoreoInstance.id}">
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'fechaMonitoreo', 'error')} required">
 	<label for="fechaMonitoreo">
@@ -11,60 +15,75 @@
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'numeroMonitoreo', 'error')} required">
-	<label for="numeroMonitoreo">
-		<g:message code="monitoreo.numeroMonitoreo.label" default="Numero Monitoreo" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="numeroMonitoreo" type="number" value="${monitoreoInstance.numeroMonitoreo}" required=""/>
+  <label for="numeroMonitoreo">
+    <g:message code="monitoreo.numeroMonitoreo.label" default="Numero Monitoreo" />
+  </label>
+  <g:field name="numeroMonitoreo" type="number" value="${monitoreoInstance.numeroMonitoreo}" required=""/>
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
-	<label for="bitacora">
-		<g:message code="monitoreo.bitacora.label" default="Bitacora" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char)}" optionKey="id" required="" value="${monitoreoInstance?.bitacora?.id}" class="many-to-one"/>
+  <label for="bitacora">
+    <g:message code="monitoreo.bitacora.label" default="Bitacora" />
+  </label>
+  <g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char).sort{it.id}}"
+    value="${monitoreoInstance.estado}" />
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'estadoMonitoreo', 'error')} required">
-	<label for="estadoMonitoreo">
-		<g:message code="monitoreo.estadoMonitoreo.label" default="Estado Monitoreo" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select name="estadoMonitoreo" from="${monitoreoInstance.constraints.estadoMonitoreo.inList}" required="" value="${fieldValue(bean: monitoreoInstance, field: 'estadoMonitoreo')}" valueMessagePrefix="monitoreo.estadoMonitoreo"/>
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
+  <label for="bitacora">
+    <g:message code="monitoreo.bitacora.label" default="Bitacora" />
+  </label>
+  <g:field id="bitacora" name="bitacora.id" type="text" disabled="true" value="${monitoreoInstance.bitacora}"/>
 </div>
+
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'estado', 'error')} required">
+	<label for="estado">
+		<g:message code="monitoreo.estado.label" default="Estado Monitoreo" />
+	</label>
+	<g:select name="estado" 
+    from="${monitoreoInstance.constraints.estado.inList}" required=""
+    value="${fieldValue(bean: monitoreoInstance, field: 'estado')}"
+    valueMessagePrefix="cat_servCat.estado"/>
+</div>
+
+</g:if>
+<g:else>
+
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
+  <label for="bitacora">
+    <g:message code="monitoreo.bitacora.label" default="Bitacora" />
+  </label>
+  <g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char)}"
+    optionKey="id" optionValue="${monitoreoInstance.bitacora}" />
+</div>
+
+</g:else>
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'semaforo', 'error')} required">
-	<label for="semaforo">
-		<g:message code="monitoreo.semaforo.label" default="Semaforo" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="semaforo" type="number" min="1" max="3" value="${monitoreoInstance.semaforo}" required=""/>
+  <label for="semaforo">
+    <g:message code="monitoreo.semaforo.label" default="Semaforo" />
+    <span class="required-indicator">*</span>
+  </label>
+  <g:select name="semaforo" from="${[1,2,3]}" valueMessagePrefix="intensidad.valor"
+    value="${monitoreoInstance.semaforo}" required="" />
 </div>
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'nota', 'error')} ">
 	<label for="nota">
 		<g:message code="monitoreo.nota.label" default="Nota" />
-
 	</label>
-	<g:textArea name="nota" cols="40" rows="5" maxlength="3000" value="${monitoreoInstance?.nota}"/>
+	<g:textArea name="nota" cols="40" rows="5" maxlength="3000"
+    value="${monitoreoInstance?.nota}" required="" />
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'modificacion', 'error')} required">
-	<label for="modificacion">
-		<g:message code="monitoreo.modificacion.label" default="Modificacion" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="modificacion" type="number" value="${monitoreoInstance.modificacion}" required=""/>
-</div>
-
-<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'monitoreoDetalles', 'error')} ">
-	<label for="monitoreoDetalles">
-		<g:message code="monitoreo.monitoreoDetalles.label" default="Monitoreo Detalles" />
+<g:if test="${monitoreoInstance.id}">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'detalles', 'error')} ">
+	<label for="detalles">
+		<g:message code="monitoreo.detalles.label" default="Monitoreo Detalles" />
 	</label>
 
   <ul class="one-to-many">
-    <g:each in="${monitoreoInstance?.monitoreoDetalles}" var="m">
+    <g:each in="${monitoreoInstance?.detalles}" var="m">
         <li><g:link controller="monitoreoDetalle" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
     </g:each>
     <li class="add">
@@ -77,4 +96,5 @@
     </li>
   </ul>
 </div>
+</g:if>
 

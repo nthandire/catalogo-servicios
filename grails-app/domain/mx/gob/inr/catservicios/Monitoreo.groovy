@@ -3,39 +3,39 @@ package mx.gob.inr.catservicios
 class Monitoreo {
   Date fechaMonitoreo
   Integer numeroMonitoreo
-  char estadoMonitoreo = (char)'A'
+  Character estado = 'A' as char
   Integer semaforo = 1
   String nota
-  // usuario TODO: ligarlo a la BD
+  Long idUsuario
   Date lastUpdated
-  Integer modificacion = 1
   String ipTerminal
 
   static belongsTo = [bitacora:Bitacora]
-  static hasMany = [monitoreoDetalles: MonitoreoDetalle]
+  static hasMany = [detalles: MonitoreoDetalle]
 
   static constraints = {
-    fechaMonitoreo()
-    numeroMonitoreo()
+    fechaMonitoreo editable:false
+    numeroMonitoreo editable:false
     bitacora column:'id_bitacora'
-    estadoMonitoreo blank:false, inList: [(char)'A',(char)'I']
+    estado column:'estado_monitoreo', blank:false,
+      inList: [(char)'A',(char)'I'], editable:false
     semaforo blank:false, min: 1, max: 3
     nota maxSize:3000
-    modificacion()
+    idUsuario display:false, editable:false
     ipTerminal editable:false
   }
 
   static mapping = {
-    id column:'id_monitoreo'
+    id column:'id_monitoreo', generator: "increment"
     bitacora column:'id_bitacora'
-    estadoMonitoreo length: 1, columnDefinition: 'char(1)',
-      defaultValue: "'A'"
+    estado column: "estado_monitoreo", length: 1,
+      columnDefinition: 'char(1)', defaultValue: "'A'"
     semaforo defaultValue: "1"
     lastUpdated column:'fecha_modificacion'
-    version false
+    version column:'modificacion'
   }
 
   String toString() {
-    "monitoreo: $numeroMonitoreo"
+    "${numeroMonitoreo}/${fechaMonitoreo[Calendar.YEAR]}"
   }
 }

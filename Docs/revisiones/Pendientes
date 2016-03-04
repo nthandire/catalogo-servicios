@@ -42,6 +42,10 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 
 Plan
 
+- monitoreo detalle
+  - quitar
+
+
 - Bitacoras
   - supongo que si ya existe un monitoreo capturado, ya no se puede editar una bitacora
   - tampoco sus detalles
