@@ -81,18 +81,22 @@
 					<span class="property-value" aria-labelledby="nota-label"><g:fieldValue bean="${monitoreoInstance}" field="nota"/></span>
 				</li>
 				</g:if>
-			%{--
+			
 				<g:if test="${monitoreoInstance?.detalles}">
 				<li class="fieldcontain">
-					<span id="detalles-label" class="property-label"><g:message code="monitoreo.detalles.label" default="Detalles" /></span>
-					
-						<g:each in="${monitoreoInstance.detalles}" var="m">
-						<span class="property-value" aria-labelledby="detalles-label"><g:link controller="monitoreoDetalle" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
+					<span id="detalles-label" class="property-label">
+						<g:message code="monitoreo.detalles.label" default="Detalles" />
+					</span>
+					<g:each in="${monitoreoInstance.detalles}" var="m">
+						<span class="property-value" aria-labelledby="detalles-label">
+							<g:link controller="monitoreoDetalle" action="show" id="${m.id}">
+								${m?.encodeAsHTML()}
+							</g:link>
+						</span>
+					</g:each>
 				</li>
 				</g:if>
-			--}%
+			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

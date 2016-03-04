@@ -12,7 +12,7 @@ class MonitoreoDetalle {
   }
 
   static mapping = {
-    id column:'id_monitoreodetalle'
+    id column:'id_monitoredetalle'
     monitoreo column:'id_monitoreo'
     bitacoradetalle column:'id_bitacoradetalle', editable:false
     estado length: 1, columnDefinition: 'char(1)',
