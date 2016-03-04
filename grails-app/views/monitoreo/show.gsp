@@ -28,36 +28,50 @@
 			
 				<g:if test="${monitoreoInstance?.fechaMonitoreo}">
 				<li class="fieldcontain">
-					<span id="fechaMonitoreo-label" class="property-label"><g:message code="monitoreo.fechaMonitoreo.label" default="Fecha Monitoreo" /></span>
+					<span id="fechaMonitoreo-label" class="property-label"><g:message code="monitoreo.fechaMonitoreo.label" default="Fecha" /></span>
 					<span class="property-value" aria-labelledby="fechaMonitoreo-label"><g:formatDate date="${monitoreoInstance?.fechaMonitoreo}" /></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${monitoreoInstance?.numeroMonitoreo}">
 				<li class="fieldcontain">
-					<span id="numeroMonitoreo-label" class="property-label"><g:message code="monitoreo.numeroMonitoreo.label" default="Numero Monitoreo" /></span>
-					<span class="property-value" aria-labelledby="numeroMonitoreo-label"><g:fieldValue bean="${monitoreoInstance}" field="numeroMonitoreo"/></span>
+					<span id="numeroMonitoreo-label" class="property-label">
+						<g:message code="monitoreo.numeroMonitoreo.label" default="Número" />
+					</span>
+					<span class="property-value" aria-labelledby="numeroMonitoreo-label">
+						${monitoreoInstance}
+					</span>
 				</li>
 				</g:if>
 			
 				<g:if test="${monitoreoInstance?.bitacora}">
 				<li class="fieldcontain">
-					<span id="bitacora-label" class="property-label"><g:message code="monitoreo.bitacora.label" default="Bitacora" /></span>
-					<span class="property-value" aria-labelledby="bitacora-label"><g:link controller="bitacora" action="show" id="${monitoreoInstance?.bitacora?.id}">${monitoreoInstance?.bitacora?.encodeAsHTML()}</g:link></span>
+					<span id="bitacora-label" class="property-label">
+						<g:message code="monitoreo.bitacora.label" default="Bitacora" />
+					</span>
+					<span class="property-value" aria-labelledby="bitacora-label">
+						<g:link controller="bitacora" action="show" id="${monitoreoInstance?.bitacora?.id}">
+							${monitoreoInstance?.bitacora?.encodeAsHTML()}
+						</g:link>
+					</span>
 				</li>
 				</g:if>
 			
 				<g:if test="${monitoreoInstance?.estado}">
 				<li class="fieldcontain">
-					<span id="estado-label" class="property-label"><g:message code="monitoreo.estado.label" default="Estado Monitoreo" /></span>
-					<span class="property-value" aria-labelledby="estado-label"><g:fieldValue bean="${monitoreoInstance}" field="estado"/></span>
+					<span id="estado-label" class="property-label"><g:message code="monitoreo.estado.label" default="Estado" /></span>
+					<span class="property-value" aria-labelledby="estado-label">
+					<g:message code="cat_servCat.estado.${monitoreoInstance.estado}" />
+					</span>
 				</li>
 				</g:if>
 			
 				<g:if test="${monitoreoInstance?.semaforo}">
 				<li class="fieldcontain">
 					<span id="semaforo-label" class="property-label"><g:message code="monitoreo.semaforo.label" default="Semaforo" /></span>
-					<span class="property-value" aria-labelledby="semaforo-label"><g:fieldValue bean="${monitoreoInstance}" field="semaforo"/></span>
+					<span class="property-value" aria-labelledby="semaforo-label">
+					<g:message code="intensidad.valor.${monitoreoInstance.semaforo}" />
+					</span>
 				</li>
 				</g:if>
 			

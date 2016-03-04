@@ -44,9 +44,9 @@
 				<g:if test="${bitacoraInstance?.estado}">
 				<li class="fieldcontain">
 					<span id="estado-label" class="property-label"><g:message code="bitacora.estado.label" default="Estado" /></span>
-
-						<span class="property-value" aria-labelledby="estado-label"><g:message code="cat_servCat.estado.${bitacoraInstance.estado}" /></span>
-
+					<span class="property-value" aria-labelledby="estado-label">
+						<g:message code="cat_servCat.estado.${bitacoraInstance.estado}" />
+					</span>
 				</li>
 				</g:if>
 
