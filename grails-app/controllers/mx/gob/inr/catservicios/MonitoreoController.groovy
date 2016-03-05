@@ -127,11 +127,13 @@ class MonitoreoController {
           def estado = 0
           if (params["det[${it.id}]"]) {
             estado = 1
-            log.debug("prender el detalle ${it.id}")
-          } else {
-            log.debug("apagar el detalle ${it.id}")
           }
           it.estado = estado
+          def nota = ""
+          if (params["observ[${it.id}]"]) {
+            nota = params["observ[${it.id}]"]
+          }
+          it.observaciones = nota
           if (!it.save(flush: true)) {
             flash.error = "Error al grabar detalles (2), revisar el programa y la BD."
             render(view: "edit", model: [monitoreoInstance: monitoreoInstance])

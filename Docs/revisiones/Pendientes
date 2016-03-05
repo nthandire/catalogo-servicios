@@ -43,12 +43,7 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - monitoreo
-  - edit
-    - capturar las observaciones
-
   - no permitir edición ni agregar detalles en otro día
-- monitoreo detalle
-  - quitar
 
 
 - Bitacoras
@@ -63,10 +58,4 @@ Plan
 - asignar un usuario a ese rol
   - alguien de Javier Torres
 
-
-
-quitar fecha de monitoreo (hoy)
-quitar numero de monitoreo (es automatico)
-quitar estado ('A')
-quitar liga para capturar detalle, tenemos la lista de la bitacora
 

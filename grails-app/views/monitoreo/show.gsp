@@ -87,14 +87,27 @@
 					<span id="detalles-label" class="property-label">
 						<g:message code="monitoreo.detalles.label" default="Detalles" />
 					</span>
-					<g:each in="${monitoreoInstance.detalles.sort{it.id}}" var="m">
-						<span class="property-value" aria-labelledby="detalles-label">
-							<g:link controller="monitoreoDetalle" action="show" id="${m.id}">
-								<g:checkBox name="det[${m.id}]" value="${m.estado}" disabled="true" />
-								: ${m?.encodeAsHTML()}
-							</g:link>
-						</span>
-					</g:each>
+
+				  <div style="margin: auto; width: 40%;" >
+				    <table>
+				      <g:each in="${monitoreoInstance?.detalles.sort{it.id}}" var="m">
+				          <tr style="text-align: left;">
+				            <td>
+				              <g:checkBox name="det[${m.id}]" value="${m.estado}" disabled="true" />
+				            </td>
+				            <td>
+				              <g:link controller="monitoreoDetalle" action="show" id="${m.id}">
+				                ${m?.encodeAsHTML()}
+				              </g:link>
+				            </td>
+				            <td>
+				              <g:field type="text" name="observ[${m.id}]"
+				              	value="${m.observaciones}" disabled="true" />
+				            </td>
+				          </tr>
+				      </g:each>
+				    </table>
+				  </div>
 				</li>
 				</g:if>
 			

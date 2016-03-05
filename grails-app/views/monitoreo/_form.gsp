@@ -71,22 +71,31 @@
     value="${monitoreoInstance?.nota}" required="" />
 </div>
 
-<g:if test="${monitoreoInstance.id}">
+<g:if test="${monitoreoInstance.detalles}">
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'detalles', 'error')} ">
 	<label for="detalles">
 		<g:message code="monitoreo.detalles.label" default="Detalles" />
 	</label>
 
-  <ul class="one-to-many">
-    <g:each in="${monitoreoInstance?.detalles.sort{it.id}}" var="m">
-        <li style="text-align: left;">
-          <g:checkBox name="det[${m.id}]" value="${m.estado}" />
-          <g:link controller="monitoreoDetalle" action="show" id="${m.id}">
-            ${m?.encodeAsHTML()}
-          </g:link>
-        </li>
-    </g:each>
-  </ul>
+  <div style="margin: auto; width: 40%;" >
+    <table>
+      <g:each in="${monitoreoInstance?.detalles.sort{it.id}}" var="m">
+          <tr style="text-align: left;">
+            <td>
+              <g:checkBox name="det[${m.id}]" value="${m.estado}" />
+            </td>
+            <td>
+              <g:link controller="monitoreoDetalle" action="show" id="${m.id}">
+                ${m?.encodeAsHTML()}
+              </g:link>
+            </td>
+            <td>
+              <g:field type="text" name="observ[${m.id}]" value="${m.observaciones}" />
+            </td>
+          </tr>
+      </g:each>
+    </table>
+  </div>
 </div>
 </g:if>
 
