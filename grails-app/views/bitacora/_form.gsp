@@ -39,11 +39,10 @@
 	</label>
   <ul class="one-to-many">
     <g:each in="${bitacoraInstance?.detalles}" var="b">
-        <li><g:link controller="bitacoraDetalle" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></li>
+      <li><g:link controller="bitacoraDetalle" action="show" id="${b.id}">
+        ${b?.encodeAsHTML()}
+      </g:link></li>
     </g:each>
-    <li class="add">
-    <g:link controller="bitacoraDetalle" action="create" params="['bitacora.id': bitacoraInstance?.id]">${message(code: 'default.add.label', args: ['Detalles'])}</g:link>
-    </li>
   </ul>
 </div>
 

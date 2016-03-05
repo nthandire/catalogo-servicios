@@ -78,17 +78,14 @@
 	</label>
 
   <ul class="one-to-many">
-    <g:each in="${monitoreoInstance?.detalles}" var="m">
-        <li><g:link controller="monitoreoDetalle" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+    <g:each in="${monitoreoInstance?.detalles.sort{it.id}}" var="m">
+        <li style="text-align: left;">
+          <g:checkBox name="det[${m.id}]" value="${m.estado}" />
+          <g:link controller="monitoreoDetalle" action="show" id="${m.id}">
+            ${m?.encodeAsHTML()}
+          </g:link>
+        </li>
     </g:each>
-    <li class="add">
-      <g:link controller="monitoreoDetalle" action="create"
-        params="['monitoreo.id': monitoreoInstance?.id]">
-        ${message(code: 'default.add.label',
-          args: [message(code: 'monitoreoDetalle.label',
-            default: 'MonitoreoDetalle')])}
-      </g:link>
-    </li>
   </ul>
 </div>
 </g:if>

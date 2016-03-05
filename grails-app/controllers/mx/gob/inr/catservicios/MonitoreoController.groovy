@@ -57,6 +57,19 @@ class MonitoreoController {
             return
         }
 
+        // salvar los detalles
+        monitoreoInstance.bitacora.detalles.sort{it.id}.each {
+          def det = new MonitoreoDetalle()
+          det.estado = 0
+          det.monitoreo = monitoreoInstance
+          det.bitacoradetalle = it
+          if (!det.save(flush: true)) {
+            flash.error = "Error al grabar detalles, revisar el programa y la BD."
+            render(view: "create", model: [monitoreoInstance: monitoreoInstance])
+            return
+          }
+        }
+
         flash.message = message(code: 'default.created.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), monitoreoInstance.toString()])
         redirect(action: "show", id: monitoreoInstance.id)
     }
@@ -84,6 +97,7 @@ class MonitoreoController {
     }
 
     def update(Long id, Long version) {
+      log.debug("params = $params")
         def monitoreoInstance = Monitoreo.get(id)
         if (!monitoreoInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), id])
@@ -109,26 +123,24 @@ class MonitoreoController {
             return
         }
 
+        monitoreoInstance.detalles.each {
+          def estado = 0
+          if (params["det[${it.id}]"]) {
+            estado = 1
+            log.debug("prender el detalle ${it.id}")
+          } else {
+            log.debug("apagar el detalle ${it.id}")
+          }
+          it.estado = estado
+          if (!it.save(flush: true)) {
+            flash.error = "Error al grabar detalles (2), revisar el programa y la BD."
+            render(view: "edit", model: [monitoreoInstance: monitoreoInstance])
+            return
+          }
+        }
+
         flash.message = message(code: 'default.updated.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), monitoreoInstance.toString()])
         redirect(action: "show", id: monitoreoInstance.id)
     }
 
-    def x_delete(Long id) {
-        def monitoreoInstance = Monitoreo.get(id)
-        if (!monitoreoInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            monitoreoInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), id])
-            redirect(action: "show", id: id)
-        }
-    }
 }

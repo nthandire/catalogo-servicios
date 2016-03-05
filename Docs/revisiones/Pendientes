@@ -43,6 +43,9 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - monitoreo
+  - edit
+    - capturar las observaciones
+
   - no permitir edición ni agregar detalles en otro día
 - monitoreo detalle
   - quitar

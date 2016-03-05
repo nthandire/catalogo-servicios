@@ -87,10 +87,11 @@
 					<span id="detalles-label" class="property-label">
 						<g:message code="monitoreo.detalles.label" default="Detalles" />
 					</span>
-					<g:each in="${monitoreoInstance.detalles}" var="m">
+					<g:each in="${monitoreoInstance.detalles.sort{it.id}}" var="m">
 						<span class="property-value" aria-labelledby="detalles-label">
 							<g:link controller="monitoreoDetalle" action="show" id="${m.id}">
-								${m?.encodeAsHTML()}
+								<g:checkBox name="det[${m.id}]" value="${m.estado}" disabled="true" />
+								: ${m?.encodeAsHTML()}
 							</g:link>
 						</span>
 					</g:each>
