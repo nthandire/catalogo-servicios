@@ -456,7 +456,7 @@ class ReportesController {
         "   and TO_CHAR(fechaSolicitud,'%Y') = ? "
       parametros << folio
       parametros << (anioFolio[Calendar.YEAR].toString())
-      titulo += ", folio $folio/${anioFolio[Calendar.YEAR]}"
+      titulo = "folio $folio/${anioFolio[Calendar.YEAR]}"
     }
 
     if (idReporta) {
