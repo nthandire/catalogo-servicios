@@ -25,15 +25,18 @@
 			  <div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<ol class="property-list monitoreo">
-			
-				<g:if test="${monitoreoInstance?.fechaMonitoreo}">
+
+<div class="row-fluid">
+  <div class="span3">
+
 				<li class="fieldcontain">
-					<span id="fechaMonitoreo-label" class="property-label"><g:message code="monitoreo.fechaMonitoreo.label" default="Fecha" /></span>
-					<span class="property-value" aria-labelledby="fechaMonitoreo-label"><g:formatDate date="${monitoreoInstance?.fechaMonitoreo}" /></span>
+					<span id="fecha-label" class="property-label"><g:message code="monitoreo.fecha.label" default="Fecha" /></span>
+					<span class="property-value" aria-labelledby="fecha-label"><g:formatDate date="${monitoreoInstance?.fecha}" /></span>
 				</li>
-				</g:if>
-			
-				<g:if test="${monitoreoInstance?.numeroMonitoreo}">
+
+  </div>
+  <div class="span3">
+
 				<li class="fieldcontain">
 					<span id="numeroMonitoreo-label" class="property-label">
 						<g:message code="monitoreo.numeroMonitoreo.label" default="Número" />
@@ -42,9 +45,10 @@
 						${monitoreoInstance}
 					</span>
 				</li>
-				</g:if>
-			
-				<g:if test="${monitoreoInstance?.bitacora}">
+
+  </div>
+  <div class="span3">
+
 				<li class="fieldcontain">
 					<span id="bitacora-label" class="property-label">
 						<g:message code="monitoreo.bitacora.label" default="Bitacora" />
@@ -53,33 +57,41 @@
 						${monitoreoInstance?.bitacora?.encodeAsHTML()}
 					</span>
 				</li>
-				</g:if>
-			
-				<g:if test="${monitoreoInstance?.estado}">
+
+  </div>
+  <div class="span3">
+
 				<li class="fieldcontain">
 					<span id="estado-label" class="property-label"><g:message code="monitoreo.estado.label" default="Estado" /></span>
 					<span class="property-value" aria-labelledby="estado-label">
 					<g:message code="cat_servCat.estado.${monitoreoInstance.estado}" />
 					</span>
 				</li>
-				</g:if>
-			
-				<g:if test="${monitoreoInstance?.semaforo}">
+
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span3">
+
 				<li class="fieldcontain">
 					<span id="semaforo-label" class="property-label"><g:message code="monitoreo.semaforo.label" default="Semaforo" /></span>
 					<span class="property-value" aria-labelledby="semaforo-label">
 					<g:message code="intensidad.valor.${monitoreoInstance.semaforo}" />
 					</span>
 				</li>
-				</g:if>
-			
-				<g:if test="${monitoreoInstance?.nota}">
+
+  </div>
+  <div class="span9">
+
 				<li class="fieldcontain">
 					<span id="nota-label" class="property-label"><g:message code="monitoreo.nota.label" default="Nota" /></span>
 					<span class="property-value" aria-labelledby="nota-label"><g:fieldValue bean="${monitoreoInstance}" field="nota"/></span>
 				</li>
-				</g:if>
-			
+
+  </div>
+</div>
+
 				<g:if test="${monitoreoInstance?.detalles}">
 				<li class="fieldcontain">
 					<span id="detalles-label" class="property-label">
@@ -108,7 +120,7 @@
 				  </div>
 				</li>
 				</g:if>
-			
+
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

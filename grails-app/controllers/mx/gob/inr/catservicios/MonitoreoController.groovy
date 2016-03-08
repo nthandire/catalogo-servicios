@@ -27,7 +27,7 @@ class MonitoreoController {
 
     def save() {
         def monitoreoInstance = new Monitoreo(params)
-        monitoreoInstance.fechaMonitoreo = new Date()
+        monitoreoInstance.fecha = new Date()
         monitoreoInstance.estado = 'A' as char
         monitoreoInstance.idUsuario = springSecurityService.principal.id
         monitoreoInstance.ipTerminal = request.getRemoteAddr()
@@ -43,7 +43,7 @@ class MonitoreoController {
         log.debug("endDate = $endDate")
 
         Long maxID = Monitoreo.withCriteria { // TODO: un test para ver si este algoritmo sique funcionando
-          between("fechaMonitoreo", startDate, endDate)
+          between("fecha", startDate, endDate)
           projections {
             max "numeroMonitoreo"
           }

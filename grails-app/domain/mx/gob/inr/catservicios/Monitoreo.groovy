@@ -1,7 +1,7 @@
 package mx.gob.inr.catservicios
 
 class Monitoreo {
-  Date fechaMonitoreo
+  Date fecha
   Integer numeroMonitoreo
   Character estado = 'A' as char
   Integer semaforo = 1
@@ -14,7 +14,7 @@ class Monitoreo {
   static hasMany = [detalles: MonitoreoDetalle]
 
   static constraints = {
-    fechaMonitoreo editable:false
+    fecha editable:false
     numeroMonitoreo editable:false
     bitacora column:'id_bitacora'
     estado column:'estado_monitoreo', blank:false,
@@ -27,6 +27,7 @@ class Monitoreo {
 
   static mapping = {
     id column:'id_monitoreo', generator: "increment"
+    fecha column:'fecha_monitoreo'
     bitacora column:'id_bitacora'
     estado column: "estado_monitoreo", length: 1,
       columnDefinition: 'char(1)', defaultValue: "'A'"
@@ -36,6 +37,6 @@ class Monitoreo {
   }
 
   String toString() {
-    "${numeroMonitoreo}/${fechaMonitoreo[Calendar.YEAR]}"
+    "${numeroMonitoreo}/${fecha[Calendar.YEAR]}"
   }
 }

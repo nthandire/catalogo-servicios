@@ -1,0 +1,28 @@
+println "hola mundo"
+
+import groovy.time.TimeCategory
+
+def fecha = new Date()
+println fecha
+println fecha.format("YYYY")
+
+use(TimeCategory) {
+  fecha += 10.months
+  fecha += 6.days
+  // fecha += 5.hours
+}
+
+println fecha
+println fecha.format("YYYY")
+
+fecha[Calendar.HOUR_OF_DAY] = 23
+fecha[Calendar.MINUTE] = 59
+fecha[Calendar.SECOND] = 59
+
+fecha[Calendar.YEAR] = 2015
+fecha[Calendar.MONTH] = 11
+fecha[Calendar.DAY_OF_MONTH] = 29
+
+println fecha
+println fecha.format("YYYY")
+

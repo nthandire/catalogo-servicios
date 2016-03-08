@@ -26,38 +26,38 @@
 			<table>
 				<thead>
 					<tr>
-					
+
 						<g:sortableColumn property="numeroMonitoreo" title="${message(code: 'monitoreo.numeroMonitoreo.label', default: 'Numero')}" />
-					
-						<g:sortableColumn property="fechaMonitoreo" title="${message(code: 'monitoreo.fechaMonitoreo.label', default: 'Fecha')}" />
-					
+
+						<g:sortableColumn property="fecha" title="${message(code: 'monitoreo.fecha.label', default: 'Fecha')}" />
+
 						<th><g:message code="monitoreo.bitacora.label" default="Bitacora" /></th>
-					
+
 						<g:sortableColumn property="estado" title="${message(code: 'monitoreo.estado.label', default: 'Estado')}" />
-					
+
 						<g:sortableColumn property="semaforo" title="${message(code: 'monitoreo.semaforo.label', default: 'Semaforo')}" />
-					
+
 						<g:sortableColumn property="nota" title="${message(code: 'monitoreo.nota.label', default: 'Nota')}" />
-					
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${monitoreoInstanceList}" status="i" var="monitoreoInstance">
 					<% def liga = createLink(action: "show", id: monitoreoInstance.id) %>
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><a href="${liga}">
 							${monitoreoInstance}
 						</a></td>
-					
+
 						<td><a href="${liga}">
-							${fieldValue(bean: monitoreoInstance, field: "fechaMonitoreo")}
+							${fieldValue(bean: monitoreoInstance, field: "fecha")}
 						</a></td>
-					
+
 						<td><a href="${liga}">
 							${fieldValue(bean: monitoreoInstance, field: "bitacora")}
 						</a></td>
-					
+
 						<td><a href="${liga}">
 							<g:message code="cat_servCat.estado.${monitoreoInstance.estado}" />
 						</a></td>
@@ -65,11 +65,11 @@
 						<td><a href="${liga}">
 							<g:message code="intensidad.valor.${monitoreoInstance.semaforo}" />
 						</a></td>
-					
+
 						<td><a href="${liga}">
 							${fieldValue(bean: monitoreoInstance, field: "nota")}
 						</a></td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>
