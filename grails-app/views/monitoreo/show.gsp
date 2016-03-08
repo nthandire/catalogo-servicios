@@ -75,7 +75,7 @@
   <div class="span3">
 
 				<li class="fieldcontain">
-					<span id="semaforo-label" class="property-label"><g:message code="monitoreo.semaforo.label" default="Semaforo" /></span>
+					<span id="semaforo-label" class="property-label"><g:message code="monitoreo.semaforo.label" default="Semaforo:" /></span>
 					<span class="property-value" aria-labelledby="semaforo-label">
 					<g:message code="intensidad.valor.${monitoreoInstance.semaforo}" />
 					</span>
@@ -85,7 +85,7 @@
   <div class="span9">
 
 				<li class="fieldcontain">
-					<span id="nota-label" class="property-label"><g:message code="monitoreo.nota.label" default="Nota" /></span>
+					<span id="nota-label" class="property-label"><g:message code="monitoreo.nota.label" default="Nota:" /></span>
 					<span class="property-value" aria-labelledby="nota-label"><g:fieldValue bean="${monitoreoInstance}" field="nota"/></span>
 				</li>
 
@@ -93,22 +93,23 @@
 </div>
 
 				<g:if test="${monitoreoInstance?.detalles}">
-				<li class="fieldcontain">
-					<span id="detalles-label" class="property-label">
-						<g:message code="monitoreo.detalles.label" default="Detalles" />
-					</span>
 
-				  <div style="margin: auto; width: 40%;" >
-				    <table>
+					<div style="height:40px;"></div>
+
+				  <div style="margin: auto; width: 80%;" >
+				    <table style="width=800px;">
+						  <tr>
+						    <th colspan="2">Nodo</th>
+						    <th>¿Respondio?</th>
+						    <th>Observaciones</th>
+						  </tr>
 				      <g:each in="${monitoreoInstance?.detalles.sort{it.id}}" var="m">
 				          <tr style="text-align: left;">
-				            <td>
-				              <g:checkBox name="det[${m.id}]" value="${m.estado}" disabled="true" />
+				            <td colspan="2">
+			                ${m?.encodeAsHTML()}
 				            </td>
-				            <td>
-				              <g:link controller="monitoreoDetalle" action="show" id="${m.id}">
-				                ${m?.encodeAsHTML()}
-				              </g:link>
+				            <td style="text-align: left;">
+				              <g:checkBox name="det[${m.id}]" value="${m.estado}" disabled="true" />
 				            </td>
 				            <td>
 				              <g:field type="text" name="observ[${m.id}]"
@@ -116,9 +117,14 @@
 				            </td>
 				          </tr>
 				      </g:each>
+		          <tr style="max-height:10px;">
+		            <td style="width:200px;">&nbsp;</td>
+		            <td style="width:200px;">&nbsp;</td>
+		            <td></td>
+		            <td></td>
+		          </tr>
 				    </table>
 				  </div>
-				</li>
 				</g:if>
 
 			</ol>

@@ -31,9 +31,6 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 > Listado para aprobadores de requerimientos en proceso
 > Listado para aprobadores de incidentes en proceso
 
-- en algun reporte se considera que al pasar 5 dìas (7, una semana) la encuesta ya ha sido realizada y satisfactoria, modificar la BD para mostrar este cambio
-
-
 
 - Reporte, Grafica
 
@@ -45,22 +42,5 @@ Plan
 - monitoreo
   - no permitir edición ni agregar detalles en otro día
   - quitar ligas inutiles
-  - cambiar columna 1 por la dos en list
-  - en list hacer que todo el renglon seleccione
   - capturar todos las bitacoras
-  - en la edición cambiar el checkbox después de la descripción
-  - en la edición acomodar los campos
-
-- Bitacoras
-  - supongo que si ya existe un monitoreo capturado, ya no se puede editar una bitacora
-  - tampoco sus detalles
-
-
-
-- crear rool para bitacoras
-  - para capturar bitacoras, admon
-  - para realizar monitoreos, bitacoras
-- asignar un usuario a ese rol
-  - alguien de Javier Torres
-
-
+  - solo mostrar los monitoreos del último mes

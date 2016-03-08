@@ -51,7 +51,7 @@
 						</a></td>
 
 						<td><a href="${liga}">
-							${fieldValue(bean: monitoreoInstance, field: "fecha")}
+							${monitoreoInstance.fecha.format("YY/MM/dd HH:mm")}
 						</a></td>
 
 						<td><a href="${liga}">
