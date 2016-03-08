@@ -1,3 +1,5 @@
+8 / marzo / 2016 : Existian unas páginas monitoreoMSOld que parece que usaban JQuery
+
 select u.rfc, u.idusuario, u.nombre, u.paterno, u.materno, p.desc_perfil, p.idperfil
   from usuario u,
        usuario_perfil up,
