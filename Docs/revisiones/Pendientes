@@ -44,7 +44,11 @@ Plan
 
 - monitoreo
   - no permitir edición ni agregar detalles en otro día
-
+  - quitar ligas inutiles
+  - cambiar columna 1 por la dos en list
+  - en list hacer que todo el renglon seleccione
+  - capturar todos las bitacoras
+  - en la edición cambiar el checkbox después de la descripción
 
 - Bitacoras
   - supongo que si ya existe un monitoreo capturado, ya no se puede editar una bitacora

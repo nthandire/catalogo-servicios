@@ -4,7 +4,7 @@ import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import groovy.time.TimeCategory
 
-@Secured(['ROLE_SAST_ADMIN'])
+@Secured(['ROLE_SAST_BITACORAS'])
 class MonitoreoController {
     def springSecurityService
     static nombreMenu = "Monitoreos"

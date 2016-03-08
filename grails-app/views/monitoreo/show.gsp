@@ -50,9 +50,7 @@
 						<g:message code="monitoreo.bitacora.label" default="Bitacora" />
 					</span>
 					<span class="property-value" aria-labelledby="bitacora-label">
-						<g:link controller="bitacora" action="show" id="${monitoreoInstance?.bitacora?.id}">
-							${monitoreoInstance?.bitacora?.encodeAsHTML()}
-						</g:link>
+						${monitoreoInstance?.bitacora?.encodeAsHTML()}
 					</span>
 				</li>
 				</g:if>
