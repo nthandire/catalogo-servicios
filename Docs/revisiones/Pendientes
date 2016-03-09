@@ -44,3 +44,8 @@ Plan
   - quitar ligas inutiles
   - capturar todos las bitacoras
   - solo mostrar los monitoreos del último mes
+
+
+- bitacorasDetalles
+  - ligas a listado de bitacoras en la pantalla para bitacorasDetalles
+  
