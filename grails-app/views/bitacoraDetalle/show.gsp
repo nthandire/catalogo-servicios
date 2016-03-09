@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" controller="bitacora" action="list">Lista de Bitacora</g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
@@ -22,32 +22,32 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list bitacoraDetalle">
-			
+
 				<g:if test="${bitacoraDetalleInstance?.descripcion}">
 				<li class="fieldcontain">
 					<span id="descripcion-label" class="property-label"><g:message code="bitacoraDetalle.descripcion.label" default="Descripcion" /></span>
-					
+
 						<span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${bitacoraDetalleInstance}" field="descripcion"/></span>
-					
+
 				</li>
 				</g:if>
-			
+
 				<g:if test="${bitacoraDetalleInstance?.estado}">
 				<li class="fieldcontain">
 					<span id="estado-label" class="property-label"><g:message code="bitacoraDetalle.estado.label" default="Estado" /></span>
 					<span class="property-value" aria-labelledby="estado-label"><g:message code="cat_servCat.estado.${bitacoraDetalleInstance.estado}" /></span>
 				</li>
 				</g:if>
-			
+
 				<g:if test="${bitacoraDetalleInstance?.bitacora}">
 				<li class="fieldcontain">
 					<span id="bitacora-label" class="property-label"><g:message code="bitacoraDetalle.bitacora.label" default="Bitacora" /></span>
-					
+
 						<span class="property-value" aria-labelledby="bitacora-label"><g:link controller="bitacora" action="show" id="${bitacoraDetalleInstance?.bitacora?.id}">${bitacoraDetalleInstance?.bitacora?.encodeAsHTML()}</g:link></span>
-					
+
 				</li>
 				</g:if>
-			
+
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
