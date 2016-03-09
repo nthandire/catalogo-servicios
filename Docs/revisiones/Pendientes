@@ -36,14 +36,15 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 
 - Reporte, Solicitudes, filtros de estado from="${['asignado', 'Mantenimiento', 'aprovisionamiento']}"
 
+- Reportes, quitar la dependencia a Arial
+
+- Documentación: 3 semanas, garantizar que al menos sea así, y evaluar rapidamente si se puede cumplir
 
 Plan
 
 - monitoreo
-  - solo editar mientras que no exista otro monitoreo del mismo tipo
   - checkbox para marcarlo como problema
   - capturar todos las bitacoras
-  - ownership de los monitoreos, libre
 
 
 - bitacorasDetalles
