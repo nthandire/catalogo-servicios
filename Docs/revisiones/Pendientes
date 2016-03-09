@@ -40,12 +40,10 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - monitoreo
-  - solo mostrar los monitoreos del último mes
+  - solo editar mientras que no exista otro monitoreo del mismo tipo
   - checkbox para marcarlo como problema
-  - no permitir edición ni agregar detalles en otro día
   - capturar todos las bitacoras
   - ownership de los monitoreos, libre
-  - solo editar mientras que no exista otro monitoreo del mismo tipo
 
 
 - bitacorasDetalles
