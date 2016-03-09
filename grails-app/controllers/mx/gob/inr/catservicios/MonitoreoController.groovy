@@ -20,7 +20,13 @@ class MonitoreoController {
         params.max = Math.min(max ?: 10, 100)
         params.sort = "id"
         params.order = "desc"
-        [monitoreoInstanceList: Monitoreo.list(params), monitoreoInstanceTotal: Monitoreo.count()]
+        def hoy = new Date()
+        def haceUnMes = hoy.clone()
+        use(TimeCategory) {
+          haceUnMes -= 1.months
+        }
+        def lista = Monitoreo.findAllByFechaBetween(haceUnMes, hoy, params)
+        [monitoreoInstanceList: lista, monitoreoInstanceTotal: Monitoreo.count()]
     }
 
     def create() {

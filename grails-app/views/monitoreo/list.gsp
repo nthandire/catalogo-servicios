@@ -50,25 +50,15 @@
 							${monitoreoInstance}
 						</a></td>
 
-						<td><a href="${liga}">
-							${monitoreoInstance.fecha.format("YY/MM/dd HH:mm")}
-						</a></td>
+						<td>${monitoreoInstance.fecha.format("YY/MM/dd HH:mm")}</td>
 
-						<td><a href="${liga}">
-							${fieldValue(bean: monitoreoInstance, field: "bitacora")}
-						</a></td>
+						<td>${fieldValue(bean: monitoreoInstance, field: "bitacora")}</td>
 
-						<td><a href="${liga}">
-							<g:message code="cat_servCat.estado.${monitoreoInstance.estado}" />
-						</a></td>
+						<td><g:message code="cat_servCat.estado.${monitoreoInstance.estado}" /></td>
 
-						<td><a href="${liga}">
-							<g:message code="intensidad.valor.${monitoreoInstance.semaforo}" />
-						</a></td>
+						<td><g:message code="intensidad.valor.${monitoreoInstance.semaforo}" /></td>
 
-						<td><a href="${liga}">
-							${fieldValue(bean: monitoreoInstance, field: "nota")}
-						</a></td>
+						<td>${fieldValue(bean: monitoreoInstance, field: "nota")}</td>
 
 					</tr>
 				</g:each>
