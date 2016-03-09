@@ -18,6 +18,8 @@ class MonitoreoController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+        params.sort = "id"
+        params.order = "desc"
         [monitoreoInstanceList: Monitoreo.list(params), monitoreoInstanceTotal: Monitoreo.count()]
     }
 

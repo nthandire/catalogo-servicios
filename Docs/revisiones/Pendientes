@@ -40,12 +40,17 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - monitoreo
+  - en list, solo un campo sea botón
+  - checkbox para marcarlo como problema
+  - quitar la lista de monitoreos o que no sea botón, por cuestion de ROLES, no se puede usar
   - no permitir edición ni agregar detalles en otro día
   - quitar ligas inutiles
   - capturar todos las bitacoras
   - solo mostrar los monitoreos del último mes
+  - ownership de los monitoreos, libre
+  - solo editar mientras que no exista otro monitoreo del mismo tipo
 
 
 - bitacorasDetalles
+  - pasarlas al ROL bitacoras
   - ligas a listado de bitacoras en la pantalla para bitacorasDetalles
-  
