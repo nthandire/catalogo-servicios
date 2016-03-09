@@ -52,5 +52,5 @@ Plan
 
 
 - bitacorasDetalles
-  - pasarlas al ROL bitacoras
   - ligas a listado de bitacoras en la pantalla para bitacorasDetalles
+  - quitar entrada en menú de bitacorasDetalles
