@@ -23,16 +23,7 @@
   <g:select name="estado" from="${bitacoraDetalleInstance.constraints.estado.inList}" required="" value="${fieldValue(bean: bitacoraDetalleInstance, field: 'estado')}" valueMessagePrefix="cat_servCat.estado"/>
 </div>
 
-<div class="fieldtablecontain ${hasErrors(bean: bitacoraDetalleInstance, field: 'bitacora', 'error')} required">
-	<label for="bitacora">
-		<g:message code="bitacoraDetalle.bitacora.label" default="Bitacora" />
-	</label>
-	${bitacoraDetalleInstance?.bitacora}"
-</div>
-
-
 </g:if>
-<g:else>
 
 <div class="fieldtablecontain ${hasErrors(bean: bitacoraDetalleInstance, field: 'bitacora', 'error')} required">
 	<label for="bitacora">
@@ -41,4 +32,3 @@
 	<g:select id="bitacora" name="bitacora.id" from="${mx.gob.inr.catservicios.Bitacora.list()}" optionKey="id" required="" value="${bitacoraDetalleInstance?.bitacora?.id}" class="many-to-one"/>
 </div>
 
-</g:else>
