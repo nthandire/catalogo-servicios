@@ -54,7 +54,7 @@
 
 						<td>${fieldValue(bean: monitoreoInstance, field: "bitacora")}</td>
 
-						<td><g:message code="cat_servCat.estado.${monitoreoInstance.estado}" /></td>
+						<td><g:message code="monitoreos.estado.${monitoreoInstance.estado}" /></td>
 
 						<td><g:message code="intensidad.valor.${monitoreoInstance.semaforo}" /></td>
 

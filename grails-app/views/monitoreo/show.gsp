@@ -64,7 +64,7 @@
 				<li class="fieldcontain">
 					<span id="estado-label" class="property-label"><g:message code="monitoreo.estado.label" default="Estado" /></span>
 					<span class="property-value" aria-labelledby="estado-label">
-					<g:message code="cat_servCat.estado.${monitoreoInstance.estado}" />
+					<g:message code="monitoreos.estado.${monitoreoInstance.estado}" />
 					</span>
 				</li>
 
@@ -131,7 +131,7 @@
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${monitoreoInstance?.id}" />
-          <g:if test="${Monitoreo.countByBitacoraAndIdGreaterThan(monitoreoInstance.bitacora, monitoreoInstance.id) == 0}">
+          <g:if test="${monitoreoInstance.estado == 'A' as char && Monitoreo.countByBitacoraAndIdGreaterThan(monitoreoInstance.bitacora, monitoreoInstance.id) == 0}">
             <g:link class="edit" action="edit" id="${monitoreoInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
           </g:if>
 				</fieldset>

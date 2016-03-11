@@ -107,7 +107,7 @@ class MonitoreoController {
     def update(Long id, Long version) {
       def monitoreoInstance = null
       def regresoBrusco = null
-      (monitoreoInstance, regresoBrusco) = _update(id, version)
+      (monitoreoInstance, regresoBrusco) = _update(id, version, 'A' as char)
       if (regresoBrusco) {
         return
       }
@@ -117,9 +117,21 @@ class MonitoreoController {
     }
 
     def problema(Long id, Long version) {
+
+      def userID = springSecurityService.principal.id
+      def firmaTeclada = params['passwordfirma']
+      def firma = Firmadigital.findById(userID)?.passwordfirma
       def monitoreoInstance = null
+      if (firmaTeclada != firma) {
+        flash.error = "Error en contaseña"
+        monitoreoInstance = Monitoreo.get(id)
+        monitoreoInstance.properties = params
+        render(view: "edit", model: [monitoreoInstance: monitoreoInstance])
+        return
+      }
+
       def regresoBrusco = null
-      (monitoreoInstance, regresoBrusco) = _update(id, version)
+      (monitoreoInstance, regresoBrusco) = _update(id, version, 'P' as char)
       if (regresoBrusco) {
         return
       }
@@ -150,7 +162,7 @@ class MonitoreoController {
       log.debug("maxID = $maxID")
       problema.folio = ++maxID
       problema.fechaProblema = new Date()
-      problema.observaciones = "¿que deberia ir aqui?, Desarrollo debe opinar"
+      problema.observaciones = params["observaciones"]
       problema.idUsuario = springSecurityService.principal.id
       problema.ipTerminal = request.getRemoteAddr()
 
@@ -163,7 +175,7 @@ class MonitoreoController {
       redirect(action: "show", id: monitoreoInstance.id)
     }
 
-    def _update(Long id, Long version) {
+    def _update(Long id, Long version, Character estadoParam) {
       log.debug("params = $params")
 
       def regresoBrusco = false
@@ -188,6 +200,7 @@ class MonitoreoController {
 
       monitoreoInstance.properties = params
       monitoreoInstance.ipTerminal = request.getRemoteAddr()
+      monitoreoInstance.estado = estadoParam
 
       if (!monitoreoInstance.save(flush: true)) {
         regresoBrusco = true

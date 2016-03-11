@@ -43,8 +43,8 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - monitoreo
-  - checkbox para marcarlo como problema
   - capturar todos las bitacoras
+  - subir archivos
 
 
 - bitacorasDetalles

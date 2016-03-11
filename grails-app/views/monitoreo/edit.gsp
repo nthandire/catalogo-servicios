@@ -36,9 +36,35 @@
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
+
+        <div id="responsive" class="modal hide fade" tabindex="-1" data-width="512">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="titulo">Marcar Bitacora como problema</h3>
+          </div>
+          <div class="modal-body">
+            <div class="row-fluid">
+              <div class="span12">
+                <fieldset class="form">
+                  <g:render template="formSolucion"/>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <fieldset class="buttons">
+              <a data-dismiss="modal" class="cancel">Cancelar</a>
+              <input type="submit" name="_action_problema" id="respButton"
+                value="${message(code: 'default.button.update.label',
+                  default: 'Update')}"
+                class="save">
+            </fieldset>
+          </div>
+        </div>
+
 				<fieldset class="buttons">
           <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-					<g:actionSubmit class="cancel" action="problema" value="Marcar como problema" />
+					<a class="cancel" data-toggle="modal" href="#responsive">Marcar como problema</a>
 				</fieldset>
 			</g:form>
 		</div>

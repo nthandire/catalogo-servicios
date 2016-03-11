@@ -18,7 +18,7 @@ class Monitoreo {
     numeroMonitoreo editable:false
     bitacora column:'id_bitacora'
     estado column:'estado_monitoreo', blank:false,
-      inList: [(char)'A',(char)'I'], editable:false
+      inList: [(char)'A', (char)'I', (char)'P'], editable:false
     semaforo blank:false, min: 1, max: 3
     nota maxSize:3000
     idUsuario display:false, editable:false
