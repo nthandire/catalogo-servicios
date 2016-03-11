@@ -31,3 +31,24 @@ SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitore
 delete from monitoreo ;
 
 
+SELECT id_problema,fuente,id_fuente,fecha_problema,folio,observaciones,solucion,fecha_solucion,resolvio,id_usuario,fecha_modificacion,modificacion,ip_terminal
+  FROM problema
+ where id_problema >= 9;
+
+delete from problema
+ where id_problema >= 9;
+
+SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitoreo,semaforo,nota,id_usuario,fecha_modificacion,modificacion,ip_terminal
+  FROM monitoreo
+ where id_monitoreo >= 3;
+
+delete FROM monitoreo
+ where id_monitoreo >= 3;
+
+SELECT id_monitoredetalle,id_monitoreo,id_bitacoradetalle,estado,observaciones
+  FROM monitoreo_detalle
+ where id_monitoreo >= 3;
+ 
+delete FROM monitoreo_detalle
+ where id_monitoreo >= 3;
+ 
