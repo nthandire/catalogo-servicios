@@ -52,3 +52,16 @@ SELECT id_monitoredetalle,id_monitoreo,id_bitacoradetalle,estado,observaciones
 delete FROM monitoreo_detalle
  where id_monitoreo >= 3;
  
+
+select *
+  from Solicitud
+ where estado_solicitud is not null
+   and estado_solicitud <> 'F'
+   and fecha_autoriza between to_date('2016/03/01', '%Y/%m/%d') and to_date('2016/03/11', '%Y/%m/%d');
+
+select *
+  from Problema
+ where id_fuente is not null
+   and fecha_problema between to_date('2016/03/01 00:00', '%Y/%m/%d %H:%M') and to_date('2016/03/11 23:59', '%Y/%m/%d %H:%M');
+   
+   
