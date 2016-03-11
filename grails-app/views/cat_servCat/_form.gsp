@@ -38,7 +38,7 @@
 		<g:message code="cat_servCat.servResp.label" default="Serv Resp" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="servResp" name="servResp.id" from="${Cat_servResp.list()}" optionKey="id" required="" value="${cat_servCatInstance?.servResp?.id}" class="many-to-one"/>
+	<g:select id="servResp" name="servResp.id" from="${Cat_servResp.list(sort:"descripcion")}" optionKey="id" required="" value="${cat_servCatInstance?.servResp?.id}" class="many-to-one"/>
 </div>
 
 		</td>

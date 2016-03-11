@@ -118,7 +118,7 @@ class Cat_servController {
       Cat_servCat category = Cat_servCat.get(categoryId)
       def subCategories = []
       if ( category != null ) {
-          subCategories = Cat_servSub.findAllByServCat(category, [order:'id'])
+          subCategories = Cat_servSub.findAllByServCat(category, [sort:'descripcion'])
       }
       render g.select(id:'servSub', name:'servSub.id',
           from:subCategories, optionKey:'id', noSelection:[null:' ']
