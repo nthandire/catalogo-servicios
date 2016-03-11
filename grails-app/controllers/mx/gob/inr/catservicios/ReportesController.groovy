@@ -677,6 +677,7 @@ class ReportesController {
     log.debug("startDate = $startDate")
     log.debug("endDate = $endDate")
     log.debug("params = $params")
+    log.debug("casos = $casos")
 
     if (!casos) {
       flash.error = "No hay datos de solicitudes"
@@ -755,16 +756,18 @@ class ReportesController {
           )
           break
         case Problema:
+          log.debug("entre a reportar un problema: $caso")
           def fuente = null
           switch (caso.fuente) {
             case "Incidente":
+              log.debug("   Y es tipo Incidente")
               fuente = Incidente.get(caso.idFuente)
               def nivel = fuente.nivel
               inventario = inventarioEquipo(fuente)
               renglon = new RptSolicitud (
                 folio: caso,
                 tipo: it.tipo,
-                estado: "",
+                estado: firmadoService.estadoDescriptivo(fuente),
                 area: firmadoService.areaNombre(caso.idUsuario),
                 nombre: Usuario.get(caso.idUsuario),
                 categoria: fuente.idServ.servSub.servCat,
@@ -776,6 +779,29 @@ class ReportesController {
                 gestionadoA: fuente."idNivel$nivel" ? Usuario.get(fuente."idNivel$nivel") :
                   fuente.idServ."servResp$nivel",
                 prioridad: message(code:"intensidad.valor.${fuente.idServ.impacto}"),
+                fechaRecepcion: caso.fechaProblema.format("YYYY-MM-dd HH:mm"),
+                fechaCierre: caso.fechaSolucion ? caso.fechaSolucion.format("YYYY-MM-dd HH:mm") : "",
+                solucion: caso.solucion ?: "",
+              )
+              break
+            case "Bitacora":
+              log.debug("   Y es tipo Bitacora")
+              fuente = Monitoreo.get(caso.idFuente)
+              inventario = null
+              renglon = new RptSolicitud (
+                folio: fuente,
+                tipo: it.tipo,
+                estado: firmadoService.estadoDescriptivo(caso),
+                area: "",
+                nombre: Usuario.get(fuente.idUsuario),
+                categoria: "",
+                subcategoria: "",
+                tercerNivel: "",
+                descripcion: caso.observaciones,
+                inventario: "",
+                responsable: g.message(code: "area.de.laboratorio"),
+                gestionadoA: "",
+                prioridad: message(code:"intensidad.valor.${fuente.semaforo}"),
                 fechaRecepcion: caso.fechaProblema.format("YYYY-MM-dd HH:mm"),
                 fechaCierre: caso.fechaSolucion ? caso.fechaSolucion.format("YYYY-MM-dd HH:mm") : "",
                 solucion: caso.solucion ?: "",

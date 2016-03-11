@@ -43,8 +43,12 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - monitoreo
+  - marcar un problema, para tronar el reporte de solicitudes
+  - incorporar los problemas de bitacoras al reporte de solicitudes
   - capturar todos las bitacoras
   - subir archivos
 
+- Servicios
+  - ordenar los combos en orden alfabetico
 
 - bitacorasDetalles

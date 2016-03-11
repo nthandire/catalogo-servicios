@@ -150,6 +150,14 @@ class FirmadoService {
     descripcion
   }
 
+  String estadoDescriptivo(Problema caso) {
+    def descripcion = "Abierto"
+    if (caso.fechaSolucion) {
+      descripcion = "cerrado"
+    }
+    descripcion
+  }
+
   def ubicacion (Long idEquipo) {
     _ubicacion(idEquipo)?.descripcion
   }
