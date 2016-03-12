@@ -1,5 +1,5 @@
 
-<%@ page import="mx.gob.inr.catservicios.Monitoreo" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -93,9 +93,7 @@
 </div>
 
 				<g:if test="${monitoreoInstance?.detalles}">
-
 					<div style="height:40px;"></div>
-
 				  <div style="margin: auto; width: 80%;" >
 				    <table style="width=800px;">
 						  <tr>
@@ -128,6 +126,24 @@
 				</g:if>
 
 			</ol>
+
+			<g:if test="${MonitoreoArchivoadjunto.countByIdMonitoreo(monitoreoInstance?.id)}">
+        <H1>
+          <g:message code="solicitud.archivos.label" default="Archivos" />
+        </H1>
+        <div class="row-fluid">
+          <div class="span10 offset1">
+            <ul class="one-to-many">
+              <g:each in="${MonitoreoArchivoadjunto.findAllByIdMonitoreo(monitoreoInstance?.id)}" var="a">
+                <li>
+                  <g:link action="download" id="${a.id}">${a?.encodeAsHTML()}</g:link>
+                </li>
+              </g:each>
+            </ul>
+          </div>
+        </div>
+			</g:if>
+
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${monitoreoInstance?.id}" />
