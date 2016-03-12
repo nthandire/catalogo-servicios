@@ -19,7 +19,7 @@ class MonitoreoArchivoadjunto {
 
 	static constraints = {
 		idMonitoreo nullable: true
-		datos nullable: true
+		datos nullable: true, display:false, editable:false, maxSize:5242900
 		nombre nullable: true
 		tamanio nullable: true
 		tipo nullable: true, maxSize: 20
@@ -27,4 +27,9 @@ class MonitoreoArchivoadjunto {
 		lastUpdated nullable: true
 		ipTerminal nullable: true, maxSize: 15
 	}
+
+  String toString() {
+    nombre
+  }
+
 }

@@ -7,14 +7,14 @@
 		<title><g:message code="default.subir.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#create-incidenteArchivoadjunto" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#create-monitoreoArchivoadjunto" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="back" action="edit" id="${incidenteArchivoadjuntoInstance?.idIncidente}">Regresar al incidente</g:link></li>
+				<li><g:link class="back" action="edit" id="${monitoreoArchivoadjuntoInstance?.idMonitoreo}">Regresar al monitoreo</g:link></li>
 			</ul>
 		</div>
-		<div id="create-incidenteArchivoadjunto" class="content scaffold-create" role="main">
+		<div id="create-monitoreoArchivoadjunto" class="content scaffold-create" role="main">
 			<h1><g:message code="default.subir.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
@@ -22,15 +22,15 @@
       <g:if test="${flash.error}">
         <div class="errors" role="status">${flash.error}</div>
       </g:if>
-			<g:hasErrors bean="${incidenteArchivoadjuntoInstance}">
+			<g:hasErrors bean="${monitoreoArchivoadjuntoInstance}">
 			<ul class="errors" role="alert">
-				<g:eachError bean="${incidenteArchivoadjuntoInstance}" var="error">
+				<g:eachError bean="${monitoreoArchivoadjuntoInstance}" var="error">
 				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if><g:message error="${error}"/></li>
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
 			<g:form action="saveArchivo"  enctype="multipart/form-data">
-				<g:hiddenField name="idIncidente" value="${incidenteArchivoadjuntoInstance?.idIncidente}" />
+				<g:hiddenField name="idMonitoreo" value="${monitoreoArchivoadjuntoInstance?.idMonitoreo}" />
 				<fieldset class="form">
 					<div class="fieldtablecontain ">
 						<br /><br /><br />

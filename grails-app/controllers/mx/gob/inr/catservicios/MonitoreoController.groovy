@@ -230,4 +230,72 @@ class MonitoreoController {
       [monitoreoInstance, regresoBrusco]
     }
 
+    def createArchivo() {
+      log.debug("params = $params")
+      def monitoreoArchivoadjuntoInstance = new MonitoreoArchivoadjunto()
+      monitoreoArchivoadjuntoInstance.idMonitoreo =
+        (params.monitoreo['id']).toInteger()
+      log.debug("idMonitoreo = ${monitoreoArchivoadjuntoInstance.idMonitoreo}")
+      [monitoreoArchivoadjuntoInstance: monitoreoArchivoadjuntoInstance]
+    }
+
+    def saveArchivo() {
+      log.debug("params = $params")
+      def file = request.getFile('file')
+      if(file.empty) {
+        flash.message = "Debe enviar algún archivo"
+        render(view: "createArchivo")
+        return
+      } else {
+        def monitoreoArchivoadjuntoInstance = new MonitoreoArchivoadjunto()
+        monitoreoArchivoadjuntoInstance.idMonitoreo =
+          (params.idMonitoreo).toInteger()
+        def nombre = file.originalFilename
+        monitoreoArchivoadjuntoInstance.nombre = nombre
+        monitoreoArchivoadjuntoInstance.datos = file.getBytes()
+        monitoreoArchivoadjuntoInstance.tamanio =
+          monitoreoArchivoadjuntoInstance.datos.size()
+
+        if (monitoreoArchivoadjuntoInstance.tamanio > 5242880) {
+          flash.error = "No puede subir archivos de más de 5 MB"
+          render(view: "createArchivo", model: [monitoreoArchivoadjuntoInstance:
+            monitoreoArchivoadjuntoInstance])
+          return
+        }
+
+        monitoreoArchivoadjuntoInstance.idUsuario = springSecurityService.principal.id
+        monitoreoArchivoadjuntoInstance.ipTerminal = request.getRemoteAddr()
+        def dot = nombre.lastIndexOf('.');
+        if (dot > 0)
+          monitoreoArchivoadjuntoInstance.tipo = nombre.substring(dot + 1).
+            toUpperCase()
+        else
+          monitoreoArchivoadjuntoInstance.tipo = ""
+        if (!monitoreoArchivoadjuntoInstance.save(flush: true)) {
+          render(view: "createArchivo", model: [monitoreoArchivoadjuntoInstance:
+            monitoreoArchivoadjuntoInstance])
+            return
+        }
+        redirect (action:'edit', id: params.idMonitoreo)
+      }
+    }
+
+    def download(long id) {
+        MonitoreoArchivoadjunto monitoreoArchivoadjuntoInstance =
+          MonitoreoArchivoadjunto.get(id)
+        if ( MonitoreoArchivoadjunto == null) {
+            flash.message = "Documento no encontrado."
+            redirect (controller: "incidente", action:'list')
+        } else {
+            response.setContentType("APPLICATION/OCTET-STREAM")
+            response.setHeader("Content-Disposition",
+              "Attachment;Filename=\"${monitoreoArchivoadjuntoInstance.nombre}\"")
+
+            def outputStream = response.getOutputStream()
+            outputStream << monitoreoArchivoadjuntoInstance.datos
+            outputStream.flush()
+            outputStream.close()
+        }
+    }
+
 }

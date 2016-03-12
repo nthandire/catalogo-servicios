@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.Monitoreo" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -36,6 +36,29 @@
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
+
+        <H1>
+          <g:message code="solicitud.archivos.label" default="Archivos" />
+        </H1>
+        <div class="row-fluid">
+          <div class="span10 offset1">
+            <ul class="one-to-many">
+              <g:each in="${MonitoreoArchivoadjunto.findAllByIdMonitoreo(monitoreoInstance?.id)}" var="a">
+                <li>
+                  <g:link action="download" id="${a.id}">${a?.encodeAsHTML()}</g:link>
+                </li>
+              </g:each>
+              <li class="add">
+                <g:link class="btn" action="createArchivo"
+                  params="['monitoreo.id': monitoreoInstance?.id]">
+                  ${message(code: 'default.subir.label',
+                    args: [message(code: 'solicitudArchivoadjunto.label',
+                                    default: 'Archivo')])}
+                </g:link>
+              </li>
+            </ul>
+          </div>
+        </div>
 
         <div id="responsive" class="modal hide fade" tabindex="-1" data-width="512">
           <div class="modal-header">
