@@ -2,6 +2,17 @@ println "hola mundo"
 
 import groovy.time.TimeCategory
 
+
+def fecha1 = null
+def fecha2 = new Date()
+println (fecha2 > fecha1)
+println (fecha2 < fecha1)
+println (fecha1 < fecha2)
+println (fecha2 == fecha1)
+
+
+
+
 def fecha = new Date()
 println fecha
 println fecha.format("YYYY")

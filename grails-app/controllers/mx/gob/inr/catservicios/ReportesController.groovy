@@ -886,7 +886,7 @@ class ReportesController {
       categorias, [sort: "servCat"])
 
     subcategorias.sort{a,b -> a.servCat.id == b.servCat.id ?
-      a.descripcion <=> b.descripcion : a.servCat.id <=> b.servCat.id}
+      a.descripcion.trim() <=> b.descripcion.trim() : a.servCat.id <=> b.servCat.id}
 
     log.debug("subcategorias = $subcategorias")
     log.debug("params = $params")
@@ -1094,7 +1094,8 @@ class ReportesController {
         log.debug("tiempoAsignado = $tiempoAsignado")
         def tiempoAsignadoString = firmadoService.minutesToString(tiempoAsignado)
         log.debug("tiempoAsignado = $tiempoAsignado")
-        def inicio = it."fechaNivel$nivel" ?: it.fechaIncidente
+        def inicio = nivel > 1 && it."fechaSolnivel${nivel - 1}" ?
+          it."fechaSolnivel${nivel - 1}" : it."fechaNivel$nivel" ?: it.fechaIncidente
         log.debug("inicio = $inicio")
         def solucion = it."fechaSolnivel$nivel" ?: new Date()
         log.debug("solucion = $solucion")
