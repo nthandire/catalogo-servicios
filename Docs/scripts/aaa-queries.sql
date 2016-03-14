@@ -28,19 +28,27 @@ update incidente
 SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitoreo,semaforo,nota,id_usuario,fecha_modificacion,modificacion,ip_terminal
   FROM monitoreo;
 
+SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitoreo,semaforo,nota,id_usuario,fecha_modificacion,modificacion,ip_terminal
+  FROM monitoreo
+ where id_monitoreo = 4;
+
+update monitoreo
+   set numero_monitoreo = 4
+ where id_monitoreo = 4;
+
 delete from monitoreo ;
 
 
 SELECT id_problema,fuente,id_fuente,fecha_problema,folio,observaciones,solucion,fecha_solucion,resolvio,id_usuario,fecha_modificacion,modificacion,ip_terminal
   FROM problema
- where id_problema >= 9;
+ where id_problema >= 0;
 
 delete from problema
  where id_problema >= 9;
 
 SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitoreo,semaforo,nota,id_usuario,fecha_modificacion,modificacion,ip_terminal
   FROM monitoreo
- where id_monitoreo >= 3;
+ where id_monitoreo >= 4;
 
 delete FROM monitoreo
  where id_monitoreo >= 3;
