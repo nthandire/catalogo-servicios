@@ -3,8 +3,9 @@ package mx.gob.inr.catservicios
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
-@Secured(['ROLE_SAST_ADMIN'])
+@Secured(['ROLE_SAST_APROBADOR', 'ROLE_SAST_TECNICO', 'ROLE_SAST_GESTOR'])
 class ProblemaController {
+  def springSecurityService
     static nombreMenu = "Problemas"
     static ordenMenu = -90
 
@@ -16,7 +17,17 @@ class ProblemaController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [problemaInstanceList: Problema.list(params), problemaInstanceTotal: Problema.count()]
+        // si es de DGAIT, solo mostrar problemas de Bitacoras
+        def areaLab = message(code: "area.de.laboratorio")
+        def userID = springSecurityService.principal.id
+        def userArea = UsuarioAutorizado.get(userID)?.area
+        def lista = []
+        if (userArea == areaLab) {
+          lista = Problema.findAllByFuente('Bitacora', params)
+        } else {
+          lista = Problema.list(params)
+        }
+        [problemaInstanceList: lista, problemaInstanceTotal: lista.size()]
     }
 
     def create() {
