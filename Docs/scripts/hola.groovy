@@ -26,3 +26,6 @@ fecha[Calendar.DAY_OF_MONTH] = 29
 println fecha
 println fecha.format("YYYY")
 
+def lista = [1,2,3,4,5,6]
+lista.sort{ -it }
+println lista

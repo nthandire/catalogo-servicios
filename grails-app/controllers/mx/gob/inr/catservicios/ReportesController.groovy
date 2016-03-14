@@ -885,6 +885,9 @@ class ReportesController {
     def subcategorias = Cat_servSub.findAllByEstadoAndServCatInList('A' as char,
       categorias, [sort: "servCat"])
 
+    subcategorias.sort{a,b -> a.servCat.id == b.servCat.id ?
+      a.descripcion <=> b.descripcion : a.servCat.id <=> b.servCat.id}
+
     log.debug("subcategorias = $subcategorias")
     log.debug("params = $params")
 
