@@ -15,7 +15,7 @@
     <span class="required-indicator">*</span>
   </label>
   <g:field name="fecha" type="text" disabled="true"
-    value="${monitoreoInstance?.fecha.format("dd/MMM/YYYY")}"
+    value="${monitoreoInstance?.fecha.format("dd/MMM/YYYY HH:mm")}"
     style="text-align: center;" />
 </div>
 
@@ -83,6 +83,21 @@
 
   </div>
   <div class="span6">
+
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'idTipomonitoreo', 'error')} ">
+  <label for="idTipomonitoreo">
+    Tipo
+  </label>
+  <g:select name="idTipomonitoreo" from="${TipoMonitoreo.list(sort:'id')}"
+    optionKey="id" value="${monitoreoInstance.idTipomonitoreo}" />
+</div>
+
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'nota', 'error')} ">
   <label for="nota">

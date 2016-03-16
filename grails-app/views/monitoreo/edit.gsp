@@ -86,7 +86,7 @@
         </div>
 
 				<fieldset class="buttons">
-          <g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+          <g:actionSubmit class="save" action="update" value="Guardar" />
 					<a class="cancel" data-toggle="modal" href="#responsive">Marcar como problema</a>
 				</fieldset>
 			</g:form>

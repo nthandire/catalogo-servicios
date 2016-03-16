@@ -1,5 +1,4 @@
-
-<%@ page import="mx.gob.inr.catservicios.Monitoreo" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,7 +30,9 @@
 
 						<g:sortableColumn property="fecha" title="${message(code: 'monitoreo.fecha.label', default: 'Fecha')}" />
 
-						<th><g:message code="monitoreo.bitacora.label" default="Bitacora" /></th>
+            <th><g:message code="monitoreo.bitacora.label" default="Sistema" /></th>
+
+						<th><g:message code="monitoreo.bitacora.label" default="Tipo" /></th>
 
 						<g:sortableColumn property="estado" title="${message(code: 'monitoreo.estado.label', default: 'Estado')}" />
 
@@ -52,7 +53,9 @@
 
 						<td>${monitoreoInstance.fecha.format("YY/MM/dd HH:mm")}</td>
 
-						<td>${fieldValue(bean: monitoreoInstance, field: "bitacora")}</td>
+            <td>${fieldValue(bean: monitoreoInstance, field: "bitacora")}</td>
+
+						<td>${TipoMonitoreo.get(monitoreoInstance.idTipomonitoreo)}</td>
 
 						<td><g:message code="monitoreos.estado.${monitoreoInstance.estado}" /></td>
 

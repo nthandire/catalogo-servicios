@@ -5,6 +5,7 @@ class Monitoreo {
   Integer numeroMonitoreo
   Character estado = 'A' as char
   Integer semaforo = 1
+  Integer idTipomonitoreo
   String nota
   Long idUsuario
   Date lastUpdated
@@ -20,6 +21,7 @@ class Monitoreo {
     estado column:'estado_monitoreo', blank:false,
       inList: [(char)'A', (char)'I', (char)'P'], editable:false
     semaforo blank:false, min: 1, max: 3
+    idTipomonitoreo blank:false
     nota maxSize:3000
     idUsuario display:false, editable:false
     ipTerminal editable:false

@@ -24,7 +24,7 @@
 				<thead>
 					<tr>
 
-						<g:sortableColumn property="tipoBitacora" title="${message(code: 'bitacora.tipoBitacora.label', default: 'Tipo')}" />
+						<g:sortableColumn property="tipoBitacora" title="${message(code: 'bitacora.tipoBitacora.label', default: 'Sistema')}" />
 
 						<g:sortableColumn property="descripcion" title="${message(code: 'bitacora.descripcion.label', default: 'Descripción')}" />
 

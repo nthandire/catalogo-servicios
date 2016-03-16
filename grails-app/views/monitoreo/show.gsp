@@ -72,17 +72,30 @@
 </div>
 
 <div class="row-fluid">
-  <div class="span3">
+  <div class="span6">
 
-				<li class="fieldcontain">
-					<span id="semaforo-label" class="property-label"><g:message code="monitoreo.semaforo.label" default="Semaforo:" /></span>
-					<span class="property-value" aria-labelledby="semaforo-label">
-					<g:message code="intensidad.valor.${monitoreoInstance.semaforo}" />
-					</span>
-				</li>
+        <li class="fieldcontain">
+          <span id="semaforo-label" class="property-label"><g:message code="monitoreo.semaforo.label" default="Semaforo:" /></span>
+          <span class="property-value" aria-labelledby="semaforo-label">
+          <g:message code="intensidad.valor.${monitoreoInstance.semaforo}" />
+          </span>
+        </li>
 
   </div>
-  <div class="span9">
+  <div class="span6">
+
+        <li class="fieldcontain">
+          <span id="idTipomonitoreo-label" class="property-label"><g:message code="monitoreo.idTipomonitoreo.label" default="Tipo:" /></span>
+          <span class="property-value" aria-labelledby="idTipomonitoreo-label">
+            ${TipoMonitoreo.get(monitoreoInstance.idTipomonitoreo)}"
+          </span>
+        </li>
+
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
 
 				<li class="fieldcontain">
 					<span id="nota-label" class="property-label"><g:message code="monitoreo.nota.label" default="Nota:" /></span>
