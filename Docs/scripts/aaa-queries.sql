@@ -84,3 +84,7 @@ SELECT id_servsub,id_servcat,descripcion,estado
 
 
 
+SELECT id_problema,fuente,id_fuente,fecha_problema,folio,observaciones,solucion,fecha_solucion,resolvio,id_usuario,fecha_modificacion,modificacion,ip_terminal
+  FROM problema
+ where fuente = 'Bitacora';
+

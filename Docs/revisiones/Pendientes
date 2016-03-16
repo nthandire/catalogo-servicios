@@ -43,9 +43,10 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - monitoreo
-  - subir archivos
-  - poner la lista de archivos en el show, sin botón
   - capturar todos las bitacoras
 
+- Problemas
+  - aumentar un menu, en mesa de servicio y en bitacoras
+  - que funcione el show
+  - poner un boton en show para marcar como terminado
 
-- bitacorasDetalles
