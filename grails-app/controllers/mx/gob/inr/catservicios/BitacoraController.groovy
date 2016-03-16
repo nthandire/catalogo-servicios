@@ -6,7 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException
 @Secured(['ROLE_SAST_BITACORAS'])
 class BitacoraController {
     static nombreMenu = "Bitacoras"
-    static ordenMenu = 31
+    static ordenMenu = 94
 
     static allowedMethods = [save: "POST", update: "POST", x_delete: "POST"]
 
