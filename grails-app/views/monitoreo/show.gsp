@@ -87,7 +87,7 @@
         <li class="fieldcontain">
           <span id="idTipomonitoreo-label" class="property-label"><g:message code="monitoreo.idTipomonitoreo.label" default="Tipo:" /></span>
           <span class="property-value" aria-labelledby="idTipomonitoreo-label">
-            ${TipoMonitoreo.get(monitoreoInstance.idTipomonitoreo)}"
+            ${TipoMonitoreo.get(monitoreoInstance.idTipomonitoreo)}
           </span>
         </li>
 
