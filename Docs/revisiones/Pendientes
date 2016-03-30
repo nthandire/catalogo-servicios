@@ -43,9 +43,6 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - Problema
-  - aumentar un menu, en mesa de servicio y en bitacoras
-    - Poner liga en mesa de servicio a los problemas
-    - Poner liga en incidentes a los problemas
   - Que funcione el show
   - De la consulta, poder saltar al origen
   - Capturar el cierre, con un comentario, firma, fecha.
