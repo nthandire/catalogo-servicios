@@ -30,12 +30,16 @@ SELECT id_incidente,numero_incidente,fecha_nivel1,fecha_solnivel1,fecha_nivel2,f
  where numero_incidente <= 10
    and id_incidente > 50;
 
-SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitoreo,semaforo,nota,id_usuario,fecha_modificacion,modificacion,ip_terminal
+
+SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitoreo,semaforo,nota,id_usuario,fecha_modificacion,modificacion,ip_terminal,id_tipomonitoreo
   FROM monitoreo;
 
 SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitoreo,semaforo,nota,id_usuario,fecha_modificacion,modificacion,ip_terminal
   FROM monitoreo
  where id_monitoreo = 4;
+
+update monitoreo
+   set id_tipomonitoreo = 1;
 
 update monitoreo
    set numero_monitoreo = 4
@@ -87,4 +91,37 @@ SELECT id_servsub,id_servcat,descripcion,estado
 SELECT id_problema,fuente,id_fuente,fecha_problema,folio,observaciones,solucion,fecha_solucion,resolvio,id_usuario,fecha_modificacion,modificacion,ip_terminal
   FROM problema
  where fuente = 'Bitacora';
+
+SELECT id_bitacoradetalle,id_bitacora,des_bitacoradetalle,estado_bitacoradetalle
+  FROM bitacora_detalle
+ where id_bitacora = 7;
+
+delete from bitacora_detalle
+ where id_bitacora = 7;
+
+SELECT id_bitacora,tipo_bitacora,des_bitacora,estado_bitacora
+  FROM bitacora
+ where id_bitacora = 7;
+
+delete FROM bitacora
+ where id_bitacora = 7;
+
+SELECT id_tipomonitoreo,des_tipomonitoreo
+  FROM tipo_monitoreo;
+
+insert into tipo_monitoreo
+  (id_tipomonitoreo,des_tipomonitoreo)
+ values
+  (1, 'Programado');
+
+insert into tipo_monitoreo
+  (id_tipomonitoreo,des_tipomonitoreo)
+ values
+  (2, 'Extraordinario');
+
+insert into tipo_monitoreo
+  (id_tipomonitoreo,des_tipomonitoreo)
+ values
+  (3, 'Revisión');
+  
 
