@@ -18,15 +18,33 @@ class MonitoreoController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        params.sort = "id"
-        params.order = "desc"
         def hoy = new Date()
         def haceUnMes = hoy.clone()
         use(TimeCategory) {
           haceUnMes -= 1.months
         }
-        def lista = Monitoreo.findAllByFechaBetween(haceUnMes, hoy, params)
-        [monitoreoInstanceList: lista, monitoreoInstanceTotal: Monitoreo.count()]
+        def lista = Monitoreo.findAllByFechaBetween(haceUnMes, hoy)
+        def cuantos = Monitoreo.countByFechaBetween(haceUnMes, hoy)
+
+        if (params.sort == "numeroMonitoreo") {
+          lista.sort{it.numeroMonitoreo}
+        } else if (params.sort == "estado") { 
+          lista.sort{it.estado}
+        } else if (params.sort == "semaforo") { 
+          lista.sort{it.semaforo}
+        } else if (params.sort == "fecha") { 
+          lista.sort{it.fecha}
+        } else {
+          lista.sort{it.id}
+        }
+        if (params.order == "desc") {
+          lista = lista.reverse()
+        }
+
+        def offset = params.offset ?: 0
+
+        [monitoreoInstanceList: lista[offset..Math.min(offset+params.max-1,lista.size()-1)],
+          monitoreoInstanceTotal: cuantos]
     }
 
     def create() {
