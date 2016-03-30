@@ -6,3 +6,6 @@
           <li><g:link class="list" action="listTerminadas">Incidentes terminados</g:link></li>
           <li><g:link class="list" action="listEncuestas">Incidentes en encuesta</g:link></li>
         </sec:access>
+        <sec:access expression="hasAnyRole('ROLE_SAST_BITACORAS')">
+          <li><g:link class="list" controller="problema" action="list">Problemas</g:link></li>
+        </sec:access>
