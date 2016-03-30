@@ -42,11 +42,11 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 
 Plan
 
-- monitoreo
-  - capturar todos las bitacoras
+- Problema
+  - Que funcione el show
+  - De la consulta, poder saltar al origen
+  - Capturar el cierre, con un comentario, firma, fecha.
+    - poner un boton en show para marcar como terminado
+    ? quitar opcion de capturar problema
 
-- Problemas
-  - aumentar un menu, en mesa de servicio y en bitacoras
-  - que funcione el show
-  - poner un boton en show para marcar como terminado
 

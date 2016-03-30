@@ -38,7 +38,7 @@
 
 						<g:sortableColumn property="semaforo" title="${message(code: 'monitoreo.semaforo.label', default: 'Semaforo')}" />
 
-						<g:sortableColumn property="nota" title="${message(code: 'monitoreo.nota.label', default: 'Nota')}" />
+						<th><g:message code="monitoreo.nota.label" default="Nota" /></th>
 
 					</tr>
 				</thead>

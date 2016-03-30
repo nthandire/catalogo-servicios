@@ -65,7 +65,7 @@ grails.gorm.failOnError=true
 environments {
     development {
       // grails.serverURL = "http://192.168.0.8:8888/catalogo-servicios"
-      grails.serverURL = "http://192.168.16.59:8888/catalogo-servicios"
+      grails.serverURL = "http://192.168.13.140:8888/catalogo-servicios"
       grails.logging.jul.usebridge = true
       // correo general, para pruebas y errores
       //correo.general=rpena@inr.gob.mx
