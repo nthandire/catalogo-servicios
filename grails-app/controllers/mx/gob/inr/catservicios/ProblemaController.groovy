@@ -53,7 +53,15 @@ class ProblemaController {
             return
         }
 
-        [problemaInstance: problemaInstance]
+      def controlador = problemaInstance.fuente
+      def accion = "show"
+      switch (problemaInstance.fuente) {
+        case "Bitacora":
+          controlador = "Monitoreo"
+          break
+      }
+
+        [problemaInstance: problemaInstance, controlador: controlador]
     }
 
     def edit(Long id) {
