@@ -43,10 +43,7 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - Problema
-  - Que funcione el show
-  - De la consulta, poder saltar al origen
   - Capturar el cierre, con un comentario, firma, fecha.
     - poner un boton en show para marcar como terminado
-    ? quitar opcion de capturar problema
 
 
