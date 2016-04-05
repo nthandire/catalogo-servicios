@@ -13,7 +13,6 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="show-problema" class="content scaffold-show" role="main">
@@ -25,6 +24,14 @@
 			 <div class="errors" role="status">${flash.error}</div>
 			</g:if>
 			<ol class="property-list problema">
+
+        <g:if test="${problemaInstance?.folio}">
+        <li class="fieldcontain">
+          <span id="folio-label" class="property-label"><g:message code="problema.folio.label" default="Folio" /></span>
+
+          <span class="property-value" aria-labelledby="folio-label">
+            ${problemaInstance}
+          </span>
 
 				<g:if test="${problemaInstance?.fuente}">
 				<li class="fieldcontain">
@@ -62,12 +69,6 @@
 
 				</li>
 				</g:if>
-
-				<g:if test="${problemaInstance?.folio}">
-				<li class="fieldcontain">
-					<span id="folio-label" class="property-label"><g:message code="problema.folio.label" default="Folio" /></span>
-
-						<span class="property-value" aria-labelledby="folio-label"><g:fieldValue bean="${problemaInstance}" field="folio"/></span>
 
 				</li>
 				</g:if>
@@ -126,20 +127,23 @@
 				</li>
 				</g:if>
 
-				<g:if test="${problemaInstance?.ipTerminal}">
-				<li class="fieldcontain">
-					<span id="ipTerminal-label" class="property-label"><g:message code="problema.ipTerminal.label" default="Ip Terminal" /></span>
+        <g:if test="${problemaInstance?.ipTerminal}">
+        <li class="fieldcontain">
+          <span id="ipTerminal-label" class="property-label"><g:message code="problema.ipTerminal.label" default="Ip Terminal" /></span>
 
-						<span class="property-value" aria-labelledby="ipTerminal-label"><g:fieldValue bean="${problemaInstance}" field="ipTerminal"/></span>
+            <span class="property-value" aria-labelledby="ipTerminal-label"><g:fieldValue bean="${problemaInstance}" field="ipTerminal"/></span>
 
-				</li>
-				</g:if>
+        </li>
+        </g:if>
 
-			</ol>
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${problemaInstance?.id}" />
-					<g:link class="edit" action="edit" id="${problemaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+      </ol>
+      <g:form>
+        <fieldset class="buttons">
+          <g:hiddenField name="id" value="${problemaInstance?.id}" />
+          <g:if test="${!problemaInstance?.fechaSolucion}">
+           <g:link class="edit" action="edit" id="${problemaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+           <g:link class="save" action="cerrar" id="${problemaInstance?.id}">Cerrar</g:link>
+				  </g:if>
 					<!--g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /-->
 				</fieldset>
 			</g:form>
