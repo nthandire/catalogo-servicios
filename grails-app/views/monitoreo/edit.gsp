@@ -55,6 +55,7 @@
                     args: [message(code: 'solicitudArchivoadjunto.label',
                                     default: 'Archivo')])}
                 </g:link>
+                (Debe guardar sus cambios antes de subir archivos o los perderá. El tamaño maximo de un archivo es de 5 MB)
               </li>
             </ul>
           </div>
@@ -78,8 +79,7 @@
             <fieldset class="buttons">
               <a data-dismiss="modal" class="cancel">Cancelar</a>
               <input type="submit" name="_action_problema" id="respButton"
-                value="${message(code: 'default.button.update.label',
-                  default: 'Update')}"
+                value="Guardar"
                 class="save">
             </fieldset>
           </div>

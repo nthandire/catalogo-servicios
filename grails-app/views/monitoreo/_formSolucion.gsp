@@ -2,7 +2,7 @@
 
 <div class="fieldtablecontain">
   <label>
-    observaciones del problema
+    Observaciones del problema
   </label>
   <g:textArea style="width:412px;" name="observaciones" id="observaciones"
     cols="30" rows="5" maxlength="3000" />

@@ -51,7 +51,7 @@
 
 				<li class="fieldcontain">
 					<span id="bitacora-label" class="property-label">
-						<g:message code="monitoreo.bitacora.label" default="Bitacora" />
+						<g:message code="monitoreo.bitacora.label" default="Sistema" />
 					</span>
 					<span class="property-value" aria-labelledby="bitacora-label">
 						${monitoreoInstance?.bitacora?.encodeAsHTML()}

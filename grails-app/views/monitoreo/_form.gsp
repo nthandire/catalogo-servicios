@@ -35,7 +35,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
   <label for="bitacora">
-    <g:message code="monitoreo.bitacora.label" default="Bitacora" />
+    <g:message code="monitoreo.bitacora.label" default="Sistema" />
   </label>
   <g:field id="bitacora" name="bitacora.id" type="text" disabled="true" value="${monitoreoInstance.bitacora}"/>
 </div>
@@ -61,7 +61,7 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
   <label for="bitacora">
-    <g:message code="monitoreo.bitacora.label" default="Bitacora" />
+    <g:message code="monitoreo.bitacora.label" default="Sistema" />
   </label>
   <g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char).sort{it.id}}"
     optionKey="id" optionValue="${monitoreoInstance.bitacora}" />

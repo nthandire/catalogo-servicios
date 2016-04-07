@@ -42,9 +42,12 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 
 Plan
 
+- Monitoreos
+  - Quitar el botón de subir archivos al principio, o cuando se ha modificado algún valor
+  - Mover el botón de subir archivos a show
+
 - Problema
   - Capturar el cierre, con un comentario, firma, fecha.
     - poner un boton en show para marcar como terminado
   - agregar menú a problemas en monitoreos
-
 

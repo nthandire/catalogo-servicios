@@ -125,3 +125,11 @@ insert into tipo_monitoreo
   (3, 'Revisión');
   
 
+SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitoreo,semaforo,nota,id_usuario,fecha_modificacion,modificacion,ip_terminal,id_tipomonitoreo
+  FROM monitoreo
+  ;
+
+
+SELECT max(numero_monitoreo)
+  FROM monitoreo
+  ;
