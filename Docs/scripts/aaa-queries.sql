@@ -133,3 +133,12 @@ SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitore
 SELECT max(numero_monitoreo)
   FROM monitoreo
   ;
+
+SELECT id_monitoreo,numero_monitoreo
+  FROM monitoreo
+ where numero_monitoreo = 10 ;
+
+
+update monitoreo
+   set numero_monitoreo = id_monitoreo
+ where numero_monitoreo = 10 ;
