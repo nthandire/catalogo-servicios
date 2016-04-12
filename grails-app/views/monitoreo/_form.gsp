@@ -29,20 +29,18 @@
   <g:field name="numeroMonitoreo" type="text" value="${monitoreoInstance}"
     disabled="true" style="text-align: center;" />
 </div>
-
   </div>
-  <div class="span3">
 
+  <div class="span3">
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'bitacora', 'error')} required">
   <label for="bitacora">
     <g:message code="monitoreo.bitacora.label" default="Sistema" />
   </label>
   <g:field id="bitacora" name="bitacora.id" type="text" disabled="true" value="${monitoreoInstance.bitacora}"/>
 </div>
-
   </div>
-  <div class="span3">
 
+  <div class="span3">
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'estado', 'error')} required">
   <label for="estado">
     <g:message code="monitoreo.estado.label" default="Estado" />
@@ -63,7 +61,8 @@
   <label for="bitacora">
     <g:message code="monitoreo.bitacora.label" default="Sistema" />
   </label>
-  <g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char).sort{it.id}}"
+  <g:select id="bitacora" name="bitacora.id"
+    from="${Bitacora.findAllByEstado('A' as char).sort{it.id}}"
     optionKey="id" optionValue="descripcion" />
 </div>
 
@@ -103,10 +102,10 @@
   </label>
   <g:field name="seguimiento" type="number" value="$seguimiento" />
 </div>
-
   </div>
-  <div class="span4">
 
+%{--
+  <div class="span4">
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'idSeguimiento', 'error')} ">
   <label for="idSeguimiento">
     ... del año
@@ -115,6 +114,7 @@
 </div>
 
   </div>
+--}%
 </div>
 
 <div class="row-fluid">

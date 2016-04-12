@@ -79,8 +79,8 @@ class MonitoreoController {
             log.debug("Marcandolo como error")
             monitoreoInstance.errors.rejectValue('idSeguimiento', 'no.existe',
                                            'No existe esa nota de seguimiento')
-            render(view: "create", model: [monitoreoInstance: monitoreoInstance],
-                   seguimiento: seguimiento, anio: new Date())
+            render(view: "create", model: [monitoreoInstance: monitoreoInstance,
+                   seguimiento: seguimiento, anio: anio])
             return
           } else {
             log.debug("nota de seguimiento asignada 2 ${monitoreoSeguimiento}")
@@ -110,8 +110,8 @@ class MonitoreoController {
         monitoreoInstance.numeroMonitoreo = ++maxID
 
         if (!monitoreoInstance.save(flush: true)) {
-            render(view: "create", model: [monitoreoInstance: monitoreoInstance],
-                   seguimiento: seguimiento, anio: anio)
+            render(view: "create", model: [monitoreoInstance: monitoreoInstance,
+                   seguimiento: seguimiento, anio: anio])
             return
         }
 
@@ -123,8 +123,8 @@ class MonitoreoController {
           det.bitacoradetalle = it
           if (!det.save(flush: true)) {
             flash.error = "Error al grabar detalles, revisar el programa y la BD."
-            render(view: "create", model: [monitoreoInstance: monitoreoInstance],
-                   seguimiento: seguimiento, anio: anio)
+            render(view: "create", model: [monitoreoInstance: monitoreoInstance,
+                   seguimiento: seguimiento, anio: anio])
             return
           }
         }
@@ -262,22 +262,23 @@ class MonitoreoController {
       log.debug("antes de checar nota de seguimiento")
       monitoreoInstance.properties = params
       def seguimiento = params['seguimiento']
+      log.debug("seguimiento = $seguimiento")
       def anio = params['anio']
       if (seguimiento) {
         def monitoreos = Monitoreo.findAllByNumeroMonitoreo(seguimiento)
         log.debug("monitoreos = $monitoreos")
         def monitoreoSeguimiento = null
         monitoreos.each {
-          def anioSeguimiento = it.fecha
-          log.debug("anioSeguimiento = $anioSeguimiento")
-          if (anio[Calendar.YEAR] == anioSeguimiento[Calendar.YEAR]) {
+          if (anio[Calendar.YEAR] == it.fecha[Calendar.YEAR]) {
             monitoreoSeguimiento = it
           }
         }
+        log.debug("antes de checar $monitoreoSeguimiento")
         if (!monitoreoSeguimiento) {
+          log.debug("en el chequeo")
           flash.error = "No existe esa nota de seguimiento"
-          render(view: "create", model: [monitoreoInstance: monitoreoInstance],
-                   seguimiento: seguimiento, anio: anio)
+          render(view: "create", model: [monitoreoInstance: monitoreoInstance,
+                   seguimiento: seguimiento, anio: anio])
           return
         } else {
           log.debug("monitoreoSeguimiento.id = ${monitoreoSeguimiento.id}")
