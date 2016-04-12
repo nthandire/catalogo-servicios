@@ -43,8 +43,11 @@ Servicio: Sistemas Automatizado de Información Hospitalaria (SAIH)/ Trabajo Soc
 Plan
 
 - Monitoreos
+  - Nuevos campos
+  - cuando no hay detalles, al salvar, debe saltar a show, no a edit
   - Quitar el botón de subir archivos al principio, o cuando se ha modificado algún valor
   - Mover el botón de subir archivos a show
+
 
 - Problema
   - Capturar el cierre, con un comentario, firma, fecha.

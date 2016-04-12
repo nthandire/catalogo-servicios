@@ -10,6 +10,7 @@ class Monitoreo {
   Long idUsuario
   Date lastUpdated
   String ipTerminal
+  Long idSeguimiento
 
   static belongsTo = [bitacora:Bitacora]
   static hasMany = [detalles: MonitoreoDetalle]
@@ -25,6 +26,7 @@ class Monitoreo {
     nota maxSize:3000
     idUsuario display:false, editable:false
     ipTerminal editable:false
+    idSeguimiento nullable: true
   }
 
   static mapping = {

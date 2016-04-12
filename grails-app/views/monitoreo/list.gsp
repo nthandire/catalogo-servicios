@@ -38,6 +38,8 @@
 
 						<g:sortableColumn property="semaforo" title="${message(code: 'monitoreo.semaforo.label', default: 'Semaforo')}" />
 
+            <g:sortableColumn property="idSeguimiento" title="${message(code: 'monitoreo.semaforo.label', default: 'Nota de Seguimiento')}" />
+
 						<th><g:message code="monitoreo.nota.label" default="Nota" /></th>
 
 					</tr>
@@ -60,6 +62,10 @@
 						<td><g:message code="monitoreos.estado.${monitoreoInstance.estado}" /></td>
 
 						<td><g:message code="intensidad.valor.${monitoreoInstance.semaforo}" /></td>
+
+            <td>
+              ${monitoreoInstance.idSeguimiento ?Monitoreo.get(monitoreoInstance.idSeguimiento) : ""}
+            </td>
 
 						<td>${fieldValue(bean: monitoreoInstance, field: "nota")}</td>
 

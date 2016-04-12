@@ -35,6 +35,8 @@ class MonitoreoController {
           lista.sort{it.semaforo}
         } else if (params.sort == "fecha") {
           lista.sort{it.fecha}
+        } else if (params.sort == "idSeguimiento") {
+          lista.sort{it.idSeguimiento}
         } else {
           lista.sort{-it.id}
         }
@@ -49,15 +51,43 @@ class MonitoreoController {
     }
 
     def create() {
-        [monitoreoInstance: new Monitoreo(params)]
+        [monitoreoInstance: new Monitoreo(params), seguimiento: null,
+          anio: new Date()]
     }
 
     def save() {
         def monitoreoInstance = new Monitoreo(params)
+        log.debug("bitacora = ${monitoreoInstance.bitacora}")
         monitoreoInstance.fecha = new Date()
         monitoreoInstance.estado = 'A' as char
         monitoreoInstance.idUsuario = springSecurityService.principal.id
         monitoreoInstance.ipTerminal = request.getRemoteAddr()
+        def seguimiento = params['seguimiento']
+        def anio = params['anio']
+        if (seguimiento) {
+          def monitoreos = Monitoreo.findAllByNumeroMonitoreo(seguimiento)
+          def monitoreoSeguimiento = null
+          monitoreos.each {
+            log.debug("fecha = ${it.fecha}")
+            def anioSeguimiento = it.fecha[Calendar.YEAR]
+            if (anio[Calendar.YEAR] == anioSeguimiento) {
+              log.debug("nota de seguimiento asignada ${it}")
+              monitoreoSeguimiento = it
+            }
+          }
+          if (!monitoreoSeguimiento) {
+            log.debug("Marcandolo como error")
+            monitoreoInstance.errors.rejectValue('idSeguimiento', 'no.existe',
+                                           'No existe esa nota de seguimiento')
+            render(view: "create", model: [monitoreoInstance: monitoreoInstance],
+                   seguimiento: seguimiento, anio: new Date())
+            return
+          } else {
+            log.debug("nota de seguimiento asignada 2 ${monitoreoSeguimiento}")
+            monitoreoInstance.idSeguimiento = monitoreoSeguimiento.id
+          }
+        }
+        log.debug("Intenta salvar")
 
         def startDate = new Date().clearTime()
         startDate[Calendar.MONTH] = 0
@@ -80,7 +110,8 @@ class MonitoreoController {
         monitoreoInstance.numeroMonitoreo = ++maxID
 
         if (!monitoreoInstance.save(flush: true)) {
-            render(view: "create", model: [monitoreoInstance: monitoreoInstance])
+            render(view: "create", model: [monitoreoInstance: monitoreoInstance],
+                   seguimiento: seguimiento, anio: anio)
             return
         }
 
@@ -92,7 +123,8 @@ class MonitoreoController {
           det.bitacoradetalle = it
           if (!det.save(flush: true)) {
             flash.error = "Error al grabar detalles, revisar el programa y la BD."
-            render(view: "create", model: [monitoreoInstance: monitoreoInstance])
+            render(view: "create", model: [monitoreoInstance: monitoreoInstance],
+                   seguimiento: seguimiento, anio: anio)
             return
           }
         }
@@ -120,7 +152,16 @@ class MonitoreoController {
             return
         }
 
-        [monitoreoInstance: monitoreoInstance]
+        def seguimiento = 0
+        def anio = (new Date())[Calendar.YEAR]
+        if (monitoreoInstance.idSeguimiento) {
+          def notaSegim = Monitoreo.get(monitoreoInstance.idSeguimiento)
+          seguimiento = notaSegim.numeroMonitoreo
+          anio = notaSegim.fecha[Calendar.YEAR]
+        }
+
+        [monitoreoInstance: monitoreoInstance, seguimiento: seguimiento,
+          anio: anio]
     }
 
     def update(Long id, Long version) {
@@ -199,6 +240,7 @@ class MonitoreoController {
 
       def regresoBrusco = false
       def monitoreoInstance = Monitoreo.get(id)
+      log.debug("monitoreoInstance = $monitoreoInstance")
       if (!monitoreoInstance) {
           regresoBrusco = true
           flash.message = message(code: 'default.not.found.message', args: [message(code: 'monitoreo.label', default: 'Monitoreo'), id])
@@ -217,7 +259,33 @@ class MonitoreoController {
           }
       }
 
+      log.debug("antes de checar nota de seguimiento")
       monitoreoInstance.properties = params
+      def seguimiento = params['seguimiento']
+      def anio = params['anio']
+      if (seguimiento) {
+        def monitoreos = Monitoreo.findAllByNumeroMonitoreo(seguimiento)
+        log.debug("monitoreos = $monitoreos")
+        def monitoreoSeguimiento = null
+        monitoreos.each {
+          def anioSeguimiento = it.fecha
+          log.debug("anioSeguimiento = $anioSeguimiento")
+          if (anio[Calendar.YEAR] == anioSeguimiento[Calendar.YEAR]) {
+            monitoreoSeguimiento = it
+          }
+        }
+        if (!monitoreoSeguimiento) {
+          flash.error = "No existe esa nota de seguimiento"
+          render(view: "create", model: [monitoreoInstance: monitoreoInstance],
+                   seguimiento: seguimiento, anio: anio)
+          return
+        } else {
+          log.debug("monitoreoSeguimiento.id = ${monitoreoSeguimiento.id}")
+          monitoreoInstance.idSeguimiento = monitoreoSeguimiento.id
+        }
+      }
+      log.debug("despues de checar nota de seguimiento")
+
       monitoreoInstance.ipTerminal = request.getRemoteAddr()
       monitoreoInstance.estado = estadoParam
 

@@ -64,7 +64,7 @@
     <g:message code="monitoreo.bitacora.label" default="Sistema" />
   </label>
   <g:select id="bitacora" name="bitacora.id" from="${Bitacora.findAllByEstado('A' as char).sort{it.id}}"
-    optionKey="id" optionValue="${monitoreoInstance.bitacora}" />
+    optionKey="id" optionValue="descripcion" />
 </div>
 
 </g:else>
@@ -90,6 +90,28 @@
   </label>
   <g:select name="idTipomonitoreo" from="${TipoMonitoreo.list(sort:'id')}"
     optionKey="id" value="${monitoreoInstance.idTipomonitoreo}" />
+</div>
+
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span4">
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'idSeguimiento', 'error')} required">
+  <label for="idSeguimiento">
+    Nota de seguimiento
+  </label>
+  <g:field name="seguimiento" type="number" value="$seguimiento" />
+</div>
+
+  </div>
+  <div class="span4">
+
+<div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'idSeguimiento', 'error')} ">
+  <label for="idSeguimiento">
+    ... del año
+  </label>
+  <g:datePicker name="anio" value="${new Date()}" precision="year" years="${2015..2025}"/>
 </div>
 
   </div>
