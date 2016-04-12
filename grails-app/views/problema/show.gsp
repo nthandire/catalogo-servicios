@@ -1,5 +1,5 @@
 
-<%@ page import="mx.gob.inr.catservicios.Problema" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -111,9 +111,11 @@
 
 				<g:if test="${problemaInstance?.idUsuario}">
 				<li class="fieldcontain">
-					<span id="idUsuario-label" class="property-label"><g:message code="problema.idUsuario.label" default="Id Usuario" /></span>
+					<span id="idUsuario-label" class="property-label"><g:message code="problema.idUsuario.label" default="Usuario" /></span>
 
-						<span class="property-value" aria-labelledby="idUsuario-label"><g:fieldValue bean="${problemaInstance}" field="idUsuario"/></span>
+						<span class="property-value" aria-labelledby="idUsuario-label">
+              ${Usuario.get(problemaInstance.idUsuario)}
+            </span>
 
 				</li>
 				</g:if>
@@ -141,10 +143,11 @@
         <fieldset class="buttons">
           <g:hiddenField name="id" value="${problemaInstance?.id}" />
           <g:if test="${!problemaInstance?.fechaSolucion}">
+          %{--
            <g:link class="edit" action="edit" id="${problemaInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+          --}%
            <g:link class="save" action="cerrar" id="${problemaInstance?.id}">Cerrar</g:link>
 				  </g:if>
-					<!--g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /-->
 				</fieldset>
 			</g:form>
 		</div>

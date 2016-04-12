@@ -75,6 +75,17 @@ class ProblemaController {
         [problemaInstance: problemaInstance]
     }
 
+    def cerrar(Long id) {
+        def problemaInstance = Problema.get(id)
+        if (!problemaInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'problema.label', default: 'Problema'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [problemaInstance: problemaInstance]
+    }
+
     def update(Long id, Long version) {
         def problemaInstance = Problema.get(id)
         if (!problemaInstance) {
@@ -88,15 +99,27 @@ class ProblemaController {
                 problemaInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'problema.label', default: 'Problema')] as Object[],
                           "Another user has updated this Problema while you were editing")
-                render(view: "edit", model: [problemaInstance: problemaInstance])
+                render(view: "cerrar", model: [problemaInstance: problemaInstance])
                 return
             }
         }
 
         problemaInstance.properties = params
+        def userID = springSecurityService.principal.id
+        def firmaTeclada = params['passwordfirma']
+        //log.debug("firmaTeclada = $firmaTeclada")
+        def firma = Firmadigital.findById(userID)?.passwordfirma
+        //log.debug("firma= $firma")
+        if (firmaTeclada != firma) {
+          flash.error = "Error en contaseña"
+          render(view: "cerrar", model: [problemaInstance: problemaInstance])
+          return
+        }
+
+        problemaInstance.fechaSolucion = new Date()
 
         if (!problemaInstance.save(flush: true)) {
-            render(view: "edit", model: [problemaInstance: problemaInstance])
+            render(view: "cerrar", model: [problemaInstance: problemaInstance])
             return
         }
 
