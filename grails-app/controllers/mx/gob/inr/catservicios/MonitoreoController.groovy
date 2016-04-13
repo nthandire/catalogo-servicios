@@ -186,7 +186,8 @@ class MonitoreoController {
         flash.error = "Error en contaseña"
         monitoreoInstance = Monitoreo.get(id)
         monitoreoInstance.properties = params
-        render(view: "edit", model: [monitoreoInstance: monitoreoInstance])
+        render(view: "edit", model: [monitoreoInstance: monitoreoInstance,
+                   seguimiento: null, anio: null])
         return
       }
 
@@ -262,6 +263,9 @@ class MonitoreoController {
       log.debug("antes de checar nota de seguimiento")
       monitoreoInstance.properties = params
       def seguimiento = params['seguimiento']
+      if (seguimiento && seguimiento.isNumber()) {
+        seguimiento = seguimiento.toInteger()
+      }
       log.debug("seguimiento = $seguimiento")
       def anio = params['anio']
       if (seguimiento) {
@@ -277,7 +281,7 @@ class MonitoreoController {
         if (!monitoreoSeguimiento) {
           log.debug("en el chequeo")
           flash.error = "No existe esa nota de seguimiento"
-          render(view: "create", model: [monitoreoInstance: monitoreoInstance,
+          render(view: "edit", model: [monitoreoInstance: monitoreoInstance,
                    seguimiento: seguimiento, anio: anio])
           return
         } else {
@@ -292,7 +296,8 @@ class MonitoreoController {
 
       if (!monitoreoInstance.save(flush: true)) {
         regresoBrusco = true
-        render(view: "edit", model: [monitoreoInstance: monitoreoInstance])
+        render(view: "edit", model: [monitoreoInstance: monitoreoInstance,
+                   seguimiento: seguimiento, anio: anio])
         return
       }
 
@@ -310,7 +315,8 @@ class MonitoreoController {
         if (!it.save(flush: true)) {
           regresoBrusco = true
           flash.error = "Error al grabar detalles (2), revisar el programa y la BD."
-          render(view: "edit", model: [monitoreoInstance: monitoreoInstance])
+          render(view: "edit", model: [monitoreoInstance: monitoreoInstance,
+                   seguimiento: seguimiento, anio: anio])
           return
         }
       }

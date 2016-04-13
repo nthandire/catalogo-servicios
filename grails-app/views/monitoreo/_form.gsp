@@ -94,25 +94,24 @@
   </div>
 </div>
 
+%{--
 <div class="row-fluid">
   <div class="span4">
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'idSeguimiento', 'error')} required">
   <label for="idSeguimiento">
     Nota de seguimiento
   </label>
-  <g:field name="seguimiento" type="number" value="$seguimiento" />
+  <g:field name="seguimiento" type="number" value="${seguimiento ?: 0}" />
 </div>
   </div>
 
-%{--
   <div class="span4">
 <div class="fieldtablecontain ${hasErrors(bean: monitoreoInstance, field: 'idSeguimiento', 'error')} ">
   <label for="idSeguimiento">
     ... del año
   </label>
-  <g:datePicker name="anio" value="${new Date()}" precision="year" years="${2015..2025}"/>
+  <g:datePicker name="anio" value="${anio ?: new Date()}" precision="year" years="${2015..2025}"/>
 </div>
-
   </div>
 --}%
 </div>
