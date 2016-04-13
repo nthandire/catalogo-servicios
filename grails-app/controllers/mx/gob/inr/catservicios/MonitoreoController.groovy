@@ -153,12 +153,14 @@ class MonitoreoController {
         }
 
         def seguimiento = 0
-        def anio = (new Date())[Calendar.YEAR]
+        def anio = new Date()
+        log.debug("En Edit, antes de validar ${monitoreoInstance.idSeguimiento}")
         if (monitoreoInstance.idSeguimiento) {
           def notaSegim = Monitoreo.get(monitoreoInstance.idSeguimiento)
           seguimiento = notaSegim.numeroMonitoreo
-          anio = notaSegim.fecha[Calendar.YEAR]
+          anio = notaSegim.fecha
         }
+        log.debug("En Edit, despues de validar, seguimiento = $seguimiento, anio = $anio")
 
         [monitoreoInstance: monitoreoInstance, seguimiento: seguimiento,
           anio: anio]
