@@ -9,7 +9,8 @@
 // }
 dataSource {
     dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
-    url = "jdbc:informix-sqli://192.168.10.1:1526/sast_dev:informixserver=ol_inrserver"
+    // url = "jdbc:informix-sqli://192.168.10.1:1526/sast_dev:informixserver=ol_inrserver" // dev
+    url = "jdbc:informix-sqli://192.168.10.12:1527/sast_dev:informixserver=ol_adminserver" // Piloto
     driverClassName = "com.informix.jdbc.IfxDriver"
     dialect = "org.hibernate.dialect.InformixDialect"
     username = "informix"
@@ -26,8 +27,8 @@ dataSource {
 // }
 dataSource_seguridad {
     dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
-    url = "jdbc:informix-sqli://192.168.10.12:1527/saihweb:informixserver=ol_adminserver"
-    // TODO: RRHH url = "jdbc:informix-sqli://192.168.10.12:1526/saihweb:informixserver=ol_inrserver"
+    // url = "jdbc:informix-sqli://192.168.10.12:1527/saihweb:informixserver=ol_adminserver" // dev
+    url = "jdbc:informix-sqli://192.168.10.12:1526/saihweb:informixserver=ol_inrserver" // Piloto
     driverClassName = "com.informix.jdbc.IfxDriver"
     dialect = "org.hibernate.dialect.InformixDialect"
     username = "informix"
@@ -46,7 +47,8 @@ dataSource_almacen {
     dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
     // url = "jdbc:informix-sqli://192.168.10.1:1526/almacenes:informixserver=ol_inrserver" // _dev es la BD original
     // url = "jdbc:informix-sqli://192.168.10.12:1527/almacenes_dev:informixserver=ol_adminserver"
-    url = "jdbc:informix-sqli://192.168.10.1:1526/almacenes:informixserver=ol_inrserver"
+    // url = "jdbc:informix-sqli://192.168.10.1:1526/almacenes:informixserver=ol_inrserver" // dev
+    url = "jdbc:informix-sqli://192.168.10.12:1527/almacenes:informixserver=ol_adminserver" // Piloto
     driverClassName = "com.informix.jdbc.IfxDriver"
     dialect = "org.hibernate.dialect.InformixDialect"
     username = "informix"

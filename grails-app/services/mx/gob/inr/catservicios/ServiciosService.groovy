@@ -23,7 +23,7 @@ class ServiciosService {
         " where upper(nombre) || ' ' || upper(nvl(paterno,''))  || ' ' || upper(nvl(materno,'')) like '%${term}%'   "
       log.debug("queryEmpleado = $queryEmpleado")
       empleados = Usuario.findAll(queryEmpleado, [],
-                      [max: 8]).collect {it.idEmpleado as Integer}.findAll{it}
+                      [max: 8]).collect {it.id as Integer}.findAll{it}
       log.debug("empleados = $empleados")
     }
 
@@ -44,7 +44,7 @@ class ServiciosService {
         return []
       }
       query +=
-        "   and d.idEmpleado in (:empleados)    "
+        "   and d.id in (:empleados)    "
         paramQuery << [empleados: empleados]
     } else {
       query +=
@@ -75,7 +75,7 @@ class ServiciosService {
   def detallesEquipo(ResguardoEntregaDetalle it) {
       def eqMap = [:] // add to map. jQuery autocomplete expects the JSON object to be with id/label/value.
       eqMap.put("serie", it['serie'])
-      def empleado = Usuario.findByIdEmpleado(it['idEmpleado'])?.toString() ?: "Error en dato de empleado"
+      def empleado = Usuario.findByIdEmpleado(it['id'])?.toString() ?: "Error en dato de empleado"
       log.debug("it['idTipoanexotecnico'] = ${it['idTipoanexotecnico']}")
       def tipoEquipo = AnexoTecnico.get(it['idTipoanexotecnico'] as Long)
       eqMap.put("value", it['id'])
