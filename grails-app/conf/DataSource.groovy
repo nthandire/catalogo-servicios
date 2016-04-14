@@ -27,6 +27,7 @@ dataSource {
 dataSource_seguridad {
     dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
     url = "jdbc:informix-sqli://192.168.10.12:1527/saihweb:informixserver=ol_adminserver"
+    // TODO: RRHH url = "jdbc:informix-sqli://192.168.10.12:1526/saihweb:informixserver=ol_inrserver"
     driverClassName = "com.informix.jdbc.IfxDriver"
     dialect = "org.hibernate.dialect.InformixDialect"
     username = "informix"

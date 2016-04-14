@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" controller="bitacora" action="list">Lista de Bitacora</g:link></li>
+				<li><g:link class="list" controller="bitacora" action="list">Lista de Sistemas</g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
@@ -41,7 +41,7 @@
 
 				<g:if test="${bitacoraDetalleInstance?.bitacora}">
 				<li class="fieldcontain">
-					<span id="bitacora-label" class="property-label"><g:message code="bitacoraDetalle.bitacora.label" default="Bitacora" /></span>
+					<span id="bitacora-label" class="property-label"><g:message code="bitacoraDetalle.bitacora.label" default="Sistema" /></span>
 
 						<span class="property-value" aria-labelledby="bitacora-label"><g:link controller="bitacora" action="show" id="${bitacoraDetalleInstance?.bitacora?.id}">${bitacoraDetalleInstance?.bitacora?.encodeAsHTML()}</g:link></span>
 

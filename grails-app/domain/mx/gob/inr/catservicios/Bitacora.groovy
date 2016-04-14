@@ -1,27 +1,47 @@
 package mx.gob.inr.catservicios
 
 class Bitacora {
-  String tipoBitacora
-  String descripcion
+  Date fecha
+  Integer numeroMonitoreo
   Character estado = 'A' as char
+  Integer semaforo = 1
+  Integer idTipomonitoreo
+  String nota
+  Long idUsuario
+  Date lastUpdated
+  String ipTerminal
+  Long idSeguimiento
 
-  static hasMany = [detalles: BitacoraDetalle, monitoreos: Monitoreo]
+  static belongsTo = [bitacora:Sistema]
+  static hasMany = [detalles: MonitoreoDetalle]
 
   static constraints = {
-    tipoBitacora maxSize:100, blank:false, widget: 'text'
-    descripcion maxSize:255, blank:false, size: 5..255, widget: 'textarea'
-    estado blank:false, inList: ['A' as char,'I' as char]
+    fecha editable:false
+    numeroMonitoreo editable:false
+    bitacora column:'id_bitacora'
+    estado column:'estado_monitoreo', blank:false,
+      inList: [(char)'A', (char)'I', (char)'P'], editable:false
+    semaforo blank:false, min: 1, max: 3
+    idTipomonitoreo blank:false
+    nota maxSize:3000
+    idUsuario display:false, editable:false
+    ipTerminal editable:false
+    idSeguimiento nullable: true
   }
 
   static mapping = {
-    id column: "id_bitacora", generator: "increment"
-    descripcion column:'des_bitacora'
-    estado column: "estado_bitacora",
-      length: 1, columnDefinition: 'char(1)', defaultValue: "'A'"
-    version false
+    table 'monitoreo'
+    id column:'id_monitoreo', generator: "increment"
+    fecha column:'fecha_monitoreo'
+    bitacora column:'id_bitacora'
+    estado column: "estado_monitoreo", length: 1,
+      columnDefinition: 'char(1)', defaultValue: "'A'"
+    semaforo defaultValue: "1"
+    lastUpdated column:'fecha_modificacion'
+    version column:'modificacion'
   }
 
   String toString() {
-    "${id}: $tipoBitacora"
+    "${numeroMonitoreo}/${fecha[Calendar.YEAR]}"
   }
 }

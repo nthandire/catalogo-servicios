@@ -4,7 +4,7 @@ class MonitoreoDetalle {
 
   Integer estado = 0
   String observaciones
-  static belongsTo = [monitoreo:Monitoreo, bitacoradetalle:BitacoraDetalle] // TODO: en la desc dice monitoreo
+  static belongsTo = [monitoreo:Bitacora, bitacoradetalle:BitacoraDetalle] // TODO: en la desc dice monitoreo
 
   static constraints = {
     estado blank:false
@@ -17,7 +17,7 @@ class MonitoreoDetalle {
     bitacoradetalle column:'id_bitacoradetalle', editable:false
     estado defaultValue: 0, editable:false
     version false
-  } 
+  }
 
   String toString() {
     "$bitacoradetalle"

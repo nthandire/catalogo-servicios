@@ -1,4 +1,4 @@
-<%@ page import="mx.gob.inr.catservicios.BitacoraDetalle" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 
 
 <style type="text/css">
@@ -27,8 +27,8 @@
 
 <div class="fieldtablecontain ${hasErrors(bean: bitacoraDetalleInstance, field: 'bitacora', 'error')} required">
 	<label for="bitacora">
-		<g:message code="bitacoraDetalle.bitacora.label" default="Bitacora" />
+		<g:message code="bitacoraDetalle.bitacora.label" default="Sistema" />
 	</label>
-	<g:select id="bitacora" name="bitacora.id" from="${mx.gob.inr.catservicios.Bitacora.list()}" optionKey="id" required="" value="${bitacoraDetalleInstance?.bitacora?.id}" class="many-to-one"/>
+	<g:select id="bitacora" name="bitacora.id" from="${Sistema.list()}" optionKey="id" required="" value="${bitacoraDetalleInstance?.bitacora?.id}" class="many-to-one"/>
 </div>
 

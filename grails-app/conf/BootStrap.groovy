@@ -50,10 +50,10 @@ class BootStrap {
 
 
 
-      def laBitacora = new Bitacora(tipoBitacora: "Monitoreo",
+      def laBitacora = new Sistema(tipoBitacora: "Bitacora",
         descripcion: "IBM BladeCenter H Advanced Management Module").save(flush: true)
 
-      assert Bitacora.count() == 1
+      assert Sistema.count() == 1
 
       new BitacoraDetalle(descripcion: "IP 192.168.10.163",
         bitacora: laBitacora).save(flush: true)

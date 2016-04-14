@@ -57,7 +57,7 @@ class ProblemaController {
       def accion = "show"
       switch (problemaInstance.fuente) {
         case "Bitacora":
-          controlador = "Monitoreo"
+          controlador = "Bitacora"
           break
       }
 

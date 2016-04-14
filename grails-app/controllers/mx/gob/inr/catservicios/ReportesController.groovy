@@ -786,7 +786,7 @@ class ReportesController {
               break
             case "Bitacora":
               log.debug("   Y es tipo Bitacora")
-              fuente = Monitoreo.get(caso.idFuente)
+              fuente = Bitacora.get(caso.idFuente)
               inventario = null
               renglon = new RptSolicitud (
                 folio: fuente,

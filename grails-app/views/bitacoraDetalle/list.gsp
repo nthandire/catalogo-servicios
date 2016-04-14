@@ -23,25 +23,25 @@
 			<table>
 				<thead>
 					<tr>
-					
+
 						<g:sortableColumn property="descripcion" title="${message(code: 'bitacoraDetalle.descripcion.label', default: 'Descripcion')}" />
-					
+
 						<g:sortableColumn property="estado" title="${message(code: 'bitacoraDetalle.estado.label', default: 'Estado')}" />
-					
-						<th><g:message code="bitacoraDetalle.bitacora.label" default="Bitacora" /></th>
-					
+
+						<th><g:message code="bitacoraDetalle.bitacora.label" default="Sistema" /></th>
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${bitacoraDetalleInstanceList}" status="i" var="bitacoraDetalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="show" id="${bitacoraDetalleInstance.id}">${fieldValue(bean: bitacoraDetalleInstance, field: "descripcion")}</g:link></td>
-					
+
 						<td>${fieldValue(bean: bitacoraDetalleInstance, field: "estado")}</td>
-					
+
 						<td>${fieldValue(bean: bitacoraDetalleInstance, field: "bitacora")}</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>

@@ -17,6 +17,7 @@ class Usuario {
   String extension
   String correo
   Character idUnidadMedica
+  // TODO: RRHH Long idEmpleado
   Long idEmpleado
 
   String getNombreMostrar() {
@@ -36,11 +37,14 @@ class Usuario {
     extension nullable: true, maxSize: 6
     correo nullable: true, maxSize: 6
     idUnidadMedica nullable: true
-		idEmpleado nullable: true
+    idEmpleado nullable: true
+		// TODO: RRHH idEmpleado nullable: true
 	}
 
 	static mapping = {
-		id column:'idusuario', generator: "increment"
+    id column:'idusuario', generator: "increment"
+    // TODO: RRHH id column:'id_empleado', generator: "increment"
+    // TODO: RRHH password column:'passwordc'
 		username column:'rfc'
 		estatus length: 1, columnDefinition: 'char(1)'
     idUnidadMedica column:'idunidadmedica', length: 1, columnDefinition: 'char(1)'
