@@ -12,19 +12,19 @@ class UsuarioRol implements Serializable {
 			return false
 		}
 
-		other.usuario?.id == usuario?.id &&
+		other.usuario?.idusuario == usuario?.idusuario &&
 			other.rol?.id == rol?.id
 	}
 
 	int hashCode() {
 		def builder = new HashCodeBuilder()
-		if (usuario) builder.append(usuario.id)
+		if (usuario) builder.append(usuario.idusuario)
 		if (rol) builder.append(rol.id)
 		builder.toHashCode()
 	}
 
 	static UsuarioRol get(long usuarioId, long rolId) {
-		find 'from UsuarioRol where usuario.id=:usuarioId and rol.id=:rolId',
+		find 'from UsuarioRol where usuario.idusuario=:usuarioId and rol.id=:rolId',
 			[usuarioId: usuarioId, rolId: rolId]
 	}
 

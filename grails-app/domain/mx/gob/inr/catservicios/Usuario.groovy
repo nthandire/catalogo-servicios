@@ -17,7 +17,7 @@ class Usuario {
   String extension
   String correo
   Character idUnidadMedica
-  // TODO: RRHH Long idEmpleado
+  Long idusuario
 
   String getNombreMostrar() {
     toString()
@@ -36,7 +36,6 @@ class Usuario {
     extension nullable: true, maxSize: 6
     correo nullable: true, maxSize: 6
     idUnidadMedica nullable: true
-		// TODO: RRHH idEmpleado nullable: true
 	}
 
 	static mapping = {

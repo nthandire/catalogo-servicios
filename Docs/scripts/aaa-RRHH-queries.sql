@@ -35,6 +35,13 @@ values
 
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria
 FROM usuario
-where rfc like "PEC%";
+where rfc like "PECR%";
 
+PECR790224
+
+
+SELECT idusuario,idperfil
+  FROM usuario_perfil
+ where idusuario = 10041;
+ 
 
