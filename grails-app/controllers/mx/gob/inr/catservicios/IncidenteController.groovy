@@ -25,7 +25,7 @@ class IncidenteController {
         params.max = Math.min(max ?: 10, 100)
         def userID = springSecurityService.principal.id
         def area = area()
-        def areaDesc = area.descripcion
+        def areaDesc = area?.descripcion ?: "No tengo el área"
         log.debug("area = ${area}, area.id = ${area?.id}")
 
         def incidentes = Incidente.findAllByEstado('A' as char)
@@ -46,8 +46,15 @@ class IncidenteController {
         def paramMax = (params['max']?:'0').toInteger()
         def paramOffset = (params['offset']?:'0').toInteger()
 
-        def incidentesPaginación = incidenteInstanceList[paramOffset..
-          Math.min(paramOffset+paramMax-1, incidenteInstanceList.size()-1)]
+        log.debug("paramOffset = ${paramOffset}")
+        log.debug("paramOffset+paramMax-1 = ${paramOffset+paramMax-1}")
+        log.debug("incidenteInstanceList.size()-1 = ${incidenteInstanceList.size()-1}")
+        log.debug("Math.max(incidenteInstanceList.size()-1, 0) = ${Math.max(incidenteInstanceList.size()-1, 0)}")
+        log.debug("Math.min(paramOffset+paramMax-1, Math.max(incidenteInstanceList.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(incidenteInstanceList.size()-1, 0))}")
+        def incidentesPaginación = incidenteInstanceList.size() ?
+          incidenteInstanceList[paramOffset..
+            Math.min(paramOffset+paramMax-1, incidenteInstanceList.size()-1)] :
+          []
         log.debug("incidentesPaginación = ${incidentesPaginación}")
         [incidenteInstanceList: incidentesPaginación,
           incidenteInstanceTotal: incidenteInstanceList.size()]
