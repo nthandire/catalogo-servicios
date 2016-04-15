@@ -142,3 +142,9 @@ SELECT id_monitoreo,numero_monitoreo
 update monitoreo
    set numero_monitoreo = id_monitoreo
  where numero_monitoreo = 10 ;
+
+
+SELECT id_usuario,area,autoriza,vobo,estado 
+  FROM usuario_autorizado
+ where id_usuario = 10041;
+

@@ -10,8 +10,8 @@
 dataSource {
     dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
     // url = "jdbc:informix-sqli://192.168.10.1:1526/sast_dev:informixserver=ol_inrserver" // dev
-    // url = "jdbc:informix-sqli://192.168.10.12:1527/sast_dev:informixserver=ol_adminserver" // Piloto
-    url = "jdbc:informix-sqli://192.168.10.12:1527/sast:informixserver=ol_adminserver" // Piloto 2
+    url = "jdbc:informix-sqli://192.168.10.12:1527/sast_dev:informixserver=ol_adminserver" // Piloto
+    // url = "jdbc:informix-sqli://192.168.10.12:1527/sast:informixserver=ol_adminserver" // Piloto 2
     driverClassName = "com.informix.jdbc.IfxDriver"
     dialect = "org.hibernate.dialect.InformixDialect"
     username = "informix"
