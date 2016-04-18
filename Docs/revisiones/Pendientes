@@ -47,3 +47,6 @@ Plan
   - Quitar el botón de subir archivos al principio, o cuando se ha modificado algún valor
   - Mover el botón de subir archivos a show
 
+- Solicitudes
+  - al fallar la firma digital, pierde los campos capturados
+  

@@ -20,6 +20,7 @@ Para refrescar una página
 
 PECR790224
 Ragnarok0
+1korangaR
 
 rfc idusuario nombre  paterno materno desc_perfil idperfil
 VENR690106  9583  Martin  Vergara <null>  ROLE_SAST_GESTOR  60

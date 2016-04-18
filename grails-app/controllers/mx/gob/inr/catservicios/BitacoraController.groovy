@@ -44,9 +44,14 @@ class BitacoraController {
           lista = lista.reverse()
         }
 
-        def offset = params.offset ?: 0
+        def offset = params.offset ? params.offset.toInteger() : 0
 
-        [monitoreoInstanceList: lista[offset..Math.min(offset+params.max-1,lista.size()-1)],
+        log.debug("lista.size = $lista.size")
+        log.debug("offset = $offset")
+        lista = lista.size() ?
+          lista[offset..Math.min(offset+params.max-1, lista.size-1)] : []
+
+        [monitoreoInstanceList: lista,
           monitoreoInstanceTotal: cuantos]
     }
 
