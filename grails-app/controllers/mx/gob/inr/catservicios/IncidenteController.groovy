@@ -201,7 +201,7 @@ class IncidenteController {
 
         def userID = springSecurityService.principal.id
         def firmaTeclada = params['passwordfirma']
-        def firma = Firmadigital.findById(userID)?.passwordfirma
+        def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
 
         if (incidenteInstance.idResguardoentregadetalle &&
             !(ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle))) {
@@ -511,7 +511,7 @@ class IncidenteController {
 
       def userID = springSecurityService.principal.id
       def firmaTeclada = params['passwordfirma']
-      def firma = Firmadigital.findById(userID)?.passwordfirma
+      def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
 
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"
@@ -583,7 +583,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
 
       def userID = springSecurityService.principal.id
       def firmaTeclada = params['passwordfirmaTec']
-      def firma = Firmadigital.findById(userID)?.passwordfirma
+      def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
 
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"
@@ -651,7 +651,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
 
       def userID = springSecurityService.principal.id
       def firmaTeclada = params['passwordfirma']
-      def firma = Firmadigital.findById(userID)?.passwordfirma
+      def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"
         render(view: "edit", model: preparaEdit(id, incidenteInstance))
@@ -741,7 +741,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
 
       def userID = springSecurityService.principal.id
       def firmaTeclada = params['passwordfirma']
-      def firma = Firmadigital.findById(userID)?.passwordfirma
+      def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"
         render(view: "edit", model: preparaEdit(id, incidenteInstance))
@@ -797,7 +797,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
 
       def userID = springSecurityService.principal.id
       def firmaTeclada = params['passwordfirma']
-      def firma = Firmadigital.findById(userID)?.passwordfirma
+      def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
 
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"

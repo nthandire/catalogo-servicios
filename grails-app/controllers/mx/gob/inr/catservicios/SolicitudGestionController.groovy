@@ -216,7 +216,7 @@ class SolicitudGestionController {
 
         def userID = springSecurityService.principal.id
         def firmaTeclada = params['passwordfirma']
-        def firma = Firmadigital.findById(userID)?.passwordfirma
+        def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
 
         if (firmaTeclada != firma) {
           flash.error = "Error en contaseña"
@@ -294,7 +294,7 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
 
         def userID = springSecurityService.principal.id
         def firmaTeclada = params['passwordfirma']
-        def firma = Firmadigital.findById(userID)?.passwordfirma
+        def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
 
         if (firmaTeclada != firma) {
           flash.error = "Error en contaseña"

@@ -187,7 +187,7 @@ class BitacoraController {
 
       def userID = springSecurityService.principal.id
       def firmaTeclada = params['passwordfirma']
-      def firma = Firmadigital.findById(userID)?.passwordfirma
+      def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
       def monitoreoInstance = null
       if (firmaTeclada != firma) {
         flash.error = "Error en contaseña"

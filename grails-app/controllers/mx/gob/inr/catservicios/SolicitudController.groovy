@@ -203,7 +203,9 @@ class SolicitudController {
         log.debug("userID = $userID")
 
         def firmaTeclada = params['passwordfirma']
-        def firma = Firmadigital.findById(userID)?.passwordfirma
+        // log.debug("firmaTeclada = $firmaTeclada")
+        def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
+        // log.debug("firma = $firma")
         if (firmaTeclada != firma) {
             flash.error = "Error en contaseña"
             render(view: "edit", model: [solicitudInstance: solicitudInstance])

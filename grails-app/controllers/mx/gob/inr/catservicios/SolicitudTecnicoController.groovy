@@ -152,7 +152,7 @@ class SolicitudTecnicoController {
 
         def firmaTeclada = params['passwordfirma']
         log.debug("firmaTeclada = $firmaTeclada")
-        def firma = Firmadigital.findById(userID)?.passwordfirma
+        def firma = Firmadigital.findById(userID)?.passwordfirma?.reverse()
         log.debug("firma = $firma")
 
         solicitudDetalleInstance.properties = params
