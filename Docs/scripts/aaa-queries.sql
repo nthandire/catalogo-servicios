@@ -146,5 +146,25 @@ update monitoreo
 
 SELECT id_usuario,area,autoriza,vobo,estado 
   FROM usuario_autorizado
+ where id_usuario = 9427; --10041;
+
+
+SELECT id_usuario,area,autoriza,vobo,estado 
+  FROM usuario_autorizado;
+
+ SELECT id_usuario,area,autoriza,vobo,estado FROM "informix"."usuario_autorizado";
+
+10041
+
+
+update usuario_autorizado
+   set autoriza = 't',vobo = 't'
  where id_usuario = 10041;
 
+insert into usuario_autorizado
+  (id_usuario,area,autoriza,vobo,estado)
+ values
+  (6648, 'MS', 't', 't', 'A');
+  --(9427, 'MS', 't', 't', 'A');
+
+  
