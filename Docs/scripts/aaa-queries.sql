@@ -10,7 +10,9 @@ SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificac
  
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
- where fecha_incidente between to_date('2016-02-01', '%Y-%m-%d') and to_date('2016-02-29', '%Y-%m-%d');
+ where fecha_incidente between to_date('2016-04-18', '%Y-%m-%d') and to_date('2016-04-19', '%Y-%m-%d')
+   and estado_incidente = 'A'
+   and id_tecnico is null  ;
 
 
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
@@ -167,4 +169,43 @@ insert into usuario_autorizado
   (6648, 'MS', 't', 't', 'A');
   --(9427, 'MS', 't', 't', 'A');
 
-  
+
+SELECT id_serv,id_servsub,descripcion,portal,incidente,solicitud,problema,id_servresp1,id_servresp2,id_servresp3,tiempo1,tiempo2,tiempo3,id_tiempo1,id_tiempo2,id_tiempo3,impacto,id_servrespautoriza,id_servrespaprueba,plantilla,observaciones,estado_serv,id_usuario,fecha_modificacion,modificacion,ip_terminal 
+  FROM cat_serv
+ where id_serv in (4,42,111);
+
+SELECT id_servresp,descripcion 
+  FROM cat_servresp
+ where id_servresp in (13,14);
+ 
+
+DGDST
+
+select id_Serv
+  from Solicitud_Detalle d                    
+ where id_tecnico is null                     
+   and d.estado_solictuddetalle = 'A'
+   and exists                                
+      (select * from Cat_serv s,                     
+                     Cat_servResp r                  
+       where d.id_Serv = s.id_serv                 
+         and s.id_servresp2 = r.id_servresp              
+         and r.descripcion like '%DGDST%') ;
+
+
+select d.id_Serv, s.id_servresp2
+  from Solicitud_Detalle d,
+       cat_serv s                    
+ where d.id_tecnico is null                     
+   and d.id_Serv is not null                     
+   and d.estado_solictuddetalle = 'A'
+   and s.id_serv = d.id_serv;
+   
+         
+   and exists                                
+      ( from Solicitud s                     
+       where s.id_solicitud = d.id_solicitud            
+         and s.estado = 'R')     ;
+         
+select * from Cat_servResp r                  
+       where r.descripcion like '%DGDST%';

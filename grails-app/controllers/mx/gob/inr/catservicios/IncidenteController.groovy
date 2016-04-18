@@ -37,11 +37,10 @@ class IncidenteController {
               b.fechaIncidente <=> a.fechaIncidente}
         log.debug("incidentesFiltrados = ${incidentesFiltrados}")
 
-
-        def incidenteInstanceList = isTecnico() ?
-            incidentesFiltrados.findAll {it."idNivel${it.nivel}" == userID}
-          :
+        def incidenteInstanceList = isCoordinador() || isGestor() ?
             incidentesFiltrados
+          :
+            incidentesFiltrados.findAll {it."idNivel${it.nivel}" == userID}
 
         def paramMax = (params['max']?:'0').toInteger()
         def paramOffset = (params['offset']?:'0').toInteger()

@@ -56,6 +56,11 @@ SELECT idusuario,idperfil
  where idusuario = 6648; --9427; --10041;
 
 
+SELECT idusuario,idperfil
+  FROM usuario_perfil
+ where idusuario in (9577,9578,9580,8456,10039,10040,10041,10042,10044,10045,10046,10047)
+   and idperfil = 60;
+ 
 
 insert into usuario_perfil
   (idusuario,idperfil)
