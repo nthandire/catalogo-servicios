@@ -14,6 +14,10 @@ SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero
    and estado_incidente = 'A'
    and id_tecnico is null  ;
 
+SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
+  FROM incidente
+ where estado_incidente = 'E';
+
 
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
@@ -27,10 +31,24 @@ update incidente
    and p01 is null;
 ;
 
-SELECT id_incidente,numero_incidente,fecha_nivel1,fecha_solnivel1,fecha_nivel2,fecha_solnivel2,fecha_nivel3,fecha_solnivel3,firma_nivel1,solucion_nivel1,firma_nivel2,solucion_nivel2,solucion_nivel3,id_sistema,id_resguardoentregadetalle,fecha_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,id_asignanivel2,id_nivel2,id_asignanivel3,id_nivel3,firma_nivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
+SELECT id_incidente,numero_incidente,estado_incidente,fecha_nivel1,fecha_solnivel1,fecha_nivel2,fecha_solnivel2,fecha_nivel3,fecha_solnivel3,firma_nivel1,solucion_nivel1,firma_nivel2,solucion_nivel2,solucion_nivel3,id_sistema,id_resguardoentregadetalle,fecha_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,id_asignanivel2,id_nivel2,id_asignanivel3,id_nivel3,firma_nivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
- where numero_incidente <= 10
+ where numero_incidente = 21;
+ 
    and id_incidente > 50;
+
+
+
+SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta,extension 
+  FROM incidente
+ where id_incidente = 94;
+
+update incidente
+      set estado_incidente = 'A'
+ where id_incidente = 94;
+  
+
+
 
 
 SELECT id_monitoreo,fecha_monitoreo,numero_monitoreo,id_bitacora,estado_monitoreo,semaforo,nota,id_usuario,fecha_modificacion,modificacion,ip_terminal,id_tipomonitoreo
@@ -148,7 +166,7 @@ update monitoreo
 
 SELECT id_usuario,area,autoriza,vobo,estado 
   FROM usuario_autorizado
- where id_usuario = 9427; --10041;
+ where id_usuario = 10071; -- 9427; --10041;
 
 
 SELECT id_usuario,area,autoriza,vobo,estado 
@@ -209,3 +227,18 @@ select d.id_Serv, s.id_servresp2
          
 select * from Cat_servResp r                  
        where r.descripcion like '%DGDST%';
+
+
+
+SELECT id_problema,fuente,id_fuente,fecha_problema,folio,observaciones,solucion,fecha_solucion,resolvio,id_usuario,fecha_modificacion,modificacion,ip_terminal,id_resolvio 
+  FROM problema;
+
+SELECT count(*)
+  FROM problema;
+
+SELECT id_problema,fuente,id_fuente,fecha_problema,folio,observaciones,solucion,fecha_solucion,resolvio,id_usuario,fecha_modificacion,modificacion,ip_terminal,id_resolvio 
+  FROM problema
+ where id_problema = 15;
+
+DELETE problema
+ where id_problema = 15;
