@@ -47,9 +47,13 @@ SELECT idusuario,id_empleado,rfc,nombre,paterno,materno,password,idunidadmedica,
 FROM usuario
 where nombre like "%MARIA DEL SOCORRO%";-- "%HERNANDEZ PEREZ ALICIA%";
 
-SELECT idusuario,id_empleado,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,extension,correo,categoria
+SELECT idusuario,correo,id_empleado,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,extension,categoria
 FROM usuario
-where nombre like "%SANCHEZ NU%";-- "%HERNANDEZ PEREZ ALICIA%";
+where nombre like "%FERNANDO%";--"%DORIAN%";--"%SANCHEZ NU%";-- "%HERNANDEZ PEREZ ALICIA%";
+
+SELECT idusuario,correo,id_empleado,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,extension,categoria
+FROM usuario
+where correo is not null; -- like "%FERNANDO%";--"%DORIAN%";--"%SANCHEZ NU%";-- "%HERNANDEZ PEREZ ALICIA%";
 
 Maria del Socorro Zarazua Perez
 
