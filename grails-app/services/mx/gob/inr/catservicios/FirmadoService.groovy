@@ -86,11 +86,15 @@ class FirmadoService {
     def area = ""
     if (usuario) {
       area = UsuarioAutorizado.get(usuario)?.area
+      log.debug("area = $area")
       if (!area || area.length() == 1) {
+        log.debug("usuario = $usuario")
         def idArea = area ?: Usuario.get(usuario)?.idUnidadMedica
+        log.debug("idArea = $idArea")
         if (idArea) {
           def unidMed = UnidadMedica.get(idArea as char)
-          area = unidMed.descripcion
+          log.debug("unidMed = $unidMed")
+          area = unidMed?.descripcion ?: ""
           } else
             area = "Error, revisar con desarrollo de sistemas"
       }
@@ -428,7 +432,9 @@ class FirmadoService {
     log.debug "minutos = $minutos"
 
     Integer idxSemaforo = 0
+    log.debug("semaforo = $semaforo")
     while (idxSemaforo < semaforo.size()) {
+      log.debug("plazoMinutos = $plazoMinutos, idxSemaforo = $idxSemaforo")
       if (minutos >= (plazoMinutos * (semaforo[idxSemaforo].min) / 100)) break
       ++idxSemaforo
     }
