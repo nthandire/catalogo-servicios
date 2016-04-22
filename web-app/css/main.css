@@ -249,7 +249,12 @@ fieldset,
 }
 
 .fieldtablecontain{
-	text-align: center;
+  text-align: center;
+  width: 85%;
+}
+
+.fieldtablecontainLeft{
+	text-align: left;
 	width: 85%;
 }
 

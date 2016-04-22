@@ -17,11 +17,11 @@
 <h1>Solicitudes y soluciones</h1>
 <g:each in="${SolicitudDetalle.findAllByIdSolicitudAndEstado(solicitudInstance,
                             'A' as char)}" var="d">
-  <div class="fieldtablecontain">
-    ${"Solicitud: " + d?.descripcion.encodeAsHTML()}
+  <div class="fieldtablecontainLeft">
+    ${"<b style='color:blue;'>Solicitud:</b> " + d?.descripcion.encodeAsHTML()}
   </div>
-  <div class="fieldtablecontain">
-    ${"Solución: " + d?.solucion.encodeAsHTML()}
+  <div class="fieldtablecontainLeft">
+    ${"<b style='color:blue;'>Solución:</b> " + d?.solucion.encodeAsHTML()}
   </div>
   <div class="fieldtablecontain">
     -------------------------------------------

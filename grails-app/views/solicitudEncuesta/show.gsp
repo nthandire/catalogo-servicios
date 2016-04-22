@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" action="list">Lista de Encuestas</g:link></li>
 			</ul>
 		</div>
 		<div id="show-solicitud" class="content scaffold-show" role="main">
@@ -50,11 +50,11 @@
         <h1>Categoría del servicio</h1>
         <g:each in="${SolicitudDetalle.findAllByIdSolicitudAndEstado(solicitudInstance,
                             'A' as char)}" var="d">
-          <div class="fieldtablecontain">
-            ${"Solicitud: ${d?.encodeAsHTML()} : ${d?.descripcion.encodeAsHTML()}"}
+          <div class="fieldtablecontainLeft">
+            ${"<b style='color:blue;'>Solicitud:</b> ${d?.encodeAsHTML()} : ${d?.descripcion.encodeAsHTML()}"}
           </div>
-          <div class="fieldtablecontain">
-            ${"Solución: " + d?.solucion.encodeAsHTML()}
+          <div class="fieldtablecontainLeft">
+            ${"<b style='color:blue;'>Solución:</b> " + d?.solucion.encodeAsHTML()}
           </div>
           <div class="fieldtablecontain">
             -------------------------------------------

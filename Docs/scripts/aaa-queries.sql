@@ -31,12 +31,23 @@ update incidente
    and p01 is null;
 ;
 
-SELECT id_incidente,numero_incidente,estado_incidente,fecha_nivel1,fecha_solnivel1,fecha_nivel2,fecha_solnivel2,fecha_nivel3,fecha_solnivel3,firma_nivel1,solucion_nivel1,firma_nivel2,solucion_nivel2,solucion_nivel3,id_sistema,id_resguardoentregadetalle,fecha_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,id_asignanivel2,id_nivel2,id_asignanivel3,id_nivel3,firma_nivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
+SELECT id_incidente,numero_incidente,nivel,estado_incidente,fecha_nivel1,fecha_solnivel1,fecha_nivel2,fecha_solnivel2,fecha_nivel3,fecha_solnivel3,firma_nivel1,solucion_nivel1,firma_nivel2,solucion_nivel2,solucion_nivel3,id_sistema,id_resguardoentregadetalle,fecha_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,id_servresp,id_captura,id_nivel1,id_asignanivel2,id_nivel2,id_asignanivel3,id_nivel3,firma_nivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
- where numero_incidente = 21;
+ where numero_incidente = 46;
+ 
+SELECT id_incidente,numero_incidente,nivel,estado_incidente,fecha_nivel1,fecha_solnivel1,fecha_nivel2,fecha_solnivel2,fecha_nivel3,fecha_solnivel3,firma_nivel1,solucion_nivel1,firma_nivel2,solucion_nivel2,solucion_nivel3,id_sistema,id_resguardoentregadetalle,fecha_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,id_servresp,id_captura,id_nivel1,id_asignanivel2,id_nivel2,id_asignanivel3,id_nivel3,firma_nivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
+  FROM incidente
+ where id_incidente = 96;
  
    and id_incidente > 50;
 
+update incidente
+   set estado_incidente = 'E'
+ where id_incidente = 96;
+ 
+SELECT id_incidente,numero_incidente,estado_incidente,fecha_nivel1,fecha_solnivel1,fecha_nivel2,fecha_solnivel2,fecha_nivel3,fecha_solnivel3,firma_nivel1,solucion_nivel1,firma_nivel2,solucion_nivel2,solucion_nivel3,id_sistema,id_resguardoentregadetalle,fecha_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,id_asignanivel2,id_nivel2,id_asignanivel3,id_nivel3,firma_nivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
+  FROM incidente
+ where id_incidente > 80;
 
 
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta,extension 
@@ -105,6 +116,10 @@ select *
 SELECT id_servsub,id_servcat,descripcion,estado
   FROM cat_servsub
  where id_servcat = 3 ;
+
+SELECT *
+  FROM cat_serv
+ where descripcion like "No coincide el nivel%" ;
 
 
 
@@ -255,3 +270,12 @@ SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificac
  ;
 
 
+  
+SELECT id_usuario,area,autoriza,vobo,estado 
+  FROM usuario_autorizado
+  ;
+
+insert into usuario_autorizado
+  (id_usuario,area,autoriza,vobo,estado)
+ values
+  (8456, 'DGDST', 't',);
