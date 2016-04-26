@@ -320,15 +320,16 @@ class IncidenteController {
     }
 
     def edit(Long id) {
-        def incidenteInstance = Incidente.get(id)
-        if (!incidenteInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'incidente.label', default: 'Incidente'), id])
-            redirect(action: "list")
-            return
-        }
-
-        preparaEdit(id, incidenteInstance)
+      def incidenteInstance = Incidente.get(id)
+      if (!incidenteInstance) {
+          flash.message = message(code: 'default.not.found.message',
+            args: [message(code: 'incidente.label', default: 'Incidente'), id])
+          redirect(action: "list")
+          return
       }
+
+      preparaEdit(id, incidenteInstance)
+    }
 
     def preparaEdit(Long id, Incidente incidenteInstance) {
         def userID = springSecurityService.principal.id
@@ -355,7 +356,7 @@ class IncidenteController {
         log.debug("tecnicos = ${tecnicos}")
         def nivel = incidenteInstance.nivel
         def idNivel = incidenteInstance."idNivel${nivel}"
-        log.debug("idNivel = ${idNivel}")
+        log.debug("incidente = $incidenteInstance, idNivel = ${idNivel}")
         def areaReporta = firmadoService.areaNombre(incidenteInstance.idReporta)
         log.debug("areaReporta = ${areaReporta}")
         def areaAtendio1 = (incidenteInstance.fechaNivel1) ?

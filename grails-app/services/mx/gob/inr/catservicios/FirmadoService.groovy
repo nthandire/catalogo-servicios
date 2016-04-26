@@ -808,4 +808,13 @@ class FirmadoService {
     casos
   }
 
+  Boolean hayMasNiveles(Incidente caso) {
+    def nivel = caso.nivel
+    if (nivel == 3) {
+      false
+    } else {
+      caso?.idServ?."servResp${nivel+1}"
+    }
+  }
+
 }

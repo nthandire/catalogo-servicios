@@ -181,6 +181,7 @@
 
 
         <fieldset class="buttons">
+          <g:set var="firmado" bean="firmadoService"/>
           <g:actionSubmit class="edit" action="update"
             value="${message(code: 'default.button.update.label',
                              default: 'Update')}"
@@ -192,12 +193,12 @@
           <g:if test="${idNivel == yo}">
             <a class="save" data-toggle="modal" href="#responsive"
               onclick="soluciona()">Solucionar Incidente</a>
-            <g:if test="${incidenteInstance.nivel < 3}">
+            <g:if test="${firmado.hayMasNiveles(incidenteInstance)}">
               <a class="escala" data-toggle="modal" href="#responsive"
                 onclick="escala()">Escalar Incidente</a>
             </g:if>
           </g:if>
-          <g:if test="${incidenteInstance.nivel == 3 && idNivel == yo}">
+          <g:if test="${!firmado.hayMasNiveles(incidenteInstance) && idNivel == yo}">
             <a class="cancel" data-toggle="modal" href="#responsive"
               onclick="problema()">Marcarlo como problema</a>
           </g:if>
