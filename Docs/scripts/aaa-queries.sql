@@ -1,6 +1,6 @@
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   FROM solicitud
- where id_solicitud > 80;
+ where id_solicitud > 210;
 
 
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
@@ -37,7 +37,7 @@ SELECT id_incidente,numero_incidente,nivel,estado_incidente,fecha_nivel1,fecha_s
  
 SELECT id_incidente,numero_incidente,nivel,estado_incidente,fecha_nivel1,fecha_solnivel1,fecha_nivel2,fecha_solnivel2,fecha_nivel3,fecha_solnivel3,firma_nivel1,solucion_nivel1,firma_nivel2,solucion_nivel2,solucion_nivel3,id_sistema,id_resguardoentregadetalle,fecha_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,id_servresp,id_captura,id_nivel1,id_asignanivel2,id_nivel2,id_asignanivel3,id_nivel3,firma_nivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
- where id_incidente = 96;
+ where id_incidente = ;
  
    and id_incidente > 50;
 
@@ -113,13 +113,10 @@ select *
    and fecha_problema between to_date('2016/03/01 00:00', '%Y/%m/%d %H:%M') and to_date('2016/03/11 23:59', '%Y/%m/%d %H:%M');
    
    
-SELECT id_servsub,id_servcat,descripcion,estado
-  FROM cat_servsub
- where id_servcat = 3 ;
-
 SELECT *
   FROM cat_serv
  where descripcion like "No coincide el nivel%" ;
+
 
 
 
@@ -279,3 +276,28 @@ insert into usuario_autorizado
   (id_usuario,area,autoriza,vobo,estado)
  values
   (8456, 'DGDST', 't',);
+
+SELECT *
+  FROM cat_serv
+ where id_servresp3 is null ;
+
+SELECT id_servsub,id_servcat,descripcion,estado
+  FROM cat_servsub
+ where id_servsub = 2 ;
+
+SELECT *
+  FROM cat_servcat
+ where id_servcat = 2 ;
+
+select id_serv, *
+  from incidente
+ where id_incidente = 119;
+ 
+update incidente
+   set id_serv = 2 -- 100
+ where id_incidente = 119;
+ 
+SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estado_solictuddetalle,descripcion,solucion,id_tecnico,fecha_solucion,id_programa,id_servcat,descripcion_tecnica,prioridad,id_aprobador,fecha_aprobador 
+  FROM solicitud_detalle
+ where id_solicitud = 220;
+
