@@ -50,6 +50,14 @@ class IncidenteController {
         log.debug("incidenteInstanceList.size()-1 = ${incidenteInstanceList.size()-1}")
         log.debug("Math.max(incidenteInstanceList.size()-1, 0) = ${Math.max(incidenteInstanceList.size()-1, 0)}")
         log.debug("Math.min(paramOffset+paramMax-1, Math.max(incidenteInstanceList.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(incidenteInstanceList.size()-1, 0))}")
+
+        incidenteInstanceList.sort{a,b -> a.fechaIncidente[Calendar.YEAR] == b.fechaIncidente[Calendar.YEAR] ?
+          b.numeroIncidente <=> a.numeroIncidente :
+          b.fechaIncidente[Calendar.YEAR] <=> a.fechaIncidente[Calendar.YEAR]}
+
+        if (params['order'] == 'asc') {
+          incidenteInstanceList = incidenteInstanceList.reverse()
+        }
         def incidentesPaginación = incidenteInstanceList.size() ?
           incidenteInstanceList[paramOffset..
             Math.min(paramOffset+paramMax-1, incidenteInstanceList.size()-1)] :
