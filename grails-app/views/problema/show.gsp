@@ -40,7 +40,7 @@
           </span>
 
 					<span class="property-value" aria-labelledby="fuente-label">
-            <g:link controller="$controlador" action="show" id="${problemaInstance?.idFuente}">
+            <g:link controller="$controlador" action="${controlador == 'Incidente' ? 'showIncidente' : 'show'}" id="${problemaInstance?.idFuente}">
               <g:fieldValue bean="${problemaInstance}" field="fuente"/>
             </g:link>
           </span>
@@ -53,7 +53,7 @@
           <span id="idFuente-label" class="property-label"><g:message code="problema.idFuente.label" default="Id Fuente" /></span>
 
           <span class="property-value" aria-labelledby="idFuente-label">
-            <g:link controller="$controlador" action="show" id="${problemaInstance?.idFuente}">
+            <g:link controller="$controlador" action="${controlador == 'Incidente' ? 'showIncidente' : 'show'}" id="${problemaInstance?.idFuente}">
               <g:fieldValue bean="${problemaInstance}" field="idFuente"/>
             </g:link>
           </span>
