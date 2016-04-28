@@ -205,6 +205,7 @@ class IncidenteController {
         log.debug("incidenteInstance.idServ = ${incidenteInstance.idServ}")
         log.debug("incidenteInstance.idServ.servSub = ${incidenteInstance.idServ.servSub}")
         log.debug("incidenteInstance.idServ.servSub.servCat = ${incidenteInstance.idServ.servSub.servCat}")
+        log.debug("incidenteInstance.idResguardoentregadetalle = ${incidenteInstance.idResguardoentregadetalle}")
 
         def userID = springSecurityService.principal.id
         def firmaTeclada = params['passwordfirma']
