@@ -194,7 +194,10 @@ class SolicitudController {
                 solicitudInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'solicitud.label', default: 'Solicitud')] as Object[],
                           "Alguien más ha modificado esta Solicitud mientras usted la estaba firmando")
-                render(view: "edit", model: [solicitudInstance: solicitudInstance])
+                render(view: "edit", model: [solicitudInstance: solicitudInstance,
+                                             autorizadores:listaDeAutorizadores(),
+                                             categorias: categorias(),
+                                             equipos: equipos()])
                 return
             }
         }
@@ -208,7 +211,10 @@ class SolicitudController {
         // log.debug("firma = $firma")
         if (firmaTeclada != firma) {
             flash.error = "Error en contaseña"
-            render(view: "edit", model: [solicitudInstance: solicitudInstance])
+            render(view: "edit", model: [solicitudInstance: solicitudInstance,
+                                         autorizadores:listaDeAutorizadores(),
+                                         categorias: categorias(),
+                                         equipos: equipos()])
             return
         }
 
@@ -216,7 +222,10 @@ class SolicitudController {
         solicitudInstance.estado = 'F' as char
 
         if (!solicitudInstance.save(flush: true)) {
-            render(view: "edit", model: [solicitudInstance: solicitudInstance])
+            render(view: "edit", model: [solicitudInstance: solicitudInstance,
+                                         autorizadores:listaDeAutorizadores(),
+                                         categorias: categorias(),
+                                         equipos: equipos()])
             return
         }
 
