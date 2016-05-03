@@ -61,13 +61,12 @@ anabel rfc EIVA721207 passwordc 1326e38796b7a63b1c088b54ddff8d18e87b073955d1e5fe
 Richard dd85ed30f6da98f6edb464029f89b903aaadb6da86478646ad0f59361d49c1de
 
 
+Corregir el prontuario para que pueda ser más preciso y sirva de guía para el manejo del sistema.
+
 
 
 GENERALES
 Se debe de poder teclear las extensiones para captura y/o corrección del mismo, el campo no está habilitado aun.
-La captura del RFC no debe ser sensible a minúsculas y mayúsculas para el usuario que ingresa al sistema.
-CORREGIDA.
-Corregir el prontuario para que pueda ser más preciso y sirva de guía para el manejo del sistema.
 
 
 
