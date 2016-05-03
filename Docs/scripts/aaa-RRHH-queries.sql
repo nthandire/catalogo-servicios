@@ -10,10 +10,17 @@ values
  
  SELECT idusuario,idperfil
    FROM usuario_perfil
-  where idusuario = 9586 ;
+  where idusuario = 10041;--10033; --9586 ;
 
 
-  
+SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
+  FROM usuario
+ where idusuario = 10033;
+
+update usuario
+   set passwordc = '1326e38796b7a63b1c088b54ddff8d18e87b073955d1e5fefc9b015ec032ff0a'
+ where idusuario = 10033;
+
 
 SELECT idusuario,idperfil
   FROM usuario_perfil
@@ -83,9 +90,9 @@ insert into usuario_perfil
 
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario
- where idusuario = 10053;
+ where idusuario = 10091; -- 8301; --10053;
 
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario
- where rfc = 'CARL740622';
+ where nombre like '%ANABEL%';-- rfc = 'CARL740622';
 

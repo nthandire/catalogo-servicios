@@ -24,7 +24,7 @@ SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero
 
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
- where fecha_incidente >= to_date('2016-04-27', '%Y-%m-%d');
+ where fecha_incidente >= to_date('2016-05-02', '%Y-%m-%d');
 
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
@@ -223,11 +223,11 @@ insert into usuario_autorizado
 
 SELECT id_serv,id_servsub,descripcion,portal,incidente,solicitud,problema,id_servresp1,id_servresp2,id_servresp3,tiempo1,tiempo2,tiempo3,id_tiempo1,id_tiempo2,id_tiempo3,impacto,id_servrespautoriza,id_servrespaprueba,plantilla,observaciones,estado_serv,id_usuario,fecha_modificacion,modificacion,ip_terminal 
   FROM cat_serv
- where id_serv in (4,42,111);
+ where id_serv in (174,4,42,111);
 
 SELECT id_servresp,descripcion 
   FROM cat_servresp
- where id_servresp in (13,14);
+ where id_servresp in (24, 13,14);
  
 
 DGDST
@@ -304,7 +304,7 @@ SELECT *
 
 SELECT id_servsub,id_servcat,descripcion,estado
   FROM cat_servsub
- where id_servsub = 2 ;
+ where id_servsub = 33 ;
 
 SELECT *
   FROM cat_servcat
@@ -320,5 +320,17 @@ update incidente
  
 SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estado_solictuddetalle,descripcion,solucion,id_tecnico,fecha_solucion,id_programa,id_servcat,descripcion_tecnica,prioridad,id_aprobador,fecha_aprobador 
   FROM solicitud_detalle
- where id_solicitud = 220;
+ where id_solicitud >= 239;
 
+SELECT id_usuario,area,autoriza,vobo,estado
+  FROM usuario_autorizado
+ WHERE id_usuario in (10041, 10033); --10091;
+
+INSERT INTO usuario_autorizado
+  (id_usuario,area,autoriza,vobo,estado)
+ VALUES
+     (10091,'DGDST','f','f','A')
+ ;
+
+
+ 

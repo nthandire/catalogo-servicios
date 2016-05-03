@@ -51,4 +51,78 @@ Plan
   - al fallar la firma digital, pierde los campos capturados
 
 - agrandar el campo del que repara un problema
+- en encuesta de incidente , en el showIncidente, arriba la liga dice "lista de incidentes" en lugar de lista de encuestas
+
+
+
+
+
+anabel rfc EIVA721207 passwordc 1326e38796b7a63b1c088b54ddff8d18e87b073955d1e5fefc9b015ec032ff0a
+Richard dd85ed30f6da98f6edb464029f89b903aaadb6da86478646ad0f59361d49c1de
+
+
+
+
+GENERALES
+Se debe de poder teclear las extensiones para captura y/o corrección del mismo, el campo no está habilitado aun.
+La captura del RFC no debe ser sensible a minúsculas y mayúsculas para el usuario que ingresa al sistema.
+CORREGIDA.
+Corregir el prontuario para que pueda ser más preciso y sirva de guía para el manejo del sistema.
+
+
+
+INCIDENTES
+Al cerrar un incidente la encuesta no se muestra en la “Lista de encuestas” del usuario (Margarita Popova Incidente 23/2016.)
+Solo personal de la mesa de servicio debe poder capturar incidentes ya actualmente todos los técnicos de la STIC lo pueden hacer.
+Un incidente que esta referenciado a un equipo, actualmente se puede levantar más de una vez, siendo que no se debe permitir, solo debe de perimirlo una sola vez.
+Es difícil la búsqueda de un incidente determinado en la lista de incidentes, ya que no funcionan los filtros en todas sus columnas para ordénalos de forma ascendente o descendente; además en algunas otras listas de los requerimientos tampoco funcionan los filtros en requerimientos a revisar, requerimientos asignados, requerimientos en encuesta, requerimientos terminados, Lista de requerimientos.
+La lista de incidentes, incidentes terminados, incidentes en encuesta la columna de “reporta” no es correcto el ordenamiento.
+Al levantar un incidente en el campo “Quien reporta” no está la función de autocompletar.
+La búsqueda del equipo por nombre de usuario no está funcionando al realizar un incidente.
+Cuando el incidente es gestionado a 2° nivel y el aprobador lo edita para asignar un técnico se muestra el botón “Actualizar”, el cual no tiene ninguna función, se requiere que sea eliminado.
+
+
+El incidente 30/2016 al marcarlo como problema no se localizo en el listado de problemas para darle seguimiento al ciclo de vida.
+Revisar la causa de porque no llegan los correos con la encuesta de satisfacción a algunos usuarios en incidentes.
+Limpiar el campo de búsqueda del equipo al seleccionar el equipo que se visualiza en el proceso de la captura de un incidente.
+No todos los incidentes del catálogo de servicios tienen tercer nivel, por lo que se requiere deshabilitar en estos casos su gestión a 3er. Nivel.
+En la opción de Problema al seleccionar la fuente incidente hay una liga rota, marca error.
+
+
+
+
+REQUERIMIENTO
+Se observó que después de visualizar el semáforo, al seleccionarlo nuevamente minutos después marco error de programación “ha ocurrido un error” y después de 3 intentos ya se vuelve a visualizar.
+Al capturar un nuevo requerimiento y por error es relacionado a un equipo de cómputo, aunque no lo has creado y te regresas a borrar la referencia del equipo, siguen quedando los datos de marca, modelo, serie, etc., le das Enter y aun así crea el requerimiento mandando a la siguiente pantalla de descripción del requerimiento.
+
+
+No se puede borrar un archivo una vez que se subió en requerimiento.
+Si el usuario al fallar la firma en un requerimiento, se pierde la lista de autorizadores.
+Al cancelar un requerimiento a Dorian no le aparece en el listado y no aparece en ningún listado.
+Al autorizar el folio 24, se mandan dos correos con nombres de otra persona en el cuerpo del mensaje debiendo referir al usuario que lo solicito (Dorian y al autorizador).
+Al contestar la encuesta del requerimiento 29/2016, la descripción de los detalles y su solución  hacen  referencia a otro servicio.
+En el requerimiento no aparece la extensión cuando el usuario está capturando el servicio, este debe ser un campo de captura del usuario, ya que no está funcionando la Base de Datos de extensiones, por lo que no tendríamos la referencia para contactar al usuario, ya que dicho campo aparece solo cuando es gestionado, el usuario nunca confirma que esa es su extensión y al ser gestionado puede ser que la extensión, no sea la correcta.
+Después de crear un requerimiento, al terminar de llenar el apartado de Descripción de requerimiento y firmar (bien o erróneamente) con ENTER, aparece un error “Debe capturar la categoría de su solicitud”.
+
+
+
+Al fallar la firma elimina el autorizador y el combo de autorizadores ya no se activa, si no hasta que te sales y vuelves a editarlo y firmarlo.
+Requerimiento 46/2016 se perdió cuando se marcó como revisado por la mesa de servicio y esto no le apareció a Alonso para su aprobación.
+No se ve el nombre completo del solicitante, del autorizador, subcategoría y equipo cuando edita el aprobador.
+En el Estado de cierre no debe de aparecer la opción de “atención de servicios”, no corresponde a requerimientos, solo a incidentes.
+Dice: Sistema de Administación de Servicios, Debe decir: Sistema de Administración de Servicios.
+Al cerrar un servicio al usuario se le envía una notificación de que su incidente fue atendido y lo invita a contestar la encuesta,  el sistema solo le envía una vez, se había solicitado que se enviara 3 veces, además no se le informa al usuario que en caso de no ser contestada la encuesta se dará por satisfactoria.
+Al revisar el gestor de la Mesa de Servicios el requerimiento no permite reclasificar la categoría antes de aprobar el servicio, solicitando se habilite solo para el rol de Gestor.
+Se requiere que donde se cuente con combos para seleccionar ya sea a un técnico, autorizador, Vo. Bo., etc. Estos estén ordenados de manera alfabéticamente ya que actualmente no está ordenado.
+En el menú principal el modulo de proveedores no debe mostrarse, no fue requerido por la mesa de servicio.
+
+
+
+Cuando el usuario genera un nuevo requerimiento selecciona la categoría, hace la Descripción del servicio y la crea, manda a la pantalla que arriba se muestra “Descripción del Requerimiento”, mostrando en el menú inferior un botón “Debe llenar todos los campos para poder firmar esta solicitud”, siendo que esto corresponde a un mensaje, por lo que se solicita se deshabilite y se deje el campo de Justificación y Autoriza como obligatorio para poder firmar la solicitud.
+
+
+
+Bitácoras.
+Incluir el identificador de seguimiento por cada nota que se haga en las bitácoras.
+
 
