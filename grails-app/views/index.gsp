@@ -88,10 +88,13 @@
 			<div id="controller-list" role="navigation">
 				<h3>Opciones disponibles:</h3>
 				<ul>
+          <g:set var="firmado" bean="firmadoService"/>
 					<g:each var="c" in="${grailsApplication.controllerClasses.findAll{ it.getStaticPropertyValue('ordenMenu', int) >= 0 }.sort{ it.getStaticPropertyValue('ordenMenu', int) } }">
 						<g:if test="${c.fullName.indexOf("Dbdoc") == -1 &&
 													c.fullName.indexOf("Jasper") == -1 &&
-													c.fullName.indexOf("Log") == -1}" >
+													c.fullName.indexOf("Log") == -1 &&
+                          (c.fullName.indexOf("SolicitudAutoriza") == -1 || firmado.autoriza()) &&
+                          (c.fullName.indexOf("SolicitudVB") == -1 || firmado.daVB())}" >
 						  <sec:access url="/${c.logicalPropertyName}">
 								<li><g:link controller="${c.logicalPropertyName}">
 									${c.getStaticPropertyValue('nombreMenu', String)}

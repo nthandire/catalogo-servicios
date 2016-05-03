@@ -6,6 +6,7 @@ import groovy.time.TimeCategory
 
 class FirmadoService {
   def grailsApplication
+  def springSecurityService
   static transactional = false
 
   Boolean isGestor(HttpSession sessionFirmado, Long userID) {
@@ -815,6 +816,19 @@ class FirmadoService {
     } else {
       caso?.idServ?."servResp${nivel+1}"
     }
+  }
+
+  Boolean autoriza() {
+    def userID = springSecurityService.principal.id
+    log.debug("userID = $userID")
+    def autoriza = UsuarioAutorizado.get(userID)?.autoriza
+    log.debug("autoriza = $autoriza")
+    autoriza
+  }
+
+  Boolean daVB() {
+    def userID = springSecurityService.principal.id
+    UsuarioAutorizado.get(userID)?.vobo
   }
 
 }
