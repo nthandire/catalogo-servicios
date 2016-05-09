@@ -64,7 +64,8 @@ class IncidenteController {
           []
         log.debug("incidentesPaginación = ${incidentesPaginación}")
         [incidenteInstanceList: incidentesPaginación,
-          incidenteInstanceTotal: incidenteInstanceList.size()]
+          incidenteInstanceTotal: incidenteInstanceList.size(),
+          miArea: firmadoService.areaNombre(userID)]
     }
 
     def listTerminadas(Integer max) {
@@ -79,7 +80,8 @@ class IncidenteController {
         log.debug("incidenteInstanceList = ${incidenteInstanceList}")
 
         [incidenteInstanceList: incidenteInstanceList,
-          incidenteInstanceTotal: incidenteInstanceTotal]
+          incidenteInstanceTotal: incidenteInstanceTotal,
+          miArea: firmadoService.areaNombre(userID)]
     }
 
     def listEncuestas(Integer max) {
@@ -94,7 +96,8 @@ class IncidenteController {
         log.debug("incidenteInstanceList = ${incidenteInstanceList}")
 
         [incidenteInstanceList: incidenteInstanceList,
-          incidenteInstanceTotal: incidenteInstanceTotal]
+          incidenteInstanceTotal: incidenteInstanceTotal,
+          miArea: firmadoService.areaNombre(userID)]
     }
 
   def listIncidentes(Integer max) {
@@ -135,7 +138,8 @@ class IncidenteController {
     log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
 
     [incidentesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
-      incidentesInstanceTotal: incidentes, bOffset: params.offset]
+      incidentesInstanceTotal: incidentes, bOffset: params.offset,
+      miArea: firmadoService.areaNombre(springSecurityService.principal.id)]
   }
 
   def showIncidente(Long id) {
@@ -197,7 +201,8 @@ class IncidenteController {
     }
 
     def create() {
-        [incidenteInstance: new Incidente(params)]
+        [incidenteInstance: new Incidente(params),
+          miArea: firmadoService.areaNombre(springSecurityService.principal.id)]
     }
 
     def save() {
@@ -303,7 +308,8 @@ class IncidenteController {
         else
           incidenteArchivoadjuntoInstance.tipo = ""
         if (!incidenteArchivoadjuntoInstance.save(flush: true)) {
-            render(view: "create", model: [incidenteArchivoadjuntoInstance: incidenteArchivoadjuntoInstance])
+            render(view: "create", model: [incidenteArchivoadjuntoInstance: incidenteArchivoadjuntoInstance,
+                    miArea: firmadoService.areaNombre(springSecurityService.principal.id)])
             return
         }
         redirect (action:'edit', id: params.idIncidente)
@@ -382,7 +388,8 @@ class IncidenteController {
           areaAtendio1: areaAtendio1, areaAtendio2: areaAtendio2,
           areaAtendio3: areaAtendio3, programas:programas,
           programasProblema: programasProblema,
-          solucionNivel: incidenteInstance."solucionNivel${nivel}"]
+          solucionNivel: incidenteInstance."solucionNivel${nivel}",
+          miArea: firmadoService.areaNombre(userID)]
     }
 
   def listaDeTecnicos(Cat_servResp servresp) {
