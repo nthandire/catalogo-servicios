@@ -22,6 +22,10 @@ SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero
    and estado_incidente = 'A'
    and id_tecnico is null  ;
 
+SELECT id_incidente,id_sistema,nivel,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
+  FROM incidente
+ where id_serv = 2;
+
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
  where fecha_incidente >= to_date('2016-05-02', '%Y-%m-%d');
@@ -224,6 +228,10 @@ insert into usuario_autorizado
 SELECT id_serv,id_servsub,descripcion,portal,incidente,solicitud,problema,id_servresp1,id_servresp2,id_servresp3,tiempo1,tiempo2,tiempo3,id_tiempo1,id_tiempo2,id_tiempo3,impacto,id_servrespautoriza,id_servrespaprueba,plantilla,observaciones,estado_serv,id_usuario,fecha_modificacion,modificacion,ip_terminal 
   FROM cat_serv
  where id_serv in (174,4,42,111);
+
+SELECT id_serv,id_servsub,descripcion,portal,incidente,solicitud,problema,id_servresp1,id_servresp2,id_servresp3,tiempo1,tiempo2,tiempo3,id_tiempo1,id_tiempo2,id_tiempo3,impacto,id_servrespautoriza,id_servrespaprueba,plantilla,observaciones,estado_serv,id_usuario,fecha_modificacion,modificacion,ip_terminal 
+  FROM cat_serv
+ where id_servresp3 is null;
 
 SELECT id_servresp,descripcion 
   FROM cat_servresp

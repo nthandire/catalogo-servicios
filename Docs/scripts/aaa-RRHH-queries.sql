@@ -52,7 +52,7 @@ where idusuario in (10041);--(10051); --(8456); --(6558,7607,8456,9574,9575,9576
 
 SELECT idusuario,id_empleado,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,extension,correo,categoria
 FROM usuario
-where nombre like "%MARIA DEL SOCORRO%";-- "%HERNANDEZ PEREZ ALICIA%";
+where nombre like "%CANO%";--"%MARIA DEL SOCORRO%";-- "%HERNANDEZ PEREZ ALICIA%";
 
 SELECT idusuario,correo,id_empleado,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,extension,categoria
 FROM usuario
@@ -68,8 +68,17 @@ Maria del Socorro Zarazua Perez
 
 SELECT idusuario,idperfil
   FROM usuario_perfil
- where idusuario = 10071; --6648; --9427; --10041;
+ where idusuario in (10041, 10053);--10071; --6648; --9427; --10041;
 
+
+SELECT idusuario,idperfil
+  FROM usuario_perfil
+ where idusuario = 10041
+   and idperfil = 65;
+
+DELETE FROM usuario_perfil
+ where idusuario = 10041
+   and idperfil = 65;
 
 SELECT idusuario,idperfil
   FROM usuario_perfil
