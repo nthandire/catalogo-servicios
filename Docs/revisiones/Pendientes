@@ -80,6 +80,9 @@ Solo personal de la mesa de servicio debe poder capturar incidentes ya actualmen
 Un incidente que esta referenciado a un equipo, actualmente se puede levantar más de una vez, siendo que no se debe permitir, solo debe de perimirlo una sola vez.
 Es difícil la búsqueda de un incidente determinado en la lista de incidentes, ya que no funcionan los filtros en todas sus columnas para ordénalos de forma ascendente o descendente; además en algunas otras listas de los requerimientos tampoco funcionan los filtros en requerimientos a revisar, requerimientos asignados, requerimientos en encuesta, requerimientos terminados, Lista de requerimientos.
 La lista de incidentes, incidentes terminados, incidentes en encuesta la columna de “reporta” no es correcto el ordenamiento.
+
+- quitar el orden por estado en incidente:list
+
 Al levantar un incidente en el campo “Quien reporta” no está la función de autocompletar.
 La búsqueda del equipo por nombre de usuario no está funcionando al realizar un incidente.
 Cuando el incidente es gestionado a 2° nivel y el aprobador lo edita para asignar un técnico se muestra el botón “Actualizar”, el cual no tiene ninguna función, se requiere que sea eliminado.

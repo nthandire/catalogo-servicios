@@ -32,9 +32,38 @@ class IncidenteController {
         log.debug("list incidentes = ${incidentes}")
 
         def incidentesFiltrados =
-          incidentes.findAll {it?.idServresp?.descripcion?.contains areaDesc}.
-            sort{a, b -> a.estado <=> b.estado ?: a.nivel <=> b.nivel ?:
-              b.fechaIncidente <=> a.fechaIncidente}
+          incidentes.findAll {it?.idServresp?.descripcion?.contains areaDesc}
+
+        log.debug("params['sort'] = ${params['sort']}")
+        switch (params['sort']) {
+          case null:
+          case "numeroIncidente":
+            log.debug("numeroIncidente")
+            incidentesFiltrados.sort{a,b -> a.fechaIncidente[Calendar.YEAR] == b.fechaIncidente[Calendar.YEAR] ?
+              b.numeroIncidente <=> a.numeroIncidente :
+              b.fechaIncidente[Calendar.YEAR] <=> a.fechaIncidente[Calendar.YEAR]}
+          break
+          case "idResguardoentregadetalle":
+            log.debug("idResguardoentregadetalle")
+            incidentesFiltrados.sort{it?.idResguardoentregadetalle}
+          break
+          case "fechaIncidente":
+            log.debug("fechaIncidente")
+            incidentesFiltrados.sort{it?.fechaIncidente}
+          break
+          case "nivel":
+            log.debug("nivel")
+            incidentesFiltrados.sort{it?.nivel}
+          break
+          case "estado":
+            log.debug("estado")
+            incidentesFiltrados.sort{it?.estado}
+          break
+          case "idReporta":
+            log.debug("idReporta")
+            incidentesFiltrados.sort{it?.idReporta ? Usuario.get(it.idReporta).toString() : ""}
+          break
+        }
         log.debug("incidentesFiltrados = ${incidentesFiltrados}")
 
         def incidenteInstanceList = isCoordinador() || isGestor() ?
@@ -50,10 +79,6 @@ class IncidenteController {
         log.debug("incidenteInstanceList.size()-1 = ${incidenteInstanceList.size()-1}")
         log.debug("Math.max(incidenteInstanceList.size()-1, 0) = ${Math.max(incidenteInstanceList.size()-1, 0)}")
         log.debug("Math.min(paramOffset+paramMax-1, Math.max(incidenteInstanceList.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(incidenteInstanceList.size()-1, 0))}")
-
-        incidenteInstanceList.sort{a,b -> a.fechaIncidente[Calendar.YEAR] == b.fechaIncidente[Calendar.YEAR] ?
-          b.numeroIncidente <=> a.numeroIncidente :
-          b.fechaIncidente[Calendar.YEAR] <=> a.fechaIncidente[Calendar.YEAR]}
 
         if (params['order'] == 'asc') {
           incidenteInstanceList = incidenteInstanceList.reverse()
