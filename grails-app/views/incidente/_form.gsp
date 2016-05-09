@@ -174,7 +174,7 @@
     <div class="span4">
       <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
         <label for="idReporta">Extensión</label>
-        <g:field type="text" id="extension" name="extension" disabled="true" value=""/>
+        <g:field type="text" id="extension" name="extension" />
       </div>
     </div>
   </div>
@@ -196,8 +196,8 @@
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
         </label>
-        <g:field type="text" name="telefono.no" disabled="true"
-          value="${Usuario.get(incidenteInstance.idReporta).extension}"/>
+        <g:field type="text" name="extension" disabled="true"
+          value="${incidenteInstance.extension}"/>
       </div>
     </div>
     <div class="span4">

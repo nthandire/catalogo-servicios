@@ -39,6 +39,7 @@ class Incidente {
 	String ipTerminal
   Character encuesta
   Date fechaEncuesta
+	Integer extension
 
 	static mapping = {
 		id column: "id_incidente", generator: "increment"
@@ -90,6 +91,7 @@ class Incidente {
     encuesta nullable: true, maxSize: 1, editable:false,
       inList: [(char)'U', (char)'S']
     fechaEncuesta nullable: true, editable:false
+		extension nullable: true
 	}
 
   String toString() {

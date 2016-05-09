@@ -100,7 +100,17 @@ class ServiciosService {
     def reporta = params.reporta.toLong()
     log.debug("en extension, reporta = $reporta")
 
-    Usuario.get(reporta).extension ?: ""
+    def ext = Usuario.get(reporta).extension
+    def extInt = ext ? ext.isInteger() ? ext.toInteger() : 0 : 0
+
+    Incidente caso = Incidente.find("from Incidente where idReporta = $reporta order by fechaIncidente desc")
+    if (caso) {
+      log.debug("caso = $caso")
+      caso.extension ?: 0
+    } else {
+      log.debug("extInt = $extInt")
+      extInt
+    }
   }
 
   def nombreEquipo(id){

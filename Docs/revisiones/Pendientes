@@ -67,6 +67,10 @@ Corregir el prontuario para que pueda ser más preciso y sirva de guía para el 
 
 GENERALES
 Se debe de poder teclear las extensiones para captura y/o corrección del mismo, el campo no está habilitado aun.
+  - estencion en incidente
+    - funcion para buscar guardar la extención
+    - pedir campo en requerimientos, si requieren la funcionalidad en ellos
+
 
 
 
