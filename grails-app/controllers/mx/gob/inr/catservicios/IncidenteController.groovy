@@ -219,13 +219,25 @@ class IncidenteController {
         if (incidenteInstance.idResguardoentregadetalle &&
             !(ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle))) {
           flash.error = "No escogio el equipo de la lista"
-          render(view: "create", model: [incidenteInstance: incidenteInstance])
+          render(view: "create", model: [incidenteInstance: incidenteInstance,
+                  miArea: firmadoService.areaNombre(userID)])
           return
+        }
+
+        if (incidenteInstance.idResguardoentregadetalle) {
+          def caso = incidenteResguardo(incidenteInstance.idResguardoentregadetalle)
+          if (caso) {
+            flash.error = "Ese equipo ya tiene un incidente ($caso)"
+            render(view: "create", model: [incidenteInstance: incidenteInstance,
+                    miArea: firmadoService.areaNombre(userID)])
+            return
+          }
         }
 
         if (firmaTeclada != firma) {
           flash.error = "Error en contaseña"
-          render(view: "create", model: [incidenteInstance: incidenteInstance])
+          render(view: "create", model: [incidenteInstance: incidenteInstance,
+                    miArea: firmadoService.areaNombre(userID)])
           return
         }
 
@@ -281,6 +293,10 @@ class IncidenteController {
         (params.incidente['id']).toInteger()
       log.debug("idIncidente = ${incidenteArchivoadjuntoInstance.idIncidente}")
       [incidenteArchivoadjuntoInstance: incidenteArchivoadjuntoInstance]
+    }
+
+    def incidenteResguardo(Long usuario) {
+      Incidente.findByIdResguardoentregadetalleAndEstado(usuario, 'A' as char)
     }
 
     def saveArchivo() {
