@@ -41,12 +41,12 @@ class ProblemaController {
     }
 
     def show(Long id) {
-        def problemaInstance = Problema.get(id)
-        if (!problemaInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'problema.label', default: 'Problema'), id])
-            redirect(action: "list")
-            return
-        }
+      def problemaInstance = Problema.get(id)
+      if (!problemaInstance) {
+          flash.message = message(code: 'default.not.found.message', args: [message(code: 'problema.label', default: 'Problema'), id])
+          redirect(action: "list")
+          return
+      }
 
       def controlador = problemaInstance.fuente
       def accion = "show"
@@ -56,7 +56,7 @@ class ProblemaController {
           break
       }
 
-        [problemaInstance: problemaInstance, controlador: controlador]
+      [problemaInstance: problemaInstance, controlador: controlador]
     }
 
     def edit(Long id) {

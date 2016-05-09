@@ -138,6 +138,7 @@ class BitacoraController {
         redirect(action: "edit", id: monitoreoInstance.id)
     }
 
+    @Secured(['ROLE_SAST_BITACORAS', 'ROLE_SAST_APROBADOR'])
     def show(Long id) {
         def monitoreoInstance = Bitacora.get(id)
         if (!monitoreoInstance) {
