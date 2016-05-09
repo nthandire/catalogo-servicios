@@ -819,16 +819,31 @@ class FirmadoService {
   }
 
   Boolean autoriza() {
-    def userID = springSecurityService.principal.id
-    log.debug("userID = $userID")
-    def autoriza = UsuarioAutorizado.get(userID)?.autoriza
-    log.debug("autoriza = $autoriza")
-    autoriza
+    log.debug("springSecurityService.principal = ${springSecurityService.principal}")
+    def user = springSecurityService.principal
+    if (user == "anonymousUser") {
+      false
+    } else {
+      def userID = springSecurityService.principal.id
+      log.debug("userID = $userID")
+      def autoriza = UsuarioAutorizado.get(userID)?.autoriza
+      log.debug("autoriza = $autoriza")
+      autoriza
+    }
   }
 
   Boolean daVB() {
-    def userID = springSecurityService.principal.id
-    UsuarioAutorizado.get(userID)?.vobo
+    log.debug("springSecurityService.principal = ${springSecurityService.principal}")
+    def user = springSecurityService.principal
+    if (user == "anonymousUser") {
+      false
+    } else {
+      def userID = springSecurityService.principal.id
+      log.debug("userID = $userID")
+      def autoriza = UsuarioAutorizado.get(userID)?.vobo
+      log.debug("autoriza = $autoriza")
+      autoriza
+    }
   }
 
 }
