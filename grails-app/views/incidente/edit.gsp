@@ -198,7 +198,7 @@
                 onclick="escala()">Escalar Incidente</a>
             </g:if>
           </g:if>
-          <g:if test="${!firmado.hayMasNiveles(incidenteInstance) && idNivel == yo}">
+          <g:if test="${incidenteInstance.nivel == 3 && idNivel == yo}">
             <a class="cancel" data-toggle="modal" href="#responsive"
               onclick="problema()">Marcarlo como problema</a>
           </g:if>
