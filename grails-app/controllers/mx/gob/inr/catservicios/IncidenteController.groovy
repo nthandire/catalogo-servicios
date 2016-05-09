@@ -102,6 +102,13 @@ class IncidenteController {
 
         def incidenteInstanceTotal = Incidente.countByEstadoOrEstado('T' as char, 'C' as char)
         def incidenteInstanceList = Incidente.findAllByEstadoOrEstado('T' as char, 'C' as char, params)
+        if (params['sort'] == 'idReporta')  {
+          incidenteInstanceList
+          incidenteInstanceList.sort{it?.idReporta ? Usuario.get(it.idReporta).toString() : ""}
+          if (params['order'] == 'desc') {
+            incidenteInstanceList = incidenteInstanceList.reverse()
+          }
+        }
         log.debug("incidenteInstanceList = ${incidenteInstanceList}")
 
         [incidenteInstanceList: incidenteInstanceList,
