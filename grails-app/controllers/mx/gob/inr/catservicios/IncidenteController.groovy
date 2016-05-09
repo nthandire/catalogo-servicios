@@ -101,13 +101,40 @@ class IncidenteController {
         log.debug("area = ${area}, area.id = ${area?.id}")
 
         def incidenteInstanceTotal = Incidente.countByEstadoOrEstado('T' as char, 'C' as char)
-        def incidenteInstanceList = Incidente.findAllByEstadoOrEstado('T' as char, 'C' as char, params)
-        if (params['sort'] == 'idReporta')  {
-          incidenteInstanceList
-          incidenteInstanceList.sort{it?.idReporta ? Usuario.get(it.idReporta).toString() : ""}
-          if (params['order'] == 'desc') {
-            incidenteInstanceList = incidenteInstanceList.reverse()
-          }
+        def incidenteInstanceList = Incidente.findAllByEstadoOrEstado('T' as char, 'C' as char)
+        switch (params['sort']) {
+          case null:
+          case "numeroIncidente":
+            log.debug("numeroIncidente")
+            incidenteInstanceList.sort{a,b -> a.fechaIncidente[Calendar.YEAR] == b.fechaIncidente[Calendar.YEAR] ?
+              b.numeroIncidente <=> a.numeroIncidente :
+              b.fechaIncidente[Calendar.YEAR] <=> a.fechaIncidente[Calendar.YEAR]}
+          break
+          case "idResguardoentregadetalle":
+            log.debug("idResguardoentregadetalle")
+            incidenteInstanceList.sort{it?.idResguardoentregadetalle}
+          break
+          case "fechaIncidente":
+            log.debug("fechaIncidente")
+            incidenteInstanceList.sort{it?.fechaIncidente}
+          break
+          case "nivel":
+            log.debug("nivel")
+            incidenteInstanceList.sort{it?.nivel}
+          break
+          case "estado":
+            log.debug("estado")
+            incidenteInstanceList.sort{it?.estado}
+          break
+          case "idReporta":
+            log.debug("idReporta")
+            incidenteInstanceList.sort{it?.idReporta ? Usuario.get(it.idReporta).toString() : ""}
+          break
+        }
+        log.debug("incidenteInstanceList = ${incidenteInstanceList}")
+
+        if (params['order'] == 'desc') {
+          incidenteInstanceList = incidenteInstanceList.reverse()
         }
         log.debug("incidenteInstanceList = ${incidenteInstanceList}")
 
@@ -455,11 +482,14 @@ class IncidenteController {
     def areaDesc = servresp.descripcion
     log.debug("areaDesc = $areaDesc")
 
+    def userID = springSecurityService.principal.id
+    def miArea = firmadoService.areaNombre(userID)
     def tecnicosDelAreaIds = UsuarioAutorizado.
       findAllByIdInListAndEstado(usuariosRolesTecnicosIds, 'A' as char).
-        findAll{areaDesc.contains(it.area)}.collect {it.id}
+        findAll{miArea == it.area ||
+            (areaDesc.contains('PROV') &&
+             'PROV' == it.area.toUpperCase())}.collect {it.id}
 
-    def userID = springSecurityService.principal.id
     Boolean agregarCoordinador = (isCoordinador() &&
                                   !tecnicosDelAreaIds.contains(userID))
     log.debug("agregarCoordinador = $agregarCoordinador")
