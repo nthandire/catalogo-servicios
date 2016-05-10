@@ -56,7 +56,7 @@ where nombre like "%CANO%";--"%MARIA DEL SOCORRO%";-- "%HERNANDEZ PEREZ ALICIA%"
 
 SELECT idusuario,correo,id_empleado,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,extension,categoria
 FROM usuario
-where nombre like "DEMANOS%"; --"%FERNANDO%";--"%DORIAN%";--"%SANCHEZ NU%";-- "%HERNANDEZ PEREZ ALICIA%";
+where nombre like "%POPOV%"; --"DEMANOS%"; --"%FERNANDO%";--"%DORIAN%";--"%SANCHEZ NU%";-- "%HERNANDEZ PEREZ ALICIA%";
 
 SELECT idusuario,correo,id_empleado,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,extension,categoria
 FROM usuario
@@ -65,6 +65,10 @@ where correo is not null; -- like "%FERNANDO%";--"%DORIAN%";--"%SANCHEZ NU%";-- 
 Maria del Socorro Zarazua Perez
 
 
+SELECT idusuario,correo,id_empleado,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,extension,categoria
+  from Usuario as u
+ where upper(nombre) || ' ' || upper(nvl(paterno,''))  || ' ' || upper(nvl(materno,'')) like '%DORIAN%';
+     
 
 SELECT idusuario,idperfil
   FROM usuario_perfil
@@ -100,6 +104,18 @@ insert into usuario_perfil
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario
  where idusuario = 10091; -- 8301; --10053;
+
+
+
+SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
+  FROM usuario
+ where id_empleado in
+(10,51,71,97,107,173,222,270,271,332,343,350,398,416,502,676,700,774,778,820,964,1018,1057,1095,1266,1280,1318,1362,1443,1465,1528,1538,1607,1623,1628,1708,1886,1911,1930,2662,2849,3016,3021,3035,3094,3323,3519,3647,3673,3718,3753,3870,3905,3928,3947,3963,4017,4020,4156,4174,4252,4507,4739,4778,4797,4812,4912);
+
+SELECT idusuario,rfc,nombre,paterno,materno
+  FROM usuario
+ where id_empleado in
+(10,51,71,97,107,173,222,270,271,332,343,350,398,416,502,676,700,774,778,820,964,1018,1057,1095,1266,1280,1318,1362,1443,1465,1528,1538,1607,1623,1628,1708,1886,1911,1930,2662,2849,3016,3021,3035,3094,3323,3519,3647,3673,3718,3753,3870,3905,3928,3947,3963,4017,4020,4156,4174,4252,4507,4739,4778,4797,4812,4912);
 
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario

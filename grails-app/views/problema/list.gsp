@@ -1,5 +1,5 @@
 
-<%@ page import="mx.gob.inr.catservicios.Problema" %>
+<%@ page import="mx.gob.inr.catservicios.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -46,7 +46,7 @@
 
 						<td><g:link action="show" id="${problemaInstance.id}">${fieldValue(bean: problemaInstance, field: "fuente")}</g:link></td>
 
-						<td>${fieldValue(bean: problemaInstance, field: "idFuente")}</td>
+						<td>${problemaInstance.fuente == "Incidente" ? Incidente.get(problemaInstance.idFuente).toString() : Bitacora.get(problemaInstance.idFuente).toString() }</td>
 
 						<td><g:formatDate date="${problemaInstance.fechaProblema}" /></td>
 

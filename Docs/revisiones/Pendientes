@@ -70,15 +70,10 @@ GENERALES
 
 
 INCIDENTES
-Al cerrar un incidente la encuesta no se muestra en la “Lista de encuestas” del usuario (Margarita Popova Incidente 23/2016.)
-
-- quitar el orden por estado en incidente:list
 
 Al levantar un incidente en el campo “Quien reporta” no está la función de autocompletar.
-La búsqueda del equipo por nombre de usuario no está funcionando al realizar un incidente.
 
 
-El incidente 30/2016 al marcarlo como problema no se localizo en el listado de problemas para darle seguimiento al ciclo de vida.
 Revisar la causa de porque no llegan los correos con la encuesta de satisfacción a algunos usuarios en incidentes.
 Limpiar el campo de búsqueda del equipo al seleccionar el equipo que se visualiza en el proceso de la captura de un incidente.
 
