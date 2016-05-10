@@ -138,6 +138,13 @@ class IncidenteController {
       }
       log.debug("incidenteInstanceList = ${incidenteInstanceList}")
 
+      def paramMax = (params['max']?:'0').toInteger()
+      def paramOffset = (params['offset']?:'0').toInteger()
+      incidenteInstanceList = incidenteInstanceList.size() ?
+        incidenteInstanceList[paramOffset..
+          Math.min(paramOffset+paramMax-1, incidenteInstanceList.size()-1)] :
+        []
+      log.debug("incidenteInstanceList = ${incidenteInstanceList}")
       [incidenteInstanceList: incidenteInstanceList,
         incidenteInstanceTotal: incidenteInstanceTotal,
         miArea: firmadoService.areaNombre(userID)]
@@ -190,6 +197,13 @@ class IncidenteController {
       }
       log.debug("incidenteInstanceList = ${incidenteInstanceList}")
 
+      def paramMax = (params['max']?:'0').toInteger()
+      def paramOffset = (params['offset']?:'0').toInteger()
+      incidenteInstanceList = incidenteInstanceList.size() ?
+        incidenteInstanceList[paramOffset..
+          Math.min(paramOffset+paramMax-1, incidenteInstanceList.size()-1)] :
+        []
+      log.debug("incidenteInstanceList = ${incidenteInstanceList}")
       [incidenteInstanceList: incidenteInstanceList,
         incidenteInstanceTotal: incidenteInstanceTotal,
         miArea: firmadoService.areaNombre(userID)]

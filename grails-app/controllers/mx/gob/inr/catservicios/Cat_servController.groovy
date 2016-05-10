@@ -21,8 +21,58 @@ class Cat_servController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [cat_servInstanceList: Cat_serv.list(params), cat_servInstanceTotal: Cat_serv.count()]
+      params.max = Math.min(max ?: 10, 100)
+
+      def lista = Cat_serv.list()
+      log.debug("lista = ${lista}")
+
+      switch (params['sort']) {
+        case null:
+        case "servSub.servCat":
+          log.debug("servSub.servCat")
+          lista.sort{it.servSub.servCat.toString()}
+        break
+        case "servSub":
+          log.debug("servSub")
+          lista.sort{it.servSub.toString()}
+        break
+        case "descripcion":
+          log.debug("descripcion")
+          lista.sort{it.descripcion}
+        break
+        case "portal":
+          log.debug("portal")
+          lista.sort{it?.portal}
+        break
+        case "incidente":
+          log.debug("incidente")
+          lista.sort{it?.incidente}
+        break
+        case "solicitud":
+          log.debug("solicitud")
+          lista.sort{it?.solicitud}
+        break
+        case "problema":
+          log.debug("problema")
+          lista.sort{it?.problema}
+        break
+      }
+      log.debug("lista = ${lista}")
+
+      if (params['order'] == 'desc') {
+        lista = lista.reverse()
+      }
+      log.debug("lista = ${lista}")
+
+      def paramMax = (params['max']?:'0').toInteger()
+      def paramOffset = (params['offset']?:'0').toInteger()
+      lista = lista.size() ?
+        lista[paramOffset..
+          Math.min(paramOffset+paramMax-1, lista.size()-1)] :
+        []
+      log.debug("lista = ${lista}")
+      [cat_servInstanceList: lista,
+        cat_servInstanceTotal: Cat_serv.count()]
     }
 
     def create() {

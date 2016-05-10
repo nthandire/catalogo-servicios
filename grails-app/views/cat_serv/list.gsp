@@ -26,10 +26,9 @@
 			<table>
 				<thead>
 					<tr>
-					
-						<th><g:message code="cat_serv.servCat.label" default="Serv Sub" /></th>
+						<g:sortableColumn property="servSub.servCat" title="${message(code: 'cat_serv.servCat.label', default: 'Serv Sub')}" />
 
-						<th><g:message code="cat_serv.servSub.label" default="Serv Sub" /></th>
+						<g:sortableColumn property="servSub" title="${message(code: 'cat_serv.servSub.label', default: 'Serv Sub')}" />
 					
 						<g:sortableColumn property="descripcion" title="${message(code: 'cat_serv.descripcion.label', default: 'Descripcion')}" />
 					
@@ -40,7 +39,6 @@
 						<g:sortableColumn property="solicitud" title="${message(code: 'cat_serv.solicitud.label', default: 'Solicitud')}" />
 					
 						<g:sortableColumn property="problema" title="${message(code: 'cat_serv.problema.label', default: 'Problema')}" />
-					
 					</tr>
 				</thead>
 				<tbody>

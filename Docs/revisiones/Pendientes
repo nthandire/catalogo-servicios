@@ -71,15 +71,11 @@ GENERALES
 
 INCIDENTES
 Al cerrar un incidente la encuesta no se muestra en la “Lista de encuestas” del usuario (Margarita Popova Incidente 23/2016.)
-Solo personal de la mesa de servicio debe poder capturar incidentes ya actualmente todos los técnicos de la STIC lo pueden hacer.
-Es difícil la búsqueda de un incidente determinado en la lista de incidentes, ya que no funcionan los filtros en todas sus columnas para ordénalos de forma ascendente o descendente; además en algunas otras listas de los requerimientos tampoco funcionan los filtros en requerimientos a revisar, requerimientos asignados, requerimientos en encuesta, requerimientos terminados, Lista de requerimientos.
-La lista de incidentes, incidentes terminados, incidentes en encuesta la columna de “reporta” no es correcto el ordenamiento.
 
 - quitar el orden por estado en incidente:list
 
 Al levantar un incidente en el campo “Quien reporta” no está la función de autocompletar.
 La búsqueda del equipo por nombre de usuario no está funcionando al realizar un incidente.
-Cuando el incidente es gestionado a 2° nivel y el aprobador lo edita para asignar un técnico se muestra el botón “Actualizar”, el cual no tiene ninguna función, se requiere que sea eliminado.
 
 
 El incidente 30/2016 al marcarlo como problema no se localizo en el listado de problemas para darle seguimiento al ciclo de vida.
