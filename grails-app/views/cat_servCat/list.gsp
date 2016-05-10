@@ -31,7 +31,7 @@
 					
 						<g:sortableColumn property="descripcion" title="${message(code: 'cat_servCat.descripcion.label', default: 'Descripcion')}" />
 					
-						<th><g:message code="cat_servCat.servResp.label" default="Serv Resp" /></th>
+						<g:sortableColumn property="servResp" title="${message(code: 'cat_servCat.servResp.label', default: 'Serv Resp')}" />
 					
 						<g:sortableColumn property="valoracion" title="${message(code: 'cat_servCat.valoracion.label', default: 'Valoracion')}" />
 					

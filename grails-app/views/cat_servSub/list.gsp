@@ -24,7 +24,7 @@
 				<thead>
 					<tr>
 					
-						<th><g:message code="cat_servSub.servCat.label" default="Serv Cat" /></th>
+						<g:sortableColumn property="servCat" title="${message(code: 'cat_servSub.servCat.label', default: 'Serv Cat')}" />
 					
 						<g:sortableColumn property="descripcion" title="${message(code: 'cat_servSub.descripcion.label', default: 'Descripcion')}" />
 					
