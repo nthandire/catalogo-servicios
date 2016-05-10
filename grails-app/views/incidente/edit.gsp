@@ -182,10 +182,6 @@
 
         <fieldset class="buttons">
           <g:set var="firmado" bean="firmadoService"/>
-          <g:actionSubmit class="edit" action="update"
-            value="${message(code: 'default.button.update.label',
-                             default: 'Update')}"
-            onclick="update()"/>
           <sec:access expression="hasAnyRole('ROLE_SAST_GESTOR','ROLE_SAST_APROBADOR')">
             <a class="save" data-toggle="modal" href="#responsiveTecnico"
               onclick="tecnico()">Asignar técnico</a>
