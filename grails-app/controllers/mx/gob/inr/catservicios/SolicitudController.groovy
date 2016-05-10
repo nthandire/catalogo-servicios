@@ -25,7 +25,7 @@ class SolicitudController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")

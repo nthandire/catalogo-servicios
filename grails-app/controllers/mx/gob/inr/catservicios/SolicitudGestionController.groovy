@@ -20,7 +20,7 @@ class SolicitudGestionController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         log.debug("params = $params")
         def query =
             "  from Solicitud              " +
@@ -37,7 +37,7 @@ class SolicitudGestionController {
     }
 
     def listTodas(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         log.debug("params = $params")
         def query =
             "  from Solicitud              " +
@@ -53,7 +53,7 @@ class SolicitudGestionController {
     }
 
     def listAsignados(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         log.debug("params = $params")
 
         def query =
@@ -72,7 +72,7 @@ class SolicitudGestionController {
     }
 
     def listEncuestas(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         log.debug("params = $params")
 
         def query =
@@ -88,7 +88,7 @@ class SolicitudGestionController {
     }
 
     def listTerminadas(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         log.debug("params = $params")
 
         def query =
@@ -384,7 +384,7 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
 *****/
 
     def listMonitoreo(Integer max) {
-        params.max = Math.min(max ?: 50, 100)
+        params.max = Math.min(max ?: 100, 100)
         if (!params.offset) {
           params["offset"] = 0
         } else {

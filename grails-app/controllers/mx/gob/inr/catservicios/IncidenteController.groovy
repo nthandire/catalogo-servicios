@@ -22,7 +22,7 @@ class IncidenteController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         def userID = springSecurityService.principal.id
         def area = area()
         def areaDesc = area?.descripcion ?: "No tengo el área"
@@ -94,7 +94,7 @@ class IncidenteController {
     }
 
     def listTerminadas(Integer max) {
-      params.max = Math.min(max ?: 10, 100)
+      params.max = Math.min(max ?: 100, 100)
       def userID = springSecurityService.principal.id
       def area = area()
       def areaDesc = area.descripcion
@@ -151,7 +151,7 @@ class IncidenteController {
     }
 
     def listEncuestas(Integer max) {
-      params.max = Math.min(max ?: 10, 100)
+      params.max = Math.min(max ?: 100, 100)
       def userID = springSecurityService.principal.id
       def area = area()
       def areaDesc = area.descripcion
@@ -210,7 +210,7 @@ class IncidenteController {
     }
 
   def listIncidentes(Integer max) {
-    params.max = Math.min(max ?: 50, 100)
+    params.max = Math.min(max ?: 100, 100)
     if (!params.offset) {
       params["offset"] = 0
     } else {
