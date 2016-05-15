@@ -211,7 +211,7 @@ Su solicitud ${solicitud} ya ha sido atendida, para mejorar la calidad del servi
 <a href='${liga}'>${solicitud}</a>
               """
 
-            def correo = solicitante.correo ?: grailsApplication.config.correo.general
+            def correo = firmadoService.correo(solicitante.idEmpleado)
             firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
         }
 

@@ -196,7 +196,7 @@ Su solicitud de Servicio de Tecnologías de la Información realizada el ${fecha
           "Hola ${persona}\n\nSu solicitud " +
             "(${solicitudInstance.justificacion}) "+
             "fue cancelada, investigue con su autorizador el motivo."
-        def correo = persona.correo ?: grailsApplication.config.correo.general
+        def correo = firmadoService.correo(persona.idEmpleado)
         firmadoService.sendMail(correo, asunto, msg)
 
         // TODO: Quitar.

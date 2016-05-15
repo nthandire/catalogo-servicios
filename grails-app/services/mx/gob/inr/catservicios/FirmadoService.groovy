@@ -283,6 +283,11 @@ class FirmadoService {
     ResguardoEntregaDetalle.get(resguardo).descripcion
   }
 
+  String correo(Long idEmpleado) {
+    def correo = idEmpleado ? VEmpleado.get(idEmpleado)?.email ?: "" : ""
+    correo ?: grailsApplication.config.correo.general
+  }
+
   def sendMail(String correo, String asunto, String msg) {
     log.debug("correo = $correo")
     log.debug("asunto = $asunto")
@@ -294,6 +299,8 @@ class FirmadoService {
         subject asunto
         body msg
       }
+    } else {
+      log.debug("No envio el correo, iba para $correo")
     }
   }
 

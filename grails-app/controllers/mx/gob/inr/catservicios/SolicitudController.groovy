@@ -233,8 +233,7 @@ class SolicitudController {
         def liga = createLink(controller:"solicitudAutoriza", action: "show",
                    id: solicitudInstance.id, absolute: "true")
         log.debug("liga = $liga")
-        def correo = personasInstance.correo ?:
-                     grailsApplication.config.correo.general
+        def correo = firmadoService.correo(personasInstance.idEmpleado)
         def cuerpoCorreo = """Hola ${personasInstance}<br/><br/>
 
                            Usted tiene una Solicitud de Servicio de Tecnologías

@@ -253,13 +253,12 @@ Prioridad: ${message(code:"intensidad.valor.${it.prioridad}")}
 <br/><br/>
 <a href='${liga}'>${solicitudInstance}</a>
 """
-            def correo = coord.correo ?: grailsApplication.config.correo.general
+            def correo = firmadoService.correo(coord.idEmpleado)
             firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
           }
 
           def asunto = "Acuse de la Solicitud realizada el ${solicitudInstance.fechaSolicitud}"
-          def correo = Usuario.get(solicitudInstance.idSolicitante).correo ?:
-                         grailsApplication.config.correo.general
+          def correo = firmadoService.correo(Usuario.get(solicitudInstance.idSolicitante).idEmpleado)
           def msg = """Acuse de la Solicitud de Servicio de Tecnologías de la Información realizada el ${fecha.format('dd')} de ${fecha.format('MMMMM')} a las ${fecha.format('hh:mm')} :
 
 Folio: ${solicitudInstance}
@@ -314,7 +313,7 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
         def liga = createLink(controller:"solicitudVB", action: "show",
                               id: solicitudInstance.id, absolute: "true")
         log.debug("liga = $liga")
-        def correo = persona.correo ?: grailsApplication.config.correo.general
+        def correo = firmadoService.correo(persona.idEmpleado)
         def asunto = "Solicitud ${solicitudInstance.toString()} requiere un visto bueno"
         def cuerpoCorreo = "Hola ${persona}<br/><br/>La solicitud folio " +
           "${solicitudInstance} requiere que le de su visto bueno, " +
@@ -466,8 +465,7 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
     }
 
     usuarios.each {
-      def correo = it.correo ?:
-                     grailsApplication.config.correo.general
+      def correo = firmadoService.correo(it.idEmpleado)
       def msg = """Hola ${it},
 
       El requerimiento con No. de folio ${caso.idSolicitud} a rebasado el tiempo de atención acordado, por lo que se solicita se atienda a la brevedad"""

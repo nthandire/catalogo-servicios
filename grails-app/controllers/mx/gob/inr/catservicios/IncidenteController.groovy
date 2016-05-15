@@ -277,8 +277,7 @@ class IncidenteController {
     }
 
     usuarios.each {
-      def correo = it.correo ?:
-                     grailsApplication.config.correo.general
+      def correo = firmadoService.correo(it.idEmpleado)
       def msg = """Hola ${it},
 
       El incidente con No. de folio ${caso} a rebasado el tiempo de atención acordado, por lo que se solicita se atienda a la brevedad"""
@@ -698,7 +697,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
 <a href='${liga}'>${incidenteInstance}</a>
               """
 
-            def correo = solicitante.correo ?: grailsApplication.config.correo.general
+            def correo = firmadoService.correo(solicitante.idEmpleado)
             firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
 
 
@@ -767,7 +766,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
         "${incidenteInstance} requiere atención. " +
         "Atiendela utilizando la siguiente liga: <br/><br/>" +
         "<a href='${liga}'>${incidenteInstance}</a>"
-      def correo = tecnico.correo ?: grailsApplication.config.correo.general
+      def correo = firmadoService.correo(tecnico.idEmpleado)
       firmadoService.sendMailHTML(correo, asunto, msg)
 
       flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])

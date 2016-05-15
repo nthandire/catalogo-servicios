@@ -254,7 +254,7 @@ class SolicitudCoordinadorController {
         def liga = createLink(controller:"SolicitudTecnico", action: "edit",
                               id: solicitudDetalleInstance.id, absolute: "true")
         log.debug("liga = $liga")
-        def correo = tecnico.correo ?: grailsApplication.config.correo.general
+        def correo = firmadoService.correo(tecnico.idEmpleado)
         def asunto = "La solicitud ${solicitudDetalleInstance.idSolicitud} requiere ser atendida"
         def cuerpoCorreo = """Hola ${tecnico}<br/><br/>
 

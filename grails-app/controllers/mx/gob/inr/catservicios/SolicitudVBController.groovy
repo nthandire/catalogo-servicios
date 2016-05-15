@@ -131,7 +131,7 @@ class SolicitudVBController {
         def idSolicitante = solicitudInstance.idSolicitante
         def asunto = "La solicitud ${solicitudInstance} ya recibió el visto bueno"
         def persona = Usuario.get(idSolicitante)
-        def correo = persona.correo ?: grailsApplication.config.correo.general
+        def correo = firmadoService.correo(persona.idEmpleado)
         def msg = "Hola ${persona}\n\nSu solicitud folio " +
           "${solicitudInstance.toString()} " +
           "ya ha recibido el visto bueno.\n"
@@ -200,7 +200,7 @@ class SolicitudVBController {
 
         def idSolicitante = solicitudInstance.idSolicitante
         def persona = Usuario.get(idSolicitante)
-        def correo = persona.correo ?: grailsApplication.config.correo.general
+        def correo = firmadoService.correo(persona.idEmpleado)
         def asunto = "Solicitud ${solicitudInstance} no recibio el visto bueno"
         def msg = "Hola ${persona}\n\nSu solicitud folio " +
           "${solicitudInstance.toString()}, '${solicitudInstance.justificacion}', " +
