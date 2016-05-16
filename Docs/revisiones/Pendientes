@@ -80,11 +80,8 @@ REQUERIMIENTO
 Se observó que después de visualizar el semáforo, al seleccionarlo nuevamente minutos después marco error de programación “ha ocurrido un error” y después de 3 intentos ya se vuelve a visualizar.
 
 
-Si el usuario al fallar la firma en un requerimiento, se pierde la lista de autorizadores.
-Al cancelar un requerimiento a Dorian no le aparece en el listado y no aparece en ningún listado.
-Al autorizar el folio 24, se mandan dos correos con nombres de otra persona en el cuerpo del mensaje debiendo referir al usuario que lo solicito (Dorian y al autorizador).
-Al contestar la encuesta del requerimiento 29/2016, la descripción de los detalles y su solución  hacen  referencia a otro servicio.
-En el requerimiento no aparece la extensión cuando el usuario está capturando el servicio, este debe ser un campo de captura del usuario, ya que no está funcionando la Base de Datos de extensiones, por lo que no tendríamos la referencia para contactar al usuario, ya que dicho campo aparece solo cuando es gestionado, el usuario nunca confirma que esa es su extensión y al ser gestionado puede ser que la extensión, no sea la correcta.
+
+
 Después de crear un requerimiento, al terminar de llenar el apartado de Descripción de requerimiento y firmar (bien o erróneamente) con ENTER, aparece un error “Debe capturar la categoría de su solicitud”.
 
 

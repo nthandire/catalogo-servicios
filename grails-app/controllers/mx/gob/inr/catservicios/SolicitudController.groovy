@@ -107,8 +107,10 @@ class SolicitudController {
             return
         }
         // Tratar de salvar el maestro
-        solicitudInstance.idSolicitante = springSecurityService.principal.id
+        def userID = springSecurityService.principal.id
+        solicitudInstance.idSolicitante = userID
         solicitudInstance.ipTerminal = request.getRemoteAddr()
+        solicitudInstance.extension = serviciosService.extension([reporta:userID])
 
         log.debug("solicitudInstance.estado = ${solicitudInstance.estado}")
         if (!solicitudInstance.save(flush: true)) {

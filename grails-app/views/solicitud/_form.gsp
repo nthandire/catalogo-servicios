@@ -109,6 +109,15 @@
 <h1> </h1>
 <p style="height:15px;"> </p>
 
+<g:set var="ss" bean="springSecurityService"/>
+<div class="row-fluid">
+  <div class="span4">
+    <div class="fieldtablecontain ${hasErrors(bean: solicitudInstance, field: 'extension', 'error')} ">
+      <label for="idReporta">Extensión donde se le puede contactar:</label>
+      <g:field type="text" id="extension" name="extension" value="${solicitudInstance?.extension}"/>
+    </div>
+  </div>
+</div>
 
 <div class="row-fluid">
   <div class="span6">

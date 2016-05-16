@@ -46,20 +46,4 @@ $(document).ready(function() {
         });
     });
 
-    $('#borrarBtn').submit(function() {
-        event.preventDefault();
-        $("#serie").val(""); // update the hidden field.
-        $("#marca").val(""); // populate the employee field with the nasdaq symbol.
-        $("#modelo").val("");
-        alert("si pasa")
-        $("#economico").val("");
-        $("#equipo").val("");
-        $("#ubicacion").val("");
-        $("#cuerpo").val("");
-        $("#empleado").val("");
-        $("#garantia").val("");
-        $("#idResguardoentregadetalle").val("");
-        return false;
-    });
-
 })

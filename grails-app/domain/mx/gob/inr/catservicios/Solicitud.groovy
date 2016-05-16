@@ -22,6 +22,7 @@ class Solicitud {
   String comentarioVb
   Character encuesta
   Date fechaEncuesta
+  Integer extension
 
   static hasMany = [detalles: SolicitudDetalle, archivos: SolicitudArchivoadjunto]
 
@@ -55,6 +56,7 @@ class Solicitud {
     encuesta nullable: true, maxSize: 1, editable:false,
       inList: [(char)'U', (char)'S']
     fechaEncuesta nullable: true, editable:false
+    extension nullable: true
 	}
 
   String toString() {

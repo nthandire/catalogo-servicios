@@ -97,21 +97,32 @@ class ServiciosService {
   }
 
   @Transactional(readOnly = true)
-  def extension(params){
+  def extension(params) { // un mapa con el par reporta:id de Usuario
     def reporta = params.reporta.toLong()
-    // log.debug("en extension, reporta = $reporta")
+    log.debug("en extension, reporta = $reporta")
 
     def ext = Usuario.get(reporta).extension
     def extInt = ext ? ext.isInteger() ? ext.toInteger() : 0 : 0
+    log.debug("extInt = $extInt")
 
-    Incidente caso = Incidente.find("from Incidente where idReporta = $reporta order by fechaIncidente desc")
-    if (caso) {
-      // log.debug("caso = $caso")
-      caso.extension ?: 0
-    } else {
-      // log.debug("extInt = $extInt")
-      extInt
+    Incidente incidente = Incidente.find("from Incidente where idReporta = $reporta order by fechaIncidente desc")
+    log.debug("incidente = $incidente")
+    Solicitud solicitud = Solicitud.find("from Solicitud where idSolicitante = $reporta order by fechaSolicitud desc")
+    log.debug("solicitud = $solicitud")
+
+    // tengo que encontrar cual es el más nuevo que tiene extención
+    def encontradoIncidente = incidente && incidente.extension ? incidente.extension : 0
+    log.debug("encontradoIncidente = $encontradoIncidente")
+    def encontradoSolicitud = solicitud && solicitud.extension ? solicitud.extension : 0
+    log.debug("encontradoSolicitud = $encontradoSolicitud")
+
+    def encontrado = encontradoIncidente ?: encontradoSolicitud
+    if (incidente && solicitud && incidente.fechaIncidente < solicitud.fechaSolicitud && encontradoSolicitud) {
+      encontrado = encontradoSolicitud
     }
+    log.debug("encontrado = $encontrado")
+
+    encontrado ?: extInt
   }
 
   def nombreEquipo(id){
