@@ -18,10 +18,33 @@
         <g:hiddenField id="idResguardoentregadetalle" name="idResguardoentregadetalle"
            value="${incidenteInstance?.idResguardoentregadetalle}" />
       </td>
-      <td>
+
+      <td style="display: flex; align-items: center;">
+          <a href="#" onclick="return (limpiaEquipo())"
+            style="border: 2px #CCCCCC solid; padding: 5px; text-decoration: none; color: #000000; border-radius: 5px; ">
+            Borrar selección
+          </a>
       </td>
     </tr>
+
+    <script>
+      function limpiaEquipo() {
+        $("#serie").val("");
+        $("#marca").val("");
+        $("#modelo").val("");
+        $("#economico").val("");
+        $("#equipo").val("");
+        $("#ubicacion").val("");
+        $("#cuerpo").val("");
+        $("#empleado").val("");
+        $("#garantia").val("");
+        $("#idResguardoentregadetalle").val("");
+        return false;
+      }
+    </script>
+
   </g:if>
+
   <g:if test="${!incidenteInstance?.idResguardoentregadetalle}">
     <tr>
       <td>

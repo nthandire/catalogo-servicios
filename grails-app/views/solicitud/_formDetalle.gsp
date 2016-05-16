@@ -30,7 +30,7 @@
 
 <div class="row-fluid">
   <g:if test="${!(solicitudDetalleInstance?.id)}">
-    <div class="span6">
+    <div class="span3">
       <div class="fieldtablecontain">
         <label for="resguardo">Inventario o No. de Serie o Usuario</label>
         <g:textField id="cpuauto" name="resguardo" value=""/>
@@ -38,8 +38,33 @@
            value="${incidenteInstance?.idResguardoentregadetalle}" />
       </div>
     </div>
+
+    <div class="span2">
+      <div>
+        <a href="#" onclick="return (limpiaEquipo())"
+            style="border: 2px #CCCCCC solid; padding: 5px; text-decoration: none; color: #000000; border-radius: 5px; ">
+            Borrar selección
+          </a>
+      </div>
+    </div>
   </g:if>
 </div>
+
+<script>
+  function limpiaEquipo() {
+    $("#serie").val("");
+    $("#marca").val("");
+    $("#modelo").val("");
+    $("#economico").val("");
+    $("#equipo").val("");
+    $("#ubicacion").val("");
+    $("#cuerpo").val("");
+    $("#empleado").val("");
+    $("#garantia").val("");
+    $("#idResguardoentregadetalle").val("");
+    return false;
+  }
+</script>
 
 <div style="display:none;">
   <g:select name="estado" id="estado" from="['A','I']"
