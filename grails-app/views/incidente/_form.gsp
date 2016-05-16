@@ -20,6 +20,8 @@
       <td>
       </td>
     </tr>
+  </g:if>
+  <g:if test="${!incidenteInstance?.idResguardoentregadetalle}">
     <tr>
       <td>
           <label for="equipo"><g:message code="servicios.equipo.label" default="Equipo" /></label>
@@ -83,7 +85,7 @@
       </td>
     </tr>
   </g:if>
-  <g:elseif test="${incidenteInstance.idResguardoentregadetalle}">
+  <g:else>
     <g:set var="equipo"
       value="${ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle)}" />
     <tr>
@@ -152,7 +154,7 @@
           readonly="true" style="width: 250px;text-transform: uppercase;" />
       </td>
     </tr>
-  </g:elseif>
+  </g:else>
 </table>
 
 <g:if test="${!incidenteInstance.id}">
