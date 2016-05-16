@@ -6,7 +6,7 @@
     <g:message code="cat_serv.servCat.final.label" default="Categoría final" />
   </label>
   <g:select id="servCat" name="idServfinal.servSub.servCat.id"
-    from="${Cat_servCat.list()}" optionKey="id"
+    from="${Cat_servCat.list([sort:'categoria'])}" optionKey="id"
     value="${incidenteInstance?.idServfinal?.servSub?.servCat?.id}"
     class="many-to-one" onchange="categoryChangedFinal(this.value)"
     noSelection="${['':'Seleccione una...']}"/>
@@ -21,7 +21,7 @@
     <g:if test="${incidenteInstance?.idServfinal}">
       <g:select id='servfinal' name='servfinal.id' required=''
         onchange='subcategoryChangedFinal(this.value)' optionKey='id'
-        from="${Cat_servSub.findAllByServCat(incidenteInstance?.idServfinal?.servSub?.servCat, [order:'id'])}"
+        from="${Cat_servSub.findAllByServCat(incidenteInstance?.idServfinal?.servSub?.servCat, [sort:'descripcion'])}"
         value="${incidenteInstance?.idServfinal?.servSub?.id}" noSelection="['':' ']"/>
     </g:if>
   </span>

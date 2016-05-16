@@ -172,6 +172,7 @@ class SolicitudCoordinadorController {
         tecnicos = UsuarioRol.findAllByRol(rolTecnicos).
           findAll {it.usuario.id in miembros}.collect {it.usuario}
       }
+      tecnicos.sort{it.nombre}
       log.debug("tecnicos = $tecnicos")
       tecnicos
     }

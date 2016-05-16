@@ -147,11 +147,11 @@ class SolicitudController {
 
       def autorizadores = []
       Usuario.withNewSession { sessionU ->
-        autorizadores = Usuario.findAllByIdInList(miembros)
+        autorizadores = Usuario.findAllByIdInList(miembros, [sort:'nombre'])
       }
 
       log.debug("numero de autorizadores = ${autorizadores.size()}")
-      return autorizadores
+      autorizadores
     }
 
     def edit(Long id) {
