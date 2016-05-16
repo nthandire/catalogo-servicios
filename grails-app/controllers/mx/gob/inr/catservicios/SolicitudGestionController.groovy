@@ -92,8 +92,8 @@ class SolicitudGestionController {
         log.debug("params = $params")
 
         def query =
-          "from Solicitud s          " +
-          " where s.estado = 'T'     "
+          "from Solicitud s               " +
+          " where s.estado in ('T', 'C')  "
         def terminadas = Solicitud.executeQuery(
             "select count(*) " + query
         )[0]
