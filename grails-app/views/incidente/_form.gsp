@@ -160,7 +160,7 @@
 <g:if test="${!incidenteInstance.id}">
   <div class="row-fluid">
     <div class="span4">
-      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} ">
+      <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idReporta', 'error')} " style="width:100%;">
         <label for="idReporta">
           <g:message code="incidente.idReporta.label" default="Quien Reporta" />
         </label>
@@ -169,7 +169,7 @@
           from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
           required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
           noSelection="${['':'Seleccione una...']}" optionKey="id"
-          optionValue="nombreMostrar"/>
+          optionValue="nombreMostrar"  style="width:350px;"/>
       </div>
     </div>
 
@@ -185,12 +185,13 @@
 <g:if test="${incidenteInstance.id && incidenteInstance.idReporta}">
   <div class="row-fluid">
     <div class="span4">
-      <div class="fieldtablecontain">
+      <div class="fieldtablecontain" style="width:100%;">
         <label for="nombre-label">
           <g:message code="incidente.idReporta.label" default="Quien Reporta" />
         </label>
         <g:field type="text" name="nombre.no" disabled="true"
-          value="${Usuario.get(incidenteInstance.idReporta)}"/>
+          value="${Usuario.get(incidenteInstance.idReporta)}"
+           style="width:350px;"/>
       </div>
     </div>
     <div class="span4">
