@@ -59,7 +59,7 @@ Plan
 
 anabel rfc EIVA721207 passwordc 1326e38796b7a63b1c088b54ddff8d18e87b073955d1e5fefc9b015ec032ff0a
 Richard dd85ed30f6da98f6edb464029f89b903aaadb6da86478646ad0f59361d49c1de
-
+iVAN MAHA850708 bf43f82c084847ce52ac7f16af242e052538b8e47bed759d9f65284d3653b1b8
 
 Corregir el prontuario para que pueda ser más preciso y sirva de guía para el manejo del sistema.
 
@@ -74,19 +74,12 @@ INCIDENTES
 Al levantar un incidente en el campo “Quien reporta” no está la función de autocompletar.
 
 
-Revisar la causa de porque no llegan los correos con la encuesta de satisfacción a algunos usuarios en incidentes.
-Limpiar el campo de búsqueda del equipo al seleccionar el equipo que se visualiza en el proceso de la captura de un incidente.
-
-
-
 
 
 REQUERIMIENTO
 Se observó que después de visualizar el semáforo, al seleccionarlo nuevamente minutos después marco error de programación “ha ocurrido un error” y después de 3 intentos ya se vuelve a visualizar.
-Al capturar un nuevo requerimiento y por error es relacionado a un equipo de cómputo, aunque no lo has creado y te regresas a borrar la referencia del equipo, siguen quedando los datos de marca, modelo, serie, etc., le das Enter y aun así crea el requerimiento mandando a la siguiente pantalla de descripción del requerimiento.
 
 
-No se puede borrar un archivo una vez que se subió en requerimiento.
 Si el usuario al fallar la firma en un requerimiento, se pierde la lista de autorizadores.
 Al cancelar un requerimiento a Dorian no le aparece en el listado y no aparece en ningún listado.
 Al autorizar el folio 24, se mandan dos correos con nombres de otra persona en el cuerpo del mensaje debiendo referir al usuario que lo solicito (Dorian y al autorizador).
@@ -104,7 +97,6 @@ Dice: Sistema de Administación de Servicios, Debe decir: Sistema de Administrac
 Al cerrar un servicio al usuario se le envía una notificación de que su incidente fue atendido y lo invita a contestar la encuesta,  el sistema solo le envía una vez, se había solicitado que se enviara 3 veces, además no se le informa al usuario que en caso de no ser contestada la encuesta se dará por satisfactoria.
 Al revisar el gestor de la Mesa de Servicios el requerimiento no permite reclasificar la categoría antes de aprobar el servicio, solicitando se habilite solo para el rol de Gestor.
 Se requiere que donde se cuente con combos para seleccionar ya sea a un técnico, autorizador, Vo. Bo., etc. Estos estén ordenados de manera alfabéticamente ya que actualmente no está ordenado.
-En el menú principal el modulo de proveedores no debe mostrarse, no fue requerido por la mesa de servicio.
 
 
 

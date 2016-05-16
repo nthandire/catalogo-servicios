@@ -74,23 +74,32 @@
 
 <div class="row-fluid">
   <div class="span10 offset1">
-    <ul class="one-to-many" style="list-style-type:decimal;">
       <g:if test="${solicitudInstance?.archivos}">
+        <table>
         <g:each in="${solicitudInstance.archivos.sort{it.id}}" var="a">
-          <li><g:link controller="solicitudArchivoadjunto" action="download"
-            id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+          <tr>
+            <td>
+            <g:link controller="solicitudArchivoadjunto" action="download"
+              id="${a.id}">${a?.encodeAsHTML()}</g:link>
+            </td><td>
+            <g:link action="deleteArch" id="${solicitudInstance.id}" style="border: 2px #CCCCCC solid; padding: 5px; text-decoration: none; color: #000000; border-radius: 5px;" params="['arch.id': a.id]">
+              Borrar
+            </g:link>
+            </td>
+          </tr>
         </g:each>
+        </table>
       </g:if>
       <g:if test="${((!solicitudInstance?.estado || solicitudInstance.estado == 'F' as char) &&
                (!solicitudInstance?.archivos || solicitudInstance.archivos.size() < 2))}">
-        <li class="add">
+        <div class="add">
           <g:link class="btn" controller="solicitudArchivoadjunto" action="create"
             params="['solicitud.id': solicitudInstance?.id]">
             ${message(code: 'default.subir.label',
               args: [message(code: 'solicitudArchivoadjunto.label',
                 default: 'SolicitudArchivoadjunto')])}
           </g:link>
-        </li>
+        </div>
       </g:if>
     </ul>
   </div>

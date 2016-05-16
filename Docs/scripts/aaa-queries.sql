@@ -1,6 +1,6 @@
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   FROM solicitud
- where id_solicitud > 210;
+ where id_solicitud > 240;
 
 
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
@@ -338,7 +338,7 @@ SELECT *
 
 select id_serv, *
   from incidente
- where id_incidente = 119;
+ where id_incidente = 168;
  
 update incidente
    set id_serv = 2 -- 100
@@ -346,7 +346,7 @@ update incidente
  
 SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estado_solictuddetalle,descripcion,solucion,id_tecnico,fecha_solucion,id_programa,id_servcat,descripcion_tecnica,prioridad,id_aprobador,fecha_aprobador 
   FROM solicitud_detalle
- where id_solicitud >= 239;
+ where id_solicitud >= 246;
 
 SELECT id_usuario,area,autoriza,vobo,estado
   FROM usuario_autorizado

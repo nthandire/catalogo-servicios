@@ -310,6 +310,47 @@ class SolicitudController {
         redirect(action: "edit", id: solicitudInstance.id)
     }
 
+    def deleteArch(Long id, Long version) {
+        def solicitudInstance = Solicitud.get(id)
+        if (!solicitudInstance) {
+            flash.message = message(code: 'default.not.found.message',
+              args: [message(code: 'solicitud.label', default: 'Solicitud'), id])
+            redirect(action: "list")
+            return
+        }
+
+        if (version != null) {
+            if (solicitudInstance.version > version) {
+                solicitudInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                          [message(code: 'solicitud.label', default: 'Solicitud')] as Object[],
+                          "Alguien más ha modificado esta Solicitud mientras usted la estaba editando")
+                render(view: "edit", model: [solicitudInstance: solicitudInstance,
+                                             autorizadores:listaDeAutorizadores(),
+                                             categorias: categorias(),
+                                             equipos: equipos()])
+                return
+            }
+        }
+
+        log.debug("params = $params")
+        log.debug("params['arch.id'] = $params['arch.id']")
+
+        def archivo = SolicitudArchivoadjunto.get(params["arch.id"])
+
+        if (!archivo.delete(flush: true)) {
+            render(view: "edit", model: [solicitudInstance: solicitudInstance,
+                                         autorizadores:listaDeAutorizadores(),
+                                         categorias: categorias(),
+                                         equipos: equipos()])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message',
+          args: [message(code: 'solicitud.label', default: 'Solicitud'),
+                 solicitudInstance.toString()]).minus(/""/)
+        redirect(action: "edit", id: solicitudInstance.id)
+    }
+
     def updateDetalle(Long id, Long version, Long idDetalle) {
       log.debug("id = $id")
       log.debug("version = $version")

@@ -117,7 +117,27 @@ SELECT idusuario,rfc,nombre,paterno,materno
  where id_empleado in
 (10,51,71,97,107,173,222,270,271,332,343,350,398,416,502,676,700,774,778,820,964,1018,1057,1095,1266,1280,1318,1362,1443,1465,1528,1538,1607,1623,1628,1708,1886,1911,1930,2662,2849,3016,3021,3035,3094,3323,3519,3647,3673,3718,3753,3870,3905,3928,3947,3963,4017,4020,4156,4174,4252,4507,4739,4778,4797,4812,4912);
 
-SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
+SELECT idusuario,rfc,nombre,paterno,materno,passwordc,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario
- where nombre like '%ANABEL%';-- rfc = 'CARL740622';
+ where rfc like '%MAHA850708%';--'%ANABEL%';-- rfc = 'CARL740622';
 
+SELECT idusuario,rfc,nombre,id_empleado,paterno,materno,passwordc,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,idperfilautorizacion,idusuariotipo,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
+  FROM usuario
+ where  rfc in ('ZAPS730120','DERA791215', 'EIVA721207','MAHA850708','PECR790224', 'CARL740622');
+
+SELECT id_empleado
+  FROM usuario
+ where  rfc in ('ZAPS730120','DERA791215', 'EIVA721207','MAHA850708','PECR790224', 'CARL740622');
+
+UPDATE usuario
+   SET passwordc = 'bf43f82c084847ce52ac7f16af242e052538b8e47bed759d9f65284d3653b1b8'
+ where rfc like '%PECR790224%';
+
+
+SELECT idusuario,passwordfirma,nombre,tipo,tamanio,datos,bloqueada,intentosfallidos 
+  FROM firmadigital
+ where idusuario = 10055;
+
+update firmadigital
+   set passwordfirma = '100evalC'
+ where idusuario = 10041;
