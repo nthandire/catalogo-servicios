@@ -18,7 +18,7 @@
 <g:each in="${SolicitudDetalle.findAllByIdSolicitudAndEstado(solicitudInstance,
                             'A' as char)}" var="d">
   <div class="fieldtablecontainLeft">
-    ${"<b style='color:blue;'>Solicitud:</b> " + d?.descripcion.encodeAsHTML()}
+    <b style='color:blue;'>Solicitud:</b> ${" ${d?.encodeAsHTML()}  : ${d?.descripcion.encodeAsHTML()}"}
   </div>
   <div class="fieldtablecontainLeft">
     ${"<b style='color:blue;'>Solución:</b> " + d?.solucion.encodeAsHTML()}
