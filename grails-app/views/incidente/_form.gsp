@@ -14,8 +14,9 @@
     <tr>
       <td>
         <label for="cpuauto">Inventario o No. de Serie o Usuario</label>
-        <g:textField id="cpuauto" name="idResguardoentregadetalle"
-          style="width: 250px;" value="${incidenteInstance?.idResguardoentregadetalle}" />
+        <g:textField id="cpuauto" name="resguardo" value=""/>
+        <g:hiddenField id="idResguardoentregadetalle" name="idResguardoentregadetalle"
+           value="${incidenteInstance?.idResguardoentregadetalle}" />
       </td>
       <td>
       </td>

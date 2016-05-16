@@ -17,15 +17,19 @@ $(document).ready(function() {
     	  },
     	  minLength: 2, // triggered only after minimum 2 characters have been entered.
     	  select: function(event, ui) { // event handler when user selects a company from the list.
-    	   $("#serie").val(ui.item.serie); // update the hidden field.
-    	   $("#marca").val(ui.item.marca); // populate the employee field with the nasdaq symbol.
-    	   $("#modelo").val(ui.item.modelo);
-    	   $("#economico").val(ui.item.economico);
-         $("#equipo").val(ui.item.equipo);
-         $("#ubicacion").val(ui.item.ubicacion);
-         $("#cuerpo").val(ui.item.cuerpo);
-         $("#empleado").val(ui.item.empleado);
-    	   $("#garantia").val(ui.item.garantia);
+            event.preventDefault();
+    	    $("#serie").val(ui.item.serie); // update the hidden field.
+    	    $("#marca").val(ui.item.marca); // populate the employee field with the nasdaq symbol.
+    	    $("#modelo").val(ui.item.modelo);
+    	    $("#economico").val(ui.item.economico);
+            $("#equipo").val(ui.item.equipo);
+            $("#ubicacion").val(ui.item.ubicacion);
+            $("#cuerpo").val(ui.item.cuerpo);
+            $("#empleado").val(ui.item.empleado);
+    	    $("#garantia").val(ui.item.garantia);
+           // alert(ui.item.value)
+            $("#idResguardoentregadetalle").val(ui.item.value);
+            $(this).val("");
     	  }
 	 	});
 

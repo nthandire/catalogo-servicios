@@ -33,7 +33,9 @@
     <div class="span6">
       <div class="fieldtablecontain">
         <label for="resguardo">Inventario o No. de Serie o Usuario</label>
-        <g:textField id="cpuauto" name="idResguardoentregadetalle"/>
+        <g:textField id="cpuauto" name="resguardo" value=""/>
+        <g:hiddenField id="idResguardoentregadetalle" name="idResguardoentregadetalle"
+           value="${incidenteInstance?.idResguardoentregadetalle}" />
       </div>
     </div>
   </g:if>
@@ -45,7 +47,7 @@
 </div>
 
 <table class="table table-condensed">
-  <g:if test="${!solicitudDetalleInstance?.id}">
+  <g:if test="${!solicitudDetalleInstance?.idResguardoentregadetalle}">
     <tr>
       <td>
           <label for="equipo"><g:message code="servicios.equipo.label" default="Equipo" /></label>
@@ -109,7 +111,7 @@
       </td>
     </tr>
   </g:if>
-  <g:elseif test="${(solicitudDetalleInstance.idResguardoentregadetalle)}">
+  <g:else>
     <g:set var="equipo"
       value="${ResguardoEntregaDetalle.get(solicitudDetalleInstance.idResguardoentregadetalle)}" />
     <tr>
@@ -178,5 +180,5 @@
           readonly="true" style="width: 250px;text-transform: uppercase;" />
       </td>
     </tr>
-  </g:elseif>
+  </g:else>
 </table>

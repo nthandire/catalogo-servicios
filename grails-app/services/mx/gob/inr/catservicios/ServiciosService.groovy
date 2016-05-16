@@ -11,20 +11,20 @@ class ServiciosService {
   @Transactional(readOnly = true)
   def listarEquipo(params){
     def term = params.term.toUpperCase().trim()
-    log.debug("en listarEquipo, term = $term")
+    // TODO: quitar en todo este archivo log.debug("en listarEquipo, term = $term")
 
     def codigos = ResguardoEntrega.findAllByCodigoLike("515%").collect {it.id}
-    log.debug("número de codigos = ${codigos.size()}")
+    // log.debug("número de codigos = ${codigos.size()}")
 
     def empleados = null
     if (term && !(term =~ /[0-9]/)) {
       def queryEmpleado =
         "  from Usuario as u     " +
         " where upper(nombre) || ' ' || upper(nvl(paterno,''))  || ' ' || upper(nvl(materno,'')) like '%${term}%'   "
-      log.debug("queryEmpleado = $queryEmpleado")
+      // log.debug("queryEmpleado = $queryEmpleado")
       empleados = Usuario.findAll(queryEmpleado, [],
                       [max: 8]).collect {it.idEmpleado as Integer}.findAll{it}
-      log.debug("empleados = $empleados")
+      // log.debug("empleados = $empleados")
     }
 
     def MAX_EQUIPOS = 2 // Es el consecutivo maximo a considerar,
@@ -38,9 +38,9 @@ class ServiciosService {
         "   and d.consecutivo <= ${MAX_EQUIPOS}  " +
         "   and d.idTipoanexotecnico is not null "
     if (empleados) {
-      log.debug("primer empleado es de tipo ${empleados[0].getClass()}")
+      // log.debug("primer empleado es de tipo ${empleados[0].getClass()}")
       if (empleados.size() > 1) {
-        log.debug("encontro más de un empleado")
+        // log.debug("encontro más de un empleado")
         return []
       }
       query +=
@@ -51,13 +51,13 @@ class ServiciosService {
         "   and (serie like :serie               " +
         "        or inventario = :inventario)    "
         def inventario = term.isNumber() ? term.toLong() : new Long(0)
-        log.debug("inventario = ${inventario}")
+        // log.debug("inventario = ${inventario}")
         paramQuery << [serie: "%$term%", inventario: inventario]
     }
     log.debug("query = $query")
 
     def clist = ResguardoEntregaDetalle.findAll(query, paramQuery, [max: 15])
-    log.debug("clist = ${clist}")
+    // log.debug("clist = ${clist}")
 
     def cSelectList = [] // cada uno de los resultados
     clist.each {
@@ -76,8 +76,9 @@ class ServiciosService {
       def eqMap = [:] // add to map. jQuery autocomplete expects the JSON object to be with id/label/value.
       eqMap.put("serie", it['serie'])
       def empleado = Usuario.findByIdEmpleado(it['idEmpleado'])?.toString() ?: "Error en dato de empleado"
-      log.debug("it['idTipoanexotecnico'] = ${it['idTipoanexotecnico']}")
+      // TODO: quitar log.debug("it['idTipoanexotecnico'] = ${it['idTipoanexotecnico']}")
       def tipoEquipo = AnexoTecnico.get(it['idTipoanexotecnico'] as Long)
+      // log.debug("it['id'] = ${it['id']}")
       eqMap.put("value", it['id'])
       def marca = descMarca(it['idMarca'])
       def ubicacion = firmadoService.ubicacion(it.id)
@@ -98,29 +99,29 @@ class ServiciosService {
   @Transactional(readOnly = true)
   def extension(params){
     def reporta = params.reporta.toLong()
-    log.debug("en extension, reporta = $reporta")
+    // log.debug("en extension, reporta = $reporta")
 
     def ext = Usuario.get(reporta).extension
     def extInt = ext ? ext.isInteger() ? ext.toInteger() : 0 : 0
 
     Incidente caso = Incidente.find("from Incidente where idReporta = $reporta order by fechaIncidente desc")
     if (caso) {
-      log.debug("caso = $caso")
+      // log.debug("caso = $caso")
       caso.extension ?: 0
     } else {
-      log.debug("extInt = $extInt")
+      // log.debug("extInt = $extInt")
       extInt
     }
   }
 
   def nombreEquipo(id){
-    log.debug("en nombreEquipo")
+    // log.debug("en nombreEquipo")
 
     def equipo = ""
     if (id) {
       equipo = ResguardoEntregaDetalle.get(id).toString()
     }
-    log.debug("equipo = $equipo")
+    // log.debug("equipo = $equipo")
     equipo
   }
 
@@ -138,22 +139,22 @@ class ServiciosService {
   }
 
   Date garantia(ResguardoEntregaDetalle equipo) {
-    log.debug("equipo = $equipo")
+    // log.debug("equipo = $equipo")
     Date garantia = null
     if (equipo.idTipoanexotecnico in [1, 2]) {
-    log.debug("CPU o Monitor")
+    // log.debug("CPU o Monitor")
       def cpu = Cpu.findByIdResguardoentregadetalle(equipo.id)
-      log.debug("cpu = ${cpu?.id}")
+      // log.debug("cpu = ${cpu?.id}")
       garantia = cpu?.fechaVenceGarantia
     } else if (equipo.idTipoanexotecnico == 5) {
-    log.debug("Impresora")
+    // log.debug("Impresora")
       def impresora = Impresora.findByIdResguardoentregadetalle(equipo.id)
-      log.debug("impresora = ${impresora?.id}")
+      // log.debug("impresora = ${impresora?.id}")
       garantia = impresora?.fechaVenceGarantia
     } else if (equipo.idTipoanexotecnico == 6) {
-    log.debug("UPS")
+    // TODO: quitar log.debug("UPS")
       def ups = Ups.findByIdResguardoentregadetalle(equipo.id)
-      log.debug("ups = ${ups?.id}")
+      // log.debug("ups = ${ups?.id}")
       garantia = ups?.fechaVenceGarantia
     }
 
