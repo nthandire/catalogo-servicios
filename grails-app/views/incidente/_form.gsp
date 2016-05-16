@@ -311,8 +311,8 @@
 </g:if>
 
 <div class="row-fluid">
-  <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+  <div class="span5">
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required" style="width:100%">
       <label for="idServ">
         <g:message code="cat_serv.servCat.label" default="Cat" />
         <span class="required-indicator">*</span>
@@ -320,20 +320,21 @@
       <g:if test="${incidenteInstance?.id && incidenteInstance.idServ}">
         <g:field id="servCat" name="idServ.servSub.servCat.id"
           value="${incidenteInstance?.idServ?.servSub?.servCat}"
-          disabled="true"/>
+          disabled="true" style="width:400px;"/>
       </g:if>
       <g:else>
         <g:select id="servCat" name="idServ.servSub.servCat.id"
           from="${firmado.categoriasIncidentes()}" optionKey="id" required=""
           value="${incidenteInstance?.idServ?.servSub?.servCat?.id}"
           class="many-to-one" onchange="categoryChanged(this.value)"
-          noSelection="${['':'Seleccione una...']}"/>
+          noSelection="${['':'Seleccione una...']}"
+          style="width:400px;"/>
       </g:else>
     </div>
   </div>
 
-  <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+  <div class="span3">
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required" style="width:100%">
       <label for="idServ">
         <g:message code="cat_serv.servSub.label" default="Serv Sub" />
         <span class="required-indicator">*</span>
@@ -342,18 +343,19 @@
         <g:if test="${incidenteInstance.id && incidenteInstance.idServ}">
           <g:field id="servSub" name="servSub.id"
             value="${incidenteInstance?.idServ?.servSub}"
-            disabled="true"/>
+            disabled="true" style="width:250px;"/>
         </g:if>
         <g:elseif test="${incidenteInstance.idServ}">
           <g:select id='servSub' name='servSub.id' required=''
             onchange='subcategoryChanged(this.value)' optionKey='id'
             from="${firmado.subcategoriasIncidentes(incidenteInstance.idServ.servSub.servCat)}"
-            value="${incidenteInstance?.idServ?.servSub?.id}" noSelection="['':' ']"/>
+            value="${incidenteInstance?.idServ?.servSub?.id}" noSelection="['':' ']"
+            style="width:250px;" />
         </g:elseif>
         <g:else>
           <g:select id='servSub' name='servSub.id' required=''
             onchange='subcategoryChanged(this.value)' optionKey='id'
-            from="${[]}"
+            from="${[]}" style="width:250px;"
             value="${incidenteInstance?.idServ?.servSub?.id}" noSelection="['':' ']"/>
         </g:else>
       </span>
@@ -361,7 +363,7 @@
   </div>
 
   <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required">
+    <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'idServ', 'error')} required" style="width:100%;">
       <label for="idServ">
         <g:message code="cat_serv.label" default="Servicio" />
         <span class="required-indicator">*</span>
@@ -370,19 +372,19 @@
         <g:if test="${incidenteInstance.id && incidenteInstance.idServ}">
           <g:field id="idServ" name="idServ.id"
             value="${incidenteInstance?.idServ}"
-            disabled="true"/>
+            disabled="true" style="width:350px;"/>
         </g:if>
         <g:elseif test="${incidenteInstance.idServ}">
           <g:select id='idServ' name='idServ.id' required=''
             optionKey='id' value="${incidenteInstance?.idServ?.id}"
             from="${firmado.tercerNivelIncidentes(incidenteInstance.idServ.servSub)}"
-            noSelection="['':' ']"/>
+            noSelection="['':' ']" style="width:350px;"/>
         </g:elseif>
         <g:else>
           <g:select id='idServ' name='idServ.id' required=''
             optionKey='id' value="${incidenteInstance?.idServ?.id}"
-            from="${[]}"
-            noSelection="['':' ']"/>
+            from="${[]}" style="width:350px;"
+            noSelection="['':' ']" style="width:350px;"/>
         </g:else>
       </span>
     </div>

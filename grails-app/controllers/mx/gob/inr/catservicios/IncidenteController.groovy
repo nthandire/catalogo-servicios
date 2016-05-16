@@ -608,7 +608,7 @@ class IncidenteController {
             subCategories = firmadoService.subcategoriasIncidentes(category)
         }
         render g.select(id:'servSub', name:'servSub.id', required:'',
-          onchange:rutinaALlamar + '(this.value)',
+          onchange:rutinaALlamar + '(this.value)', style:'width:250px',
           from:subCategories, optionKey:'id', noSelection:['':' ']
         )
     }
@@ -629,7 +629,8 @@ class IncidenteController {
             servicios = firmadoService.tercerNivelIncidentes(subcategory)
         }
         render g.select(id:campoAActualizar, name:campoAActualizar + '.id', required:'',
-            from:servicios, optionKey:'id', noSelection:['':'Seleccione una...']
+            from:servicios, optionKey:'id', noSelection:['':'Seleccione una...'],
+            style:'width:350px'
         )
     }
 

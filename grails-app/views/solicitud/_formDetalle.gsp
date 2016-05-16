@@ -5,18 +5,19 @@
 </style>
 
 <div class="row-fluid">
-  <div class="span4">
-    <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
+  <div class="span6">
+    <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} " style="width: 95%;">
       <label for="idServcat">
         <g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
       </label>
       <g:select id="idServcat" name="idServcat.id" from="${categorias}"
         optionKey="id" value="${solicitudDetalleInstance?.idServcat?.id}"
-        class="many-to-one" noSelection="['': '']"/>
+        class="many-to-one" noSelection="['': '']"
+        style="width: 450px;" />
     </div>
   </div>
 
-  <div class="span4">
+  <div class="span6">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'descripcion', 'error')} ">
       <label for="descripcion">
         <g:message code="solicitudDetalle.descripcion.label" default="Descripción" />
@@ -25,9 +26,11 @@
         maxlength="3000" value="${solicitudDetalleInstance?.descripcion}"/>
     </div>
   </div>
+</div>
 
+<div class="row-fluid">
   <g:if test="${!(solicitudDetalleInstance?.id)}">
-    <div class="span4">
+    <div class="span6">
       <div class="fieldtablecontain">
         <label for="resguardo">Inventario o No. de Serie o Usuario</label>
         <g:textField id="cpuauto" name="idResguardoentregadetalle"/>
