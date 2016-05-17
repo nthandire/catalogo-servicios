@@ -156,13 +156,10 @@
           <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
 					  <g:actionSubmit class="save" action="update" onclick="maestro()"
               value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-            <g:if test="${!solicitudInstance?.estado && solicitudInstance?.justificacion && solicitudInstance?.idAutoriza}">
+            <g:if test="${!solicitudInstance?.estado && solicitudInstance?.justificacion && solicitudInstance?.idAutoriza && solicitudInstance?.extension}">
               <a href="#myModalFirmar" class="edit" data-toggle="modal"
                 onclick="firma()">Firmar</a>
             </g:if>
-            <g:elseif test="${!solicitudInstance?.estado}">
-              <a href="#" class="cancel" data-toggle="modal">Debe llenar todos los campos para poder firmar esta solicitud</a>
-            </g:elseif>
           </g:if>
         </fieldset>
       </g:form>

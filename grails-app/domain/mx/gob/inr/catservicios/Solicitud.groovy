@@ -56,7 +56,7 @@ class Solicitud {
     encuesta nullable: true, maxSize: 1, editable:false,
       inList: [(char)'U', (char)'S']
     fechaEncuesta nullable: true, editable:false
-    extension nullable: true
+    extension nullable: true, matches: /^[0-9]$/
 	}
 
   String toString() {

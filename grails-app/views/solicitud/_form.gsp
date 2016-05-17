@@ -117,6 +117,14 @@
       <g:field type="text" id="extension" name="extension" value="${solicitudInstance?.extension}"/>
     </div>
   </div>
+  <div class="span4">
+    <g:if test="${!solicitudInstance?.estado && (!solicitudInstance?.justificacion || !solicitudInstance?.idAutoriza || !solicitudInstance?.extension)}">
+      <label style="color:#CC0000; font-size:130%;">
+        Debe llenar todos los campos para poder firmar esta solicitud
+      </label>
+    </g:if>
+  </div>
+
 </div>
 
 <div class="row-fluid">
