@@ -65,14 +65,6 @@ Corregir el prontuario para que pueda ser más preciso y sirva de guía para el 
 
 
 
-GENERALES
-
-
-
-INCIDENTES
-
-
-REQUERIMIENTO
 
 
 Después de crear un requerimiento, al terminar de llenar el apartado de Descripción de requerimiento y firmar (bien o erróneamente) con ENTER, aparece un error “Debe capturar la categoría de su solicitud”.
@@ -84,7 +76,5 @@ Al cerrar un servicio al usuario se le envía una notificación de que su incide
 
 
 
-Bitácoras.
-Incluir el identificador de seguimiento por cada nota que se haga en las bitácoras.
 
 
