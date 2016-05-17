@@ -39,10 +39,6 @@ class ServiciosService {
         "   and d.idTipoanexotecnico is not null "
     if (empleados) {
       // log.debug("primer empleado es de tipo ${empleados[0].getClass()}")
-      if (empleados.size() > 1) {
-        // log.debug("encontro más de un empleado")
-        return []
-      }
       query +=
         "   and d.idEmpleado in (:empleados)    "
         paramQuery << [empleados: empleados]
