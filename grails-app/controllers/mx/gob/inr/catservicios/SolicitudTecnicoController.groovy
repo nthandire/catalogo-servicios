@@ -210,6 +210,8 @@ class SolicitudTecnicoController {
 Su solicitud ${solicitud} ya ha sido atendida, para mejorar la calidad del servicio se solicita conteste la siguiente encuesta, usando la siguiente liga:<br/><br/>
 
 <a href='${liga}'>${solicitud}</a>
+<br/><br/>
+Se le recuerda que solo tiene una semana para contestar dicha encuesta, después de ese tiempo, la encuesta se dará por satisfactoria.
               """
 
             def correo = firmadoService.correo(solicitante.idEmpleado)
