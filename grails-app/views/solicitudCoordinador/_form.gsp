@@ -96,11 +96,11 @@
 <div class="row-fluid">
   <div class="span4">
 
-    <div class="fieldtablecontain">
+    <div class="fieldtablecontain" style="widht:100%">
       <label for="nombre-label">
         <g:message code="solicitud.nombre.label" default="Autorizador"/>
       </label>
-      <g:field type="text" name="nombre.no" disabled="true"
+      <g:field type="text" name="nombre.no" disabled="true" style="width:350px;"
         value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
     </div>
 
@@ -133,11 +133,11 @@
   <div class="row-fluid">
     <div class="span4">
 
-      <div class="fieldtablecontain">
+      <div class="fieldtablecontain" style="widht:100%">
         <label for="nombre-label">
           <g:message code="solicitud.nombre.label" default="Visto Bueno"/>
         </label>
-        <g:field type="text" name="nombre.no" disabled="true"
+        <g:field type="text" name="nombre.no" disabled="true" style="width:350px;"
           value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
       </div>
 
