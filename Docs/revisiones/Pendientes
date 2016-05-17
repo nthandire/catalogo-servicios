@@ -71,14 +71,8 @@ GENERALES
 
 INCIDENTES
 
-Al levantar un incidente en el campo “Quien reporta” no está la función de autocompletar.
-
-
-
 
 REQUERIMIENTO
-Se observó que después de visualizar el semáforo, al seleccionarlo nuevamente minutos después marco error de programación “ha ocurrido un error” y después de 3 intentos ya se vuelve a visualizar.
-
 
 
 Después de crear un requerimiento, al terminar de llenar el apartado de Descripción de requerimiento y firmar (bien o erróneamente) con ENTER, aparece un error “Debe capturar la categoría de su solicitud”.
@@ -86,11 +80,6 @@ Después de crear un requerimiento, al terminar de llenar el apartado de Descrip
 
 
 Al cerrar un servicio al usuario se le envía una notificación de que su incidente fue atendido y lo invita a contestar la encuesta,  el sistema solo le envía una vez, se había solicitado que se enviara 3 veces, además no se le informa al usuario que en caso de no ser contestada la encuesta se dará por satisfactoria.
-
-Al revisar el gestor de la Mesa de Servicios el requerimiento no permite reclasificar la categoría antes de aprobar el servicio, solicitando se habilite solo para el rol de Gestor.
-
-
-
 
 
 
