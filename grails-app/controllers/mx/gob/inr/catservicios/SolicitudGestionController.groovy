@@ -191,6 +191,7 @@ class SolicitudGestionController {
       Usuario.withNewSession { sessionU ->
         autorizadores = Usuario.findAllByIdInList(miembros)
       }
+      autorizadores.sort{it.toString()}
 
       log.debug("numero de autorizadores = ${autorizadores.size()}")
       return autorizadores
