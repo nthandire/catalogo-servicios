@@ -15,7 +15,7 @@ class Cat_servCatController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
       def lista = Cat_servCat.list()
       log.debug("lista = ${lista}")
 

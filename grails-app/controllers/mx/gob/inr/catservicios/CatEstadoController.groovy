@@ -15,7 +15,7 @@ class CatEstadoController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         [catEstadoInstanceList: CatEstado.list(params), catEstadoInstanceTotal: CatEstado.count()]
     }
 

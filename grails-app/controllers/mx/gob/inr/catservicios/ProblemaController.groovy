@@ -16,7 +16,7 @@ class ProblemaController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         def lista = Problema.list(params)
         def cuantos = Problema.count()
         log.debug("lista = $lista")

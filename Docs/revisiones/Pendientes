@@ -86,8 +86,6 @@ Después de crear un requerimiento, al terminar de llenar el apartado de Descrip
 
 
 
-Al fallar la firma elimina el autorizador y el combo de autorizadores ya no se activa, si no hasta que te sales y vuelves a editarlo y firmarlo.
-Requerimiento 46/2016 se perdió cuando se marcó como revisado por la mesa de servicio y esto no le apareció a Alonso para su aprobación.
 No se ve el nombre completo del solicitante, del autorizador, subcategoría y equipo cuando edita el aprobador.
 En el Estado de cierre no debe de aparecer la opción de “atención de servicios”, no corresponde a requerimientos, solo a incidentes.
 Dice: Sistema de Administación de Servicios, Debe decir: Sistema de Administración de Servicios.

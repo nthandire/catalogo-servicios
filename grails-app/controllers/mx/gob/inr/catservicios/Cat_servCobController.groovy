@@ -15,7 +15,7 @@ class Cat_servCobController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 100, 100)
         [cat_servCobInstanceList: Cat_servCob.list(params), cat_servCobInstanceTotal: Cat_servCob.count()]
     }
 
