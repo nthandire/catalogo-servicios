@@ -9,13 +9,38 @@ SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificac
  
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   from Solicitud
- where fecha_autoriza >= to_date('2016-04-26', '%Y-%m-%d');
+ where fecha_solicitud between to_date('2016-04-20', '%Y-%m-%d') and to_date('2016-04-22', '%Y-%m-%d');
  
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   from Solicitud
- where id_solicitud = 202;
+ where fecha_autoriza >= to_date('2016-04-26', '%Y-%m-%d');
  
-  
+SELECT id_solicitud,fecha_solicitud,extension,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
+  from Solicitud
+ where id_solicitud >= 250;
+ 
+SELECT id_solicitud,fecha_solicitud,extension,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
+  from Solicitud
+ where numero_solicitud = 46;
+ 
+SELECT id_solicitud,fecha_solicitud,numero_solicitud,extension,id_solicitante,estado_solicitud,justificacion,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
+  from Solicitud
+ where id_solicitante = 10053;--8301;
+ 
+update Solicitud
+   set estado_solicitud = 'E' --'T' --'F'
+   , id_solicitante = 10041
+ where id_solicitud = 140;
+
+update Solicitud
+   set estado_solicitud = 'A' --'T' --'F'
+ where id_solicitud = 181;
+
+update Solicitud
+   set numero_solicitud = 24
+ where id_solicitud = 138;
+
+
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
  where fecha_incidente between to_date('2016-04-18', '%Y-%m-%d') and to_date('2016-04-19', '%Y-%m-%d')
@@ -240,11 +265,15 @@ insert into usuario_autorizado
 
 SELECT id_serv,id_servsub,descripcion,portal,incidente,solicitud,problema,id_servresp1,id_servresp2,id_servresp3,tiempo1,tiempo2,tiempo3,id_tiempo1,id_tiempo2,id_tiempo3,impacto,id_servrespautoriza,id_servrespaprueba,plantilla,observaciones,estado_serv,id_usuario,fecha_modificacion,modificacion,ip_terminal 
   FROM cat_serv
- where id_serv in (174,4,42,111);
+ where id_serv in (137,174,4,42,111);
 
 SELECT id_serv,id_servsub,descripcion,portal,incidente,solicitud,problema,id_servresp1,id_servresp2,id_servresp3,tiempo1,tiempo2,tiempo3,id_tiempo1,id_tiempo2,id_tiempo3,impacto,id_servrespautoriza,id_servrespaprueba,plantilla,observaciones,estado_serv,id_usuario,fecha_modificacion,modificacion,ip_terminal 
   FROM cat_serv
  where id_servresp3 is null;
+
+SELECT id_serv,id_servsub,descripcion,portal,incidente,solicitud,problema,id_servresp1,id_servresp2,id_servresp3,tiempo1,tiempo2,tiempo3,id_tiempo1,id_tiempo2,id_tiempo3,impacto,id_servrespautoriza,id_servrespaprueba,plantilla,observaciones,estado_serv,id_usuario,fecha_modificacion,modificacion,ip_terminal 
+  FROM cat_serv
+ where id_serv = 74;
 
 SELECT id_serv,id_servsub,descripcion,portal,incidente,solicitud,problema,id_servresp1,id_servresp2,id_servresp3,tiempo1,tiempo2,tiempo3,id_tiempo1,id_tiempo2,id_tiempo3,impacto,id_servrespautoriza,id_servrespaprueba,plantilla,observaciones,estado_serv,id_usuario,fecha_modificacion,modificacion,ip_terminal 
   FROM cat_serv
@@ -253,7 +282,7 @@ SELECT id_serv,id_servsub,descripcion,portal,incidente,solicitud,problema,id_ser
 
 SELECT id_servresp,descripcion 
   FROM cat_servresp
- where id_servresp in (24, 13,14);
+ where id_servresp in (2, 24, 13,14);
  
 
 DGDST
@@ -346,7 +375,11 @@ update incidente
  
 SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estado_solictuddetalle,descripcion,solucion,id_tecnico,fecha_solucion,id_programa,id_servcat,descripcion_tecnica,prioridad,id_aprobador,fecha_aprobador 
   FROM solicitud_detalle
- where id_solicitud >= 246;
+ where id_solicitud = 181;
+
+update solicitud_detalle
+   set id_tecnico = null
+ where id_solicitud = 181;
 
 SELECT id_usuario,area,autoriza,vobo,estado
   FROM usuario_autorizado

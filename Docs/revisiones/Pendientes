@@ -81,21 +81,17 @@ Se observó que después de visualizar el semáforo, al seleccionarlo nuevamente
 
 
 
-
 Después de crear un requerimiento, al terminar de llenar el apartado de Descripción de requerimiento y firmar (bien o erróneamente) con ENTER, aparece un error “Debe capturar la categoría de su solicitud”.
 
 
 
-No se ve el nombre completo del solicitante, del autorizador, subcategoría y equipo cuando edita el aprobador.
-En el Estado de cierre no debe de aparecer la opción de “atención de servicios”, no corresponde a requerimientos, solo a incidentes.
-Dice: Sistema de Administación de Servicios, Debe decir: Sistema de Administración de Servicios.
 Al cerrar un servicio al usuario se le envía una notificación de que su incidente fue atendido y lo invita a contestar la encuesta,  el sistema solo le envía una vez, se había solicitado que se enviara 3 veces, además no se le informa al usuario que en caso de no ser contestada la encuesta se dará por satisfactoria.
+
 Al revisar el gestor de la Mesa de Servicios el requerimiento no permite reclasificar la categoría antes de aprobar el servicio, solicitando se habilite solo para el rol de Gestor.
-Se requiere que donde se cuente con combos para seleccionar ya sea a un técnico, autorizador, Vo. Bo., etc. Estos estén ordenados de manera alfabéticamente ya que actualmente no está ordenado.
 
 
 
-Cuando el usuario genera un nuevo requerimiento selecciona la categoría, hace la Descripción del servicio y la crea, manda a la pantalla que arriba se muestra “Descripción del Requerimiento”, mostrando en el menú inferior un botón “Debe llenar todos los campos para poder firmar esta solicitud”, siendo que esto corresponde a un mensaje, por lo que se solicita se deshabilite y se deje el campo de Justificación y Autoriza como obligatorio para poder firmar la solicitud.
+
 
 
 
