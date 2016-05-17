@@ -357,12 +357,25 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
         redirect(action: "show", id: solicitudDetalleInstance.idSolicitud.id)
     }
 
+  def categoryChanged(long categoryId) {
+      Cat_servCat category = Cat_servCat.get(categoryId)
+      def subCategories = []
+      if ( category != null ) {
+          subCategories = firmadoService.subcategoriasSolicitudes(category)
+      }
+      render g.select(id:'servSub', name:'servSub', required: true,
+          from:subCategories, optionKey:'id', noSelection:[null:'Seleccione una...'],
+          class:"many-to-one", onchange:"subcategoryChanged(this.value)"
+      )
+  }
+
   def subcategoryChanged(long subcategoryId) {
     log.debug("subcategoryId = $subcategoryId")
     Cat_servSub subcategory = Cat_servSub.get(subcategoryId)
     def servicios = []
     if ( subcategory != null ) {
       servicios = firmadoService.tercerNivelSolicitudes(subcategory)
+      log.debug("servicios = $servicios")
     }
     render g.select(id: 'idServ', name:'idServ.id', required:'',
       onchange:"servicesChanged(this.value)",

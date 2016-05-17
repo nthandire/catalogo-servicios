@@ -15,8 +15,11 @@
       <label for="idServcat">
         <g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
       </label>
-      <g:field type="text" name="idServcat.id" disabled="true"
-        value="${solicitudDetalleInstance.idServcat}"/>
+      <g:select id="servCat" name="servCat.id" required="true"
+        from="${firmado.categoriasSolicitudes()}"
+        optionKey="id" class="many-to-one"
+        value="${solicitudDetalleInstance.idServcat}"
+        onchange="categoryChanged(this.value)"/>
     </div>
   </div>
   <div class="span4">
@@ -26,11 +29,13 @@
         <g:message code="cat_serv.servSub.label" default="Serv Sub" />
         <span class="required-indicator">*</span>
       </label>
-      <g:select id='servSub' name='servSub' required=''
-        onchange="subcategoryChanged(this.value)"
-        from="${firmado.subcategoriasSolicitudes(solicitudDetalleInstance.idServcat)}"
-        value="${solicitudDetalleInstance?.idServ?.servSub?.id}"
-        optionKey='id' noSelection="['':'Seleccione una...']"/>
+      <span id="subContainer">
+        <g:select id='servSub' name='servSub' required=''
+          onchange="subcategoryChanged(this.value)"
+          from="${firmado.subcategoriasSolicitudes(solicitudDetalleInstance.idServcat)}"
+          value="${solicitudDetalleInstance?.idServ?.servSub?.id}"
+          optionKey='id' noSelection="['':'Seleccione una...']"/>
+      </span>
     </div>
   </div>
   <div class="span4">
@@ -54,6 +59,11 @@
 </div>
 
 <script>
+    function categoryChanged(categoryId) {
+        <g:remoteFunction action="categoryChanged"
+            update="subContainer"
+            params="'categoryId='+categoryId"/>
+    }
     function subcategoryChanged(subcategoryId) {
       <g:remoteFunction action="subcategoryChanged"
           update="serviciosContainer"
