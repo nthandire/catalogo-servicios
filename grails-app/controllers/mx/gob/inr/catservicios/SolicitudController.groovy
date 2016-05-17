@@ -421,4 +421,9 @@ class SolicitudController {
     render serviciosService.listarEquipo(params) as JSON
   }
 
+  def listarUsuario() {
+    log.debug("en listarEquipo")
+    render serviciosService.listarUsuario(params) as JSON
+  }
+
 }

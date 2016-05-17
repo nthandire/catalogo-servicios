@@ -9,7 +9,7 @@ class ServiciosService {
   def firmadoService
 
   @Transactional(readOnly = true)
-  def listarEquipo(params){
+  def listarEquipo(params) {
     def term = params.term.toUpperCase().trim()
     // TODO: quitar en todo este archivo log.debug("en listarEquipo, term = $term")
 
@@ -60,6 +60,36 @@ class ServiciosService {
       cSelectList.add(detallesEquipo(it))
     }
     return cSelectList
+  }
+
+  @Transactional(readOnly = true)
+  def listarUsuario(params) {
+    def term = params.term.toUpperCase().trim()
+    // TODO: quitar en todo este archivo log.debug("en listarUsuario, term = $term")
+
+    def paramQuery = [nombre: "%$term%"]
+    def query =
+        "  from Usuario              " +
+        " where Enabled = 't'        " +
+        "   and nombre like :nombre  " +
+        " order by nombre "
+    log.debug("query = $query")
+
+    def clist = Usuario.findAll(query, paramQuery, [max: 15])
+    // log.debug("clist = ${clist}")
+
+    def cSelectList = [] // cada uno de los resultados
+    clist.each {
+      def eqMap = [:]
+      eqMap.put("nombre", it['nombre'])
+      eqMap.put("label", it['nombre'])
+      eqMap.put("id", it['id'])
+      def extension = extension(['reporta': it.id])
+      eqMap.put("extension", extension)
+      log.debug("eqMap = $eqMap")
+      cSelectList.add(eqMap)
+    }
+    cSelectList
   }
 
   @Transactional(readOnly = true)

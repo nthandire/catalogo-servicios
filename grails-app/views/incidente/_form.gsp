@@ -188,12 +188,9 @@
         <label for="idReporta">
           <g:message code="incidente.idReporta.label" default="Quien Reporta" />
         </label>
-        <%-- TODO: mejorar el select, solo los usuarios SAST --%>
-        <g:select id="idReporta" name="idReporta"
-          from="${Usuario.findAllEnabled().sort { it?.nombreMostrar }}"
-          required="" value="${incidenteInstance?.idReporta}" class="many-to-one"
-          noSelection="${['':'Seleccione una...']}" optionKey="id"
-          optionValue="nombreMostrar"  style="width:350px;"/>
+        <g:textField id="reporta" name="reporta" required=""
+          value="${incidenteInstance?.idReporta ? Usuario.get(incidenteInstance.idReporta).nombre : ""}"/>
+        <g:hiddenField id="idReporta" name="idReporta" value="${incidenteInstance.idReporta}"/>
       </div>
     </div>
 

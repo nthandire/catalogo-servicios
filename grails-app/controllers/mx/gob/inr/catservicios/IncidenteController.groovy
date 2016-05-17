@@ -315,6 +315,7 @@ class IncidenteController {
 
     def save() {
         def incidenteInstance = new Incidente(params)
+        log.debug("incidenteInstance.idReporta = ${incidenteInstance.idReporta}")
         log.debug("incidenteInstance.idServ = ${incidenteInstance.idServ}")
         log.debug("incidenteInstance.idServ.servSub = ${incidenteInstance.idServ.servSub}")
         log.debug("incidenteInstance.idServ.servSub.servCat = ${incidenteInstance.idServ.servSub.servCat}")
@@ -979,7 +980,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
     }
 
   def extension() {
-    log.debug("params = $params")
+    log.debug("En extension params = $params")
     render serviciosService.extension(params)
   }
 

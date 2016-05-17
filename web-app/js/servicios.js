@@ -33,6 +33,31 @@ $(document).ready(function() {
           }
         });
 
+    $("#reporta").autocomplete({
+          source: function(request, response){
+           $.ajax({
+            url: "/catalogo-servicios/solicitud/listarUsuario" ,
+            data: request,
+            success: function(data){
+             response(data); // set the response
+            },
+            error: function(){ // handle server errors
+            console.log("No puedo traer los usuarios");
+              //$.jGrowl("No puedo traer los equipos", {
+              //  theme: 'ui-state-error ui-corner-all'
+              //});
+            }
+           });
+          },
+          minLength: 2, // triggered only after minimum 2 characters have been entered.
+          select: function(event, ui) { // event handler when user selects a company from the list.
+            event.preventDefault();
+            $("#idReporta").val(ui.item.id);
+            $(this).val(ui.item.nombre);
+            $("#extension").val(ui.item.extension);
+          }
+        });
+
     $('#idReporta').change(function() {
         $.ajax({
             url: "/catalogo-servicios/incidente/extension" , // remote datasource
