@@ -291,7 +291,9 @@ class FirmadoService {
   def sendMail(String correo, String asunto, String msg) {
     log.debug("correo = $correo")
     log.debug("asunto = $asunto")
+    log.debug("grailsApplication.config.enviar.correos = $grailsApplication.config.enviar.correos")
     log.debug("msg = $msg")
+    log.debug("grailsApplication.config.enviar.correos.toBoolean() = $grailsApplication.config.enviar.correos.toBoolean()")
     if (grailsApplication.config.enviar.correos.toBoolean()) {
       log.debug("si envio el correo")
       sendMail {
@@ -307,6 +309,7 @@ class FirmadoService {
   def sendMailHTML(String correo, String asunto, String msg) {
     log.debug("correo = $correo")
     log.debug("asunto = $asunto")
+    log.debug("enviar.correos = ${grailsApplication.config.enviar.correos}")
     log.debug("msg = $msg")
     log.debug("enviar.correos = ${grailsApplication.config.enviar.correos.toBoolean()}")
     if (grailsApplication.config.enviar.correos.toBoolean()) {
@@ -316,6 +319,8 @@ class FirmadoService {
         subject asunto
         html msg
       }
+    } else { // nada
+      log.debug("No envio el correo, iba para $correo")
     }
   }
 

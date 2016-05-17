@@ -552,6 +552,8 @@ class IncidenteController {
     }
     log.debug("numero de tecnicos = ${tecnicos.size()}")
 
+    tecnicos.sort{it.toString()}
+
     tecnicos
   }
 
@@ -766,7 +768,7 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
       def asunto = "El incidente ${incidenteInstance} ha sido asignado a usted"
       def msg = "Hola ${tecnico}<br/><br/>El incidente folio: " +
         "${incidenteInstance} requiere atención. " +
-        "Atiendela utilizando la siguiente liga: <br/><br/>" +
+        "Atiendelo utilizando la siguiente liga: <br/><br/>" +
         "<a href='${liga}'>${incidenteInstance}</a>"
       def correo = firmadoService.correo(tecnico.idEmpleado)
       firmadoService.sendMailHTML(correo, asunto, msg)
