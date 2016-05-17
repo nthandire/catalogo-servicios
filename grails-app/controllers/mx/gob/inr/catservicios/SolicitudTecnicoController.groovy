@@ -96,6 +96,7 @@ class SolicitudTecnicoController {
         minPrograma = message(code: "laboratorio.programa.DGAIT").toInteger()
       log.debug("minPrograma = ${minPrograma}")
       def programas = CatPrograma.findAllByIdGreaterThanEquals(minPrograma)
+      programas = programas.findAll{!it.desPrograma.contains("Atención de Servicio") }
       log.debug("programas = ${programas}")
 
       [solicitudDetalleInstance: solicitudDetalleInstance,
