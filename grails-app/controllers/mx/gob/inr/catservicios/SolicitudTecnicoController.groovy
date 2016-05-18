@@ -100,7 +100,7 @@ class SolicitudTecnicoController {
       log.debug("programas = ${programas}")
 
       [solicitudDetalleInstance: solicitudDetalleInstance,
-        equipo: resg?resg.toString():'',
+        equipo: resg,
         programas: programas]
     }
 

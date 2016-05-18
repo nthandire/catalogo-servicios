@@ -176,7 +176,7 @@ class FirmadoService {
 
   def _ubicacion (Long idEquipo) {
     def idUbicacion = ResguardoEntregaDetalle.get(idEquipo)?.idUbicacion
-    log.debug("idUbicacion = $idUbicacion")
+    // log.debug("idUbicacion = $idUbicacion")
     if (!idUbicacion)
       return null
    Ubicacion.get(idUbicacion)
@@ -854,6 +854,24 @@ class FirmadoService {
       def autoriza = UsuarioAutorizado.get(userID)?.vobo
       log.debug("autoriza = $autoriza")
       autoriza
+    }
+  }
+
+  String tipoEquipo(id) {
+    log.debug("springSecurityService.principalid = ${id}")
+    if (!id) {
+      return ""
+    }
+    tipoEquipoResguardo(ResguardoEntregaDetalle.get(id))
+  }
+
+  String tipoEquipoResguardo(resguardo) {
+    if (!resguardo) {
+      return "Error en equipo en resguardo"
+    } else if (!resguardo.idTipoanexotecnico) {
+      return resguardo.descripcion
+    } else {
+      return AnexoTecnico.get(resguardo.idTipoanexotecnico).descripcion
     }
   }
 

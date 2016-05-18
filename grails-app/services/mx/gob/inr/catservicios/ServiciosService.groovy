@@ -11,6 +11,7 @@ class ServiciosService {
   @Transactional(readOnly = true)
   def listarEquipo(params) {
     def term = params.term.toUpperCase().trim()
+    log.debug("term = <$term>")
     // TODO: quitar en todo este archivo log.debug("en listarEquipo, term = $term")
 
     def codigos = ResguardoEntrega.findAllByCodigoLike("515%").collect {it.id}
@@ -23,7 +24,7 @@ class ServiciosService {
         " where upper(nombre) || ' ' || upper(nvl(paterno,''))  || ' ' || upper(nvl(materno,'')) like '%${term}%'   "
       // log.debug("queryEmpleado = $queryEmpleado")
       empleados = Usuario.findAll(queryEmpleado, [],
-                      [max: 8]).collect {it.idEmpleado as Integer}.findAll{it}
+                      [max: 80]).collect {it.idEmpleado as Integer}.findAll{it}
       // log.debug("empleados = $empleados")
     }
 
@@ -39,6 +40,7 @@ class ServiciosService {
         "   and d.idTipoanexotecnico is not null "
     if (empleados) {
       // log.debug("primer empleado es de tipo ${empleados[0].getClass()}")
+      log.debug("empleados = $empleados")
       query +=
         "   and d.idEmpleado in (:empleados)    "
         paramQuery << [empleados: empleados]
