@@ -99,11 +99,10 @@
           </div>
           <div class="modal-footer">
             <fieldset class="buttons">
-              <a data-dismiss="modal" class="cancel">Cancelar</a>
               <input type="submit" name="_action_tecnicoUpdate" id="respButtonTec"
-                value="${message(code: 'default.button.update.label',
-                  default: 'Update')}"
+                value="${message(code: 'default.button.update.label', default: 'Update')}"
                 class="save">
+              <a data-dismiss="modal" class="cancel">Cancelar</a>
             </fieldset>
           </div>
         </div>
