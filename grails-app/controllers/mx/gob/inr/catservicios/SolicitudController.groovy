@@ -140,9 +140,12 @@ class SolicitudController {
 
     def listaDeAutorizadores() {
       def userID = springSecurityService.principal.id
+      log.debug("areauserID = $userID")
       def area = UsuarioAutorizado.get(userID)?.area
+      log.debug("area = $area")
       if (!area) {
         area = Usuario.get(userID).idUnidadMedica
+        log.debug("area = $area")
       }
       def miembros = UsuarioAutorizado.findAllAutorizaByAreaAndEstado(area,
                                                 'A' as char).collect{it.id}

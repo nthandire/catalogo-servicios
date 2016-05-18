@@ -284,16 +284,16 @@ class FirmadoService {
   }
 
   String correo(Long idEmpleado) {
-    def correo = idEmpleado ? VEmpleado.get(idEmpleado)?.email ?: "" : ""
-    correo ?: grailsApplication.config.correo.general
+    // def correo = idEmpleado ? VEmpleado.get(idEmpleado)?.email ?: "" : ""
+    // correo ?: grailsApplication.config.correo.general
+    grailsApplication.config.correo.general
   }
 
   def sendMail(String correo, String asunto, String msg) {
     log.debug("correo = $correo")
     log.debug("asunto = $asunto")
-    log.debug("grailsApplication.config.enviar.correos = $grailsApplication.config.enviar.correos")
     log.debug("msg = $msg")
-    log.debug("grailsApplication.config.enviar.correos.toBoolean() = $grailsApplication.config.enviar.correos.toBoolean()")
+    log.debug("grailsApplication.config.enviar.correos = $grailsApplication.config.enviar.correos")
     if (grailsApplication.config.enviar.correos.toBoolean()) {
       log.debug("si envio el correo")
       sendMail {
@@ -309,9 +309,8 @@ class FirmadoService {
   def sendMailHTML(String correo, String asunto, String msg) {
     log.debug("correo = $correo")
     log.debug("asunto = $asunto")
-    log.debug("enviar.correos = ${grailsApplication.config.enviar.correos}")
     log.debug("msg = $msg")
-    log.debug("enviar.correos = ${grailsApplication.config.enviar.correos.toBoolean()}")
+    log.debug("enviar.correos = ${grailsApplication.config.enviar.correos}")
     if (grailsApplication.config.enviar.correos.toBoolean()) {
       log.debug("si envio el correo")
       sendMail {
