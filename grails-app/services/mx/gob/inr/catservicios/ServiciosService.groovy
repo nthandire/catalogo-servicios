@@ -12,9 +12,11 @@ class ServiciosService {
   def listarEquipo(params) {
     def term = params.term.toUpperCase().trim()
     log.debug("term = <$term>")
+    def codigo = params.codigo
+    log.debug("codigo = $codigo")
     // TODO: quitar en todo este archivo log.debug("en listarEquipo, term = $term")
 
-    def codigos = ResguardoEntrega.findAllByCodigoLike("515%").collect {it.id}
+    def codigos = ResguardoEntrega.findAllByIdBienes(codigo).collect {it.id}
     // log.debug("número de codigos = ${codigos.size()}")
 
     def empleados = null

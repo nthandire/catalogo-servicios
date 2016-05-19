@@ -420,7 +420,9 @@ class SolicitudController {
     }
 
   def listarEquipo() {
-    log.debug("en listarEquipo")
+    def codigo = message(code: "codigo.de.equipos.en.resguado").toLong()
+    log.debug("en listarEquipo, codigo = $codigo")
+    params << ['codigo': codigo]
     render serviciosService.listarEquipo(params) as JSON
   }
 
