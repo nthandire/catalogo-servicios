@@ -70,7 +70,7 @@ environments {
       // correo general, para pruebas y errores
       //correo.general=rpena@inr.gob.mx
       correo.general = 'dzamora@inr.gob.mx'
-      enviar.correos = true
+      enviar.correos = false
     }
     production {
       grails.logging.jul.usebridge = true // false // TODO: apagar por performance

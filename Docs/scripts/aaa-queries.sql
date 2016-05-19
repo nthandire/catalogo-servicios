@@ -247,7 +247,17 @@ SELECT id_usuario,area,autoriza,vobo,estado
 SELECT id_usuario,area,autoriza,vobo,estado 
   FROM usuario_autorizado;
 
- SELECT id_usuario,area,autoriza,vobo,estado FROM "informix"."usuario_autorizado";
+SELECT id_usuario,area,autoriza,vobo,estado
+   FROM usuario_autorizado--nada 
+  where area = 'MS';
+
+SELECT id_usuario,area,autoriza,vobo,estado
+   FROM usuario_autorizado--nada 
+  where autoriza = 't';
+
+SELECT id_usuario
+   FROM usuario_autorizado--nada 
+  where autoriza = 't';
 
 10041
 
@@ -257,7 +267,7 @@ update usuario_autorizado
  where id_usuario = 10041;
 
 update usuario_autorizado
-   set area = 'V'
+   set area = null --'V'
  where id_usuario = 10052;
 
 insert into usuario_autorizado

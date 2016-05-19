@@ -141,19 +141,13 @@ class SolicitudController {
     def listaDeAutorizadores() {
       def userID = springSecurityService.principal.id
       log.debug("areauserID = $userID")
-      def area = UsuarioAutorizado.get(userID)?.area
+      def area = Usuario.get(userID)?.idUnidadMedica
       log.debug("area = $area")
-      if (!area) {
-        area = Usuario.get(userID).idUnidadMedica
-        log.debug("area = $area")
-      }
-      def miembros = UsuarioAutorizado.findAllAutorizaByAreaAndEstado(area,
-                                                'A' as char).collect{it.id}
+      def usuariosAutorizadores = UsuarioAutorizado.findAllAutorizaByEstado('A' as char).
+        collect{it.id}
 
-      def autorizadores = []
-      Usuario.withNewSession { sessionU ->
-        autorizadores = Usuario.findAllByIdInList(miembros, [sort:'nombre'])
-      }
+      def autorizadores = Usuario.findAllByIdInListAndIdUnidadMedica(usuariosAutorizadores,
+        area, [sort:'nombre'])
 
       log.debug("numero de autorizadores = ${autorizadores.size()}")
       autorizadores

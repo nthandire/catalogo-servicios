@@ -111,7 +111,7 @@ insert into usuario_perfil
 
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario
- where idusuario = 10091; -- 8301; --10053;
+ where idusuario = 10052; --10091; -- 8301; --10053;
 
 
 
@@ -133,6 +133,15 @@ SELECT idusuario,rfc,nombre,id_empleado,paterno,materno,passwordc,password,iduni
   FROM usuario
  where  rfc in ('ZAPS730120','DERA791215', 'EIVA721207','MAHA850708','PECR790224', 'CARL740622');
 
+
+SELECT idusuario,rfc,nombre,idunidadmedica,id_empleado,paterno,materno,passwordc,password,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,idperfilautorizacion,idusuariotipo,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
+  FROM usuario
+ where idusuario in (10041,10052,10054,10055,10058,9427,6648,10033);
+
+SELECT first 20 passwordc,*
+  FROM USUARIO;
+
+
 SELECT id_empleado
   FROM usuario
  where  rfc in ('ZAPS730120','DERA791215', 'EIVA721207','MAHA850708','PECR790224', 'CARL740622');
@@ -142,13 +151,13 @@ UPDATE usuario
  where rfc like '%PECR790224%';
 
 UPDATE usuario
-   SET passwordc = 'd19626026696a27cc36244644c98705b3d4459feb9fb7e3142d065702590ca1e'--'bf43f82c084847ce52ac7f16af242e052538b8e47bed759d9f65284d3653b1b8'
+   SET passwordc = 'bf43f82c084847ce52ac7f16af242e052538b8e47bed759d9f65284d3653b1b8'--'d19626026696a27cc36244644c98705b3d4459feb9fb7e3142d065702590ca1e'--
  where rfc like '%POGM601025%';
 
 
 SELECT idusuario,passwordfirma,nombre,tipo,tamanio,datos,bloqueada,intentosfallidos 
   FROM firmadigital
- where idusuario = 10051; --10055;
+ where idusuario = 10041;--10051; --10055;
 
 update firmadigital
    set passwordfirma = '100evalC'
