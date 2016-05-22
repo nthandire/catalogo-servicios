@@ -705,10 +705,11 @@ Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad d
               """
 
         def correo = firmadoService.correo(solicitante.idEmpleado)
+        firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
 
         // enviar tarea (correos por tres días seguidos)
-        EnviarCorreoEncuestaJob.schedule(3 * 60 * 1000, 2, [correo:correo, asunto:asunto,
-          msg:cuerpoCorreo, tipoMsg:"HTML", tipoEncuesta:"Incidente", folio:incidenteInstance.id])
+        // EnviarCorreoEncuestaJob.schedule(3 * 60 * 1000, 2, [correo:correo, asunto:asunto,
+        //   msg:cuerpoCorreo, tipoMsg:"HTML", tipoEncuesta:"Incidente", folio:incidenteInstance.id])
       }
 
 

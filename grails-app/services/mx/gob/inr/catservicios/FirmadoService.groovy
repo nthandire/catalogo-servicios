@@ -1,5 +1,7 @@
 package mx.gob.inr.catservicios
 
+import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+
 import javax.servlet.http.HttpSession
 import groovy.time.*
 import groovy.time.TimeCategory
@@ -7,6 +9,7 @@ import groovy.time.TimeCategory
 class FirmadoService {
   def grailsApplication
   def springSecurityService
+  LinkGenerator grailsLinkGenerator
   static transactional = false
 
   Boolean isGestor(HttpSession sessionFirmado, Long userID) {
@@ -342,6 +345,77 @@ class FirmadoService {
       log.debug("-------------- Ya esta respondida la encuesta --------------")
     }
     log.debug(new Date())
+  }
+
+  def mandarTodosLosMensajeDeEncuestas() {
+    //debo saber si es lunes
+    def fechaInicio = new Date()
+    fechaInicio[Calendar.HOUR_OF_DAY] = 0
+    fechaInicio[Calendar.MINUTE] = 0
+    fechaInicio[Calendar.SECOND] = 0
+    fechaInicio[Calendar.MILLISECOND] = 0
+    fechaInicio -= 2 // dos dias antes
+    def fecha = new Date() //
+    def diaDeLaSemana = fecha[Calendar.DAY_OF_WEEK]
+    if (diaDeLaSemana == Calendar.MONDAY || diaDeLaSemana == Calendar.TUESDAY) {
+      fechaInicio -= 2 // dos dias antes, ṕor el fin de semana
+    }
+    def fechaFinal = new Date()
+    // fechaFinal-- // El día anterior
+    fechaFinal[Calendar.HOUR_OF_DAY] = 23
+    fechaFinal[Calendar.MINUTE] = 59
+    fechaFinal[Calendar.SECOND] = 59
+    fechaFinal[Calendar.MILLISECOND] = 999
+
+    // Incidentes
+    def incidentes = Incidente.findAllByEstadoAndLastUpdatedBetween('E' as char,
+                                            fechaInicio, fechaFinal)
+    log.debug("fechaInicio = ${fechaInicio}")
+    log.debug("fechaFinal = ${fechaFinal}")
+    log.debug("incidentes = ${incidentes}")
+    incidentes.each{
+      def solicitante = Usuario.get(it.idReporta)
+      def liga = grailsLinkGenerator.link(controller:"SolicitudEncuesta",
+        action:"editIncidente", id: it.id, absolute: true)
+      log.debug("liga = ${liga}")
+      def asunto = "El incidente ${it} ya ha sido atendida"
+      def cuerpoCorreo = """Hola ${solicitante}<br/><br/>
+
+Su solicitud ${it} ya ha sido atendida, para mejorar la calidad del servicio se solicita conteste la siguiente encuesta, usando la siguiente liga:<br/><br/>
+
+<a href='${liga}'>${it}</a>
+<br/><br/>
+Se le recuerda que solo tiene una semana para contestar dicha encuesta, después de ese tiempo, la encuesta se dará por satisfactoria.
+              """
+
+      def correo = correo(solicitante.idEmpleado)
+      sendMailHTML(correo, asunto, cuerpoCorreo)
+    }
+
+    // Requerimientos
+    def solicitudes = Solicitud.findAllByEstadoAndLastUpdatedBetween('E' as char,
+                                            fechaInicio, fechaFinal)
+    log.debug("solicitudes = ${solicitudes}")
+    solicitudes.each{
+      def solicitante = Usuario.get(it.idSolicitante)
+      def liga = grailsLinkGenerator.link(controller:"SolicitudEncuesta",
+        action: "edit", id: it.id, absolute: "true")
+      log.debug("liga = ${liga}")
+      def asunto = "La solicitud ${it} ya ha sido atendida"
+      def cuerpoCorreo = """Hola ${solicitante}<br/><br/>
+
+Su solicitud ${it} ya ha sido atendida, para mejorar la calidad del servicio se solicita conteste la siguiente encuesta, usando la siguiente liga:<br/><br/>
+
+<a href='${liga}'>${it}</a>
+<br/><br/>
+Se le recuerda que solo tiene una semana para contestar dicha encuesta, después de ese tiempo, la encuesta se dará por satisfactoria.
+              """
+
+      def correo = correo(solicitante.idEmpleado)
+      sendMailHTML(correo, asunto, cuerpoCorreo)
+    }
+
+    log.debug("Se enviaron los correos de las encuestas ${new Date()}")
   }
 
   Integer retraso(List semaforo, SolicitudDetalle caso) {
