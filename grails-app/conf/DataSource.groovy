@@ -56,6 +56,15 @@ dataSource_almacen {
     password = "informix"
     pooled = true
 }
+// dataSource_quartz {
+//     pooled = true
+//     driverClassName = "org.h2.Driver"
+//     username = "sa"
+//     password = ""
+//     dbCreate = 'update'//"update" // one of 'create', 'create-drop', 'update', 'validate', ''
+//     // url = "jdbc:h2:mem:informixMemDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+//     url = "jdbc:h2:quartzDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+// }
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
@@ -67,6 +76,7 @@ environments {
       dataSource {}
       dataSource_seguridad {}
       dataSource_almacen {}
+      // dataSource_quartz {}
     }
     test {
         dataSource {
@@ -78,5 +88,6 @@ environments {
       dataSource {}
       dataSource_seguridad {}
       dataSource_almacen {}
+      // dataSource_quartz {}
     }
 }

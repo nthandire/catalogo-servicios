@@ -11,6 +11,7 @@ class IncidenteController {
     def springSecurityService
     def firmadoService
     def serviciosService
+    def quartzScheduler
     static nombreMenu = "Incidentes"
     static ordenMenu = 81
 
@@ -88,6 +89,7 @@ class IncidenteController {
             Math.min(paramOffset+paramMax-1, incidenteInstanceList.size()-1)] :
           []
         log.debug("incidentesPaginación = ${incidentesPaginación}")
+
         [incidenteInstanceList: incidentesPaginación,
           incidenteInstanceTotal: incidenteInstanceList.size(),
           miArea: firmadoService.areaNombre(userID)]
@@ -689,20 +691,25 @@ class IncidenteController {
           return
       }
 
-            def solicitante = Usuario.get(incidenteInstance.idReporta)
-            def liga = createLink(controller:"SolicitudEncuesta", action: "editIncidente",
-                                  id: incidenteInstance.id, absolute: "true")
-            log.debug("liga = ${liga}")
-            def asunto = "El incidente ${incidenteInstance} ya ha sido atendida"
-            def cuerpoCorreo = """Hola ${solicitante}<br/><br/>
+      if (incidenteInstance.estado == 'E' as char) {
+        def solicitante = Usuario.get(incidenteInstance.idReporta)
+        def liga = createLink(controller:"SolicitudEncuesta", action: "editIncidente",
+                              id: incidenteInstance.id, absolute: "true")
+        log.debug("liga = ${liga}")
+        def asunto = "El incidente ${incidenteInstance} ya ha sido atendida"
+        def cuerpoCorreo = """Hola ${solicitante}<br/><br/>
 
 Su solicitud ${incidenteInstance} ya ha sido atendida, para mejorar la calidad del servicio se solicita conteste la siguiente encuesta, usando la siguiente liga:<br/><br/>
 
 <a href='${liga}'>${incidenteInstance}</a>
               """
 
-            def correo = firmadoService.correo(solicitante.idEmpleado)
-            firmadoService.sendMailHTML(correo, asunto, cuerpoCorreo)
+        def correo = firmadoService.correo(solicitante.idEmpleado)
+
+        // enviar tarea (correos por tres días seguidos)
+        EnviarCorreoEncuestaJob.schedule(3 * 60 * 1000, 2, [correo:correo, asunto:asunto,
+          msg:cuerpoCorreo, tipoMsg:"HTML", tipoEncuesta:"Incidente", folio:incidenteInstance.id])
+      }
 
 
       flash.message = message(code: 'default.updated.message', args: [message(code: 'incidente.label', default: 'Incidente'), incidenteInstance.toString()])

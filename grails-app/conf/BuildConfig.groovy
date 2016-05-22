@@ -51,6 +51,7 @@ grails.project.dependency.resolution = {
       exclude (group: 'commons-logging', name: 'commons-logging')
       exclude (group: 'commons-lang', name: 'commons-lang')
     }
+    compile "org.grails.plugins:quartz:1.0.2"
   }
 
   plugins {
@@ -77,6 +78,7 @@ grails.project.dependency.resolution = {
       compile ":jasper:1.11.0"
       compile ":mail:1.0.7"
       compile ":easygrid:1.4.1"
+      compile ':quartz:1.0.2'
   }
 
   environments {

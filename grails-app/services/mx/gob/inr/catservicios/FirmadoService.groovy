@@ -323,6 +323,27 @@ class FirmadoService {
     }
   }
 
+  def mandarMensaje(context) {
+    log.debug("context = ${context}")
+    def encuestaRespondida = false
+    log.debug("context['folio'] = ${context['folio']}")
+
+    encuestaRespondida = context["tipoEncuesta"] == "Incidente" ?
+      Incidente.get(context['folio']).estado == 'T' as char :
+      Solicitud.get(context['folio']).estado == 'T' as char
+
+    if (!encuestaRespondida) {
+      if (context["tipoMsg"] == "HTML") {
+        sendMailHTML(context["correo"], context["asunto"], context["msg"])
+      } else {
+        sendMail(context["correo"], context["asunto"], context["msg"])
+      }
+    } else {
+      log.debug("-------------- Ya esta respondida la encuesta --------------")
+    }
+    log.debug(new Date())
+  }
+
   Integer retraso(List semaforo, SolicitudDetalle caso) {
     def fecha = new Date()
     def minutos = 0
