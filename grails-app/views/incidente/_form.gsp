@@ -405,8 +405,7 @@
         <g:else>
           <g:select id='idServ' name='idServ.id' required=''
             optionKey='id' value="${incidenteInstance?.idServ?.id}"
-            from="${[]}" style="width:350px;"
-            noSelection="['':' ']" style="width:350px;"/>
+            from="${[]}" style="width:350px;" noSelection="['':' ']"/>
         </g:else>
       </span>
     </div>
@@ -417,6 +416,9 @@
     function categoryChanged(categoryId) {
         <g:remoteFunction controller="incidente" action="categoryChanged"
             update="subContainer"
+            params="'categoryId='+categoryId"/>
+        <g:remoteFunction controller="incidente" action="categoryChanged2"
+            update="serviciosContainer"
             params="'categoryId='+categoryId"/>
     }
     function subcategoryChanged(subcategoryId) {

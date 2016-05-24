@@ -597,6 +597,14 @@ class IncidenteController {
         redirect(action: "edit", id: incidenteInstance.id)
     }
 
+    def categoryChanged2(long categoryId) {
+      def campoAActualizar = 'idServ'
+      render g.select(id:campoAActualizar, name:campoAActualizar + '.id', required:'',
+          from:[], optionKey:'id', noSelection:['':' '],
+          style:'width:350px'
+      )
+    }
+
     def categoryChanged(long categoryId) {
       categoryChangedProceso(categoryId, 'subcategoryChanged')
     }
@@ -634,7 +642,7 @@ class IncidenteController {
             servicios = firmadoService.tercerNivelIncidentes(subcategory)
         }
         render g.select(id:campoAActualizar, name:campoAActualizar + '.id', required:'',
-            from:servicios, optionKey:'id', noSelection:['':'Seleccione una...'],
+            from:servicios, optionKey:'id', noSelection:['':' '],
             style:'width:350px'
         )
     }
