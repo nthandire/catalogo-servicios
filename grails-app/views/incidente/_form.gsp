@@ -215,7 +215,7 @@
            style="width:350px;"/>
       </div>
     </div>
-    <div class="span4">
+    <div class="span2">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -229,7 +229,7 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true"
+        <g:field type="text" name="area.no" disabled="true" style="width:320px;"
           value="${areaReporta}"/>
       </div>
     </div>
@@ -247,7 +247,7 @@
           value="${Usuario.get(incidenteInstance.idNivel1)}"/>
       </div>
     </div>
-    <div class="span4">
+    <div class="span2">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -261,7 +261,7 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true"
+        <g:field type="text" name="area.no" disabled="true" style="width:320px;"
           value="${areaAtendio1}"/>
       </div>
     </div>
@@ -279,7 +279,7 @@
           value="${Usuario.get(incidenteInstance.idNivel2)}"/>
       </div>
     </div>
-    <div class="span4">
+    <div class="span2">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -293,7 +293,7 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true"
+        <g:field type="text" name="area.no" disabled="true" style="width:320px;"
           value="${areaAtendio2}"/>
       </div>
     </div>
@@ -311,7 +311,7 @@
           value="${Usuario.get(incidenteInstance.idNivel3)}"/>
       </div>
     </div>
-    <div class="span4">
+    <div class="span2">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -325,7 +325,7 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true"
+        <g:field type="text" name="area.no" disabled="true" style="width:320px;"
           value="${areaAtendio3}"/>
       </div>
     </div>

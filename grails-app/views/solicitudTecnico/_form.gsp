@@ -57,12 +57,12 @@
     </div>
   </div>
   <div class="span3">
-    <div class="fieldtablecontain">
+    <div class="fieldtablecontain" style="width:100%;">
       <label for="area-label">
         <g:message code="solicitud.area.label" default="Área" />
       </label>
-      <g:field type="text" name="area.no" disabled="true"
-        value="${firmado.areaNombre(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
+      <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+        value="${firmado.areaDetalladaNombre(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
     </div>
   </div>
 </div>
@@ -111,12 +111,12 @@
     </div>
   </div>
   <div class="span3">
-    <div class="fieldtablecontain">
+    <div class="fieldtablecontain" style="width:100%;">
       <label for="area-label">
         <g:message code="solicitud.area.label" default="Área" />
       </label>
-      <g:field type="text" name="area.no" disabled="true"
-        value="${firmado.areaNombre(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
+      <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+        value="${firmado.areaDetalladaNombre(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
     </div>
   </div>
 </div>
@@ -142,12 +142,12 @@
       </div>
     </div>
     <div class="span3">
-      <div class="fieldtablecontain">
+      <div class="fieldtablecontain" style="width:100%;">
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true"
-          value="${firmado.areaNombre(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
+        <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+          value="${firmado.areaDetalladaNombre(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
       </div>
     </div>
   </div>
@@ -214,17 +214,6 @@
     </div>
   </div>
 
-  <div class="span5 offset2">
-    <g:if test="${equipo}">
-      <div class="fieldtablecontain">
-        <label for="resguardo">
-          <g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Equipo" />
-        </label>
-        <g:textArea name="equipo" cols="40" rows="1" maxlength="3000"
-          value="${firmado.tipoEquipoResguardo(equipo)}" disabled="true"/>
-      </div>
-    </g:if>
-  </div>
 </div>
 
 

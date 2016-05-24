@@ -85,7 +85,7 @@
       <label for="nombre-label">
         <g:message code="solicitud.nombre.label" default="Solicitante"/>
       </label>
-      <g:field type="text" name="nombre.no" disabled="true"
+      <g:field type="text" name="nombre.no" disabled="true" style="width:400px"
         value="${Usuario.get(solicitudInstance.idSolicitante)}"/>
     </div>
   </div>
@@ -94,10 +94,6 @@
       <label for="telefono-label">
         Fecha de solicitud
       </label>
-      <%--
-      <input name="solicitudInstance.fechaSolicitud" disabled="true"
-        value="${solicitudInstance.fechaSolicitud}"/>
-      --%>
       <g:field type="datetime" disabled="true"
         name="solicitudInstance.fechaSolicitud"
         value="$solicitudInstance.fechaSolicitud"/>
@@ -117,8 +113,8 @@
       <label for="area-label">
         <g:message code="solicitud.area.label" default="Área" />
       </label>
-      <g:field type="text" name="area.no" disabled="true"
-        value="${firmado.areaNombre(solicitudInstance.idSolicitante)}"/>
+      <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+        value="${firmado.areaDetalladaNombre(solicitudInstance.idSolicitante)}"/>
     </div>
   </div>
 </div>
@@ -129,7 +125,7 @@
       <label for="nombre-label">
         <g:message code="solicitud.nombre.label" default="Autorizador"/>
       </label>
-      <g:field type="text" name="nombre.no" disabled="true"
+      <g:field type="text" name="nombre.no" disabled="true" style="width:400px"
         value="${Usuario.get(solicitudInstance.idAutoriza)}"/>
     </div>
   </div>
@@ -156,8 +152,8 @@
       <label for="area-label">
         <g:message code="solicitud.area.label" default="Área" />
       </label>
-      <g:field type="text" name="area.no" disabled="true"
-        value="${firmado.areaNombre(solicitudInstance?.idAutoriza)}"/>
+      <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+        value="${firmado.areaDetalladaNombre(solicitudInstance?.idAutoriza)}"/>
     </div>
   </div>
 </div>
@@ -169,7 +165,7 @@
         <label for="nombre-label">
           <g:message code="solicitud.nombre.label" default="Visto Bueno"/>
         </label>
-        <g:field type="text" name="nombre.no" disabled="true"
+        <g:field type="text" name="nombre.no" disabled="true" style="width:400px"
           value="${Usuario.get(solicitudInstance.idVb)}"/>
       </div>
     </div>
@@ -196,8 +192,8 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true"
-          value="${firmado.areaNombre(solicitudInstance?.idVb)}"/>
+        <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+          value="${firmado.areaDetalladaNombre(solicitudInstance?.idVb)}"/>
       </div>
     </div>
   </div>
@@ -223,20 +219,82 @@
         value="${solicitudDetalleInstance?.idPrograma}" disabled="true"/>
     </div>
   </div>
-  <div class="span4">
-    <g:if test="${solicitudDetalleInstance?.idResguardoentregadetalle}">
-      <div class="fieldtablecontain">
-        <label for="resguardo">
-          <g:message code="solicitudDetalle.idResguardoentregadetalle.label" default="Equipo" />
-        </label>
-        <g:select id="idResguardoentregadetalle" name="idResguardoentregadetalle"
-          from="${ResguardoEntregaDetalle.executeQuery('from ResguardoEntregaDetalle d where exists( from ResguardoEntrega r where r.id = d.idResguardo and r.codigo like ?)', "515%")}"
-            optionKey="id" value="${solicitudDetalleInstance?.idResguardoentregadetalle}"
-            class="many-to-one" disabled="true"/>
-      </div>
-    </g:if>
-  </div>
 </div>
+
+<table class="table table-condensed">
+  <g:if test="${solicitudDetalleInstance?.idResguardoentregadetalle}">
+    <g:set var="equipo"
+      value="${ResguardoEntregaDetalle.get(solicitudDetalleInstance.idResguardoentregadetalle)}" />
+    <g:set var="servicios" bean="serviciosService"/>
+    <tr>
+      <td>
+          <label for="equipo"><g:message code="servicios.equipo.label" default="Equipo" /></label>
+          <g:textField name="equipo" value="${AnexoTecnico.get(equipo.idTipoanexotecnico)}"
+            readonly="true" style="width: 250px;text-transform: uppercase;"/>
+      </td>
+      <td>
+          <label for="marca">
+            <g:message code="servicios.marca.label" default="Marca" />
+          </label>
+          <g:textField name="marca" value="${servicios.descMarca(equipo?.idMarca)}"
+            readonly="true" style="width: 250px;text-transform: uppercase;"/>
+      </td>
+      <td>
+          <label for="modelo">
+            <g:message code="servicios.modelo.label" default="Modelo" />
+          </label>
+          <g:textField name="modelo" value="${equipo?.desModelo}"
+            readonly="true" style="width: 250px;text-transform: uppercase;"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+          <label for="serie">
+            <g:message code="servicios.serie.label" default="Serie" />
+          </label>
+          <g:textField name="serie" value="${equipo?.serie}"
+            readonly="true" style="width: 250px;text-transform: uppercase;" />
+      </td>
+      <td>
+          <label for="economico">
+            <g:message code="servicios.economico.label" default="Inventario" />
+          </label>
+          <g:textField name="economico" value="${equipo?.inventario}" readonly="true" style="width: 250px;"/>
+      </td>
+      <td>
+      </td>
+    </tr>
+    <g:if test="${firmado.ubicacion(solicitudDetalleInstance?.idResguardoentregadetalle) || firmado.cuerpoNivel(solicitudDetalleInstance?.idResguardoentregadetalle)}">
+      <tr>
+        <td colspan="2">
+          <label for="ubicacion">Ubicación</label>
+          <g:field type="text" name="ubicacion" disabled="true" style="width:600px"
+            value="${firmado.ubicacion(solicitudDetalleInstance?.idResguardoentregadetalle)}"/>
+        </td>
+        <td>
+          <label for="garantia">Cuerpo : Nivel</label>
+          <g:field type="text" name="cuerpo" disabled="true" style="width:400px"
+            value="${firmado.cuerpoNivel(solicitudDetalleInstance?.idResguardoentregadetalle)}"/>
+        </td>
+      </tr>
+    </g:if>
+    <tr>
+      <td>
+        <label for="empleado">
+          <g:message code="servicios.empleado.label" default="Usuario que resguarda el equipo" />
+        </label>
+        <g:textField name="empleado" value="${firmado.nombreEmpleado(equipo?.idEmpleado)}"
+          readonly="true" style="width: 250px;text-transform: uppercase;" />
+      </td>
+      <td>
+        <label for="garantia">Garantía</label>
+        <g:textField name="garantia" value="${servicios.garantia(equipo)}"
+          readonly="true" style="width: 250px;text-transform: uppercase;" />
+      </td>
+    </tr>
+  </g:if>
+</table>
+
 
 <div class="row-fluid">
   <div class="span4">

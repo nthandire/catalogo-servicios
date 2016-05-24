@@ -86,6 +86,16 @@ class FirmadoService {
     Usuario.findByIdEmpleado(empleado)
   }
 
+  def areaDetalladaNombre (Long usuario) {
+    def area = ""
+    if (usuario) {
+      def empleado = Usuario.get(usuario).idEmpleado
+      def idArea = VMovemp.get(empleado).idArea
+      area = VArea.get(idArea).descripcion
+    }
+    area
+  }
+
   def areaNombre (Long usuario) {
     def area = ""
     if (usuario) {
