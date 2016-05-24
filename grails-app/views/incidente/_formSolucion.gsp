@@ -47,6 +47,9 @@
         <g:remoteFunction controller="incidente" action="categoryChangedFinal"
             update="subContainerFinal"
             params="'categoryId='+categoryId"/>
+        <g:remoteFunction controller="incidente" action="categoryChangedFinal2"
+            update="serviciosContainerFinal"
+            params="'categoryId='+categoryId"/>
     }
     function subcategoryChangedFinal(subcategoryId) {
         <g:remoteFunction controller="incidente" action="subcategoryChangedFinal"

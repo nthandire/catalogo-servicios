@@ -598,7 +598,14 @@ class IncidenteController {
     }
 
     def categoryChanged2(long categoryId) {
-      def campoAActualizar = 'idServ'
+      categoryChangedProceso2(categoryId, 'idServ')
+    }
+
+    def categoryChangedFinal2(long categoryId) {
+      categoryChangedProceso2(categoryId, 'idServfinal')
+    }
+
+    def categoryChangedProceso2(long categoryId, String campoAActualizar) {
       render g.select(id:campoAActualizar, name:campoAActualizar + '.id', required:'',
           from:[], optionKey:'id', noSelection:['':' '],
           style:'width:350px'

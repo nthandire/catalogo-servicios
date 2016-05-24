@@ -364,9 +364,16 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
           subCategories = firmadoService.subcategoriasSolicitudes(category)
       }
       render g.select(id:'servSub', name:'servSub', required: true,
-          from:subCategories, optionKey:'id', noSelection:[null:'Seleccione una...'],
+          from:subCategories, optionKey:'id', noSelection:['':'Seleccione una...'],
           class:"many-to-one", onchange:"subcategoryChanged(this.value)"
       )
+  }
+
+  def categoryChanged2(long categoryId) {
+    render g.select(id: 'idServ', name:'idServ.id', required:true,
+      onchange:"servicesChanged(this.value)",
+      from:[], optionKey:'id', noSelection:['':'Seleccione una...']
+    )
   }
 
   def subcategoryChanged(long subcategoryId) {
@@ -377,7 +384,7 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
       servicios = firmadoService.tercerNivelSolicitudes(subcategory)
       log.debug("servicios = $servicios")
     }
-    render g.select(id: 'idServ', name:'idServ.id', required:'',
+    render g.select(id: 'idServ', name:'idServ.id', required:true,
       onchange:"servicesChanged(this.value)",
       from:servicios, optionKey:'id', noSelection:['':'Seleccione una...']
     )

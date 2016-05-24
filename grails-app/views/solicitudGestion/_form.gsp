@@ -60,9 +60,12 @@
 
 <script>
     function categoryChanged(categoryId) {
-        <g:remoteFunction action="categoryChanged"
-            update="subContainer"
-            params="'categoryId='+categoryId"/>
+      <g:remoteFunction action="categoryChanged"
+          update="subContainer"
+          params="'categoryId='+categoryId"/>
+      <g:remoteFunction action="categoryChanged2"
+          update="serviciosContainer"
+          params="'categoryId='+categoryId"/>
     }
     function subcategoryChanged(subcategoryId) {
       <g:remoteFunction action="subcategoryChanged"
