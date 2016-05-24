@@ -8,6 +8,7 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
+    <g:set var="firmado" bean="firmadoService"/>
 		<a href="#list-incidente" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
@@ -54,7 +55,7 @@
 
             <td>
               <a href="${liga}">
-                ${incidenteInstance.idResguardoentregadetalle ? ResguardoEntregaDetalle.get(incidenteInstance.idResguardoentregadetalle) : ""}
+                ${firmado.tipoEquipo(incidenteInstance.idResguardoentregadetalle)}
               </a>
             </td>
 

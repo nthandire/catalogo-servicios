@@ -953,11 +953,13 @@ Se le recuerda que solo tiene una semana para contestar dicha encuesta, después
   }
 
   String tipoEquipo(id) {
-    log.debug("springSecurityService.principalid = ${id}")
+    // log.debug("springSecurityService.principalid = ${id}")
     if (!id) {
       return ""
     }
-    tipoEquipoResguardo(ResguardoEntregaDetalle.get(id))
+    def resultado = tipoEquipoResguardo(ResguardoEntregaDetalle.get(id))
+    // log.debug("resultado = $resultado")
+    (resultado ?: "") - " (CONTINÚA SEGÚN REQUISICIÓN DE COMPRA)"
   }
 
   String tipoEquipoResguardo(resguardo) {
