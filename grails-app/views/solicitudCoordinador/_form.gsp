@@ -272,7 +272,7 @@
   <div class="span5">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idTecnico', 'error')} ">
       <label for="idTecnico">
-        <g:message code="solicitudDetalle.idTecnico.label" default="Tecnico" />
+        <g:message code="solicitudDetalle.idTecnico.label" default="Técnico" />
       </label>
       <g:select id="idTecnico" name="idTecnico" required="true"
         from="${tecnicos}" style="width:100%;"

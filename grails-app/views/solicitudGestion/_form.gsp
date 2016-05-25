@@ -15,10 +15,10 @@
       <label for="idServcat">
         <g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
       </label>
-      <g:select id="servCat" name="servCat.id" required="true"
+      <g:select id="idServcat" name="idServcat.id" required="true"
         from="${firmado.categoriasSolicitudes()}"
         optionKey="id" class="many-to-one"
-        value="${solicitudDetalleInstance.idServcat}"
+        value="${solicitudDetalleInstance.idServcat.id}"
         onchange="categoryChanged(this.value)"/>
     </div>
   </div>

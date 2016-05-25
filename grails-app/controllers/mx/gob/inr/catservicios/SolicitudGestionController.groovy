@@ -346,14 +346,15 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
         }
 
         solicitudDetalleInstance.properties = params
-        log.debug("soli det idServ = ${(solicitudDetalleInstance.idServ)}")
+        log.debug("soli det cat = ${(solicitudDetalleInstance.idServ)}")
+        log.debug("soli det idServ = ${(solicitudDetalleInstance.idServcat)}")
 
         if (!solicitudDetalleInstance.save(flush: true)) {
             render(view: "edit", model: [solicitudDetalleInstance: solicitudDetalleInstance])
             return
         }
 
-        flash.message = /"${solicitudDetalleInstance.toString()}" actualizado/
+        flash.message = /"$solicitudDetalleInstance.idSolicitud:${solicitudDetalleInstance.toString()}" actualizado/
         redirect(action: "show", id: solicitudDetalleInstance.idSolicitud.id)
     }
 
