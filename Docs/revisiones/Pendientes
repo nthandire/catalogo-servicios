@@ -91,3 +91,7 @@ Al cerrar un servicio al usuario se le envía una notificación de que su incide
 - validar captura de extension
 - validar que el back-space no sirva como "back"
 - validar campos de captura
+
+
+- Probar el cambio de categoria en requerimientos
+- Probar el cambio de categoria en incidentes
