@@ -90,8 +90,15 @@ class FirmadoService {
     def area = ""
     if (usuario) {
       def empleado = Usuario.get(usuario).idEmpleado
-      def idArea = VMovemp.get(empleado).idArea
-      area = VArea.get(idArea).descripcion
+      def movemp = VMovemp.get(empleado)
+      if (!movemp || !movemp.idArea) {
+        return areaNombre(usuario) + " *"
+      }
+      def areaReg = VArea.get(movemp.idArea)
+      if (!areaReg || !areaReg.descripcion) {
+        return areaNombre(usuario) + " **"
+      }
+      area = areaReg.descripcion
     }
     area
   }

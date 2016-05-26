@@ -69,7 +69,9 @@ environments {
       grails.logging.jul.usebridge = true
       // correo general, para pruebas y errores
       //correo.general=rpena@inr.gob.mx
+      // fija cual es el correo default que utiliza el sistema en caso de no encontrar un correo para algún usuario u operador.
       correo.general = 'dzamora@inr.gob.mx'
+      // indica si el sistema manda o no mensajes de correo
       enviar.correos = true
     }
     production {

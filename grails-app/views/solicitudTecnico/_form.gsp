@@ -14,7 +14,8 @@
         <g:message code="solicitudDetalle.idServcat.label" default="Categoría" />
       </label>
       <g:field type="text" id="idServcat" name="idServcat.id"
-        value="${solicitudDetalleInstance?.idServcat}" disabled="true"/>
+        value="${solicitudDetalleInstance?.idServcat}" disabled="true"
+        style="width:400px;"/>
     </div>
   </div>
   <div class="span4">
@@ -23,7 +24,8 @@
         <g:message code="solicitudDetalle.idServsub.label" default="Subcategoría" />
       </label>
       <g:field type="text" id="idServsub" name="idServsub.id"
-        value="${solicitudDetalleInstance?.idServ?.servSub}" disabled="true"/>
+        value="${solicitudDetalleInstance?.idServ?.servSub}" disabled="true"
+        style="width:400px;"/>
     </div>
   </div>
   <div class="span4">
@@ -32,7 +34,8 @@
         <g:message code="solicitudDetalle.idServ.label" default="Tercer nivel" />
       </label>
       <g:field type="text" id="idServ" name="idServ.id"
-        value="${solicitudDetalleInstance?.idServ}" disabled="true"/>
+        value="${solicitudDetalleInstance?.idServ}" disabled="true"
+        style="width:400px;"/>
     </div>
   </div>
 </div>
@@ -43,7 +46,7 @@
       <label for="nombre-label">
         <g:message code="solicitud.nombre.label" default="Solicitante"/>
       </label>
-      <g:field type="text" name="nombre.no" disabled="true" style="width:350px;"
+      <g:field type="text" name="nombre.no" disabled="true" style="width:400px;"
         value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
     </div>
   </div>
@@ -61,7 +64,7 @@
       <label for="area-label">
         <g:message code="solicitud.area.label" default="Área" />
       </label>
-      <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+      <g:field type="text" name="area.no" disabled="true" style="width:420px;"
         value="${firmado.areaDetalladaNombre(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
     </div>
   </div>
@@ -115,7 +118,7 @@
       <label for="area-label">
         <g:message code="solicitud.area.label" default="Área" />
       </label>
-      <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+      <g:field type="text" name="area.no" disabled="true" style="width:420px;"
         value="${firmado.areaDetalladaNombre(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
     </div>
   </div>
@@ -146,7 +149,7 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+        <g:field type="text" name="area.no" disabled="true" style="width:420px;"
           value="${firmado.areaDetalladaNombre(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
       </div>
     </div>

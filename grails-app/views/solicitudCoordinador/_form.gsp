@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <div class="span3">
+  <div class="span3" style="width:50px;">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -63,7 +63,7 @@
       <label for="area-label">
         <g:message code="solicitud.area.label" default="Área" />
       </label>
-      <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+      <g:field type="text" name="area.no" disabled="true" style="width:420px;"
         value="${firmado.areaDetalladaNombre(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
     </div>
   </div>
@@ -103,10 +103,9 @@
       <g:field type="text" name="nombre.no" disabled="true" style="width:350px;"
         value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
     </div>
-
   </div>
-  <div class="span3">
 
+  <div class="span3" style="width:50px;">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -114,18 +113,16 @@
       <g:field type="text" name="telefono.no" disabled="true"
         value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza).extension}"/>
     </div>
-
   </div>
-  <div class="span3">
 
+  <div class="span3">
     <div class="fieldtablecontain">
       <label for="area-label">
         <g:message code="solicitud.area.label" default="Área" />
       </label>
-      <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+      <g:field type="text" name="area.no" disabled="true" style="width:420px;"
         value="${firmado.areaDetalladaNombre(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
     </div>
-
   </div>
 </div>
 
@@ -140,10 +137,9 @@
         <g:field type="text" name="nombre.no" disabled="true" style="width:350px;"
           value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
       </div>
-
     </div>
-    <div class="span3">
 
+    <div class="span3" style="width:50px;">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
@@ -151,18 +147,16 @@
         <g:field type="text" name="telefono.no" disabled="true"
           value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb).extension}"/>
       </div>
-
     </div>
-    <div class="span3">
 
+    <div class="span3">
       <div class="fieldtablecontain">
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true" style="width:280px;"
+        <g:field type="text" name="area.no" disabled="true" style="width:420px;"
           value="${firmado.areaDetalladaNombre(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
       </div>
-
     </div>
   </div>
 </g:if>

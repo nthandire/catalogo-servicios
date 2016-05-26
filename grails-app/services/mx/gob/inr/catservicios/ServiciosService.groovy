@@ -128,7 +128,12 @@ class ServiciosService {
 
   @Transactional(readOnly = true)
   def extension(params) { // un mapa con el par reporta:id de Usuario
-    def reporta = params.reporta.toLong()
+    log.debug("params = $params")
+    def reporta = params.reporta
+    if (!reporta) {
+      return 0
+    }
+    reporta = reporta.toLong()
     log.debug("en extension, reporta = $reporta")
 
     def ext = Usuario.get(reporta).extension

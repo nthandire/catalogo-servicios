@@ -206,22 +206,21 @@
 <g:if test="${incidenteInstance.id && incidenteInstance.idReporta}">
   <div class="row-fluid">
     <div class="span4">
-      <div class="fieldtablecontain" style="width:100%;">
+      <div class="fieldtablecontain">
         <label for="nombre-label">
           <g:message code="incidente.idReporta.label" default="Quien Reporta" />
         </label>
         <g:field type="text" name="nombre.no" disabled="true"
-          value="${Usuario.get(incidenteInstance.idReporta)}"
-           style="width:350px;"/>
+          value="${Usuario.get(incidenteInstance.idReporta)}" style="width:350px;"/>
       </div>
     </div>
-    <div class="span2">
+    <div class="span1">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
         </label>
-        <g:field type="text" name="extension" disabled="true"
-          value="${incidenteInstance.extension}"/>
+        <g:field type="text" name="extension" disabled="true" size="5"
+          value="${incidenteInstance.extension}" style="width:60px;"/>
       </div>
     </div>
     <div class="span4">
@@ -229,7 +228,7 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true" style="width:320px;"
+        <g:field type="text" name="area.no" disabled="true" style="width:460px;"
           value="${areaReporta}"/>
       </div>
     </div>
@@ -244,16 +243,16 @@
           <g:message code="incidente.idNivel1.label" default="Quien Atendió nivel 1" />
         </label>
         <g:field type="text" name="nombre.no" disabled="true"
-          value="${Usuario.get(incidenteInstance.idNivel1)}"/>
+          value="${Usuario.get(incidenteInstance.idNivel1)}" style="width:350px;"/>
       </div>
     </div>
-    <div class="span2">
+    <div class="span1">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
         </label>
-        <g:field type="text" name="telefono.no" disabled="true"
-          value="${Usuario.get(incidenteInstance.idNivel1).extension}"/>
+        <g:field type="text" name="telefono.no" disabled="true" size="5"
+          value="${servicios.extension([reporta:incidenteInstance.idNivel1])}" style="width:60px;"/>
       </div>
     </div>
     <div class="span4">
@@ -261,7 +260,7 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true" style="width:320px;"
+        <g:field type="text" name="area.no" disabled="true" style="width:460px;"
           value="${areaAtendio1}"/>
       </div>
     </div>
@@ -276,16 +275,16 @@
           <g:message code="incidente.idNivel2.label" default="Quien Atendió nivel 2" />
         </label>
         <g:field type="text" name="nombre.no" disabled="true"
-          value="${Usuario.get(incidenteInstance.idNivel2)}"/>
+          value="${Usuario.get(incidenteInstance.idNivel2)}" style="width:350px;"/>
       </div>
     </div>
-    <div class="span2">
+    <div class="span1">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
         </label>
-        <g:field type="text" name="telefono.no" disabled="true"
-          value="${Usuario.get(incidenteInstance.idNivel2).extension}"/>
+        <g:field type="text" name="telefono.no" disabled="true" size="5"
+          value="${servicios.extension([reporta:incidenteInstance.idNivel2])}" style="width:60px;"/>
       </div>
     </div>
     <div class="span4">
@@ -293,7 +292,7 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true" style="width:320px;"
+        <g:field type="text" name="area.no" disabled="true" style="width:460px;"
           value="${areaAtendio2}"/>
       </div>
     </div>
@@ -308,16 +307,16 @@
           <g:message code="incidente.idNivel3.label" default="Quien Atendió nivel 3" />
         </label>
         <g:field type="text" name="nombre.no" disabled="true"
-          value="${Usuario.get(incidenteInstance.idNivel3)}"/>
+          value="${Usuario.get(incidenteInstance.idNivel3)}" style="width:350px;"/>
       </div>
     </div>
-    <div class="span2">
+    <div class="span1">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
         </label>
-        <g:field type="text" name="telefono.no" disabled="true"
-          value="${Usuario.get(incidenteInstance.idNivel3).extension}"/>
+        <g:field type="text" name="telefono.no" disabled="true" size="5"
+          value="${servicios.extension([reporta:incidenteInstance.idNivel3])}" style="width:60px;"/>
       </div>
     </div>
     <div class="span4">
@@ -325,7 +324,7 @@
         <label for="area-label">
           <g:message code="solicitud.area.label" default="Área" />
         </label>
-        <g:field type="text" name="area.no" disabled="true" style="width:320px;"
+        <g:field type="text" name="area.no" disabled="true" style="width:460px;"
           value="${areaAtendio3}"/>
       </div>
     </div>

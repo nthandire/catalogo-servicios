@@ -85,7 +85,7 @@ class SolicitudAutorizaController {
             return
         }
 
-        def area = firmadoService.areaNombre(solicitudInstance?.idSolicitante)
+        def area = firmadoService.areaDetalladaNombre(solicitudInstance?.idSolicitante)
 
         [solicitudInstance: solicitudInstance, area: area]
     }

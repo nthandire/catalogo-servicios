@@ -8,6 +8,7 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
+    <g:set var="servicios" bean="serviciosService"/>
 		<a href="#show-solicitud" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
@@ -48,7 +49,7 @@
                 <g:message code="solicitud.telefono.label" default="Extensión" />
               </span>
                 <span class="property-value" aria-labelledby="telefono-label">
-                  ${Usuario.get(solicitudInstance?.idSolicitante).extension}
+                  ${servicios.extension([reporta:solicitudInstance?.idSolicitante])}
                 </span>
             </li>
 
