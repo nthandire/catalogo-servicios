@@ -152,9 +152,9 @@ class SolicitudGestionController {
             return
         }
 
-        def area = firmadoService.areaNombre(solicitudInstance?.idSolicitante)
-        def areaAutoriza = firmadoService.areaNombre(solicitudInstance?.idAutoriza)
-        def areaVb = firmadoService.areaNombre(solicitudInstance?.idVb)
+        def area = firmadoService.areaDetalladaNombre(solicitudInstance?.idSolicitante)
+        def areaAutoriza = firmadoService.areaDetalladaNombre(solicitudInstance?.idAutoriza)
+        def areaVb = firmadoService.areaDetalladaNombre(solicitudInstance?.idVb)
         [solicitudInstance: solicitudInstance,
           autorizadores:listaDeVobos(), area: area, areaAutoriza: areaAutoriza,
           areaVb: areaVb]
