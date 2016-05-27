@@ -1,6 +1,6 @@
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   FROM solicitud
- where id_solicitud = 151;
+ where id_solicitud = 218;
 
 
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
@@ -15,13 +15,13 @@ SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificac
   from Solicitud
  where fecha_autoriza >= to_date('2016-04-26', '%Y-%m-%d');
  
-SELECT id_solicitud,fecha_solicitud,extension,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
+SELECT id_solicitud,fecha_solicitud,fecha_modificacion,extension,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   from Solicitud
- where id_solicitud >= 250;
+ where id_solicitud = 151;
  
 SELECT id_solicitud,fecha_solicitud,extension,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   from Solicitud
- where numero_solicitud = 46;
+ where numero_solicitud = 35;
  
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,extension,id_solicitante,estado_solicitud,justificacion,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   from Solicitud
@@ -58,7 +58,7 @@ SELECT id_incidente,id_sistema,nivel,estado_incidente,id_serv,id_resguardoentreg
 
 SELECT id_incidente,id_sistema,nivel,estado_incidente,id_serv,id_resguardoentregadetalle,fecha_incidente,numero_incidente,id_reporta,id_servfinal,descripcion,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
- where id_incidente = 103; --numero_incidente = 30;
+ where id_incidente = 116; --numero_incidente = 30;
 
 update incidente
    set estado_incidente = 'A'
@@ -410,7 +410,7 @@ update incidente
  
 SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estado_solictuddetalle,descripcion,solucion,id_tecnico,fecha_solucion,id_programa,id_servcat,descripcion_tecnica,prioridad,id_aprobador,fecha_aprobador 
   FROM solicitud_detalle
- where id_solicituddetalle = 191;
+ where id_solicituddetalle = 260;
 
 update solicitud_detalle
    set id_tecnico = null
@@ -436,9 +436,9 @@ delete from problema
  where id_problema = 16;
 
 
-SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estado_solictuddetalle,descripcion,solucion,id_tecnico,fecha_solucion,id_programa,id_servcat,descripcion_tecnica,prioridad,id_aprobador,fecha_aprobador 
-
 SELECT id_resguardoentregadetalle
+
+SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estado_solictuddetalle,descripcion,solucion,id_tecnico,fecha_solucion,id_programa,id_servcat,descripcion_tecnica,prioridad,id_aprobador,fecha_aprobador 
   FROM solicitud_detalle
  where id_resguardoentregadetalle is not null;
 
