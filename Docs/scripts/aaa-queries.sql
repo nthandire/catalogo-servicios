@@ -1,7 +1,3 @@
-SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
-  FROM solicitud
- where id_solicitud = 218;
-
 
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   from Solicitud
@@ -262,7 +258,7 @@ update monitoreo
 
 SELECT id_usuario,area,autoriza,vobo,estado 
   FROM usuario_autorizado
- where id_usuario = 10052; --10071; -- 9427; --10041;
+ where id_usuario = 10053; --10102; --10052; --10071; -- 9427; --10041;
 
 
 SELECT id_usuario,area,autoriza,vobo,estado 
@@ -408,10 +404,6 @@ update incidente
    set id_serv = 2 -- 100
  where id_incidente = 119;
  
-SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estado_solictuddetalle,descripcion,solucion,id_tecnico,fecha_solucion,id_programa,id_servcat,descripcion_tecnica,prioridad,id_aprobador,fecha_aprobador 
-  FROM solicitud_detalle
- where id_solicituddetalle = 260;
-
 update solicitud_detalle
    set id_tecnico = null
  where id_solicitud = 181;
@@ -449,4 +441,18 @@ select s.id_solicitud, id_solicituddetalle, id_serv, id_resguardoentregadetalle
  where s.estado_solicitud = 'R'
    and s.id_solicitud = d.id_solicitud
    and id_resguardoentregadetalle is not null;
-   
+
+select s.id_solicitud, id_solicituddetalle, id_serv, id_resguardoentregadetalle, s.estado_solicitud
+  from solicitud s,
+       solicitud_detalle d
+ where s.id_solicitud = d.id_solicitud
+   and id_vb is not null;
+
+SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estado_solictuddetalle,descripcion,solucion,id_tecnico,fecha_solucion,id_programa,id_servcat,descripcion_tecnica,prioridad,id_aprobador,fecha_aprobador 
+  FROM solicitud_detalle
+ where id_solicitud = 165;
+
+SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
+  FROM solicitud
+ where id_solicitud = 165;
+

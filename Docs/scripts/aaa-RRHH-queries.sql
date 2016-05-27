@@ -10,12 +10,12 @@ values
  
  SELECT idusuario,idperfil
    FROM usuario_perfil
-  where idusuario = 10041;--10033; --9586 ;
+  where idusuario = 10053;--10102; --10041;--10033; --9586 ;
 
 
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario
- where idusuario = 10033;
+ where idusuario = 10041; --10033;
 
 update usuario
    set passwordc = '1326e38796b7a63b1c088b54ddff8d18e87b073955d1e5fefc9b015ec032ff0a'
@@ -127,7 +127,7 @@ SELECT idusuario,rfc,nombre,paterno,materno
 
 SELECT idusuario,rfc,nombre,id_empleado,paterno,materno,passwordc,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,idperfilautorizacion,idusuariotipo,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario
- where rfc like '%PECR79%';--'%MAHA850708%';--'%ANABEL%';-- rfc = 'CARL740622';
+ where rfc like "%CARL74%"; --'%VENR69%';--'%PECR79%';--'%MAHA850708%';--'%ANABEL%';-- rfc = 'CARL740622';
 
 SELECT idusuario,rfc,nombre,id_empleado,paterno,materno,passwordc,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,idperfilautorizacion,idusuariotipo,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario
