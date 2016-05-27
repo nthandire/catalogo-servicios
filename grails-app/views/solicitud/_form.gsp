@@ -114,7 +114,8 @@
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudInstance, field: 'extension', 'error')} ">
       <label for="idReporta">Extensión donde se le puede contactar:</label>
-      <g:field type="text" id="extension" name="extension" value="${solicitudInstance?.extension}"/>
+      <g:field type="text" id="extension" name="extension" value="${solicitudInstance?.extension}"
+        pattern="[0-9]{5}" title="Numero de extensión, solo numeros de cinco digitos"/>
     </div>
   </div>
 </div>

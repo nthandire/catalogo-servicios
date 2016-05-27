@@ -196,12 +196,39 @@
 
     <div class="span4">
       <div class="fieldtablecontain ${hasErrors(bean: incidenteInstance, field: 'extension', 'error')} ">
-        <label for="idReporta">Extensión</label>
-        <g:field type="text" id="extension" name="extension" value="${incidenteInstance?.extension}"/>
+        <label for="idReporta">Extensión 2</label>
+        <g:field type="text" id="extension" name="extension" size="5"
+          pattern="[0-9]{5}" title="Numero de extensión, solo numeros de cinco digitos"
+          value="${incidenteInstance?.extension}"/>
+        %{--
+        <g:validationField tag='input' type='text' domain="${Incidente}" field='extension' />
+        --}%
       </div>
     </div>
   </div>
 </g:if>
+
+%{--
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["fname"].value;
+/*
+  if (frm.txt.value.length!=9) {
+    alert('error');
+    frm.txt.focus();
+  }
+*/
+    if (x != null && x != "" && x.length > 5) {
+        alert("Deben ser maximo 5");
+        return false;
+    }
+    if (isNaN(x)) {
+        alert("Debe ser un numero");
+        return false;
+    }
+}
+</script>
+--}%
 
 <g:if test="${incidenteInstance.id && incidenteInstance.idReporta}">
   <div class="row-fluid">

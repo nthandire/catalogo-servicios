@@ -57,6 +57,7 @@ grails.project.dependency.resolution = {
     // compile (":shiro:1.2.0") {
     //             excludes([name: 'quartz', group: 'org.opensymphony.quartz'])
     // }
+    // compile "org.grails.plugins:validation-field:0.2"
   }
 
   plugins {
