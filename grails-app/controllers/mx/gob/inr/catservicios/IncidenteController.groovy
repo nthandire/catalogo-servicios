@@ -345,6 +345,14 @@ class IncidenteController {
           }
         }
 
+        if (!incidenteInstance.extension) {
+          incidenteInstance.extension = 0
+          // flash.error = "Capture una extension valida, solo numeros."
+          render(view: "create", model: [incidenteInstance: incidenteInstance,
+                  miArea: firmadoService.areaNombre(userID)])
+          return
+        }
+
         if (firmaTeclada != firma) {
           flash.error = "Error en contaseña"
           render(view: "create", model: [incidenteInstance: incidenteInstance,
