@@ -5,7 +5,7 @@
   textArea { width: 100%; }
 </style>
 
-
+<g:set var="servicios" bean="serviciosService"/>
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
@@ -48,13 +48,13 @@
     </div>
   </div>
 
-  <div class="span3" style="width:50px;">
+  <div class="span1">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
       </label>
-      <g:field type="text" name="telefono.no" disabled="true"
-        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante).extension}"/>
+      <g:field type="text" name="telefono.no" disabled="true" style="width:60px;"
+        value="${solicitudDetalleInstance?.idSolicitud?.extension ?: ""}"/>
     </div>
   </div>
 
@@ -105,13 +105,13 @@
     </div>
   </div>
 
-  <div class="span3" style="width:50px;">
+  <div class="span1">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
       </label>
-      <g:field type="text" name="telefono.no" disabled="true"
-        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza).extension}"/>
+      <g:field type="text" name="telefono.no" disabled="true" size="5" style="width:60px;"
+        value="${servicios.extension([reporta:solicitudDetalleInstance?.idSolicitud?.idAutoriza])}"/>
     </div>
   </div>
 
@@ -139,13 +139,13 @@
       </div>
     </div>
 
-    <div class="span3" style="width:50px;">
+    <div class="span1">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
         </label>
-        <g:field type="text" name="telefono.no" disabled="true"
-          value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb).extension}"/>
+        <g:field type="text" name="telefono.no" disabled="true" style="width:60px;"
+          value="${servicios.extension([reporta:solicitudDetalleInstance?.idSolicitud?.idVb])}"/>
       </div>
     </div>
 

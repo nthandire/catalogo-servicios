@@ -100,13 +100,14 @@
         value="$solicitudInstance.fechaSolicitud"/>
     </div>
   </div>
-  <div class="span1" style="width:50px;">
+  <div class="span1">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
       </label>
       <g:field type="text" name="telefono.no" disabled="true" size="5"
-        value="${Usuario.get(solicitudInstance.idSolicitante).extension}"/>
+         style="width:60px;"
+        value="${solicitudInstance.extension}"/>
     </div>
   </div>
   <div class="span4">
@@ -139,12 +140,13 @@
         value="${solicitudInstance.fechaAutoriza}"/>
     </div>
   </div>
-  <div class="span1" style="width:50px;">
+  <div class="span1">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
       </label>
       <g:field type="text" name="telefono.no" disabled="true" size="5"
+         style="width:60px;"
         value="${servicios.extension([reporta:solicitudInstance?.idAutoriza])}"/>
     </div>
   </div>
@@ -179,12 +181,13 @@
           value="${solicitudInstance.fechaVb}"/>
       </div>
     </div>
-    <div class="span1" style="width:50px;">
+    <div class="span1">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
         </label>
         <g:field type="text" name="telefono.no" disabled="true" size="5"
+           style="width:60px;"
           value="${servicios.extension([reporta:solicitudInstance.idVb])}"/>
       </div>
     </div>

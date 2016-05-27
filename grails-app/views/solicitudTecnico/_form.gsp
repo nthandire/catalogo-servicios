@@ -7,6 +7,7 @@
 
 
 <g:set var="firmado" bean="firmadoService"/>
+<g:set var="servicios" bean="serviciosService"/>
 <div class="row-fluid">
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudDetalleInstance, field: 'idServcat', 'error')} ">
@@ -50,13 +51,13 @@
         value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante)}"/>
     </div>
   </div>
-  <div class="span3">
+  <div class="span1">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
       </label>
-      <g:field type="text" name="telefono.no" disabled="true"
-        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idSolicitante).extension}"/>
+      <g:field type="text" name="telefono.no" disabled="true" style="width:60px;"
+        value="${solicitudDetalleInstance?.idSolicitud?.extension}"/>
     </div>
   </div>
   <div class="span3">
@@ -104,13 +105,13 @@
         value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza)}"/>
     </div>
   </div>
-  <div class="span3">
+  <div class="span1">
     <div class="fieldtablecontain">
       <label for="telefono-label">
         <g:message code="solicitud.telefono.label" default="Extensión" />
       </label>
-      <g:field type="text" name="telefono.no" disabled="true"
-        value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idAutoriza).extension}"/>
+      <g:field type="text" name="telefono.no" disabled="true" style="width:60px;"
+        value="${servicios.extension([reporta:solicitudDetalleInstance?.idSolicitud?.idAutoriza])}"/>
     </div>
   </div>
   <div class="span3">
@@ -135,13 +136,13 @@
           value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb)}"/>
       </div>
     </div>
-    <div class="span3">
+    <div class="span1">
       <div class="fieldtablecontain">
         <label for="telefono-label">
           <g:message code="solicitud.telefono.label" default="Extensión" />
         </label>
-        <g:field type="text" name="telefono.no" disabled="true"
-          value="${Usuario.get(solicitudDetalleInstance?.idSolicitud?.idVb).extension}"/>
+        <g:field type="text" name="telefono.no" disabled="true" style="width:60px;"
+          value="${servicios.extension([reporta:solicitudDetalleInstance?.idSolicitud?.idVb])}"/>
       </div>
     </div>
     <div class="span3">
