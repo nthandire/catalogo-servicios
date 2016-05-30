@@ -79,7 +79,8 @@ environments {
       grails.serverURL = "http://192.168.16.51:8888/catalogo-servicios"
       // correo general, para pruebas y errores
       // correo.general = 'szarazua@inr.gob.mx'
-      correo.general = 'dzamora@inr.gob.mx'
+      // correo.general = 'dzamora@inr.gob.mx'
+      correo.general = 'mpopova@inr.gob.mx'
       enviar.correos = true
     }
 }
