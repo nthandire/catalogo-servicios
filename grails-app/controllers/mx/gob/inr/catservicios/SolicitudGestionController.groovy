@@ -27,13 +27,56 @@ class SolicitudGestionController {
             " where (estado = 'A'          " +
             "        and idVb is null)     " +
             "    or  estado = 'V'          "
-        def autorizados = Solicitud.executeQuery (
-          "select count (*) " + query
-        )[0]
-        log.debug("numero de autorizados = ${autorizados}")
-        query += " order by fechaSolicitud desc"
-        [autorizadosInstanceList: Solicitud.executeQuery(query, [], params),
-            autorizadosInstanceTotal: autorizados]
+        def solicitudes = Solicitud.executeQuery(query)
+        log.debug("lista solicitudes = ${solicitudes}")
+
+        log.debug("params['sort'] = ${params['sort']}")
+        switch (params['sort']) {
+          case null:
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            solicitudes.sort{it.toString()}
+          break
+          case "nombre":
+            log.debug("nombre")
+            solicitudes.sort{Usuario.get(it.idSolicitante).toString()}
+          break
+          case "lastUpdated":
+            log.debug("fechaSolicitud")
+            solicitudes.sort{it.fechaVb?:it.fechaAutoriza}
+          break
+          case "justificacion":
+            log.debug("justificacion")
+            solicitudes.sort{it?.justificacion}
+          break
+          case "estado":
+            log.debug("estado")
+            solicitudes.sort{it?.estado}
+          break
+        }
+        log.debug("solicitudes = ${solicitudes}")
+
+        def paramMax = (params['max']?:'0').toInteger()
+        def paramOffset = (params['offset']?:'0').toInteger()
+
+        log.debug("paramOffset = ${paramOffset}")
+        log.debug("paramOffset+paramMax-1 = ${paramOffset+paramMax-1}")
+        log.debug("solicitudes.size()-1 = ${solicitudes.size()-1}")
+        log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
+        log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
+
+        if (params['order'] == 'asc') {
+          solicitudes = solicitudes.reverse()
+        }
+        def total = solicitudes.size()
+        def solicitudesPaginación = total ?
+          solicitudes[paramOffset..
+            Math.min(paramOffset+paramMax-1, solicitudes.size()-1)] :
+          []
+        log.debug("solicitudesPaginación = ${solicitudesPaginación}")
+
+        [autorizadosInstanceList: solicitudesPaginación,
+            autorizadosInstanceTotal: total]
     }
 
     def listTodas(Integer max) {
@@ -43,13 +86,56 @@ class SolicitudGestionController {
             "  from Solicitud              " +
             " where estado <> 'F'          " +
             "   and estado is not null     "
-        def autorizados = Solicitud.executeQuery (
-          "select count (*) " + query
-        )[0]
-        log.debug("numero de autorizados = ${autorizados}")
-        query += " order by fechaSolicitud desc"
-        [autorizadosInstanceList: Solicitud.executeQuery(query, [], params),
-            autorizadosInstanceTotal: autorizados]
+        def solicitudes = Solicitud.executeQuery (query)
+        log.debug("lista solicitudes = ${solicitudes}")
+
+        log.debug("params['sort'] = ${params['sort']}")
+        switch (params['sort']) {
+          case null:
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            solicitudes.sort{it.toString()}
+          break
+          case "nombre":
+            log.debug("nombre")
+            solicitudes.sort{Usuario.get(it.idSolicitante).toString()}
+          break
+          case "lastUpdated":
+            log.debug("fechaSolicitud")
+            solicitudes.sort{it.fechaRevisa?:it.fechaVb?:it.fechaAutoriza}
+          break
+          case "justificacion":
+            log.debug("justificacion")
+            solicitudes.sort{it?.justificacion}
+          break
+          case "estado":
+            log.debug("estado")
+            solicitudes.sort{it?.estado}
+          break
+        }
+        log.debug("solicitudes = ${solicitudes}")
+
+        def paramMax = (params['max']?:'0').toInteger()
+        def paramOffset = (params['offset']?:'0').toInteger()
+
+        log.debug("paramOffset = ${paramOffset}")
+        log.debug("paramOffset+paramMax-1 = ${paramOffset+paramMax-1}")
+        log.debug("solicitudes.size()-1 = ${solicitudes.size()-1}")
+        log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
+        log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
+
+        if (params['order'] == 'asc') {
+          solicitudes = solicitudes.reverse()
+        }
+        def total = solicitudes.size()
+        def solicitudesPaginación = total ?
+          solicitudes[paramOffset..
+            Math.min(paramOffset+paramMax-1, solicitudes.size()-1)] :
+          []
+        log.debug("solicitudesPaginación = ${solicitudesPaginación}")
+
+        [autorizadosInstanceList: solicitudesPaginación,
+            autorizadosInstanceTotal: total]
     }
 
     def listAsignados(Integer max) {
@@ -62,13 +148,52 @@ class SolicitudGestionController {
           "   and not exists(select id from SolicitudDetalle d  " +
           "               where s.id = d.idSolicitud            " +
           "                 and idTecnico is null)              "
-        def asignados = Solicitud.executeQuery(
-            "select count(*) " + query
-        )[0]
-        log.debug("numero de asignados = ${asignados}")
-        query += " order by fechaSolicitud desc"
-        [asignadosInstanceList: Solicitud.executeQuery(query, [], params),
-            asignadosInstanceTotal: asignados]
+        def solicitudes = Solicitud.executeQuery (query)
+        log.debug("lista solicitudes = ${solicitudes}")
+
+        log.debug("params['sort'] = ${params['sort']}")
+        switch (params['sort']) {
+          case null:
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            solicitudes.sort{it.toString()}
+          break
+          case "nombre":
+            log.debug("nombre")
+            solicitudes.sort{Usuario.get(it.idSolicitante).toString()}
+          break
+          case "lastUpdated":
+            log.debug("fechaRevisa")
+            solicitudes.sort{it.fechaRevisa}
+          break
+          case "justificacion":
+            log.debug("justificacion")
+            solicitudes.sort{it?.justificacion}
+          break
+        }
+        log.debug("solicitudes = ${solicitudes}")
+
+        def paramMax = (params['max']?:'0').toInteger()
+        def paramOffset = (params['offset']?:'0').toInteger()
+
+        log.debug("paramOffset = ${paramOffset}")
+        log.debug("paramOffset+paramMax-1 = ${paramOffset+paramMax-1}")
+        log.debug("solicitudes.size()-1 = ${solicitudes.size()-1}")
+        log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
+        log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
+
+        if (params['order'] == 'asc') {
+          solicitudes = solicitudes.reverse()
+        }
+        def total = solicitudes.size()
+        def solicitudesPaginación = total ?
+          solicitudes[paramOffset..
+            Math.min(paramOffset+paramMax-1, solicitudes.size()-1)] :
+          []
+        log.debug("solicitudesPaginación = ${solicitudesPaginación}")
+
+        [asignadosInstanceList: solicitudesPaginación,
+            asignadosInstanceTotal: total]
     }
 
     def listEncuestas(Integer max) {
@@ -78,13 +203,52 @@ class SolicitudGestionController {
         def query =
           "from Solicitud s          " +
           " where s.estado = 'E'     "
-        def enEncuestas = Solicitud.executeQuery(
-            "select count(*) " + query
-        )[0]
-        log.debug("numero de enEncuestas = ${enEncuestas}")
-        query += " order by fechaSolicitud desc"
-        [enEncuestasInstanceList: Solicitud.executeQuery(query, [], params),
-            enEncuestasInstanceTotal: enEncuestas]
+        def solicitudes = Solicitud.executeQuery (query)
+        log.debug("lista solicitudes = ${solicitudes}")
+
+        log.debug("params['sort'] = ${params['sort']}")
+        switch (params['sort']) {
+          case null:
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            solicitudes.sort{it.toString()}
+          break
+          case "nombre":
+            log.debug("nombre")
+            solicitudes.sort{Usuario.get(it.idSolicitante).toString()}
+          break
+          case "lastUpdated":
+            log.debug("fechaRevisa")
+            solicitudes.sort{it.fechaRevisa}
+          break
+          case "justificacion":
+            log.debug("justificacion")
+            solicitudes.sort{it?.justificacion}
+          break
+        }
+        log.debug("solicitudes = ${solicitudes}")
+
+        def paramMax = (params['max']?:'0').toInteger()
+        def paramOffset = (params['offset']?:'0').toInteger()
+
+        log.debug("paramOffset = ${paramOffset}")
+        log.debug("paramOffset+paramMax-1 = ${paramOffset+paramMax-1}")
+        log.debug("solicitudes.size()-1 = ${solicitudes.size()-1}")
+        log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
+        log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
+
+        if (params['order'] == 'asc') {
+          solicitudes = solicitudes.reverse()
+        }
+        def total = solicitudes.size()
+        def solicitudesPaginación = total ?
+          solicitudes[paramOffset..
+            Math.min(paramOffset+paramMax-1, solicitudes.size()-1)] :
+          []
+        log.debug("solicitudesPaginación = ${solicitudesPaginación}")
+
+        [enEncuestasInstanceList: solicitudesPaginación,
+            enEncuestasInstanceTotal: total]
     }
 
     def listTerminadas(Integer max) {
@@ -94,13 +258,52 @@ class SolicitudGestionController {
         def query =
           "from Solicitud s               " +
           " where s.estado in ('T', 'C')  "
-        def terminadas = Solicitud.executeQuery(
-            "select count(*) " + query
-        )[0]
-        log.debug("numero de terminadas = ${terminadas}")
-        query += " order by fechaSolicitud desc"
-        [terminadasInstanceList: Solicitud.executeQuery(query, [], params),
-            terminadasInstanceTotal: terminadas]
+        def solicitudes = Solicitud.executeQuery (query)
+        log.debug("lista solicitudes = ${solicitudes}")
+
+        log.debug("params['sort'] = ${params['sort']}")
+        switch (params['sort']) {
+          case null:
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            solicitudes.sort{it.toString()}
+          break
+          case "nombre":
+            log.debug("nombre")
+            solicitudes.sort{Usuario.get(it.idSolicitante).toString()}
+          break
+          case "lastUpdated":
+            log.debug("lastUpdated")
+            solicitudes.sort{it.lastUpdated}
+          break
+          case "justificacion":
+            log.debug("justificacion")
+            solicitudes.sort{it?.justificacion}
+          break
+        }
+        log.debug("solicitudes = ${solicitudes}")
+
+        def paramMax = (params['max']?:'0').toInteger()
+        def paramOffset = (params['offset']?:'0').toInteger()
+
+        log.debug("paramOffset = ${paramOffset}")
+        log.debug("paramOffset+paramMax-1 = ${paramOffset+paramMax-1}")
+        log.debug("solicitudes.size()-1 = ${solicitudes.size()-1}")
+        log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
+        log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
+
+        if (params['order'] == 'asc') {
+          solicitudes = solicitudes.reverse()
+        }
+        def total = solicitudes.size()
+        def solicitudesPaginación = total ?
+          solicitudes[paramOffset..
+            Math.min(paramOffset+paramMax-1, solicitudes.size()-1)] :
+          []
+        log.debug("solicitudesPaginación = ${solicitudesPaginación}")
+
+        [terminadasInstanceList: solicitudesPaginación,
+            terminadasInstanceTotal: total]
     }
 
     def create() {
@@ -427,26 +630,22 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
         def semaforo = session["semaforo"]
         def listaOrdenar = detallesList.collect{new Ordenado(caso: it,
                               orden: firmadoService.retraso(semaforo, it))}
-        listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
+        listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"green"}
 
         def listaOrdenada = []
         if (!params.sort || params.sort == "semaforo") {
           listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
             a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
             a.orden <=> b.orden}
-          if (params.order == "desc") {
-            listaOrdenada = listaOrdenada.reverse()
-          }
-        } else if (params.sort == "folio") {
-          listaOrdenada = listaOrdenar.sort{!params.order || params.order == "asc" ?
-            it.caso.idSolicitud.numeroSolicitud : -it.caso.idSolicitud.numeroSolicitud}
+        } else         if (params.sort == "folio") {
+          listaOrdenada = listaOrdenar.sort{it.caso.idSolicitud.numeroSolicitud}
         } else { // params.sort == "estado"
           listaOrdenada = listaOrdenar.sort{a,b -> a.caso.idSolicitud.estado == b.caso.idSolicitud.estado ?
             a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
             a.caso.idSolicitud.estado <=> b.caso.idSolicitud.estado}
-          if (params.order == "desc") {
-            listaOrdenada = listaOrdenada.reverse()
-          }
+        }
+        if (params.order == "desc") {
+          listaOrdenada = listaOrdenada.reverse()
         }
         log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
 

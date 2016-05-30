@@ -29,32 +29,59 @@ class SolicitudController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def solicitudes = Solicitud.withCriteria {
-            projections {count()}
-            eq('idSolicitante',(Integer)userID)
-            or {
-                and {
-                    ne('estado','T' as char)
-                    ne('estado','C' as char) }
-                isNull('estado') }
-        }[0]
-        log.debug("numero de solicitudes = $solicitudes")
-        if (!solicitudes)
-          redirect(action: "create")
-        def criterio = Solicitud.createCriteria()
-        def solicitudesList = criterio.list(max:params.max, offset:params.offset,
-                                            sort:"fechaSolicitud", order:"desc") {
-            eq('idSolicitante',(Integer)userID)
-            or {
-                and {
-                    ne('estado','T' as char)
-                    ne('estado','C' as char)
-                    }
-                isNull('estado')
-                }
+        def solicitudes = Solicitud.findAllByEstadoNotEqualAndEstadoNotEqualAndIdSolicitante(
+          'T' as char, 'C' as char, (Integer)userID)
+        log.debug("lista solicitudes = ${solicitudes}")
+
+        log.debug("params['sort'] = ${params['sort']}")
+        switch (params['sort']) {
+          case null:
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            solicitudes.sort{it.toString()}
+          break
+          case "lastUpdated":
+            log.debug("fechaSolicitud")
+            solicitudes.sort{it.fechaSolicitud ?: it.lastUpdated}
+          break
+          case "justificacion":
+            log.debug("justificacion")
+            solicitudes.sort{it?.justificacion}
+          break
+          case "estado":
+            log.debug("estado")
+            solicitudes.sort{it?.estado}
+          break
         }
-        [solicitudInstanceList: solicitudesList,
-            solicitudInstanceTotal: solicitudes]
+        log.debug("solicitudes = ${solicitudes}")
+
+        // def incidenteInstanceList = solicitudes
+        // def incidenteInstanceList = isCoordinador() || isGestor() ?
+        //     solicitudes
+        //   :
+        //     solicitudes.findAll {it."idNivel${it.nivel}" == userID}
+
+        def paramMax = (params['max']?:'0').toInteger()
+        def paramOffset = (params['offset']?:'0').toInteger()
+
+        log.debug("paramOffset = ${paramOffset}")
+        log.debug("paramOffset+paramMax-1 = ${paramOffset+paramMax-1}")
+        log.debug("solicitudes.size()-1 = ${solicitudes.size()-1}")
+        log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
+        log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
+
+        if (params['order'] == 'asc') {
+          solicitudes = solicitudes.reverse()
+        }
+        def total = solicitudes.size()
+        def solicitudesPaginación = total ?
+          solicitudes[paramOffset..
+            Math.min(paramOffset+paramMax-1, solicitudes.size()-1)] :
+          []
+        log.debug("solicitudesPaginación = ${solicitudesPaginación}")
+
+        [solicitudInstanceList: solicitudesPaginación,
+            solicitudInstanceTotal: total]
     }
 
     def create() {

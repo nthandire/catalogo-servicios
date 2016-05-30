@@ -477,9 +477,9 @@ Se le recuerda que solo tiene una semana para contestar dicha encuesta, después
         plazoMinutos *= 60 * 24 * 7
         break
     }
-    log.debug "tercer nivel = ${caso?.idServ}"
-    log.debug "unidades = ${unidades}"
-    log.debug "plazoMinutos = $plazoMinutos"
+    // log.debug "tercer nivel = ${caso?.idServ}"
+    // log.debug "unidades = ${unidades}"
+    // log.debug "plazoMinutos = $plazoMinutos"
 
     def ahora = new Date()
     log.debug "ahora = $ahora"
