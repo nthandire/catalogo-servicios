@@ -199,7 +199,7 @@
         <label for="idReporta">Extensión</label>
         <g:field type="text" id="extension" name="extension" size="5"
           pattern="[0-9]{5}" title="Numero de extensión, solo numeros de cinco digitos"
-          value="${incidenteInstance?.extension}"/>
+          value="${incidenteInstance?.extension ?: ""}" required=""/>
       </div>
     </div>
   </div>
