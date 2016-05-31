@@ -47,13 +47,11 @@
 
             <g:sortableColumn property="semaforo" title="Semaforo" />
 
-            <g:sortableColumn property="folio"
+            <g:sortableColumn property="numeroSolicitud"
               title="${message(code: 'solicitudDetalle.numeroSolicitud.label',
                                default: 'Requerimiento')}" />
 
-            <th>
-            ${message(code: 'solicitudDetalle.err.inicioatencion.label', default: 'Inicio de atención')}
-            </th>
+            <g:sortableColumn property="inicio" title="inicio" />
 
             <th>Solicitante</th>
 

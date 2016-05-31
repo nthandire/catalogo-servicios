@@ -1,5 +1,7 @@
 package mx.gob.inr.catservicios
 
+import java.text.DecimalFormat
+
 class SolicitudDetalle {
 
 	Cat_serv idServ
@@ -47,6 +49,14 @@ class SolicitudDetalle {
 
   String toString() {
     idServcat
+  }
+
+  static moneyform = new DecimalFormat("00000")
+
+  String paraOrdenar() {
+    "${(idSolicitud.fechaSolicitud?:lastUpdated)[Calendar.YEAR]}${moneyform.format(idSolicitud.numeroSolicitud)}"
+    // idSolicitud.numeroSolicitud ? "${(idSolicitud.fechaSolicitud?:lastUpdated)[Calendar.YEAR]}${moneyform.format(idSolicitud.numeroSolicitud)}" :
+    //   "${justificacion?justificacion.substring(0, Math.min(30, justificacion.length())):""}"
   }
 
 }

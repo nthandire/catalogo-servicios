@@ -632,18 +632,44 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
                               orden: firmadoService.retraso(semaforo, it))}
         listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"green"}
 
-        def listaOrdenada = []
-        if (!params.sort || params.sort == "semaforo") {
-          listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
-            a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
-            a.orden <=> b.orden}
-        } else         if (params.sort == "folio") {
-          listaOrdenada = listaOrdenar.sort{it.caso.idSolicitud.numeroSolicitud}
-        } else { // params.sort == "estado"
-          listaOrdenada = listaOrdenar.sort{a,b -> a.caso.idSolicitud.estado == b.caso.idSolicitud.estado ?
+        def listaOrdenada = listaOrdenar
+        switch (params['sort']) {
+          case null:
+          case "semaforo":
+            log.debug("semaforo")
+            listaOrdenar.sort{a,b -> a.orden == b.orden ?
+              a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
+              a.orden <=> b.orden}
+          break
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            listaOrdenar.sort{it.caso.paraOrdenar()}
+          break
+          case "inicio":
+            log.debug("numeroSolicitud")
+            listaOrdenar.sort{it.caso.idSolicitud.fechaRevisa?:
+              it.caso.idSolicitud.fechaVb?:it.caso.idSolicitud.fechaAutoriza}
+          break
+          // case "nombre":
+          //   log.debug("nombre")
+          //   solicitudes.sort{Usuario.get(it.idSolicitante).toString()}
+          // break
+          // case "lastUpdated":
+          //   log.debug("fechaSolicitud")
+          //   solicitudes.sort{it.fechaVb?:it.fechaAutoriza}
+          // break
+          // case "justificacion":
+          //   log.debug("justificacion")
+          //   solicitudes.sort{it?.justificacion}
+          // break
+          case "estado":
+            log.debug("estado")
+            listaOrdenar.sort{a,b -> a.caso.idSolicitud.estado == b.caso.idSolicitud.estado ?
             a.caso.idSolicitud.fechaSolicitud <=> b.caso.idSolicitud.fechaSolicitud :
             a.caso.idSolicitud.estado <=> b.caso.idSolicitud.estado}
+          break
         }
+
         if (params.order == "desc") {
           listaOrdenada = listaOrdenada.reverse()
         }

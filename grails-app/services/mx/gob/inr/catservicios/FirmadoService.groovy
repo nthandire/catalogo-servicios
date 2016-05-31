@@ -107,14 +107,14 @@ class FirmadoService {
     def area = ""
     if (usuario) {
       area = UsuarioAutorizado.get(usuario)?.area
-      log.debug("area = $area")
+      // log.debug("area = $area")
       if (!area || area.length() == 1) {
-        log.debug("usuario = $usuario")
+        // log.debug("usuario = $usuario")
         def idArea = area ?: Usuario.get(usuario)?.idUnidadMedica
-        log.debug("idArea = $idArea")
+        // log.debug("idArea = $idArea")
         if (idArea) {
           def unidMed = UnidadMedica.get(idArea as char)
-          log.debug("unidMed = $unidMed")
+          // log.debug("unidMed = $unidMed")
           area = unidMed?.descripcion ?: ""
           } else
             area = "Error, revisar con desarrollo de sistemas"
