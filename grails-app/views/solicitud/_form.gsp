@@ -9,8 +9,12 @@
 <div class="row-fluid">
   <div class="span10 offset1">
     <p style="height:10px;"> </p>
+    <g:set var="detalles"
+      value="${SolicitudDetalle.findAllByIdSolicitud(solicitudInstance)}" />
+    <g:set var="archivos"
+      value="${SolicitudArchivoadjunto.findAllByIdSolicitud(solicitudInstance)}" />
     <table>
-      <g:if test="${solicitudInstance?.detalles}">
+      <g:if test="${detalles}">
         <g:set var="servicios" bean="serviciosService"/>
         <tr>
           <th>Categoría</th>
@@ -20,7 +24,7 @@
           <th>Estado</th>
         </tr>
       </g:if>
-      <g:each in="${solicitudInstance?.detalles.sort {it.id}}" var="d">
+      <g:each in="${detalles.sort {it.id}}" var="d">
         <tr>
           <td>
             <g:if test="${!solicitudInstance?.estado || solicitudInstance?.estado == 'F' as char}">
@@ -74,9 +78,9 @@
 
 <div class="row-fluid">
   <div class="span10 offset1">
-      <g:if test="${solicitudInstance?.archivos}">
+      <g:if test="${archivos}">
         <table>
-        <g:each in="${solicitudInstance.archivos.sort{it.id}}" var="a">
+        <g:each in="${archivos.sort{it.id}}" var="a">
           <tr>
             <td>
             <g:link controller="solicitudArchivoadjunto" action="download"
@@ -91,7 +95,7 @@
         </table>
       </g:if>
       <g:if test="${((!solicitudInstance?.estado || solicitudInstance.estado == 'F' as char) &&
-               (!solicitudInstance?.archivos || solicitudInstance.archivos.size() < 2))}">
+               (!archivos || archivos.size() < 2))}">
         <div class="add">
           <g:link class="btn" controller="solicitudArchivoadjunto" action="create"
             params="['solicitud.id': solicitudInstance?.id]">
@@ -114,8 +118,9 @@
   <div class="span4">
     <div class="fieldtablecontain ${hasErrors(bean: solicitudInstance, field: 'extension', 'error')} ">
       <label for="idReporta">Extensión donde se le puede contactar:</label>
-      <g:field type="text" id="extension" name="extension" value="${solicitudInstance?.extension}"
-        pattern="[0-9]{5}" title="Numero de extensión, solo numeros de cinco digitos"/>
+      <g:field type="text" id="extension" name="extension" value="${solicitudInstance?.extension ?: ""}"
+        pattern="[0-9]{5}" title="Numero de extensión, solo numeros de cinco digitos"
+        required=""/>
     </div>
   </div>
 </div>

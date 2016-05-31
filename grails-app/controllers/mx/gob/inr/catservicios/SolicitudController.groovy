@@ -29,8 +29,14 @@ class SolicitudController {
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        def solicitudes = Solicitud.findAllByEstadoNotEqualAndEstadoNotEqualAndIdSolicitante(
-          'T' as char, 'C' as char, (Integer)userID)
+        def query =
+          "  from Solicitud                 " +
+          " where idSolicitante = $userID   " +
+          "   and ((estado <> 'T'           " +
+          "         and estado <> 'C')      " +
+          "        or estado is null)       "
+
+        def solicitudes = Solicitud.executeQuery(query)
         log.debug("lista solicitudes = ${solicitudes}")
 
         log.debug("params['sort'] = ${params['sort']}")
@@ -315,6 +321,17 @@ class SolicitudController {
         }
         if (!(solicitudInstance.justificacion)) {
           flash.error = "Debe capturar la justificación"
+          solicitudInstance.discard()
+          render(view: "edit", model: [solicitudInstance: solicitudInstance,
+                                       autorizadores:listaDeAutorizadores(),
+                                       categorias: categorias(),
+                                       equipos: equipos()])
+          return
+        }
+
+        if (!(params["extension"])) {
+          flash.error = "Debe capturar la extensión"
+          solicitudInstance.discard()
           render(view: "edit", model: [solicitudInstance: solicitudInstance,
                                        autorizadores:listaDeAutorizadores(),
                                        categorias: categorias(),
