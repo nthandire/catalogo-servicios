@@ -643,25 +643,37 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
           break
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
-            listaOrdenar.sort{it.caso.paraOrdenar()}
+            listaOrdenar.sort{it.caso.idSolicitud.paraOrdenar()}
           break
           case "inicio":
             log.debug("numeroSolicitud")
             listaOrdenar.sort{it.caso.idSolicitud.fechaRevisa?:
               it.caso.idSolicitud.fechaVb?:it.caso.idSolicitud.fechaAutoriza}
           break
-          // case "nombre":
-          //   log.debug("nombre")
-          //   solicitudes.sort{Usuario.get(it.idSolicitante).toString()}
-          // break
-          // case "lastUpdated":
-          //   log.debug("fechaSolicitud")
-          //   solicitudes.sort{it.fechaVb?:it.fechaAutoriza}
-          // break
-          // case "justificacion":
-          //   log.debug("justificacion")
-          //   solicitudes.sort{it?.justificacion}
-          // break
+          case "nombre":
+            log.debug("nombre")
+            listaOrdenar.sort{Usuario.get(it.caso.idSolicitud.idSolicitante).toString()}
+          break
+          case "area":
+            log.debug("area")
+            listaOrdenar.sort{firmadoService.areaDetalladaNombre(it.caso.idSolicitud.idSolicitante)}
+          break
+          case "extension":
+            log.debug("extension")
+            listaOrdenar.sort{it.caso.idSolicitud.extension}
+          break
+          case "categoria":
+            log.debug("categoria")
+            listaOrdenar.sort{it.caso.idServcat.categoria}
+          break
+          case "subcategoria":
+            log.debug("subcategoria")
+            listaOrdenar.sort{it.caso.idServ?.servSub ? it.caso.idServ?.servSub.toString().trim() : ""}
+          break
+          case "servicio":
+            log.debug("servicio")
+            listaOrdenar.sort{it.caso.idServ?.toString()}
+          break
           case "estado":
             log.debug("estado")
             listaOrdenar.sort{a,b -> a.caso.idSolicitud.estado == b.caso.idSolicitud.estado ?

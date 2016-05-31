@@ -1,5 +1,7 @@
 package mx.gob.inr.catservicios
 
+import java.text.DecimalFormat
+
 class Solicitud {
 
   Date fechaSolicitud
@@ -62,6 +64,12 @@ class Solicitud {
   String toString() {
     numeroSolicitud ? "${numeroSolicitud}/${(fechaSolicitud?:lastUpdated)[Calendar.YEAR]}" :
       "${justificacion?justificacion.substring(0, Math.min(30, justificacion.length())):""}"
+  }
+
+  static moneyform = new DecimalFormat("00000")
+
+  String paraOrdenar() {
+    "${(fechaSolicitud?:lastUpdated)[Calendar.YEAR]}${moneyform.format(numeroSolicitud)}"
   }
 
 }

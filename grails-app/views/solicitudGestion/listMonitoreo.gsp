@@ -53,17 +53,17 @@
 
             <g:sortableColumn property="inicio" title="inicio" />
 
-            <th>Solicitante</th>
+            <g:sortableColumn property="nombre" title="Solicitante" />
 
-            <th>Área</th>
+            <g:sortableColumn property="area" title="Área" />
 
-            <th>Extensión</th>
+            <g:sortableColumn property="extension" title="Extensión" />
 
-            <th>Categoría</th>
+            <g:sortableColumn property="categoria" title="Categoría" />
 
-            <th>Subcategoría</th>
+            <g:sortableColumn property="subcategoria" title="Subcategoría" />
 
-            <th>Categoría de Tercer nivel</th>
+            <g:sortableColumn property="servicio" title="Categoría de Tercer nivel" />
 
             <g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
 
@@ -89,9 +89,9 @@
               ${firmado.usuarioNombre(detalleInstance.caso.idSolicitud.idSolicitante)}
             </td>
 
-            <td>${firmado.areaNombre(detalleInstance.caso.idSolicitud.idSolicitante)}</td>
+            <td>${firmado.areaDetalladaNombre(detalleInstance.caso.idSolicitud.idSolicitante)}</td>
 
-            <td>${Usuario.get(detalleInstance.caso.idSolicitud.idSolicitante).extension}</td>
+            <td>${detalleInstance.caso.idSolicitud.extension}</td>
 
             <td>${detalleInstance.caso.idServcat.categoria}</td>
 
