@@ -89,7 +89,7 @@ class ServiciosService {
       eqMap.put("label", it['nombre'])
       eqMap.put("id", it['id'])
       def extension = extension(['reporta': it.id])
-      eqMap.put("extension", extension)
+      eqMap.put("extension", extension ?: "")
       log.debug("eqMap = $eqMap")
       cSelectList.add(eqMap)
     }

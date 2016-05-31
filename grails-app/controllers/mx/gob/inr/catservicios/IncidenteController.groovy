@@ -345,9 +345,9 @@ class IncidenteController {
           }
         }
 
-        if (!incidenteInstance.extension) {
+        if (incidenteInstance.extension != null && !incidenteInstance.extension) {
           incidenteInstance.extension = 0
-          // flash.error = "Capture una extension valida, solo numeros."
+          flash.error = "Capture una extension valida, solo numeros."
           render(view: "create", model: [incidenteInstance: incidenteInstance,
                   miArea: firmadoService.areaNombre(userID)])
           return

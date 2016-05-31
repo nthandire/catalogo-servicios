@@ -58,17 +58,4 @@ $(document).ready(function() {
           }
         });
 
-    $('#idReporta').change(function() {
-        $.ajax({
-            url: "/catalogo-servicios/incidente/extension" , // remote datasource
-            data: {reporta: $('#idReporta').val()},
-            success: function(data) {
-              $("#extension").val(data);
-            },
-            error: function() {
-            $("#extension").val("No puedo traer la extensión");
-            }
-        });
-    });
-
 })
