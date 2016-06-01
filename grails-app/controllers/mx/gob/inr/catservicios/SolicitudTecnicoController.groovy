@@ -33,17 +33,28 @@ class SolicitudTecnicoController {
             log.debug("numeroSolicitud")
             solicitudes.sort{it.idSolicitud.paraOrdenar()}
           break
+          case "categoria":
+            log.debug("categoria")
+            solicitudes.sort{it.idServcat.categoria}
+          break
+          case "servicio":
+            log.debug("servicio")
+            solicitudes.sort{it.idServ?.toString()}
+          case "descripcion":
+            log.debug("descripcion")
+            solicitudes.sort{it?.descripcion}
+          break
+          case "prioridad":
+            log.debug("prioridad")
+            solicitudes.sort{it?.prioridad?:(it?.idServ?.impacto)}
+          break
           case "lastUpdated":
-            log.debug("fechaSolicitud")
-            solicitudes.sort{it.fechaSolicitud ?: it.lastUpdated}
+            log.debug("lastUpdated")
+            solicitudes.sort{it.idSolicitud.fechaRevisa}
           break
-          case "justificacion":
-            log.debug("justificacion")
-            solicitudes.sort{it?.justificacion}
-          break
-          case "estado":
-            log.debug("estado")
-            solicitudes.sort{it?.estado}
+          case "tiempo":
+            log.debug("tiempo")
+            solicitudes.sort{it.idServ?.tiempo2?:"" + it?.idServ?.unidades2?.descripcion?:""}
           break
         }
         log.debug("solicitudes = ${solicitudes.collect{"$it.id:$it"}}")
