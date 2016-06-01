@@ -69,7 +69,8 @@ class Solicitud {
   static moneyform = new DecimalFormat("00000")
 
   String paraOrdenar() {
-    "${(fechaSolicitud?:lastUpdated)[Calendar.YEAR]}${moneyform.format(numeroSolicitud)}"
+    numeroSolicitud ? "${(fechaSolicitud?:lastUpdated)[Calendar.YEAR]}${moneyform.format(numeroSolicitud)}"
+      : justificacion ?: ""
   }
 
 }

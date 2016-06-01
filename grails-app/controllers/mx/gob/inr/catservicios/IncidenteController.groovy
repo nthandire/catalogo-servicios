@@ -81,7 +81,7 @@ class IncidenteController {
         log.debug("Math.max(incidenteInstanceList.size()-1, 0) = ${Math.max(incidenteInstanceList.size()-1, 0)}")
         log.debug("Math.min(paramOffset+paramMax-1, Math.max(incidenteInstanceList.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(incidenteInstanceList.size()-1, 0))}")
 
-        if (params['order'] == 'asc') {
+        if (params['order'] == 'desc') {
           incidenteInstanceList = incidenteInstanceList.reverse()
         }
         def incidentesPaginación = incidenteInstanceList.size() ?

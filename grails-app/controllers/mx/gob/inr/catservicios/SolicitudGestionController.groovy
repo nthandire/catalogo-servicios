@@ -65,7 +65,7 @@ class SolicitudGestionController {
         log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
         log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
 
-        if (params['order'] == 'asc') {
+        if (params['order'] == 'desc') {
           solicitudes = solicitudes.reverse()
         }
         def total = solicitudes.size()
@@ -94,7 +94,7 @@ class SolicitudGestionController {
           case null:
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
-            solicitudes.sort{it.toString()}
+            solicitudes.sort{it.paraOrdenar()}
           break
           case "nombre":
             log.debug("nombre")
@@ -124,7 +124,7 @@ class SolicitudGestionController {
         log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
         log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
 
-        if (params['order'] == 'asc') {
+        if (params['order'] == 'desc') {
           solicitudes = solicitudes.reverse()
         }
         def total = solicitudes.size()
@@ -156,7 +156,7 @@ class SolicitudGestionController {
           case null:
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
-            solicitudes.sort{it.toString()}
+            solicitudes.sort{it.paraOrdenar()}
           break
           case "nombre":
             log.debug("nombre")
@@ -182,7 +182,7 @@ class SolicitudGestionController {
         log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
         log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
 
-        if (params['order'] == 'asc') {
+        if (params['order'] == 'desc') {
           solicitudes = solicitudes.reverse()
         }
         def total = solicitudes.size()
@@ -211,7 +211,7 @@ class SolicitudGestionController {
           case null:
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
-            solicitudes.sort{it.toString()}
+            solicitudes.sort{it.paraOrdenar()}
           break
           case "nombre":
             log.debug("nombre")
@@ -237,7 +237,7 @@ class SolicitudGestionController {
         log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
         log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
 
-        if (params['order'] == 'asc') {
+        if (params['order'] == 'desc') {
           solicitudes = solicitudes.reverse()
         }
         def total = solicitudes.size()
@@ -266,7 +266,7 @@ class SolicitudGestionController {
           case null:
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
-            solicitudes.sort{it.toString()}
+            solicitudes.sort{it.paraOrdenar()}
           break
           case "nombre":
             log.debug("nombre")
@@ -292,7 +292,7 @@ class SolicitudGestionController {
         log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
         log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
 
-        if (params['order'] == 'asc') {
+        if (params['order'] == 'desc') {
           solicitudes = solicitudes.reverse()
         }
         def total = solicitudes.size()

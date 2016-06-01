@@ -27,7 +27,8 @@
 				<thead>
 					<tr>
 
-						<th><g:message code="solicitudDetalle.idSolicitud.label" default="Requerimiento" /></th>
+						<g:sortableColumn property="numeroSolicitud"
+              title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Requerimiento')}" />
 
             <th><g:message code="solicitudDetalle.idServcat.label" default="Categoría" /></th>
 
@@ -46,7 +47,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${solicitudDetalleInstanceList.sort{ it.prioridad?:(it?.idServ?.impacto?:3) }}" status="i" var="solicitudDetalleInstance">
+				<g:each in="${solicitudDetalleInstanceList}" status="i" var="solicitudDetalleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
 						<td><g:link action="edit" id="${solicitudDetalleInstance.id}">${fieldValue(bean: solicitudDetalleInstance, field: "idSolicitud")}</g:link></td>

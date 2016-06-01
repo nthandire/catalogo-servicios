@@ -19,13 +19,56 @@ class SolicitudTecnicoController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        params.sort = "id"
-        params.order = "desc"
         log.debug("params = $params")
         def userID = springSecurityService.principal.id
         log.debug("userID = $userID")
-        [solicitudDetalleInstanceList: SolicitudDetalle.findAllByIdTecnicoAndFechaSolucionIsNull((Integer)userID, params),
-            solicitudDetalleInstanceTotal: SolicitudDetalle.countByIdTecnicoAndFechaSolucionIsNull((Integer)userID)]
+
+        def solicitudes = SolicitudDetalle.findAllByIdTecnicoAndFechaSolucionIsNull((Integer)userID)
+        log.debug("lista solicitudes = ${solicitudes.collect{"$it.id:$it"}}")
+
+        log.debug("params['sort'] = ${params['sort']}")
+        switch (params['sort']) {
+          case null:
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            solicitudes.sort{it.idSolicitud.paraOrdenar()}
+          break
+          case "lastUpdated":
+            log.debug("fechaSolicitud")
+            solicitudes.sort{it.fechaSolicitud ?: it.lastUpdated}
+          break
+          case "justificacion":
+            log.debug("justificacion")
+            solicitudes.sort{it?.justificacion}
+          break
+          case "estado":
+            log.debug("estado")
+            solicitudes.sort{it?.estado}
+          break
+        }
+        log.debug("solicitudes = ${solicitudes.collect{"$it.id:$it"}}")
+
+        def paramMax = (params['max']?:'0').toInteger()
+        def paramOffset = (params['offset']?:'0').toInteger()
+
+        log.debug("paramOffset = ${paramOffset}")
+        log.debug("paramOffset+paramMax-1 = ${paramOffset+paramMax-1}")
+        log.debug("solicitudes.size()-1 = ${solicitudes.size()-1}")
+        log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
+        log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
+
+        if (params['order'] == 'desc') {
+          solicitudes = solicitudes.reverse()
+        }
+        def total = solicitudes.size()
+        def solicitudesPaginación = total ?
+          solicitudes[paramOffset..
+            Math.min(paramOffset+paramMax-1, solicitudes.size()-1)] :
+          []
+        log.debug("solicitudesPaginación = ${solicitudesPaginación.collect{"$it.id:$it"}}")
+
+        [solicitudDetalleInstanceList: solicitudesPaginación,
+          solicitudDetalleInstanceTotal: total]
     }
 
     def create() {

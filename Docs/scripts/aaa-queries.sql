@@ -5,10 +5,6 @@ SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificac
  
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   from Solicitud
- where fecha_solicitud between to_date('2016-04-20', '%Y-%m-%d') and to_date('2016-04-22', '%Y-%m-%d');
- 
-SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
-  from Solicitud
  where fecha_autoriza >= to_date('2016-04-26', '%Y-%m-%d');
  
 SELECT id_solicitud,fecha_solicitud,fecha_modificacion,extension,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
@@ -454,5 +450,16 @@ SELECT id_solicituddetalle,id_solicitud,id_serv,id_resguardoentregadetalle,estad
 
 SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
   FROM solicitud
- where id_solicitud = 165;
+ where id_solicitante = 10062
+   and ((estado_solicitud <> 'T'
+        and estado_solicitud <> 'C')
+         or estado_solicitud is null);
+ 
+ where id_solicitud = 157;
 
+SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificacion,id_solicitante,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,fecha_modificacion,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta,fecha_encuesta
+  from Solicitud
+ order by fecha_modificacion desc;
+ 
+ where fecha_solicitud between to_date('2016-04-20', '%Y-%m-%d') and to_date('2016-04-22', '%Y-%m-%d');
+ 
