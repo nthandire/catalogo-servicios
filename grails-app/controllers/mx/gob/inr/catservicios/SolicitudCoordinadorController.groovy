@@ -49,13 +49,64 @@ class SolicitudCoordinadorController {
             "       where s.id = d.idSolicitud            \n" +
             "         and s.estado = 'R')                 \n"
         log.debug("query = \n${query}")
-        def detalles = SolicitudDetalle.executeQuery (
-              "select count (*) " + query
-            )[0]
-        log.debug("numero de detalles = ${detalles}")
-        [solicitudDetalleInstanceList: SolicitudDetalle.
-            executeQuery(query + "order by d.id desc", [], params),
-            solicitudDetalleInstanceTotal: detalles]
+
+        def solicitudes = SolicitudDetalle.executeQuery (query)
+        log.debug("lista solicitudes = ${solicitudes.collect{"$it.id:$it"}}")
+
+        log.debug("params['sort'] = ${params['sort']}")
+        switch (params['sort']) {
+          case null:
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            solicitudes.sort{it.idSolicitud.paraOrdenar()}
+          break
+          case "categoria":
+            log.debug("categoria")
+            solicitudes.sort{it.idServcat.categoria}
+          break
+          case "servicio":
+            log.debug("servicio")
+            solicitudes.sort{it.idServ?.toString()}
+          case "descripcion":
+            log.debug("descripcion")
+            solicitudes.sort{it?.descripcion}
+          break
+          case "prioridad":
+            log.debug("prioridad")
+            solicitudes.sort{it?.prioridad?:(it?.idServ?.impacto)}
+          break
+          case "lastUpdated":
+            log.debug("lastUpdated")
+            solicitudes.sort{it.idSolicitud.fechaRevisa}
+          break
+          case "tiempo":
+            log.debug("tiempo")
+            solicitudes.sort{it.idServ?.tiempo2?:"" + it?.idServ?.unidades2?.descripcion?:""}
+          break
+        }
+        log.debug("solicitudes = ${solicitudes.collect{"$it.id:$it"}}")
+
+        def paramMax = (params['max']?:'0').toInteger()
+        def paramOffset = (params['offset']?:'0').toInteger()
+
+        log.debug("paramOffset = ${paramOffset}")
+        log.debug("paramOffset+paramMax-1 = ${paramOffset+paramMax-1}")
+        log.debug("solicitudes.size()-1 = ${solicitudes.size()-1}")
+        log.debug("Math.max(solicitudes.size()-1, 0) = ${Math.max(solicitudes.size()-1, 0)}")
+        log.debug("Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0)) = ${Math.min(paramOffset+paramMax-1, Math.max(solicitudes.size()-1, 0))}")
+
+        if (params['order'] == 'desc') {
+          solicitudes = solicitudes.reverse()
+        }
+        def total = solicitudes.size()
+        def solicitudesPaginación = total ?
+          solicitudes[paramOffset..
+            Math.min(paramOffset+paramMax-1, solicitudes.size()-1)] :
+          []
+        log.debug("solicitudesPaginación = ${solicitudesPaginación.collect{"$it.id:$it"}}")
+
+        [solicitudDetalleInstanceList: solicitudesPaginación,
+          solicitudDetalleInstanceTotal: total]
     }
 
     def listAsignados(Integer max) {

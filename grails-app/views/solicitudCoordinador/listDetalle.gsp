@@ -30,10 +30,8 @@
 				<thead>
 					<tr>
 
-						<th>
-              <g:message code="solicitudDetalle.idSolicitud.label"
-                default="Requerimiento" />
-            </th>
+						<g:sortableColumn property="numeroSolicitud"
+              title="${message(code: 'solicitud.numeroSolicitud.label', default: 'Requerimiento')}" />
 
             <g:sortableColumn property="lastUpdated"
               title="${message(code: 'solicitud.fechaSolicitud.label',
