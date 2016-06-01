@@ -113,11 +113,11 @@ class ServiciosService {
       def marca = descMarca(it['idMarca'])
       def ubicacion = firmadoService.ubicacion(it.id)
       def cuerpo = firmadoService.cuerpoNivel(it.id)
-      eqMap.put("label", "${it['inventario']} : ${it['serie']} : $tipoEquipo : " +
+      eqMap.put("label", "${it.codigo()}${it['inventario']} : ${it['serie']} : $tipoEquipo : " +
         "$empleado : $marca : ${it['desModelo']}${ubicacion ? ' : ' + ubicacion + ' : ' + cuerpo : ''}")
       eqMap.put("marca", marca)
       eqMap.put("modelo", it['desModelo'])
-      eqMap.put("economico", it['inventario'])
+      eqMap.put("economico", it.codigo() + it['inventario'])
       eqMap.put("equipo", tipoEquipo.descripcion)
       eqMap.put("empleado", empleado)
       eqMap.put("garantia", garantiaFormateada(it))

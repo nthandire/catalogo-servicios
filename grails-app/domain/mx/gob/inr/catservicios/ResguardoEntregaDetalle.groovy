@@ -57,4 +57,8 @@ class ResguardoEntregaDetalle {
     "$inventario : $descripcion"
   }
 
+  String codigo() {
+    idResguardo.codigo
+  }
+
 }
