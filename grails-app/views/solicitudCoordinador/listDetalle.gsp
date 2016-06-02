@@ -39,15 +39,9 @@
 
 						<g:sortableColumn property="tiempo" title="Tiempo de atención" />
 
-						<th>
-              <g:message code="solicitudDetalle.idServcat.label"
-                default="Categoría" />
-            </th>
+						<g:sortableColumn property="categoria" title="Categoría" />
 
-            <th>
-              <g:message code="solicitudDetalle.idServ.label"
-                default="Tercer nivel" />
-            </th>
+            <g:sortableColumn property="servicio" title="Categoría de Tercer nivel" />
 
 						<g:sortableColumn property="descripcion"
               title="${message(code: 'solicitudDetalle.descripcion.label',

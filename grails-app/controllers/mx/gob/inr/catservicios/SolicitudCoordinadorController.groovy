@@ -60,21 +60,6 @@ class SolicitudCoordinadorController {
             log.debug("numeroSolicitud")
             solicitudes.sort{it.idSolicitud.paraOrdenar()}
           break
-          case "categoria":
-            log.debug("categoria")
-            solicitudes.sort{it.idServcat.categoria}
-          break
-          case "servicio":
-            log.debug("servicio")
-            solicitudes.sort{it.idServ?.toString()}
-          case "descripcion":
-            log.debug("descripcion")
-            solicitudes.sort{it?.descripcion}
-          break
-          case "prioridad":
-            log.debug("prioridad")
-            solicitudes.sort{it?.prioridad?:(it?.idServ?.impacto)}
-          break
           case "lastUpdated":
             log.debug("lastUpdated")
             solicitudes.sort{it.idSolicitud.fechaRevisa}
@@ -82,6 +67,18 @@ class SolicitudCoordinadorController {
           case "tiempo":
             log.debug("tiempo")
             solicitudes.sort{it.idServ?.tiempo2?:"" + it?.idServ?.unidades2?.descripcion?:""}
+          break
+          case "categoria":
+            log.debug("categoria")
+            solicitudes.sort{it.idServcat.categoria}
+          break
+          case "servicio":
+            log.debug("servicio")
+            solicitudes.sort{it.idServ?.toString()}
+          break
+          case "descripcion":
+            log.debug("descripcion")
+            solicitudes.sort{(it?.descripcion ?: "")}
           break
         }
         log.debug("solicitudes = ${solicitudes.collect{"$it.id:$it"}}")
