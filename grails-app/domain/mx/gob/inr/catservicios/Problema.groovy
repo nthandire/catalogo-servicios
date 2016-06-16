@@ -1,5 +1,7 @@
 package mx.gob.inr.catservicios
 
+import java.text.DecimalFormat
+
 class Problema {
 
   String fuente
@@ -36,6 +38,12 @@ class Problema {
 
   String toString() {
     "${folio}/${fechaProblema[Calendar.YEAR]}"
+  }
+
+  static moneyform = new DecimalFormat("00000")
+
+  String paraOrdenar() {
+    "${fechaProblema[Calendar.YEAR]}${moneyform.format(folio)}"
   }
 
 }

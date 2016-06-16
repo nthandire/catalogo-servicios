@@ -41,9 +41,7 @@ class IncidenteController {
             params['order'] = 'desc'
           case "numeroIncidente":
             log.debug("numeroIncidente")
-            incidentesFiltrados.sort{a,b -> a.fechaIncidente[Calendar.YEAR] == b.fechaIncidente[Calendar.YEAR] ?
-              b.numeroIncidente <=> a.numeroIncidente :
-              b.fechaIncidente[Calendar.YEAR] <=> a.fechaIncidente[Calendar.YEAR]}
+            incidentesFiltrados.sort{it.paraOrdenar()}
           break
           case "idResguardoentregadetalle":
             log.debug("idResguardoentregadetalle")

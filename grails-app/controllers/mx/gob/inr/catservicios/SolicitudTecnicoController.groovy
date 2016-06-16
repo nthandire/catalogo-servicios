@@ -29,6 +29,7 @@ class SolicitudTecnicoController {
         log.debug("params['sort'] = ${params['sort']}")
         switch (params['sort']) {
           case null:
+            params['order'] = 'desc'
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
             solicitudes.sort{it.idSolicitud.paraOrdenar()}
