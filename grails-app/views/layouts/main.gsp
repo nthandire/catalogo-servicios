@@ -29,6 +29,11 @@
 					</td>
 					<td>
 						<div align="center">
+            %{--
+                <h5>NO UTILIZAR</h5>
+                <h5>Se va a estar tirando el sistema por un tiempo</h5>
+                <h5>Sistema de Administración de Servicios de TIC's.</h5>
+            --}%
 						    <h5>INSTITUTO NACIONAL DE REHABILITACION</h5>
 						    <h5>Subdirección de Tecnologías de la Información y Comunicaciones</h5>
 						    <h5>Sistema de Administración de Servicios de TIC's</h5>
