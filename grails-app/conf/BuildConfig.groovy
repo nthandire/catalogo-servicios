@@ -51,6 +51,7 @@ grails.project.dependency.resolution = {
       exclude (group: 'commons-logging', name: 'commons-logging')
       exclude (group: 'commons-lang', name: 'commons-lang')
     }
+    // compile ":quartz:1.0.2"
     // compile "org.grails.plugins:quartz:1.0.2"
     //     excludes("org.grails.plugins:quartz:1.0.1")
     // }
@@ -74,7 +75,7 @@ grails.project.dependency.resolution = {
       //runtime ":yui-minify-resources:0.1.5"
 
       build ":tomcat:$grailsVersion"
-      build ':jbossas:1.0'
+      build ":jbossas:1.0"
 
 
       compile ":jquery-ui:1.10.4"
@@ -84,7 +85,7 @@ grails.project.dependency.resolution = {
       compile ":jasper:1.11.0"
       compile ":mail:1.0.7"
       compile ":easygrid:1.4.1"
-      // compile ':quartz:1.0.2'
+      // compile ":quartz:1.0.2"
   }
 
   environments {

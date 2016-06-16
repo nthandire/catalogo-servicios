@@ -46,24 +46,22 @@
 
             <g:sortableColumn property="semaforo" title="Semaforo" />
 
-            <g:sortableColumn property="folio" title="${message(code: 'incidente.folio.label', default: 'Incidente')}" />
+            <g:sortableColumn property="numeroIncidente" title="${message(code: 'incidente.folio.label', default: 'Incidente')}" />
 
 
-            <th>
-              ${message(code: 'solicitudDetalle.err.inicioatencion.label', default: 'Inicio de atención')}
-            </th>
+            <g:sortableColumn property="inicio" title="inicio" />
 
-            <th>Solicitante</th>
+            <g:sortableColumn property="nombre" title="Solicitante" />
 
-            <th>Área</th>
+            <g:sortableColumn property="area" title="Área" />
 
-            <th>Cuerpo : Nivel</th>
+            <g:sortableColumn property="nivel" title="Cuerpo : Nivel" />
 
-            <th>Categoría</th>
+            <g:sortableColumn property="categoria" title="Categoría" />
 
-            <th>Subcategoría</th>
+            <g:sortableColumn property="subcategoria" title="Subcategoría" />
 
-            <th>Tercer nivel</th>
+            <g:sortableColumn property="servicio" title="Tercer nivel" />
 
             <g:sortableColumn property="estado" title="${message(code: 'solicitud.estado.label', default: 'Estado')}" />
 
@@ -89,7 +87,7 @@
               ${firmado.usuarioNombre(incidente.caso.idReporta)}
             </td>
 
-            <td>${firmado.areaNombre(incidente.caso.idReporta)}</td>
+            <td>${firmado.areaDetalladaNombre(incidente.caso.idReporta)}</td>
 
             <td>${firmado.cuerpoNivel(incidente.caso.idResguardoentregadetalle)}</td>
 

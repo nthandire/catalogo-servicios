@@ -33,6 +33,7 @@ class SolicitudGestionController {
         log.debug("params['sort'] = ${params['sort']}")
         switch (params['sort']) {
           case null:
+            params['order'] = 'desc'
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
             solicitudes.sort{it.toString()}
@@ -47,7 +48,7 @@ class SolicitudGestionController {
           break
           case "justificacion":
             log.debug("justificacion")
-            solicitudes.sort{it?.justificacion}
+            solicitudes.sort{it?.justificacion?.toUpperCase()}
           break
           case "estado":
             log.debug("estado")
@@ -92,6 +93,7 @@ class SolicitudGestionController {
         log.debug("params['sort'] = ${params['sort']}")
         switch (params['sort']) {
           case null:
+            params['order'] = 'desc'
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
             solicitudes.sort{it.paraOrdenar()}
@@ -106,7 +108,7 @@ class SolicitudGestionController {
           break
           case "justificacion":
             log.debug("justificacion")
-            solicitudes.sort{it?.justificacion}
+            solicitudes.sort{it?.justificacion?.toUpperCase()}
           break
           case "estado":
             log.debug("estado")
@@ -154,6 +156,7 @@ class SolicitudGestionController {
         log.debug("params['sort'] = ${params['sort']}")
         switch (params['sort']) {
           case null:
+            params['order'] = 'desc'
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
             solicitudes.sort{it.paraOrdenar()}
@@ -168,7 +171,7 @@ class SolicitudGestionController {
           break
           case "justificacion":
             log.debug("justificacion")
-            solicitudes.sort{it?.justificacion}
+            solicitudes.sort{it?.justificacion?.toUpperCase()}
           break
         }
         log.debug("solicitudes = ${solicitudes}")
@@ -209,6 +212,7 @@ class SolicitudGestionController {
         log.debug("params['sort'] = ${params['sort']}")
         switch (params['sort']) {
           case null:
+            params['order'] = 'desc'
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
             solicitudes.sort{it.paraOrdenar()}
@@ -223,7 +227,7 @@ class SolicitudGestionController {
           break
           case "justificacion":
             log.debug("justificacion")
-            solicitudes.sort{it?.justificacion}
+            solicitudes.sort{it?.justificacion?.toUpperCase()}
           break
         }
         log.debug("solicitudes = ${solicitudes}")
@@ -264,6 +268,7 @@ class SolicitudGestionController {
         log.debug("params['sort'] = ${params['sort']}")
         switch (params['sort']) {
           case null:
+            params['order'] = 'desc'
           case "numeroSolicitud":
             log.debug("numeroSolicitud")
             solicitudes.sort{it.paraOrdenar()}
@@ -278,7 +283,7 @@ class SolicitudGestionController {
           break
           case "justificacion":
             log.debug("justificacion")
-            solicitudes.sort{it?.justificacion}
+            solicitudes.sort{it?.justificacion?.toUpperCase()}
           break
         }
         log.debug("solicitudes = ${solicitudes}")
@@ -664,15 +669,15 @@ Tiempo de Atención: ${it.idServ.tiempo2} ${it.idServ.unidades2.descripcion}
           break
           case "categoria":
             log.debug("categoria")
-            listaOrdenar.sort{it.caso.idServcat.categoria}
+            listaOrdenar.sort{it.caso.idServcat.categoria.toString().toUpperCase()}
           break
           case "subcategoria":
             log.debug("subcategoria")
-            listaOrdenar.sort{it.caso.idServ?.servSub ? it.caso.idServ?.servSub.toString().trim() : ""}
+            listaOrdenar.sort{it.caso.idServ?.servSub ? it.caso.idServ?.servSub?.toString()?.toUpperCase()?.trim() : ""}
           break
           case "servicio":
             log.debug("servicio")
-            listaOrdenar.sort{it.caso.idServ?.toString()}
+            listaOrdenar.sort{it.caso.idServ?.toString()?.toUpperCase()}
           break
           case "estado":
             log.debug("estado")

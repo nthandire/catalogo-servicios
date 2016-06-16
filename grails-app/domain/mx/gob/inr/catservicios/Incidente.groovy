@@ -1,5 +1,7 @@
 package mx.gob.inr.catservicios
 
+import java.text.DecimalFormat
+
 class Incidente {
 
 	Long idResguardoentregadetalle
@@ -96,6 +98,12 @@ class Incidente {
 
   String toString() {
     "${numeroIncidente}/${fechaIncidente[Calendar.YEAR]}"
+  }
+
+  static moneyform = new DecimalFormat("00000")
+
+  String paraOrdenar() {
+    "${fechaIncidente[Calendar.YEAR]}${moneyform.format(numeroIncidente)}"
   }
 
 }

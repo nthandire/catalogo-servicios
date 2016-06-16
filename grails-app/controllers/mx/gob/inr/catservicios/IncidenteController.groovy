@@ -38,6 +38,7 @@ class IncidenteController {
         log.debug("params['sort'] = ${params['sort']}")
         switch (params['sort']) {
           case null:
+            params['order'] = 'desc'
           case "numeroIncidente":
             log.debug("numeroIncidente")
             incidentesFiltrados.sort{a,b -> a.fechaIncidente[Calendar.YEAR] == b.fechaIncidente[Calendar.YEAR] ?
@@ -159,8 +160,8 @@ class IncidenteController {
       def areaDesc = area.descripcion
       log.debug("area = ${area}, area.id = ${area?.id}")
 
-      def incidenteInstanceTotal = Incidente.countByEstado('E' as char)
       def incidenteInstanceList = Incidente.findAllByEstado('E' as char)
+      def incidenteInstanceTotal = incidenteInstanceList.size()
       log.debug("incidenteInstanceList = ${incidenteInstanceList}")
 
       switch (params['sort']) {
@@ -231,22 +232,74 @@ class IncidenteController {
                           orden: firmadoService.retrasoIncidente(semaforo, it))}
     listaOrdenar.each{it.color = semaforo[it.orden]? semaforo[it.orden].color :"white"}
 
-    def listaOrdenada = []
-    if (!params.sort || params.sort == "semaforo") {
-      listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
-        a.caso.fechaIncidente <=> b.caso.fechaIncidente :
-        !params.order || params.order == "asc" ? a.orden <=> b.orden : b.orden <=> a.orden}
-    } else if (params.sort == "folio") {
-      listaOrdenada = listaOrdenar.sort{!params.order || params.order == "asc" ?
-        it.caso.id : -it.caso.id}
-    } else { // params.sort == "estado"
-      listaOrdenada = listaOrdenar.sort{firmadoService.asignado(it.caso)}
-      if (params.order == "desc") {
-        listaOrdenada = listaOrdenada.reverse()
-      }
+    def listaOrdenada = listaOrdenar
+    switch (params['sort']) {
+      case null:
+      case "semaforo":
+        log.debug("semaforo")
+        listaOrdenar.sort{a,b -> a.orden == b.orden ?
+          a.caso.fechaIncidente <=> b.caso.fechaIncidente :
+          a.orden <=> b.orden}
+      break
+      case "numeroIncidente":
+        log.debug("numeroIncidente")
+        listaOrdenar.sort{it.caso.paraOrdenar()}
+      break
+      case "inicio":
+        log.debug("numeroSolicitud")
+        listaOrdenar.sort{it.caso.fechaIncidente}
+      break
+      case "nombre":
+        log.debug("nombre")
+        listaOrdenar.sort{Usuario.get(it.caso.idReporta).toString()}
+      break
+      case "area":
+        log.debug("area")
+        listaOrdenar.sort{firmadoService.areaDetalladaNombre(it.caso.idReporta)}
+      break
+      case "nivel":
+        log.debug("nivel")
+        listaOrdenar.sort{firmadoService.cuerpoNivel(it.caso.idResguardoentregadetalle)}
+      break
+      case "categoria":
+        log.debug("categoria")
+        listaOrdenar.sort{it.caso.idServ?.servSub.servCat.categoria}
+      break
+      case "subcategoria":
+        log.debug("subcategoria")
+        listaOrdenar.sort{it.caso.idServ?.servSub?.toString()?.trim()}
+      break
+      case "servicio":
+        log.debug("servicio")
+        listaOrdenar.sort{it.caso.idServ?.toString()}
+      break
+      case "estado":
+        log.debug("estado")
+        listaOrdenar.sort{it.caso.estado == 'A' as char ? firmadoService.asignado(it.caso) ? "Asignado" : "Abierto" : Cerrado}
+      break
     }
 
+    if (params.order == "desc") {
+      listaOrdenada = listaOrdenada.reverse()
+    }
     log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
+
+    // def listaOrdenada = [] // TODO: Quitar
+    // if (!params.sort || params.sort == "semaforo") {
+    //   listaOrdenada = listaOrdenar.sort{a,b -> a.orden == b.orden ?
+    //     a.caso.fechaIncidente <=> b.caso.fechaIncidente :
+    //     !params.order || params.order == "asc" ? a.orden <=> b.orden : b.orden <=> a.orden}
+    // } else if (params.sort == "folio") {
+    //   listaOrdenada = listaOrdenar.sort{!params.order || params.order == "asc" ?
+    //     it.caso.id : -it.caso.id}
+    // } else { // params.sort == "estado"
+    //   listaOrdenada = listaOrdenar.sort{firmadoService.asignado(it.caso)}
+    //   if (params.order == "desc") {
+    //     listaOrdenada = listaOrdenada.reverse()
+    //   }
+    // }
+
+    // log.debug("listaOrdenada[0] = ${listaOrdenada[0]}, color = ${listaOrdenada[0].color}")
 
     [incidentesInstanceList: listaOrdenada[params.offset..Math.min(params.offset+params.max-1,listaOrdenada.size()-1)],
       incidentesInstanceTotal: incidentes, bOffset: params.offset,

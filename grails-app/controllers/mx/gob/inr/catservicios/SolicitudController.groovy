@@ -42,17 +42,19 @@ class SolicitudController {
         log.debug("params['sort'] = ${params['sort']}")
         switch (params['sort']) {
           case null:
-          case "numeroSolicitud":
-            log.debug("numeroSolicitud")
-            solicitudes.sort{it.toString()}
-          break
+            params['order'] = 'desc'
+            log.debug("primera vez")
           case "lastUpdated":
             log.debug("fechaSolicitud")
             solicitudes.sort{it.fechaSolicitud ?: it.lastUpdated}
           break
+          case "numeroSolicitud":
+            log.debug("numeroSolicitud")
+            solicitudes.sort{it.paraOrdenar()}
+          break
           case "justificacion":
             log.debug("justificacion")
-            solicitudes.sort{it?.justificacion}
+            solicitudes.sort{it?.justificacion?.toUpperCase()}
           break
           case "estado":
             log.debug("estado")

@@ -70,7 +70,7 @@ class Solicitud {
 
   String paraOrdenar() {
     numeroSolicitud ? "${(fechaSolicitud?:lastUpdated)[Calendar.YEAR]}${moneyform.format(numeroSolicitud)}"
-      : justificacion ?: ""
+      : justificacion?.toUpperCase() ?: "Solicitud nueva"
   }
 
 }
