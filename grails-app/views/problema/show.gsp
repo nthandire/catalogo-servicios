@@ -54,7 +54,7 @@
 
           <span class="property-value" aria-labelledby="idFuente-label">
             <g:link controller="$controlador" action="${controlador == 'Incidente' ? 'showIncidenteProb' : 'show'}" id="${problemaInstance?.idFuente}">
-              <g:fieldValue bean="${problemaInstance}" field="idFuente"/>
+              ${Incidente.get(problemaInstance.idFuente)}
             </g:link>
           </span>
 
@@ -128,15 +128,6 @@
 
 				</li>
 				</g:if>
-
-        <g:if test="${problemaInstance?.ipTerminal}">
-        <li class="fieldcontain">
-          <span id="ipTerminal-label" class="property-label"><g:message code="problema.ipTerminal.label" default="Ip Terminal" /></span>
-
-            <span class="property-value" aria-labelledby="ipTerminal-label"><g:fieldValue bean="${problemaInstance}" field="ipTerminal"/></span>
-
-        </li>
-        </g:if>
 
       </ol>
       <g:form>
