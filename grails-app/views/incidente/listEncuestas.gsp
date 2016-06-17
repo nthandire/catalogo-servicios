@@ -44,9 +44,14 @@
 				</thead>
 				<tbody>
 				<g:each in="${incidenteInstanceList}" status="i" var="incidenteInstance">
+          <% def liga = createLink(action: "showIncidenteEncuesta", id: incidenteInstance.id) %>
           <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-            <td>${incidenteInstance.toString()}</td>
+            <td>
+              <a href="${liga}">
+                ${incidenteInstance.toString()}
+              </a>
+            </td>
 
             <td>
                 ${firmado.tipoEquipo(incidenteInstance.idResguardoentregadetalle)}

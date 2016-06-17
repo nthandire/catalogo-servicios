@@ -105,11 +105,10 @@ class IncidenteController {
       def incidenteInstanceList = Incidente.findAllByEstadoOrEstado('T' as char, 'C' as char)
       switch (params['sort']) {
         case null:
+          params['order'] = 'desc'
         case "numeroIncidente":
           log.debug("numeroIncidente")
-          incidenteInstanceList.sort{a,b -> a.fechaIncidente[Calendar.YEAR] == b.fechaIncidente[Calendar.YEAR] ?
-            b.numeroIncidente <=> a.numeroIncidente :
-            b.fechaIncidente[Calendar.YEAR] <=> a.fechaIncidente[Calendar.YEAR]}
+          incidenteInstanceList.sort{it.paraOrdenar()}
         break
         case "idResguardoentregadetalle":
           log.debug("idResguardoentregadetalle")
@@ -164,11 +163,10 @@ class IncidenteController {
 
       switch (params['sort']) {
         case null:
+          params['order'] = 'desc'
         case "numeroIncidente":
           log.debug("numeroIncidente")
-          incidenteInstanceList.sort{a,b -> a.fechaIncidente[Calendar.YEAR] == b.fechaIncidente[Calendar.YEAR] ?
-            b.numeroIncidente <=> a.numeroIncidente :
-            b.fechaIncidente[Calendar.YEAR] <=> a.fechaIncidente[Calendar.YEAR]}
+          incidenteInstanceList.sort{it.paraOrdenar()}
         break
         case "idResguardoentregadetalle":
           log.debug("idResguardoentregadetalle")
@@ -305,19 +303,22 @@ class IncidenteController {
   }
 
   def showIncidente(Long id) {
-    log.debug("params = $params")
-    def incidente = Incidente.get(id)
-    if (!incidente) {
-        flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'incidente'), id])
-        redirect(action: "listIncidentes")
-        return
-    }
-
-    log.debug("bOffset = $params.offset")
-    [incidente: incidente, bOffset: params.offset]
+    showBase(id)
   }
 
   def showIncidenteSemaforo(Long id) {
+    showBase(id)
+  }
+
+  def showIncidenteTerminados(Long id) {
+    showBase(id)
+  }
+
+  def showIncidenteEncuesta(Long id) {
+    showBase(id)
+  }
+
+  def showBase(Long id) {
     log.debug("params = $params")
     def incidente = Incidente.get(id)
     if (!incidente) {
