@@ -17,12 +17,53 @@ class ProblemaController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 100, 100)
-        def lista = Problema.list(params)
-        def cuantos = Problema.count()
-        log.debug("lista = $lista")
-        log.debug("cuantos = $cuantos")
 
-        [problemaInstanceList: lista, problemaInstanceTotal: cuantos]
+      def problemaInstanceList = Problema.list()
+      def problemaInstanceTotal = problemaInstanceList.size()
+      switch (params['sort']) {
+        case null:
+          params['order'] = 'desc'
+        case "idFuente":
+          log.debug("idFuente")
+          problemaInstanceList.sort{it.paraOrdenar()}
+        break
+        case "fuente":
+          log.debug("fuente")
+          problemaInstanceList.sort{it.fuente}
+        break
+        case "fechaProblema":
+          log.debug("fechaProblema")
+          problemaInstanceList.sort{it?.fechaProblema}
+        break
+        case "folio":
+          log.debug("folio")
+          problemaInstanceList.sort{it.folio}
+        break
+        case "observaciones":
+          log.debug("observaciones")
+          problemaInstanceList.sort{it.observaciones?.toUpperCase()}
+        break
+        case "solucion":
+          log.debug("solucion")
+          problemaInstanceList.sort{it.solucion?.toUpperCase()}
+        break
+      }
+      log.debug("problemaInstanceList = ${problemaInstanceList}")
+
+      if (params['order'] == 'desc') {
+        problemaInstanceList = problemaInstanceList.reverse()
+      }
+      log.debug("problemaInstanceList = ${problemaInstanceList}")
+
+      def paramMax = (params['max']?:'0').toInteger()
+      def paramOffset = (params['offset']?:'0').toInteger()
+      problemaInstanceList = problemaInstanceList.size() ?
+        problemaInstanceList[paramOffset..
+          Math.min(paramOffset+paramMax-1, problemaInstanceList.size()-1)] :
+        []
+      log.debug("problemaInstanceList = ${problemaInstanceList}")
+      [problemaInstanceList: problemaInstanceList,
+        problemaInstanceTotal: problemaInstanceTotal]
     }
 
     def create() {
