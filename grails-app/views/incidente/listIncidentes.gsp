@@ -75,7 +75,7 @@
 
             <td style="background-color: ${incidente.color};">&nbsp;</td>
 
-						<td><g:link action="showIncidente" id="${incidente.caso.id}" params="[offset: bOffset?:0]">
+						<td><g:link action="showIncidenteSemaforo" id="${incidente.caso.id}" params="[offset: bOffset?:0]">
               ${incidente.caso.toString()}
             </g:link></td>
 

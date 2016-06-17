@@ -21,7 +21,9 @@ SELECT id_solicitud,fecha_solicitud,numero_solicitud,extension,id_solicitante,es
  
 SELECT id_solicitud,fecha_modificacion,fecha_encuesta,fecha_solicitud,numero_solicitud,extension,id_solicitante,estado_solicitud,justificacion,id_autoriza,fecha_autoriza,id_vb,fecha_vb,p01,p02,p03,p04,modificacion,ip_terminal,comentario_vb,id_revisa,fecha_revisa,encuesta
   from Solicitud
- where estado_solicitud = 'E';
+ where estado_solicitud = 'T';
+ 
+   and id_solicitante = 10041;
  
 update Solicitud
    set estado_solicitud = 'E' --'T' --'F'
@@ -67,15 +69,16 @@ SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero
 
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
- where id_incidente = 164;
+ where id_incidente = 204;
+
 
 SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
  where numero_incidente = 100;
 
 update incidente
-   set estado_incidente = 'A'
- where id_incidente = 173;
+   set estado_incidente = 'E'
+ where id_incidente = 204;
 
 SELECT id_incidente,id_sistema,id_reporta,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,fecha_modificacion,modificacion,ip_terminal,encuesta,fecha_encuesta
   FROM incidente
@@ -89,7 +92,8 @@ SELECT id_incidente,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero
 
 SELECT id_incidente,fecha_modificacion,fecha_encuesta,id_sistema,id_resguardoentregadetalle,fecha_incidente,numero_incidente,estado_incidente,id_reporta,id_serv,id_servfinal,descripcion,nivel,id_servresp,id_captura,id_nivel1,fecha_nivel1,firma_nivel1,solucion_nivel1,fecha_solnivel1,id_asignanivel2,id_nivel2,fecha_nivel2,firma_nivel2,solucion_nivel2,fecha_solnivel2,id_asignanivel3,id_nivel3,fecha_nivel3,firma_nivel3,solucion_nivel3,fecha_solnivel3,p01,p02,p03,p04,id_programa,modificacion,ip_terminal,encuesta
   FROM incidente
- where estado_incidente = 'E';
+ where estado_incidente = 'E' 
+   and id_incidente > 190;
 
  
 update incidente
