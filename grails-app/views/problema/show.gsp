@@ -36,30 +36,17 @@
 				<g:if test="${problemaInstance?.fuente}">
 				<li class="fieldcontain">
 					<span id="fuente-label" class="property-label">
-            <g:message code="problema.fuente.label" default="Fuente" />
+            <g:fieldValue bean="${problemaInstance}" field="fuente"/>
           </span>
 
-					<span class="property-value" aria-labelledby="fuente-label">
-            <g:link controller="$controlador" action="${controlador == 'Incidente' ? 'showIncidenteProb' : 'show'}" id="${problemaInstance?.idFuente}" params="[back: problemaInstance.id]">
-              <g:fieldValue bean="${problemaInstance}" field="fuente"/>
-            </g:link>
-          </span>
-
-        </li>
-        </g:if>
-
-        <g:if test="${problemaInstance?.idFuente}">
-        <li class="fieldcontain">
-          <span id="idFuente-label" class="property-label"><g:message code="problema.idFuente.label" default="Id Fuente" /></span>
-
-          <span class="property-value" aria-labelledby="idFuente-label">
+          <span class="property-value" aria-labelledby="fuente-label">
             <g:link controller="$controlador" action="${controlador == 'Incidente' ? 'showIncidenteProb' : 'show'}" id="${problemaInstance?.idFuente}">
               ${Incidente.get(problemaInstance.idFuente)}
             </g:link>
           </span>
 
-				</li>
-				</g:if>
+        </li>
+        </g:if>
 
 				<g:if test="${problemaInstance?.fechaProblema}">
 				<li class="fieldcontain">
