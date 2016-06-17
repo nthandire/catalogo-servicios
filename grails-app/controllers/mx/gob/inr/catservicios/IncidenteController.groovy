@@ -317,6 +317,19 @@ class IncidenteController {
     [incidente: incidente, bOffset: params.offset]
   }
 
+  def showIncidenteProb(Long id) {
+    log.debug("params = $params")
+    def incidente = Incidente.get(id)
+    if (!incidente) {
+        flash.message = message(code: 'default.not.found.message', args: [message(code: 'solicitudDetalle.label', default: 'incidente'), id])
+        redirect(action: "listIncidentes")
+        return
+    }
+
+    log.debug("bOffset = $params.offset")
+    [incidente: incidente, bOffset: params.offset, back: params['back']]
+  }
+
   def correoIncidente(Long id) {
     log.debug("params = $params, id = $id")
     def asunto = "Aviso de servicio retrasado"
