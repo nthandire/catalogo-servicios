@@ -15,7 +15,7 @@ values
 
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria,idusuariocapturo,idusuariomodifico 
   FROM usuario
- where idusuario = 10041; --10033;
+ where idusuario = 10055; --10041; --10033;
 
 update usuario
    set passwordc = '1326e38796b7a63b1c088b54ddff8d18e87b073955d1e5fefc9b015ec032ff0a'
@@ -24,8 +24,13 @@ update usuario
 
 SELECT idusuario,idperfil
   FROM usuario_perfil
- where idusuario = 9579;
+ where idusuario = 10055; --9579;
 
+SELECT up.idusuario,up.idperfil,desc_perfil
+  FROM usuario_perfil up, 
+       perfil p
+ where up.idusuario = 10055
+       and up.idperfil = p.idperfil;
  
  
 insert into usuario_perfil
@@ -42,7 +47,7 @@ values
 
 SELECT idusuario,rfc,nombre,paterno,materno,password,idunidadmedica,idservicio,cedula,estatus,fecha_nacimiento,lugar_nacimiento,fecha_ingreso_inr,direccion,colonia,cp,municipio,ciudad,estado,telefono,turno,estadocivil,cargo,sexo,titulo,idperfilagenda,enabled,account_expired,account_locked,password_expired,passwordc,idperfilautorizacion,idusuariotipo,id_empleado,extension,correo,categoria
 FROM usuario
-where rfc like "PECR%"; -- "EIVA721207" ; -- "VENR690106"; -- 
+where rfc like "MAHA85%";--"PECR%"; -- "EIVA721207" ; -- "VENR690106"; -- 
 
 PECR790224
 

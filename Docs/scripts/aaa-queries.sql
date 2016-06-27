@@ -467,3 +467,6 @@ SELECT id_solicitud,fecha_solicitud,numero_solicitud,estado_solicitud,justificac
  
  where fecha_solicitud between to_date('2016-04-20', '%Y-%m-%d') and to_date('2016-04-22', '%Y-%m-%d');
  
+SELECT id_servhist,id_serv,folio,descripcion,id_usuario,fecha_modificacion,ip_terminal
+  FROM cat_serv_hist;
+
